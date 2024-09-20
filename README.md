@@ -211,4 +211,27 @@ Hello World
 docker run -it --rm my-python-application:latest bash
 ```
 
+## Makefile
+
+We are using [Makefile](https://www.gnu.org/software/make/manual/make.html) to manage the project.
+
+To see the list of commands:
+
+```bash
+make
+```
+
+```bash
+➜  api-spec git:(main) ✗ make
+help                           Show this help
+run                            Run the project
+test                           Run the tests
+lint                           Run the linter
+format                         Run the formatter
+typecheck                      Run the type checker
+security                       Run the security checker
+clean                          Clean the project
+install                        Install the project
+```
+
 ---
