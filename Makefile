@@ -6,7 +6,7 @@ help: ## Show this help
 
 .PHONY: run
 run: ## Run the project
-	uv run python -m python_boilerplate.main
+	uv run python -m codegen.main
 
 .PHONY: test
 test: ## Run the tests

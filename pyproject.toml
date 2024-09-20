@@ -8,6 +8,9 @@ authors = [
     { name = "Samuel MARLHENS", email = "samuel.marlhens@proton.me" },
 ]
 readme = { file = "README.md", content-type = "text/markdown" }
+dependencies = [
+    "dataclasses-json>=0.6.7",
+]
 
 [project.urls]
 homepage = "https://github.com/smarlhens/python-boilerplate#readme"
