@@ -2,7 +2,7 @@ import re
 
 import inflection
 
-from ..parse.parse import RPC, Enum, Gateway, SpecRoot, Struct
+from ..parse.parse import RPC, Enum, Err, Gateway, SpecRoot, Stream, Struct
 from .codegen_context import CodegenCtx
 from .markdown_writer import MarkdownWriter
 
@@ -15,6 +15,25 @@ def generate(spec_root: SpecRoot) -> None:
             gateway,
             f"artifacts/apidocs/{inflection.underscore(gateway.name).lower()}_api.md",
         )
+        write_gateway_streams(
+            ctx,
+            gateway,
+            f"artifacts/apidocs/{inflection.underscore(gateway.name).lower()}_streams.md",
+        )
+
+
+def write_gateway_streams(ctx: CodegenCtx, gateway: Gateway, artifact_path: str) -> None:
+    with open(artifact_path, "w") as f:
+        md = MarkdownWriter(f)
+        md.writeln(f"# {gateway.name} Websocket Streams")
+        md.writeln("")
+
+        last_namespace = ""
+        for stream in gateway.streams:
+            if stream.namespace != last_namespace:
+                md.writeln(f"## {stream.namespace}")
+                last_namespace = stream.namespace
+            write_stream(ctx, md, gateway, stream)
 
 
 def write_gateway_rpcs(ctx: CodegenCtx, gateway: Gateway, artifact_path: str) -> None:
@@ -32,6 +51,89 @@ def write_gateway_rpcs(ctx: CodegenCtx, gateway: Gateway, artifact_path: str) ->
             write_rpc(ctx, md, gateway, rpc)
 
 
+###########
+# STREAMS #
+###########
+
+
+def write_stream(
+    ctx: CodegenCtx, md: MarkdownWriter, gateway: Gateway, stream: Stream
+) -> None:
+    name = " ".join(re.split("(?<=.)(?=[A-Z])", stream.name[6:-2]))
+    md.writeln(f"### {name}")
+    md.writeln("```")
+    md.writeln(f"CHANNEL: {stream.channel}")
+    md.writeln("```")
+    md.writeln("")
+
+    write_stream_feed_selector(ctx, md, stream)
+    write_stream_feed_data(ctx, md, stream)
+    write_errors(ctx, md, stream.on_subscribe_errors)
+    # write_rpc_try_it_out(ctx, md, gateway, rpc)
+    md.writeln('<hr class="solid">')
+
+
+def write_stream_feed_selector(
+    ctx: CodegenCtx, md: MarkdownWriter, stream: Stream
+) -> None:
+    # Header
+    md.writeln('=== "Feed Selector"')
+    md.indent()
+
+    # Left Section
+    write_left_section(md)
+    write_struct_schema(ctx, md, ctx.struct_map[stream.feed_selector], True)
+    write_section_end(md)
+
+    # Right Section
+    write_right_section(md)
+    md.writeln("!!! example")
+    md.indent()
+    md.writeln("```json")
+    write_struct_example(ctx, md, ctx.struct_map[stream.feed_selector], True, True)
+    md.writeln("```")
+    md.writeln("```json")
+    write_struct_example(ctx, md, ctx.struct_map[stream.feed_selector], True, False)
+    md.writeln("```")
+    md.dedent()
+    write_section_end(md)
+
+    # Footer
+    md.dedent()
+
+
+def write_stream_feed_data(ctx: CodegenCtx, md: MarkdownWriter, stream: Stream) -> None:
+    # Header
+    md.writeln('=== "Feed Data"')
+    md.indent()
+
+    # Left Section
+    write_left_section(md)
+    write_struct_schema(ctx, md, ctx.struct_map[stream.feed], True)
+    write_section_end(md)
+
+    # Right Section
+    write_right_section(md)
+    md.writeln("!!! example")
+    md.indent()
+    md.writeln("```json")
+    write_struct_example(ctx, md, ctx.struct_map[stream.feed], True, True)
+    md.writeln("```")
+    md.writeln("```json")
+    write_struct_example(ctx, md, ctx.struct_map[stream.feed], True, False)
+    md.writeln("```")
+    md.dedent()
+    write_section_end(md)
+
+    # Footer
+    md.dedent()
+
+
+########
+# RPCS #
+########
+
+
 def write_rpc(ctx: CodegenCtx, md: MarkdownWriter, gateway: Gateway, rpc: RPC) -> None:
     name = " ".join(re.split("(?<=.)(?=[A-Z])", rpc.name[3:-2]))
     md.writeln(f"### {name}")
@@ -43,7 +145,7 @@ def write_rpc(ctx: CodegenCtx, md: MarkdownWriter, gateway: Gateway, rpc: RPC) -
 
     write_rpc_request(ctx, md, rpc)
     write_rpc_response(ctx, md, rpc)
-    write_rpc_errors(ctx, md, rpc)
+    write_errors(ctx, md, rpc.on_request_errors)
     write_rpc_try_it_out(ctx, md, gateway, rpc)
     md.writeln('<hr class="solid">')
 
@@ -91,43 +193,6 @@ def write_rpc_response(ctx: CodegenCtx, md: MarkdownWriter, rpc: RPC) -> None:
     md.indent()
     md.writeln("```json")
     write_struct_example(ctx, md, ctx.struct_map[rpc.response], True)
-    md.writeln("```")
-    md.dedent()
-    write_section_end(md)
-
-    # Footer
-    md.dedent()
-
-
-def write_rpc_errors(ctx: CodegenCtx, md: MarkdownWriter, rpc: RPC) -> None:
-    # Header
-    md.writeln('=== "Errors"')
-    md.indent()
-
-    # Left Section
-    write_left_section(md)
-    md.writeln('!!! info "Error Codes"')
-    md.indent()
-    md.writeln("|Code|HttpStatus| Description |")
-    md.writeln("|-|-|-|")
-    for error in rpc.on_request_errors:
-        md.writeln(f"|{error.code}|{error.status}|{error.message}|")
-    md.dedent()
-    write_section_end(md)
-
-    # Right Section
-    write_right_section(md)
-    md.writeln("!!! example")
-    md.indent()
-    md.writeln("```json")
-    for error in rpc.on_request_errors:
-        md.writeln("{")
-        md.indent()
-        md.writeln(f'"code":{error.code},')
-        md.writeln(f'"message":"{error.message}",')
-        md.writeln(f'"status":{error.status}')
-        md.dedent()
-        md.writeln("}")
     md.writeln("```")
     md.dedent()
     write_section_end(md)
@@ -249,6 +314,43 @@ def write_enum_schema(md: MarkdownWriter, enum: Enum) -> None:
     md.writeln("|-|-|")
     for value in enum.values:
         md.writeln(f"|`{value.name}` = {value.value}|{"<br>".join(value.comment)}|")
+    md.dedent()
+
+
+def write_errors(ctx: CodegenCtx, md: MarkdownWriter, errors: list[Err]) -> None:
+    # Header
+    md.writeln('=== "Errors"')
+    md.indent()
+
+    # Left Section
+    write_left_section(md)
+    md.writeln('!!! info "Error Codes"')
+    md.indent()
+    md.writeln("|Code|HttpStatus| Description |")
+    md.writeln("|-|-|-|")
+    for error in errors:
+        md.writeln(f"|{error.code}|{error.status}|{error.message}|")
+    md.dedent()
+    write_section_end(md)
+
+    # Right Section
+    write_right_section(md)
+    md.writeln("!!! example")
+    md.indent()
+    md.writeln("```json")
+    for error in errors:
+        md.writeln("{")
+        md.indent()
+        md.writeln(f'"code":{error.code},')
+        md.writeln(f'"message":"{error.message}",')
+        md.writeln(f'"status":{error.status}')
+        md.dedent()
+        md.writeln("}")
+    md.writeln("```")
+    md.dedent()
+    write_section_end(md)
+
+    # Footer
     md.dedent()
 
 
