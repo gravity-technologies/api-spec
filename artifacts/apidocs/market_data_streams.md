@@ -17,7 +17,7 @@ STREAM: v1.mini.s
         |rate|r|number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (raw, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -68,7 +68,7 @@ STREAM: v1.mini.s
             |best_ask_size|ba1|string|False|The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.mini.s",
@@ -115,12 +115,12 @@ STREAM: v1.mini.s
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
@@ -132,7 +132,7 @@ STREAM: v1.mini.s
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
@@ -144,7 +144,7 @@ STREAM: v1.mini.s
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
@@ -156,7 +156,7 @@ STREAM: v1.mini.s
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
@@ -186,7 +186,7 @@ STREAM: v1.mini.d
         |rate|r|number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (raw, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -237,7 +237,7 @@ STREAM: v1.mini.d
             |best_ask_size|ba1|string|False|The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.mini.s",
@@ -284,12 +284,12 @@ STREAM: v1.mini.d
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
@@ -301,7 +301,7 @@ STREAM: v1.mini.d
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
@@ -313,7 +313,7 @@ STREAM: v1.mini.d
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
@@ -325,7 +325,7 @@ STREAM: v1.mini.d
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
@@ -355,7 +355,7 @@ STREAM: v1.ticker.s
         |rate|r|number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -421,7 +421,7 @@ STREAM: v1.ticker.s
             |long_short_ratio|ls1|string|False|The ratio of accounts that are net long vs net short on this instrument|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.ticker.s",
@@ -494,12 +494,12 @@ STREAM: v1.ticker.s
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
@@ -511,7 +511,7 @@ STREAM: v1.ticker.s
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
@@ -523,7 +523,7 @@ STREAM: v1.ticker.s
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
@@ -535,7 +535,7 @@ STREAM: v1.ticker.s
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
@@ -565,7 +565,7 @@ STREAM: v1.ticker.d
         |rate|r|number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -631,7 +631,7 @@ STREAM: v1.ticker.d
             |long_short_ratio|ls1|string|False|The ratio of accounts that are net long vs net short on this instrument|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.ticker.s",
@@ -704,12 +704,12 @@ STREAM: v1.ticker.d
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
@@ -721,7 +721,7 @@ STREAM: v1.ticker.d
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
@@ -733,7 +733,7 @@ STREAM: v1.ticker.d
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
@@ -745,7 +745,7 @@ STREAM: v1.ticker.d
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
@@ -778,7 +778,7 @@ STREAM: v1.book.s
         |aggregate|a|number|True|The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -834,7 +834,7 @@ STREAM: v1.book.s
                 |num_orders|no|number|True|The number of open orders at this level|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.book.s",
@@ -883,12 +883,12 @@ STREAM: v1.book.s
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
@@ -900,7 +900,7 @@ STREAM: v1.book.s
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
@@ -912,7 +912,7 @@ STREAM: v1.book.s
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
@@ -924,7 +924,7 @@ STREAM: v1.book.s
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
@@ -956,7 +956,7 @@ STREAM: v1.book.d
         |aggregate|a|number|True|The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -1012,7 +1012,7 @@ STREAM: v1.book.d
                 |num_orders|no|number|True|The number of open orders at this level|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.book.s",
@@ -1061,12 +1061,12 @@ STREAM: v1.book.d
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
@@ -1078,7 +1078,7 @@ STREAM: v1.book.d
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
@@ -1090,7 +1090,7 @@ STREAM: v1.book.d
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
@@ -1102,7 +1102,7 @@ STREAM: v1.book.d
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
@@ -1133,7 +1133,7 @@ STREAM: v1.trade
         |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -1193,7 +1193,7 @@ STREAM: v1.trade
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.trade",
@@ -1242,12 +1242,12 @@ STREAM: v1.trade
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
@@ -1259,7 +1259,7 @@ STREAM: v1.trade
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
@@ -1271,7 +1271,7 @@ STREAM: v1.trade
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
@@ -1283,7 +1283,7 @@ STREAM: v1.trade
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
@@ -1343,7 +1343,7 @@ STREAM: v1.candle
             |`MID` = 4|Tracks book mid prices|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -1395,7 +1395,7 @@ STREAM: v1.candle
             |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.candle",
@@ -1440,12 +1440,12 @@ STREAM: v1.candle
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
@@ -1457,7 +1457,7 @@ STREAM: v1.candle
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
@@ -1469,7 +1469,7 @@ STREAM: v1.candle
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
@@ -1481,7 +1481,7 @@ STREAM: v1.candle
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '

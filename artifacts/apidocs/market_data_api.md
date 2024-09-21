@@ -18,7 +18,7 @@ LITE ENDPOINT: lite/v1/instrument
         |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "instrument": "BTC_USDT_Perp"
@@ -96,7 +96,7 @@ LITE ENDPOINT: lite/v1/instrument
                 |`QUARTERLY` = 5|Instrument settles at an expiry date, marked as a quarterly instrument|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "results": {
@@ -126,7 +126,7 @@ LITE ENDPOINT: lite/v1/instrument
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -136,7 +136,7 @@ LITE ENDPOINT: lite/v1/instrument
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/instrument' \
         --data '{
@@ -144,7 +144,7 @@ LITE ENDPOINT: lite/v1/instrument
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/instrument' \
         --data '{
@@ -152,7 +152,7 @@ LITE ENDPOINT: lite/v1/instrument
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://market-data.testnet.grvt.io/full/v1/instrument' \
         --data '{
@@ -160,7 +160,7 @@ LITE ENDPOINT: lite/v1/instrument
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://market-data.grvt.io/full/v1/instrument' \
         --data '{
@@ -186,7 +186,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         |is_active|ia|boolean|False|Fetch only active instruments|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "is_active": true
@@ -264,7 +264,7 @@ LITE ENDPOINT: lite/v1/all_instruments
                 |`QUARTERLY` = 5|Instrument settles at an expiry date, marked as a quarterly instrument|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "instruments": {
@@ -294,7 +294,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -304,7 +304,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/all_instruments' \
         --data '{
@@ -312,7 +312,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/all_instruments' \
         --data '{
@@ -320,7 +320,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://market-data.testnet.grvt.io/full/v1/all_instruments' \
         --data '{
@@ -328,7 +328,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://market-data.grvt.io/full/v1/all_instruments' \
         --data '{
@@ -385,7 +385,7 @@ LITE ENDPOINT: lite/v1/instruments
             |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "kind": ["PERPETUAL"],
@@ -471,7 +471,7 @@ LITE ENDPOINT: lite/v1/instruments
                 |`QUARTERLY` = 5|Instrument settles at an expiry date, marked as a quarterly instrument|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "results": {
@@ -501,7 +501,7 @@ LITE ENDPOINT: lite/v1/instruments
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -511,7 +511,7 @@ LITE ENDPOINT: lite/v1/instruments
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/instruments' \
         --data '{
@@ -523,7 +523,7 @@ LITE ENDPOINT: lite/v1/instruments
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/instruments' \
         --data '{
@@ -535,7 +535,7 @@ LITE ENDPOINT: lite/v1/instruments
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://market-data.testnet.grvt.io/full/v1/instruments' \
         --data '{
@@ -547,7 +547,7 @@ LITE ENDPOINT: lite/v1/instruments
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://market-data.grvt.io/full/v1/instruments' \
         --data '{
@@ -578,7 +578,7 @@ LITE ENDPOINT: lite/v1/mini
         |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "instrument": "BTC_USDT_Perp"
@@ -612,7 +612,7 @@ LITE ENDPOINT: lite/v1/mini
             |best_ask_size|ba1|string|False|The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "results": {
@@ -639,7 +639,7 @@ LITE ENDPOINT: lite/v1/mini
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -649,7 +649,7 @@ LITE ENDPOINT: lite/v1/mini
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/mini' \
         --data '{
@@ -657,7 +657,7 @@ LITE ENDPOINT: lite/v1/mini
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/mini' \
         --data '{
@@ -665,7 +665,7 @@ LITE ENDPOINT: lite/v1/mini
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://market-data.testnet.grvt.io/full/v1/mini' \
         --data '{
@@ -673,7 +673,7 @@ LITE ENDPOINT: lite/v1/mini
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://market-data.grvt.io/full/v1/mini' \
         --data '{
@@ -699,7 +699,7 @@ LITE ENDPOINT: lite/v1/ticker
         |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "instrument": "BTC_USDT_Perp"
@@ -748,7 +748,7 @@ LITE ENDPOINT: lite/v1/ticker
             |long_short_ratio|ls1|string|False|The ratio of accounts that are net long vs net short on this instrument|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "results": {
@@ -788,7 +788,7 @@ LITE ENDPOINT: lite/v1/ticker
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -798,7 +798,7 @@ LITE ENDPOINT: lite/v1/ticker
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/ticker' \
         --data '{
@@ -806,7 +806,7 @@ LITE ENDPOINT: lite/v1/ticker
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/ticker' \
         --data '{
@@ -814,7 +814,7 @@ LITE ENDPOINT: lite/v1/ticker
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://market-data.testnet.grvt.io/full/v1/ticker' \
         --data '{
@@ -822,7 +822,7 @@ LITE ENDPOINT: lite/v1/ticker
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://market-data.grvt.io/full/v1/ticker' \
         --data '{
@@ -851,7 +851,7 @@ LITE ENDPOINT: lite/v1/book
         |aggregate|a|number|True|The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "instrument": "BTC_USDT_Perp",
@@ -894,7 +894,7 @@ LITE ENDPOINT: lite/v1/book
                 |num_orders|no|number|True|The number of open orders at this level|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "results": {
@@ -922,7 +922,7 @@ LITE ENDPOINT: lite/v1/book
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -932,7 +932,7 @@ LITE ENDPOINT: lite/v1/book
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/book' \
         --data '{
@@ -942,7 +942,7 @@ LITE ENDPOINT: lite/v1/book
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/book' \
         --data '{
@@ -952,7 +952,7 @@ LITE ENDPOINT: lite/v1/book
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://market-data.testnet.grvt.io/full/v1/book' \
         --data '{
@@ -962,7 +962,7 @@ LITE ENDPOINT: lite/v1/book
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://market-data.grvt.io/full/v1/book' \
         --data '{
@@ -992,7 +992,7 @@ LITE ENDPOINT: lite/v1/trades
         |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "instrument": "BTC_USDT_Perp",
@@ -1037,7 +1037,7 @@ LITE ENDPOINT: lite/v1/trades
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "results": {
@@ -1065,7 +1065,7 @@ LITE ENDPOINT: lite/v1/trades
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -1075,7 +1075,7 @@ LITE ENDPOINT: lite/v1/trades
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/trades' \
         --data '{
@@ -1084,7 +1084,7 @@ LITE ENDPOINT: lite/v1/trades
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trades' \
         --data '{
@@ -1093,7 +1093,7 @@ LITE ENDPOINT: lite/v1/trades
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://market-data.testnet.grvt.io/full/v1/trades' \
         --data '{
@@ -1102,7 +1102,7 @@ LITE ENDPOINT: lite/v1/trades
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://market-data.grvt.io/full/v1/trades' \
         --data '{
@@ -1131,7 +1131,7 @@ LITE ENDPOINT: lite/v1/trade_history
         |cursor|c|string|True|The cursor to indicate when to start the query from|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "instrument": "BTC_USDT_Perp",
@@ -1178,7 +1178,7 @@ LITE ENDPOINT: lite/v1/trade_history
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "results": {
@@ -1206,7 +1206,7 @@ LITE ENDPOINT: lite/v1/trade_history
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -1216,7 +1216,7 @@ LITE ENDPOINT: lite/v1/trade_history
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/trade_history' \
         --data '{
@@ -1226,7 +1226,7 @@ LITE ENDPOINT: lite/v1/trade_history
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trade_history' \
         --data '{
@@ -1236,7 +1236,7 @@ LITE ENDPOINT: lite/v1/trade_history
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://market-data.testnet.grvt.io/full/v1/trade_history' \
         --data '{
@@ -1246,7 +1246,7 @@ LITE ENDPOINT: lite/v1/trade_history
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://market-data.grvt.io/full/v1/trade_history' \
         --data '{
@@ -1308,7 +1308,7 @@ LITE ENDPOINT: lite/v1/kline
             |`MID` = 4|Tracks book mid prices|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "instrument": "BTC_USDT_Perp",
@@ -1353,7 +1353,7 @@ LITE ENDPOINT: lite/v1/kline
             |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "results": {
@@ -1379,7 +1379,7 @@ LITE ENDPOINT: lite/v1/kline
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -1389,7 +1389,7 @@ LITE ENDPOINT: lite/v1/kline
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/kline' \
         --data '{
@@ -1402,7 +1402,7 @@ LITE ENDPOINT: lite/v1/kline
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/kline' \
         --data '{
@@ -1415,7 +1415,7 @@ LITE ENDPOINT: lite/v1/kline
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://market-data.testnet.grvt.io/full/v1/kline' \
         --data '{
@@ -1428,7 +1428,7 @@ LITE ENDPOINT: lite/v1/kline
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://market-data.grvt.io/full/v1/kline' \
         --data '{
@@ -1463,7 +1463,7 @@ LITE ENDPOINT: lite/v1/funding
         |limit|l|number|True|The limit to query for. Defaults to 90; Max 300|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "instrument": "BTC_USDT_Perp",
@@ -1496,7 +1496,7 @@ LITE ENDPOINT: lite/v1/funding
             |mark_price|mp|string|True|The mark price of the instrument at funding timestamp, expressed in `9` decimals|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "results": {
@@ -1516,7 +1516,7 @@ LITE ENDPOINT: lite/v1/funding
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -1526,7 +1526,7 @@ LITE ENDPOINT: lite/v1/funding
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/funding' \
         --data '{
@@ -1537,7 +1537,7 @@ LITE ENDPOINT: lite/v1/funding
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/funding' \
         --data '{
@@ -1548,7 +1548,7 @@ LITE ENDPOINT: lite/v1/funding
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://market-data.testnet.grvt.io/full/v1/funding' \
         --data '{
@@ -1559,7 +1559,7 @@ LITE ENDPOINT: lite/v1/funding
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://market-data.grvt.io/full/v1/funding' \
         --data '{
@@ -1612,7 +1612,7 @@ LITE ENDPOINT: lite/v1/settlement
             |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "underlying": "BTC",
@@ -1669,7 +1669,7 @@ LITE ENDPOINT: lite/v1/settlement
                 |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "results": {
@@ -1689,7 +1689,7 @@ LITE ENDPOINT: lite/v1/settlement
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -1699,7 +1699,7 @@ LITE ENDPOINT: lite/v1/settlement
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/settlement' \
         --data '{
@@ -1713,7 +1713,7 @@ LITE ENDPOINT: lite/v1/settlement
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/settlement' \
         --data '{
@@ -1727,7 +1727,7 @@ LITE ENDPOINT: lite/v1/settlement
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://market-data.testnet.grvt.io/full/v1/settlement' \
         --data '{
@@ -1741,7 +1741,7 @@ LITE ENDPOINT: lite/v1/settlement
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://market-data.grvt.io/full/v1/settlement' \
         --data '{
