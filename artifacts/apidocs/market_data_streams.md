@@ -122,7 +122,8 @@ STREAM: v1.mini.s
 === "Try it out"
     !!! info "dev"
         ```bash
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
@@ -133,7 +134,8 @@ STREAM: v1.mini.s
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
@@ -144,7 +146,8 @@ STREAM: v1.mini.s
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
@@ -155,7 +158,8 @@ STREAM: v1.mini.s
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://market-data.grvt.io/ws" -x '
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
@@ -287,7 +291,8 @@ STREAM: v1.mini.d
 === "Try it out"
     !!! info "dev"
         ```bash
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
@@ -298,7 +303,8 @@ STREAM: v1.mini.d
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
@@ -309,7 +315,8 @@ STREAM: v1.mini.d
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
@@ -320,7 +327,8 @@ STREAM: v1.mini.d
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://market-data.grvt.io/ws" -x '
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
@@ -493,7 +501,8 @@ STREAM: v1.ticker.s
 === "Try it out"
     !!! info "dev"
         ```bash
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
@@ -504,7 +513,8 @@ STREAM: v1.ticker.s
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
@@ -515,7 +525,8 @@ STREAM: v1.ticker.s
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
@@ -526,7 +537,8 @@ STREAM: v1.ticker.s
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://market-data.grvt.io/ws" -x '
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
@@ -699,7 +711,8 @@ STREAM: v1.ticker.d
 === "Try it out"
     !!! info "dev"
         ```bash
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
@@ -710,7 +723,8 @@ STREAM: v1.ticker.d
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
@@ -721,7 +735,8 @@ STREAM: v1.ticker.d
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
@@ -732,7 +747,8 @@ STREAM: v1.ticker.d
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://market-data.grvt.io/ws" -x '
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
@@ -874,7 +890,8 @@ STREAM: v1.book.s
 === "Try it out"
     !!! info "dev"
         ```bash
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.book.s",
             "feed":["BTC_USDT_Perp@500-100-10"],
@@ -885,7 +902,8 @@ STREAM: v1.book.s
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.book.s",
             "feed":["BTC_USDT_Perp@500-100-10"],
@@ -896,7 +914,8 @@ STREAM: v1.book.s
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.book.s",
             "feed":["BTC_USDT_Perp@500-100-10"],
@@ -907,7 +926,8 @@ STREAM: v1.book.s
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://market-data.grvt.io/ws" -x '
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.book.s",
             "feed":["BTC_USDT_Perp@500-100-10"],
@@ -1048,7 +1068,8 @@ STREAM: v1.book.d
 === "Try it out"
     !!! info "dev"
         ```bash
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.book.d",
             "feed":["BTC_USDT_Perp@500-100-10"],
@@ -1059,7 +1080,8 @@ STREAM: v1.book.d
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.book.d",
             "feed":["BTC_USDT_Perp@500-100-10"],
@@ -1070,7 +1092,8 @@ STREAM: v1.book.d
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.book.d",
             "feed":["BTC_USDT_Perp@500-100-10"],
@@ -1081,7 +1104,8 @@ STREAM: v1.book.d
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://market-data.grvt.io/ws" -x '
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.book.d",
             "feed":["BTC_USDT_Perp@500-100-10"],
@@ -1225,7 +1249,8 @@ STREAM: v1.trade
 === "Try it out"
     !!! info "dev"
         ```bash
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
@@ -1236,7 +1261,8 @@ STREAM: v1.trade
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
@@ -1247,7 +1273,8 @@ STREAM: v1.trade
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
@@ -1258,7 +1285,8 @@ STREAM: v1.trade
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://market-data.grvt.io/ws" -x '
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
@@ -1419,7 +1447,8 @@ STREAM: v1.candle
 === "Try it out"
     !!! info "dev"
         ```bash
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
@@ -1430,7 +1459,8 @@ STREAM: v1.candle
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
         {
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
@@ -1441,7 +1471,8 @@ STREAM: v1.candle
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
@@ -1452,7 +1483,8 @@ STREAM: v1.candle
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://market-data.grvt.io/ws" -x '
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
         {
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],

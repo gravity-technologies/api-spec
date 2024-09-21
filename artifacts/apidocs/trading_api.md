@@ -120,8 +120,8 @@ LITE ENDPOINT: lite/v1/create_order
         ```json
         {
             "order": {
-                "order_id": "2927361400114782",
-                "sub_account_id": "2927361400114782",
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
                 "taker_fee_percentage_cap": "0.05",
@@ -160,8 +160,8 @@ LITE ENDPOINT: lite/v1/create_order
         ```json
         {
             "o": {
-                "oi": "2927361400114782",
-                "sa": "2927361400114782",
+                "oi": "0x1234567890abcdef",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "im": false,
                 "ti": "GOOD_TILL_TIME",
                 "tf": "0.05",
@@ -308,8 +308,8 @@ LITE ENDPOINT: lite/v1/create_order
         ```json
         {
             "order": {
-                "order_id": "2927361400114782",
-                "sub_account_id": "2927361400114782",
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
                 "taker_fee_percentage_cap": "0.05",
@@ -364,13 +364,15 @@ LITE ENDPOINT: lite/v1/create_order
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/create_order' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "order": {
-                "order_id": "2927361400114782",
-                "sub_account_id": "2927361400114782",
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
                 "taker_fee_percentage_cap": "0.05",
@@ -410,10 +412,11 @@ LITE ENDPOINT: lite/v1/create_order
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/create_order' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "order": {
-                "order_id": "2927361400114782",
-                "sub_account_id": "2927361400114782",
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
                 "taker_fee_percentage_cap": "0.05",
@@ -453,10 +456,11 @@ LITE ENDPOINT: lite/v1/create_order
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/create_order' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "order": {
-                "order_id": "2927361400114782",
-                "sub_account_id": "2927361400114782",
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
                 "taker_fee_percentage_cap": "0.05",
@@ -496,10 +500,11 @@ LITE ENDPOINT: lite/v1/create_order
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/create_order' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "order": {
-                "order_id": "2927361400114782",
-                "sub_account_id": "2927361400114782",
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
                 "taker_fee_percentage_cap": "0.05",
@@ -559,14 +564,14 @@ LITE ENDPOINT: lite/v1/cancel_order
     !!! example
         ```json
         {
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042"
         }
         ```
         ```json
         {
-            "sa": "2927361400114782",
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "oi": "0x1028403",
             "co": "23042"
         }
@@ -682,8 +687,8 @@ LITE ENDPOINT: lite/v1/cancel_order
         ```json
         {
             "order": {
-                "order_id": "2927361400114782",
-                "sub_account_id": "2927361400114782",
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
                 "taker_fee_percentage_cap": "0.05",
@@ -738,11 +743,13 @@ LITE ENDPOINT: lite/v1/cancel_order
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_order' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042"
         }
@@ -751,8 +758,9 @@ LITE ENDPOINT: lite/v1/cancel_order
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/cancel_order' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042"
         }
@@ -761,8 +769,9 @@ LITE ENDPOINT: lite/v1/cancel_order
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_order' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042"
         }
@@ -771,8 +780,9 @@ LITE ENDPOINT: lite/v1/cancel_order
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/cancel_order' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042"
         }
@@ -799,12 +809,12 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
     !!! example
         ```json
         {
-            "sub_account_id": "2927361400114782"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         ```
         ```json
         {
-            "sa": "2927361400114782"
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         ```
     </section>
@@ -841,35 +851,40 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_all_orders' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         '
         ```
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/cancel_all_orders' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         '
         ```
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_all_orders' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         '
         ```
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/cancel_all_orders' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         '
         ```
@@ -894,14 +909,14 @@ LITE ENDPOINT: lite/v1/order
     !!! example
         ```json
         {
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042"
         }
         ```
         ```json
         {
-            "sa": "2927361400114782",
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "oi": "0x1028403",
             "co": "23042"
         }
@@ -1017,8 +1032,8 @@ LITE ENDPOINT: lite/v1/order
         ```json
         {
             "order": {
-                "order_id": "2927361400114782",
-                "sub_account_id": "2927361400114782",
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
                 "taker_fee_percentage_cap": "0.05",
@@ -1077,7 +1092,7 @@ LITE ENDPOINT: lite/v1/order
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/order' \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042"
         }
@@ -1087,7 +1102,7 @@ LITE ENDPOINT: lite/v1/order
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/order' \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042"
         }
@@ -1097,7 +1112,7 @@ LITE ENDPOINT: lite/v1/order
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/order' \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042"
         }
@@ -1107,7 +1122,7 @@ LITE ENDPOINT: lite/v1/order
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/order' \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042"
         }
@@ -1162,7 +1177,7 @@ LITE ENDPOINT: lite/v1/open_orders
     !!! example
         ```json
         {
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
@@ -1170,7 +1185,7 @@ LITE ENDPOINT: lite/v1/open_orders
         ```
         ```json
         {
-            "sa": "2927361400114782",
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
             "u": ["BTC", "ETH"],
             "q": ["USDT", "USDC"]
@@ -1289,8 +1304,8 @@ LITE ENDPOINT: lite/v1/open_orders
         ```json
         {
             "orders": {
-                "order_id": "2927361400114782",
-                "sub_account_id": "2927361400114782",
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
                 "taker_fee_percentage_cap": "0.05",
@@ -1345,11 +1360,13 @@ LITE ENDPOINT: lite/v1/open_orders
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/open_orders' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
@@ -1359,8 +1376,9 @@ LITE ENDPOINT: lite/v1/open_orders
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/open_orders' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
@@ -1370,8 +1388,9 @@ LITE ENDPOINT: lite/v1/open_orders
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/open_orders' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
@@ -1381,8 +1400,9 @@ LITE ENDPOINT: lite/v1/open_orders
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/open_orders' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
@@ -1444,7 +1464,7 @@ LITE ENDPOINT: lite/v1/order_history
     !!! example
         ```json
         {
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
@@ -1456,7 +1476,7 @@ LITE ENDPOINT: lite/v1/order_history
         ```
         ```json
         {
-            "sa": "2927361400114782",
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
             "u": ["BTC", "ETH"],
             "q": ["USDT", "USDC"],
@@ -1581,8 +1601,8 @@ LITE ENDPOINT: lite/v1/order_history
             "total": 500,
             "next": "Qw0918=",
             "orders": {
-                "order_id": "2927361400114782",
-                "sub_account_id": "2927361400114782",
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
                 "taker_fee_percentage_cap": "0.05",
@@ -1637,11 +1657,13 @@ LITE ENDPOINT: lite/v1/order_history
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/order_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
@@ -1655,8 +1677,9 @@ LITE ENDPOINT: lite/v1/order_history
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/order_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
@@ -1670,8 +1693,9 @@ LITE ENDPOINT: lite/v1/order_history
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/order_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
@@ -1685,8 +1709,9 @@ LITE ENDPOINT: lite/v1/order_history
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/order_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
@@ -1753,7 +1778,7 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! example
         ```json
         {
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
@@ -1765,7 +1790,7 @@ LITE ENDPOINT: lite/v1/trade_history
         ```
         ```json
         {
-            "sa": "2927361400114782",
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
             "u": ["BTC", "ETH"],
             "q": ["USDT", "USDC"],
@@ -1820,7 +1845,7 @@ LITE ENDPOINT: lite/v1/trade_history
             "next": "Qw0918=",
             "results": {
                 "event_time": "1697788800000000000",
-                "sub_account_id": "2927361400114782",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
                 "is_buyer": true,
                 "is_taker": true,
@@ -1859,11 +1884,13 @@ LITE ENDPOINT: lite/v1/trade_history
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/trade_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
@@ -1877,8 +1904,9 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/trade_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
@@ -1892,8 +1920,9 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/trade_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
@@ -1907,8 +1936,9 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/trade_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
@@ -1970,7 +2000,7 @@ LITE ENDPOINT: lite/v1/positions
     !!! example
         ```json
         {
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
@@ -1978,7 +2008,7 @@ LITE ENDPOINT: lite/v1/positions
         ```
         ```json
         {
-            "sa": "2927361400114782",
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
             "u": ["BTC", "ETH"],
             "q": ["USDT", "USDC"]
@@ -2013,7 +2043,7 @@ LITE ENDPOINT: lite/v1/positions
         {
             "results": {
                 "event_time": "1697788800000000000",
-                "sub_account_id": "2927361400114782",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
                 "balance": "2635000.50",
                 "value": "2635000.50",
@@ -2046,11 +2076,13 @@ LITE ENDPOINT: lite/v1/positions
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/positions' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
@@ -2060,8 +2092,9 @@ LITE ENDPOINT: lite/v1/positions
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/positions' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
@@ -2071,8 +2104,9 @@ LITE ENDPOINT: lite/v1/positions
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/positions' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
@@ -2082,8 +2116,9 @@ LITE ENDPOINT: lite/v1/positions
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/positions' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
@@ -2171,9 +2206,11 @@ LITE ENDPOINT: lite/v1/deposit
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/deposit' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "token_currency": "USDT",
@@ -2184,6 +2221,7 @@ LITE ENDPOINT: lite/v1/deposit
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/deposit' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "token_currency": "USDT",
@@ -2194,6 +2232,7 @@ LITE ENDPOINT: lite/v1/deposit
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/deposit' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "token_currency": "USDT",
@@ -2204,6 +2243,7 @@ LITE ENDPOINT: lite/v1/deposit
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/deposit' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "token_currency": "USDT",
@@ -2324,9 +2364,11 @@ LITE ENDPOINT: lite/v1/deposit_history
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/deposit_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "limit": 500,
             "cursor": "Qw0918=",
@@ -2339,6 +2381,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/deposit_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "limit": 500,
             "cursor": "Qw0918=",
@@ -2351,6 +2394,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/deposit_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "limit": 500,
             "cursor": "Qw0918=",
@@ -2363,6 +2407,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/deposit_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "limit": 500,
             "cursor": "Qw0918=",
@@ -2418,9 +2463,9 @@ LITE ENDPOINT: lite/v1/transfer
         ```json
         {
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "from_sub_account_id": "2927361400114782",
+            "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "to_sub_account_id": "2927361400114782",
+            "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "token_currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
@@ -2436,9 +2481,9 @@ LITE ENDPOINT: lite/v1/transfer
         ```json
         {
             "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "fs": "2927361400114782",
+            "fs": "'$GRVT_SUB_ACCOUNT_ID'",
             "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "ts": "2927361400114782",
+            "ts": "'$GRVT_SUB_ACCOUNT_ID'",
             "tc": "USDT",
             "nt": "1500.0",
             "s": {
@@ -2487,14 +2532,16 @@ LITE ENDPOINT: lite/v1/transfer
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/transfer' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "from_sub_account_id": "2927361400114782",
+            "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "to_sub_account_id": "2927361400114782",
+            "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "token_currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
@@ -2511,11 +2558,12 @@ LITE ENDPOINT: lite/v1/transfer
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/transfer' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "from_sub_account_id": "2927361400114782",
+            "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "to_sub_account_id": "2927361400114782",
+            "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "token_currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
@@ -2532,11 +2580,12 @@ LITE ENDPOINT: lite/v1/transfer
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/transfer' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "from_sub_account_id": "2927361400114782",
+            "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "to_sub_account_id": "2927361400114782",
+            "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "token_currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
@@ -2553,11 +2602,12 @@ LITE ENDPOINT: lite/v1/transfer
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/transfer' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "from_sub_account_id": "2927361400114782",
+            "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "to_sub_account_id": "2927361400114782",
+            "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "token_currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
@@ -2670,9 +2720,9 @@ LITE ENDPOINT: lite/v1/transfer_history
             "results": {
                 "tx_id": "1028403",
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "from_sub_account_id": "2927361400114782",
+                "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "to_sub_account_id": "2927361400114782",
+                "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "token_currency": "USDT",
                 "num_tokens": "1500.0",
                 "signature": {
@@ -2706,9 +2756,11 @@ LITE ENDPOINT: lite/v1/transfer_history
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/transfer_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "limit": 500,
             "cursor": "Qw0918=",
@@ -2721,6 +2773,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/transfer_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "limit": 500,
             "cursor": "Qw0918=",
@@ -2733,6 +2786,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/transfer_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "limit": 500,
             "cursor": "Qw0918=",
@@ -2745,6 +2799,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/transfer_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "limit": 500,
             "cursor": "Qw0918=",
@@ -2863,9 +2918,11 @@ LITE ENDPOINT: lite/v1/withdrawal
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/withdrawal' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2885,6 +2942,7 @@ LITE ENDPOINT: lite/v1/withdrawal
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/withdrawal' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2904,6 +2962,7 @@ LITE ENDPOINT: lite/v1/withdrawal
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/withdrawal' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2923,6 +2982,7 @@ LITE ENDPOINT: lite/v1/withdrawal
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/withdrawal' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3070,9 +3130,11 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/withdrawal_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "limit": 500,
             "cursor": "Qw0918=",
@@ -3085,6 +3147,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/withdrawal_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "limit": 500,
             "cursor": "Qw0918=",
@@ -3097,6 +3160,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/withdrawal_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "limit": 500,
             "cursor": "Qw0918=",
@@ -3109,6 +3173,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/withdrawal_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "limit": 500,
             "cursor": "Qw0918=",
@@ -3138,12 +3203,12 @@ LITE ENDPOINT: lite/v1/account_summary
     !!! example
         ```json
         {
-            "sub_account_id": "2927361400114782"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         ```
         ```json
         {
-            "sa": "2927361400114782"
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         ```
     </section>
@@ -3219,7 +3284,7 @@ LITE ENDPOINT: lite/v1/account_summary
         {
             "results": {
                 "event_time": "1697788800000000000",
-                "sub_account_id": "2927361400114782",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "margin_type": "SIMPLE_CROSS_MARGIN",
                 "quote_currency": "USDT",
                 "unrealized_pnl": "123456.78",
@@ -3233,7 +3298,7 @@ LITE ENDPOINT: lite/v1/account_summary
                 },
                 "positions": {
                     "event_time": "1697788800000000000",
-                    "sub_account_id": "2927361400114782",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "instrument": "BTC_USDT_Perp",
                     "balance": "2635000.50",
                     "value": "2635000.50",
@@ -3267,35 +3332,40 @@ LITE ENDPOINT: lite/v1/account_summary
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/account_summary' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         '
         ```
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/account_summary' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         '
         ```
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/account_summary' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         '
         ```
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/account_summary' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         '
         ```
@@ -3323,7 +3393,7 @@ LITE ENDPOINT: lite/v1/account_history
     !!! example
         ```json
         {
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "cursor": "Qw0918="
@@ -3331,7 +3401,7 @@ LITE ENDPOINT: lite/v1/account_history
         ```
         ```json
         {
-            "sa": "2927361400114782",
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "st": "1697788800000000000",
             "et": "1697788800000000000",
             "c": "Qw0918="
@@ -3412,7 +3482,7 @@ LITE ENDPOINT: lite/v1/account_history
             "next": "Qw0918=",
             "results": {
                 "event_time": "1697788800000000000",
-                "sub_account_id": "2927361400114782",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "margin_type": "SIMPLE_CROSS_MARGIN",
                 "quote_currency": "USDT",
                 "unrealized_pnl": "123456.78",
@@ -3426,7 +3496,7 @@ LITE ENDPOINT: lite/v1/account_history
                 },
                 "positions": {
                     "event_time": "1697788800000000000",
-                    "sub_account_id": "2927361400114782",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "instrument": "BTC_USDT_Perp",
                     "balance": "2635000.50",
                     "value": "2635000.50",
@@ -3460,11 +3530,13 @@ LITE ENDPOINT: lite/v1/account_history
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/account_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "cursor": "Qw0918="
@@ -3474,8 +3546,9 @@ LITE ENDPOINT: lite/v1/account_history
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/account_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "cursor": "Qw0918="
@@ -3485,8 +3558,9 @@ LITE ENDPOINT: lite/v1/account_history
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/account_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "cursor": "Qw0918="
@@ -3496,8 +3570,9 @@ LITE ENDPOINT: lite/v1/account_history
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/account_history' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "2927361400114782",
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "cursor": "Qw0918="
@@ -3604,9 +3679,11 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/aggregated_account_summary' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
         }
         '
@@ -3614,6 +3691,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/aggregated_account_summary' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
         }
         '
@@ -3621,6 +3699,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/aggregated_account_summary' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
         }
         '
@@ -3628,6 +3707,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/aggregated_account_summary' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
         }
         '
@@ -3732,9 +3812,11 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/funding_account_summary' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
         }
         '
@@ -3742,6 +3824,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
     !!! info "stg"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/funding_account_summary' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
         }
         '
@@ -3749,6 +3832,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
     !!! info "testnet"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/funding_account_summary' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
         }
         '
@@ -3756,6 +3840,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
     !!! info "prod"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/funding_account_summary' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
         }
         '

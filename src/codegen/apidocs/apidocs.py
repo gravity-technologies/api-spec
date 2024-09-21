@@ -181,12 +181,19 @@ def write_stream_rpc_try_it_out(
     md.writeln('=== "Try it out"')
     md.indent()
 
+    # Auth Section
+    if stream.auth_required:
+        md.writeln('-8<- "sections/auth.md"')
+
     # Main Section
     for endpoint in gateway.endpoints:
         md.writeln(f'!!! info "{endpoint.name}"')
         md.indent()
         md.writeln("```bash")
-        md.writeln(f'wscat -c "wss://{endpoint.url}/ws" -x \'')
+        md.writeln(f'wscat -c "wss://{endpoint.url}/ws" \\')
+        if stream.auth_required:
+            md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
+        md.writeln("-x '")
         selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
         write_stream_feed_request(md, stream, selector, True)
         md.writeln("' -w 360")
@@ -277,6 +284,10 @@ def write_rpc_try_it_out(
     md.writeln('=== "Try it out"')
     md.indent()
 
+    # Auth Section
+    if rpc.auth_required:
+        md.writeln('-8<- "sections/auth.md"')
+
     # Main Section
     for endpoint in gateway.endpoints:
         md.writeln(f'!!! info "{endpoint.name}"')
@@ -285,6 +296,8 @@ def write_rpc_try_it_out(
         md.writeln(
             f"curl --location 'https://{endpoint.url}/full/v{rpc.version}{rpc.route}' \\"
         )
+        if rpc.auth_required:
+            md.writeln('--header "Cookie: $GRVT_COOKIE" \\')
 
         request_struct = ctx.struct_map[rpc.request]
         md.write("--data '")
@@ -430,6 +443,10 @@ def get_field_example(ctx: CodegenCtx, struct: Struct, field: Field) -> str:
     else:
         example_value = "null"
         print(f"No example value for field: {struct.name}.{field.name}")  # noqa: T201
+
+    # To allow environment variable injection in the example
+    if example_value.startswith('"$'):
+        example_value = f"\"'{example_value[1:-1]}'\""
     return example_value
 
 
