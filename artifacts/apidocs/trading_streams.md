@@ -3,7 +3,7 @@
 ## Order
 ### Order
 ```
-CHANNEL: v1.order
+STREAM: v1.order
 ```
 
 === "Feed Selector"
@@ -54,22 +54,29 @@ CHANNEL: v1.order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
-            "sub_account_id": "2927361400114782",
-            "kind": "PERPETUAL",
-            "underlying": "BTC",
-            "quote": "USDT",
-            "state_filter": "C"
+            "stream":"v1.order",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
-            "sa": "2927361400114782",
-            "k": "PERPETUAL",
-            "u": "BTC",
-            "q": "USDT",
-            "sf": "C"
+            "stream":"v1.order",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.order",
+            "subs":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "unsubs":[]
         }
         ```
     </section>
@@ -278,10 +285,56 @@ CHANNEL: v1.order
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.order",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.order",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.order",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://trades.grvt.io/ws" -x '
+        {
+            "stream":"v1.order",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
+
 ### Order State
 ```
-CHANNEL: v1.state
+STREAM: v1.state
 ```
 
 === "Feed Selector"
@@ -332,22 +385,29 @@ CHANNEL: v1.state
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
-            "sub_account_id": "2927361400114782",
-            "kind": "PERPETUAL",
-            "underlying": "BTC",
-            "quote": "USDT",
-            "state_filter": "C"
+            "stream":"v1.state",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
-            "sa": "2927361400114782",
-            "k": "PERPETUAL",
-            "u": "BTC",
-            "q": "USDT",
-            "sf": "C"
+            "stream":"v1.state",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.state",
+            "subs":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "unsubs":[]
         }
         ```
     </section>
@@ -455,11 +515,57 @@ CHANNEL: v1.state
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.state",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.state",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.state",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://trades.grvt.io/ws" -x '
+        {
+            "stream":"v1.state",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
+
 ## Trade
 ### Private Trade
 ```
-CHANNEL: v1.trade
+STREAM: v1.trade
 ```
 
 === "Feed Selector"
@@ -501,20 +607,29 @@ CHANNEL: v1.trade
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
-            "sub_account_id": "2927361400114782",
-            "kind": "PERPETUAL",
-            "underlying": "BTC",
-            "quote": "USDT"
+            "stream":"v1.trade",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
-            "sa": "2927361400114782",
-            "k": "PERPETUAL",
-            "u": "BTC",
-            "q": "USDT"
+            "stream":"v1.trade",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.trade",
+            "subs":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "unsubs":[]
         }
         ```
     </section>
@@ -620,10 +735,56 @@ CHANNEL: v1.trade
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.trade",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.trade",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.trade",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://trades.grvt.io/ws" -x '
+        {
+            "stream":"v1.trade",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
+
 ### Positions
 ```
-CHANNEL: v1.position
+STREAM: v1.position
 ```
 
 === "Feed Selector"
@@ -667,20 +828,29 @@ CHANNEL: v1.position
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
-            "sub_account_id": "2927361400114782",
-            "kind": "PERPETUAL",
-            "underlying": "BTC",
-            "quote": "USDT"
+            "stream":"v1.position",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
-            "sa": "2927361400114782",
-            "k": "PERPETUAL",
-            "u": "BTC",
-            "q": "USDT"
+            "stream":"v1.position",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.position",
+            "subs":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "unsubs":[]
         }
         ```
     </section>
@@ -762,11 +932,57 @@ CHANNEL: v1.position
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.position",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.position",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.position",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://trades.grvt.io/ws" -x '
+        {
+            "stream":"v1.position",
+            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
+
 ## Transfer
 ### Deposit
 ```
-CHANNEL: v1.deposit
+STREAM: v1.deposit
 ```
 
 === "Feed Selector"
@@ -779,12 +995,29 @@ CHANNEL: v1.deposit
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
+            "stream":"v1.deposit",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
+            "stream":"v1.deposit",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.deposit",
+            "subs":[""],
+            "unsubs":[]
         }
         ```
     </section>
@@ -853,10 +1086,56 @@ CHANNEL: v1.deposit
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.deposit",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.deposit",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.deposit",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://trades.grvt.io/ws" -x '
+        {
+            "stream":"v1.deposit",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
+
 ### Transfer
 ```
-CHANNEL: v1.transfer
+STREAM: v1.transfer
 ```
 
 === "Feed Selector"
@@ -869,12 +1148,29 @@ CHANNEL: v1.transfer
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
+            "stream":"v1.transfer",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
+            "stream":"v1.transfer",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.transfer",
+            "subs":[""],
+            "unsubs":[]
         }
         ```
     </section>
@@ -975,10 +1271,56 @@ CHANNEL: v1.transfer
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.transfer",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.transfer",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.transfer",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://trades.grvt.io/ws" -x '
+        {
+            "stream":"v1.transfer",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
+
 ### Withdrawal
 ```
-CHANNEL: v1.withdrawal
+STREAM: v1.withdrawal
 ```
 
 === "Feed Selector"
@@ -991,12 +1333,29 @@ CHANNEL: v1.withdrawal
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
+            "stream":"v1.withdrawal",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
+            "stream":"v1.withdrawal",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.withdrawal",
+            "subs":[""],
+            "unsubs":[]
         }
         ```
     </section>
@@ -1091,4 +1450,49 @@ CHANNEL: v1.withdrawal
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.withdrawal",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.withdrawal",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.withdrawal",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://trades.grvt.io/ws" -x '
+        {
+            "stream":"v1.withdrawal",
+            "feed":[""],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">

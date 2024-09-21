@@ -2,7 +2,7 @@ import re
 
 import inflection
 
-from ..parse.parse import RPC, Enum, Err, Gateway, SpecRoot, Stream, Struct
+from ..parse.parse import RPC, Enum, Err, Field, Gateway, SpecRoot, Stream, Struct
 from .codegen_context import CodegenCtx
 from .markdown_writer import MarkdownWriter
 
@@ -62,15 +62,16 @@ def write_stream(
     name = " ".join(re.split("(?<=.)(?=[A-Z])", stream.name[6:-2]))
     md.writeln(f"### {name}")
     md.writeln("```")
-    md.writeln(f"CHANNEL: {stream.channel}")
+    md.writeln(f"STREAM: {stream.channel}")
     md.writeln("```")
     md.writeln("")
 
     write_stream_feed_selector(ctx, md, stream)
     write_stream_feed_data(ctx, md, stream)
     write_errors(ctx, md, stream.on_subscribe_errors)
-    # write_rpc_try_it_out(ctx, md, gateway, rpc)
+    write_stream_rpc_try_it_out(ctx, md, gateway, stream)
     md.writeln('<hr class="solid">')
+    md.writeln("")
 
 
 def write_stream_feed_selector(
@@ -86,20 +87,64 @@ def write_stream_feed_selector(
     write_section_end(md)
 
     # Right Section
+    selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
     write_right_section(md)
     md.writeln("!!! example")
     md.indent()
+    md.writeln("**JSON RPC Request**")
     md.writeln("```json")
-    write_struct_example(ctx, md, ctx.struct_map[stream.feed_selector], True, True)
+    write_stream_feed_request(md, stream, selector, True)
     md.writeln("```")
     md.writeln("```json")
-    write_struct_example(ctx, md, ctx.struct_map[stream.feed_selector], True, False)
+    write_stream_feed_request(md, stream, selector, False)
     md.writeln("```")
+    md.writeln("**JSON RPC Response**")
+    write_stream_feed_response(md, stream, selector)
     md.dedent()
     write_section_end(md)
 
     # Footer
     md.dedent()
+
+
+def get_selector(ctx: CodegenCtx, struct: Struct) -> str:
+    selector_primary: list[str] = []
+    selector_secondary: list[str] = []
+    for i, field in enumerate(struct.fields):
+        example = get_field_example(ctx, struct, field).strip('"')
+        if field.selector == "primary":
+            selector_primary.append(example)
+        elif field.selector == "secondary":
+            selector_secondary.append(example)
+    selector_str = "-".join(selector_primary)
+    if len(selector_secondary) > 0:
+        selector_str = f"{selector_str}@{"-".join(selector_secondary)}"
+    return selector_str
+
+
+def write_stream_feed_request(
+    md: MarkdownWriter, stream: Stream, selector: str, is_full: bool
+) -> None:
+    md.writeln("{")
+    md.indent()
+    md.writeln(f'"stream":"{stream.channel}",')
+    md.writeln(f'"feed":["{selector}"],')
+    md.writeln('"method":"subscribe",')
+    md.writeln(f'"is_full":{str(is_full).lower()}')
+    md.dedent()
+    md.writeln("}")
+
+
+def write_stream_feed_response(md: MarkdownWriter, stream: Stream, selector: str) -> None:
+    md.writeln("```json")
+    md.writeln("{")
+    md.indent()
+    md.writeln(f'"stream":"{stream.channel}",')
+    md.writeln(f'"subs":["{selector}"],')
+    md.writeln('"unsubs":[]')
+    md.dedent()
+    md.writeln("}")
+    md.writeln("```")
 
 
 def write_stream_feed_data(ctx: CodegenCtx, md: MarkdownWriter, stream: Stream) -> None:
@@ -129,6 +174,29 @@ def write_stream_feed_data(ctx: CodegenCtx, md: MarkdownWriter, stream: Stream) 
     md.dedent()
 
 
+def write_stream_rpc_try_it_out(
+    ctx: CodegenCtx, md: MarkdownWriter, gateway: Gateway, stream: Stream
+) -> None:
+    # Header
+    md.writeln('=== "Try it out"')
+    md.indent()
+
+    # Main Section
+    for endpoint in gateway.endpoints:
+        md.writeln(f'!!! info "{endpoint.name}"')
+        md.indent()
+        md.writeln("```bash")
+        md.writeln(f'wscat -c "wss://{endpoint.url}/ws" -x \'')
+        selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
+        write_stream_feed_request(md, stream, selector, True)
+        md.writeln("' -w 360")
+        md.writeln("```")
+        md.dedent()
+
+    # Footer
+    md.dedent()
+
+
 ########
 # RPCS #
 ########
@@ -148,6 +216,7 @@ def write_rpc(ctx: CodegenCtx, md: MarkdownWriter, gateway: Gateway, rpc: RPC) -
     write_errors(ctx, md, rpc.on_request_errors)
     write_rpc_try_it_out(ctx, md, gateway, rpc)
     md.writeln('<hr class="solid">')
+    md.writeln("")
 
 
 def write_rpc_request(ctx: CodegenCtx, md: MarkdownWriter, rpc: RPC) -> None:
@@ -251,14 +320,7 @@ def write_struct_example(
             write_struct_example(ctx, md, ctx.struct_map[field.json_type], False, is_full)
             md.writeln("," if i < len(struct.fields) - 1 else "")
         else:
-            example_value = ""
-            if field.example:
-                example_value = field.example.replace("'", '"')
-            elif field.json_type in ctx.enum_map:
-                example_value = '"' + ctx.enum_map[field.json_type].values[0].name + '"'
-            else:
-                example_value = "null"
-                print(f"No example value for field: {struct.name}.{field.name}")  # noqa: T201
+            example_value = get_field_example(ctx, struct, field)
             md.writeln(
                 f'"{fn}": {example_value}' + ("," if i < len(struct.fields) - 1 else "")
             )
@@ -357,6 +419,18 @@ def write_errors(ctx: CodegenCtx, md: MarkdownWriter, errors: list[Err]) -> None
 ######################
 # Formatting Helpers #
 ######################
+
+
+def get_field_example(ctx: CodegenCtx, struct: Struct, field: Field) -> str:
+    example_value = ""
+    if field.example:
+        example_value = field.example.replace("'", '"')
+    elif field.json_type in ctx.enum_map:
+        example_value = '"' + ctx.enum_map[field.json_type].values[0].name + '"'
+    else:
+        example_value = "null"
+        print(f"No example value for field: {struct.name}.{field.name}")  # noqa: T201
+    return example_value
 
 
 def write_comment(md: MarkdownWriter, comment: list[str]) -> None:
