@@ -200,7 +200,7 @@
       ],
       "streams": [
         {
-          "namespace": "Mini",
+          "namespace": "Ticker",
           "name": "StreamMiniTickerSnapV1",
           "channel": "v1.mini.s",
           "auth_required": false,
@@ -209,7 +209,7 @@
           "on_subscribe_errors": []
         },
         {
-          "namespace": "MiniTicker",
+          "namespace": "Ticker",
           "name": "StreamMiniTickerDeltaV1",
           "channel": "v1.mini.d",
           "auth_required": false,
@@ -664,7 +664,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The sub account ID to request for"]
+          "comment": [
+            "The sub account ID to request for"
+          ]
         },
         {
           "name": "kind",
@@ -706,7 +708,9 @@
           ]
         }
       ],
-      "comment": ["Query the positions of a sub account"]
+      "comment": [
+        "Query the positions of a sub account"
+      ]
     },
     {
       "name": "Positions",
@@ -721,7 +725,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Time at which the event was emitted in unix nanoseconds"]
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
         },
         {
           "name": "sub_account_id",
@@ -732,7 +738,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The sub account ID that participated in the trade"]
+          "comment": [
+            "The sub account ID that participated in the trade"
+          ]
         },
         {
           "name": "instrument",
@@ -743,7 +751,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'BTC_USDT_Perp'",
-          "comment": ["The instrument being represented"]
+          "comment": [
+            "The instrument being represented"
+          ]
         },
         {
           "name": "balance",
@@ -885,7 +895,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The positions matching the request filter"]
+          "comment": [
+            "The positions matching the request filter"
+          ]
         }
       ],
       "comment": []
@@ -903,7 +915,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The sub account ID to request for"]
+          "comment": [
+            "The sub account ID to request for"
+          ]
         },
         {
           "name": "kind",
@@ -979,7 +993,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The limit to query for. Defaults to 500; Max 1000"]
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
         },
         {
           "name": "cursor",
@@ -990,7 +1006,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'Qw0918='",
-          "comment": ["The cursor to indicate when to start the query from"]
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
         }
       ],
       "comment": [
@@ -1010,7 +1028,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Time at which the event was emitted in unix nanoseconds"]
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
         },
         {
           "name": "sub_account_id",
@@ -1021,7 +1041,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The sub account ID that participated in the trade"]
+          "comment": [
+            "The sub account ID that participated in the trade"
+          ]
         },
         {
           "name": "instrument",
@@ -1032,7 +1054,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'BTC_USDT_Perp'",
-          "comment": ["The instrument being represented"]
+          "comment": [
+            "The instrument being represented"
+          ]
         },
         {
           "name": "is_buyer",
@@ -1043,7 +1067,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "true",
-          "comment": ["The side that the subaccount took on the trade"]
+          "comment": [
+            "The side that the subaccount took on the trade"
+          ]
         },
         {
           "name": "is_taker",
@@ -1054,7 +1080,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "true",
-          "comment": ["The role that the subaccount took on the trade"]
+          "comment": [
+            "The role that the subaccount took on the trade"
+          ]
         },
         {
           "name": "size",
@@ -1078,7 +1106,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'65038.01'",
-          "comment": ["The traded price, expressed in `9` decimals"]
+          "comment": [
+            "The traded price, expressed in `9` decimals"
+          ]
         },
         {
           "name": "mark_price",
@@ -1167,7 +1197,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "0.0003",
-          "comment": ["The fee rate paid on the trade"]
+          "comment": [
+            "The fee rate paid on the trade"
+          ]
         },
         {
           "name": "trade_id",
@@ -1178,7 +1210,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'209358'",
-          "comment": ["A trade identifier"]
+          "comment": [
+            "A trade identifier"
+          ]
         },
         {
           "name": "order_id",
@@ -1189,7 +1223,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0x10000101000203040506'",
-          "comment": ["An order identifier"]
+          "comment": [
+            "An order identifier"
+          ]
         },
         {
           "name": "venue",
@@ -1200,7 +1236,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'ORDERBOOK'",
-          "comment": ["The venue where the trade occurred"]
+          "comment": [
+            "The venue where the trade occurred"
+          ]
         },
         {
           "name": "client_order_id",
@@ -1252,7 +1290,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'Qw0918='",
-          "comment": ["The cursor to indicate when to start the query from"]
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
         },
         {
           "name": "results",
@@ -1262,7 +1302,9 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The private trades matching the request asset"]
+          "comment": [
+            "The private trades matching the request asset"
+          ]
         }
       ],
       "comment": []
@@ -1280,7 +1322,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The subaccount ID to filter by"]
+          "comment": [
+            "The subaccount ID to filter by"
+          ]
         }
       ],
       "comment": []
@@ -1298,7 +1342,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The currency you hold a spot balance in"]
+          "comment": [
+            "The currency you hold a spot balance in"
+          ]
         },
         {
           "name": "balance",
@@ -1331,7 +1377,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Time at which the event was emitted in unix nanoseconds"]
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
         },
         {
           "name": "sub_account_id",
@@ -1342,7 +1390,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The sub account ID this entry refers to"]
+          "comment": [
+            "The sub account ID this entry refers to"
+          ]
         },
         {
           "name": "margin_type",
@@ -1353,7 +1403,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'SIMPLE_CROSS_MARGIN'",
-          "comment": ["The type of margin algorithm this subaccount uses"]
+          "comment": [
+            "The type of margin algorithm this subaccount uses"
+          ]
         },
         {
           "name": "quote_currency",
@@ -1456,7 +1508,9 @@
           "index": 10,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The list of positions owned by this sub account"]
+          "comment": [
+            "The list of positions owned by this sub account"
+          ]
         }
       ],
       "comment": []
@@ -1473,7 +1527,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The sub account matching the request sub account"]
+          "comment": [
+            "The sub account matching the request sub account"
+          ]
         }
       ],
       "comment": [
@@ -1493,7 +1549,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The sub account ID to request for"]
+          "comment": [
+            "The sub account ID to request for"
+          ]
         },
         {
           "name": "start_time",
@@ -1504,7 +1562,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Start time of sub account history in unix nanoseconds"]
+          "comment": [
+            "Start time of sub account history in unix nanoseconds"
+          ]
         },
         {
           "name": "end_time",
@@ -1515,7 +1575,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["End time of sub account history in unix nanoseconds"]
+          "comment": [
+            "End time of sub account history in unix nanoseconds"
+          ]
         },
         {
           "name": "cursor",
@@ -1597,7 +1659,9 @@
           "array_depth": 1,
           "optional": false,
           "example": "['2376', '5821']",
-          "comment": ["The list of sub account ids to query"]
+          "comment": [
+            "The list of sub account ids to query"
+          ]
         }
       ],
       "comment": [
@@ -1637,7 +1701,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The currency you hold a spot balance in"]
+          "comment": [
+            "The currency you hold a spot balance in"
+          ]
         },
         {
           "name": "mark_price",
@@ -1648,7 +1714,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "65000.1",
-          "comment": ["The mark price of the asset, expressed in `9` decimals"]
+          "comment": [
+            "The mark price of the asset, expressed in `9` decimals"
+          ]
         }
       ],
       "comment": []
@@ -1679,7 +1747,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'3945034.23'",
-          "comment": ["Total equity of the account, denominated in USD"]
+          "comment": [
+            "Total equity of the account, denominated in USD"
+          ]
         },
         {
           "name": "spot_balances",
@@ -1734,7 +1804,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'3945034.23'",
-          "comment": ["Total equity of the account, denominated in USD"]
+          "comment": [
+            "Total equity of the account, denominated in USD"
+          ]
         },
         {
           "name": "spot_balances",
@@ -1827,7 +1899,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'65038.01'",
-          "comment": ["The price of the level, expressed in `9` decimals"]
+          "comment": [
+            "The price of the level, expressed in `9` decimals"
+          ]
         },
         {
           "name": "size",
@@ -1851,7 +1925,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'123'",
-          "comment": ["The number of open orders at this level"]
+          "comment": [
+            "The number of open orders at this level"
+          ]
         }
       ],
       "comment": []
@@ -1869,7 +1945,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Time at which the event was emitted in unix nanoseconds"]
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
         },
         {
           "name": "instrument",
@@ -1895,7 +1973,9 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The list of best bids up till query depth"]
+          "comment": [
+            "The list of best bids up till query depth"
+          ]
         },
         {
           "name": "asks",
@@ -1905,7 +1985,9 @@
           "index": 3,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The list of best asks up till query depth"]
+          "comment": [
+            "The list of best asks up till query depth"
+          ]
         }
       ],
       "comment": []
@@ -1922,7 +2004,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The orderbook levels objects matching the request asset"]
+          "comment": [
+            "The orderbook levels objects matching the request asset"
+          ]
         }
       ],
       "comment": []
@@ -1965,7 +2049,9 @@
           "array_depth": 0,
           "optional": true,
           "example": "'1697788800000000000'",
-          "comment": ["Time at which the event was emitted in unix nanoseconds"]
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
         },
         {
           "name": "instrument",
@@ -2115,7 +2201,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The mini ticker matching the request asset"]
+          "comment": [
+            "The mini ticker matching the request asset"
+          ]
         }
       ],
       "comment": []
@@ -2158,7 +2246,9 @@
           "array_depth": 0,
           "optional": true,
           "example": "'1697788800000000000'",
-          "comment": ["Time at which the event was emitted in unix nanoseconds"]
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
         },
         {
           "name": "instrument",
@@ -2490,7 +2580,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The mini ticker matching the request asset"]
+          "comment": [
+            "The mini ticker matching the request asset"
+          ]
         }
       ],
       "comment": []
@@ -2524,7 +2616,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The limit to query for. Defaults to 500; Max 1000"]
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
         }
       ],
       "comment": [
@@ -2545,7 +2639,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Time at which the event was emitted in unix nanoseconds"]
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
         },
         {
           "name": "instrument",
@@ -2572,7 +2668,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "true",
-          "comment": ["If taker was the buyer on the trade"]
+          "comment": [
+            "If taker was the buyer on the trade"
+          ]
         },
         {
           "name": "size",
@@ -2596,7 +2694,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'65038.01'",
-          "comment": ["The traded price, expressed in `9` decimals"]
+          "comment": [
+            "The traded price, expressed in `9` decimals"
+          ]
         },
         {
           "name": "mark_price",
@@ -2659,7 +2759,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1234567890'",
-          "comment": ["A trade identifier"]
+          "comment": [
+            "A trade identifier"
+          ]
         },
         {
           "name": "venue",
@@ -2669,7 +2771,9 @@
           "index": 10,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The venue where the trade occurred"]
+          "comment": [
+            "The venue where the trade occurred"
+          ]
         },
         {
           "name": "is_liquidation",
@@ -2680,7 +2784,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "false",
-          "comment": ["If the trade was a liquidation"]
+          "comment": [
+            "If the trade was a liquidation"
+          ]
         }
       ],
       "comment": [
@@ -2699,7 +2805,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The public trades matching the request asset"]
+          "comment": [
+            "The public trades matching the request asset"
+          ]
         }
       ],
       "comment": []
@@ -2733,7 +2841,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The limit to query for. Defaults to 500; Max 1000"]
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
         },
         {
           "name": "cursor",
@@ -2744,7 +2854,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'Qw0918='",
-          "comment": ["The cursor to indicate when to start the query from"]
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
         }
       ],
       "comment": [
@@ -2765,7 +2877,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The public trades matching the request asset"]
+          "comment": [
+            "The public trades matching the request asset"
+          ]
         }
       ],
       "comment": []
@@ -2824,7 +2938,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'BTC'",
-          "comment": ["The underlying currency"]
+          "comment": [
+            "The underlying currency"
+          ]
         },
         {
           "name": "quote",
@@ -2835,7 +2951,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The quote currency"]
+          "comment": [
+            "The quote currency"
+          ]
         },
         {
           "name": "kind",
@@ -2846,7 +2964,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'PERPETUAL'",
-          "comment": ["The kind of instrument"]
+          "comment": [
+            "The kind of instrument"
+          ]
         },
         {
           "name": "expiry",
@@ -2857,7 +2977,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The expiry time of the instrument in unix nanoseconds"]
+          "comment": [
+            "The expiry time of the instrument in unix nanoseconds"
+          ]
         },
         {
           "name": "strike_price",
@@ -2881,7 +3003,9 @@
           "array_depth": 1,
           "optional": false,
           "example": "['ORDERBOOK']",
-          "comment": ["Venues that this instrument can be traded at"]
+          "comment": [
+            "Venues that this instrument can be traded at"
+          ]
         },
         {
           "name": "settlement_period",
@@ -2892,7 +3016,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'PERPETUAL'",
-          "comment": ["The settlement period of the instrument"]
+          "comment": [
+            "The settlement period of the instrument"
+          ]
         },
         {
           "name": "underlying_decimals",
@@ -2968,7 +3094,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Creation time in unix nanoseconds"]
+          "comment": [
+            "Creation time in unix nanoseconds"
+          ]
         }
       ],
       "comment": []
@@ -2985,7 +3113,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The instrument matching the request asset"]
+          "comment": [
+            "The instrument matching the request asset"
+          ]
         }
       ],
       "comment": []
@@ -3042,7 +3172,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "true",
-          "comment": ["Request for active instruments only"]
+          "comment": [
+            "Request for active instruments only"
+          ]
         },
         {
           "name": "limit",
@@ -3053,10 +3185,14 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The limit to query for. Defaults to 500; Max 100000"]
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 100000"
+          ]
         }
       ],
-      "comment": ["Fetch a list of instruments based on the filters provided"]
+      "comment": [
+        "Fetch a list of instruments based on the filters provided"
+      ]
     },
     {
       "name": "ApiGetFilteredInstrumentsResponse",
@@ -3070,7 +3206,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The instruments matching the request filter"]
+          "comment": [
+            "The instruments matching the request filter"
+          ]
         }
       ],
       "comment": []
@@ -3103,7 +3241,9 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The interval of each candlestick"]
+          "comment": [
+            "The interval of each candlestick"
+          ]
         },
         {
           "name": "type",
@@ -3113,7 +3253,9 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The type of candlestick data to retrieve"]
+          "comment": [
+            "The type of candlestick data to retrieve"
+          ]
         },
         {
           "name": "start_time",
@@ -3124,7 +3266,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Start time of kline data in unix nanoseconds"]
+          "comment": [
+            "Start time of kline data in unix nanoseconds"
+          ]
         },
         {
           "name": "end_time",
@@ -3135,7 +3279,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["End time of kline data in unix nanoseconds"]
+          "comment": [
+            "End time of kline data in unix nanoseconds"
+          ]
         },
         {
           "name": "limit",
@@ -3146,7 +3292,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The limit to query for. Defaults to 500; Max 1500"]
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1500"
+          ]
         }
       ],
       "comment": [
@@ -3167,7 +3315,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Open time of kline bar in unix nanoseconds"]
+          "comment": [
+            "Open time of kline bar in unix nanoseconds"
+          ]
         },
         {
           "name": "close_time",
@@ -3178,7 +3328,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Close time of kline bar in unix nanosecond"]
+          "comment": [
+            "Close time of kline bar in unix nanosecond"
+          ]
         },
         {
           "name": "open",
@@ -3267,7 +3419,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "123456",
-          "comment": ["The number of trades transacted"]
+          "comment": [
+            "The number of trades transacted"
+          ]
         },
         {
           "name": "instrument",
@@ -3286,7 +3440,9 @@
           ]
         }
       ],
-      "comment": [""]
+      "comment": [
+        ""
+      ]
     },
     {
       "name": "ApiCandlestickResponse",
@@ -3300,7 +3456,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The candlestick result set for given interval"]
+          "comment": [
+            "The candlestick result set for given interval"
+          ]
         }
       ],
       "comment": []
@@ -3334,7 +3492,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Start time of funding rate in unix nanoseconds"]
+          "comment": [
+            "Start time of funding rate in unix nanoseconds"
+          ]
         },
         {
           "name": "end_time",
@@ -3345,7 +3505,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["End time of funding rate in unix nanoseconds"]
+          "comment": [
+            "End time of funding rate in unix nanoseconds"
+          ]
         },
         {
           "name": "limit",
@@ -3356,7 +3518,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The limit to query for. Defaults to 90; Max 300"]
+          "comment": [
+            "The limit to query for. Defaults to 90; Max 300"
+          ]
         }
       ],
       "comment": [
@@ -3440,7 +3604,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The funding rate result set for given interval"]
+          "comment": [
+            "The funding rate result set for given interval"
+          ]
         }
       ],
       "comment": []
@@ -3458,7 +3624,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'BTC'",
-          "comment": ["The underlying currency to select"]
+          "comment": [
+            "The underlying currency to select"
+          ]
         },
         {
           "name": "quote",
@@ -3469,7 +3637,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The quote currency to select"]
+          "comment": [
+            "The quote currency to select"
+          ]
         },
         {
           "name": "start_time",
@@ -3480,7 +3650,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Start time of kline data in unix nanoseconds"]
+          "comment": [
+            "Start time of kline data in unix nanoseconds"
+          ]
         },
         {
           "name": "end_time",
@@ -3491,7 +3663,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["End time of kline data in unix nanoseconds"]
+          "comment": [
+            "End time of kline data in unix nanoseconds"
+          ]
         },
         {
           "name": "expiration",
@@ -3502,7 +3676,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The expiration time to select in unix nanoseconds"]
+          "comment": [
+            "The expiration time to select in unix nanoseconds"
+          ]
         },
         {
           "name": "strike_price",
@@ -3513,7 +3689,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "65000.0",
-          "comment": ["The strike price to select"]
+          "comment": [
+            "The strike price to select"
+          ]
         },
         {
           "name": "limit",
@@ -3524,7 +3702,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The limit to query for. Defaults to 30; Max 100"]
+          "comment": [
+            "The limit to query for. Defaults to 30; Max 100"
+          ]
         }
       ],
       "comment": [
@@ -3547,7 +3727,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'BTC'",
-          "comment": ["The underlying currency of the settlement price"]
+          "comment": [
+            "The underlying currency of the settlement price"
+          ]
         },
         {
           "name": "quote",
@@ -3558,7 +3740,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The quote currency of the settlement price"]
+          "comment": [
+            "The quote currency of the settlement price"
+          ]
         },
         {
           "name": "settlement_time",
@@ -3582,7 +3766,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'65038.01'",
-          "comment": ["The settlement price, expressed in `9` decimals"]
+          "comment": [
+            "The settlement price, expressed in `9` decimals"
+          ]
         }
       ],
       "comment": []
@@ -3599,7 +3785,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The funding rate result set for given interval"]
+          "comment": [
+            "The funding rate result set for given interval"
+          ]
         }
       ],
       "comment": []
@@ -3617,7 +3805,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.ticker.d'",
-          "comment": ["The channel to subscribe to (eg: ticker.s / ticker.d "]
+          "comment": [
+            "The channel to subscribe to (eg: ticker.s / ticker.d "
+          ]
         },
         {
           "name": "feed",
@@ -3628,7 +3818,9 @@
           "array_depth": 1,
           "optional": false,
           "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
-          "comment": ["The list of feeds to subscribe to (eg: "]
+          "comment": [
+            "The list of feeds to subscribe to (eg: "
+          ]
         },
         {
           "name": "method",
@@ -3652,7 +3844,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "true",
-          "comment": ["Whether the request is for full data or lite data"]
+          "comment": [
+            "Whether the request is for full data or lite data"
+          ]
         }
       ],
       "comment": []
@@ -3675,7 +3869,8 @@
             "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
             "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
             "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
-          ]
+          ],
+          "selector": "primary"
         },
         {
           "name": "rate",
@@ -3690,7 +3885,8 @@
             "The minimal rate at which we publish feeds (in milliseconds)",
             "Delta (100, 200, 500, 1000, 5000)",
             "Snapshot (500, 1000, 5000)"
-          ]
+          ],
+          "selector": "secondary"
         },
         {
           "name": "depth",
@@ -3703,7 +3899,8 @@
           "example": "100",
           "comment": [
             "Depth of the order book to be retrieved (API/Snapshot max is 100, Delta max is 1000)"
-          ]
+          ],
+          "selector": "secondary"
         },
         {
           "name": "aggregate",
@@ -3716,7 +3913,8 @@
           "example": "10",
           "comment": [
             "The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)"
-          ]
+          ],
+          "selector": "secondary"
         }
       ],
       "comment": [
@@ -3741,7 +3939,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.book.s'",
-          "comment": ["Stream name"]
+          "comment": [
+            "Stream name"
+          ]
         },
         {
           "name": "sequence_number",
@@ -3764,7 +3964,9 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["An orderbook levels object matching the request filter"]
+          "comment": [
+            "An orderbook levels object matching the request filter"
+          ]
         }
       ],
       "comment": []
@@ -3787,7 +3989,8 @@
             "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
             "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
             "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
-          ]
+          ],
+          "selector": "primary"
         },
         {
           "name": "rate",
@@ -3802,7 +4005,8 @@
             "The minimal rate at which we publish feeds (in milliseconds)",
             "Delta (raw, 50, 100, 200, 500, 1000, 5000)",
             "Snapshot (200, 500, 1000, 5000)"
-          ]
+          ],
+          "selector": "secondary"
         }
       ],
       "comment": [
@@ -3827,7 +4031,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.mini.s'",
-          "comment": ["Stream name"]
+          "comment": [
+            "Stream name"
+          ]
         },
         {
           "name": "sequence_number",
@@ -3850,7 +4056,9 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["A mini ticker matching the request filter"]
+          "comment": [
+            "A mini ticker matching the request filter"
+          ]
         }
       ],
       "comment": []
@@ -3873,7 +4081,8 @@
             "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
             "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
             "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
-          ]
+          ],
+          "selector": "primary"
         },
         {
           "name": "rate",
@@ -3888,7 +4097,8 @@
             "The minimal rate at which we publish feeds (in milliseconds)",
             "Delta (100, 200, 500, 1000, 5000)",
             "Snapshot (500, 1000, 5000)"
-          ]
+          ],
+          "selector": "secondary"
         }
       ],
       "comment": [
@@ -3913,7 +4123,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.ticker.s'",
-          "comment": ["Stream name"]
+          "comment": [
+            "Stream name"
+          ]
         },
         {
           "name": "sequence_number",
@@ -3936,7 +4148,9 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["A ticker matching the request filter"]
+          "comment": [
+            "A ticker matching the request filter"
+          ]
         }
       ],
       "comment": []
@@ -3953,7 +4167,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The mini ticker matching the request asset"]
+          "comment": [
+            "The mini ticker matching the request asset"
+          ]
         }
       ],
       "comment": []
@@ -3976,7 +4192,8 @@
             "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
             "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
             "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
-          ]
+          ],
+          "selector": "primary"
         },
         {
           "name": "limit",
@@ -3987,10 +4204,15 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The limit to query for. Defaults to 500; Max 1000"]
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ],
+          "selector": "secondary"
         }
       ],
-      "comment": ["Subscribes to a stream of Public Trades for an instrument."]
+      "comment": [
+        "Subscribes to a stream of Public Trades for an instrument."
+      ]
     },
     {
       "name": "WSPublicTradesFeedDataV1",
@@ -4005,7 +4227,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.trade'",
-          "comment": ["Stream name"]
+          "comment": [
+            "Stream name"
+          ]
         },
         {
           "name": "sequence_number",
@@ -4028,7 +4252,9 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["A public trade matching the request filter"]
+          "comment": [
+            "A public trade matching the request filter"
+          ]
         }
       ],
       "comment": []
@@ -4051,7 +4277,8 @@
             "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
             "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
             "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
-          ]
+          ],
+          "selector": "primary"
         },
         {
           "name": "interval",
@@ -4061,7 +4288,10 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The interval of each candlestick"]
+          "comment": [
+            "The interval of each candlestick"
+          ],
+          "selector": "secondary"
         },
         {
           "name": "type",
@@ -4071,7 +4301,10 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The type of candlestick data to retrieve"]
+          "comment": [
+            "The type of candlestick data to retrieve"
+          ],
+          "selector": "secondary"
         }
       ],
       "comment": [
@@ -4092,7 +4325,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.candle'",
-          "comment": ["Stream name"]
+          "comment": [
+            "Stream name"
+          ]
         },
         {
           "name": "sequence_number",
@@ -4115,7 +4350,9 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["A candlestick entry matching the request filters"]
+          "comment": [
+            "A candlestick entry matching the request filters"
+          ]
         }
       ],
       "comment": []
@@ -4133,7 +4370,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.ticker.d'",
-          "comment": ["The channel to subscribe to (eg: ticker.s / ticker.d "]
+          "comment": [
+            "The channel to subscribe to (eg: ticker.s / ticker.d "
+          ]
         },
         {
           "name": "subs",
@@ -4144,7 +4383,9 @@
           "array_depth": 1,
           "optional": false,
           "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
-          "comment": ["The list of feeds subscribed to"]
+          "comment": [
+            "The list of feeds subscribed to"
+          ]
         },
         {
           "name": "unsubs",
@@ -4155,7 +4396,9 @@
           "array_depth": 1,
           "optional": false,
           "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
-          "comment": ["The list of feeds unsubscribed to"]
+          "comment": [
+            "The list of feeds unsubscribed to"
+          ]
         }
       ],
       "comment": []
@@ -4173,10 +4416,14 @@
           "array_depth": 0,
           "optional": true,
           "example": "true",
-          "comment": ["Fetch only active instruments"]
+          "comment": [
+            "Fetch only active instruments"
+          ]
         }
       ],
-      "comment": ["Fetch all instruments"]
+      "comment": [
+        "Fetch all instruments"
+      ]
     },
     {
       "name": "ApiGetAllInstrumentsResponse",
@@ -4190,7 +4437,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["List of instruments"]
+          "comment": [
+            "List of instruments"
+          ]
         }
       ],
       "comment": []
@@ -4208,7 +4457,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'BTC_USDT_Perp'",
-          "comment": ["The instrument to trade in this leg"]
+          "comment": [
+            "The instrument to trade in this leg"
+          ]
         },
         {
           "name": "size",
@@ -4261,7 +4512,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "true",
-          "comment": ["Specifies if the order leg is a buy or sell"]
+          "comment": [
+            "Specifies if the order leg is a buy or sell"
+          ]
         }
       ],
       "comment": []
@@ -4292,7 +4545,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8'",
-          "comment": ["Signature R"]
+          "comment": [
+            "Signature R"
+          ]
         },
         {
           "name": "s",
@@ -4303,7 +4558,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d'",
-          "comment": ["Signature S"]
+          "comment": [
+            "Signature S"
+          ]
         },
         {
           "name": "v",
@@ -4314,7 +4571,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'28'",
-          "comment": ["Signature V"]
+          "comment": [
+            "Signature V"
+          ]
         },
         {
           "name": "expiration",
@@ -4404,7 +4663,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The status of the order"]
+          "comment": [
+            "The status of the order"
+          ]
         },
         {
           "name": "reject_reason",
@@ -4415,7 +4676,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'CLIENT_CANCEL'",
-          "comment": ["The reason for rejection or cancellation"]
+          "comment": [
+            "The reason for rejection or cancellation"
+          ]
         },
         {
           "name": "book_size",
@@ -4485,7 +4748,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The subaccount initiating the order"]
+          "comment": [
+            "The subaccount initiating the order"
+          ]
         },
         {
           "name": "is_market",
@@ -4604,7 +4869,9 @@
           "index": 9,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The signature approving this order"]
+          "comment": [
+            "The signature approving this order"
+          ]
         },
         {
           "name": "metadata",
@@ -4653,10 +4920,14 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The order to create"]
+          "comment": [
+            "The order to create"
+          ]
         }
       ],
-      "comment": ["Create an order on the orderbook for this trading account."]
+      "comment": [
+        "Create an order on the orderbook for this trading account."
+      ]
     },
     {
       "name": "ApiCreateOrderResponse",
@@ -4670,7 +4941,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The created order"]
+          "comment": [
+            "The created order"
+          ]
         }
       ],
       "comment": []
@@ -4688,7 +4961,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The subaccount ID cancelling the order"]
+          "comment": [
+            "The subaccount ID cancelling the order"
+          ]
         },
         {
           "name": "order_id",
@@ -4699,7 +4974,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0x1028403'",
-          "comment": ["Cancel the order with this `order_id`"]
+          "comment": [
+            "Cancel the order with this `order_id`"
+          ]
         },
         {
           "name": "client_order_id",
@@ -4710,10 +4987,14 @@
           "array_depth": 0,
           "optional": false,
           "example": "'23042'",
-          "comment": ["Cancel the order with this `client_order_id`"]
+          "comment": [
+            "Cancel the order with this `client_order_id`"
+          ]
         }
       ],
-      "comment": ["Cancel an order on the orderbook for this trading account."]
+      "comment": [
+        "Cancel an order on the orderbook for this trading account."
+      ]
     },
     {
       "name": "ApiCancelOrderResponse",
@@ -4727,7 +5008,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The cancelled order"]
+          "comment": [
+            "The cancelled order"
+          ]
         }
       ],
       "comment": []
@@ -4745,7 +5028,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The subaccount ID cancelling all orders"]
+          "comment": [
+            "The subaccount ID cancelling all orders"
+          ]
         }
       ],
       "comment": [
@@ -4765,7 +5050,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
-          "comment": ["The number of orders cancelled"]
+          "comment": [
+            "The number of orders cancelled"
+          ]
         }
       ],
       "comment": []
@@ -4783,7 +5070,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The subaccount ID to filter by"]
+          "comment": [
+            "The subaccount ID to filter by"
+          ]
         },
         {
           "name": "kind",
@@ -4839,7 +5128,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The Open Orders matching the request filter"]
+          "comment": [
+            "The Open Orders matching the request filter"
+          ]
         }
       ],
       "comment": [
@@ -4859,7 +5150,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The subaccount ID to filter by"]
+          "comment": [
+            "The subaccount ID to filter by"
+          ]
         },
         {
           "name": "kind",
@@ -4935,7 +5228,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The limit to query for. Defaults to 500; Max 1000"]
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
         },
         {
           "name": "cursor",
@@ -4946,10 +5241,14 @@
           "array_depth": 0,
           "optional": false,
           "example": "'Qw0918='",
-          "comment": ["The cursor to indicate when to start the query from"]
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
         }
       ],
-      "comment": ["Retrieves the order history for the account."]
+      "comment": [
+        "Retrieves the order history for the account."
+      ]
     },
     {
       "name": "ApiOrderHistoryResponse",
@@ -4964,7 +5263,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The total number of orders matching the request filter"]
+          "comment": [
+            "The total number of orders matching the request filter"
+          ]
         },
         {
           "name": "next",
@@ -4975,7 +5276,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'Qw0918='",
-          "comment": ["The cursor to indicate when to start the query from"]
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
         },
         {
           "name": "orders",
@@ -4985,7 +5288,9 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The Open Orders matching the request filter"]
+          "comment": [
+            "The Open Orders matching the request filter"
+          ]
         }
       ],
       "comment": []
@@ -4994,7 +5299,9 @@
       "name": "EmptyRequest",
       "is_root": true,
       "fields": [],
-      "comment": ["Used for requests that do not require any parameters"]
+      "comment": [
+        "Used for requests that do not require any parameters"
+      ]
     },
     {
       "name": "AckResponse",
@@ -5031,7 +5338,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The subaccount ID to filter by"]
+          "comment": [
+            "The subaccount ID to filter by"
+          ]
         },
         {
           "name": "order_id",
@@ -5042,7 +5351,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0x1028403'",
-          "comment": ["Filter for `order_id`"]
+          "comment": [
+            "Filter for `order_id`"
+          ]
         },
         {
           "name": "client_order_id",
@@ -5053,7 +5364,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'23042'",
-          "comment": ["Filter for `client_order_id`"]
+          "comment": [
+            "Filter for `client_order_id`"
+          ]
         }
       ],
       "comment": []
@@ -5070,7 +5383,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The order state for the requested filter"]
+          "comment": [
+            "The order state for the requested filter"
+          ]
         }
       ],
       "comment": []
@@ -5088,7 +5403,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The subaccount ID to filter by"]
+          "comment": [
+            "The subaccount ID to filter by"
+          ]
         },
         {
           "name": "order_id",
@@ -5099,7 +5416,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0x1028403'",
-          "comment": ["Filter for `order_id`"]
+          "comment": [
+            "Filter for `order_id`"
+          ]
         },
         {
           "name": "client_order_id",
@@ -5110,7 +5429,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'23042'",
-          "comment": ["Filter for `client_order_id`"]
+          "comment": [
+            "Filter for `client_order_id`"
+          ]
         }
       ],
       "comment": []
@@ -5127,7 +5448,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The order object for the requested filter"]
+          "comment": [
+            "The order object for the requested filter"
+          ]
         }
       ],
       "comment": []
@@ -5145,7 +5468,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'ACC_1234567890'",
-          "comment": ["The off chain account id"]
+          "comment": [
+            "The off chain account id"
+          ]
         },
         {
           "name": "calculate_from",
@@ -5156,7 +5481,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Start time of the epoch - phase"]
+          "comment": [
+            "Start time of the epoch - phase"
+          ]
         },
         {
           "name": "include_user_rank",
@@ -5167,7 +5494,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'true'",
-          "comment": ["Include user rank in the response"]
+          "comment": [
+            "Include user rank in the response"
+          ]
         }
       ],
       "comment": []
@@ -5185,7 +5514,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'ACC_1234567890'",
-          "comment": ["The off chain account id"]
+          "comment": [
+            "The off chain account id"
+          ]
         },
         {
           "name": "main_account_id",
@@ -5196,7 +5527,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["The main account id"]
+          "comment": [
+            "The main account id"
+          ]
         },
         {
           "name": "total_point",
@@ -5207,7 +5540,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total ecosystem point"]
+          "comment": [
+            "Total ecosystem point"
+          ]
         },
         {
           "name": "direct_invite_count",
@@ -5218,7 +5553,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
-          "comment": ["Direct invite count"]
+          "comment": [
+            "Direct invite count"
+          ]
         },
         {
           "name": "indirect_invite_count",
@@ -5229,7 +5566,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
-          "comment": ["Indirect invite count"]
+          "comment": [
+            "Indirect invite count"
+          ]
         },
         {
           "name": "direct_invite_trading_volume",
@@ -5240,7 +5579,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Direct invite trading volume"]
+          "comment": [
+            "Direct invite trading volume"
+          ]
         },
         {
           "name": "indirect_invite_trading_volume",
@@ -5251,7 +5592,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Indirect invite trading volume"]
+          "comment": [
+            "Indirect invite trading volume"
+          ]
         },
         {
           "name": "calculate_at",
@@ -5262,7 +5605,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The time when the ecosystem point is calculated"]
+          "comment": [
+            "The time when the ecosystem point is calculated"
+          ]
         },
         {
           "name": "calculate_from",
@@ -5273,7 +5618,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Start time of the epoch - phase"]
+          "comment": [
+            "Start time of the epoch - phase"
+          ]
         },
         {
           "name": "calculate_to",
@@ -5284,7 +5631,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["End time of the epoch - phase"]
+          "comment": [
+            "End time of the epoch - phase"
+          ]
         },
         {
           "name": "rank",
@@ -5295,10 +5644,14 @@
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
-          "comment": ["The rank of the account in the ecosystem"]
+          "comment": [
+            "The rank of the account in the ecosystem"
+          ]
         }
       ],
-      "comment": [""]
+      "comment": [
+        ""
+      ]
     },
     {
       "name": "ApiGetUserEcosystemPointResponse",
@@ -5312,7 +5665,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The list of ecosystem points"]
+          "comment": [
+            "The list of ecosystem points"
+          ]
         }
       ],
       "comment": []
@@ -5330,7 +5685,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Start time of the epoch - phase"]
+          "comment": [
+            "Start time of the epoch - phase"
+          ]
         },
         {
           "name": "limit",
@@ -5341,7 +5698,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The number of accounts to return"]
+          "comment": [
+            "The number of accounts to return"
+          ]
         }
       ],
       "comment": []
@@ -5358,7 +5717,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The list of ecosystem points"]
+          "comment": [
+            "The list of ecosystem points"
+          ]
         }
       ],
       "comment": []
@@ -5376,7 +5737,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
-          "comment": ["Direct invite count"]
+          "comment": [
+            "Direct invite count"
+          ]
         },
         {
           "name": "indirect_invite_count",
@@ -5387,7 +5750,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
-          "comment": ["Indirect invite count"]
+          "comment": [
+            "Indirect invite count"
+          ]
         },
         {
           "name": "direct_invite_trading_volume",
@@ -5398,7 +5763,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total volume traded by direct invites multiple by 1e9"]
+          "comment": [
+            "Total volume traded by direct invites multiple by 1e9"
+          ]
         },
         {
           "name": "indirect_invite_trading_volume",
@@ -5409,7 +5776,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total volume traded by indirect invites multiple by 1e9"]
+          "comment": [
+            "Total volume traded by indirect invites multiple by 1e9"
+          ]
         }
       ],
       "comment": []
@@ -5427,7 +5796,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'Phase 1'",
-          "comment": ["The name of the epoch"]
+          "comment": [
+            "The name of the epoch"
+          ]
         },
         {
           "name": "point",
@@ -5471,7 +5842,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
-          "comment": ["Direct invite count"]
+          "comment": [
+            "Direct invite count"
+          ]
         },
         {
           "name": "indirect_invite_count",
@@ -5482,7 +5855,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
-          "comment": ["Indirect invite count"]
+          "comment": [
+            "Indirect invite count"
+          ]
         },
         {
           "name": "direct_invite_trading_volume",
@@ -5493,7 +5868,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Direct invite trading volume"]
+          "comment": [
+            "Direct invite trading volume"
+          ]
         },
         {
           "name": "indirect_invite_trading_volume",
@@ -5504,7 +5881,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Indirect invite trading volume"]
+          "comment": [
+            "Indirect invite trading volume"
+          ]
         },
         {
           "name": "total_point",
@@ -5515,7 +5894,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total ecosystem point of this epoch/phase"]
+          "comment": [
+            "Total ecosystem point of this epoch/phase"
+          ]
         }
       ],
       "comment": []
@@ -5532,7 +5913,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["Phase zero metric"]
+          "comment": [
+            "Phase zero metric"
+          ]
         },
         {
           "name": "phase_one_metric",
@@ -5542,7 +5925,9 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "comment": ["Phase one metric"]
+          "comment": [
+            "Phase one metric"
+          ]
         },
         {
           "name": "rank",
@@ -5553,7 +5938,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
-          "comment": ["The rank of the account in the ecosystem"]
+          "comment": [
+            "The rank of the account in the ecosystem"
+          ]
         },
         {
           "name": "total",
@@ -5564,7 +5951,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "52",
-          "comment": ["The total number of accounts in the ecosystem"]
+          "comment": [
+            "The total number of accounts in the ecosystem"
+          ]
         },
         {
           "name": "total_point",
@@ -5575,7 +5964,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total ecosystem point of the first epoch"]
+          "comment": [
+            "Total ecosystem point of the first epoch"
+          ]
         },
         {
           "name": "last_calculated_at",
@@ -5586,7 +5977,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The time when the ecosystem points were last calculated"]
+          "comment": [
+            "The time when the ecosystem points were last calculated"
+          ]
         }
       ],
       "comment": []
@@ -5604,7 +5997,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'ACC_1234567890'",
-          "comment": ["The off chain account id"]
+          "comment": [
+            "The off chain account id"
+          ]
         },
         {
           "name": "rank",
@@ -5615,7 +6010,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
-          "comment": ["The rank of the account in the ecosystem"]
+          "comment": [
+            "The rank of the account in the ecosystem"
+          ]
         },
         {
           "name": "total_point",
@@ -5626,7 +6023,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total ecosystem point"]
+          "comment": [
+            "Total ecosystem point"
+          ]
         },
         {
           "name": "twitter_username",
@@ -5637,7 +6036,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'elonmusk'",
-          "comment": ["The twitter username of the account"]
+          "comment": [
+            "The twitter username of the account"
+          ]
         }
       ],
       "comment": []
@@ -5654,7 +6055,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The list of ecosystem leaderboard users"]
+          "comment": [
+            "The list of ecosystem leaderboard users"
+          ]
         }
       ],
       "comment": []
@@ -5685,7 +6088,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Optional. Start time in unix nanoseconds"]
+          "comment": [
+            "Optional. Start time in unix nanoseconds"
+          ]
         },
         {
           "name": "end_time",
@@ -5696,7 +6101,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Optional. End time in unix nanoseconds"]
+          "comment": [
+            "Optional. End time in unix nanoseconds"
+          ]
         },
         {
           "name": "account_id",
@@ -5707,7 +6114,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'ACC_1234567890'",
-          "comment": ["The off chain account id to get all user's referrers"]
+          "comment": [
+            "The off chain account id to get all user's referrers"
+          ]
         }
       ],
       "comment": [
@@ -5727,7 +6136,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'ACC_1234567890'",
-          "comment": ["The off chain account id"]
+          "comment": [
+            "The off chain account id"
+          ]
         },
         {
           "name": "referrer_id",
@@ -5738,7 +6149,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'ACC_1234567890'",
-          "comment": ["The off chain referrer account id"]
+          "comment": [
+            "The off chain referrer account id"
+          ]
         },
         {
           "name": "referrer_level",
@@ -5762,7 +6175,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The account creation time"]
+          "comment": [
+            "The account creation time"
+          ]
         },
         {
           "name": "main_account_id",
@@ -5773,7 +6188,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["The main account id"]
+          "comment": [
+            "The main account id"
+          ]
         },
         {
           "name": "referrer_main_account_id",
@@ -5784,10 +6201,14 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["The referrer main account id"]
+          "comment": [
+            "The referrer main account id"
+          ]
         }
       ],
-      "comment": [""]
+      "comment": [
+        ""
+      ]
     },
     {
       "name": "ApiGetListFlatReferralResponse",
@@ -5801,7 +6222,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The list of flat referrals"]
+          "comment": [
+            "The list of flat referrals"
+          ]
         }
       ],
       "comment": []
@@ -5834,7 +6257,9 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The interval of each sub account trade"]
+          "comment": [
+            "The interval of each sub account trade"
+          ]
         },
         {
           "name": "sub_account_i_ds",
@@ -5845,7 +6270,9 @@
           "array_depth": 1,
           "optional": false,
           "example": "['2376', '5821']",
-          "comment": ["The list of sub account ids to query"]
+          "comment": [
+            "The list of sub account ids to query"
+          ]
         },
         {
           "name": "start_interval",
@@ -5869,7 +6296,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Optional. Start time in unix nanoseconds"]
+          "comment": [
+            "Optional. Start time in unix nanoseconds"
+          ]
         },
         {
           "name": "end_time",
@@ -5880,7 +6309,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Optional. End time in unix nanoseconds"]
+          "comment": [
+            "Optional. End time in unix nanoseconds"
+          ]
         }
       ],
       "comment": [
@@ -5900,7 +6331,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Start of calculation epoch"]
+          "comment": [
+            "Start of calculation epoch"
+          ]
         },
         {
           "name": "sub_account_id",
@@ -5911,7 +6344,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The sub account id"]
+          "comment": [
+            "The sub account id"
+          ]
         },
         {
           "name": "instrument",
@@ -5922,7 +6357,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'BTC_USDT_Perp'",
-          "comment": ["The instrument being represented"]
+          "comment": [
+            "The instrument being represented"
+          ]
         },
         {
           "name": "total_fee",
@@ -5933,7 +6370,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total fee paid"]
+          "comment": [
+            "Total fee paid"
+          ]
         },
         {
           "name": "total_trade_volume",
@@ -5944,10 +6383,14 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total volume traded"]
+          "comment": [
+            "Total volume traded"
+          ]
         }
       ],
-      "comment": [""]
+      "comment": [
+        ""
+      ]
     },
     {
       "name": "ApiSubAccountTradeResponse",
@@ -5961,7 +6404,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The sub account trade result set for given interval"]
+          "comment": [
+            "The sub account trade result set for given interval"
+          ]
         }
       ],
       "comment": []
@@ -5978,7 +6423,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The interval of each sub account trade"]
+          "comment": [
+            "The interval of each sub account trade"
+          ]
         },
         {
           "name": "sub_account_i_ds",
@@ -5989,7 +6436,9 @@
           "array_depth": 1,
           "optional": false,
           "example": "['2376', '5821']",
-          "comment": ["The list of sub account ids to query"]
+          "comment": [
+            "The list of sub account ids to query"
+          ]
         },
         {
           "name": "start_interval",
@@ -6022,7 +6471,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["Start of calculation epoch"]
+          "comment": [
+            "Start of calculation epoch"
+          ]
         },
         {
           "name": "sub_account_id",
@@ -6033,7 +6484,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The sub account id"]
+          "comment": [
+            "The sub account id"
+          ]
         },
         {
           "name": "total_fee",
@@ -6044,7 +6497,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total fee paid"]
+          "comment": [
+            "Total fee paid"
+          ]
         },
         {
           "name": "total_trade_volume",
@@ -6055,7 +6510,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total volume traded"]
+          "comment": [
+            "Total volume traded"
+          ]
         }
       ],
       "comment": [
@@ -6094,7 +6551,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total fee paid"]
+          "comment": [
+            "Total fee paid"
+          ]
         }
       ],
       "comment": []
@@ -6112,7 +6571,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total fee paid"]
+          "comment": [
+            "Total fee paid"
+          ]
         },
         {
           "name": "total_point",
@@ -6123,7 +6584,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total trader point of this epoch/phase"]
+          "comment": [
+            "Total trader point of this epoch/phase"
+          ]
         }
       ],
       "comment": []
@@ -6140,7 +6603,9 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "comment": ["Phase zero metric"]
+          "comment": [
+            "Phase zero metric"
+          ]
         },
         {
           "name": "rank",
@@ -6151,7 +6616,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
-          "comment": ["The rank of the account in the trader"]
+          "comment": [
+            "The rank of the account in the trader"
+          ]
         },
         {
           "name": "total",
@@ -6162,7 +6629,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "52",
-          "comment": ["The total number of accounts in the trader"]
+          "comment": [
+            "The total number of accounts in the trader"
+          ]
         },
         {
           "name": "last_calculated_at",
@@ -6173,7 +6642,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The time when the trader points were last calculated"]
+          "comment": [
+            "The time when the trader points were last calculated"
+          ]
         }
       ],
       "comment": []
@@ -6191,7 +6662,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'ACC_1234567890'",
-          "comment": ["The off chain account id"]
+          "comment": [
+            "The off chain account id"
+          ]
         },
         {
           "name": "rank",
@@ -6202,7 +6675,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
-          "comment": ["The rank of the account in the Trader"]
+          "comment": [
+            "The rank of the account in the Trader"
+          ]
         },
         {
           "name": "total_point",
@@ -6213,7 +6688,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
-          "comment": ["Total Trader point"]
+          "comment": [
+            "Total Trader point"
+          ]
         },
         {
           "name": "twitter_username",
@@ -6224,7 +6701,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'elonmusk'",
-          "comment": ["The twitter username of the account"]
+          "comment": [
+            "The twitter username of the account"
+          ]
         }
       ],
       "comment": []
@@ -6241,7 +6720,9 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The list of trader leaderboard users"]
+          "comment": [
+            "The list of trader leaderboard users"
+          ]
         }
       ],
       "comment": []
@@ -6259,7 +6740,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The subaccount ID to filter by"]
+          "comment": [
+            "The subaccount ID to filter by"
+          ],
+          "selector": "primary"
         },
         {
           "name": "kind",
@@ -6270,7 +6754,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'PERPETUAL'",
-          "comment": ["The kind filter to apply."]
+          "comment": [
+            "The kind filter to apply."
+          ],
+          "selector": "primary"
         },
         {
           "name": "underlying",
@@ -6281,7 +6768,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'BTC'",
-          "comment": ["The underlying filter to apply."]
+          "comment": [
+            "The underlying filter to apply."
+          ],
+          "selector": "primary"
         },
         {
           "name": "quote",
@@ -6292,7 +6782,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The quote filter to apply."]
+          "comment": [
+            "The quote filter to apply."
+          ],
+          "selector": "primary"
         },
         {
           "name": "state_filter",
@@ -6302,7 +6795,10 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
-          "comment": ["create only, update only, all"]
+          "comment": [
+            "create only, update only, all"
+          ],
+          "selector": "secondary"
         }
       ],
       "comment": [
@@ -6324,7 +6820,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.order'",
-          "comment": ["Stream name"]
+          "comment": [
+            "Stream name"
+          ]
         },
         {
           "name": "sequence_number",
@@ -6347,7 +6845,9 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The order object being created or updated"]
+          "comment": [
+            "The order object being created or updated"
+          ]
         }
       ],
       "comment": []
@@ -6365,7 +6865,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The subaccount ID to filter by"]
+          "comment": [
+            "The subaccount ID to filter by"
+          ],
+          "selector": "primary"
         },
         {
           "name": "kind",
@@ -6376,7 +6879,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'PERPETUAL'",
-          "comment": ["The kind filter to apply."]
+          "comment": [
+            "The kind filter to apply."
+          ],
+          "selector": "primary"
         },
         {
           "name": "underlying",
@@ -6387,7 +6893,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'BTC'",
-          "comment": ["The underlying filter to apply."]
+          "comment": [
+            "The underlying filter to apply."
+          ],
+          "selector": "primary"
         },
         {
           "name": "quote",
@@ -6398,7 +6907,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The quote filter to apply."]
+          "comment": [
+            "The quote filter to apply."
+          ],
+          "selector": "primary"
         },
         {
           "name": "state_filter",
@@ -6408,7 +6920,10 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
-          "comment": ["create only, update only, all"]
+          "comment": [
+            "create only, update only, all"
+          ],
+          "selector": "secondary"
         }
       ],
       "comment": [
@@ -6443,7 +6958,9 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The order state object being created or updated"]
+          "comment": [
+            "The order state object being created or updated"
+          ]
         }
       ],
       "comment": []
@@ -6461,7 +6978,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.state'",
-          "comment": ["Stream name"]
+          "comment": [
+            "Stream name"
+          ]
         },
         {
           "name": "sequence_number",
@@ -6484,7 +7003,9 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The Order State Feed"]
+          "comment": [
+            "The Order State Feed"
+          ]
         }
       ],
       "comment": []
@@ -6502,7 +7023,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The subaccount ID to filter by"]
+          "comment": [
+            "The subaccount ID to filter by"
+          ],
+          "selector": "primary"
         },
         {
           "name": "kind",
@@ -6513,7 +7037,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'PERPETUAL'",
-          "comment": ["The kind filter to apply."]
+          "comment": [
+            "The kind filter to apply."
+          ],
+          "selector": "primary"
         },
         {
           "name": "underlying",
@@ -6524,7 +7051,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'BTC'",
-          "comment": ["The underlying filter to apply."]
+          "comment": [
+            "The underlying filter to apply."
+          ],
+          "selector": "primary"
         },
         {
           "name": "quote",
@@ -6535,7 +7065,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The quote filter to apply."]
+          "comment": [
+            "The quote filter to apply."
+          ],
+          "selector": "primary"
         }
       ],
       "comment": [
@@ -6555,7 +7088,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.position'",
-          "comment": ["Stream name"]
+          "comment": [
+            "Stream name"
+          ]
         },
         {
           "name": "sequence_number",
@@ -6598,7 +7133,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'2927361400114782'",
-          "comment": ["The sub account ID to request for"]
+          "comment": [
+            "The sub account ID to request for"
+          ],
+          "selector": "primary"
         },
         {
           "name": "kind",
@@ -6609,7 +7147,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'PERPETUAL'",
-          "comment": ["The kind filter to apply."]
+          "comment": [
+            "The kind filter to apply."
+          ],
+          "selector": "primary"
         },
         {
           "name": "underlying",
@@ -6620,7 +7161,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'BTC'",
-          "comment": ["The underlying filter to apply."]
+          "comment": [
+            "The underlying filter to apply."
+          ],
+          "selector": "primary"
         },
         {
           "name": "quote",
@@ -6631,7 +7175,10 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The quote filter to apply."]
+          "comment": [
+            "The quote filter to apply."
+          ],
+          "selector": "primary"
         }
       ],
       "comment": []
@@ -6649,7 +7196,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.trade'",
-          "comment": ["The websocket channel to which the response is sent"]
+          "comment": [
+            "The websocket channel to which the response is sent"
+          ]
         },
         {
           "name": "sequence_number",
@@ -6672,7 +7221,9 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["A private trade matching the request filter"]
+          "comment": [
+            "A private trade matching the request filter"
+          ]
         }
       ],
       "comment": []
@@ -6690,7 +7241,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The account to transfer from"]
+          "comment": [
+            "The account to transfer from"
+          ]
         },
         {
           "name": "from_sub_account_id",
@@ -6714,7 +7267,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The account to deposit into"]
+          "comment": [
+            "The account to deposit into"
+          ]
         },
         {
           "name": "to_sub_account_id",
@@ -6738,7 +7293,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The token currency to transfer"]
+          "comment": [
+            "The token currency to transfer"
+          ]
         },
         {
           "name": "num_tokens",
@@ -6749,7 +7306,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10.50'",
-          "comment": ["The number of tokens to transfer"]
+          "comment": [
+            "The number of tokens to transfer"
+          ]
         },
         {
           "name": "signature",
@@ -6759,7 +7318,9 @@
           "index": 6,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The signature of the transfer"]
+          "comment": [
+            "The signature of the transfer"
+          ]
         }
       ],
       "comment": []
@@ -6777,7 +7338,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.transfer'",
-          "comment": ["The websocket channel to which the response is sent"]
+          "comment": [
+            "The websocket channel to which the response is sent"
+          ]
         },
         {
           "name": "sequence_number",
@@ -6800,10 +7363,14 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The Transfer object"]
+          "comment": [
+            "The Transfer object"
+          ]
         }
       ],
-      "comment": ["Subscribes to a feed of transfer updates."]
+      "comment": [
+        "Subscribes to a feed of transfer updates."
+      ]
     },
     {
       "name": "Deposit",
@@ -6818,7 +7385,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0x1234567890123456789012345678901234567890123456789012345678901234'",
-          "comment": ["The hash of the bridgemint event producing the deposit"]
+          "comment": [
+            "The hash of the bridgemint event producing the deposit"
+          ]
         },
         {
           "name": "to_account_id",
@@ -6829,7 +7398,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The account to deposit into"]
+          "comment": [
+            "The account to deposit into"
+          ]
         },
         {
           "name": "token_currency",
@@ -6840,7 +7411,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The token currency to deposit"]
+          "comment": [
+            "The token currency to deposit"
+          ]
         },
         {
           "name": "num_tokens",
@@ -6851,7 +7424,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10.50'",
-          "comment": ["The number of tokens to deposit"]
+          "comment": [
+            "The number of tokens to deposit"
+          ]
         }
       ],
       "comment": []
@@ -6869,7 +7444,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.deposit'",
-          "comment": ["The websocket channel to which the response is sent"]
+          "comment": [
+            "The websocket channel to which the response is sent"
+          ]
         },
         {
           "name": "sequence_number",
@@ -6892,10 +7469,14 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The Deposit object"]
+          "comment": [
+            "The Deposit object"
+          ]
         }
       ],
-      "comment": ["Subscribes to a feed of deposit updates."]
+      "comment": [
+        "Subscribes to a feed of deposit updates."
+      ]
     },
     {
       "name": "Withdrawal",
@@ -6910,7 +7491,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The subaccount to withdraw from"]
+          "comment": [
+            "The subaccount to withdraw from"
+          ]
         },
         {
           "name": "to_eth_address",
@@ -6921,7 +7504,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The ethereum address to withdraw to"]
+          "comment": [
+            "The ethereum address to withdraw to"
+          ]
         },
         {
           "name": "token_currency",
@@ -6932,7 +7517,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The token currency to withdraw"]
+          "comment": [
+            "The token currency to withdraw"
+          ]
         },
         {
           "name": "num_tokens",
@@ -6943,7 +7530,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'10.50'",
-          "comment": ["The number of tokens to withdraw"]
+          "comment": [
+            "The number of tokens to withdraw"
+          ]
         },
         {
           "name": "signature",
@@ -6953,7 +7542,9 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The signature of the withdrawal"]
+          "comment": [
+            "The signature of the withdrawal"
+          ]
         }
       ],
       "comment": []
@@ -6971,7 +7562,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'v1.withdrawal'",
-          "comment": ["The websocket channel to which the response is sent"]
+          "comment": [
+            "The websocket channel to which the response is sent"
+          ]
         },
         {
           "name": "sequence_number",
@@ -6994,10 +7587,14 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The Withdrawal object"]
+          "comment": [
+            "The Withdrawal object"
+          ]
         }
       ],
-      "comment": ["Subscribes to a feed of withdrawal updates."]
+      "comment": [
+        "Subscribes to a feed of withdrawal updates."
+      ]
     },
     {
       "name": "ApiDepositRequest",
@@ -7012,7 +7609,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The main account to deposit into"]
+          "comment": [
+            "The main account to deposit into"
+          ]
         },
         {
           "name": "token_currency",
@@ -7023,7 +7622,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The token currency to deposit"]
+          "comment": [
+            "The token currency to deposit"
+          ]
         },
         {
           "name": "num_tokens",
@@ -7060,7 +7661,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The main account to withdraw from"]
+          "comment": [
+            "The main account to withdraw from"
+          ]
         },
         {
           "name": "to_eth_address",
@@ -7071,7 +7674,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The Ethereum wallet to withdraw into"]
+          "comment": [
+            "The Ethereum wallet to withdraw into"
+          ]
         },
         {
           "name": "token_currency",
@@ -7082,7 +7687,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The token currency to withdraw"]
+          "comment": [
+            "The token currency to withdraw"
+          ]
         },
         {
           "name": "num_tokens",
@@ -7105,7 +7712,9 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The signature of the withdrawal"]
+          "comment": [
+            "The signature of the withdrawal"
+          ]
         }
       ],
       "comment": [
@@ -7130,7 +7739,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The main account to transfer from"]
+          "comment": [
+            "The main account to transfer from"
+          ]
         },
         {
           "name": "from_sub_account_id",
@@ -7154,7 +7765,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The main account to deposit into"]
+          "comment": [
+            "The main account to deposit into"
+          ]
         },
         {
           "name": "to_sub_account_id",
@@ -7178,7 +7791,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The token currency to transfer"]
+          "comment": [
+            "The token currency to transfer"
+          ]
         },
         {
           "name": "num_tokens",
@@ -7201,7 +7816,9 @@
           "index": 6,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The signature of the transfer"]
+          "comment": [
+            "The signature of the transfer"
+          ]
         }
       ],
       "comment": [
@@ -7225,7 +7842,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The limit to query for. Defaults to 500; Max 1000"]
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
         },
         {
           "name": "cursor",
@@ -7262,7 +7881,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The start time to query for in unix nanoseconds"]
+          "comment": [
+            "The start time to query for in unix nanoseconds"
+          ]
         },
         {
           "name": "end_time",
@@ -7273,7 +7894,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The end time to query for in unix nanoseconds"]
+          "comment": [
+            "The end time to query for in unix nanoseconds"
+          ]
         }
       ],
       "comment": [
@@ -7294,7 +7917,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1028403'",
-          "comment": ["The transaction ID of the deposit"]
+          "comment": [
+            "The transaction ID of the deposit"
+          ]
         },
         {
           "name": "tx_hash",
@@ -7305,7 +7930,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0x10000101000203040506'",
-          "comment": ["The txHash of the bridgemint event"]
+          "comment": [
+            "The txHash of the bridgemint event"
+          ]
         },
         {
           "name": "to_account_id",
@@ -7316,7 +7943,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The account to deposit into"]
+          "comment": [
+            "The account to deposit into"
+          ]
         },
         {
           "name": "token_currency",
@@ -7327,7 +7956,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The token currency to deposit"]
+          "comment": [
+            "The token currency to deposit"
+          ]
         },
         {
           "name": "num_tokens",
@@ -7338,7 +7969,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1500.0'",
-          "comment": ["The number of tokens to deposit"]
+          "comment": [
+            "The number of tokens to deposit"
+          ]
         },
         {
           "name": "event_time",
@@ -7349,7 +7982,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The timestamp of the deposit in unix nanoseconds"]
+          "comment": [
+            "The timestamp of the deposit in unix nanoseconds"
+          ]
         }
       ],
       "comment": []
@@ -7392,7 +8027,9 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The deposit history matching the request account"]
+          "comment": [
+            "The deposit history matching the request account"
+          ]
         }
       ],
       "comment": []
@@ -7410,7 +8047,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The limit to query for. Defaults to 500; Max 1000"]
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
         },
         {
           "name": "cursor",
@@ -7447,7 +8086,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The start time to query for in unix nanoseconds"]
+          "comment": [
+            "The start time to query for in unix nanoseconds"
+          ]
         },
         {
           "name": "end_time",
@@ -7458,7 +8099,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The end time to query for in unix nanoseconds"]
+          "comment": [
+            "The end time to query for in unix nanoseconds"
+          ]
         }
       ],
       "comment": [
@@ -7479,7 +8122,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1028403'",
-          "comment": ["The transaction ID of the transfer"]
+          "comment": [
+            "The transaction ID of the transfer"
+          ]
         },
         {
           "name": "from_account_id",
@@ -7490,7 +8135,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The account to transfer from"]
+          "comment": [
+            "The account to transfer from"
+          ]
         },
         {
           "name": "from_sub_account_id",
@@ -7514,7 +8161,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The account to deposit into"]
+          "comment": [
+            "The account to deposit into"
+          ]
         },
         {
           "name": "to_sub_account_id",
@@ -7538,7 +8187,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The token currency to transfer"]
+          "comment": [
+            "The token currency to transfer"
+          ]
         },
         {
           "name": "num_tokens",
@@ -7549,7 +8200,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1500.0'",
-          "comment": ["The number of tokens to transfer"]
+          "comment": [
+            "The number of tokens to transfer"
+          ]
         },
         {
           "name": "signature",
@@ -7559,7 +8212,9 @@
           "index": 7,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The signature of the transfer"]
+          "comment": [
+            "The signature of the transfer"
+          ]
         },
         {
           "name": "event_time",
@@ -7570,7 +8225,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The timestamp of the transfer in unix nanoseconds"]
+          "comment": [
+            "The timestamp of the transfer in unix nanoseconds"
+          ]
         }
       ],
       "comment": []
@@ -7613,7 +8270,9 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The transfer history matching the request account"]
+          "comment": [
+            "The transfer history matching the request account"
+          ]
         }
       ],
       "comment": []
@@ -7631,7 +8290,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "500",
-          "comment": ["The limit to query for. Defaults to 500; Max 1000"]
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
         },
         {
           "name": "cursor",
@@ -7668,7 +8329,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The start time to query for in unix nanoseconds"]
+          "comment": [
+            "The start time to query for in unix nanoseconds"
+          ]
         },
         {
           "name": "end_time",
@@ -7679,7 +8342,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The end time to query for in unix nanoseconds"]
+          "comment": [
+            "The end time to query for in unix nanoseconds"
+          ]
         }
       ],
       "comment": [
@@ -7700,7 +8365,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1028403'",
-          "comment": ["The transaction ID of the withdrawal"]
+          "comment": [
+            "The transaction ID of the withdrawal"
+          ]
         },
         {
           "name": "from_account_id",
@@ -7711,7 +8378,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The subaccount to withdraw from"]
+          "comment": [
+            "The subaccount to withdraw from"
+          ]
         },
         {
           "name": "to_eth_address",
@@ -7722,7 +8391,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": ["The ethereum address to withdraw to"]
+          "comment": [
+            "The ethereum address to withdraw to"
+          ]
         },
         {
           "name": "token_currency",
@@ -7733,7 +8404,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
-          "comment": ["The token currency to withdraw"]
+          "comment": [
+            "The token currency to withdraw"
+          ]
         },
         {
           "name": "num_tokens",
@@ -7744,7 +8417,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1500.0'",
-          "comment": ["The number of tokens to withdraw"]
+          "comment": [
+            "The number of tokens to withdraw"
+          ]
         },
         {
           "name": "signature",
@@ -7754,7 +8429,9 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
-          "comment": ["The signature of the withdrawal"]
+          "comment": [
+            "The signature of the withdrawal"
+          ]
         },
         {
           "name": "event_time",
@@ -7765,7 +8442,9 @@
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
-          "comment": ["The timestamp of the withdrawal in unix nanoseconds"]
+          "comment": [
+            "The timestamp of the withdrawal in unix nanoseconds"
+          ]
         }
       ],
       "comment": []
@@ -7808,7 +8487,9 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
-          "comment": ["The withdrawals history matching the request account"]
+          "comment": [
+            "The withdrawals history matching the request account"
+          ]
         }
       ],
       "comment": []
@@ -7821,92 +8502,128 @@
         {
           "name": "CI_1_M",
           "value": 1,
-          "comment": ["1 minute"]
+          "comment": [
+            "1 minute"
+          ]
         },
         {
           "name": "CI_3_M",
           "value": 2,
-          "comment": ["3 minutes"]
+          "comment": [
+            "3 minutes"
+          ]
         },
         {
           "name": "CI_5_M",
           "value": 3,
-          "comment": ["5 minutes"]
+          "comment": [
+            "5 minutes"
+          ]
         },
         {
           "name": "CI_15_M",
           "value": 4,
-          "comment": ["15 minutes"]
+          "comment": [
+            "15 minutes"
+          ]
         },
         {
           "name": "CI_30_M",
           "value": 5,
-          "comment": ["30 minutes"]
+          "comment": [
+            "30 minutes"
+          ]
         },
         {
           "name": "CI_1_H",
           "value": 6,
-          "comment": ["1 hour"]
+          "comment": [
+            "1 hour"
+          ]
         },
         {
           "name": "CI_2_H",
           "value": 7,
-          "comment": ["2 hour"]
+          "comment": [
+            "2 hour"
+          ]
         },
         {
           "name": "CI_4_H",
           "value": 8,
-          "comment": ["4 hour"]
+          "comment": [
+            "4 hour"
+          ]
         },
         {
           "name": "CI_6_H",
           "value": 9,
-          "comment": ["6 hour"]
+          "comment": [
+            "6 hour"
+          ]
         },
         {
           "name": "CI_8_H",
           "value": 10,
-          "comment": ["8 hour"]
+          "comment": [
+            "8 hour"
+          ]
         },
         {
           "name": "CI_12_H",
           "value": 11,
-          "comment": ["12 hour"]
+          "comment": [
+            "12 hour"
+          ]
         },
         {
           "name": "CI_1_D",
           "value": 12,
-          "comment": ["1 day"]
+          "comment": [
+            "1 day"
+          ]
         },
         {
           "name": "CI_3_D",
           "value": 13,
-          "comment": ["3 days"]
+          "comment": [
+            "3 days"
+          ]
         },
         {
           "name": "CI_5_D",
           "value": 14,
-          "comment": ["5 days"]
+          "comment": [
+            "5 days"
+          ]
         },
         {
           "name": "CI_1_W",
           "value": 15,
-          "comment": ["1 week"]
+          "comment": [
+            "1 week"
+          ]
         },
         {
           "name": "CI_2_W",
           "value": 16,
-          "comment": ["2 weeks"]
+          "comment": [
+            "2 weeks"
+          ]
         },
         {
           "name": "CI_3_W",
           "value": 17,
-          "comment": ["3 weeks"]
+          "comment": [
+            "3 weeks"
+          ]
         },
         {
           "name": "CI_4_W",
           "value": 18,
-          "comment": ["4 weeks"]
+          "comment": [
+            "4 weeks"
+          ]
         }
       ],
       "comment": []
@@ -7917,22 +8634,30 @@
         {
           "name": "TRADE",
           "value": 1,
-          "comment": ["Tracks traded prices"]
+          "comment": [
+            "Tracks traded prices"
+          ]
         },
         {
           "name": "MARK",
           "value": 2,
-          "comment": ["Tracks mark prices"]
+          "comment": [
+            "Tracks mark prices"
+          ]
         },
         {
           "name": "INDEX",
           "value": 3,
-          "comment": ["Tracks index prices"]
+          "comment": [
+            "Tracks index prices"
+          ]
         },
         {
           "name": "MID",
           "value": 4,
-          "comment": ["Tracks book mid prices"]
+          "comment": [
+            "Tracks book mid prices"
+          ]
         }
       ],
       "comment": []
@@ -7943,22 +8668,30 @@
         {
           "name": "USDC",
           "value": 2,
-          "comment": ["the USDC token"]
+          "comment": [
+            "the USDC token"
+          ]
         },
         {
           "name": "USDT",
           "value": 3,
-          "comment": ["the USDT token"]
+          "comment": [
+            "the USDT token"
+          ]
         },
         {
           "name": "ETH",
           "value": 4,
-          "comment": ["the ETH token"]
+          "comment": [
+            "the ETH token"
+          ]
         },
         {
           "name": "BTC",
           "value": 5,
-          "comment": ["the BTC token"]
+          "comment": [
+            "the BTC token"
+          ]
         }
       ],
       "comment": [
@@ -8012,22 +8745,30 @@
         {
           "name": "PERPETUAL",
           "value": 1,
-          "comment": ["the perpetual asset kind"]
+          "comment": [
+            "the perpetual asset kind"
+          ]
         },
         {
           "name": "FUTURE",
           "value": 2,
-          "comment": ["the future asset kind"]
+          "comment": [
+            "the future asset kind"
+          ]
         },
         {
           "name": "CALL",
           "value": 3,
-          "comment": ["the call option asset kind"]
+          "comment": [
+            "the call option asset kind"
+          ]
         },
         {
           "name": "PUT",
           "value": 4,
-          "comment": ["the put option asset kind"]
+          "comment": [
+            "the put option asset kind"
+          ]
         }
       ],
       "comment": [
@@ -8060,12 +8801,16 @@
         {
           "name": "CLIENT_CANCEL",
           "value": 1,
-          "comment": ["client called a Cancel API"]
+          "comment": [
+            "client called a Cancel API"
+          ]
         },
         {
           "name": "CLIENT_BULK_CANCEL",
           "value": 2,
-          "comment": ["client called a Bulk Cancel API"]
+          "comment": [
+            "client called a Bulk Cancel API"
+          ]
         },
         {
           "name": "CLIENT_SESSION_END",
@@ -8084,7 +8829,9 @@
         {
           "name": "IOC_CANCEL",
           "value": 5,
-          "comment": ["the IOC order was cancelled after no/partial fill"]
+          "comment": [
+            "the IOC order was cancelled after no/partial fill"
+          ]
         },
         {
           "name": "AON_CANCEL",
@@ -8103,7 +8850,9 @@
         {
           "name": "EXPIRED",
           "value": 8,
-          "comment": ["the order was cancelled as it has expired"]
+          "comment": [
+            "the order was cancelled as it has expired"
+          ]
         },
         {
           "name": "FAIL_POST_ONLY",
@@ -8164,7 +8913,9 @@
         {
           "name": "INSTRUMENT_INVALID",
           "value": 17,
-          "comment": ["instrument is invalid or not found on Gravity"]
+          "comment": [
+            "instrument is invalid or not found on Gravity"
+          ]
         },
         {
           "name": "INSTRUMENT_DEACTIVATED",
@@ -8176,7 +8927,9 @@
         {
           "name": "SYSTEM_FAILOVER",
           "value": 19,
-          "comment": ["system failover resulting in loss of order state"]
+          "comment": [
+            "system failover resulting in loss of order state"
+          ]
         },
         {
           "name": "UNAUTHORISED",
@@ -8188,12 +8941,16 @@
         {
           "name": "SESSION_KEY_EXPIRED",
           "value": 21,
-          "comment": ["the session key used to sign the order expired"]
+          "comment": [
+            "the session key used to sign the order expired"
+          ]
         },
         {
           "name": "SUB_ACCOUNT_NOT_FOUND",
           "value": 22,
-          "comment": ["the subaccount does not exist"]
+          "comment": [
+            "the subaccount does not exist"
+          ]
         },
         {
           "name": "NO_TRADE_PERMISSION",
@@ -8225,17 +8982,23 @@
         {
           "name": "C",
           "value": 1,
-          "comment": ["create only filter"]
+          "comment": [
+            "create only filter"
+          ]
         },
         {
           "name": "U",
           "value": 2,
-          "comment": ["update only filter"]
+          "comment": [
+            "update only filter"
+          ]
         },
         {
           "name": "A",
           "value": 3,
-          "comment": ["create and update filter"]
+          "comment": [
+            "create and update filter"
+          ]
         }
       ],
       "comment": []
@@ -8246,7 +9009,9 @@
         {
           "name": "PENDING",
           "value": 1,
-          "comment": ["Order is waiting for Trigger Condition to be hit"]
+          "comment": [
+            "Order is waiting for Trigger Condition to be hit"
+          ]
         },
         {
           "name": "OPEN",
@@ -8258,7 +9023,9 @@
         {
           "name": "FILLED",
           "value": 3,
-          "comment": ["Order is fully filled and hence closed"]
+          "comment": [
+            "Order is fully filled and hence closed"
+          ]
         },
         {
           "name": "REJECTED",
@@ -8283,12 +9050,16 @@
         {
           "name": "SAT_1_MO",
           "value": 1,
-          "comment": ["1 month"]
+          "comment": [
+            "1 month"
+          ]
         },
         {
           "name": "SAT_1_D",
           "value": 2,
-          "comment": ["1 day"]
+          "comment": [
+            "1 day"
+          ]
         }
       ],
       "comment": []
@@ -8299,7 +9070,9 @@
         {
           "name": "GOOD_TILL_TIME",
           "value": 1,
-          "comment": ["GTT - Remains open until it is cancelled, or expired"]
+          "comment": [
+            "GTT - Remains open until it is cancelled, or expired"
+          ]
         },
         {
           "name": "ALL_OR_NONE",
@@ -8337,7 +9110,9 @@
         {
           "name": "ORDERBOOK",
           "value": 1,
-          "comment": ["the trade is cleared on the orderbook venue"]
+          "comment": [
+            "the trade is cleared on the orderbook venue"
+          ]
         }
       ],
       "comment": [

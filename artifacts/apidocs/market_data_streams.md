@@ -1,9 +1,9 @@
 # MarketData Websocket Streams
 
-## Mini
+## Ticker
 ### Mini Ticker Snap
 ```
-CHANNEL: v1.mini.s
+STREAM: v1.mini.s
 ```
 
 === "Feed Selector"
@@ -18,16 +18,29 @@ CHANNEL: v1.mini.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
-            "instrument": "BTC_USDT_Perp",
-            "rate": 500
+            "stream":"v1.mini.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
-            "i": "BTC_USDT_Perp",
-            "r": 500
+            "stream":"v1.mini.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.mini.s",
+            "subs":["BTC_USDT_Perp@500"],
+            "unsubs":[]
         }
         ```
     </section>
@@ -106,11 +119,56 @@ CHANNEL: v1.mini.s
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.mini.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.mini.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.mini.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://market-data.grvt.io/ws" -x '
+        {
+            "stream":"v1.mini.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
-## MiniTicker
+
 ### Mini Ticker Delta
 ```
-CHANNEL: v1.mini.d
+STREAM: v1.mini.d
 ```
 
 === "Feed Selector"
@@ -125,16 +183,29 @@ CHANNEL: v1.mini.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
-            "instrument": "BTC_USDT_Perp",
-            "rate": 500
+            "stream":"v1.mini.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
-            "i": "BTC_USDT_Perp",
-            "r": 500
+            "stream":"v1.mini.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.mini.d",
+            "subs":["BTC_USDT_Perp@500"],
+            "unsubs":[]
         }
         ```
     </section>
@@ -213,11 +284,56 @@ CHANNEL: v1.mini.d
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.mini.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.mini.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.mini.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://market-data.grvt.io/ws" -x '
+        {
+            "stream":"v1.mini.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
-## Ticker
+
 ### Ticker Snap
 ```
-CHANNEL: v1.ticker.s
+STREAM: v1.ticker.s
 ```
 
 === "Feed Selector"
@@ -232,16 +348,29 @@ CHANNEL: v1.ticker.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
-            "instrument": "BTC_USDT_Perp",
-            "rate": 500
+            "stream":"v1.ticker.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
-            "i": "BTC_USDT_Perp",
-            "r": 500
+            "stream":"v1.ticker.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.ticker.s",
+            "subs":["BTC_USDT_Perp@500"],
+            "unsubs":[]
         }
         ```
     </section>
@@ -361,10 +490,56 @@ CHANNEL: v1.ticker.s
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.ticker.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.ticker.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.ticker.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://market-data.grvt.io/ws" -x '
+        {
+            "stream":"v1.ticker.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
+
 ### Ticker Delta
 ```
-CHANNEL: v1.ticker.d
+STREAM: v1.ticker.d
 ```
 
 === "Feed Selector"
@@ -379,16 +554,29 @@ CHANNEL: v1.ticker.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
-            "instrument": "BTC_USDT_Perp",
-            "rate": 500
+            "stream":"v1.ticker.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
-            "i": "BTC_USDT_Perp",
-            "r": 500
+            "stream":"v1.ticker.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.ticker.d",
+            "subs":["BTC_USDT_Perp@500"],
+            "unsubs":[]
         }
         ```
     </section>
@@ -508,11 +696,57 @@ CHANNEL: v1.ticker.d
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.ticker.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.ticker.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.ticker.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://market-data.grvt.io/ws" -x '
+        {
+            "stream":"v1.ticker.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
+
 ## Orderbook
 ### Orderbook Snap
 ```
-CHANNEL: v1.book.s
+STREAM: v1.book.s
 ```
 
 === "Feed Selector"
@@ -529,20 +763,29 @@ CHANNEL: v1.book.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
-            "instrument": "BTC_USDT_Perp",
-            "rate": 500,
-            "depth": 100,
-            "aggregate": 10
+            "stream":"v1.book.s",
+            "feed":["BTC_USDT_Perp@500-100-10"],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
-            "i": "BTC_USDT_Perp",
-            "r": 500,
-            "d": 100,
-            "a": 10
+            "stream":"v1.book.s",
+            "feed":["BTC_USDT_Perp@500-100-10"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.book.s",
+            "subs":["BTC_USDT_Perp@500-100-10"],
+            "unsubs":[]
         }
         ```
     </section>
@@ -628,10 +871,56 @@ CHANNEL: v1.book.s
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.book.s",
+            "feed":["BTC_USDT_Perp@500-100-10"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.book.s",
+            "feed":["BTC_USDT_Perp@500-100-10"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.book.s",
+            "feed":["BTC_USDT_Perp@500-100-10"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://market-data.grvt.io/ws" -x '
+        {
+            "stream":"v1.book.s",
+            "feed":["BTC_USDT_Perp@500-100-10"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
+
 ### Orderbook Delta
 ```
-CHANNEL: v1.book.d
+STREAM: v1.book.d
 ```
 
 === "Feed Selector"
@@ -648,20 +937,29 @@ CHANNEL: v1.book.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
-            "instrument": "BTC_USDT_Perp",
-            "rate": 500,
-            "depth": 100,
-            "aggregate": 10
+            "stream":"v1.book.d",
+            "feed":["BTC_USDT_Perp@500-100-10"],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
-            "i": "BTC_USDT_Perp",
-            "r": 500,
-            "d": 100,
-            "a": 10
+            "stream":"v1.book.d",
+            "feed":["BTC_USDT_Perp@500-100-10"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.book.d",
+            "subs":["BTC_USDT_Perp@500-100-10"],
+            "unsubs":[]
         }
         ```
     </section>
@@ -747,11 +1045,57 @@ CHANNEL: v1.book.d
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.book.d",
+            "feed":["BTC_USDT_Perp@500-100-10"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.book.d",
+            "feed":["BTC_USDT_Perp@500-100-10"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.book.d",
+            "feed":["BTC_USDT_Perp@500-100-10"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://market-data.grvt.io/ws" -x '
+        {
+            "stream":"v1.book.d",
+            "feed":["BTC_USDT_Perp@500-100-10"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
+
 ## Trade
 ### Public Trades
 ```
-CHANNEL: v1.trade
+STREAM: v1.trade
 ```
 
 === "Feed Selector"
@@ -766,16 +1110,29 @@ CHANNEL: v1.trade
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
-            "instrument": "BTC_USDT_Perp",
-            "limit": 500
+            "stream":"v1.trade",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
-            "i": "BTC_USDT_Perp",
-            "l": 500
+            "stream":"v1.trade",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.trade",
+            "subs":["BTC_USDT_Perp@500"],
+            "unsubs":[]
         }
         ```
     </section>
@@ -865,11 +1222,57 @@ CHANNEL: v1.trade
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.trade",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.trade",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.trade",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://market-data.grvt.io/ws" -x '
+        {
+            "stream":"v1.trade",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">
+
 ## Candlestick
 ### Candlestick
 ```
-CHANNEL: v1.candle
+STREAM: v1.candle
 ```
 
 === "Feed Selector"
@@ -913,18 +1316,29 @@ CHANNEL: v1.candle
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! example
+        **JSON RPC Request**
         ```json
         {
-            "instrument": "BTC_USDT_Perp",
-            "interval": "CI_1_M",
-            "type": "TRADE"
+            "stream":"v1.candle",
+            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "method":"subscribe",
+            "is_full":true
         }
         ```
         ```json
         {
-            "i": "BTC_USDT_Perp",
-            "i1": "CI_1_M",
-            "t": "TRADE"
+            "stream":"v1.candle",
+            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ```
+        **JSON RPC Response**
+        ```json
+        {
+            "stream":"v1.candle",
+            "subs":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "unsubs":[]
         }
         ```
     </section>
@@ -1002,4 +1416,49 @@ CHANNEL: v1.candle
         ```json
         ```
     </section>
+=== "Try it out"
+    !!! info "dev"
+        ```bash
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.candle",
+            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "stg"
+        ```bash
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" -x '
+        {
+            "stream":"v1.candle",
+            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "testnet"
+        ```bash
+        wscat -c "wss://market-data.testnet.grvt.io/ws" -x '
+        {
+            "stream":"v1.candle",
+            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
+    !!! info "prod"
+        ```bash
+        wscat -c "wss://market-data.grvt.io/ws" -x '
+        {
+            "stream":"v1.candle",
+            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ' -w 360
+        ```
 <hr class="solid">

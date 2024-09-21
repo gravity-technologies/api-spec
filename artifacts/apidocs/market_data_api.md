@@ -169,6 +169,7 @@ LITE ENDPOINT: lite/v1/instrument
         '
         ```
 <hr class="solid">
+
 ### Get All Instruments
 ```
 FULL ENDPOINT: full/v1/all_instruments
@@ -336,6 +337,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         '
         ```
 <hr class="solid">
+
 ### Get Filtered Instruments
 ```
 FULL ENDPOINT: full/v1/instruments
@@ -558,6 +560,7 @@ LITE ENDPOINT: lite/v1/instruments
         '
         ```
 <hr class="solid">
+
 ## Ticker
 ### Mini Ticker
 ```
@@ -679,6 +682,7 @@ LITE ENDPOINT: lite/v1/mini
         '
         ```
 <hr class="solid">
+
 ### Ticker
 ```
 FULL ENDPOINT: full/v1/ticker
@@ -827,6 +831,7 @@ LITE ENDPOINT: lite/v1/ticker
         '
         ```
 <hr class="solid">
+
 ## Orderbook
 ### Orderbook Levels
 ```
@@ -968,6 +973,7 @@ LITE ENDPOINT: lite/v1/book
         '
         ```
 <hr class="solid">
+
 ## Trade
 ### Public Trades
 ```
@@ -1106,6 +1112,7 @@ LITE ENDPOINT: lite/v1/trades
         '
         ```
 <hr class="solid">
+
 ### Public Trade History
 ```
 FULL ENDPOINT: full/v1/trade_history
@@ -1250,6 +1257,7 @@ LITE ENDPOINT: lite/v1/trade_history
         '
         ```
 <hr class="solid">
+
 ## Candlestick
 ### Candlestick
 ```
@@ -1434,6 +1442,7 @@ LITE ENDPOINT: lite/v1/kline
         '
         ```
 <hr class="solid">
+
 ## Settlement
 ### Funding Rate
 ```
@@ -1562,6 +1571,7 @@ LITE ENDPOINT: lite/v1/funding
         '
         ```
 <hr class="solid">
+
 ### Settlement Price
 ```
 FULL ENDPOINT: full/v1/settlement

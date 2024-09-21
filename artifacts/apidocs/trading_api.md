@@ -537,6 +537,7 @@ LITE ENDPOINT: lite/v1/create_order
         '
         ```
 <hr class="solid">
+
 ### Cancel Order
 ```
 FULL ENDPOINT: full/v1/cancel_order
@@ -778,6 +779,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         '
         ```
 <hr class="solid">
+
 ### Cancel All Orders
 ```
 FULL ENDPOINT: full/v1/cancel_all_orders
@@ -872,6 +874,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         '
         ```
 <hr class="solid">
+
 ### Get Order
 ```
 FULL ENDPOINT: full/v1/order
@@ -1111,6 +1114,7 @@ LITE ENDPOINT: lite/v1/order
         '
         ```
 <hr class="solid">
+
 ### Open Orders
 ```
 FULL ENDPOINT: full/v1/open_orders
@@ -1386,6 +1390,7 @@ LITE ENDPOINT: lite/v1/open_orders
         '
         ```
 <hr class="solid">
+
 ### Order History
 ```
 FULL ENDPOINT: full/v1/order_history
@@ -1693,6 +1698,7 @@ LITE ENDPOINT: lite/v1/order_history
         '
         ```
 <hr class="solid">
+
 ## Trade
 ### Private Trade History
 ```
@@ -1914,6 +1920,7 @@ LITE ENDPOINT: lite/v1/trade_history
         '
         ```
 <hr class="solid">
+
 ### Positions
 ```
 FULL ENDPOINT: full/v1/positions
@@ -2084,6 +2091,7 @@ LITE ENDPOINT: lite/v1/positions
         '
         ```
 <hr class="solid">
+
 ## Transfer
 ### Deposit
 ```
@@ -2204,6 +2212,7 @@ LITE ENDPOINT: lite/v1/deposit
         '
         ```
 <hr class="solid">
+
 ### Deposit History
 ```
 FULL ENDPOINT: full/v1/deposit_history
@@ -2364,6 +2373,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         '
         ```
 <hr class="solid">
+
 ### Transfer
 ```
 FULL ENDPOINT: full/v1/transfer
@@ -2562,6 +2572,7 @@ LITE ENDPOINT: lite/v1/transfer
         '
         ```
 <hr class="solid">
+
 ### Transfer History
 ```
 FULL ENDPOINT: full/v1/transfer_history
@@ -2744,6 +2755,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         '
         ```
 <hr class="solid">
+
 ### Withdrawal
 ```
 FULL ENDPOINT: full/v1/withdrawal
@@ -2928,6 +2940,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         '
         ```
 <hr class="solid">
+
 ### Withdrawal History
 ```
 FULL ENDPOINT: full/v1/withdrawal_history
@@ -3106,6 +3119,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         '
         ```
 <hr class="solid">
+
 ## Account
 ### Sub Account Summary
 ```
@@ -3286,6 +3300,7 @@ LITE ENDPOINT: lite/v1/account_summary
         '
         ```
 <hr class="solid">
+
 ### Sub Account History
 ```
 FULL ENDPOINT: full/v1/account_history
@@ -3490,6 +3505,7 @@ LITE ENDPOINT: lite/v1/account_history
         '
         ```
 <hr class="solid">
+
 ### Aggregated Account Summary
 ```
 FULL ENDPOINT: full/v1/aggregated_account_summary
@@ -3617,6 +3633,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         '
         ```
 <hr class="solid">
+
 ### Funding Account Summary
 ```
 FULL ENDPOINT: full/v1/funding_account_summary

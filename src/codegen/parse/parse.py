@@ -37,6 +37,7 @@ class Field:
     optional: bool
     example: str | None
     comment: list[str]
+    selector: str | None
 
 
 @dataclass_json
