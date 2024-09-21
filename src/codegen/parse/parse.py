@@ -4,6 +4,10 @@ from typing import cast
 
 from dataclasses_json import dataclass_json
 
+###########################
+# Types (Structs & Enums) #
+###########################
+
 
 @dataclass_json
 @dataclass
@@ -44,9 +48,64 @@ class Struct:
     comment: list[str]
 
 
+##########################
+# Types (RPCs & Streams) #
+##########################
+
+
+@dataclass_json
+@dataclass
+class Endpoint:
+    name: str
+    url: str
+
+
+@dataclass_json
+@dataclass
+class Err:
+    code: int
+    message: str
+    status: int
+
+
+@dataclass_json
+@dataclass
+class RPC:
+    namespace: str
+    name: str
+    version: int
+    route: str
+    auth_required: bool
+    request: str
+    response: str
+    on_request_errors: list[Err]
+
+
+@dataclass_json
+@dataclass
+class Stream:
+    namespace: str
+    name: str
+    channel: str
+    auth_required: bool
+    feed_selector: str
+    feed: str
+    on_subscribe_errors: list[Err]
+
+
+@dataclass_json
+@dataclass
+class Gateway:
+    name: str
+    endpoints: list[Endpoint]
+    rpcs: list[RPC]
+    streams: list[Stream]
+
+
 @dataclass_json
 @dataclass
 class SpecRoot:
+    gateways: list[Gateway]
     structs: list[Struct]
     enums: list[Enum]
 

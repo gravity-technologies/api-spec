@@ -131,9 +131,11 @@ class SubAccountTradeInterval(Enum):
 
 class TimeInForce(Enum):
     """
-    |                       | Must Fill All | Can Fill Partial | | -                     |
-    -             | -                | | Must Fill Immediately | FOK           | IOC
-    | | Can Fill Till Time    | AON           | GTC              |
+    |                       | Must Fill All | Can Fill Partial |
+    | -                     | -             | -                |
+    | Must Fill Immediately | FOK           | IOC              |
+    | Can Fill Till Time    | AON           | GTC              |
+
     """
 
     GOOD_TILL_TIME = 1  # GTT - Remains open until it is cancelled, or expired
@@ -168,19 +170,15 @@ class Positions:
     balance: str  # The balance of the position, expressed in underlying asset decimal units. Negative for short positions
     value: str  # The value of the position, negative for short assets, expressed in quote asset decimal units
     """
-    The entry price of the position, expressed in `9` decimals.
-
-    Whenever increasing the balance of a position, the entry price is updated to the new
-    average entry price newEntryPrice = (oldEntryPrice * oldBalance + tradePrice *
-    tradeBalance) / (oldBalance + tradeBalance)
+    The entry price of the position, expressed in `9` decimals
+    Whenever increasing the balance of a position, the entry price is updated to the new average entry price
+    newEntryPrice = (oldEntryPrice * oldBalance + tradePrice * tradeBalance) / (oldBalance + tradeBalance)
     """
     entry_price: str
     """
-    The exit price of the position, expressed in `9` decimals.
-
-    Whenever decreasing the balance of a position, the exit price is updated to the new
-    average exit price newExitPrice = (oldExitPrice * oldExitBalance + tradePrice *
-    tradeBalance) / (oldExitBalance + tradeBalance)
+    The exit price of the position, expressed in `9` decimals
+    Whenever decreasing the balance of a position, the exit price is updated to the new average exit price
+    newExitPrice = (oldExitPrice * oldExitBalance + tradePrice * tradeBalance) / (oldExitBalance + tradeBalance)
     """
     exit_price: str
     mark_price: str  # The mark price of the position, expressed in `9` decimals
@@ -195,13 +193,13 @@ class Positions:
     """
     realized_pnl: str
     """
-    The total PnL of the position, expressed in quote asset decimal units totalPnl =
-    realizedPnl + unrealizedPnl.
+    The total PnL of the position, expressed in quote asset decimal units
+    totalPnl = realizedPnl + unrealizedPnl
     """
     pnl: str
     """
-    The ROI of the position, expressed as a percentage roi = (pnl / (entryPrice *
-    balance)) * 100.
+    The ROI of the position, expressed as a percentage
+    roi = (pnl / (entryPrice * balance)) * 100
     """
     roi: str
 
@@ -250,11 +248,9 @@ class PrivateTrade:
     venue: Venue  # The venue where the trade occurred
     """
     A unique identifier for the active order within a subaccount, specified by the client
-    This is used to identify the order in the client's system This field can be used for
-    order amendment/cancellation, but has no bearing on the smart contract layer This
-    field will not be propagated to the smart contract, and should not be signed by the
-    client.
-
+    This is used to identify the order in the client's system
+    This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer
+    This field will not be propagated to the smart contract, and should not be signed by the client
     This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected
     Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]
     To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]
@@ -280,10 +276,9 @@ class ApiSubAccountSummaryRequest:
 class SpotBalance:
     currency: Currency  # The currency you hold a spot balance in
     """
-    The balance of the asset, expressed in underlying asset decimal units Must take into
-    account the value of all positions with this quote asset ie.
-
-    for USDT denominated subaccounts, this is is identical to total balance
+    The balance of the asset, expressed in underlying asset decimal units
+    Must take into account the value of all positions with this quote asset
+    ie. for USDT denominated subaccounts, this is is identical to total balance
     """
     balance: str
 
@@ -294,10 +289,10 @@ class SubAccount:
     sub_account_id: int  # The sub account ID this entry refers to
     margin_type: MarginType  # The type of margin algorithm this subaccount uses
     """
-    The Quote Currency that this Sub Account is denominated in This subaccount can only
-    open derivative positions denominated in this quote currency All other assets are
-    converted to this quote currency for the purpose of calculating margin In the future,
-    when users select a Multi-Currency Margin Type, this will be USD.
+    The Quote Currency that this Sub Account is denominated in
+    This subaccount can only open derivative positions denominated in this quote currency
+    All other assets are converted to this quote currency for the purpose of calculating margin
+    In the future, when users select a Multi-Currency Margin Type, this will be USD
     """
     quote_currency: Currency
     unrealized_pnl: str  # The total unrealized PnL of all positions owned by this subaccount, denominated in quote currency decimal units
@@ -319,10 +314,11 @@ class ApiSubAccountSummaryResponse:
 @dataclass
 class ApiSubAccountHistoryRequest:
     """
-    The request to get the history of a sub account SubAccount Summary values are
-    snapshotted once every hour No snapshots are taken if the sub account has no activity
-    in the hourly window The history is returned in reverse chronological order History is
-    preserved only for the last 30 days.
+    The request to get the history of a sub account
+    SubAccount Summary values are snapshotted once every hour
+    No snapshots are taken if the sub account has no activity in the hourly window
+    The history is returned in reverse chronological order
+    History is preserved only for the last 30 days
     """
 
     sub_account_id: int  # The sub account ID to request for
@@ -341,7 +337,8 @@ class ApiSubAccountHistoryResponse:
 @dataclass
 class ApiLatestSnapSubAccountsRequest:
     """
-    The request to get the latest snapshot of list sub account.
+    The request to get the latest snapshot of list sub account
+
     """
 
     sub_account_i_ds: list[int]  # The list of sub account ids to query
@@ -389,9 +386,7 @@ class ApiFundingAccountSummaryResponse:
 @dataclass
 class ApiOrderbookLevelsRequest:
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -413,9 +408,7 @@ class OrderbookLevel:
 class OrderbookLevels:
     event_time: int  # Time at which the event was emitted in unix nanoseconds
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -433,9 +426,7 @@ class ApiOrderbookLevelsResponse:
 @dataclass
 class ApiMiniTickerRequest:
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -448,9 +439,7 @@ class ApiMiniTickerRequest:
 class MiniTicker:
     event_time: int | None  # Time at which the event was emitted in unix nanoseconds
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -489,9 +478,7 @@ class ApiMiniTickerResponse:
 @dataclass
 class ApiTickerRequest:
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -504,7 +491,6 @@ class ApiTickerRequest:
 class Ticker:
     """
     Derived data such as the below, will not be included by default:
-
       - 24 hour volume (`buyVolume + sellVolume`)
       - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)
       - 24 hour average trade price (`volumeQ / volumeU`)
@@ -515,13 +501,12 @@ class Ticker:
     To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.
     Ticker extensions are currently under design to offer you more convenience.
     These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.
+
     """
 
     event_time: int | None  # Time at which the event was emitted in unix nanoseconds
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -599,11 +584,8 @@ class ApiTickerResponse:
 @dataclass
 class ApiPublicTradesRequest:
     """
-    Retrieves up to 1000 of the most recent public trades in any given instrument.
-
-    Do not use this to poll for data -- a websocket subscription is much more performant,
-    and useful. This endpoint offers public trading data, use the Trading APIs instead to
-    query for your personalized trade tape.
+    Retrieves up to 1000 of the most recent public trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.
+    This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
     """
 
     """
@@ -620,9 +602,7 @@ class ApiPublicTradesRequest:
 class PublicTrade:
     event_time: int  # Time at which the event was emitted in unix nanoseconds
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -649,9 +629,8 @@ class ApiPublicTradesResponse:
 class ApiPublicTradeHistoryRequest:
     """
     Perform historical lookup of public trades in any given instrument.
-
-    This endpoint offers public trading data, use the Trading APIs instead to query for
-    your personalized trade tape. Only data from the last three months will be retained.
+    This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
+    Only data from the last three months will be retained.
     """
 
     """
@@ -673,9 +652,7 @@ class ApiPublicTradeHistoryResponse:
 @dataclass
 class ApiGetInstrumentRequest:
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -687,9 +664,7 @@ class ApiGetInstrumentRequest:
 @dataclass
 class Instrument:
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -745,9 +720,7 @@ class ApiGetFilteredInstrumentsResponse:
 @dataclass
 class ApiCandlestickRequest:
     """
-    Kline/Candlestick bars for an instrument.
-
-    Klines are uniquely identified by their instrument, type, interval, and open time.
+    Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.
     startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent candlesticks are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the candlesticks starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the candlesticks ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the candlesticks between `startTime` and `endTime` are returned up to `limit`.</li></ul>
     """
 
@@ -777,9 +750,7 @@ class Candlestick:
     volume_q: str  # The quote volume transacted, expressed in quote asset decimal units
     trades: int  # The number of trades transacted
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -795,17 +766,10 @@ class ApiCandlestickResponse:
 @dataclass
 class ApiFundingRateRequest:
     """
-    Lookup the historical funding rate of various pairs. startTime and endTime are
-    optional parameters. The semantics of these parameters are as follows:<ul><li>If both
-    `startTime` and `endTime` are not set, the most recent funding rates are returned up
-    to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the funding rates
-    starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not
-    set and `endTime` is set, the funding rates ending at `endTime` are returned up to
-    `limit`.</li><li>If both `startTime` and `endTime` are set, the funding rates between
-    `startTime` and `endTime` are returned up to `limit`.</li></ul>
+    Lookup the historical funding rate of various pairs.
+    startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent funding rates are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the funding rates starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the funding rates ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the funding rates between `startTime` and `endTime` are returned up to `limit`.</li></ul>
 
-    The instrument is also optional. When left empty, all perpetual instruments are
-    returned.
+    The instrument is also optional. When left empty, all perpetual instruments are returned.
     """
 
     """
@@ -823,9 +787,7 @@ class ApiFundingRateRequest:
 @dataclass
 class FundingRate:
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -847,17 +809,10 @@ class ApiFundingRateResponse:
 @dataclass
 class ApiSettlementPriceRequest:
     """
-    Lookup the historical settlement price of various pairs. startTime and endTime are
-    optional parameters. The semantics of these parameters are as follows:<ul><li>If both
-    `startTime` and `endTime` are not set, the most recent settlement prices are returned
-    up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the settlement
-    prices starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is
-    not set and `endTime` is set, the settlement prices ending at `endTime` are returned
-    up to `limit`.</li><li>If both `startTime` and `endTime` are set, the settlement
-    prices between `startTime` and `endTime` are returned up to `limit`.</li></ul>
+    Lookup the historical settlement price of various pairs.
+    startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent settlement prices are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the settlement prices starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the settlement prices ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the settlement prices between `startTime` and `endTime` are returned up to `limit`.</li></ul>
 
-    The instrument is also optional. When left empty, all perpetual instruments are
-    returned.
+    The instrument is also optional. When left empty, all perpetual instruments are returned.
     """
 
     underlying: Currency  # The underlying currency to select
@@ -893,20 +848,12 @@ class WSRequestV1:
 @dataclass
 class WSOrderbookLevelsFeedSelectorV1:
     """
-    Subscribes to aggregated orderbook updates for a single instrument. The `book.s`
-    channel offers simpler integration. To experience higher publishing rates, please use
-    the `book.d` channel. Unlike the `book.d` channel which publishes an initial snapshot,
-    then only streams deltas after, the `book.s` channel publishes full snapshots at each
-    feed.
+    Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.
+    Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.
 
-    The Delta feed will work as follows:<ul><li>On subscription, the server will send a
-    full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server
-    will only send levels that have changed in value.</li></ul>
+    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul>
 
-    Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not
-    published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to
-    zero, {size: '0'}</li><li>Incoming levels will be published as soon as price
-    moves</li><li>Outgoing levels will be published with `size = 0`</li></ul>
+    Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul>
     """
 
     """
@@ -917,8 +864,9 @@ class WSOrderbookLevelsFeedSelectorV1:
     """
     instrument: str
     """
-    The minimal rate at which we publish feeds (in milliseconds) Delta (100, 200, 500,
-    1000, 5000) Snapshot (500, 1000, 5000)
+    The minimal rate at which we publish feeds (in milliseconds)
+    Delta (100, 200, 500, 1000, 5000)
+    Snapshot (500, 1000, 5000)
     """
     rate: int
     depth: int  # Depth of the order book to be retrieved (API/Snapshot max is 100, Delta max is 1000)
@@ -935,19 +883,12 @@ class WSOrderbookLevelsFeedDataV1:
 @dataclass
 class WSMiniTickerFeedSelectorV1:
     """
-    Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers
-    simpler integration. To experience higher publishing rates, please use the `mini.d`
-    channel. Unlike the `mini.d` channel which publishes an initial snapshot, then only
-    streams deltas after, the `mini.s` channel publishes full snapshots at each feed.
+    Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.
+    Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.
 
-    The Delta feed will work as follows:<ul><li>On subscription, the server will send a
-    full snapshot of the mini ticker.</li><li>After the snapshot, the server will only
-    send deltas of the mini ticker.</li><li>The server will send a delta if any of the
-    fields in the mini ticker have changed.</li></ul>
+    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul>
 
-    Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field
-    is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If
-    a field is set to null, {field: ''}</li></ul>
+    Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul>
     """
 
     """
@@ -958,8 +899,9 @@ class WSMiniTickerFeedSelectorV1:
     """
     instrument: str
     """
-    The minimal rate at which we publish feeds (in milliseconds) Delta (raw, 50, 100, 200,
-    500, 1000, 5000) Snapshot (200, 500, 1000, 5000)
+    The minimal rate at which we publish feeds (in milliseconds)
+    Delta (raw, 50, 100, 200, 500, 1000, 5000)
+    Snapshot (200, 500, 1000, 5000)
     """
     rate: int
 
@@ -974,19 +916,12 @@ class WSMiniTickerFeedDataV1:
 @dataclass
 class WSTickerFeedSelectorV1:
     """
-    Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers
-    simpler integration. To experience higher publishing rates, please use the `ticker.d`
-    channel. Unlike the `ticker.d` channel which publishes an initial snapshot, then only
-    streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.
+    Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.
+    Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.
 
-    The Delta feed will work as follows:<ul><li>On subscription, the server will send a
-    full snapshot of the ticker.</li><li>After the snapshot, the server will only send
-    deltas of the ticker.</li><li>The server will send a delta if any of the fields in the
-    ticker have changed.</li></ul>
+    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the ticker.</li><li>After the snapshot, the server will only send deltas of the ticker.</li><li>The server will send a delta if any of the fields in the ticker have changed.</li></ul>
 
-    Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field
-    is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If
-    a field is set to null, {field: ''}</li></ul>
+    Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul>
     """
 
     """
@@ -997,8 +932,9 @@ class WSTickerFeedSelectorV1:
     """
     instrument: str
     """
-    The minimal rate at which we publish feeds (in milliseconds) Delta (100, 200, 500,
-    1000, 5000) Snapshot (500, 1000, 5000)
+    The minimal rate at which we publish feeds (in milliseconds)
+    Delta (100, 200, 500, 1000, 5000)
+    Snapshot (500, 1000, 5000)
     """
     rate: int
 
@@ -1018,9 +954,7 @@ class ApiTickerFeedDataV1:
 @dataclass
 class WSPublicTradesFeedSelectorV1:
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -1040,11 +974,8 @@ class WSPublicTradesFeedDataV1:
 @dataclass
 class WSCandlestickFeedSelectorV1:
     """
-    Subscribes to a stream of Kline/Candlestick updates for an instrument.
-
-    A Kline is uniquely identified by its open time. A new Kline is published every
-    interval (if it exists). Upon subscription, the server will send the 5 most recent
-    Kline for the requested interval.
+    Subscribes to a stream of Kline/Candlestick updates for an instrument. A Kline is uniquely identified by its open time.
+    A new Kline is published every interval (if it exists). Upon subscription, the server will send the 5 most recent Kline for the requested interval.
     """
 
     """
@@ -1088,17 +1019,13 @@ class OrderLeg:
     size: str  # The total number of assets to trade in this leg, expressed in underlying asset decimal units.
     """
     The limit price of the order leg, expressed in `9` decimals.
-
     This is the total amount of base currency to pay/receive for all legs.
     """
     limit_price: str
     """
-    If a OCO order is specified, this must contain the other limit price User must sign
-    both limit prices.
-
-    Depending on which trigger condition is activated, a different limit price is used The
-    smart contract will always validate both limit prices, by arranging them in ascending
-    order
+    If a OCO order is specified, this must contain the other limit price
+    User must sign both limit prices. Depending on which trigger condition is activated, a different limit price is used
+    The smart contract will always validate both limit prices, by arranging them in ascending order
     """
     oco_limit_price: str
     is_buying_asset: bool  # Specifies if the order leg is a buy or sell
@@ -1113,10 +1040,9 @@ class Signature:
     expiration: int  # Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days
     """
     Users can randomly generate this value, used as a signature deconflicting key.
-
-    ie. You can send the same exact instruction twice with different nonces. When the same
-    nonce is used, the same payload will generate the same signature. Our system will
-    consider the payload a duplicate, and ignore it.
+    ie. You can send the same exact instruction twice with different nonces.
+    When the same nonce is used, the same payload will generate the same signature.
+    Our system will consider the payload a duplicate, and ignore it.
     """
     nonce: int
 
@@ -1124,10 +1050,8 @@ class Signature:
 @dataclass
 class OrderMetadata:
     """
-    Metadata fields are used to support Backend only operations.
-
-    These operations are not trustless by nature. Hence, fields in here are never signed,
-    and is never transmitted to the smart contract.
+    Metadata fields are used to support Backend only operations. These operations are not trustless by nature.
+    Hence, fields in here are never signed, and is never transmitted to the smart contract.
     """
 
     """
@@ -1163,12 +1087,10 @@ class OrderState:
 @dataclass
 class Order:
     """
-    Order is a typed payload used throughout the GRVT platform to express all orderbook,
-    RFQ, and liquidation orders. GRVT orders are capable of expressing both single-legged,
-    and multi-legged orders by default. This increases the learning curve slightly but
-    reduces overall integration load, since the order payload is used across all GRVT
-    trading venues. Given GRVT's trustless settlement model, the Order payload also
-    carries the signature, required to trade the order on our ZKSync Hyperchain.
+    Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.
+    GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.
+    This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.
+    Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.
 
     All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.
     This minimizes the amount of trust users have to offer to GRVT
@@ -1177,9 +1099,8 @@ class Order:
     order_id: str  # [Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
     sub_account_id: int  # The subaccount initiating the order
     """
-    If the order is a market order Market Orders do not have a limit price, and are always
-    executed according to the maker order price.
-
+    If the order is a market order
+    Market Orders do not have a limit price, and are always executed according to the maker order price.
     Market Orders must always be taker orders
     """
     is_market: bool
@@ -1195,26 +1116,28 @@ class Order:
     time_in_force: TimeInForce
     """
     The taker fee percentage cap signed by the order.
+    This is the maximum taker fee percentage the order sender is willing to pay for the order.
+    Expressed in 1/100th of a basis point. Eg. 100 = 1bps, 10,000 = 1%
 
-    This is the maximum taker fee percentage the order sender is willing to pay for the
-    order. Expressed in 1/100th of a basis point. Eg. 100 = 1bps, 10,000 = 1%
     """
     taker_fee_percentage_cap: int
     maker_fee_percentage_cap: int  # Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates
     """
-    If True, Order must be a maker order. It has to fill the orderbook instead of match
-    it. If False, Order can be either a maker or taker order.
+    If True, Order must be a maker order. It has to fill the orderbook instead of match it.
+    If False, Order can be either a maker or taker order.
 
-    |               | Must Fill All | Can Fill Partial | | -             | -             |
-    -                | | Must Be Taker | FOK + False   | IOC + False      | | Can Be
-    Either | AON + False   | GTC + False      | | Must Be Maker | AON + True    | GTC +
-    True       |
+    |               | Must Fill All | Can Fill Partial |
+    | -             | -             | -                |
+    | Must Be Taker | FOK + False   | IOC + False      |
+    | Can Be Either | AON + False   | GTC + False      |
+    | Must Be Maker | AON + True    | GTC + True       |
+
     """
     post_only: bool
     reduce_only: bool  # If True, Order must reduce the position size, or be cancelled
     """
-    The legs present in this order The legs must be sorted by
-    Asset.Instrument/Underlying/Quote/Expiration/StrikePrice.
+    The legs present in this order
+    The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice
     """
     legs: list[OrderLeg]
     signature: Signature  # The signature approving this order
@@ -1455,9 +1378,7 @@ class ApiGetListFlatReferralResponse:
 @dataclass
 class ApiSubAccountTradeRequest:
     """
-    The readable name of the instrument.
-
-    For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
+    The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
@@ -1543,7 +1464,6 @@ class ApiFindTraderLeaderboardResponse:
 class WSOrderFeedSelectorV1:
     """
     Subscribes to a feed of order updates pertaining to orders made by your account.
-
     Each Order can be uniquely identified by its `order_id` or `client_order_id` (if client designs well).
     Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both.
     """
@@ -1566,7 +1486,6 @@ class WSOrderFeedDataV1:
 class WSOrderStateFeedSelectorV1:
     """
     Subscribes to a feed of order updates pertaining to orders made by your account.
-
     Unlike the Order Stream, this only streams state updates, drastically improving throughput, and latency.
     Each Order can be uniquely identified by its `order_id` or `client_order_id` (if client designs well).
     Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both.
@@ -1678,11 +1597,9 @@ class WSWithdrawalFeedDataV1:
 @dataclass
 class ApiDepositRequest:
     """
-    GRVT runs on a ZKSync Hyperchain which settles directly onto Ethereum. To Deposit
-    funds from your L1 wallet into a GRVT SubAccount, you will be required to submit a
-    deposit transaction directly to Ethereum. GRVT's bridge verifier will scan Ethereum
-    from time to time. Once it receives proof that your deposit has been confirmed on
-    Ethereum, it will initiate the deposit process.
+    GRVT runs on a ZKSync Hyperchain which settles directly onto Ethereum.
+    To Deposit funds from your L1 wallet into a GRVT SubAccount, you will be required to submit a deposit transaction directly to Ethereum.
+    GRVT's bridge verifier will scan Ethereum from time to time. Once it receives proof that your deposit has been confirmed on Ethereum, it will initiate the deposit process.
 
     This current payload is used for alpha testing only.
     """
@@ -1695,14 +1612,12 @@ class ApiDepositRequest:
 @dataclass
 class ApiWithdrawalRequest:
     """
-    Leverage this API to initialize a withdrawal from GRVT's Hyperchain onto Ethereum. Do
-    take note that the bridging process does take time. The GRVT UI will help you keep
-    track of bridging progress, and notify you once its complete.
+    Leverage this API to initialize a withdrawal from GRVT's Hyperchain onto Ethereum.
+    Do take note that the bridging process does take time. The GRVT UI will help you keep track of bridging progress, and notify you once its complete.
 
-    If not withdrawing the entirety of your balance, there is a minimum withdrawal amount.
-    Currently that amount is ~25 USDT. Withdrawal fees also apply to cover the cost of the
-    Ethereum transaction. Note that your funds will always remain in self-custory
-    throughout the withdrawal process. At no stage does GRVT gain control over your funds.
+    If not withdrawing the entirety of your balance, there is a minimum withdrawal amount. Currently that amount is ~25 USDT.
+    Withdrawal fees also apply to cover the cost of the Ethereum transaction.
+    Note that your funds will always remain in self-custory throughout the withdrawal process. At no stage does GRVT gain control over your funds.
     """
 
     from_account_id: str  # The main account to withdraw from
@@ -1717,9 +1632,10 @@ class ApiWithdrawalRequest:
 @dataclass
 class ApiTransferRequest:
     """
-    This API allows you to transfer funds in multiple different ways<ul> <li>Between
-    SubAccounts within your Main Account</li> <li>Between your MainAccount and your
-    SubAccounts</li> <li>To other MainAccounts that you have previously allowlisted</li>
+    This API allows you to transfer funds in multiple different ways<ul>
+    <li>Between SubAccounts within your Main Account</li>
+    <li>Between your MainAccount and your SubAccounts</li>
+    <li>To other MainAccounts that you have previously allowlisted</li>
     </ul>
     """
 
@@ -1741,8 +1657,8 @@ class ApiTransferRequest:
 @dataclass
 class ApiDepositHistoryRequest:
     """
-    The request to get the historical deposits of an account The history is returned in
-    reverse chronological order.
+    The request to get the historical deposits of an account
+    The history is returned in reverse chronological order
     """
 
     limit: int  # The limit to query for. Defaults to 500; Max 1000
@@ -1774,8 +1690,8 @@ class ApiDepositHistoryResponse:
 @dataclass
 class ApiTransferHistoryRequest:
     """
-    The request to get the historical transfers of an account The history is returned in
-    reverse chronological order.
+    The request to get the historical transfers of an account
+    The history is returned in reverse chronological order
     """
 
     limit: int  # The limit to query for. Defaults to 500; Max 1000
@@ -1814,8 +1730,8 @@ class ApiTransferHistoryResponse:
 @dataclass
 class ApiWithdrawalHistoryRequest:
     """
-    The request to get the historical withdrawals of an account The history is returned in
-    reverse chronological order.
+    The request to get the historical withdrawals of an account
+    The history is returned in reverse chronological order
     """
 
     limit: int  # The limit to query for. Defaults to 500; Max 1000
