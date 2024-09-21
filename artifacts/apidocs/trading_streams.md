@@ -53,7 +53,7 @@ STREAM: v1.order
             |`A` = 3|create and update filter|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -188,7 +188,7 @@ STREAM: v1.order
                     |`MULTI_LEGGED_ORDER` = 25|the order has multiple legs, but multiple legs are not supported by this venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.order",
@@ -281,13 +281,13 @@ STREAM: v1.order
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -300,7 +300,7 @@ STREAM: v1.order
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -313,7 +313,7 @@ STREAM: v1.order
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -326,7 +326,7 @@ STREAM: v1.order
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -393,7 +393,7 @@ STREAM: v1.state
             |`A` = 3|create and update filter|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -479,7 +479,7 @@ STREAM: v1.state
                     |`MULTI_LEGGED_ORDER` = 25|the order has multiple legs, but multiple legs are not supported by this venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.state",
@@ -520,13 +520,13 @@ STREAM: v1.state
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -539,7 +539,7 @@ STREAM: v1.state
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -552,7 +552,7 @@ STREAM: v1.state
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -565,7 +565,7 @@ STREAM: v1.state
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -624,7 +624,7 @@ STREAM: v1.trade
             |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -688,7 +688,7 @@ STREAM: v1.trade
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.trade",
@@ -749,13 +749,13 @@ STREAM: v1.trade
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -768,7 +768,7 @@ STREAM: v1.trade
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -781,7 +781,7 @@ STREAM: v1.trade
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -794,7 +794,7 @@ STREAM: v1.trade
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -854,7 +854,7 @@ STREAM: v1.position
             |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -906,7 +906,7 @@ STREAM: v1.position
             |roi|r|string|True|The ROI of the position, expressed as a percentage<br>roi = (pnl / (entryPrice * balance)) * 100|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.position",
@@ -955,13 +955,13 @@ STREAM: v1.position
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -974,7 +974,7 @@ STREAM: v1.position
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -987,7 +987,7 @@ STREAM: v1.position
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1000,7 +1000,7 @@ STREAM: v1.position
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1030,7 +1030,7 @@ STREAM: v1.deposit
         |-|-|-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -1085,7 +1085,7 @@ STREAM: v1.deposit
                 |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.deposit",
@@ -1118,13 +1118,13 @@ STREAM: v1.deposit
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1137,7 +1137,7 @@ STREAM: v1.deposit
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1150,7 +1150,7 @@ STREAM: v1.deposit
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1163,7 +1163,7 @@ STREAM: v1.deposit
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1192,7 +1192,7 @@ STREAM: v1.transfer
         |-|-|-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -1259,7 +1259,7 @@ STREAM: v1.transfer
                 |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.transfer",
@@ -1312,13 +1312,13 @@ STREAM: v1.transfer
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1331,7 +1331,7 @@ STREAM: v1.transfer
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1344,7 +1344,7 @@ STREAM: v1.transfer
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1357,7 +1357,7 @@ STREAM: v1.transfer
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1386,7 +1386,7 @@ STREAM: v1.withdrawal
         |-|-|-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         **JSON RPC Request**
         ```json
         {
@@ -1451,7 +1451,7 @@ STREAM: v1.withdrawal
                 |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "stream": "v1.withdrawal",
@@ -1500,13 +1500,13 @@ STREAM: v1.withdrawal
         |-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "dev"
         ```bash
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1519,7 +1519,7 @@ STREAM: v1.withdrawal
         }
         ' -w 360
         ```
-    !!! info "stg"
+    !!! example "stg"
         ```bash
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1532,7 +1532,7 @@ STREAM: v1.withdrawal
         }
         ' -w 360
         ```
-    !!! info "testnet"
+    !!! example "testnet"
         ```bash
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
@@ -1545,7 +1545,7 @@ STREAM: v1.withdrawal
         }
         ' -w 360
         ```
-    !!! info "prod"
+    !!! example "prod"
         ```bash
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \

@@ -89,7 +89,7 @@ def write_stream_feed_selector(
     # Right Section
     selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
     write_right_section(md)
-    md.writeln("!!! example")
+    md.writeln('!!! question "Query"')
     md.indent()
     md.writeln("**JSON RPC Request**")
     md.writeln("```json")
@@ -159,7 +159,7 @@ def write_stream_feed_data(ctx: CodegenCtx, md: MarkdownWriter, stream: Stream) 
 
     # Right Section
     write_right_section(md)
-    md.writeln("!!! example")
+    md.writeln("!!! success")
     md.indent()
     md.writeln("```json")
     write_struct_example(ctx, md, ctx.struct_map[stream.feed], True, True)
@@ -187,7 +187,7 @@ def write_stream_rpc_try_it_out(
 
     # Main Section
     for endpoint in gateway.endpoints:
-        md.writeln(f'!!! info "{endpoint.name}"')
+        md.writeln(f'!!! example "{endpoint.name}"')
         md.indent()
         md.writeln("```bash")
         md.writeln(f'wscat -c "wss://{endpoint.url}/ws" \\')
@@ -238,7 +238,7 @@ def write_rpc_request(ctx: CodegenCtx, md: MarkdownWriter, rpc: RPC) -> None:
 
     # Right Section
     write_right_section(md)
-    md.writeln("!!! example")
+    md.writeln('!!! question "Query"')
     md.indent()
     md.writeln("```json")
     write_struct_example(ctx, md, ctx.struct_map[rpc.request], True, True)
@@ -265,7 +265,7 @@ def write_rpc_response(ctx: CodegenCtx, md: MarkdownWriter, rpc: RPC) -> None:
 
     # Right Section
     write_right_section(md)
-    md.writeln("!!! example")
+    md.writeln("!!! success")
     md.indent()
     md.writeln("```json")
     write_struct_example(ctx, md, ctx.struct_map[rpc.response], True)
@@ -290,7 +290,7 @@ def write_rpc_try_it_out(
 
     # Main Section
     for endpoint in gateway.endpoints:
-        md.writeln(f'!!! info "{endpoint.name}"')
+        md.writeln(f'!!! example "Try {endpoint.name.upper()}"')
         md.indent()
         md.writeln("```bash")
         md.writeln(
@@ -410,7 +410,7 @@ def write_errors(ctx: CodegenCtx, md: MarkdownWriter, errors: list[Err]) -> None
 
     # Right Section
     write_right_section(md)
-    md.writeln("!!! example")
+    md.writeln("!!! failure")
     md.indent()
     md.writeln("```json")
     for error in errors:

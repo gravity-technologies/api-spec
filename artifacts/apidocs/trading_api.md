@@ -116,7 +116,7 @@ LITE ENDPOINT: lite/v1/create_order
                     |`MULTI_LEGGED_ORDER` = 25|the order has multiple legs, but multiple legs are not supported by this venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "order": {
@@ -304,7 +304,7 @@ LITE ENDPOINT: lite/v1/create_order
                     |`MULTI_LEGGED_ORDER` = 25|the order has multiple legs, but multiple legs are not supported by this venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "order": {
@@ -354,7 +354,7 @@ LITE ENDPOINT: lite/v1/create_order
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -365,7 +365,7 @@ LITE ENDPOINT: lite/v1/create_order
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/create_order' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -409,7 +409,7 @@ LITE ENDPOINT: lite/v1/create_order
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/create_order' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -453,7 +453,7 @@ LITE ENDPOINT: lite/v1/create_order
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/create_order' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -497,7 +497,7 @@ LITE ENDPOINT: lite/v1/create_order
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/create_order' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -561,7 +561,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         |client_order_id|co|string|True|Cancel the order with this `client_order_id`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -683,7 +683,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                     |`MULTI_LEGGED_ORDER` = 25|the order has multiple legs, but multiple legs are not supported by this venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "order": {
@@ -733,7 +733,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -744,7 +744,7 @@ LITE ENDPOINT: lite/v1/cancel_order
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_order' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -755,7 +755,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/cancel_order' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -766,7 +766,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_order' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -777,7 +777,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/cancel_order' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -806,7 +806,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         |sub_account_id|sa|string|True|The subaccount ID cancelling all orders|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
@@ -826,7 +826,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         |num_cancelled|nc|number|True|The number of orders cancelled|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "num_cancelled": "52"
@@ -841,7 +841,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -852,7 +852,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -861,7 +861,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -870,7 +870,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -879,7 +879,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -906,7 +906,7 @@ LITE ENDPOINT: lite/v1/order
         |client_order_id|co|string|True|Filter for `client_order_id`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -1028,7 +1028,7 @@ LITE ENDPOINT: lite/v1/order
                     |`MULTI_LEGGED_ORDER` = 25|the order has multiple legs, but multiple legs are not supported by this venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "order": {
@@ -1078,7 +1078,7 @@ LITE ENDPOINT: lite/v1/order
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -1088,7 +1088,7 @@ LITE ENDPOINT: lite/v1/order
         ```
     </section>
 === "Try it out"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/order' \
         --data '{
@@ -1098,7 +1098,7 @@ LITE ENDPOINT: lite/v1/order
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/order' \
         --data '{
@@ -1108,7 +1108,7 @@ LITE ENDPOINT: lite/v1/order
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/order' \
         --data '{
@@ -1118,7 +1118,7 @@ LITE ENDPOINT: lite/v1/order
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/order' \
         --data '{
@@ -1174,7 +1174,7 @@ LITE ENDPOINT: lite/v1/open_orders
             |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -1300,7 +1300,7 @@ LITE ENDPOINT: lite/v1/open_orders
                     |`MULTI_LEGGED_ORDER` = 25|the order has multiple legs, but multiple legs are not supported by this venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "orders": {
@@ -1350,7 +1350,7 @@ LITE ENDPOINT: lite/v1/open_orders
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -1361,7 +1361,7 @@ LITE ENDPOINT: lite/v1/open_orders
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/open_orders' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -1373,7 +1373,7 @@ LITE ENDPOINT: lite/v1/open_orders
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/open_orders' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -1385,7 +1385,7 @@ LITE ENDPOINT: lite/v1/open_orders
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/open_orders' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -1397,7 +1397,7 @@ LITE ENDPOINT: lite/v1/open_orders
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/open_orders' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -1461,7 +1461,7 @@ LITE ENDPOINT: lite/v1/order_history
             |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -1595,7 +1595,7 @@ LITE ENDPOINT: lite/v1/order_history
                     |`MULTI_LEGGED_ORDER` = 25|the order has multiple legs, but multiple legs are not supported by this venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "total": 500,
@@ -1647,7 +1647,7 @@ LITE ENDPOINT: lite/v1/order_history
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -1658,7 +1658,7 @@ LITE ENDPOINT: lite/v1/order_history
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/order_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -1674,7 +1674,7 @@ LITE ENDPOINT: lite/v1/order_history
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/order_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -1690,7 +1690,7 @@ LITE ENDPOINT: lite/v1/order_history
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/order_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -1706,7 +1706,7 @@ LITE ENDPOINT: lite/v1/order_history
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/order_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -1775,7 +1775,7 @@ LITE ENDPOINT: lite/v1/trade_history
             |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -1838,7 +1838,7 @@ LITE ENDPOINT: lite/v1/trade_history
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "total": 52,
@@ -1874,7 +1874,7 @@ LITE ENDPOINT: lite/v1/trade_history
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -1885,7 +1885,7 @@ LITE ENDPOINT: lite/v1/trade_history
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/trade_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -1901,7 +1901,7 @@ LITE ENDPOINT: lite/v1/trade_history
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/trade_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -1917,7 +1917,7 @@ LITE ENDPOINT: lite/v1/trade_history
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/trade_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -1933,7 +1933,7 @@ LITE ENDPOINT: lite/v1/trade_history
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/trade_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -1997,7 +1997,7 @@ LITE ENDPOINT: lite/v1/positions
             |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -2038,7 +2038,7 @@ LITE ENDPOINT: lite/v1/positions
             |roi|r|string|True|The ROI of the position, expressed as a percentage<br>roi = (pnl / (entryPrice * balance)) * 100|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "results": {
@@ -2066,7 +2066,7 @@ LITE ENDPOINT: lite/v1/positions
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -2077,7 +2077,7 @@ LITE ENDPOINT: lite/v1/positions
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/positions' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2089,7 +2089,7 @@ LITE ENDPOINT: lite/v1/positions
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/positions' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2101,7 +2101,7 @@ LITE ENDPOINT: lite/v1/positions
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/positions' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2113,7 +2113,7 @@ LITE ENDPOINT: lite/v1/positions
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/positions' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2155,7 +2155,7 @@ LITE ENDPOINT: lite/v1/deposit
             |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2181,7 +2181,7 @@ LITE ENDPOINT: lite/v1/deposit
         |acknowledgement|a|boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "acknowledgement": "true"
@@ -2196,7 +2196,7 @@ LITE ENDPOINT: lite/v1/deposit
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -2207,7 +2207,7 @@ LITE ENDPOINT: lite/v1/deposit
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/deposit' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2218,7 +2218,7 @@ LITE ENDPOINT: lite/v1/deposit
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/deposit' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2229,7 +2229,7 @@ LITE ENDPOINT: lite/v1/deposit
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/deposit' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2240,7 +2240,7 @@ LITE ENDPOINT: lite/v1/deposit
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/deposit' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2282,7 +2282,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "limit": 500,
@@ -2330,7 +2330,7 @@ LITE ENDPOINT: lite/v1/deposit_history
                 |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "total": 52,
@@ -2354,7 +2354,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -2365,7 +2365,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2378,7 +2378,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2391,7 +2391,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2404,7 +2404,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2459,7 +2459,7 @@ LITE ENDPOINT: lite/v1/transfer
             |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2507,7 +2507,7 @@ LITE ENDPOINT: lite/v1/transfer
         |acknowledgement|a|boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "acknowledgement": "true"
@@ -2522,7 +2522,7 @@ LITE ENDPOINT: lite/v1/transfer
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -2533,7 +2533,7 @@ LITE ENDPOINT: lite/v1/transfer
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/transfer' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2555,7 +2555,7 @@ LITE ENDPOINT: lite/v1/transfer
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/transfer' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2577,7 +2577,7 @@ LITE ENDPOINT: lite/v1/transfer
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/transfer' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2599,7 +2599,7 @@ LITE ENDPOINT: lite/v1/transfer
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/transfer' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2652,7 +2652,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "limit": 500,
@@ -2712,7 +2712,7 @@ LITE ENDPOINT: lite/v1/transfer_history
                 |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "total": 52,
@@ -2746,7 +2746,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -2757,7 +2757,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2770,7 +2770,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2783,7 +2783,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2796,7 +2796,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2849,7 +2849,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2893,7 +2893,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         |acknowledgement|a|boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "acknowledgement": "true"
@@ -2908,7 +2908,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -2919,7 +2919,7 @@ LITE ENDPOINT: lite/v1/withdrawal
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/withdrawal' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2939,7 +2939,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/withdrawal' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2959,7 +2959,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/withdrawal' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -2979,7 +2979,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/withdrawal' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3030,7 +3030,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "limit": 500,
@@ -3088,7 +3088,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "total": 52,
@@ -3120,7 +3120,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -3131,7 +3131,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3144,7 +3144,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3157,7 +3157,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3170,7 +3170,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3200,7 +3200,7 @@ LITE ENDPOINT: lite/v1/account_summary
         |sub_account_id|sa|string|True|The subaccount ID to filter by|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
@@ -3279,7 +3279,7 @@ LITE ENDPOINT: lite/v1/account_summary
                 |roi|r|string|True|The ROI of the position, expressed as a percentage<br>roi = (pnl / (entryPrice * balance)) * 100|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "results": {
@@ -3322,7 +3322,7 @@ LITE ENDPOINT: lite/v1/account_summary
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -3333,7 +3333,7 @@ LITE ENDPOINT: lite/v1/account_summary
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3342,7 +3342,7 @@ LITE ENDPOINT: lite/v1/account_summary
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3351,7 +3351,7 @@ LITE ENDPOINT: lite/v1/account_summary
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3360,7 +3360,7 @@ LITE ENDPOINT: lite/v1/account_summary
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3390,7 +3390,7 @@ LITE ENDPOINT: lite/v1/account_history
         |cursor|c|string|True|The cursor to indicate when to start the next query from|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -3475,7 +3475,7 @@ LITE ENDPOINT: lite/v1/account_history
                 |roi|r|string|True|The ROI of the position, expressed as a percentage<br>roi = (pnl / (entryPrice * balance)) * 100|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "total": 52,
@@ -3520,7 +3520,7 @@ LITE ENDPOINT: lite/v1/account_history
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -3531,7 +3531,7 @@ LITE ENDPOINT: lite/v1/account_history
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/account_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3543,7 +3543,7 @@ LITE ENDPOINT: lite/v1/account_history
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/account_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3555,7 +3555,7 @@ LITE ENDPOINT: lite/v1/account_history
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/account_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3567,7 +3567,7 @@ LITE ENDPOINT: lite/v1/account_history
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/account_history' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3596,7 +3596,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         |-|-|-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
         }
@@ -3645,7 +3645,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                 |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3669,7 +3669,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -3680,7 +3680,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/aggregated_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3688,7 +3688,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/aggregated_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3696,7 +3696,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/aggregated_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3704,7 +3704,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/aggregated_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3729,7 +3729,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         |-|-|-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! question "Query"
         ```json
         {
         }
@@ -3778,7 +3778,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
                 |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! success
         ```json
         {
             "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3802,7 +3802,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         |1001|500|InternalServerErr|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! example
+    !!! failure
         ```json
         {
             "code":1001,
@@ -3813,7 +3813,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! info "dev"
+    !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/funding_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3821,7 +3821,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         }
         '
         ```
-    !!! info "stg"
+    !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/funding_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3829,7 +3829,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         }
         '
         ```
-    !!! info "testnet"
+    !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/funding_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
@@ -3837,7 +3837,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         }
         '
         ```
-    !!! info "prod"
+    !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/funding_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
