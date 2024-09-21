@@ -154,7 +154,7 @@
           "name": "RPCCandlestickV1",
           "version": 1,
           "route": "/kline",
-          "auth_required": true,
+          "auth_required": false,
           "request": "ApiCandlestickRequest",
           "response": "ApiCandlestickResponse",
           "on_request_errors": [
@@ -663,7 +663,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID to request for"
           ]
@@ -737,7 +737,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID that participated in the trade"
           ]
@@ -914,7 +914,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID to request for"
           ]
@@ -1040,7 +1040,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID that participated in the trade"
           ]
@@ -1321,7 +1321,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
           ]
@@ -1389,7 +1389,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID this entry refers to"
           ]
@@ -1548,7 +1548,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID to request for"
           ]
@@ -4734,7 +4734,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'0x1234567890abcdef'",
           "comment": [
             "[Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend"
           ]
@@ -4747,7 +4747,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount initiating the order"
           ]
@@ -4960,7 +4960,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID cancelling the order"
           ]
@@ -5027,7 +5027,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID cancelling all orders"
           ]
@@ -5069,7 +5069,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
           ]
@@ -5149,7 +5149,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
           ]
@@ -5337,7 +5337,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
           ]
@@ -5402,7 +5402,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
           ]
@@ -6343,7 +6343,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account id"
           ]
@@ -6483,7 +6483,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account id"
           ]
@@ -6739,7 +6739,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
           ],
@@ -6864,7 +6864,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
           ],
@@ -7022,7 +7022,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
           ],
@@ -7132,7 +7132,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID to request for"
           ],
@@ -7253,7 +7253,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount to transfer from (0 if transferring from main account)"
           ]
@@ -7279,7 +7279,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount to transfer to (0 if transferring to main account)"
           ]
@@ -7751,7 +7751,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount to transfer from (0 if transferring from main account)"
           ]
@@ -7777,7 +7777,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount to transfer to (0 if transferring to main account)"
           ]
@@ -8147,7 +8147,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount to transfer from (0 if transferring from main account)"
           ]
@@ -8173,7 +8173,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
-          "example": "'2927361400114782'",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount to transfer to (0 if transferring to main account)"
           ]

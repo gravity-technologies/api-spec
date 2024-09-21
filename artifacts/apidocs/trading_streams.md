@@ -58,7 +58,7 @@ STREAM: v1.order
         ```json
         {
             "stream":"v1.order",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "method":"subscribe",
             "is_full":true
         }
@@ -66,7 +66,7 @@ STREAM: v1.order
         ```json
         {
             "stream":"v1.order",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "method":"subscribe",
             "is_full":false
         }
@@ -75,7 +75,7 @@ STREAM: v1.order
         ```json
         {
             "stream":"v1.order",
-            "subs":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "subs":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "unsubs":[]
         }
         ```
@@ -194,8 +194,8 @@ STREAM: v1.order
             "stream": "v1.order",
             "sequence_number": "872634876",
             "feed": {
-                "order_id": "2927361400114782",
-                "sub_account_id": "2927361400114782",
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
                 "taker_fee_percentage_cap": "0.05",
@@ -236,8 +236,8 @@ STREAM: v1.order
             "s": "v1.order",
             "sn": "872634876",
             "f": {
-                "oi": "2927361400114782",
-                "sa": "2927361400114782",
+                "oi": "0x1234567890abcdef",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "im": false,
                 "ti": "GOOD_TILL_TIME",
                 "tf": "0.05",
@@ -286,12 +286,15 @@ STREAM: v1.order
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.order",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "method":"subscribe",
             "is_full":true
         }
@@ -299,10 +302,12 @@ STREAM: v1.order
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.order",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "method":"subscribe",
             "is_full":true
         }
@@ -310,10 +315,12 @@ STREAM: v1.order
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.order",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "method":"subscribe",
             "is_full":true
         }
@@ -321,10 +328,12 @@ STREAM: v1.order
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://trades.grvt.io/ws" -x '
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.order",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "method":"subscribe",
             "is_full":true
         }
@@ -389,7 +398,7 @@ STREAM: v1.state
         ```json
         {
             "stream":"v1.state",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "method":"subscribe",
             "is_full":true
         }
@@ -397,7 +406,7 @@ STREAM: v1.state
         ```json
         {
             "stream":"v1.state",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "method":"subscribe",
             "is_full":false
         }
@@ -406,7 +415,7 @@ STREAM: v1.state
         ```json
         {
             "stream":"v1.state",
-            "subs":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "subs":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "unsubs":[]
         }
         ```
@@ -516,12 +525,15 @@ STREAM: v1.state
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.state",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "method":"subscribe",
             "is_full":true
         }
@@ -529,10 +541,12 @@ STREAM: v1.state
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.state",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "method":"subscribe",
             "is_full":true
         }
@@ -540,10 +554,12 @@ STREAM: v1.state
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.state",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "method":"subscribe",
             "is_full":true
         }
@@ -551,10 +567,12 @@ STREAM: v1.state
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://trades.grvt.io/ws" -x '
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.state",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
             "method":"subscribe",
             "is_full":true
         }
@@ -611,7 +629,7 @@ STREAM: v1.trade
         ```json
         {
             "stream":"v1.trade",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
         }
@@ -619,7 +637,7 @@ STREAM: v1.trade
         ```json
         {
             "stream":"v1.trade",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":false
         }
@@ -628,7 +646,7 @@ STREAM: v1.trade
         ```json
         {
             "stream":"v1.trade",
-            "subs":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "subs":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "unsubs":[]
         }
         ```
@@ -677,7 +695,7 @@ STREAM: v1.trade
             "sequence_number": "872634876",
             "feed": {
                 "event_time": "1697788800000000000",
-                "sub_account_id": "2927361400114782",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
                 "is_buyer": true,
                 "is_taker": true,
@@ -703,7 +721,7 @@ STREAM: v1.trade
             "sn": "872634876",
             "f": {
                 "et": "1697788800000000000",
-                "sa": "2927361400114782",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "i": "BTC_USDT_Perp",
                 "ib": true,
                 "it": true,
@@ -736,12 +754,15 @@ STREAM: v1.trade
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.trade",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
         }
@@ -749,10 +770,12 @@ STREAM: v1.trade
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.trade",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
         }
@@ -760,10 +783,12 @@ STREAM: v1.trade
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.trade",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
         }
@@ -771,10 +796,12 @@ STREAM: v1.trade
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://trades.grvt.io/ws" -x '
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.trade",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
         }
@@ -832,7 +859,7 @@ STREAM: v1.position
         ```json
         {
             "stream":"v1.position",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
         }
@@ -840,7 +867,7 @@ STREAM: v1.position
         ```json
         {
             "stream":"v1.position",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":false
         }
@@ -849,7 +876,7 @@ STREAM: v1.position
         ```json
         {
             "stream":"v1.position",
-            "subs":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "subs":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "unsubs":[]
         }
         ```
@@ -886,7 +913,7 @@ STREAM: v1.position
             "sequence_number": "872634876",
             "feed": {
                 "event_time": "1697788800000000000",
-                "sub_account_id": "2927361400114782",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
                 "balance": "2635000.50",
                 "value": "2635000.50",
@@ -906,7 +933,7 @@ STREAM: v1.position
             "sn": "872634876",
             "f": {
                 "et": "1697788800000000000",
-                "sa": "2927361400114782",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "i": "BTC_USDT_Perp",
                 "b": "2635000.50",
                 "v": "2635000.50",
@@ -933,12 +960,15 @@ STREAM: v1.position
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.position",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
         }
@@ -946,10 +976,12 @@ STREAM: v1.position
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.position",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
         }
@@ -957,10 +989,12 @@ STREAM: v1.position
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.position",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
         }
@@ -968,10 +1002,12 @@ STREAM: v1.position
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://trades.grvt.io/ws" -x '
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.position",
-            "feed":["2927361400114782-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1087,9 +1123,12 @@ STREAM: v1.deposit
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.deposit",
             "feed":[""],
@@ -1100,7 +1139,9 @@ STREAM: v1.deposit
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.deposit",
             "feed":[""],
@@ -1111,7 +1152,9 @@ STREAM: v1.deposit
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.deposit",
             "feed":[""],
@@ -1122,7 +1165,9 @@ STREAM: v1.deposit
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://trades.grvt.io/ws" -x '
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.deposit",
             "feed":[""],
@@ -1221,9 +1266,9 @@ STREAM: v1.transfer
             "sequence_number": "872634876",
             "feed": {
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "from_sub_account_id": "2927361400114782",
+                "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "to_sub_account_id": "2927361400114782",
+                "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "token_currency": "USDT",
                 "num_tokens": "10.50",
                 "signature": {
@@ -1243,9 +1288,9 @@ STREAM: v1.transfer
             "sn": "872634876",
             "f": {
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "fs": "2927361400114782",
+                "fs": "'$GRVT_SUB_ACCOUNT_ID'",
                 "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "ts": "2927361400114782",
+                "ts": "'$GRVT_SUB_ACCOUNT_ID'",
                 "tc": "USDT",
                 "nt": "10.50",
                 "s": {
@@ -1272,9 +1317,12 @@ STREAM: v1.transfer
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.transfer",
             "feed":[""],
@@ -1285,7 +1333,9 @@ STREAM: v1.transfer
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.transfer",
             "feed":[""],
@@ -1296,7 +1346,9 @@ STREAM: v1.transfer
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.transfer",
             "feed":[""],
@@ -1307,7 +1359,9 @@ STREAM: v1.transfer
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://trades.grvt.io/ws" -x '
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.transfer",
             "feed":[""],
@@ -1451,9 +1505,12 @@ STREAM: v1.withdrawal
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! info "dev"
         ```bash
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.withdrawal",
             "feed":[""],
@@ -1464,7 +1521,9 @@ STREAM: v1.withdrawal
         ```
     !!! info "stg"
         ```bash
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" -x '
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.withdrawal",
             "feed":[""],
@@ -1475,7 +1534,9 @@ STREAM: v1.withdrawal
         ```
     !!! info "testnet"
         ```bash
-        wscat -c "wss://trades.testnet.grvt.io/ws" -x '
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.withdrawal",
             "feed":[""],
@@ -1486,7 +1547,9 @@ STREAM: v1.withdrawal
         ```
     !!! info "prod"
         ```bash
-        wscat -c "wss://trades.grvt.io/ws" -x '
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
         {
             "stream":"v1.withdrawal",
             "feed":[""],
