@@ -10,6 +10,7 @@ authors = [
 readme = { file = "README.md", content-type = "text/markdown" }
 dependencies = [
     "dataclasses-json>=0.6.7",
+    "inflection>=0.5.1",
 ]
 
 [project.urls]
