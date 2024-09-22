@@ -328,15 +328,17 @@ def write_struct_example(
 
     for i, field in enumerate(struct.fields):
         fn = field.name if is_full else field.lite_name
+        comma = "," if i < len(struct.fields) - 1 else ""
+        md.write(f'"{fn}": ')
+        for _ in range(field.array_depth):
+            md.write("[")
         if field.json_type in ctx.struct_map:
-            md.write(f'"{fn}": ')
             write_struct_example(ctx, md, ctx.struct_map[field.json_type], False, is_full)
-            md.writeln("," if i < len(struct.fields) - 1 else "")
         else:
-            example_value = get_field_example(ctx, struct, field)
-            md.writeln(
-                f'"{fn}": {example_value}' + ("," if i < len(struct.fields) - 1 else "")
-            )
+            md.write(get_field_example(ctx, struct, field))
+        for _ in range(field.array_depth):
+            md.write("]")
+        md.writeln(comma)
 
     md.dedent()
 
@@ -363,8 +365,11 @@ def write_struct_schema(
     md.writeln("|Name|Lite|Type|Required| Description |")
     md.writeln("|-|-|-|-|-|")
     for field in struct.fields:
+        json_type = field.json_type
+        for _ in range(field.array_depth):
+            json_type = f"[{json_type}]"
         md.writeln(
-            f"|{field.name}|{field.lite_name}|{field.json_type}|"
+            f"|{field.name}|{field.lite_name}|{json_type}|"
             + f"{not field.optional}|{"<br>".join(field.comment)}|"
         )
 
@@ -447,7 +452,9 @@ def get_field_example(ctx: CodegenCtx, struct: Struct, field: Field) -> str:
     # To allow environment variable injection in the example
     if example_value.startswith('"$'):
         example_value = f"\"'{example_value[1:-1]}'\""
-    return example_value
+
+    # Handle lists
+    return example_value.removeprefix("[").removesuffix("]")
 
 
 def write_comment(md: MarkdownWriter, comment: list[str]) -> None:

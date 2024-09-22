@@ -23,10 +23,10 @@ def test_get_all_instruments() -> None:
     resp = api.get_all_instruments_v1(types.ApiGetAllInstrumentsRequest(is_active=True))
     if isinstance(resp, GrvtError):
         raise ValueError(f"Received error: {resp}")
-    if resp.instruments is None:
-        raise ValueError("Expected instruments to be non-null")
-    if len(resp.instruments) == 0:
-        raise ValueError("Expected instruments to be non-empty")
+    if resp.results is None:
+        raise ValueError("Expected results to be non-null")
+    if len(resp.results) == 0:
+        raise ValueError("Expected results to be non-empty")
 
 
 def test_open_orders() -> None:

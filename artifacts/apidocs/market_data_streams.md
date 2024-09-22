@@ -9,7 +9,7 @@ STREAM: v1.mini.s
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSMiniTickerFeedSelectorV1"
-        Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.<br>        Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.<br>        <br>        The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul><br>        <br>        Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
+        Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.<br>Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -178,7 +178,7 @@ STREAM: v1.mini.d
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSMiniTickerFeedSelectorV1"
-        Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.<br>        Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.<br>        <br>        The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul><br>        <br>        Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
+        Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.<br>Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -347,7 +347,7 @@ STREAM: v1.ticker.s
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSTickerFeedSelectorV1"
-        Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.<br>        Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.<br>        <br>        The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the ticker.</li><li>After the snapshot, the server will only send deltas of the ticker.</li><li>The server will send a delta if any of the fields in the ticker have changed.</li></ul><br>        <br>        Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
+        Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.<br>Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the ticker.</li><li>After the snapshot, the server will only send deltas of the ticker.</li><li>The server will send a delta if any of the fields in the ticker have changed.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -391,7 +391,7 @@ STREAM: v1.ticker.s
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|Ticker|True|A ticker matching the request filter|
         ??? info "Ticker"
-            Derived data such as the below, will not be included by default:<br>              - 24 hour volume (`buyVolume + sellVolume`)<br>              - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>              - 24 hour average trade price (`volumeQ / volumeU`)<br>              - 24 hour average trade volume (`volume / trades`)<br>              - 24 hour percentage change (`24hStatChange / 24hStat`)<br>              - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br>            <br>            To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>            Ticker extensions are currently under design to offer you more convenience.<br>            These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br>            <br>
+            Derived data such as the below, will not be included by default:<br>  - 24 hour volume (`buyVolume + sellVolume`)<br>  - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>  - 24 hour average trade price (`volumeQ / volumeU`)<br>  - 24 hour average trade volume (`volume / trades`)<br>  - 24 hour percentage change (`24hStatChange / 24hStat`)<br>  - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br><br>To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>Ticker extensions are currently under design to offer you more convenience.<br>These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br><br>
 
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -557,7 +557,7 @@ STREAM: v1.ticker.d
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSTickerFeedSelectorV1"
-        Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.<br>        Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.<br>        <br>        The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the ticker.</li><li>After the snapshot, the server will only send deltas of the ticker.</li><li>The server will send a delta if any of the fields in the ticker have changed.</li></ul><br>        <br>        Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
+        Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.<br>Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the ticker.</li><li>After the snapshot, the server will only send deltas of the ticker.</li><li>The server will send a delta if any of the fields in the ticker have changed.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -601,7 +601,7 @@ STREAM: v1.ticker.d
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|Ticker|True|A ticker matching the request filter|
         ??? info "Ticker"
-            Derived data such as the below, will not be included by default:<br>              - 24 hour volume (`buyVolume + sellVolume`)<br>              - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>              - 24 hour average trade price (`volumeQ / volumeU`)<br>              - 24 hour average trade volume (`volume / trades`)<br>              - 24 hour percentage change (`24hStatChange / 24hStat`)<br>              - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br>            <br>            To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>            Ticker extensions are currently under design to offer you more convenience.<br>            These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br>            <br>
+            Derived data such as the below, will not be included by default:<br>  - 24 hour volume (`buyVolume + sellVolume`)<br>  - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>  - 24 hour average trade price (`volumeQ / volumeU`)<br>  - 24 hour average trade volume (`volume / trades`)<br>  - 24 hour percentage change (`24hStatChange / 24hStat`)<br>  - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br><br>To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>Ticker extensions are currently under design to offer you more convenience.<br>These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br><br>
 
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -768,7 +768,7 @@ STREAM: v1.book.s
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSOrderbookLevelsFeedSelectorV1"
-        Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.<br>        Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.<br>        <br>        The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul><br>        <br>        Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul><br>
+        Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.<br>Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -818,8 +818,8 @@ STREAM: v1.book.s
             |-|-|-|-|-|
             |event_time|et|string|True|Time at which the event was emitted in unix nanoseconds|
             |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
-            |bids|b|OrderbookLevel|True|The list of best bids up till query depth|
-            |asks|a|OrderbookLevel|True|The list of best asks up till query depth|
+            |bids|b|[OrderbookLevel]|True|The list of best bids up till query depth|
+            |asks|a|[OrderbookLevel]|True|The list of best asks up till query depth|
             ??? info "OrderbookLevel"
                 |Name|Lite|Type|Required| Description |
                 |-|-|-|-|-|
@@ -842,16 +842,16 @@ STREAM: v1.book.s
             "feed": {
                 "event_time": "1697788800000000000",
                 "instrument": "BTC_USDT_Perp",
-                "bids": {
+                "bids": [{
                     "price": "65038.01",
                     "size": "3456.78",
                     "num_orders": "123"
-                },
-                "asks": {
+                }],
+                "asks": [{
                     "price": "65038.01",
                     "size": "3456.78",
                     "num_orders": "123"
-                }
+                }]
             }
         }
         ```
@@ -862,16 +862,16 @@ STREAM: v1.book.s
             "f": {
                 "et": "1697788800000000000",
                 "i": "BTC_USDT_Perp",
-                "b": {
+                "b": [{
                     "p": "65038.01",
                     "s": "3456.78",
                     "no": "123"
-                },
-                "a": {
+                }],
+                "a": [{
                     "p": "65038.01",
                     "s": "3456.78",
                     "no": "123"
-                }
+                }]
             }
         }
         ```
@@ -946,7 +946,7 @@ STREAM: v1.book.d
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSOrderbookLevelsFeedSelectorV1"
-        Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.<br>        Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.<br>        <br>        The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul><br>        <br>        Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul><br>
+        Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.<br>Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -996,8 +996,8 @@ STREAM: v1.book.d
             |-|-|-|-|-|
             |event_time|et|string|True|Time at which the event was emitted in unix nanoseconds|
             |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
-            |bids|b|OrderbookLevel|True|The list of best bids up till query depth|
-            |asks|a|OrderbookLevel|True|The list of best asks up till query depth|
+            |bids|b|[OrderbookLevel]|True|The list of best bids up till query depth|
+            |asks|a|[OrderbookLevel]|True|The list of best asks up till query depth|
             ??? info "OrderbookLevel"
                 |Name|Lite|Type|Required| Description |
                 |-|-|-|-|-|
@@ -1020,16 +1020,16 @@ STREAM: v1.book.d
             "feed": {
                 "event_time": "1697788800000000000",
                 "instrument": "BTC_USDT_Perp",
-                "bids": {
+                "bids": [{
                     "price": "65038.01",
                     "size": "3456.78",
                     "num_orders": "123"
-                },
-                "asks": {
+                }],
+                "asks": [{
                     "price": "65038.01",
                     "size": "3456.78",
                     "num_orders": "123"
-                }
+                }]
             }
         }
         ```
@@ -1040,16 +1040,16 @@ STREAM: v1.book.d
             "f": {
                 "et": "1697788800000000000",
                 "i": "BTC_USDT_Perp",
-                "b": {
+                "b": [{
                     "p": "65038.01",
                     "s": "3456.78",
                     "no": "123"
-                },
-                "a": {
+                }],
+                "a": [{
                     "p": "65038.01",
                     "s": "3456.78",
                     "no": "123"
-                }
+                }]
             }
         }
         ```
@@ -1306,7 +1306,7 @@ STREAM: v1.candle
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSCandlestickFeedSelectorV1"
-        Subscribes to a stream of Kline/Candlestick updates for an instrument. A Kline is uniquely identified by its open time.<br>        A new Kline is published every interval (if it exists). Upon subscription, the server will send the 5 most recent Kline for the requested interval.<br>
+        Subscribes to a stream of Kline/Candlestick updates for an instrument. A Kline is uniquely identified by its open time.<br>A new Kline is published every interval (if it exists). Upon subscription, the server will send the 5 most recent Kline for the requested interval.<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
