@@ -24,15 +24,16 @@ def write_enum(enum: Enum, f: TextIOWrapper) -> None:
                 else:
                     f.write("\n")
             f.write('    """\n')
-            f.write(f"    {value.name} = {value.value}\n")
+            f.write(f'    {value.name} = "{value.name}"\n')
         elif len(value.comment) == 1:
-            f.write(f"    {value.name} = {value.value}  # {value.comment[0]}\n")
+            f.write(f"    # {value.comment[0]}\n")
+            f.write(f'    {value.name} = "{value.name}"\n')
         else:
-            f.write(f"    {value.name} = {value.value}\n")
+            f.write(f'    {value.name} = "{value.name}"\n')
     f.write("\n")
 
 
-def semantic_to_python_type(semantic_type: str) -> str:
+def semantic_and_json_to_python_type(semantic_type: str, json_type: str) -> str:
     if semantic_type[0].isupper():
         return semantic_type
 
@@ -56,7 +57,10 @@ def semantic_to_python_type(semantic_type: str) -> str:
     }
 
     if semantic_type in type_mapping:
-        return type_mapping[semantic_type]
+        t = type_mapping[semantic_type]
+        if json_type == "string":
+            t = "str"
+        return t
 
     print(f"[Warning] Unmapped python type: {semantic_type}")  # noqa: T201
     return semantic_type
@@ -77,7 +81,7 @@ def write_struct(struct: Struct, f: TextIOWrapper) -> None:
         f.write("    pass\n\n")
         return
     for field in struct.fields:
-        py_type = semantic_to_python_type(field.semantic_type)
+        py_type = semantic_and_json_to_python_type(field.semantic_type, field.json_type)
         for _ in range(field.array_depth):
             py_type = f"list[{py_type}]"
         if field.optional:
@@ -94,7 +98,8 @@ def write_struct(struct: Struct, f: TextIOWrapper) -> None:
             f.write('    """\n')
             f.write(f"    {field.name}: {py_type}\n")
         elif len(field.comment) == 1:
-            f.write(f"    {field.name}: {py_type}  # {field.comment[0]}\n")
+            f.write(f"    # {field.comment[0]}\n")
+            f.write(f"    {field.name}: {py_type}\n")
         else:
             f.write(f"    {field.name}: {py_type}\n")
     f.write("\n")

@@ -12,6 +12,10 @@ run: ## Run the project
 test: ## Run the tests
 	uv run pytest tests --cov=src
 
+.PHONY: precommit
+precommit: ## Run the pre-commit hooks
+	bash .git/hooks/pre-commit
+
 .PHONY: lint
 lint: ## Run the linter
 	uv run ruff check .
