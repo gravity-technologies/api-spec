@@ -17,7 +17,7 @@ LITE ENDPOINT: lite/v1/create_order
         |-|-|-|-|-|
         |order|o|Order|True|The order to create|
         ??? info "Order"
-            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>            GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>            This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>            Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br>            <br>            All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>            This minimizes the amount of trust users have to offer to GRVT<br>
+            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -29,7 +29,7 @@ LITE ENDPOINT: lite/v1/create_order
             |maker_fee_percentage_cap|mf|number|True|Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates|
             |post_only|po|boolean|True|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order.<br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
             |reduce_only|ro|boolean|True|If True, Order must reduce the position size, or be cancelled|
-            |legs|l|OrderLeg|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
+            |legs|l|[OrderLeg]|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
             |signature|s|Signature|True|The signature approving this order|
             |metadata|m|OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state|s1|OrderState|True|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
@@ -64,7 +64,7 @@ LITE ENDPOINT: lite/v1/create_order
                 |expiration|e|string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
             ??? info "OrderMetadata"
-                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>                Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
+                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name|Lite|Type|Required| Description |
                 |-|-|-|-|-|
@@ -75,8 +75,8 @@ LITE ENDPOINT: lite/v1/create_order
                 |-|-|-|-|-|
                 |status|s|OrderStatus|True|The status of the order|
                 |reject_reason|rr|OrderRejectReason|True|The reason for rejection or cancellation|
-                |book_size|bs|string|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
-                |traded_size|ts|string|True|The total number of assets traded. Sorted in same order as Order.Legs|
+                |book_size|bs|[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
+                |traded_size|ts|[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time|ut|string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
                 ??? info "OrderStatus"
                     |Value| Description |
@@ -128,13 +128,13 @@ LITE ENDPOINT: lite/v1/create_order
                 "maker_fee_percentage_cap": "0.03",
                 "post_only": false,
                 "reduce_only": false,
-                "legs": {
+                "legs": [{
                     "instrument": "BTC_USDT_Perp",
                     "size": "10.5",
                     "limit_price": "65038.01",
                     "oco_limit_price": "63038.01",
                     "is_buying_asset": true
-                },
+                }],
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -168,13 +168,13 @@ LITE ENDPOINT: lite/v1/create_order
                 "mf": "0.03",
                 "po": false,
                 "ro": false,
-                "l": {
+                "l": [{
                     "i": "BTC_USDT_Perp",
                     "s": "10.5",
                     "lp": "65038.01",
                     "ol": "63038.01",
                     "ib": true
-                },
+                }],
                 "s": {
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -205,7 +205,7 @@ LITE ENDPOINT: lite/v1/create_order
         |-|-|-|-|-|
         |order|o|Order|True|The created order|
         ??? info "Order"
-            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>            GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>            This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>            Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br>            <br>            All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>            This minimizes the amount of trust users have to offer to GRVT<br>
+            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -217,7 +217,7 @@ LITE ENDPOINT: lite/v1/create_order
             |maker_fee_percentage_cap|mf|number|True|Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates|
             |post_only|po|boolean|True|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order.<br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
             |reduce_only|ro|boolean|True|If True, Order must reduce the position size, or be cancelled|
-            |legs|l|OrderLeg|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
+            |legs|l|[OrderLeg]|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
             |signature|s|Signature|True|The signature approving this order|
             |metadata|m|OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state|s1|OrderState|True|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
@@ -252,7 +252,7 @@ LITE ENDPOINT: lite/v1/create_order
                 |expiration|e|string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
             ??? info "OrderMetadata"
-                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>                Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
+                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name|Lite|Type|Required| Description |
                 |-|-|-|-|-|
@@ -263,8 +263,8 @@ LITE ENDPOINT: lite/v1/create_order
                 |-|-|-|-|-|
                 |status|s|OrderStatus|True|The status of the order|
                 |reject_reason|rr|OrderRejectReason|True|The reason for rejection or cancellation|
-                |book_size|bs|string|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
-                |traded_size|ts|string|True|The total number of assets traded. Sorted in same order as Order.Legs|
+                |book_size|bs|[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
+                |traded_size|ts|[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time|ut|string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
                 ??? info "OrderStatus"
                     |Value| Description |
@@ -316,13 +316,13 @@ LITE ENDPOINT: lite/v1/create_order
                 "maker_fee_percentage_cap": "0.03",
                 "post_only": false,
                 "reduce_only": false,
-                "legs": {
+                "legs": [{
                     "instrument": "BTC_USDT_Perp",
                     "size": "10.5",
                     "limit_price": "65038.01",
                     "oco_limit_price": "63038.01",
                     "is_buying_asset": true
-                },
+                }],
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -379,13 +379,13 @@ LITE ENDPOINT: lite/v1/create_order
                 "maker_fee_percentage_cap": "0.03",
                 "post_only": false,
                 "reduce_only": false,
-                "legs": {
+                "legs": [{
                     "instrument": "BTC_USDT_Perp",
                     "size": "10.5",
                     "limit_price": "65038.01",
                     "oco_limit_price": "63038.01",
                     "is_buying_asset": true
-                },
+                }],
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -423,13 +423,13 @@ LITE ENDPOINT: lite/v1/create_order
                 "maker_fee_percentage_cap": "0.03",
                 "post_only": false,
                 "reduce_only": false,
-                "legs": {
+                "legs": [{
                     "instrument": "BTC_USDT_Perp",
                     "size": "10.5",
                     "limit_price": "65038.01",
                     "oco_limit_price": "63038.01",
                     "is_buying_asset": true
-                },
+                }],
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -467,13 +467,13 @@ LITE ENDPOINT: lite/v1/create_order
                 "maker_fee_percentage_cap": "0.03",
                 "post_only": false,
                 "reduce_only": false,
-                "legs": {
+                "legs": [{
                     "instrument": "BTC_USDT_Perp",
                     "size": "10.5",
                     "limit_price": "65038.01",
                     "oco_limit_price": "63038.01",
                     "is_buying_asset": true
-                },
+                }],
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -511,13 +511,13 @@ LITE ENDPOINT: lite/v1/create_order
                 "maker_fee_percentage_cap": "0.03",
                 "post_only": false,
                 "reduce_only": false,
-                "legs": {
+                "legs": [{
                     "instrument": "BTC_USDT_Perp",
                     "size": "10.5",
                     "limit_price": "65038.01",
                     "oco_limit_price": "63038.01",
                     "is_buying_asset": true
-                },
+                }],
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -584,7 +584,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         |-|-|-|-|-|
         |order|o|Order|True|The cancelled order|
         ??? info "Order"
-            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>            GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>            This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>            Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br>            <br>            All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>            This minimizes the amount of trust users have to offer to GRVT<br>
+            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -596,7 +596,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             |maker_fee_percentage_cap|mf|number|True|Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates|
             |post_only|po|boolean|True|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order.<br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
             |reduce_only|ro|boolean|True|If True, Order must reduce the position size, or be cancelled|
-            |legs|l|OrderLeg|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
+            |legs|l|[OrderLeg]|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
             |signature|s|Signature|True|The signature approving this order|
             |metadata|m|OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state|s1|OrderState|True|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
@@ -631,7 +631,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                 |expiration|e|string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
             ??? info "OrderMetadata"
-                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>                Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
+                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name|Lite|Type|Required| Description |
                 |-|-|-|-|-|
@@ -642,8 +642,8 @@ LITE ENDPOINT: lite/v1/cancel_order
                 |-|-|-|-|-|
                 |status|s|OrderStatus|True|The status of the order|
                 |reject_reason|rr|OrderRejectReason|True|The reason for rejection or cancellation|
-                |book_size|bs|string|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
-                |traded_size|ts|string|True|The total number of assets traded. Sorted in same order as Order.Legs|
+                |book_size|bs|[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
+                |traded_size|ts|[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time|ut|string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
                 ??? info "OrderStatus"
                     |Value| Description |
@@ -695,13 +695,13 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "maker_fee_percentage_cap": "0.03",
                 "post_only": false,
                 "reduce_only": false,
-                "legs": {
+                "legs": [{
                     "instrument": "BTC_USDT_Perp",
                     "size": "10.5",
                     "limit_price": "65038.01",
                     "oco_limit_price": "63038.01",
                     "is_buying_asset": true
-                },
+                }],
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -929,7 +929,7 @@ LITE ENDPOINT: lite/v1/order
         |-|-|-|-|-|
         |order|o|Order|True|The order object for the requested filter|
         ??? info "Order"
-            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>            GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>            This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>            Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br>            <br>            All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>            This minimizes the amount of trust users have to offer to GRVT<br>
+            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -941,7 +941,7 @@ LITE ENDPOINT: lite/v1/order
             |maker_fee_percentage_cap|mf|number|True|Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates|
             |post_only|po|boolean|True|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order.<br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
             |reduce_only|ro|boolean|True|If True, Order must reduce the position size, or be cancelled|
-            |legs|l|OrderLeg|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
+            |legs|l|[OrderLeg]|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
             |signature|s|Signature|True|The signature approving this order|
             |metadata|m|OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state|s1|OrderState|True|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
@@ -976,7 +976,7 @@ LITE ENDPOINT: lite/v1/order
                 |expiration|e|string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
             ??? info "OrderMetadata"
-                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>                Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
+                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name|Lite|Type|Required| Description |
                 |-|-|-|-|-|
@@ -987,8 +987,8 @@ LITE ENDPOINT: lite/v1/order
                 |-|-|-|-|-|
                 |status|s|OrderStatus|True|The status of the order|
                 |reject_reason|rr|OrderRejectReason|True|The reason for rejection or cancellation|
-                |book_size|bs|string|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
-                |traded_size|ts|string|True|The total number of assets traded. Sorted in same order as Order.Legs|
+                |book_size|bs|[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
+                |traded_size|ts|[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time|ut|string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
                 ??? info "OrderStatus"
                     |Value| Description |
@@ -1040,13 +1040,13 @@ LITE ENDPOINT: lite/v1/order
                 "maker_fee_percentage_cap": "0.03",
                 "post_only": false,
                 "reduce_only": false,
-                "legs": {
+                "legs": [{
                     "instrument": "BTC_USDT_Perp",
                     "size": "10.5",
                     "limit_price": "65038.01",
                     "oco_limit_price": "63038.01",
                     "is_buying_asset": true
-                },
+                }],
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -1142,9 +1142,9 @@ LITE ENDPOINT: lite/v1/open_orders
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |sub_account_id|sa|string|True|The subaccount ID to filter by|
-        |kind|k|Kind|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
-        |underlying|u|Currency|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
-        |quote|q|Currency|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
+        |kind|k|[Kind]|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
+        |underlying|u|[Currency]|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
+        |quote|q|[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         ??? info "Kind"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -1199,9 +1199,9 @@ LITE ENDPOINT: lite/v1/open_orders
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |orders|o|Order|True|The Open Orders matching the request filter|
+        |orders|o|[Order]|True|The Open Orders matching the request filter|
         ??? info "Order"
-            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>            GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>            This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>            Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br>            <br>            All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>            This minimizes the amount of trust users have to offer to GRVT<br>
+            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -1213,7 +1213,7 @@ LITE ENDPOINT: lite/v1/open_orders
             |maker_fee_percentage_cap|mf|number|True|Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates|
             |post_only|po|boolean|True|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order.<br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
             |reduce_only|ro|boolean|True|If True, Order must reduce the position size, or be cancelled|
-            |legs|l|OrderLeg|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
+            |legs|l|[OrderLeg]|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
             |signature|s|Signature|True|The signature approving this order|
             |metadata|m|OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state|s1|OrderState|True|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
@@ -1248,7 +1248,7 @@ LITE ENDPOINT: lite/v1/open_orders
                 |expiration|e|string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
             ??? info "OrderMetadata"
-                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>                Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
+                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name|Lite|Type|Required| Description |
                 |-|-|-|-|-|
@@ -1259,8 +1259,8 @@ LITE ENDPOINT: lite/v1/open_orders
                 |-|-|-|-|-|
                 |status|s|OrderStatus|True|The status of the order|
                 |reject_reason|rr|OrderRejectReason|True|The reason for rejection or cancellation|
-                |book_size|bs|string|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
-                |traded_size|ts|string|True|The total number of assets traded. Sorted in same order as Order.Legs|
+                |book_size|bs|[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
+                |traded_size|ts|[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time|ut|string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
                 ??? info "OrderStatus"
                     |Value| Description |
@@ -1303,7 +1303,7 @@ LITE ENDPOINT: lite/v1/open_orders
     !!! success
         ```json
         {
-            "orders": {
+            "orders": [{
                 "order_id": "0x1234567890abcdef",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
@@ -1312,13 +1312,13 @@ LITE ENDPOINT: lite/v1/open_orders
                 "maker_fee_percentage_cap": "0.03",
                 "post_only": false,
                 "reduce_only": false,
-                "legs": {
+                "legs": [{
                     "instrument": "BTC_USDT_Perp",
                     "size": "10.5",
                     "limit_price": "65038.01",
                     "oco_limit_price": "63038.01",
                     "is_buying_asset": true
-                },
+                }],
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -1338,7 +1338,7 @@ LITE ENDPOINT: lite/v1/open_orders
                     "traded_size": ["3.0", "6.0"],
                     "update_time": "1697788800000000000"
                 }
-            }
+            }]
         }
         ```
     </section>
@@ -1425,11 +1425,11 @@ LITE ENDPOINT: lite/v1/order_history
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |sub_account_id|sa|string|True|The subaccount ID to filter by|
-        |kind|k|Kind|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
-        |underlying|u|Currency|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
-        |quote|q|Currency|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
-        |expiration|e|string|True|The expiration time to apply in nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned|
-        |strike_price|sp|string|True|The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned|
+        |kind|k|[Kind]|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
+        |underlying|u|[Currency]|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
+        |quote|q|[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
+        |expiration|e|[string]|True|The expiration time to apply in nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned|
+        |strike_price|sp|[string]|True|The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned|
         |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
         |cursor|c|string|True|The cursor to indicate when to start the query from|
         ??? info "Kind"
@@ -1494,9 +1494,9 @@ LITE ENDPOINT: lite/v1/order_history
         |-|-|-|-|-|
         |total|t|number|True|The total number of orders matching the request filter|
         |next|n|string|True|The cursor to indicate when to start the query from|
-        |orders|o|Order|True|The Open Orders matching the request filter|
+        |orders|o|[Order]|True|The Open Orders matching the request filter|
         ??? info "Order"
-            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>            GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>            This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>            Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br>            <br>            All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>            This minimizes the amount of trust users have to offer to GRVT<br>
+            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -1508,7 +1508,7 @@ LITE ENDPOINT: lite/v1/order_history
             |maker_fee_percentage_cap|mf|number|True|Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates|
             |post_only|po|boolean|True|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order.<br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
             |reduce_only|ro|boolean|True|If True, Order must reduce the position size, or be cancelled|
-            |legs|l|OrderLeg|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
+            |legs|l|[OrderLeg]|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
             |signature|s|Signature|True|The signature approving this order|
             |metadata|m|OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state|s1|OrderState|True|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
@@ -1543,7 +1543,7 @@ LITE ENDPOINT: lite/v1/order_history
                 |expiration|e|string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
             ??? info "OrderMetadata"
-                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>                Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
+                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name|Lite|Type|Required| Description |
                 |-|-|-|-|-|
@@ -1554,8 +1554,8 @@ LITE ENDPOINT: lite/v1/order_history
                 |-|-|-|-|-|
                 |status|s|OrderStatus|True|The status of the order|
                 |reject_reason|rr|OrderRejectReason|True|The reason for rejection or cancellation|
-                |book_size|bs|string|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
-                |traded_size|ts|string|True|The total number of assets traded. Sorted in same order as Order.Legs|
+                |book_size|bs|[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
+                |traded_size|ts|[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time|ut|string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
                 ??? info "OrderStatus"
                     |Value| Description |
@@ -1600,7 +1600,7 @@ LITE ENDPOINT: lite/v1/order_history
         {
             "total": 500,
             "next": "Qw0918=",
-            "orders": {
+            "orders": [{
                 "order_id": "0x1234567890abcdef",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
@@ -1609,13 +1609,13 @@ LITE ENDPOINT: lite/v1/order_history
                 "maker_fee_percentage_cap": "0.03",
                 "post_only": false,
                 "reduce_only": false,
-                "legs": {
+                "legs": [{
                     "instrument": "BTC_USDT_Perp",
                     "size": "10.5",
                     "limit_price": "65038.01",
                     "oco_limit_price": "63038.01",
                     "is_buying_asset": true
-                },
+                }],
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -1635,7 +1635,7 @@ LITE ENDPOINT: lite/v1/order_history
                     "traded_size": ["3.0", "6.0"],
                     "update_time": "1697788800000000000"
                 }
-            }
+            }]
         }
         ```
     </section>
@@ -1739,9 +1739,9 @@ LITE ENDPOINT: lite/v1/trade_history
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |sub_account_id|sa|string|True|The sub account ID to request for|
-        |kind|k|Kind|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
-        |underlying|u|Currency|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
-        |quote|q|Currency|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
+        |kind|k|[Kind]|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
+        |underlying|u|[Currency]|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
+        |quote|q|[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         |expiration|e|string|True|The expiration time to apply in unix nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned|
         |strike_price|sp|string|True|The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned|
         |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
@@ -1808,7 +1808,7 @@ LITE ENDPOINT: lite/v1/trade_history
         |-|-|-|-|-|
         |total|t|number|True|The total number of private trades matching the request filter|
         |next|n|string|True|The cursor to indicate when to start the query from|
-        |results|r|PrivateTrade|True|The private trades matching the request asset|
+        |results|r|[PrivateTrade]|True|The private trades matching the request asset|
         ??? info "PrivateTrade"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -1843,7 +1843,7 @@ LITE ENDPOINT: lite/v1/trade_history
         {
             "total": 52,
             "next": "Qw0918=",
-            "results": {
+            "results": [{
                 "event_time": "1697788800000000000",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
@@ -1862,7 +1862,7 @@ LITE ENDPOINT: lite/v1/trade_history
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
                 "client_order_id": "23042"
-            }
+            }]
         }
         ```
     </section>
@@ -1965,9 +1965,9 @@ LITE ENDPOINT: lite/v1/positions
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |sub_account_id|sa|string|True|The sub account ID to request for|
-        |kind|k|Kind|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
-        |underlying|u|Currency|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
-        |quote|q|Currency|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
+        |kind|k|[Kind]|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
+        |underlying|u|[Currency]|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
+        |quote|q|[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         ??? info "Kind"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -2020,7 +2020,7 @@ LITE ENDPOINT: lite/v1/positions
     !!! info "ApiPositionsResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |results|r|Positions|True|The positions matching the request filter|
+        |results|r|[Positions]|True|The positions matching the request filter|
         ??? info "Positions"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -2041,7 +2041,7 @@ LITE ENDPOINT: lite/v1/positions
     !!! success
         ```json
         {
-            "results": {
+            "results": [{
                 "event_time": "1697788800000000000",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
@@ -2054,7 +2054,7 @@ LITE ENDPOINT: lite/v1/positions
                 "realized_pnl": "-35000.30",
                 "pnl": "100000.20",
                 "roi": "10.20"
-            }
+            }]
         }
         ```
     </section>
@@ -2137,7 +2137,7 @@ LITE ENDPOINT: lite/v1/deposit
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiDepositRequest"
-        GRVT runs on a ZKSync Hyperchain which settles directly onto Ethereum.<br>        To Deposit funds from your L1 wallet into a GRVT SubAccount, you will be required to submit a deposit transaction directly to Ethereum.<br>        GRVT's bridge verifier will scan Ethereum from time to time. Once it receives proof that your deposit has been confirmed on Ethereum, it will initiate the deposit process.<br>        <br>        This current payload is used for alpha testing only.<br>
+        GRVT runs on a ZKSync Hyperchain which settles directly onto Ethereum.<br>To Deposit funds from your L1 wallet into a GRVT SubAccount, you will be required to submit a deposit transaction directly to Ethereum.<br>GRVT's bridge verifier will scan Ethereum from time to time. Once it receives proof that your deposit has been confirmed on Ethereum, it will initiate the deposit process.<br><br>This current payload is used for alpha testing only.<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -2262,13 +2262,13 @@ LITE ENDPOINT: lite/v1/deposit_history
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiDepositHistoryRequest"
-        The request to get the historical deposits of an account<br>        The history is returned in reverse chronological order<br>
+        The request to get the historical deposits of an account<br>The history is returned in reverse chronological order<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
         |cursor|c|string|True|The cursor to indicate when to start the next query from|
-        |token_currency|tc|Currency|True|The token currency to query for, if nil or empty, return all deposits. Otherwise, only entries matching the filter will be returned|
+        |token_currency|tc|[Currency]|True|The token currency to query for, if nil or empty, return all deposits. Otherwise, only entries matching the filter will be returned|
         |start_time|st|string|True|The start time to query for in unix nanoseconds|
         |end_time|et|string|True|The end time to query for in unix nanoseconds|
         ??? info "Currency"
@@ -2309,7 +2309,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         |-|-|-|-|-|
         |total|t|number|True|The total number of deposits matching the request account|
         |next|n|string|True|The cursor to indicate when to start the next query from|
-        |results|r|DepositHistory|True|The deposit history matching the request account|
+        |results|r|[DepositHistory]|True|The deposit history matching the request account|
         ??? info "DepositHistory"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -2335,14 +2335,14 @@ LITE ENDPOINT: lite/v1/deposit_history
         {
             "total": 52,
             "next": "Qw0918=",
-            "results": {
+            "results": [{
                 "tx_id": "1028403",
                 "tx_hash": "0x10000101000203040506",
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "token_currency": "USDT",
                 "num_tokens": "1500.0",
                 "event_time": "1697788800000000000"
-            }
+            }]
         }
         ```
     </section>
@@ -2428,7 +2428,7 @@ LITE ENDPOINT: lite/v1/transfer
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiTransferRequest"
-        This API allows you to transfer funds in multiple different ways<ul><br>        <li>Between SubAccounts within your Main Account</li><br>        <li>Between your MainAccount and your SubAccounts</li><br>        <li>To other MainAccounts that you have previously allowlisted</li><br>        </ul><br>
+        This API allows you to transfer funds in multiple different ways<ul><br><li>Between SubAccounts within your Main Account</li><br><li>Between your MainAccount and your SubAccounts</li><br><li>To other MainAccounts that you have previously allowlisted</li><br></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -2632,13 +2632,13 @@ LITE ENDPOINT: lite/v1/transfer_history
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiTransferHistoryRequest"
-        The request to get the historical transfers of an account<br>        The history is returned in reverse chronological order<br>
+        The request to get the historical transfers of an account<br>The history is returned in reverse chronological order<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
         |cursor|c|string|True|The cursor to indicate when to start the next query from|
-        |token_currency|tc|Currency|True|The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned|
+        |token_currency|tc|[Currency]|True|The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned|
         |start_time|st|string|True|The start time to query for in unix nanoseconds|
         |end_time|et|string|True|The end time to query for in unix nanoseconds|
         ??? info "Currency"
@@ -2679,7 +2679,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         |-|-|-|-|-|
         |total|t|number|True|The total number of transfers matching the request account|
         |next|n|string|True|The cursor to indicate when to start the next query from|
-        |results|r|TransferHistory|True|The transfer history matching the request account|
+        |results|r|[TransferHistory]|True|The transfer history matching the request account|
         ??? info "TransferHistory"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -2717,7 +2717,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         {
             "total": 52,
             "next": "Qw0918=",
-            "results": {
+            "results": [{
                 "tx_id": "1028403",
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -2734,7 +2734,7 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "nonce": "1234567890"
                 },
                 "event_time": "1697788800000000000"
-            }
+            }]
         }
         ```
     </section>
@@ -2820,7 +2820,7 @@ LITE ENDPOINT: lite/v1/withdrawal
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiWithdrawalRequest"
-        Leverage this API to initialize a withdrawal from GRVT's Hyperchain onto Ethereum.<br>        Do take note that the bridging process does take time. The GRVT UI will help you keep track of bridging progress, and notify you once its complete.<br>        <br>        If not withdrawing the entirety of your balance, there is a minimum withdrawal amount. Currently that amount is ~25 USDT.<br>        Withdrawal fees also apply to cover the cost of the Ethereum transaction.<br>        Note that your funds will always remain in self-custory throughout the withdrawal process. At no stage does GRVT gain control over your funds.<br>
+        Leverage this API to initialize a withdrawal from GRVT's Hyperchain onto Ethereum.<br>Do take note that the bridging process does take time. The GRVT UI will help you keep track of bridging progress, and notify you once its complete.<br><br>If not withdrawing the entirety of your balance, there is a minimum withdrawal amount. Currently that amount is ~25 USDT.<br>Withdrawal fees also apply to cover the cost of the Ethereum transaction.<br>Note that your funds will always remain in self-custory throughout the withdrawal process. At no stage does GRVT gain control over your funds.<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -3010,13 +3010,13 @@ LITE ENDPOINT: lite/v1/withdrawal_history
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiWithdrawalHistoryRequest"
-        The request to get the historical withdrawals of an account<br>        The history is returned in reverse chronological order<br>
+        The request to get the historical withdrawals of an account<br>The history is returned in reverse chronological order<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
         |cursor|c|string|True|The cursor to indicate when to start the next query from|
-        |token_currency|tc|Currency|True|The token currency to query for, if nil or empty, return all withdrawals. Otherwise, only entries matching the filter will be returned|
+        |token_currency|tc|[Currency]|True|The token currency to query for, if nil or empty, return all withdrawals. Otherwise, only entries matching the filter will be returned|
         |start_time|st|string|True|The start time to query for in unix nanoseconds|
         |end_time|et|string|True|The end time to query for in unix nanoseconds|
         ??? info "Currency"
@@ -3057,7 +3057,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         |-|-|-|-|-|
         |total|t|number|True|The total number of withdrawals matching the request account|
         |next|n|string|True|The cursor to indicate when to start the next query from|
-        |results|r|WithdrawalHistory|True|The withdrawals history matching the request account|
+        |results|r|[WithdrawalHistory]|True|The withdrawals history matching the request account|
         ??? info "WithdrawalHistory"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -3093,7 +3093,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         {
             "total": 52,
             "next": "Qw0918=",
-            "results": {
+            "results": [{
                 "tx_id": "1028403",
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3108,7 +3108,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "nonce": "1234567890"
                 },
                 "event_time": "1697788800000000000"
-            }
+            }]
         }
         ```
     </section>
@@ -3232,8 +3232,8 @@ LITE ENDPOINT: lite/v1/account_summary
             |initial_margin|im|string|True|The initial margin requirement of all positions owned by this vault, denominated in quote currency decimal units|
             |maintanence_margin|mm|string|True|The maintanence margin requirement of all positions owned by this vault, denominated in quote currency decimal units|
             |available_margin|am|string|True|The margin available for withdrawal, denominated in quote currency decimal units|
-            |spot_balances|sb|SpotBalance|True|The list of spot assets owned by this sub account, and their balances|
-            |positions|p|Positions|True|The list of positions owned by this sub account|
+            |spot_balances|sb|[SpotBalance]|True|The list of spot assets owned by this sub account, and their balances|
+            |positions|p|[Positions]|True|The list of positions owned by this sub account|
             ??? info "MarginType"
                 |Value| Description |
                 |-|-|
@@ -3292,11 +3292,11 @@ LITE ENDPOINT: lite/v1/account_summary
                 "initial_margin": "123456.78",
                 "maintanence_margin": "123456.78",
                 "available_margin": "123456.78",
-                "spot_balances": {
+                "spot_balances": [{
                     "currency": "USDT",
                     "balance": "123456.78"
-                },
-                "positions": {
+                }],
+                "positions": [{
                     "event_time": "1697788800000000000",
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "instrument": "BTC_USDT_Perp",
@@ -3309,7 +3309,7 @@ LITE ENDPOINT: lite/v1/account_summary
                     "realized_pnl": "-35000.30",
                     "pnl": "100000.20",
                     "roi": "10.20"
-                }
+                }]
             }
         }
         ```
@@ -3380,7 +3380,7 @@ LITE ENDPOINT: lite/v1/account_history
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiSubAccountHistoryRequest"
-        The request to get the history of a sub account<br>        SubAccount Summary values are snapshotted once every hour<br>        No snapshots are taken if the sub account has no activity in the hourly window<br>        The history is returned in reverse chronological order<br>        History is preserved only for the last 30 days<br>
+        The request to get the history of a sub account<br>SubAccount Summary values are snapshotted once every hour<br>No snapshots are taken if the sub account has no activity in the hourly window<br>The history is returned in reverse chronological order<br>History is preserved only for the last 30 days<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -3415,7 +3415,7 @@ LITE ENDPOINT: lite/v1/account_history
         |-|-|-|-|-|
         |total|t|number|True|The total number of sub account snapshots matching the request filter|
         |next|n|string|True|The cursor to indicate when to start the next query from|
-        |results|r|SubAccount|True|The sub account history matching the request sub account|
+        |results|r|[SubAccount]|True|The sub account history matching the request sub account|
         ??? info "SubAccount"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -3428,8 +3428,8 @@ LITE ENDPOINT: lite/v1/account_history
             |initial_margin|im|string|True|The initial margin requirement of all positions owned by this vault, denominated in quote currency decimal units|
             |maintanence_margin|mm|string|True|The maintanence margin requirement of all positions owned by this vault, denominated in quote currency decimal units|
             |available_margin|am|string|True|The margin available for withdrawal, denominated in quote currency decimal units|
-            |spot_balances|sb|SpotBalance|True|The list of spot assets owned by this sub account, and their balances|
-            |positions|p|Positions|True|The list of positions owned by this sub account|
+            |spot_balances|sb|[SpotBalance]|True|The list of spot assets owned by this sub account, and their balances|
+            |positions|p|[Positions]|True|The list of positions owned by this sub account|
             ??? info "MarginType"
                 |Value| Description |
                 |-|-|
@@ -3480,7 +3480,7 @@ LITE ENDPOINT: lite/v1/account_history
         {
             "total": 52,
             "next": "Qw0918=",
-            "results": {
+            "results": [{
                 "event_time": "1697788800000000000",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "margin_type": "SIMPLE_CROSS_MARGIN",
@@ -3490,11 +3490,11 @@ LITE ENDPOINT: lite/v1/account_history
                 "initial_margin": "123456.78",
                 "maintanence_margin": "123456.78",
                 "available_margin": "123456.78",
-                "spot_balances": {
+                "spot_balances": [{
                     "currency": "USDT",
                     "balance": "123456.78"
-                },
-                "positions": {
+                }],
+                "positions": [{
                     "event_time": "1697788800000000000",
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "instrument": "BTC_USDT_Perp",
@@ -3507,8 +3507,8 @@ LITE ENDPOINT: lite/v1/account_history
                     "realized_pnl": "-35000.30",
                     "pnl": "100000.20",
                     "roi": "10.20"
-                }
-            }
+                }]
+            }]
         }
         ```
     </section>
@@ -3613,8 +3613,8 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         |-|-|-|-|-|
         |main_account_id|ma|string|True|The main account ID of the account to which the summary belongs|
         |total_equity|te|string|True|Total equity of the account, denominated in USD|
-        |spot_balances|sb|SpotBalance|True|The list of spot assets owned by this sub account, and their balances|
-        |mark_prices|mp|MarkPrice|True|The list of mark prices for the assets owned by this account|
+        |spot_balances|sb|[SpotBalance]|True|The list of spot assets owned by this sub account, and their balances|
+        |mark_prices|mp|[MarkPrice]|True|The list of mark prices for the assets owned by this account|
         ??? info "SpotBalance"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -3650,14 +3650,14 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         {
             "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "total_equity": "3945034.23",
-            "spot_balances": {
+            "spot_balances": [{
                 "currency": "USDT",
                 "balance": "123456.78"
-            },
-            "mark_prices": {
+            }],
+            "mark_prices": [{
                 "currency": "USDT",
                 "mark_price": 65000.1
-            }
+            }]
         }
         ```
     </section>
@@ -3746,8 +3746,8 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         |-|-|-|-|-|
         |main_account_id|ma|string|True|The main account ID of the account to which the summary belongs|
         |total_equity|te|string|True|Total equity of the account, denominated in USD|
-        |spot_balances|sb|SpotBalance|True|The list of spot assets owned by this account, and their balances|
-        |mark_prices|mp|MarkPrice|True|The list of mark prices for the assets owned by this account|
+        |spot_balances|sb|[SpotBalance]|True|The list of spot assets owned by this account, and their balances|
+        |mark_prices|mp|[MarkPrice]|True|The list of mark prices for the assets owned by this account|
         ??? info "SpotBalance"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -3783,14 +3783,14 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         {
             "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "total_equity": "3945034.23",
-            "spot_balances": {
+            "spot_balances": [{
                 "currency": "USDT",
                 "balance": "123456.78"
-            },
-            "mark_prices": {
+            }],
+            "mark_prices": [{
                 "currency": "USDT",
                 "mark_price": 65000.1
-            }
+            }]
         }
         ```
     </section>

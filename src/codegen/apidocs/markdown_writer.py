@@ -8,7 +8,10 @@ class MarkdownWriter:
         self.prefixed = False
 
     def write(self, s: str) -> None:
-        self.f.write("    " * self.indentation + s)
+        if self.prefixed:
+            self.f.write(s)
+        else:
+            self.f.write("    " * self.indentation + s)
         self.prefixed = True
 
     def writeln(self, s: str) -> None:

@@ -45,7 +45,7 @@ LITE ENDPOINT: lite/v1/instrument
             |kind|k|Kind|True|The kind of instrument|
             |expiry|e|string|True|The expiry time of the instrument in unix nanoseconds|
             |strike_price|sp|string|True|The strike price of the instrument, expressed in `9` decimals|
-            |venues|v|Venue|True|Venues that this instrument can be traded at|
+            |venues|v|[Venue]|True|Venues that this instrument can be traded at|
             |settlement_period|sp1|InstrumentSettlementPeriod|True|The settlement period of the instrument|
             |underlying_decimals|ud|number|True|The smallest denomination of the underlying asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
             |quote_decimals|qd|number|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
@@ -203,7 +203,7 @@ LITE ENDPOINT: lite/v1/all_instruments
     !!! info "ApiGetAllInstrumentsResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |instruments|i|Instrument|True|List of instruments|
+        |results|r|[Instrument]|True|List of instruments|
         ??? info "Instrument"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -213,7 +213,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             |kind|k|Kind|True|The kind of instrument|
             |expiry|e|string|True|The expiry time of the instrument in unix nanoseconds|
             |strike_price|sp|string|True|The strike price of the instrument, expressed in `9` decimals|
-            |venues|v|Venue|True|Venues that this instrument can be traded at|
+            |venues|v|[Venue]|True|Venues that this instrument can be traded at|
             |settlement_period|sp1|InstrumentSettlementPeriod|True|The settlement period of the instrument|
             |underlying_decimals|ud|number|True|The smallest denomination of the underlying asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
             |quote_decimals|qd|number|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
@@ -267,7 +267,7 @@ LITE ENDPOINT: lite/v1/all_instruments
     !!! success
         ```json
         {
-            "instruments": {
+            "results": [{
                 "instrument": "BTC_USDT_Perp",
                 "underlying": "BTC",
                 "quote": "USDT",
@@ -282,7 +282,7 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "min_size": "0.01",
                 "min_block_trade_size": "5.0",
                 "create_time": "1697788800000000000"
-            }
+            }]
         }
         ```
     </section>
@@ -351,9 +351,9 @@ LITE ENDPOINT: lite/v1/instruments
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |kind|k|Kind|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
-        |underlying|u|Currency|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
-        |quote|q|Currency|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
+        |kind|k|[Kind]|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
+        |underlying|u|[Currency]|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
+        |quote|q|[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         |is_active|ia|boolean|True|Request for active instruments only|
         |limit|l|number|True|The limit to query for. Defaults to 500; Max 100000|
         ??? info "Kind"
@@ -410,7 +410,7 @@ LITE ENDPOINT: lite/v1/instruments
     !!! info "ApiGetFilteredInstrumentsResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |results|r|Instrument|True|The instruments matching the request filter|
+        |results|r|[Instrument]|True|The instruments matching the request filter|
         ??? info "Instrument"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -420,7 +420,7 @@ LITE ENDPOINT: lite/v1/instruments
             |kind|k|Kind|True|The kind of instrument|
             |expiry|e|string|True|The expiry time of the instrument in unix nanoseconds|
             |strike_price|sp|string|True|The strike price of the instrument, expressed in `9` decimals|
-            |venues|v|Venue|True|Venues that this instrument can be traded at|
+            |venues|v|[Venue]|True|Venues that this instrument can be traded at|
             |settlement_period|sp1|InstrumentSettlementPeriod|True|The settlement period of the instrument|
             |underlying_decimals|ud|number|True|The smallest denomination of the underlying asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
             |quote_decimals|qd|number|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
@@ -474,7 +474,7 @@ LITE ENDPOINT: lite/v1/instruments
     !!! success
         ```json
         {
-            "results": {
+            "results": [{
                 "instrument": "BTC_USDT_Perp",
                 "underlying": "BTC",
                 "quote": "USDT",
@@ -489,7 +489,7 @@ LITE ENDPOINT: lite/v1/instruments
                 "min_size": "0.01",
                 "min_block_trade_size": "5.0",
                 "create_time": "1697788800000000000"
-            }
+            }]
         }
         ```
     </section>
@@ -718,7 +718,7 @@ LITE ENDPOINT: lite/v1/ticker
         |-|-|-|-|-|
         |results|r|Ticker|True|The mini ticker matching the request asset|
         ??? info "Ticker"
-            Derived data such as the below, will not be included by default:<br>              - 24 hour volume (`buyVolume + sellVolume`)<br>              - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>              - 24 hour average trade price (`volumeQ / volumeU`)<br>              - 24 hour average trade volume (`volume / trades`)<br>              - 24 hour percentage change (`24hStatChange / 24hStat`)<br>              - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br>            <br>            To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>            Ticker extensions are currently under design to offer you more convenience.<br>            These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br>            <br>
+            Derived data such as the below, will not be included by default:<br>  - 24 hour volume (`buyVolume + sellVolume`)<br>  - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>  - 24 hour average trade price (`volumeQ / volumeU`)<br>  - 24 hour average trade volume (`volume / trades`)<br>  - 24 hour percentage change (`24hStatChange / 24hStat`)<br>  - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br><br>To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>Ticker extensions are currently under design to offer you more convenience.<br>These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br><br>
 
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -878,8 +878,8 @@ LITE ENDPOINT: lite/v1/book
             |-|-|-|-|-|
             |event_time|et|string|True|Time at which the event was emitted in unix nanoseconds|
             |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
-            |bids|b|OrderbookLevel|True|The list of best bids up till query depth|
-            |asks|a|OrderbookLevel|True|The list of best asks up till query depth|
+            |bids|b|[OrderbookLevel]|True|The list of best bids up till query depth|
+            |asks|a|[OrderbookLevel]|True|The list of best asks up till query depth|
             ??? info "OrderbookLevel"
                 |Name|Lite|Type|Required| Description |
                 |-|-|-|-|-|
@@ -900,16 +900,16 @@ LITE ENDPOINT: lite/v1/book
             "results": {
                 "event_time": "1697788800000000000",
                 "instrument": "BTC_USDT_Perp",
-                "bids": {
+                "bids": [{
                     "price": "65038.01",
                     "size": "3456.78",
                     "num_orders": "123"
-                },
-                "asks": {
+                }],
+                "asks": [{
                     "price": "65038.01",
                     "size": "3456.78",
                     "num_orders": "123"
-                }
+                }]
             }
         }
         ```
@@ -984,7 +984,7 @@ LITE ENDPOINT: lite/v1/trades
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiPublicTradesRequest"
-        Retrieves up to 1000 of the most recent public trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.<br>        This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>
+        Retrieves up to 1000 of the most recent public trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.<br>This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -1011,7 +1011,7 @@ LITE ENDPOINT: lite/v1/trades
     !!! info "ApiPublicTradesResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |results|r|PublicTrade|True|The public trades matching the request asset|
+        |results|r|[PublicTrade]|True|The public trades matching the request asset|
         ??? info "PublicTrade"
             All private RFQs and Private AXEs will be filtered out from the responses<br>
 
@@ -1040,7 +1040,7 @@ LITE ENDPOINT: lite/v1/trades
     !!! success
         ```json
         {
-            "results": {
+            "results": [{
                 "event_time": "1697788800000000000",
                 "instrument": "BTC_USDT_Perp",
                 "is_taker_buyer": true,
@@ -1053,7 +1053,7 @@ LITE ENDPOINT: lite/v1/trades
                 "trade_id": "1234567890",
                 "venue": "ORDERBOOK",
                 "is_liquidation": false
-            }
+            }]
         }
         ```
     </section>
@@ -1122,7 +1122,7 @@ LITE ENDPOINT: lite/v1/trade_history
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiPublicTradeHistoryRequest"
-        Perform historical lookup of public trades in any given instrument.<br>        This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>        Only data from the last three months will be retained.<br>
+        Perform historical lookup of public trades in any given instrument.<br>This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>Only data from the last three months will be retained.<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -1152,7 +1152,7 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! info "ApiPublicTradeHistoryResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |results|r|PublicTrade|True|The public trades matching the request asset|
+        |results|r|[PublicTrade]|True|The public trades matching the request asset|
         ??? info "PublicTrade"
             All private RFQs and Private AXEs will be filtered out from the responses<br>
 
@@ -1181,7 +1181,7 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! success
         ```json
         {
-            "results": {
+            "results": [{
                 "event_time": "1697788800000000000",
                 "instrument": "BTC_USDT_Perp",
                 "is_taker_buyer": true,
@@ -1194,7 +1194,7 @@ LITE ENDPOINT: lite/v1/trade_history
                 "trade_id": "1234567890",
                 "venue": "ORDERBOOK",
                 "is_liquidation": false
-            }
+            }]
         }
         ```
     </section>
@@ -1268,7 +1268,7 @@ LITE ENDPOINT: lite/v1/kline
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiCandlestickRequest"
-        Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.<br>        startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent candlesticks are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the candlesticks starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the candlesticks ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the candlesticks between `startTime` and `endTime` are returned up to `limit`.</li></ul><br>
+        Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.<br>startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent candlesticks are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the candlesticks starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the candlesticks ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the candlesticks between `startTime` and `endTime` are returned up to `limit`.</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -1335,7 +1335,7 @@ LITE ENDPOINT: lite/v1/kline
     !!! info "ApiCandlestickResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |results|r|Candlestick|True|The candlestick result set for given interval|
+        |results|r|[Candlestick]|True|The candlestick result set for given interval|
         ??? info "Candlestick"
             <br>
 
@@ -1356,7 +1356,7 @@ LITE ENDPOINT: lite/v1/kline
     !!! success
         ```json
         {
-            "results": {
+            "results": [{
                 "open_time": "1697788800000000000",
                 "close_time": "1697788800000000000",
                 "open": "123456.78",
@@ -1367,7 +1367,7 @@ LITE ENDPOINT: lite/v1/kline
                 "volume_q": "123456.78",
                 "trades": 123456,
                 "instrument": "BTC_USDT_Perp"
-            }
+            }]
         }
         ```
     </section>
@@ -1453,7 +1453,7 @@ LITE ENDPOINT: lite/v1/funding
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiFundingRateRequest"
-        Lookup the historical funding rate of various pairs.<br>        startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent funding rates are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the funding rates starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the funding rates ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the funding rates between `startTime` and `endTime` are returned up to `limit`.</li></ul><br>        <br>        The instrument is also optional. When left empty, all perpetual instruments are returned.<br>
+        Lookup the historical funding rate of various pairs.<br>startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent funding rates are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the funding rates starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the funding rates ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the funding rates between `startTime` and `endTime` are returned up to `limit`.</li></ul><br><br>The instrument is also optional. When left empty, all perpetual instruments are returned.<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -1486,7 +1486,7 @@ LITE ENDPOINT: lite/v1/funding
     !!! info "ApiFundingRateResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |results|r|FundingRate|True|The funding rate result set for given interval|
+        |results|r|[FundingRate]|True|The funding rate result set for given interval|
         ??? info "FundingRate"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -1499,12 +1499,12 @@ LITE ENDPOINT: lite/v1/funding
     !!! success
         ```json
         {
-            "results": {
+            "results": [{
                 "instrument": "BTC_USDT_Perp",
                 "funding_rate": "6.78",
                 "funding_time": "1697788800000000000",
                 "mark_price": "65038.01"
-            }
+            }]
         }
         ```
     </section>
@@ -1581,7 +1581,7 @@ LITE ENDPOINT: lite/v1/settlement
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiSettlementPriceRequest"
-        Lookup the historical settlement price of various pairs.<br>        startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent settlement prices are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the settlement prices starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the settlement prices ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the settlement prices between `startTime` and `endTime` are returned up to `limit`.</li></ul><br>        <br>        The instrument is also optional. When left empty, all perpetual instruments are returned.<br>
+        Lookup the historical settlement price of various pairs.<br>startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent settlement prices are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the settlement prices starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the settlement prices ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the settlement prices between `startTime` and `endTime` are returned up to `limit`.</li></ul><br><br>The instrument is also optional. When left empty, all perpetual instruments are returned.<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -1641,7 +1641,7 @@ LITE ENDPOINT: lite/v1/settlement
     !!! info "ApiSettlementPriceResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |results|r|APISettlementPrice|True|The funding rate result set for given interval|
+        |results|r|[APISettlementPrice]|True|The funding rate result set for given interval|
         ??? info "APISettlementPrice"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -1672,12 +1672,12 @@ LITE ENDPOINT: lite/v1/settlement
     !!! success
         ```json
         {
-            "results": {
+            "results": [{
                 "underlying": "BTC",
                 "quote": "USDT",
                 "settlement_time": "1697788800000000000",
                 "settlement_price": "65038.01"
-            }
+            }]
         }
         ```
     </section>

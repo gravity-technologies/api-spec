@@ -26,10 +26,10 @@ async def get_all_instruments() -> None:
     )
     if isinstance(resp, GrvtError):
         raise ValueError(f"Received error: {resp}")
-    if resp.instruments is None:
-        raise ValueError("Expected instruments to be non-null")
-    if len(resp.instruments) == 0:
-        raise ValueError("Expected instruments to be non-empty")
+    if resp.results is None:
+        raise ValueError("Expected results to be non-null")
+    if len(resp.results) == 0:
+        raise ValueError("Expected results to be non-empty")
 
 
 async def open_orders() -> None:

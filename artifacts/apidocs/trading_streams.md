@@ -9,7 +9,7 @@ STREAM: v1.order
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSOrderFeedSelectorV1"
-        Subscribes to a feed of order updates pertaining to orders made by your account.<br>        Each Order can be uniquely identified by its `order_id` or `client_order_id` (if client designs well).<br>        Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both.<br>
+        Subscribes to a feed of order updates pertaining to orders made by your account.<br>Each Order can be uniquely identified by its `order_id` or `client_order_id` (if client designs well).<br>Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both.<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -89,7 +89,7 @@ STREAM: v1.order
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|Order|True|The order object being created or updated|
         ??? info "Order"
-            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>            GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>            This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>            Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br>            <br>            All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>            This minimizes the amount of trust users have to offer to GRVT<br>
+            Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -101,7 +101,7 @@ STREAM: v1.order
             |maker_fee_percentage_cap|mf|number|True|Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates|
             |post_only|po|boolean|True|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order.<br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
             |reduce_only|ro|boolean|True|If True, Order must reduce the position size, or be cancelled|
-            |legs|l|OrderLeg|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
+            |legs|l|[OrderLeg]|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
             |signature|s|Signature|True|The signature approving this order|
             |metadata|m|OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state|s1|OrderState|True|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
@@ -136,7 +136,7 @@ STREAM: v1.order
                 |expiration|e|string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
             ??? info "OrderMetadata"
-                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>                Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
+                Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name|Lite|Type|Required| Description |
                 |-|-|-|-|-|
@@ -147,8 +147,8 @@ STREAM: v1.order
                 |-|-|-|-|-|
                 |status|s|OrderStatus|True|The status of the order|
                 |reject_reason|rr|OrderRejectReason|True|The reason for rejection or cancellation|
-                |book_size|bs|string|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
-                |traded_size|ts|string|True|The total number of assets traded. Sorted in same order as Order.Legs|
+                |book_size|bs|[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
+                |traded_size|ts|[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time|ut|string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
                 ??? info "OrderStatus"
                     |Value| Description |
@@ -202,13 +202,13 @@ STREAM: v1.order
                 "maker_fee_percentage_cap": "0.03",
                 "post_only": false,
                 "reduce_only": false,
-                "legs": {
+                "legs": [{
                     "instrument": "BTC_USDT_Perp",
                     "size": "10.5",
                     "limit_price": "65038.01",
                     "oco_limit_price": "63038.01",
                     "is_buying_asset": true
-                },
+                }],
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -244,13 +244,13 @@ STREAM: v1.order
                 "mf": "0.03",
                 "po": false,
                 "ro": false,
-                "l": {
+                "l": [{
                     "i": "BTC_USDT_Perp",
                     "s": "10.5",
                     "lp": "65038.01",
                     "ol": "63038.01",
                     "ib": true
-                },
+                }],
                 "s": {
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -349,7 +349,7 @@ STREAM: v1.state
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSOrderStateFeedSelectorV1"
-        Subscribes to a feed of order updates pertaining to orders made by your account.<br>        Unlike the Order Stream, this only streams state updates, drastically improving throughput, and latency.<br>        Each Order can be uniquely identified by its `order_id` or `client_order_id` (if client designs well).<br>        Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both.<br>
+        Subscribes to a feed of order updates pertaining to orders made by your account.<br>Unlike the Order Stream, this only streams state updates, drastically improving throughput, and latency.<br>Each Order can be uniquely identified by its `order_id` or `client_order_id` (if client designs well).<br>Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both.<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -438,8 +438,8 @@ STREAM: v1.state
                 |-|-|-|-|-|
                 |status|s|OrderStatus|True|The status of the order|
                 |reject_reason|rr|OrderRejectReason|True|The reason for rejection or cancellation|
-                |book_size|bs|string|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
-                |traded_size|ts|string|True|The total number of assets traded. Sorted in same order as Order.Legs|
+                |book_size|bs|[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
+                |traded_size|ts|[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time|ut|string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
                 ??? info "OrderStatus"
                     |Value| Description |

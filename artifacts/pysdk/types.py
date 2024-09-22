@@ -1190,7 +1190,7 @@ class ApiGetAllInstrumentsRequest:
 @dataclass
 class ApiGetAllInstrumentsResponse:
     # List of instruments
-    instruments: list[Instrument]
+    results: list[Instrument]
 
 
 @dataclass
