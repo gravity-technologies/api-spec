@@ -21,7 +21,7 @@ def get_config() -> GrvtApiConfig:
 
 async def get_all_instruments() -> None:
     api = GrvtApiAsync(config=get_config())
-    resp = await api.get_all_instruments(
+    resp = await api.get_all_instruments_v1(
         types.ApiGetAllInstrumentsRequest(is_active=True)
     )
     if isinstance(resp, GrvtError):
@@ -32,14 +32,14 @@ async def get_all_instruments() -> None:
         raise ValueError("Expected instruments to be non-empty")
 
 
-async def get_open_orders() -> None:
+async def open_orders() -> None:
     api = GrvtApiAsync(config=get_config())
 
     # Skip test if trading account id is not set
     if api.config.trading_account_id is None:
         return None
 
-    resp = await api.get_open_orders(
+    resp = await api.open_orders_v1(
         types.ApiOpenOrdersRequest(
             sub_account_id=str(api.config.trading_account_id),
             kind=[types.Kind.PERPETUAL],
@@ -59,5 +59,5 @@ def test_get_all_instruments() -> None:
     asyncio.run(get_all_instruments())
 
 
-def test_get_open_orders() -> None:
-    asyncio.run(get_open_orders())
+def test_open_orders() -> None:
+    asyncio.run(open_orders())
