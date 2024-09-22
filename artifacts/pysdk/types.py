@@ -10,123 +10,177 @@ from enum import Enum
 
 
 class CandlestickInterval(Enum):
-    CI_1_M = 1  # 1 minute
-    CI_3_M = 2  # 3 minutes
-    CI_5_M = 3  # 5 minutes
-    CI_15_M = 4  # 15 minutes
-    CI_30_M = 5  # 30 minutes
-    CI_1_H = 6  # 1 hour
-    CI_2_H = 7  # 2 hour
-    CI_4_H = 8  # 4 hour
-    CI_6_H = 9  # 6 hour
-    CI_8_H = 10  # 8 hour
-    CI_12_H = 11  # 12 hour
-    CI_1_D = 12  # 1 day
-    CI_3_D = 13  # 3 days
-    CI_5_D = 14  # 5 days
-    CI_1_W = 15  # 1 week
-    CI_2_W = 16  # 2 weeks
-    CI_3_W = 17  # 3 weeks
-    CI_4_W = 18  # 4 weeks
+    # 1 minute
+    CI_1_M = "CI_1_M"
+    # 3 minutes
+    CI_3_M = "CI_3_M"
+    # 5 minutes
+    CI_5_M = "CI_5_M"
+    # 15 minutes
+    CI_15_M = "CI_15_M"
+    # 30 minutes
+    CI_30_M = "CI_30_M"
+    # 1 hour
+    CI_1_H = "CI_1_H"
+    # 2 hour
+    CI_2_H = "CI_2_H"
+    # 4 hour
+    CI_4_H = "CI_4_H"
+    # 6 hour
+    CI_6_H = "CI_6_H"
+    # 8 hour
+    CI_8_H = "CI_8_H"
+    # 12 hour
+    CI_12_H = "CI_12_H"
+    # 1 day
+    CI_1_D = "CI_1_D"
+    # 3 days
+    CI_3_D = "CI_3_D"
+    # 5 days
+    CI_5_D = "CI_5_D"
+    # 1 week
+    CI_1_W = "CI_1_W"
+    # 2 weeks
+    CI_2_W = "CI_2_W"
+    # 3 weeks
+    CI_3_W = "CI_3_W"
+    # 4 weeks
+    CI_4_W = "CI_4_W"
 
 
 class CandlestickType(Enum):
-    TRADE = 1  # Tracks traded prices
-    MARK = 2  # Tracks mark prices
-    INDEX = 3  # Tracks index prices
-    MID = 4  # Tracks book mid prices
+    # Tracks traded prices
+    TRADE = "TRADE"
+    # Tracks mark prices
+    MARK = "MARK"
+    # Tracks index prices
+    INDEX = "INDEX"
+    # Tracks book mid prices
+    MID = "MID"
 
 
 class Currency(Enum):
-    USDC = 2  # the USDC token
-    USDT = 3  # the USDT token
-    ETH = 4  # the ETH token
-    BTC = 5  # the BTC token
+    # the USDC token
+    USDC = "USDC"
+    # the USDT token
+    USDT = "USDT"
+    # the ETH token
+    ETH = "ETH"
+    # the BTC token
+    BTC = "BTC"
 
 
 class InstrumentSettlementPeriod(Enum):
-    PERPETUAL = 1  # Instrument settles through perpetual hourly funding cycles
-    DAILY = 2  # Instrument settles at an expiry date, marked as a daily instrument
-    WEEKLY = 3  # Instrument settles at an expiry date, marked as a weekly instrument
-    MONTHLY = 4  # Instrument settles at an expiry date, marked as a monthly instrument
-    QUARTERLY = (
-        5  # Instrument settles at an expiry date, marked as a quarterly instrument
-    )
+    # Instrument settles through perpetual hourly funding cycles
+    PERPETUAL = "PERPETUAL"
+    # Instrument settles at an expiry date, marked as a daily instrument
+    DAILY = "DAILY"
+    # Instrument settles at an expiry date, marked as a weekly instrument
+    WEEKLY = "WEEKLY"
+    # Instrument settles at an expiry date, marked as a monthly instrument
+    MONTHLY = "MONTHLY"
+    # Instrument settles at an expiry date, marked as a quarterly instrument
+    QUARTERLY = "QUARTERLY"
 
 
 class Kind(Enum):
-    PERPETUAL = 1  # the perpetual asset kind
-    FUTURE = 2  # the future asset kind
-    CALL = 3  # the call option asset kind
-    PUT = 4  # the put option asset kind
+    # the perpetual asset kind
+    PERPETUAL = "PERPETUAL"
+    # the future asset kind
+    FUTURE = "FUTURE"
+    # the call option asset kind
+    CALL = "CALL"
+    # the put option asset kind
+    PUT = "PUT"
 
 
 class MarginType(Enum):
-    SIMPLE_CROSS_MARGIN = 2  # Simple Cross Margin Mode: all assets have a predictable margin impact, the whole subaccount shares a single margin
-    PORTFOLIO_CROSS_MARGIN = 3  # Portfolio Cross Margin Mode: asset margin impact is analysed on portfolio level, the whole subaccount shares a single margin
+    # Simple Cross Margin Mode: all assets have a predictable margin impact, the whole subaccount shares a single margin
+    SIMPLE_CROSS_MARGIN = "SIMPLE_CROSS_MARGIN"
+    # Portfolio Cross Margin Mode: asset margin impact is analysed on portfolio level, the whole subaccount shares a single margin
+    PORTFOLIO_CROSS_MARGIN = "PORTFOLIO_CROSS_MARGIN"
 
 
 class OrderRejectReason(Enum):
-    CLIENT_CANCEL = 1  # client called a Cancel API
-    CLIENT_BULK_CANCEL = 2  # client called a Bulk Cancel API
-    CLIENT_SESSION_END = 3  # client called a Session Cancel API, or set the WebSocket connection to 'cancelOrdersOnTerminate'
-    MARKET_CANCEL = 4  # the market order was cancelled after no/partial fill. Takes precedence over other TimeInForce cancel reasons
-    IOC_CANCEL = 5  # the IOC order was cancelled after no/partial fill
-    AON_CANCEL = 6  # the AON order was cancelled as it could not be fully matched
-    FOK_CANCEL = 7  # the FOK order was cancelled as it could not be fully matched
-    EXPIRED = 8  # the order was cancelled as it has expired
-    FAIL_POST_ONLY = 9  # the post-only order could not be posted into the orderbook
-    FAIL_REDUCE_ONLY = (
-        10  # the reduce-only order would have caused position size to increase
-    )
-    MM_PROTECTION = 11  # the order was cancelled due to market maker protection trigger
-    SELF_TRADE_PROTECTION = (
-        12  # the order was cancelled due to self-trade protection trigger
-    )
-    SELF_MATCHED_SUBACCOUNT = (
-        13  # the order matched with another order from the same sub account
-    )
-    OVERLAPPING_CLIENT_ORDER_ID = (
-        14  # an active order on your sub account shares the same clientOrderId
-    )
-    BELOW_MARGIN = (
-        15  # the order will bring the sub account below initial margin requirement
-    )
-    LIQUIDATION = (
-        16  # the sub account is liquidated (and all open orders are cancelled by Gravity)
-    )
-    INSTRUMENT_INVALID = 17  # instrument is invalid or not found on Gravity
-    INSTRUMENT_DEACTIVATED = 18  # instrument is no longer tradable on Gravity. (typically due to a market halt, or instrument expiry)
-    SYSTEM_FAILOVER = 19  # system failover resulting in loss of order state
-    UNAUTHORISED = 20  # the credentials used (userSession/apiKeySession/walletSignature) is not authorised to perform the action
-    SESSION_KEY_EXPIRED = 21  # the session key used to sign the order expired
-    SUB_ACCOUNT_NOT_FOUND = 22  # the subaccount does not exist
-    NO_TRADE_PERMISSION = (
-        23  # the signature used to sign the order has no trade permission
-    )
-    UNSUPPORTED_TIME_IN_FORCE = (
-        24  # the order payload does not contain a supported TimeInForce value
-    )
-    MULTI_LEGGED_ORDER = 25  # the order has multiple legs, but multiple legs are not supported by this venue
+    # client called a Cancel API
+    CLIENT_CANCEL = "CLIENT_CANCEL"
+    # client called a Bulk Cancel API
+    CLIENT_BULK_CANCEL = "CLIENT_BULK_CANCEL"
+    # client called a Session Cancel API, or set the WebSocket connection to 'cancelOrdersOnTerminate'
+    CLIENT_SESSION_END = "CLIENT_SESSION_END"
+    # the market order was cancelled after no/partial fill. Takes precedence over other TimeInForce cancel reasons
+    MARKET_CANCEL = "MARKET_CANCEL"
+    # the IOC order was cancelled after no/partial fill
+    IOC_CANCEL = "IOC_CANCEL"
+    # the AON order was cancelled as it could not be fully matched
+    AON_CANCEL = "AON_CANCEL"
+    # the FOK order was cancelled as it could not be fully matched
+    FOK_CANCEL = "FOK_CANCEL"
+    # the order was cancelled as it has expired
+    EXPIRED = "EXPIRED"
+    # the post-only order could not be posted into the orderbook
+    FAIL_POST_ONLY = "FAIL_POST_ONLY"
+    # the reduce-only order would have caused position size to increase
+    FAIL_REDUCE_ONLY = "FAIL_REDUCE_ONLY"
+    # the order was cancelled due to market maker protection trigger
+    MM_PROTECTION = "MM_PROTECTION"
+    # the order was cancelled due to self-trade protection trigger
+    SELF_TRADE_PROTECTION = "SELF_TRADE_PROTECTION"
+    # the order matched with another order from the same sub account
+    SELF_MATCHED_SUBACCOUNT = "SELF_MATCHED_SUBACCOUNT"
+    # an active order on your sub account shares the same clientOrderId
+    OVERLAPPING_CLIENT_ORDER_ID = "OVERLAPPING_CLIENT_ORDER_ID"
+    # the order will bring the sub account below initial margin requirement
+    BELOW_MARGIN = "BELOW_MARGIN"
+    # the sub account is liquidated (and all open orders are cancelled by Gravity)
+    LIQUIDATION = "LIQUIDATION"
+    # instrument is invalid or not found on Gravity
+    INSTRUMENT_INVALID = "INSTRUMENT_INVALID"
+    # instrument is no longer tradable on Gravity. (typically due to a market halt, or instrument expiry)
+    INSTRUMENT_DEACTIVATED = "INSTRUMENT_DEACTIVATED"
+    # system failover resulting in loss of order state
+    SYSTEM_FAILOVER = "SYSTEM_FAILOVER"
+    # the credentials used (userSession/apiKeySession/walletSignature) is not authorised to perform the action
+    UNAUTHORISED = "UNAUTHORISED"
+    # the session key used to sign the order expired
+    SESSION_KEY_EXPIRED = "SESSION_KEY_EXPIRED"
+    # the subaccount does not exist
+    SUB_ACCOUNT_NOT_FOUND = "SUB_ACCOUNT_NOT_FOUND"
+    # the signature used to sign the order has no trade permission
+    NO_TRADE_PERMISSION = "NO_TRADE_PERMISSION"
+    # the order payload does not contain a supported TimeInForce value
+    UNSUPPORTED_TIME_IN_FORCE = "UNSUPPORTED_TIME_IN_FORCE"
+    # the order has multiple legs, but multiple legs are not supported by this venue
+    MULTI_LEGGED_ORDER = "MULTI_LEGGED_ORDER"
 
 
 class OrderStateFilter(Enum):
-    C = 1  # create only filter
-    U = 2  # update only filter
-    A = 3  # create and update filter
+    # create only filter
+    C = "C"
+    # update only filter
+    U = "U"
+    # create and update filter
+    A = "A"
 
 
 class OrderStatus(Enum):
-    PENDING = 1  # Order is waiting for Trigger Condition to be hit
-    OPEN = 2  # Order is actively matching on the orderbook, could be unfilled or partially filled
-    FILLED = 3  # Order is fully filled and hence closed
-    REJECTED = 4  # Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)
-    CANCELLED = 5  # Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)
+    # Order is waiting for Trigger Condition to be hit
+    PENDING = "PENDING"
+    # Order is actively matching on the orderbook, could be unfilled or partially filled
+    OPEN = "OPEN"
+    # Order is fully filled and hence closed
+    FILLED = "FILLED"
+    # Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)
+    REJECTED = "REJECTED"
+    # Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)
+    CANCELLED = "CANCELLED"
 
 
 class SubAccountTradeInterval(Enum):
-    SAT_1_MO = 1  # 1 month
-    SAT_1_D = 2  # 1 day
+    # 1 month
+    SAT_1_MO = "SAT_1_MO"
+    # 1 day
+    SAT_1_D = "SAT_1_D"
 
 
 class TimeInForce(Enum):
@@ -138,37 +192,45 @@ class TimeInForce(Enum):
 
     """
 
-    GOOD_TILL_TIME = 1  # GTT - Remains open until it is cancelled, or expired
-    ALL_OR_NONE = 2  # AON - Either fill the whole order or none of it (Block Trades Only)
-    IMMEDIATE_OR_CANCEL = 3  # IOC - Fill the order as much as possible, when hitting the orderbook. Then cancel it
-    FILL_OR_KILL = 4  # FOK - Both AoN and IoC. Either fill the full order when hitting the orderbook, or cancel it
+    # GTT - Remains open until it is cancelled, or expired
+    GOOD_TILL_TIME = "GOOD_TILL_TIME"
+    # AON - Either fill the whole order or none of it (Block Trades Only)
+    ALL_OR_NONE = "ALL_OR_NONE"
+    # IOC - Fill the order as much as possible, when hitting the orderbook. Then cancel it
+    IMMEDIATE_OR_CANCEL = "IMMEDIATE_OR_CANCEL"
+    # FOK - Both AoN and IoC. Either fill the full order when hitting the orderbook, or cancel it
+    FILL_OR_KILL = "FILL_OR_KILL"
 
 
 class Venue(Enum):
-    ORDERBOOK = 1  # the trade is cleared on the orderbook venue
+    # the trade is cleared on the orderbook venue
+    ORDERBOOK = "ORDERBOOK"
 
 
 @dataclass
 class ApiPositionsRequest:
-    sub_account_id: int  # The sub account ID to request for
-    kind: list[
-        Kind
-    ]  # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
-    underlying: list[
-        Currency
-    ]  # The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned
-    quote: list[
-        Currency
-    ]  # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    # The sub account ID to request for
+    sub_account_id: str
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
+    kind: list[Kind]
+    # The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned
+    underlying: list[Currency]
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    quote: list[Currency]
 
 
 @dataclass
 class Positions:
-    event_time: int  # Time at which the event was emitted in unix nanoseconds
-    sub_account_id: int  # The sub account ID that participated in the trade
-    instrument: str  # The instrument being represented
-    balance: str  # The balance of the position, expressed in underlying asset decimal units. Negative for short positions
-    value: str  # The value of the position, negative for short assets, expressed in quote asset decimal units
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The sub account ID that participated in the trade
+    sub_account_id: str
+    # The instrument being represented
+    instrument: str
+    # The balance of the position, expressed in underlying asset decimal units. Negative for short positions
+    balance: str
+    # The value of the position, negative for short assets, expressed in quote asset decimal units
+    value: str
     """
     The entry price of the position, expressed in `9` decimals
     Whenever increasing the balance of a position, the entry price is updated to the new average entry price
@@ -181,7 +243,8 @@ class Positions:
     newExitPrice = (oldExitPrice * oldExitBalance + tradePrice * tradeBalance) / (oldExitBalance + tradeBalance)
     """
     exit_price: str
-    mark_price: str  # The mark price of the position, expressed in `9` decimals
+    # The mark price of the position, expressed in `9` decimals
+    mark_price: str
     """
     The unrealized PnL of the position, expressed in quote asset decimal units
     unrealizedPnl = (markPrice - entryPrice) * balance
@@ -206,46 +269,66 @@ class Positions:
 
 @dataclass
 class ApiPositionsResponse:
-    results: list[Positions]  # The positions matching the request filter
+    # The positions matching the request filter
+    results: list[Positions]
 
 
 @dataclass
 class ApiPrivateTradeHistoryRequest:
-    sub_account_id: int  # The sub account ID to request for
-    kind: list[
-        Kind
-    ]  # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
-    underlying: list[
-        Currency
-    ]  # The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned
-    quote: list[
-        Currency
-    ]  # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
-    expiration: int  # The expiration time to apply in unix nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned
-    strike_price: str  # The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned
-    limit: int  # The limit to query for. Defaults to 500; Max 1000
-    cursor: str  # The cursor to indicate when to start the query from
+    # The sub account ID to request for
+    sub_account_id: str
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
+    kind: list[Kind]
+    # The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned
+    underlying: list[Currency]
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    quote: list[Currency]
+    # The expiration time to apply in unix nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned
+    expiration: str
+    # The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned
+    strike_price: str
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int
+    # The cursor to indicate when to start the query from
+    cursor: str
 
 
 @dataclass
 class PrivateTrade:
-    event_time: int  # Time at which the event was emitted in unix nanoseconds
-    sub_account_id: int  # The sub account ID that participated in the trade
-    instrument: str  # The instrument being represented
-    is_buyer: bool  # The side that the subaccount took on the trade
-    is_taker: bool  # The role that the subaccount took on the trade
-    size: str  # The number of assets being traded, expressed in underlying asset decimal units
-    price: str  # The traded price, expressed in `9` decimals
-    mark_price: str  # The mark price of the instrument at point of trade, expressed in `9` decimals
-    index_price: str  # The index price of the instrument at point of trade, expressed in `9` decimals
-    interest_rate: str  # The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)
-    forward_price: str  # [Options] The forward price of the option at point of trade, expressed in `9` decimals
-    realized_pnl: str  # The realized PnL of the trade, expressed in quote asset decimal units (0 if increasing position size)
-    fee: str  # The fees paid on the trade, expressed in quote asset decimal unit (negative if maker rebate applied)
-    fee_rate: str  # The fee rate paid on the trade
-    trade_id: int  # A trade identifier
-    order_id: str  # An order identifier
-    venue: Venue  # The venue where the trade occurred
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The sub account ID that participated in the trade
+    sub_account_id: str
+    # The instrument being represented
+    instrument: str
+    # The side that the subaccount took on the trade
+    is_buyer: bool
+    # The role that the subaccount took on the trade
+    is_taker: bool
+    # The number of assets being traded, expressed in underlying asset decimal units
+    size: str
+    # The traded price, expressed in `9` decimals
+    price: str
+    # The mark price of the instrument at point of trade, expressed in `9` decimals
+    mark_price: str
+    # The index price of the instrument at point of trade, expressed in `9` decimals
+    index_price: str
+    # The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)
+    interest_rate: str
+    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
+    forward_price: str
+    # The realized PnL of the trade, expressed in quote asset decimal units (0 if increasing position size)
+    realized_pnl: str
+    # The fees paid on the trade, expressed in quote asset decimal unit (negative if maker rebate applied)
+    fee: str
+    # The fee rate paid on the trade
+    fee_rate: str
+    # A trade identifier
+    trade_id: str
+    # An order identifier
+    order_id: str
+    # The venue where the trade occurred
+    venue: Venue
     """
     A unique identifier for the active order within a subaccount, specified by the client
     This is used to identify the order in the client's system
@@ -257,24 +340,29 @@ class PrivateTrade:
 
     When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
     """
-    client_order_id: int
+    client_order_id: str
 
 
 @dataclass
 class ApiPrivateTradeHistoryResponse:
-    total: int  # The total number of private trades matching the request filter
-    next: str  # The cursor to indicate when to start the query from
-    results: list[PrivateTrade]  # The private trades matching the request asset
+    # The total number of private trades matching the request filter
+    total: int
+    # The cursor to indicate when to start the query from
+    next: str
+    # The private trades matching the request asset
+    results: list[PrivateTrade]
 
 
 @dataclass
 class ApiSubAccountSummaryRequest:
-    sub_account_id: int  # The subaccount ID to filter by
+    # The subaccount ID to filter by
+    sub_account_id: str
 
 
 @dataclass
 class SpotBalance:
-    currency: Currency  # The currency you hold a spot balance in
+    # The currency you hold a spot balance in
+    currency: Currency
     """
     The balance of the asset, expressed in underlying asset decimal units
     Must take into account the value of all positions with this quote asset
@@ -285,9 +373,12 @@ class SpotBalance:
 
 @dataclass
 class SubAccount:
-    event_time: int  # Time at which the event was emitted in unix nanoseconds
-    sub_account_id: int  # The sub account ID this entry refers to
-    margin_type: MarginType  # The type of margin algorithm this subaccount uses
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The sub account ID this entry refers to
+    sub_account_id: str
+    # The type of margin algorithm this subaccount uses
+    margin_type: MarginType
     """
     The Quote Currency that this Sub Account is denominated in
     This subaccount can only open derivative positions denominated in this quote currency
@@ -295,20 +386,26 @@ class SubAccount:
     In the future, when users select a Multi-Currency Margin Type, this will be USD
     """
     quote_currency: Currency
-    unrealized_pnl: str  # The total unrealized PnL of all positions owned by this subaccount, denominated in quote currency decimal units
-    total_value: str  # The total value across all spot assets, or in other words, the current margin
-    initial_margin: str  # The initial margin requirement of all positions owned by this vault, denominated in quote currency decimal units
-    maintanence_margin: str  # The maintanence margin requirement of all positions owned by this vault, denominated in quote currency decimal units
-    available_margin: str  # The margin available for withdrawal, denominated in quote currency decimal units
-    spot_balances: list[
-        SpotBalance
-    ]  # The list of spot assets owned by this sub account, and their balances
-    positions: list[Positions]  # The list of positions owned by this sub account
+    # The total unrealized PnL of all positions owned by this subaccount, denominated in quote currency decimal units
+    unrealized_pnl: str
+    # The total value across all spot assets, or in other words, the current margin
+    total_value: str
+    # The initial margin requirement of all positions owned by this vault, denominated in quote currency decimal units
+    initial_margin: str
+    # The maintanence margin requirement of all positions owned by this vault, denominated in quote currency decimal units
+    maintanence_margin: str
+    # The margin available for withdrawal, denominated in quote currency decimal units
+    available_margin: str
+    # The list of spot assets owned by this sub account, and their balances
+    spot_balances: list[SpotBalance]
+    # The list of positions owned by this sub account
+    positions: list[Positions]
 
 
 @dataclass
 class ApiSubAccountSummaryResponse:
-    results: SubAccount  # The sub account matching the request sub account
+    # The sub account matching the request sub account
+    results: SubAccount
 
 
 @dataclass
@@ -321,17 +418,24 @@ class ApiSubAccountHistoryRequest:
     History is preserved only for the last 30 days
     """
 
-    sub_account_id: int  # The sub account ID to request for
-    start_time: int  # Start time of sub account history in unix nanoseconds
-    end_time: int  # End time of sub account history in unix nanoseconds
-    cursor: str  # The cursor to indicate when to start the next query from
+    # The sub account ID to request for
+    sub_account_id: str
+    # Start time of sub account history in unix nanoseconds
+    start_time: str
+    # End time of sub account history in unix nanoseconds
+    end_time: str
+    # The cursor to indicate when to start the next query from
+    cursor: str
 
 
 @dataclass
 class ApiSubAccountHistoryResponse:
-    total: int  # The total number of sub account snapshots matching the request filter
-    next: str  # The cursor to indicate when to start the next query from
-    results: list[SubAccount]  # The sub account history matching the request sub account
+    # The total number of sub account snapshots matching the request filter
+    total: int
+    # The cursor to indicate when to start the next query from
+    next: str
+    # The sub account history matching the request sub account
+    results: list[SubAccount]
 
 
 @dataclass
@@ -341,46 +445,46 @@ class ApiLatestSnapSubAccountsRequest:
 
     """
 
-    sub_account_i_ds: list[int]  # The list of sub account ids to query
+    # The list of sub account ids to query
+    sub_account_i_ds: list[str]
 
 
 @dataclass
 class ApiLatestSnapSubAccountsResponse:
-    results: list[SubAccount]  # The sub account history matching the request sub account
+    # The sub account history matching the request sub account
+    results: list[SubAccount]
 
 
 @dataclass
 class MarkPrice:
-    currency: Currency  # The currency you hold a spot balance in
-    mark_price: str  # The mark price of the asset, expressed in `9` decimals
+    # The currency you hold a spot balance in
+    currency: Currency
+    # The mark price of the asset, expressed in `9` decimals
+    mark_price: str
 
 
 @dataclass
 class ApiAggregatedAccountSummaryResponse:
-    main_account_id: (
-        str  # The main account ID of the account to which the summary belongs
-    )
-    total_equity: str  # Total equity of the account, denominated in USD
-    spot_balances: list[
-        SpotBalance
-    ]  # The list of spot assets owned by this sub account, and their balances
-    mark_prices: list[
-        MarkPrice
-    ]  # The list of mark prices for the assets owned by this account
+    # The main account ID of the account to which the summary belongs
+    main_account_id: str
+    # Total equity of the account, denominated in USD
+    total_equity: str
+    # The list of spot assets owned by this sub account, and their balances
+    spot_balances: list[SpotBalance]
+    # The list of mark prices for the assets owned by this account
+    mark_prices: list[MarkPrice]
 
 
 @dataclass
 class ApiFundingAccountSummaryResponse:
-    main_account_id: (
-        str  # The main account ID of the account to which the summary belongs
-    )
-    total_equity: str  # Total equity of the account, denominated in USD
-    spot_balances: list[
-        SpotBalance
-    ]  # The list of spot assets owned by this account, and their balances
-    mark_prices: list[
-        MarkPrice
-    ]  # The list of mark prices for the assets owned by this account
+    # The main account ID of the account to which the summary belongs
+    main_account_id: str
+    # Total equity of the account, denominated in USD
+    total_equity: str
+    # The list of spot assets owned by this account, and their balances
+    spot_balances: list[SpotBalance]
+    # The list of mark prices for the assets owned by this account
+    mark_prices: list[MarkPrice]
 
 
 @dataclass
@@ -393,20 +497,26 @@ class ApiOrderbookLevelsRequest:
     """
 
     instrument: str
-    depth: int  # Depth of the order book to be retrieved (API/Snapshot max is 100, Delta max is 1000)
-    aggregate: int  # The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)
+    # Depth of the order book to be retrieved (API/Snapshot max is 100, Delta max is 1000)
+    depth: int
+    # The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)
+    aggregate: int
 
 
 @dataclass
 class OrderbookLevel:
-    price: str  # The price of the level, expressed in `9` decimals
-    size: str  # The number of assets offered, expressed in underlying asset decimal units
-    num_orders: int  # The number of open orders at this level
+    # The price of the level, expressed in `9` decimals
+    price: str
+    # The number of assets offered, expressed in underlying asset decimal units
+    size: str
+    # The number of open orders at this level
+    num_orders: int
 
 
 @dataclass
 class OrderbookLevels:
-    event_time: int  # Time at which the event was emitted in unix nanoseconds
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
     """
     The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
@@ -414,13 +524,16 @@ class OrderbookLevels:
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
     """
     instrument: str
-    bids: list[OrderbookLevel]  # The list of best bids up till query depth
-    asks: list[OrderbookLevel]  # The list of best asks up till query depth
+    # The list of best bids up till query depth
+    bids: list[OrderbookLevel]
+    # The list of best asks up till query depth
+    asks: list[OrderbookLevel]
 
 
 @dataclass
 class ApiOrderbookLevelsResponse:
-    results: OrderbookLevels  # The orderbook levels objects matching the request asset
+    # The orderbook levels objects matching the request asset
+    results: OrderbookLevels
 
 
 @dataclass
@@ -437,7 +550,8 @@ class ApiMiniTickerRequest:
 
 @dataclass
 class MiniTicker:
-    event_time: int | None  # Time at which the event was emitted in unix nanoseconds
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str | None
     """
     The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
@@ -445,34 +559,30 @@ class MiniTicker:
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
     """
     instrument: str | None
-    mark_price: str | None  # The mark price of the instrument, expressed in `9` decimals
-    index_price: (
-        str | None
-    )  # The index price of the instrument, expressed in `9` decimals
-    last_price: (
-        str | None
-    )  # The last traded price of the instrument (also close price), expressed in `9` decimals
-    last_size: (
-        str | None
-    )  # The number of assets traded in the last trade, expressed in underlying asset decimal units
-    mid_price: str | None  # The mid price of the instrument, expressed in `9` decimals
-    best_bid_price: (
-        str | None
-    )  # The best bid price of the instrument, expressed in `9` decimals
-    best_bid_size: (
-        str | None
-    )  # The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units
-    best_ask_price: (
-        str | None
-    )  # The best ask price of the instrument, expressed in `9` decimals
-    best_ask_size: (
-        str | None
-    )  # The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units
+    # The mark price of the instrument, expressed in `9` decimals
+    mark_price: str | None
+    # The index price of the instrument, expressed in `9` decimals
+    index_price: str | None
+    # The last traded price of the instrument (also close price), expressed in `9` decimals
+    last_price: str | None
+    # The number of assets traded in the last trade, expressed in underlying asset decimal units
+    last_size: str | None
+    # The mid price of the instrument, expressed in `9` decimals
+    mid_price: str | None
+    # The best bid price of the instrument, expressed in `9` decimals
+    best_bid_price: str | None
+    # The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units
+    best_bid_size: str | None
+    # The best ask price of the instrument, expressed in `9` decimals
+    best_ask_price: str | None
+    # The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units
+    best_ask_size: str | None
 
 
 @dataclass
 class ApiMiniTickerResponse:
-    results: MiniTicker  # The mini ticker matching the request asset
+    # The mini ticker matching the request asset
+    results: MiniTicker
 
 
 @dataclass
@@ -504,7 +614,8 @@ class Ticker:
 
     """
 
-    event_time: int | None  # Time at which the event was emitted in unix nanoseconds
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str | None
     """
     The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
@@ -512,73 +623,56 @@ class Ticker:
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
     """
     instrument: str | None
-    mark_price: str | None  # The mark price of the instrument, expressed in `9` decimals
-    index_price: (
-        str | None
-    )  # The index price of the instrument, expressed in `9` decimals
-    last_price: (
-        str | None
-    )  # The last traded price of the instrument (also close price), expressed in `9` decimals
-    last_size: (
-        str | None
-    )  # The number of assets traded in the last trade, expressed in underlying asset decimal units
-    mid_price: str | None  # The mid price of the instrument, expressed in `9` decimals
-    best_bid_price: (
-        str | None
-    )  # The best bid price of the instrument, expressed in `9` decimals
-    best_bid_size: (
-        str | None
-    )  # The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units
-    best_ask_price: (
-        str | None
-    )  # The best ask price of the instrument, expressed in `9` decimals
-    best_ask_size: (
-        str | None
-    )  # The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units
-    funding_rate_8_h_curr: (
-        str | None
-    )  # The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)
-    funding_rate_8_h_avg: (
-        str | None
-    )  # The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)
-    interest_rate: (
-        str | None
-    )  # The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)
-    forward_price: (
-        str | None
-    )  # [Options] The forward price of the option, expressed in `9` decimals
-    buy_volume_24_h_u: (
-        str | None
-    )  # The 24 hour taker buy volume of the instrument, expressed in underlying asset decimal units
-    sell_volume_24_h_u: (
-        str | None
-    )  # The 24 hour taker sell volume of the instrument, expressed in underlying asset decimal units
-    buy_volume_24_h_q: (
-        str | None
-    )  # The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units
-    sell_volume_24_h_q: (
-        str | None
-    )  # The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units
-    high_price: (
-        str | None
-    )  # The 24 hour highest traded price of the instrument, expressed in `9` decimals
-    low_price: (
-        str | None
-    )  # The 24 hour lowest traded price of the instrument, expressed in `9` decimals
-    open_price: (
-        str | None
-    )  # The 24 hour first traded price of the instrument, expressed in `9` decimals
-    open_interest: (
-        str | None
-    )  # The open interest in the instrument, expressed in underlying asset decimal units
-    long_short_ratio: (
-        str | None
-    )  # The ratio of accounts that are net long vs net short on this instrument
+    # The mark price of the instrument, expressed in `9` decimals
+    mark_price: str | None
+    # The index price of the instrument, expressed in `9` decimals
+    index_price: str | None
+    # The last traded price of the instrument (also close price), expressed in `9` decimals
+    last_price: str | None
+    # The number of assets traded in the last trade, expressed in underlying asset decimal units
+    last_size: str | None
+    # The mid price of the instrument, expressed in `9` decimals
+    mid_price: str | None
+    # The best bid price of the instrument, expressed in `9` decimals
+    best_bid_price: str | None
+    # The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units
+    best_bid_size: str | None
+    # The best ask price of the instrument, expressed in `9` decimals
+    best_ask_price: str | None
+    # The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units
+    best_ask_size: str | None
+    # The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)
+    funding_rate_8_h_curr: str | None
+    # The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)
+    funding_rate_8_h_avg: str | None
+    # The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)
+    interest_rate: str | None
+    # [Options] The forward price of the option, expressed in `9` decimals
+    forward_price: str | None
+    # The 24 hour taker buy volume of the instrument, expressed in underlying asset decimal units
+    buy_volume_24_h_u: str | None
+    # The 24 hour taker sell volume of the instrument, expressed in underlying asset decimal units
+    sell_volume_24_h_u: str | None
+    # The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units
+    buy_volume_24_h_q: str | None
+    # The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units
+    sell_volume_24_h_q: str | None
+    # The 24 hour highest traded price of the instrument, expressed in `9` decimals
+    high_price: str | None
+    # The 24 hour lowest traded price of the instrument, expressed in `9` decimals
+    low_price: str | None
+    # The 24 hour first traded price of the instrument, expressed in `9` decimals
+    open_price: str | None
+    # The open interest in the instrument, expressed in underlying asset decimal units
+    open_interest: str | None
+    # The ratio of accounts that are net long vs net short on this instrument
+    long_short_ratio: str | None
 
 
 @dataclass
 class ApiTickerResponse:
-    results: Ticker  # The mini ticker matching the request asset
+    # The mini ticker matching the request asset
+    results: Ticker
 
 
 @dataclass
@@ -595,12 +689,14 @@ class ApiPublicTradesRequest:
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
     """
     instrument: str
-    limit: int  # The limit to query for. Defaults to 500; Max 1000
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int
 
 
 @dataclass
 class PublicTrade:
-    event_time: int  # Time at which the event was emitted in unix nanoseconds
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
     """
     The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
@@ -608,21 +704,32 @@ class PublicTrade:
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
     """
     instrument: str
-    is_taker_buyer: bool  # If taker was the buyer on the trade
-    size: str  # The number of assets being traded, expressed in underlying asset decimal units
-    price: str  # The traded price, expressed in `9` decimals
-    mark_price: str  # The mark price of the instrument at point of trade, expressed in `9` decimals
-    index_price: str  # The index price of the instrument at point of trade, expressed in `9` decimals
-    interest_rate: str  # The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)
-    forward_price: str  # [Options] The forward price of the option at point of trade, expressed in `9` decimals
-    trade_id: int  # A trade identifier
-    venue: Venue  # The venue where the trade occurred
-    is_liquidation: bool  # If the trade was a liquidation
+    # If taker was the buyer on the trade
+    is_taker_buyer: bool
+    # The number of assets being traded, expressed in underlying asset decimal units
+    size: str
+    # The traded price, expressed in `9` decimals
+    price: str
+    # The mark price of the instrument at point of trade, expressed in `9` decimals
+    mark_price: str
+    # The index price of the instrument at point of trade, expressed in `9` decimals
+    index_price: str
+    # The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)
+    interest_rate: str
+    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
+    forward_price: str
+    # A trade identifier
+    trade_id: str
+    # The venue where the trade occurred
+    venue: Venue
+    # If the trade was a liquidation
+    is_liquidation: bool
 
 
 @dataclass
 class ApiPublicTradesResponse:
-    results: list[PublicTrade]  # The public trades matching the request asset
+    # The public trades matching the request asset
+    results: list[PublicTrade]
 
 
 @dataclass
@@ -640,13 +747,16 @@ class ApiPublicTradeHistoryRequest:
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
     """
     instrument: str
-    limit: int  # The limit to query for. Defaults to 500; Max 1000
-    cursor: str  # The cursor to indicate when to start the query from
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int
+    # The cursor to indicate when to start the query from
+    cursor: str
 
 
 @dataclass
 class ApiPublicTradeHistoryResponse:
-    results: list[PublicTrade]  # The public trades matching the request asset
+    # The public trades matching the request asset
+    results: list[PublicTrade]
 
 
 @dataclass
@@ -671,50 +781,58 @@ class Instrument:
     """
 
     instrument: str
-    underlying: Currency  # The underlying currency
-    quote: Currency  # The quote currency
-    kind: Kind  # The kind of instrument
-    expiry: int  # The expiry time of the instrument in unix nanoseconds
-    strike_price: str  # The strike price of the instrument, expressed in `9` decimals
-    venues: list[Venue]  # Venues that this instrument can be traded at
-    settlement_period: (
-        InstrumentSettlementPeriod  # The settlement period of the instrument
-    )
-    underlying_decimals: int  # The smallest denomination of the underlying asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
-    quote_decimals: int  # The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
-    tick_size: str  # The size of a single tick, expressed in quote asset decimal units
-    min_size: (
-        str  # The minimum contract size, expressed in underlying asset decimal units
-    )
-    min_block_trade_size: (
-        str  # The minimum block trade size, expressed in underlying asset decimal units
-    )
-    create_time: int  # Creation time in unix nanoseconds
+    # The underlying currency
+    underlying: Currency
+    # The quote currency
+    quote: Currency
+    # The kind of instrument
+    kind: Kind
+    # The expiry time of the instrument in unix nanoseconds
+    expiry: str
+    # The strike price of the instrument, expressed in `9` decimals
+    strike_price: str
+    # Venues that this instrument can be traded at
+    venues: list[Venue]
+    # The settlement period of the instrument
+    settlement_period: InstrumentSettlementPeriod
+    # The smallest denomination of the underlying asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
+    underlying_decimals: int
+    # The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
+    quote_decimals: int
+    # The size of a single tick, expressed in quote asset decimal units
+    tick_size: str
+    # The minimum contract size, expressed in underlying asset decimal units
+    min_size: str
+    # The minimum block trade size, expressed in underlying asset decimal units
+    min_block_trade_size: str
+    # Creation time in unix nanoseconds
+    create_time: str
 
 
 @dataclass
 class ApiGetInstrumentResponse:
-    results: Instrument  # The instrument matching the request asset
+    # The instrument matching the request asset
+    results: Instrument
 
 
 @dataclass
 class ApiGetFilteredInstrumentsRequest:
-    kind: list[
-        Kind
-    ]  # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
-    underlying: list[
-        Currency
-    ]  # The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned
-    quote: list[
-        Currency
-    ]  # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
-    is_active: bool  # Request for active instruments only
-    limit: int  # The limit to query for. Defaults to 500; Max 100000
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
+    kind: list[Kind]
+    # The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned
+    underlying: list[Currency]
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    quote: list[Currency]
+    # Request for active instruments only
+    is_active: bool
+    # The limit to query for. Defaults to 500; Max 100000
+    limit: int
 
 
 @dataclass
 class ApiGetFilteredInstrumentsResponse:
-    results: list[Instrument]  # The instruments matching the request filter
+    # The instruments matching the request filter
+    results: list[Instrument]
 
 
 @dataclass
@@ -731,24 +849,38 @@ class ApiCandlestickRequest:
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
     """
     instrument: str
-    interval: CandlestickInterval  # The interval of each candlestick
-    type: CandlestickType  # The type of candlestick data to retrieve
-    start_time: int  # Start time of kline data in unix nanoseconds
-    end_time: int  # End time of kline data in unix nanoseconds
-    limit: int  # The limit to query for. Defaults to 500; Max 1500
+    # The interval of each candlestick
+    interval: CandlestickInterval
+    # The type of candlestick data to retrieve
+    type: CandlestickType
+    # Start time of kline data in unix nanoseconds
+    start_time: str
+    # End time of kline data in unix nanoseconds
+    end_time: str
+    # The limit to query for. Defaults to 500; Max 1500
+    limit: int
 
 
 @dataclass
 class Candlestick:
-    open_time: int  # Open time of kline bar in unix nanoseconds
-    close_time: int  # Close time of kline bar in unix nanosecond
-    open: str  # The open price, expressed in underlying currency resolution units
-    close: str  # The close price, expressed in underlying currency resolution units
-    high: str  # The high price, expressed in underlying currency resolution units
-    low: str  # The low price, expressed in underlying currency resolution units
-    volume_u: str  # The underlying volume transacted, expressed in underlying asset decimal units
-    volume_q: str  # The quote volume transacted, expressed in quote asset decimal units
-    trades: int  # The number of trades transacted
+    # Open time of kline bar in unix nanoseconds
+    open_time: str
+    # Close time of kline bar in unix nanosecond
+    close_time: str
+    # The open price, expressed in underlying currency resolution units
+    open: str
+    # The close price, expressed in underlying currency resolution units
+    close: str
+    # The high price, expressed in underlying currency resolution units
+    high: str
+    # The low price, expressed in underlying currency resolution units
+    low: str
+    # The underlying volume transacted, expressed in underlying asset decimal units
+    volume_u: str
+    # The quote volume transacted, expressed in quote asset decimal units
+    volume_q: str
+    # The number of trades transacted
+    trades: int
     """
     The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
@@ -760,7 +892,8 @@ class Candlestick:
 
 @dataclass
 class ApiCandlestickResponse:
-    results: list[Candlestick]  # The candlestick result set for given interval
+    # The candlestick result set for given interval
+    results: list[Candlestick]
 
 
 @dataclass
@@ -779,9 +912,12 @@ class ApiFundingRateRequest:
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
     """
     instrument: str
-    start_time: int  # Start time of funding rate in unix nanoseconds
-    end_time: int  # End time of funding rate in unix nanoseconds
-    limit: int  # The limit to query for. Defaults to 90; Max 300
+    # Start time of funding rate in unix nanoseconds
+    start_time: str
+    # End time of funding rate in unix nanoseconds
+    end_time: str
+    # The limit to query for. Defaults to 90; Max 300
+    limit: int
 
 
 @dataclass
@@ -794,16 +930,18 @@ class FundingRate:
     """
 
     instrument: str
-    funding_rate: int  # The funding rate of the instrument, expressed in centibeeps
-    funding_time: (
-        int  # The funding timestamp of the funding rate, expressed in unix nanoseconds
-    )
-    mark_price: int  # The mark price of the instrument at funding timestamp, expressed in `9` decimals
+    # The funding rate of the instrument, expressed in centibeeps
+    funding_rate: int
+    # The funding timestamp of the funding rate, expressed in unix nanoseconds
+    funding_time: str
+    # The mark price of the instrument at funding timestamp, expressed in `9` decimals
+    mark_price: str
 
 
 @dataclass
 class ApiFundingRateResponse:
-    results: list[FundingRate]  # The funding rate result set for given interval
+    # The funding rate result set for given interval
+    results: list[FundingRate]
 
 
 @dataclass
@@ -815,34 +953,50 @@ class ApiSettlementPriceRequest:
     The instrument is also optional. When left empty, all perpetual instruments are returned.
     """
 
-    underlying: Currency  # The underlying currency to select
-    quote: Currency  # The quote currency to select
-    start_time: int  # Start time of kline data in unix nanoseconds
-    end_time: int  # End time of kline data in unix nanoseconds
-    expiration: int  # The expiration time to select in unix nanoseconds
-    strike_price: str  # The strike price to select
-    limit: int  # The limit to query for. Defaults to 30; Max 100
+    # The underlying currency to select
+    underlying: Currency
+    # The quote currency to select
+    quote: Currency
+    # Start time of kline data in unix nanoseconds
+    start_time: str
+    # End time of kline data in unix nanoseconds
+    end_time: str
+    # The expiration time to select in unix nanoseconds
+    expiration: str
+    # The strike price to select
+    strike_price: str
+    # The limit to query for. Defaults to 30; Max 100
+    limit: int
 
 
 @dataclass
 class APISettlementPrice:
-    underlying: Currency  # The underlying currency of the settlement price
-    quote: Currency  # The quote currency of the settlement price
-    settlement_time: int  # The settlement timestamp of the settlement price, expressed in unix nanoseconds
-    settlement_price: str  # The settlement price, expressed in `9` decimals
+    # The underlying currency of the settlement price
+    underlying: Currency
+    # The quote currency of the settlement price
+    quote: Currency
+    # The settlement timestamp of the settlement price, expressed in unix nanoseconds
+    settlement_time: str
+    # The settlement price, expressed in `9` decimals
+    settlement_price: str
 
 
 @dataclass
 class ApiSettlementPriceResponse:
-    results: list[APISettlementPrice]  # The funding rate result set for given interval
+    # The funding rate result set for given interval
+    results: list[APISettlementPrice]
 
 
 @dataclass
 class WSRequestV1:
-    stream: str  # The channel to subscribe to (eg: ticker.s / ticker.d
-    feed: list[str]  # The list of feeds to subscribe to (eg:
-    method: str  # The method to use for the request (eg: subscribe / unsubscribe)
-    is_full: bool  # Whether the request is for full data or lite data
+    # The channel to subscribe to (eg: ticker.s / ticker.d
+    stream: str
+    # The list of feeds to subscribe to (eg:
+    feed: list[str]
+    # The method to use for the request (eg: subscribe / unsubscribe)
+    method: str
+    # Whether the request is for full data or lite data
+    is_full: bool
 
 
 @dataclass
@@ -869,15 +1023,20 @@ class WSOrderbookLevelsFeedSelectorV1:
     Snapshot (500, 1000, 5000)
     """
     rate: int
-    depth: int  # Depth of the order book to be retrieved (API/Snapshot max is 100, Delta max is 1000)
-    aggregate: int  # The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)
+    # Depth of the order book to be retrieved (API/Snapshot max is 100, Delta max is 1000)
+    depth: int
+    # The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)
+    aggregate: int
 
 
 @dataclass
 class WSOrderbookLevelsFeedDataV1:
-    stream: str  # Stream name
-    sequence_number: int  # A running sequence number that determines global message order within the specific stream
-    feed: OrderbookLevels  # An orderbook levels object matching the request filter
+    # Stream name
+    stream: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # An orderbook levels object matching the request filter
+    feed: OrderbookLevels
 
 
 @dataclass
@@ -908,9 +1067,12 @@ class WSMiniTickerFeedSelectorV1:
 
 @dataclass
 class WSMiniTickerFeedDataV1:
-    stream: str  # Stream name
-    sequence_number: int  # A running sequence number that determines global message order within the specific stream
-    feed: MiniTicker  # A mini ticker matching the request filter
+    # Stream name
+    stream: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # A mini ticker matching the request filter
+    feed: MiniTicker
 
 
 @dataclass
@@ -941,14 +1103,18 @@ class WSTickerFeedSelectorV1:
 
 @dataclass
 class WSTickerFeedDataV1:
-    stream: str  # Stream name
-    sequence_number: int  # A running sequence number that determines global message order within the specific stream
-    feed: Ticker  # A ticker matching the request filter
+    # Stream name
+    stream: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # A ticker matching the request filter
+    feed: Ticker
 
 
 @dataclass
 class ApiTickerFeedDataV1:
-    results: Ticker  # The mini ticker matching the request asset
+    # The mini ticker matching the request asset
+    results: Ticker
 
 
 @dataclass
@@ -961,14 +1127,18 @@ class WSPublicTradesFeedSelectorV1:
     """
 
     instrument: str
-    limit: int  # The limit to query for. Defaults to 500; Max 1000
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int
 
 
 @dataclass
 class WSPublicTradesFeedDataV1:
-    stream: str  # Stream name
-    sequence_number: int  # A running sequence number that determines global message order within the specific stream
-    feed: PublicTrade  # A public trade matching the request filter
+    # Stream name
+    stream: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # A public trade matching the request filter
+    feed: PublicTrade
 
 
 @dataclass
@@ -985,38 +1155,50 @@ class WSCandlestickFeedSelectorV1:
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
     """
     instrument: str
-    interval: CandlestickInterval  # The interval of each candlestick
-    type: CandlestickType  # The type of candlestick data to retrieve
+    # The interval of each candlestick
+    interval: CandlestickInterval
+    # The type of candlestick data to retrieve
+    type: CandlestickType
 
 
 @dataclass
 class WSCandlestickFeedDataV1:
-    stream: str  # Stream name
-    sequence_number: int  # A running sequence number that determines global message order within the specific stream
-    feed: Candlestick  # A candlestick entry matching the request filters
+    # Stream name
+    stream: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # A candlestick entry matching the request filters
+    feed: Candlestick
 
 
 @dataclass
 class WSResponseV1:
-    stream: str  # The channel to subscribe to (eg: ticker.s / ticker.d
-    subs: list[str]  # The list of feeds subscribed to
-    unsubs: list[str]  # The list of feeds unsubscribed to
+    # The channel to subscribe to (eg: ticker.s / ticker.d
+    stream: str
+    # The list of feeds subscribed to
+    subs: list[str]
+    # The list of feeds unsubscribed to
+    unsubs: list[str]
 
 
 @dataclass
 class ApiGetAllInstrumentsRequest:
-    is_active: bool | None  # Fetch only active instruments
+    # Fetch only active instruments
+    is_active: bool | None
 
 
 @dataclass
 class ApiGetAllInstrumentsResponse:
-    instruments: list[Instrument]  # List of instruments
+    # List of instruments
+    instruments: list[Instrument]
 
 
 @dataclass
 class OrderLeg:
-    instrument: str  # The instrument to trade in this leg
-    size: str  # The total number of assets to trade in this leg, expressed in underlying asset decimal units.
+    # The instrument to trade in this leg
+    instrument: str
+    # The total number of assets to trade in this leg, expressed in underlying asset decimal units.
+    size: str
     """
     The limit price of the order leg, expressed in `9` decimals.
     This is the total amount of base currency to pay/receive for all legs.
@@ -1028,16 +1210,22 @@ class OrderLeg:
     The smart contract will always validate both limit prices, by arranging them in ascending order
     """
     oco_limit_price: str
-    is_buying_asset: bool  # Specifies if the order leg is a buy or sell
+    # Specifies if the order leg is a buy or sell
+    is_buying_asset: bool
 
 
 @dataclass
 class Signature:
-    signer: str  # The address (public key) of the wallet signing the payload
-    r: str  # Signature R
-    s: str  # Signature S
-    v: int  # Signature V
-    expiration: int  # Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days
+    # The address (public key) of the wallet signing the payload
+    signer: str
+    # Signature R
+    r: str
+    # Signature S
+    s: str
+    # Signature V
+    v: int
+    # Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days
+    expiration: str
     """
     Users can randomly generate this value, used as a signature deconflicting key.
     ie. You can send the same exact instruction twice with different nonces.
@@ -1065,23 +1253,23 @@ class OrderMetadata:
 
     When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
     """
-    client_order_id: int
-    create_time: int  # [Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds
+    client_order_id: str
+    # [Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds
+    create_time: str
 
 
 @dataclass
 class OrderState:
-    status: OrderStatus  # The status of the order
-    reject_reason: OrderRejectReason  # The reason for rejection or cancellation
-    book_size: list[
-        str
-    ]  # The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs
-    traded_size: list[
-        str
-    ]  # The total number of assets traded. Sorted in same order as Order.Legs
-    update_time: (
-        int  # Time at which the order was updated by GRVT, expressed in unix nanoseconds
-    )
+    # The status of the order
+    status: OrderStatus
+    # The reason for rejection or cancellation
+    reject_reason: OrderRejectReason
+    # The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs
+    book_size: list[str]
+    # The total number of assets traded. Sorted in same order as Order.Legs
+    traded_size: list[str]
+    # Time at which the order was updated by GRVT, expressed in unix nanoseconds
+    update_time: str
 
 
 @dataclass
@@ -1096,8 +1284,10 @@ class Order:
     This minimizes the amount of trust users have to offer to GRVT
     """
 
-    order_id: str  # [Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
-    sub_account_id: int  # The subaccount initiating the order
+    # [Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
+    order_id: str
+    # The subaccount initiating the order
+    sub_account_id: str
     """
     If the order is a market order
     Market Orders do not have a limit price, and are always executed according to the maker order price.
@@ -1121,7 +1311,8 @@ class Order:
 
     """
     taker_fee_percentage_cap: int
-    maker_fee_percentage_cap: int  # Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates
+    # Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates
+    maker_fee_percentage_cap: int
     """
     If True, Order must be a maker order. It has to fill the orderbook instead of match it.
     If False, Order can be either a maker or taker order.
@@ -1134,95 +1325,107 @@ class Order:
 
     """
     post_only: bool
-    reduce_only: bool  # If True, Order must reduce the position size, or be cancelled
+    # If True, Order must reduce the position size, or be cancelled
+    reduce_only: bool
     """
     The legs present in this order
     The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice
     """
     legs: list[OrderLeg]
-    signature: Signature  # The signature approving this order
-    metadata: OrderMetadata  # Order Metadata, ignored by the smart contract, and unsigned by the client
-    state: OrderState  # [Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client
+    # The signature approving this order
+    signature: Signature
+    # Order Metadata, ignored by the smart contract, and unsigned by the client
+    metadata: OrderMetadata
+    # [Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client
+    state: OrderState
 
 
 @dataclass
 class ApiCreateOrderRequest:
-    order: Order  # The order to create
+    # The order to create
+    order: Order
 
 
 @dataclass
 class ApiCreateOrderResponse:
-    order: Order  # The created order
+    # The created order
+    order: Order
 
 
 @dataclass
 class ApiCancelOrderRequest:
-    sub_account_id: int  # The subaccount ID cancelling the order
-    order_id: str  # Cancel the order with this `order_id`
-    client_order_id: int  # Cancel the order with this `client_order_id`
+    # The subaccount ID cancelling the order
+    sub_account_id: str
+    # Cancel the order with this `order_id`
+    order_id: str
+    # Cancel the order with this `client_order_id`
+    client_order_id: str
 
 
 @dataclass
 class ApiCancelOrderResponse:
-    order: Order  # The cancelled order
+    # The cancelled order
+    order: Order
 
 
 @dataclass
 class ApiCancelAllOrdersRequest:
-    sub_account_id: int  # The subaccount ID cancelling all orders
+    # The subaccount ID cancelling all orders
+    sub_account_id: str
 
 
 @dataclass
 class ApiCancelAllOrdersResponse:
-    num_cancelled: int  # The number of orders cancelled
+    # The number of orders cancelled
+    num_cancelled: int
 
 
 @dataclass
 class ApiOpenOrdersRequest:
-    sub_account_id: int  # The subaccount ID to filter by
-    kind: list[
-        Kind
-    ]  # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
-    underlying: list[
-        Currency
-    ]  # The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned
-    quote: list[
-        Currency
-    ]  # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
+    kind: list[Kind]
+    # The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned
+    underlying: list[Currency]
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    quote: list[Currency]
 
 
 @dataclass
 class ApiOpenOrdersResponse:
-    orders: list[Order]  # The Open Orders matching the request filter
+    # The Open Orders matching the request filter
+    orders: list[Order]
 
 
 @dataclass
 class ApiOrderHistoryRequest:
-    sub_account_id: int  # The subaccount ID to filter by
-    kind: list[
-        Kind
-    ]  # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
-    underlying: list[
-        Currency
-    ]  # The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned
-    quote: list[
-        Currency
-    ]  # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
-    expiration: list[
-        int
-    ]  # The expiration time to apply in nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned
-    strike_price: list[
-        str
-    ]  # The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned
-    limit: int  # The limit to query for. Defaults to 500; Max 1000
-    cursor: str  # The cursor to indicate when to start the query from
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
+    kind: list[Kind]
+    # The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned
+    underlying: list[Currency]
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    quote: list[Currency]
+    # The expiration time to apply in nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned
+    expiration: list[str]
+    # The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned
+    strike_price: list[str]
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int
+    # The cursor to indicate when to start the query from
+    cursor: str
 
 
 @dataclass
 class ApiOrderHistoryResponse:
-    total: int  # The total number of orders matching the request filter
-    next: str  # The cursor to indicate when to start the query from
-    orders: list[Order]  # The Open Orders matching the request filter
+    # The total number of orders matching the request filter
+    total: int
+    # The cursor to indicate when to start the query from
+    next: str
+    # The Open Orders matching the request filter
+    orders: list[Order]
 
 
 @dataclass
@@ -1232,147 +1435,200 @@ class EmptyRequest:
 
 @dataclass
 class AckResponse:
-    acknowledgement: bool  # Gravity has acknowledged that the request has been successfully received and it will process it in the backend
+    # Gravity has acknowledged that the request has been successfully received and it will process it in the backend
+    acknowledgement: bool
 
 
 @dataclass
 class ApiOrderStateRequest:
-    sub_account_id: int  # The subaccount ID to filter by
-    order_id: str  # Filter for `order_id`
-    client_order_id: int  # Filter for `client_order_id`
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # Filter for `order_id`
+    order_id: str
+    # Filter for `client_order_id`
+    client_order_id: str
 
 
 @dataclass
 class ApiOrderStateResponse:
-    state: OrderState  # The order state for the requested filter
+    # The order state for the requested filter
+    state: OrderState
 
 
 @dataclass
 class ApiGetOrderRequest:
-    sub_account_id: int  # The subaccount ID to filter by
-    order_id: str  # Filter for `order_id`
-    client_order_id: int  # Filter for `client_order_id`
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # Filter for `order_id`
+    order_id: str
+    # Filter for `client_order_id`
+    client_order_id: str
 
 
 @dataclass
 class ApiGetOrderResponse:
-    order: Order  # The order object for the requested filter
+    # The order object for the requested filter
+    order: Order
 
 
 @dataclass
 class ApiGetUserEcosystemPointRequest:
-    account_id: str  # The off chain account id
-    calculate_from: int  # Start time of the epoch - phase
-    include_user_rank: bool  # Include user rank in the response
+    # The off chain account id
+    account_id: str
+    # Start time of the epoch - phase
+    calculate_from: str
+    # Include user rank in the response
+    include_user_rank: bool
 
 
 @dataclass
 class EcosystemPoint:
-    account_id: str  # The off chain account id
-    main_account_id: str  # The main account id
-    total_point: int  # Total ecosystem point
-    direct_invite_count: int  # Direct invite count
-    indirect_invite_count: int  # Indirect invite count
-    direct_invite_trading_volume: str  # Direct invite trading volume
-    indirect_invite_trading_volume: str  # Indirect invite trading volume
-    calculate_at: int  # The time when the ecosystem point is calculated
-    calculate_from: int  # Start time of the epoch - phase
-    calculate_to: int  # End time of the epoch - phase
-    rank: int  # The rank of the account in the ecosystem
+    # The off chain account id
+    account_id: str
+    # The main account id
+    main_account_id: str
+    # Total ecosystem point
+    total_point: str
+    # Direct invite count
+    direct_invite_count: int
+    # Indirect invite count
+    indirect_invite_count: int
+    # Direct invite trading volume
+    direct_invite_trading_volume: str
+    # Indirect invite trading volume
+    indirect_invite_trading_volume: str
+    # The time when the ecosystem point is calculated
+    calculate_at: str
+    # Start time of the epoch - phase
+    calculate_from: str
+    # End time of the epoch - phase
+    calculate_to: str
+    # The rank of the account in the ecosystem
+    rank: int
 
 
 @dataclass
 class ApiGetUserEcosystemPointResponse:
-    points: list[EcosystemPoint]  # The list of ecosystem points
+    # The list of ecosystem points
+    points: list[EcosystemPoint]
 
 
 @dataclass
 class ApiGetEcosystemLeaderboardRequest:
-    calculate_from: int  # Start time of the epoch - phase
-    limit: int  # The number of accounts to return
+    # Start time of the epoch - phase
+    calculate_from: str
+    # The number of accounts to return
+    limit: int
 
 
 @dataclass
 class ApiGetEcosystemLeaderboardResponse:
-    points: list[EcosystemPoint]  # The list of ecosystem points
+    # The list of ecosystem points
+    points: list[EcosystemPoint]
 
 
 @dataclass
 class ApiGetEcosystemReferralStatResponse:
-    direct_invite_count: int  # Direct invite count
-    indirect_invite_count: int  # Indirect invite count
-    direct_invite_trading_volume: (
-        str  # Total volume traded by direct invites multiple by 1e9
-    )
-    indirect_invite_trading_volume: (
-        str  # Total volume traded by indirect invites multiple by 1e9
-    )
+    # Direct invite count
+    direct_invite_count: int
+    # Indirect invite count
+    indirect_invite_count: int
+    # Total volume traded by direct invites multiple by 1e9
+    direct_invite_trading_volume: str
+    # Total volume traded by indirect invites multiple by 1e9
+    indirect_invite_trading_volume: str
 
 
 @dataclass
 class ApiResolveEpochEcosystemMetricResponse:
-    epoch_name: str  # The name of the epoch
-    point: (
-        int  # Ecosystem points up to the most recently calculated time within this epoch
-    )
-    last_calculated_time: (
-        int  # The time in unix nanoseconds when the ecosystem points were last calculated
-    )
+    # The name of the epoch
+    epoch_name: str
+    # Ecosystem points up to the most recently calculated time within this epoch
+    point: int
+    # The time in unix nanoseconds when the ecosystem points were last calculated
+    last_calculated_time: str
 
 
 @dataclass
 class EcosystemMetric:
-    direct_invite_count: int  # Direct invite count
-    indirect_invite_count: int  # Indirect invite count
-    direct_invite_trading_volume: str  # Direct invite trading volume
-    indirect_invite_trading_volume: str  # Indirect invite trading volume
-    total_point: int  # Total ecosystem point of this epoch/phase
+    # Direct invite count
+    direct_invite_count: int
+    # Indirect invite count
+    indirect_invite_count: int
+    # Direct invite trading volume
+    direct_invite_trading_volume: str
+    # Indirect invite trading volume
+    indirect_invite_trading_volume: str
+    # Total ecosystem point of this epoch/phase
+    total_point: str
 
 
 @dataclass
 class ApiFindFirstEpochMetricResponse:
-    phase_zero_metric: EcosystemMetric  # Phase zero metric
-    phase_one_metric: EcosystemMetric  # Phase one metric
-    rank: int  # The rank of the account in the ecosystem
-    total: int  # The total number of accounts in the ecosystem
-    total_point: int  # Total ecosystem point of the first epoch
-    last_calculated_at: int  # The time when the ecosystem points were last calculated
+    # Phase zero metric
+    phase_zero_metric: EcosystemMetric
+    # Phase one metric
+    phase_one_metric: EcosystemMetric
+    # The rank of the account in the ecosystem
+    rank: int
+    # The total number of accounts in the ecosystem
+    total: int
+    # Total ecosystem point of the first epoch
+    total_point: str
+    # The time when the ecosystem points were last calculated
+    last_calculated_at: str
 
 
 @dataclass
 class EcosystemLeaderboardUser:
-    account_id: str  # The off chain account id
-    rank: int  # The rank of the account in the ecosystem
-    total_point: int  # Total ecosystem point
-    twitter_username: str  # The twitter username of the account
+    # The off chain account id
+    account_id: str
+    # The rank of the account in the ecosystem
+    rank: int
+    # Total ecosystem point
+    total_point: str
+    # The twitter username of the account
+    twitter_username: str
 
 
 @dataclass
 class ApiFindEcosystemLeaderboardResponse:
-    users: list[EcosystemLeaderboardUser]  # The list of ecosystem leaderboard users
+    # The list of ecosystem leaderboard users
+    users: list[EcosystemLeaderboardUser]
 
 
 @dataclass
 class ApiGetListFlatReferralRequest:
-    referral_id: str  # The off chain referrer account id to get all flat referrals
-    start_time: int  # Optional. Start time in unix nanoseconds
-    end_time: int  # Optional. End time in unix nanoseconds
-    account_id: str  # The off chain account id to get all user's referrers
+    # The off chain referrer account id to get all flat referrals
+    referral_id: str
+    # Optional. Start time in unix nanoseconds
+    start_time: str
+    # Optional. End time in unix nanoseconds
+    end_time: str
+    # The off chain account id to get all user's referrers
+    account_id: str
 
 
 @dataclass
 class FlatReferral:
-    account_id: str  # The off chain account id
-    referrer_id: str  # The off chain referrer account id
-    referrer_level: int  # The referrer level; 1: direct referrer, 2: indirect referrer
-    account_create_time: int  # The account creation time
-    main_account_id: str  # The main account id
-    referrer_main_account_id: str  # The referrer main account id
+    # The off chain account id
+    account_id: str
+    # The off chain referrer account id
+    referrer_id: str
+    # The referrer level; 1: direct referrer, 2: indirect referrer
+    referrer_level: int
+    # The account creation time
+    account_create_time: str
+    # The main account id
+    main_account_id: str
+    # The referrer main account id
+    referrer_main_account_id: str
 
 
 @dataclass
 class ApiGetListFlatReferralResponse:
-    flat_referrals: list[FlatReferral]  # The list of flat referrals
+    # The list of flat referrals
+    flat_referrals: list[FlatReferral]
 
 
 @dataclass
@@ -1385,79 +1641,108 @@ class ApiSubAccountTradeRequest:
     """
 
     instrument: str
-    interval: SubAccountTradeInterval  # The interval of each sub account trade
-    sub_account_i_ds: list[int]  # The list of sub account ids to query
-    start_interval: int  # Optional. The starting time in unix nanoseconds of a specific interval to query
-    start_time: int  # Optional. Start time in unix nanoseconds
-    end_time: int  # Optional. End time in unix nanoseconds
+    # The interval of each sub account trade
+    interval: SubAccountTradeInterval
+    # The list of sub account ids to query
+    sub_account_i_ds: list[str]
+    # Optional. The starting time in unix nanoseconds of a specific interval to query
+    start_interval: str
+    # Optional. Start time in unix nanoseconds
+    start_time: str
+    # Optional. End time in unix nanoseconds
+    end_time: str
 
 
 @dataclass
 class SubAccountTrade:
-    start_interval: int  # Start of calculation epoch
-    sub_account_id: int  # The sub account id
-    instrument: str  # The instrument being represented
-    total_fee: int  # Total fee paid
-    total_trade_volume: str  # Total volume traded
+    # Start of calculation epoch
+    start_interval: str
+    # The sub account id
+    sub_account_id: str
+    # The instrument being represented
+    instrument: str
+    # Total fee paid
+    total_fee: str
+    # Total volume traded
+    total_trade_volume: str
 
 
 @dataclass
 class ApiSubAccountTradeResponse:
-    results: list[SubAccountTrade]  # The sub account trade result set for given interval
+    # The sub account trade result set for given interval
+    results: list[SubAccountTrade]
 
 
 @dataclass
 class ApiSubAccountTradeAggregationRequest:
-    interval: SubAccountTradeInterval  # The interval of each sub account trade
-    sub_account_i_ds: list[int]  # The list of sub account ids to query
-    start_interval: int  # Optional. The starting time in unix nanoseconds of a specific interval to query
+    # The interval of each sub account trade
+    interval: SubAccountTradeInterval
+    # The list of sub account ids to query
+    sub_account_i_ds: list[str]
+    # Optional. The starting time in unix nanoseconds of a specific interval to query
+    start_interval: str
 
 
 @dataclass
 class SubAccountTradeAggregation:
-    start_interval: int  # Start of calculation epoch
-    sub_account_id: int  # The sub account id
-    total_fee: int  # Total fee paid
-    total_trade_volume: str  # Total volume traded
+    # Start of calculation epoch
+    start_interval: str
+    # The sub account id
+    sub_account_id: str
+    # Total fee paid
+    total_fee: str
+    # Total volume traded
+    total_trade_volume: str
 
 
 @dataclass
 class ApiSubAccountTradeAggregationResponse:
-    results: list[
-        SubAccountTradeAggregation
-    ]  # The sub account trade aggregation result set for given interval
+    # The sub account trade aggregation result set for given interval
+    results: list[SubAccountTradeAggregation]
 
 
 @dataclass
 class ApiGetTraderStatResponse:
-    total_fee: int  # Total fee paid
+    # Total fee paid
+    total_fee: str
 
 
 @dataclass
 class TraderMetric:
-    total_fee: int  # Total fee paid
-    total_point: int  # Total trader point of this epoch/phase
+    # Total fee paid
+    total_fee: str
+    # Total trader point of this epoch/phase
+    total_point: str
 
 
 @dataclass
 class ApiFindTraderEpochMetricResponse:
-    metric: TraderMetric  # Phase zero metric
-    rank: int  # The rank of the account in the trader
-    total: int  # The total number of accounts in the trader
-    last_calculated_at: int  # The time when the trader points were last calculated
+    # Phase zero metric
+    metric: TraderMetric
+    # The rank of the account in the trader
+    rank: int
+    # The total number of accounts in the trader
+    total: int
+    # The time when the trader points were last calculated
+    last_calculated_at: str
 
 
 @dataclass
 class TraderLeaderboardUser:
-    account_id: str  # The off chain account id
-    rank: int  # The rank of the account in the Trader
-    total_point: int  # Total Trader point
-    twitter_username: str  # The twitter username of the account
+    # The off chain account id
+    account_id: str
+    # The rank of the account in the Trader
+    rank: int
+    # Total Trader point
+    total_point: str
+    # The twitter username of the account
+    twitter_username: str
 
 
 @dataclass
 class ApiFindTraderLeaderboardResponse:
-    users: list[TraderLeaderboardUser]  # The list of trader leaderboard users
+    # The list of trader leaderboard users
+    users: list[TraderLeaderboardUser]
 
 
 @dataclass
@@ -1468,18 +1753,26 @@ class WSOrderFeedSelectorV1:
     Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both.
     """
 
-    sub_account_id: int  # The subaccount ID to filter by
-    kind: Kind  # The kind filter to apply.
-    underlying: Currency  # The underlying filter to apply.
-    quote: Currency  # The quote filter to apply.
-    state_filter: OrderStateFilter  # create only, update only, all
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The kind filter to apply.
+    kind: Kind
+    # The underlying filter to apply.
+    underlying: Currency
+    # The quote filter to apply.
+    quote: Currency
+    # create only, update only, all
+    state_filter: OrderStateFilter
 
 
 @dataclass
 class WSOrderFeedDataV1:
-    stream: str  # Stream name
-    sequence_number: int  # A running sequence number that determines global message order within the specific stream
-    feed: Order  # The order object being created or updated
+    # Stream name
+    stream: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # The order object being created or updated
+    feed: Order
 
 
 @dataclass
@@ -1491,107 +1784,152 @@ class WSOrderStateFeedSelectorV1:
     Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both.
     """
 
-    sub_account_id: int  # The subaccount ID to filter by
-    kind: Kind  # The kind filter to apply.
-    underlying: Currency  # The underlying filter to apply.
-    quote: Currency  # The quote filter to apply.
-    state_filter: OrderStateFilter  # create only, update only, all
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The kind filter to apply.
+    kind: Kind
+    # The underlying filter to apply.
+    underlying: Currency
+    # The quote filter to apply.
+    quote: Currency
+    # create only, update only, all
+    state_filter: OrderStateFilter
 
 
 @dataclass
 class OrderStateFeed:
-    order_id: str  # A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
-    order_state: OrderState  # The order state object being created or updated
+    # A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
+    order_id: str
+    # The order state object being created or updated
+    order_state: OrderState
 
 
 @dataclass
 class WSOrderStateFeedDataV1:
-    stream: str  # Stream name
-    sequence_number: int  # A running sequence number that determines global message order within the specific stream
-    feed: OrderStateFeed  # The Order State Feed
+    # Stream name
+    stream: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # The Order State Feed
+    feed: OrderStateFeed
 
 
 @dataclass
 class WSPositionsFeedSelectorV1:
-    sub_account_id: int  # The subaccount ID to filter by
-    kind: Kind  # The kind filter to apply.
-    underlying: Currency  # The underlying filter to apply.
-    quote: Currency  # The quote filter to apply.
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The kind filter to apply.
+    kind: Kind
+    # The underlying filter to apply.
+    underlying: Currency
+    # The quote filter to apply.
+    quote: Currency
 
 
 @dataclass
 class WSPositionsFeedDataV1:
-    stream: str  # Stream name
-    sequence_number: int  # A running sequence number that determines global message order within the specific stream
-    feed: Positions  # A Position being created or updated matching the request filter
+    # Stream name
+    stream: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # A Position being created or updated matching the request filter
+    feed: Positions
 
 
 @dataclass
 class WSPrivateTradeFeedSelectorV1:
-    sub_account_id: int  # The sub account ID to request for
-    kind: Kind  # The kind filter to apply.
-    underlying: Currency  # The underlying filter to apply.
-    quote: Currency  # The quote filter to apply.
+    # The sub account ID to request for
+    sub_account_id: str
+    # The kind filter to apply.
+    kind: Kind
+    # The underlying filter to apply.
+    underlying: Currency
+    # The quote filter to apply.
+    quote: Currency
 
 
 @dataclass
 class WSPrivateTradeFeedDataV1:
-    stream: str  # The websocket channel to which the response is sent
-    sequence_number: int  # A running sequence number that determines global message order within the specific stream
-    feed: PrivateTrade  # A private trade matching the request filter
+    # The websocket channel to which the response is sent
+    stream: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # A private trade matching the request filter
+    feed: PrivateTrade
 
 
 @dataclass
 class Transfer:
-    from_account_id: str  # The account to transfer from
-    from_sub_account_id: (
-        int  # The subaccount to transfer from (0 if transferring from main account)
-    )
-    to_account_id: str  # The account to deposit into
-    to_sub_account_id: (
-        int  # The subaccount to transfer to (0 if transferring to main account)
-    )
-    token_currency: Currency  # The token currency to transfer
-    num_tokens: str  # The number of tokens to transfer
-    signature: Signature  # The signature of the transfer
+    # The account to transfer from
+    from_account_id: str
+    # The subaccount to transfer from (0 if transferring from main account)
+    from_sub_account_id: str
+    # The account to deposit into
+    to_account_id: str
+    # The subaccount to transfer to (0 if transferring to main account)
+    to_sub_account_id: str
+    # The token currency to transfer
+    token_currency: Currency
+    # The number of tokens to transfer
+    num_tokens: str
+    # The signature of the transfer
+    signature: Signature
 
 
 @dataclass
 class WSTransferFeedDataV1:
-    stream: str  # The websocket channel to which the response is sent
-    sequence_number: int  # A running sequence number that determines global message order within the specific stream
-    feed: Transfer  # The Transfer object
+    # The websocket channel to which the response is sent
+    stream: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # The Transfer object
+    feed: Transfer
 
 
 @dataclass
 class Deposit:
-    tx_hash: str  # The hash of the bridgemint event producing the deposit
-    to_account_id: str  # The account to deposit into
-    token_currency: Currency  # The token currency to deposit
-    num_tokens: str  # The number of tokens to deposit
+    # The hash of the bridgemint event producing the deposit
+    tx_hash: str
+    # The account to deposit into
+    to_account_id: str
+    # The token currency to deposit
+    token_currency: Currency
+    # The number of tokens to deposit
+    num_tokens: str
 
 
 @dataclass
 class WSDepositFeedDataV1:
-    stream: str  # The websocket channel to which the response is sent
-    sequence_number: int  # A running sequence number that determines global message order within the specific stream
-    feed: Deposit  # The Deposit object
+    # The websocket channel to which the response is sent
+    stream: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # The Deposit object
+    feed: Deposit
 
 
 @dataclass
 class Withdrawal:
-    from_account_id: str  # The subaccount to withdraw from
-    to_eth_address: str  # The ethereum address to withdraw to
-    token_currency: Currency  # The token currency to withdraw
-    num_tokens: str  # The number of tokens to withdraw
-    signature: Signature  # The signature of the withdrawal
+    # The subaccount to withdraw from
+    from_account_id: str
+    # The ethereum address to withdraw to
+    to_eth_address: str
+    # The token currency to withdraw
+    token_currency: Currency
+    # The number of tokens to withdraw
+    num_tokens: str
+    # The signature of the withdrawal
+    signature: Signature
 
 
 @dataclass
 class WSWithdrawalFeedDataV1:
-    stream: str  # The websocket channel to which the response is sent
-    sequence_number: int  # A running sequence number that determines global message order within the specific stream
-    feed: Withdrawal  # The Withdrawal object
+    # The websocket channel to which the response is sent
+    stream: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # The Withdrawal object
+    feed: Withdrawal
 
 
 @dataclass
@@ -1604,9 +1942,12 @@ class ApiDepositRequest:
     This current payload is used for alpha testing only.
     """
 
-    to_account_id: str  # The main account to deposit into
-    token_currency: Currency  # The token currency to deposit
-    num_tokens: str  # The number of tokens to deposit, quoted in token_currency decimals
+    # The main account to deposit into
+    to_account_id: str
+    # The token currency to deposit
+    token_currency: Currency
+    # The number of tokens to deposit, quoted in token_currency decimals
+    num_tokens: str
 
 
 @dataclass
@@ -1620,13 +1961,16 @@ class ApiWithdrawalRequest:
     Note that your funds will always remain in self-custory throughout the withdrawal process. At no stage does GRVT gain control over your funds.
     """
 
-    from_account_id: str  # The main account to withdraw from
-    to_eth_address: str  # The Ethereum wallet to withdraw into
-    token_currency: Currency  # The token currency to withdraw
-    num_tokens: (
-        str  # The number of tokens to withdraw, quoted in tokenCurrency decimal units
-    )
-    signature: Signature  # The signature of the withdrawal
+    # The main account to withdraw from
+    from_account_id: str
+    # The Ethereum wallet to withdraw into
+    to_eth_address: str
+    # The token currency to withdraw
+    token_currency: Currency
+    # The number of tokens to withdraw, quoted in tokenCurrency decimal units
+    num_tokens: str
+    # The signature of the withdrawal
+    signature: Signature
 
 
 @dataclass
@@ -1639,19 +1983,20 @@ class ApiTransferRequest:
     </ul>
     """
 
-    from_account_id: str  # The main account to transfer from
-    from_sub_account_id: (
-        int  # The subaccount to transfer from (0 if transferring from main account)
-    )
-    to_account_id: str  # The main account to deposit into
-    to_sub_account_id: (
-        int  # The subaccount to transfer to (0 if transferring to main account)
-    )
-    token_currency: Currency  # The token currency to transfer
-    num_tokens: (
-        str  # The number of tokens to transfer, quoted in tokenCurrency decimal units
-    )
-    signature: Signature  # The signature of the transfer
+    # The main account to transfer from
+    from_account_id: str
+    # The subaccount to transfer from (0 if transferring from main account)
+    from_sub_account_id: str
+    # The main account to deposit into
+    to_account_id: str
+    # The subaccount to transfer to (0 if transferring to main account)
+    to_sub_account_id: str
+    # The token currency to transfer
+    token_currency: Currency
+    # The number of tokens to transfer, quoted in tokenCurrency decimal units
+    num_tokens: str
+    # The signature of the transfer
+    signature: Signature
 
 
 @dataclass
@@ -1661,30 +2006,42 @@ class ApiDepositHistoryRequest:
     The history is returned in reverse chronological order
     """
 
-    limit: int  # The limit to query for. Defaults to 500; Max 1000
-    cursor: str  # The cursor to indicate when to start the next query from
-    token_currency: list[
-        Currency
-    ]  # The token currency to query for, if nil or empty, return all deposits. Otherwise, only entries matching the filter will be returned
-    start_time: int  # The start time to query for in unix nanoseconds
-    end_time: int  # The end time to query for in unix nanoseconds
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int
+    # The cursor to indicate when to start the next query from
+    cursor: str
+    # The token currency to query for, if nil or empty, return all deposits. Otherwise, only entries matching the filter will be returned
+    token_currency: list[Currency]
+    # The start time to query for in unix nanoseconds
+    start_time: str
+    # The end time to query for in unix nanoseconds
+    end_time: str
 
 
 @dataclass
 class DepositHistory:
-    tx_id: int  # The transaction ID of the deposit
-    tx_hash: str  # The txHash of the bridgemint event
-    to_account_id: str  # The account to deposit into
-    token_currency: Currency  # The token currency to deposit
-    num_tokens: str  # The number of tokens to deposit
-    event_time: int  # The timestamp of the deposit in unix nanoseconds
+    # The transaction ID of the deposit
+    tx_id: str
+    # The txHash of the bridgemint event
+    tx_hash: str
+    # The account to deposit into
+    to_account_id: str
+    # The token currency to deposit
+    token_currency: Currency
+    # The number of tokens to deposit
+    num_tokens: str
+    # The timestamp of the deposit in unix nanoseconds
+    event_time: str
 
 
 @dataclass
 class ApiDepositHistoryResponse:
-    total: int  # The total number of deposits matching the request account
-    next: str  # The cursor to indicate when to start the next query from
-    results: list[DepositHistory]  # The deposit history matching the request account
+    # The total number of deposits matching the request account
+    total: int
+    # The cursor to indicate when to start the next query from
+    next: str
+    # The deposit history matching the request account
+    results: list[DepositHistory]
 
 
 @dataclass
@@ -1694,37 +2051,48 @@ class ApiTransferHistoryRequest:
     The history is returned in reverse chronological order
     """
 
-    limit: int  # The limit to query for. Defaults to 500; Max 1000
-    cursor: str  # The cursor to indicate when to start the next query from
-    token_currency: list[
-        Currency
-    ]  # The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned
-    start_time: int  # The start time to query for in unix nanoseconds
-    end_time: int  # The end time to query for in unix nanoseconds
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int
+    # The cursor to indicate when to start the next query from
+    cursor: str
+    # The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned
+    token_currency: list[Currency]
+    # The start time to query for in unix nanoseconds
+    start_time: str
+    # The end time to query for in unix nanoseconds
+    end_time: str
 
 
 @dataclass
 class TransferHistory:
-    tx_id: int  # The transaction ID of the transfer
-    from_account_id: str  # The account to transfer from
-    from_sub_account_id: (
-        int  # The subaccount to transfer from (0 if transferring from main account)
-    )
-    to_account_id: str  # The account to deposit into
-    to_sub_account_id: (
-        int  # The subaccount to transfer to (0 if transferring to main account)
-    )
-    token_currency: Currency  # The token currency to transfer
-    num_tokens: str  # The number of tokens to transfer
-    signature: Signature  # The signature of the transfer
-    event_time: int  # The timestamp of the transfer in unix nanoseconds
+    # The transaction ID of the transfer
+    tx_id: str
+    # The account to transfer from
+    from_account_id: str
+    # The subaccount to transfer from (0 if transferring from main account)
+    from_sub_account_id: str
+    # The account to deposit into
+    to_account_id: str
+    # The subaccount to transfer to (0 if transferring to main account)
+    to_sub_account_id: str
+    # The token currency to transfer
+    token_currency: Currency
+    # The number of tokens to transfer
+    num_tokens: str
+    # The signature of the transfer
+    signature: Signature
+    # The timestamp of the transfer in unix nanoseconds
+    event_time: str
 
 
 @dataclass
 class ApiTransferHistoryResponse:
-    total: int  # The total number of transfers matching the request account
-    next: str  # The cursor to indicate when to start the next query from
-    results: list[TransferHistory]  # The transfer history matching the request account
+    # The total number of transfers matching the request account
+    total: int
+    # The cursor to indicate when to start the next query from
+    next: str
+    # The transfer history matching the request account
+    results: list[TransferHistory]
 
 
 @dataclass
@@ -1734,30 +2102,41 @@ class ApiWithdrawalHistoryRequest:
     The history is returned in reverse chronological order
     """
 
-    limit: int  # The limit to query for. Defaults to 500; Max 1000
-    cursor: str  # The cursor to indicate when to start the next query from
-    token_currency: list[
-        Currency
-    ]  # The token currency to query for, if nil or empty, return all withdrawals. Otherwise, only entries matching the filter will be returned
-    start_time: int  # The start time to query for in unix nanoseconds
-    end_time: int  # The end time to query for in unix nanoseconds
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int
+    # The cursor to indicate when to start the next query from
+    cursor: str
+    # The token currency to query for, if nil or empty, return all withdrawals. Otherwise, only entries matching the filter will be returned
+    token_currency: list[Currency]
+    # The start time to query for in unix nanoseconds
+    start_time: str
+    # The end time to query for in unix nanoseconds
+    end_time: str
 
 
 @dataclass
 class WithdrawalHistory:
-    tx_id: int  # The transaction ID of the withdrawal
-    from_account_id: str  # The subaccount to withdraw from
-    to_eth_address: str  # The ethereum address to withdraw to
-    token_currency: Currency  # The token currency to withdraw
-    num_tokens: str  # The number of tokens to withdraw
-    signature: Signature  # The signature of the withdrawal
-    event_time: int  # The timestamp of the withdrawal in unix nanoseconds
+    # The transaction ID of the withdrawal
+    tx_id: str
+    # The subaccount to withdraw from
+    from_account_id: str
+    # The ethereum address to withdraw to
+    to_eth_address: str
+    # The token currency to withdraw
+    token_currency: Currency
+    # The number of tokens to withdraw
+    num_tokens: str
+    # The signature of the withdrawal
+    signature: Signature
+    # The timestamp of the withdrawal in unix nanoseconds
+    event_time: str
 
 
 @dataclass
 class ApiWithdrawalHistoryResponse:
-    total: int  # The total number of withdrawals matching the request account
-    next: str  # The cursor to indicate when to start the next query from
-    results: list[
-        WithdrawalHistory
-    ]  # The withdrawals history matching the request account
+    # The total number of withdrawals matching the request account
+    total: int
+    # The cursor to indicate when to start the next query from
+    next: str
+    # The withdrawals history matching the request account
+    results: list[WithdrawalHistory]

@@ -9,8 +9,10 @@ authors = [
 ]
 readme = { file = "README.md", content-type = "text/markdown" }
 dependencies = [
+    "aiohttp>=3.10.5",
     "dataclasses-json>=0.6.7",
     "inflection>=0.5.1",
+    "requests>=2.32.3",
 ]
 
 [project.urls]
