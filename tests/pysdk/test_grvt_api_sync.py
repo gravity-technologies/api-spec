@@ -20,7 +20,7 @@ def get_config() -> GrvtApiConfig:
 
 def test_get_all_instruments() -> None:
     api = GrvtApiSync(config=get_config())
-    resp = api.get_all_instruments(types.ApiGetAllInstrumentsRequest(is_active=True))
+    resp = api.get_all_instruments_v1(types.ApiGetAllInstrumentsRequest(is_active=True))
     if isinstance(resp, GrvtError):
         raise ValueError(f"Received error: {resp}")
     if resp.instruments is None:
@@ -29,14 +29,14 @@ def test_get_all_instruments() -> None:
         raise ValueError("Expected instruments to be non-empty")
 
 
-def test_get_open_orders() -> None:
+def test_open_orders() -> None:
     api = GrvtApiSync(config=get_config())
 
     # Skip test if trading account id is not set
     if api.config.trading_account_id is None:
         return None
 
-    resp = api.get_open_orders(
+    resp = api.open_orders_v1(
         types.ApiOpenOrdersRequest(
             # sub_account_id=233, Uncomment to test error path with invalid sub account id
             sub_account_id=str(api.config.trading_account_id),

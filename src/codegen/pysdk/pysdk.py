@@ -1,5 +1,7 @@
 from io import TextIOWrapper
 
+import inflection
+
 from ..parse.parse import Enum, SpecRoot, Struct
 
 
@@ -105,6 +107,67 @@ def write_struct(struct: Struct, f: TextIOWrapper) -> None:
     f.write("\n")
 
 
+# from . import types
+# from .grvt_api_base import GrvtApiAsyncBase, GrvtApiConfig, GrvtError
+
+
+# class GrvtApiAsync(GrvtApiAsyncBase):
+#     def __init__(self, config: GrvtApiConfig):
+#         super().__init__(config)
+
+#         self.md_rpc = self.env.market_data.rpc_endpoint
+#         self.td_rpc = self.env.trade_data.rpc_endpoint
+
+#     async def get_all_instruments(
+#         self, req: types.ApiGetAllInstrumentsRequest
+#     ) -> types.ApiGetAllInstrumentsResponse | GrvtError:
+#         resp = await self._post(False, self.md_rpc + "/full/v1/all_instruments", req)
+#         if resp.get("code"):
+#             return GrvtError(**resp)
+#         return types.ApiGetAllInstrumentsResponse(**resp)
+
+#     async def get_open_orders(
+#         self, req: types.ApiOpenOrdersRequest
+#     ) -> types.ApiOpenOrdersResponse | GrvtError:
+#         resp = await self._post(True, self.td_rpc + "/full/v1/open_orders", req)
+#         if resp.get("code"):
+#             return GrvtError(**resp)
+#         return types.ApiOpenOrdersResponse(**resp)
+
+
+def write_rpc_api(spec_root: SpecRoot, f: TextIOWrapper, is_async: bool) -> None:
+    class_name = "GrvtApiAsync" if is_async else "GrvtApiSync"
+    base_class = "GrvtApiAsyncBase" if is_async else "GrvtApiSyncBase"
+
+    f.write("from . import types\n")
+    f.write(f"from .grvt_api_base import {base_class}, GrvtApiConfig, GrvtError\n\n\n")
+
+    f.write(f"class {class_name}({base_class}):\n")
+    f.write("    def __init__(self, config: GrvtApiConfig):\n")
+    f.write("        super().__init__(config)\n")
+    f.write("        self.md_rpc = self.env.market_data.rpc_endpoint\n")
+    f.write("        self.td_rpc = self.env.trade_data.rpc_endpoint\n")
+
+    # Write methods for each RPC
+    for gateway in spec_root.gateways:
+        for rpc in gateway.rpcs:
+            method_prefix = "async " if is_async else ""
+            await_prefix = "await " if is_async else ""
+            rpc_var = "md" if gateway.name == "MarketData" else "td"
+            func_name = inflection.underscore(rpc.name[3:]).lower()
+
+            f.write(f"    {method_prefix}def {func_name}(\n")
+            f.write(f"        self, req: types.{rpc.request}\n")
+            f.write(f"    ) -> types.{rpc.response} | GrvtError:\n")
+            f.write(
+                f"        resp = {await_prefix}self._post({rpc.auth_required},"
+                + f' self.{rpc_var}_rpc + "/full/v{rpc.version}{rpc.route}", req)\n'
+            )
+            f.write('        if resp.get("code"):\n')
+            f.write("            return GrvtError(**resp)\n")
+            f.write(f"        return types.{rpc.response}(**resp)\n\n")
+
+
 def generate(spec_root: SpecRoot) -> None:
     with open("artifacts/pysdk/types.py", "w") as f:
         f.write("# ruff: noqa: D200\n")
@@ -120,3 +183,9 @@ def generate(spec_root: SpecRoot) -> None:
             write_enum(enum, f)
         for struct in spec_root.structs:
             write_struct(struct, f)
+
+    with open("artifacts/pysdk/grvt_api_async.py", "w") as f:
+        write_rpc_api(spec_root, f, is_async=True)
+
+    with open("artifacts/pysdk/grvt_api_sync.py", "w") as f:
+        write_rpc_api(spec_root, f, is_async=False)
