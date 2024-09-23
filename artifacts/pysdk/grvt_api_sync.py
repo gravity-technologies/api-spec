@@ -123,7 +123,7 @@ class GrvtApiSync(GrvtApiSyncBase):
     def get_order_v1(
         self, req: types.ApiGetOrderRequest
     ) -> types.ApiGetOrderResponse | GrvtError:
-        resp = self._post(False, self.td_rpc + "/full/v1/order", req)
+        resp = self._post(True, self.td_rpc + "/full/v1/order", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return types.ApiGetOrderResponse(**resp)

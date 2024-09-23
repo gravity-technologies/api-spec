@@ -1675,18 +1675,24 @@ class ApiSubAccountTradeResponse:
 
 @dataclass
 class ApiSubAccountTradeAggregationRequest:
+    # Optional. The limit of the number of results to return
+    limit: int
     # The interval of each sub account trade
     interval: SubAccountTradeInterval
     # The list of sub account ids to query
     sub_account_i_ds: list[str]
+    # The sub account id to query greater than
+    sub_account_id_greater_than: str
     # Optional. The starting time in unix nanoseconds of a specific interval to query
     start_interval: str
+    # Optional. Start time in unix nanoseconds
+    start_time: str
+    # Optional. End time in unix nanoseconds
+    end_time: str
 
 
 @dataclass
 class SubAccountTradeAggregation:
-    # Start of calculation epoch
-    start_interval: str
     # The sub account id
     sub_account_id: str
     # Total fee paid

@@ -231,13 +231,14 @@ class GrvtApiAsyncBase(GrvtApiBase):
         self.logger.debug(f"{FN} {req_json=}")
         resp: aiohttp.ClientResponse = await self._session.post(path, data=req_json)
         try:
-            resp_json = await resp.json(content_type="application/json")
+            resp_text = await resp.text()
+            resp_json = json.loads(resp_text)
             if not resp.ok:
-                self.logger.warning(f"{FN} Error {resp_json=}")
+                self.logger.warning(f"{FN} Error {resp_text=}")
             else:
-                self.logger.debug(f"{FN} OK {resp_json=}")
+                self.logger.debug(f"{FN} OK {resp_text=}")
         except Exception as err:
-            self.logger.error(f"{FN} Unable to parse {resp.text=} as json:{err=}")
+            self.logger.error(f"{FN} Unable to parse {resp_text=} as json:{err=}")
         return resp_json
 
 
