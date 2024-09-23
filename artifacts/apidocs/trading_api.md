@@ -351,15 +351,201 @@ LITE ENDPOINT: lite/v1/create_order
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |1003|404|Data Not Found|
+        |1004|401|Logged in user does not match the sub account|
+        |1005|500|Unknown Error|
+        |2001|401|Order signature is from an unauthorized signer|
+        |2002|401|Order signature has expired|
+        |2003|401|Order signature does not match payload|
+        |2004|401|Order sub account does not match logged in user|
+        |2005|400|Order ID should be empty when creating an order|
+        |2006|400|Client Order ID should be supplied when creating an order|
+        |2007|400|Client Order ID overlaps with existing active order|
+        |2008|400|Signed Taker Fee lower than Account eligibility|
+        |2009|400|Signed Maker Fee lower than Account eligibility|
+        |2010|400|Orderbook Orders must have a TimeInForce of GTT/IOC/FOK|
+        |2011|400|RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK|
+        |2012|400|Post Only can only be set to true for GTT/AON orders|
+        |2013|400|Market Order must always be supplied without a limit price|
+        |2014|400|Limit Order must always be supplied with a limit price|
+        |2015|400|One-Cancels-Other Order must always be supplied with an oco limit price|
+        |2016|400|Order must contain at least one leg|
+        |2017|400|Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice|
+        |2018|400|Orderbook Orders must contain only one leg|
+        |2019|400|Order state must be empty upon creation|
+        |2020|400|Order execution metadata must be empty upon creation|
+        |2021|400|Order Legs contain one or more inactive derivative|
+        |2022|400|Unsupported Instrument Requested|
+        |2023|400|Order size smaller than min size|
+        |2024|400|Order size smaller than min block size in block trade venue|
+        |2025|400|Invalid limit price tick|
+        |2026|400|Liquidation Order is not supported|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
+        {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":1003,
+            "message":"Data Not Found",
+            "status":404
+        }
+        {
+            "code":1004,
+            "message":"Logged in user does not match the sub account",
+            "status":401
+        }
+        {
+            "code":1005,
+            "message":"Unknown Error",
+            "status":500
+        }
+        {
+            "code":2001,
+            "message":"Order signature is from an unauthorized signer",
+            "status":401
+        }
+        {
+            "code":2002,
+            "message":"Order signature has expired",
+            "status":401
+        }
+        {
+            "code":2003,
+            "message":"Order signature does not match payload",
+            "status":401
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
+        }
+        {
+            "code":2005,
+            "message":"Order ID should be empty when creating an order",
+            "status":400
+        }
+        {
+            "code":2006,
+            "message":"Client Order ID should be supplied when creating an order",
+            "status":400
+        }
+        {
+            "code":2007,
+            "message":"Client Order ID overlaps with existing active order",
+            "status":400
+        }
+        {
+            "code":2008,
+            "message":"Signed Taker Fee lower than Account eligibility",
+            "status":400
+        }
+        {
+            "code":2009,
+            "message":"Signed Maker Fee lower than Account eligibility",
+            "status":400
+        }
+        {
+            "code":2010,
+            "message":"Orderbook Orders must have a TimeInForce of GTT/IOC/FOK",
+            "status":400
+        }
+        {
+            "code":2011,
+            "message":"RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK",
+            "status":400
+        }
+        {
+            "code":2012,
+            "message":"Post Only can only be set to true for GTT/AON orders",
+            "status":400
+        }
+        {
+            "code":2013,
+            "message":"Market Order must always be supplied without a limit price",
+            "status":400
+        }
+        {
+            "code":2014,
+            "message":"Limit Order must always be supplied with a limit price",
+            "status":400
+        }
+        {
+            "code":2015,
+            "message":"One-Cancels-Other Order must always be supplied with an oco limit price",
+            "status":400
+        }
+        {
+            "code":2016,
+            "message":"Order must contain at least one leg",
+            "status":400
+        }
+        {
+            "code":2017,
+            "message":"Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice",
+            "status":400
+        }
+        {
+            "code":2018,
+            "message":"Orderbook Orders must contain only one leg",
+            "status":400
+        }
+        {
+            "code":2019,
+            "message":"Order state must be empty upon creation",
+            "status":400
+        }
+        {
+            "code":2020,
+            "message":"Order execution metadata must be empty upon creation",
+            "status":400
+        }
+        {
+            "code":2021,
+            "message":"Order Legs contain one or more inactive derivative",
+            "status":400
+        }
+        {
+            "code":2022,
+            "message":"Unsupported Instrument Requested",
+            "status":400
+        }
+        {
+            "code":2023,
+            "message":"Order size smaller than min size",
+            "status":400
+        }
+        {
+            "code":2024,
+            "message":"Order size smaller than min block size in block trade venue",
+            "status":400
+        }
+        {
+            "code":2025,
+            "message":"Invalid limit price tick",
+            "status":400
+        }
+        {
+            "code":2026,
+            "message":"Liquidation Order is not supported",
+            "status":400
         }
         ```
     </section>
@@ -730,15 +916,27 @@ LITE ENDPOINT: lite/v1/cancel_order
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -838,15 +1036,27 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -1075,22 +1285,42 @@ LITE ENDPOINT: lite/v1/order
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |1003|404|Data Not Found|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":1003,
+            "message":"Data Not Found",
+            "status":404
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
 === "Try it out"
+    -8<- "sections/auth.md"
     !!! example "Try DEV"
         ```bash
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/order' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
@@ -1101,6 +1331,7 @@ LITE ENDPOINT: lite/v1/order
     !!! example "Try STG"
         ```bash
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/order' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
@@ -1111,6 +1342,7 @@ LITE ENDPOINT: lite/v1/order
     !!! example "Try TESTNET"
         ```bash
         curl --location 'https://trades.testnet.grvt.io/full/v1/order' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
@@ -1121,6 +1353,7 @@ LITE ENDPOINT: lite/v1/order
     !!! example "Try PROD"
         ```bash
         curl --location 'https://trades.grvt.io/full/v1/order' \
+        --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
@@ -1347,15 +1580,27 @@ LITE ENDPOINT: lite/v1/open_orders
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -1644,15 +1889,27 @@ LITE ENDPOINT: lite/v1/order_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -1871,15 +2128,27 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -2063,15 +2332,27 @@ LITE ENDPOINT: lite/v1/positions
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -2193,15 +2474,27 @@ LITE ENDPOINT: lite/v1/deposit
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -2351,15 +2644,27 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -2519,15 +2824,27 @@ LITE ENDPOINT: lite/v1/transfer
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -2743,15 +3060,27 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1000|401|You are not authorized to access this functionality|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -2905,15 +3234,27 @@ LITE ENDPOINT: lite/v1/withdrawal
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -3117,15 +3458,33 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |1000|401|You are not authorized to access this functionality|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -3319,15 +3678,27 @@ LITE ENDPOINT: lite/v1/account_summary
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -3517,15 +3888,27 @@ LITE ENDPOINT: lite/v1/account_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
+        |2004|401|Order sub account does not match logged in user|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
+        }
+        {
+            "code":2004,
+            "message":"Order sub account does not match logged in user",
+            "status":401
         }
         ```
     </section>
@@ -3666,15 +4049,21 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
         }
         ```
     </section>
@@ -3799,15 +4188,21 @@ LITE ENDPOINT: lite/v1/funding_account_summary
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
+        |1002|400|Invalid Request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Invalid Request",
+            "status":400
         }
         ```
     </section>

@@ -123,14 +123,14 @@ LITE ENDPOINT: lite/v1/instrument
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
         }
         ```
@@ -291,14 +291,14 @@ LITE ENDPOINT: lite/v1/all_instruments
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
         }
         ```
@@ -498,14 +498,14 @@ LITE ENDPOINT: lite/v1/instruments
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
         }
         ```
@@ -636,14 +636,14 @@ LITE ENDPOINT: lite/v1/mini
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
         }
         ```
@@ -785,14 +785,14 @@ LITE ENDPOINT: lite/v1/ticker
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
         }
         ```
@@ -919,14 +919,14 @@ LITE ENDPOINT: lite/v1/book
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
         }
         ```
@@ -1062,14 +1062,14 @@ LITE ENDPOINT: lite/v1/trades
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
         }
         ```
@@ -1203,14 +1203,14 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
         }
         ```
@@ -1376,14 +1376,14 @@ LITE ENDPOINT: lite/v1/kline
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
         }
         ```
@@ -1513,14 +1513,14 @@ LITE ENDPOINT: lite/v1/funding
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
         }
         ```
@@ -1686,14 +1686,14 @@ LITE ENDPOINT: lite/v1/settlement
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|InternalServerErr|
+        |1001|500|Internal Server Error|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1001,
-            "message":"InternalServerErr",
+            "message":"Internal Server Error",
             "status":500
         }
         ```

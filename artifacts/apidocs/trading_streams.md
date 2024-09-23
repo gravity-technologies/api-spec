@@ -583,7 +583,7 @@ STREAM: v1.state
 ## Trade
 ### Private Trade
 ```
-STREAM: v1.trade
+STREAM: v1.fill
 ```
 
 === "Feed Selector"
@@ -628,7 +628,7 @@ STREAM: v1.trade
         **JSON RPC Request**
         ```json
         {
-            "stream":"v1.trade",
+            "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
@@ -636,7 +636,7 @@ STREAM: v1.trade
         ```
         ```json
         {
-            "stream":"v1.trade",
+            "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":false
@@ -645,7 +645,7 @@ STREAM: v1.trade
         **JSON RPC Response**
         ```json
         {
-            "stream":"v1.trade",
+            "stream":"v1.fill",
             "subs":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "unsubs":[]
         }
@@ -691,7 +691,7 @@ STREAM: v1.trade
     !!! success
         ```json
         {
-            "stream": "v1.trade",
+            "stream": "v1.fill",
             "sequence_number": "872634876",
             "feed": {
                 "event_time": "1697788800000000000",
@@ -717,7 +717,7 @@ STREAM: v1.trade
         ```
         ```json
         {
-            "s": "v1.trade",
+            "s": "v1.fill",
             "sn": "872634876",
             "f": {
                 "et": "1697788800000000000",
@@ -761,7 +761,7 @@ STREAM: v1.trade
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "stream":"v1.trade",
+            "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
@@ -774,7 +774,7 @@ STREAM: v1.trade
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "stream":"v1.trade",
+            "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
@@ -787,7 +787,7 @@ STREAM: v1.trade
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "stream":"v1.trade",
+            "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
@@ -800,7 +800,7 @@ STREAM: v1.trade
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "stream":"v1.trade",
+            "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
             "method":"subscribe",
             "is_full":true
