@@ -227,44 +227,46 @@ class Positions:
     sub_account_id: str
     # The instrument being represented
     instrument: str
-    # The balance of the position, expressed in underlying asset decimal units. Negative for short positions
-    balance: str
-    # The value of the position, negative for short assets, expressed in quote asset decimal units
-    value: str
+    # The size of the position, expressed in underlying asset decimal units. Negative for short positions
+    size: str
+    # The notional value of the position, negative for short assets, expressed in quote asset decimal units
+    notional: str
     """
     The entry price of the position, expressed in `9` decimals
-    Whenever increasing the balance of a position, the entry price is updated to the new average entry price
-    newEntryPrice = (oldEntryPrice * oldBalance + tradePrice * tradeBalance) / (oldBalance + tradeBalance)
+    Whenever increasing the size of a position, the entry price is updated to the new average entry price
+    `new_entry_price = (old_entry_price * old_size + trade_price * trade_size) / (old_size + trade_size)`
     """
     entry_price: str
     """
     The exit price of the position, expressed in `9` decimals
-    Whenever decreasing the balance of a position, the exit price is updated to the new average exit price
-    newExitPrice = (oldExitPrice * oldExitBalance + tradePrice * tradeBalance) / (oldExitBalance + tradeBalance)
+    Whenever decreasing the size of a position, the exit price is updated to the new average exit price
+    `new_exit_price = (old_exit_price * old_exit_trade_size + trade_price * trade_size) / (old_exit_trade_size + trade_size)`
     """
     exit_price: str
     # The mark price of the position, expressed in `9` decimals
     mark_price: str
     """
     The unrealized PnL of the position, expressed in quote asset decimal units
-    unrealizedPnl = (markPrice - entryPrice) * balance
+    `unrealized_pnl = (mark_price - entry_price) * size`
     """
     unrealized_pnl: str
     """
     The realized PnL of the position, expressed in quote asset decimal units
-    realizedPnl = (exitPrice - entryPrice) * exitBalance
+    `realized_pnl = (exit_price - entry_price) * exit_trade_size`
     """
     realized_pnl: str
     """
     The total PnL of the position, expressed in quote asset decimal units
-    totalPnl = realizedPnl + unrealizedPnl
+    `total_pnl = realized_pnl + unrealized_pnl`
     """
-    pnl: str
+    total_pnl: str
     """
     The ROI of the position, expressed as a percentage
-    roi = (pnl / (entryPrice * balance)) * 100
+    `roi = (total_pnl / (entry_price * abs(size))) * 100^`
     """
     roi: str
+    # The index price of the quote currency. (reported in `USD`)
+    quote_index_price: str
 
 
 @dataclass
@@ -363,12 +365,10 @@ class ApiSubAccountSummaryRequest:
 class SpotBalance:
     # The currency you hold a spot balance in
     currency: Currency
-    """
-    The balance of the asset, expressed in underlying asset decimal units
-    Must take into account the value of all positions with this quote asset
-    ie. for USDT denominated subaccounts, this is is identical to total balance
-    """
+    # This currency's balance in this trading account.
     balance: str
+    # The index price of this currency. (reported in `USD`)
+    index_price: str
 
 
 @dataclass
@@ -380,26 +380,44 @@ class SubAccount:
     # The type of margin algorithm this subaccount uses
     margin_type: MarginType
     """
-    The Quote Currency that this Sub Account is denominated in
-    This subaccount can only open derivative positions denominated in this quote currency
-    All other assets are converted to this quote currency for the purpose of calculating margin
+    The settlement, margin, and reporting currency of this account.
+    This subaccount can only open positions quoted in this currency
+
     In the future, when users select a Multi-Currency Margin Type, this will be USD
+    All other assets are converted to this currency for the purpose of calculating margin
     """
-    quote_currency: Currency
-    # The total unrealized PnL of all positions owned by this subaccount, denominated in quote currency decimal units
+    settle_currency: Currency
+    """
+    The total unrealized PnL of all positions owned by this subaccount, denominated in quote currency decimal units.
+    `unrealized_pnl = sum(position.unrealized_pnl * position.quote_index_price) / settle_index_price`
+    """
     unrealized_pnl: str
-    # The total value across all spot assets, or in other words, the current margin
-    total_value: str
-    # The initial margin requirement of all positions owned by this vault, denominated in quote currency decimal units
+    """
+    The notional value of your account if all positions are closed, excluding trading fees (reported in `settle_currency`).
+    `total_equity = sum(spot_balance.balance * spot_balance.index_price) / settle_index_price + unrealized_pnl`
+    """
+    total_equity: str
+    """
+    The `total_equity` required to open positions in the account (reported in `settle_currency`).
+    Computation is different depending on account's `margin_type`
+    """
     initial_margin: str
-    # The maintanence margin requirement of all positions owned by this vault, denominated in quote currency decimal units
-    maintanence_margin: str
-    # The margin available for withdrawal, denominated in quote currency decimal units
-    available_margin: str
+    """
+    The `total_equity` required to avoid liquidation of positions in the account (reported in `settle_currency`).
+    Computation is different depending on account's `margin_type`
+    """
+    maintenance_margin: str
+    """
+    The notional value available to transfer out of the trading account into the funding account (reported in `settle_currency`).
+    `available_balance = total_equity - initial_margin - min(unrealized_pnl, 0)`
+    """
+    available_balance: str
     # The list of spot assets owned by this sub account, and their balances
     spot_balances: list[SpotBalance]
     # The list of positions owned by this sub account
     positions: list[Positions]
+    # The index price of the settle currency. (reported in `USD`)
+    settle_index_price: str
 
 
 @dataclass
@@ -456,35 +474,23 @@ class ApiLatestSnapSubAccountsResponse:
 
 
 @dataclass
-class MarkPrice:
-    # The currency you hold a spot balance in
-    currency: Currency
-    # The mark price of the asset, expressed in `9` decimals
-    mark_price: str
-
-
-@dataclass
 class ApiAggregatedAccountSummaryResponse:
     # The main account ID of the account to which the summary belongs
     main_account_id: str
-    # Total equity of the account, denominated in USD
+    # Total equity of the main (+ sub) account, denominated in USD
     total_equity: str
-    # The list of spot assets owned by this sub account, and their balances
+    # The list of spot assets owned by this main (+ sub) account, and their balances
     spot_balances: list[SpotBalance]
-    # The list of mark prices for the assets owned by this account
-    mark_prices: list[MarkPrice]
 
 
 @dataclass
 class ApiFundingAccountSummaryResponse:
     # The main account ID of the account to which the summary belongs
     main_account_id: str
-    # Total equity of the account, denominated in USD
+    # Total equity of the main account, denominated in USD
     total_equity: str
-    # The list of spot assets owned by this account, and their balances
+    # The list of spot assets owned by this main account, and their balances
     spot_balances: list[SpotBalance]
-    # The list of mark prices for the assets owned by this account
-    mark_prices: list[MarkPrice]
 
 
 @dataclass
@@ -1204,12 +1210,6 @@ class OrderLeg:
     This is the total amount of base currency to pay/receive for all legs.
     """
     limit_price: str
-    """
-    If a OCO order is specified, this must contain the other limit price
-    User must sign both limit prices. Depending on which trigger condition is activated, a different limit price is used
-    The smart contract will always validate both limit prices, by arranging them in ascending order
-    """
-    oco_limit_price: str
     # Specifies if the order leg is a buy or sell
     is_buying_asset: bool
 
@@ -1304,15 +1304,6 @@ class Order:
     RFQ Maker only supports (GTT, AON), RFQ Taker only supports (FOK)
     """
     time_in_force: TimeInForce
-    """
-    The taker fee percentage cap signed by the order.
-    This is the maximum taker fee percentage the order sender is willing to pay for the order.
-    Expressed in 1/100th of a basis point. Eg. 100 = 1bps, 10,000 = 1%
-
-    """
-    taker_fee_percentage_cap: int
-    # Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates
-    maker_fee_percentage_cap: int
     """
     If True, Order must be a maker order. It has to fill the orderbook instead of match it.
     If False, Order can be either a maker or taker order.

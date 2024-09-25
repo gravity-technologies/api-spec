@@ -97,8 +97,6 @@ STREAM: v1.order
             |sub_account_id|sa|string|True|The subaccount initiating the order|
             |is_market|im|boolean|True|If the order is a market order<br>Market Orders do not have a limit price, and are always executed according to the maker order price.<br>Market Orders must always be taker orders|
             |time_in_force|ti|TimeInForce|True|Four supported types of orders: GTT, IOC, AON, FOK:<ul><br><li>PARTIAL EXECUTION = GTT / IOC - allows partial size execution on each leg</li><br><li>FULL EXECUTION = AON / FOK - only allows full size execution on all legs</li><br><li>TAKER ONLY = IOC / FOK - only allows taker orders</li><br><li>MAKER OR TAKER = GTT / AON - allows maker or taker orders</li><br></ul>Exchange only supports (GTT, IOC, FOK)<br>RFQ Maker only supports (GTT, AON), RFQ Taker only supports (FOK)|
-            |taker_fee_percentage_cap|tf|number|True|The taker fee percentage cap signed by the order.<br>This is the maximum taker fee percentage the order sender is willing to pay for the order.<br>Expressed in 1/100th of a basis point. Eg. 100 = 1bps, 10,000 = 1%<br>|
-            |maker_fee_percentage_cap|mf|number|True|Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates|
             |post_only|po|boolean|True|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order.<br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
             |reduce_only|ro|boolean|True|If True, Order must reduce the position size, or be cancelled|
             |legs|l|[OrderLeg]|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
@@ -124,7 +122,6 @@ STREAM: v1.order
                 |instrument|i|string|True|The instrument to trade in this leg|
                 |size|s|string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
                 |limit_price|lp|string|True|The limit price of the order leg, expressed in `9` decimals.<br>This is the total amount of base currency to pay/receive for all legs.|
-                |oco_limit_price|ol|string|True|If a OCO order is specified, this must contain the other limit price<br>User must sign both limit prices. Depending on which trigger condition is activated, a different limit price is used<br>The smart contract will always validate both limit prices, by arranging them in ascending order|
                 |is_buying_asset|ib|boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
                 |Name|Lite|Type|Required| Description |
@@ -198,15 +195,12 @@ STREAM: v1.order
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
-                "taker_fee_percentage_cap": "0.05",
-                "maker_fee_percentage_cap": "0.03",
                 "post_only": false,
                 "reduce_only": false,
                 "legs": [{
                     "instrument": "BTC_USDT_Perp",
                     "size": "10.5",
                     "limit_price": "65038.01",
-                    "oco_limit_price": "63038.01",
                     "is_buying_asset": true
                 }],
                 "signature": {
@@ -240,15 +234,12 @@ STREAM: v1.order
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "im": false,
                 "ti": "GOOD_TILL_TIME",
-                "tf": "0.05",
-                "mf": "0.03",
                 "po": false,
                 "ro": false,
                 "l": [{
                     "i": "BTC_USDT_Perp",
                     "s": "10.5",
                     "lp": "65038.01",
-                    "ol": "63038.01",
                     "ib": true
                 }],
                 "s": {
@@ -895,15 +886,16 @@ STREAM: v1.position
             |event_time|et|string|True|Time at which the event was emitted in unix nanoseconds|
             |sub_account_id|sa|string|True|The sub account ID that participated in the trade|
             |instrument|i|string|True|The instrument being represented|
-            |balance|b|string|True|The balance of the position, expressed in underlying asset decimal units. Negative for short positions|
-            |value|v|string|True|The value of the position, negative for short assets, expressed in quote asset decimal units|
-            |entry_price|ep|string|True|The entry price of the position, expressed in `9` decimals<br>Whenever increasing the balance of a position, the entry price is updated to the new average entry price<br>newEntryPrice = (oldEntryPrice * oldBalance + tradePrice * tradeBalance) / (oldBalance + tradeBalance)|
-            |exit_price|ep1|string|True|The exit price of the position, expressed in `9` decimals<br>Whenever decreasing the balance of a position, the exit price is updated to the new average exit price<br>newExitPrice = (oldExitPrice * oldExitBalance + tradePrice * tradeBalance) / (oldExitBalance + tradeBalance)|
+            |size|s|string|True|The size of the position, expressed in underlying asset decimal units. Negative for short positions|
+            |notional|n|string|True|The notional value of the position, negative for short assets, expressed in quote asset decimal units|
+            |entry_price|ep|string|True|The entry price of the position, expressed in `9` decimals<br>Whenever increasing the size of a position, the entry price is updated to the new average entry price<br>`new_entry_price = (old_entry_price * old_size + trade_price * trade_size) / (old_size + trade_size)`|
+            |exit_price|ep1|string|True|The exit price of the position, expressed in `9` decimals<br>Whenever decreasing the size of a position, the exit price is updated to the new average exit price<br>`new_exit_price = (old_exit_price * old_exit_trade_size + trade_price * trade_size) / (old_exit_trade_size + trade_size)`|
             |mark_price|mp|string|True|The mark price of the position, expressed in `9` decimals|
-            |unrealized_pnl|up|string|True|The unrealized PnL of the position, expressed in quote asset decimal units<br>unrealizedPnl = (markPrice - entryPrice) * balance|
-            |realized_pnl|rp|string|True|The realized PnL of the position, expressed in quote asset decimal units<br>realizedPnl = (exitPrice - entryPrice) * exitBalance|
-            |pnl|p|string|True|The total PnL of the position, expressed in quote asset decimal units<br>totalPnl = realizedPnl + unrealizedPnl|
-            |roi|r|string|True|The ROI of the position, expressed as a percentage<br>roi = (pnl / (entryPrice * balance)) * 100|
+            |unrealized_pnl|up|string|True|The unrealized PnL of the position, expressed in quote asset decimal units<br>`unrealized_pnl = (mark_price - entry_price) * size`|
+            |realized_pnl|rp|string|True|The realized PnL of the position, expressed in quote asset decimal units<br>`realized_pnl = (exit_price - entry_price) * exit_trade_size`|
+            |total_pnl|tp|string|True|The total PnL of the position, expressed in quote asset decimal units<br>`total_pnl = realized_pnl + unrealized_pnl`|
+            |roi|r|string|True|The ROI of the position, expressed as a percentage<br>`roi = (total_pnl / (entry_price * abs(size))) * 100^`|
+            |quote_index_price|qi|string|True|The index price of the quote currency. (reported in `USD`)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -915,15 +907,16 @@ STREAM: v1.position
                 "event_time": "1697788800000000000",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
-                "balance": "2635000.50",
-                "value": "2635000.50",
+                "size": "2635000.50",
+                "notional": "2635000.50",
                 "entry_price": "65038.01",
                 "exit_price": "65038.01",
                 "mark_price": "65038.01",
                 "unrealized_pnl": "135000.50",
                 "realized_pnl": "-35000.30",
-                "pnl": "100000.20",
-                "roi": "10.20"
+                "total_pnl": "100000.20",
+                "roi": "10.20",
+                "quote_index_price": "1.0000102"
             }
         }
         ```
@@ -935,15 +928,16 @@ STREAM: v1.position
                 "et": "1697788800000000000",
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "i": "BTC_USDT_Perp",
-                "b": "2635000.50",
-                "v": "2635000.50",
+                "s": "2635000.50",
+                "n": "2635000.50",
                 "ep": "65038.01",
                 "ep1": "65038.01",
                 "mp": "65038.01",
                 "up": "135000.50",
                 "rp": "-35000.30",
-                "p": "100000.20",
-                "r": "10.20"
+                "tp": "100000.20",
+                "r": "10.20",
+                "qi": "1.0000102"
             }
         }
         ```
