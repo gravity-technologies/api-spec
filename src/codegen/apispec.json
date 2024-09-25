@@ -369,16 +369,6 @@
               "status": 400
             },
             {
-              "code": 2008,
-              "message": "Signed Taker Fee lower than Account eligibility",
-              "status": 400
-            },
-            {
-              "code": 2009,
-              "message": "Signed Maker Fee lower than Account eligibility",
-              "status": 400
-            },
-            {
               "code": 2010,
               "message": "Orderbook Orders must have a TimeInForce of GTT/IOC/FOK",
               "status": 400
@@ -401,11 +391,6 @@
             {
               "code": 2014,
               "message": "Limit Order must always be supplied with a limit price",
-              "status": 400
-            },
-            {
-              "code": 2015,
-              "message": "One-Cancels-Other Order must always be supplied with an oco limit price",
               "status": 400
             },
             {
@@ -472,7 +457,33 @@
           "route": "/cancel_order",
           "auth_required": true,
           "request": "ApiCancelOrderRequest",
-          "response": "ApiCancelOrderResponse",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1001,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1002,
+              "message": "Invalid Request",
+              "status": 400
+            },
+            {
+              "code": 1000,
+              "message": "You are not authorized to access this functionality",
+              "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "Order",
+          "name": "RPCCancelAllOrdersV1",
+          "version": 1,
+          "route": "/cancel_all_orders",
+          "auth_required": true,
+          "request": "ApiCancelAllOrdersRequest",
+          "response": "AckResponse",
           "on_request_errors": [
             {
               "code": 1001,
@@ -488,31 +499,10 @@
               "code": 2004,
               "message": "Order sub account does not match logged in user",
               "status": 401
-            }
-          ]
-        },
-        {
-          "namespace": "Order",
-          "name": "RPCCancelAllOrdersV1",
-          "version": 1,
-          "route": "/cancel_all_orders",
-          "auth_required": true,
-          "request": "ApiCancelAllOrdersRequest",
-          "response": "ApiCancelAllOrdersResponse",
-          "on_request_errors": [
-            {
-              "code": 1001,
-              "message": "Internal Server Error",
-              "status": 500
             },
             {
-              "code": 1002,
-              "message": "Invalid Request",
-              "status": 400
-            },
-            {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
+              "code": 1000,
+              "message": "You are not authorized to access this functionality",
               "status": 401
             }
           ]
@@ -542,8 +532,8 @@
               "status": 404
             },
             {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
+              "code": 1000,
+              "message": "You are not authorized to access this functionality",
               "status": 401
             }
           ]
@@ -568,8 +558,8 @@
               "status": 400
             },
             {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
+              "code": 1000,
+              "message": "You are not authorized to access this functionality",
               "status": 401
             }
           ]
@@ -594,8 +584,8 @@
               "status": 400
             },
             {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
+              "code": 1000,
+              "message": "You are not authorized to access this functionality",
               "status": 401
             }
           ]
@@ -620,8 +610,8 @@
               "status": 400
             },
             {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
+              "code": 1000,
+              "message": "You are not authorized to access this functionality",
               "status": 401
             }
           ]
@@ -646,8 +636,8 @@
               "status": 400
             },
             {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
+              "code": 1000,
+              "message": "You are not authorized to access this functionality",
               "status": 401
             }
           ]
@@ -672,8 +662,8 @@
               "status": 400
             },
             {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
+              "code": 1000,
+              "message": "You are not authorized to access this functionality",
               "status": 401
             }
           ]
@@ -698,8 +688,8 @@
               "status": 400
             },
             {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
+              "code": 1000,
+              "message": "You are not authorized to access this functionality",
               "status": 401
             }
           ]
@@ -724,8 +714,8 @@
               "status": 400
             },
             {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
+              "code": 1000,
+              "message": "You are not authorized to access this functionality",
               "status": 401
             }
           ]
@@ -747,11 +737,6 @@
             {
               "code": 1000,
               "message": "You are not authorized to access this functionality",
-              "status": 401
-            },
-            {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
               "status": 401
             }
           ]
@@ -776,8 +761,8 @@
               "status": 400
             },
             {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
+              "code": 1000,
+              "message": "You are not authorized to access this functionality",
               "status": 401
             }
           ]
@@ -804,11 +789,6 @@
             {
               "code": 1000,
               "message": "You are not authorized to access this functionality",
-              "status": 401
-            },
-            {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
               "status": 401
             }
           ]
@@ -859,8 +839,8 @@
               "status": 400
             },
             {
-              "code": 2004,
-              "message": "Order sub account does not match logged in user",
+              "code": 1000,
+              "message": "You are not authorized to access this functionality",
               "status": 401
             }
           ]
@@ -1081,8 +1061,8 @@
           ]
         },
         {
-          "name": "balance",
-          "lite_name": "b",
+          "name": "size",
+          "lite_name": "s",
           "semantic_type": "string",
           "json_type": "string",
           "index": 3,
@@ -1090,12 +1070,12 @@
           "optional": false,
           "example": "'2635000.50'",
           "comment": [
-            "The balance of the position, expressed in underlying asset decimal units. Negative for short positions"
+            "The size of the position, expressed in underlying asset decimal units. Negative for short positions"
           ]
         },
         {
-          "name": "value",
-          "lite_name": "v",
+          "name": "notional",
+          "lite_name": "n",
           "semantic_type": "string",
           "json_type": "string",
           "index": 4,
@@ -1103,7 +1083,7 @@
           "optional": false,
           "example": "'2635000.50'",
           "comment": [
-            "The value of the position, negative for short assets, expressed in quote asset decimal units"
+            "The notional value of the position, negative for short assets, expressed in quote asset decimal units"
           ]
         },
         {
@@ -1117,8 +1097,8 @@
           "example": "'65038.01'",
           "comment": [
             "The entry price of the position, expressed in `9` decimals",
-            "Whenever increasing the balance of a position, the entry price is updated to the new average entry price",
-            "newEntryPrice = (oldEntryPrice * oldBalance + tradePrice * tradeBalance) / (oldBalance + tradeBalance)"
+            "Whenever increasing the size of a position, the entry price is updated to the new average entry price",
+            "`new_entry_price = (old_entry_price * old_size + trade_price * trade_size) / (old_size + trade_size)`"
           ]
         },
         {
@@ -1132,8 +1112,8 @@
           "example": "'65038.01'",
           "comment": [
             "The exit price of the position, expressed in `9` decimals",
-            "Whenever decreasing the balance of a position, the exit price is updated to the new average exit price",
-            "newExitPrice = (oldExitPrice * oldExitBalance + tradePrice * tradeBalance) / (oldExitBalance + tradeBalance)"
+            "Whenever decreasing the size of a position, the exit price is updated to the new average exit price",
+            "`new_exit_price = (old_exit_price * old_exit_trade_size + trade_price * trade_size) / (old_exit_trade_size + trade_size)`"
           ]
         },
         {
@@ -1160,7 +1140,7 @@
           "example": "'135000.50'",
           "comment": [
             "The unrealized PnL of the position, expressed in quote asset decimal units",
-            "unrealizedPnl = (markPrice - entryPrice) * balance"
+            "`unrealized_pnl = (mark_price - entry_price) * size`"
           ]
         },
         {
@@ -1174,12 +1154,12 @@
           "example": "'-35000.30'",
           "comment": [
             "The realized PnL of the position, expressed in quote asset decimal units",
-            "realizedPnl = (exitPrice - entryPrice) * exitBalance"
+            "`realized_pnl = (exit_price - entry_price) * exit_trade_size`"
           ]
         },
         {
-          "name": "pnl",
-          "lite_name": "p",
+          "name": "total_pnl",
+          "lite_name": "tp",
           "semantic_type": "string",
           "json_type": "string",
           "index": 10,
@@ -1188,7 +1168,7 @@
           "example": "'100000.20'",
           "comment": [
             "The total PnL of the position, expressed in quote asset decimal units",
-            "totalPnl = realizedPnl + unrealizedPnl"
+            "`total_pnl = realized_pnl + unrealized_pnl`"
           ]
         },
         {
@@ -1202,7 +1182,20 @@
           "example": "'10.20'",
           "comment": [
             "The ROI of the position, expressed as a percentage",
-            "roi = (pnl / (entryPrice * balance)) * 100"
+            "`roi = (total_pnl / (entry_price * abs(size))) * 100^`"
+          ]
+        },
+        {
+          "name": "quote_index_price",
+          "lite_name": "qi",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 12,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1.0000102'",
+          "comment": [
+            "The index price of the quote currency. (reported in `USD`)"
           ]
         }
       ],
@@ -1681,9 +1674,20 @@
           "optional": false,
           "example": "'123456.78'",
           "comment": [
-            "The balance of the asset, expressed in underlying asset decimal units",
-            "Must take into account the value of all positions with this quote asset",
-            "ie. for USDT denominated subaccounts, this is is identical to total balance"
+            "This currency's balance in this trading account."
+          ]
+        },
+        {
+          "name": "index_price",
+          "lite_name": "ip",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1.0000102'",
+          "comment": [
+            "The index price of this currency. (reported in `USD`)"
           ]
         }
       ],
@@ -1733,8 +1737,8 @@
           ]
         },
         {
-          "name": "quote_currency",
-          "lite_name": "qc",
+          "name": "settle_currency",
+          "lite_name": "sc",
           "semantic_type": "Currency",
           "json_type": "Currency",
           "index": 3,
@@ -1742,10 +1746,11 @@
           "optional": false,
           "example": "'USDT'",
           "comment": [
-            "The Quote Currency that this Sub Account is denominated in",
-            "This subaccount can only open derivative positions denominated in this quote currency",
-            "All other assets are converted to this quote currency for the purpose of calculating margin",
-            "In the future, when users select a Multi-Currency Margin Type, this will be USD"
+            "The settlement, margin, and reporting currency of this account.",
+            "This subaccount can only open positions quoted in this currency",
+            "",
+            "In the future, when users select a Multi-Currency Margin Type, this will be USD",
+            "All other assets are converted to this currency for the purpose of calculating margin"
           ]
         },
         {
@@ -1758,12 +1763,13 @@
           "optional": false,
           "example": "'123456.78'",
           "comment": [
-            "The total unrealized PnL of all positions owned by this subaccount, denominated in quote currency decimal units"
+            "The total unrealized PnL of all positions owned by this subaccount, denominated in quote currency decimal units.",
+            "`unrealized_pnl = sum(position.unrealized_pnl * position.quote_index_price) / settle_index_price`"
           ]
         },
         {
-          "name": "total_value",
-          "lite_name": "tv",
+          "name": "total_equity",
+          "lite_name": "te",
           "semantic_type": "string",
           "json_type": "string",
           "index": 5,
@@ -1771,7 +1777,8 @@
           "optional": false,
           "example": "'123456.78'",
           "comment": [
-            "The total value across all spot assets, or in other words, the current margin "
+            "The notional value of your account if all positions are closed, excluding trading fees (reported in `settle_currency`).",
+            "`total_equity = sum(spot_balance.balance * spot_balance.index_price) / settle_index_price + unrealized_pnl`"
           ]
         },
         {
@@ -1784,11 +1791,12 @@
           "optional": false,
           "example": "'123456.78'",
           "comment": [
-            "The initial margin requirement of all positions owned by this vault, denominated in quote currency decimal units"
+            "The `total_equity` required to open positions in the account (reported in `settle_currency`).",
+            "Computation is different depending on account's `margin_type`"
           ]
         },
         {
-          "name": "maintanence_margin",
+          "name": "maintenance_margin",
           "lite_name": "mm",
           "semantic_type": "string",
           "json_type": "string",
@@ -1797,12 +1805,13 @@
           "optional": false,
           "example": "'123456.78'",
           "comment": [
-            "The maintanence margin requirement of all positions owned by this vault, denominated in quote currency decimal units"
+            "The `total_equity` required to avoid liquidation of positions in the account (reported in `settle_currency`).",
+            "Computation is different depending on account's `margin_type`"
           ]
         },
         {
-          "name": "available_margin",
-          "lite_name": "am",
+          "name": "available_balance",
+          "lite_name": "ab",
           "semantic_type": "string",
           "json_type": "string",
           "index": 8,
@@ -1810,7 +1819,8 @@
           "optional": false,
           "example": "'123456.78'",
           "comment": [
-            "The margin available for withdrawal, denominated in quote currency decimal units"
+            "The notional value available to transfer out of the trading account into the funding account (reported in `settle_currency`).",
+            "`available_balance = total_equity - initial_margin - min(unrealized_pnl, 0)`"
           ]
         },
         {
@@ -1835,6 +1845,19 @@
           "optional": false,
           "comment": [
             "The list of positions owned by this sub account"
+          ]
+        },
+        {
+          "name": "settle_index_price",
+          "lite_name": "si",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 11,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1.0000102'",
+          "comment": [
+            "The index price of the settle currency. (reported in `USD`)"
           ]
         }
       ],
@@ -2014,39 +2037,6 @@
       "comment": []
     },
     {
-      "name": "MarkPrice",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "currency",
-          "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'USDT'",
-          "comment": [
-            "The currency you hold a spot balance in"
-          ]
-        },
-        {
-          "name": "mark_price",
-          "lite_name": "mp",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "65000.1",
-          "comment": [
-            "The mark price of the asset, expressed in `9` decimals"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
       "name": "ApiAggregatedAccountSummaryResponse",
       "is_root": true,
       "fields": [
@@ -2073,7 +2063,7 @@
           "optional": false,
           "example": "'3945034.23'",
           "comment": [
-            "Total equity of the account, denominated in USD"
+            "Total equity of the main (+ sub) account, denominated in USD"
           ]
         },
         {
@@ -2085,23 +2075,13 @@
           "array_depth": 1,
           "optional": false,
           "comment": [
-            "The list of spot assets owned by this sub account, and their balances"
-          ]
-        },
-        {
-          "name": "mark_prices",
-          "lite_name": "mp",
-          "semantic_type": "MarkPrice",
-          "json_type": "MarkPrice",
-          "index": 3,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The list of mark prices for the assets owned by this account"
+            "The list of spot assets owned by this main (+ sub) account, and their balances"
           ]
         }
       ],
-      "comment": []
+      "comment": [
+        "The aggregated account summary, that reports the total equity and spot balances of a funding (main) account, and its constituent trading (sub) accounts"
+      ]
     },
     {
       "name": "ApiFundingAccountSummaryResponse",
@@ -2130,7 +2110,7 @@
           "optional": false,
           "example": "'3945034.23'",
           "comment": [
-            "Total equity of the account, denominated in USD"
+            "Total equity of the main account, denominated in USD"
           ]
         },
         {
@@ -2142,23 +2122,13 @@
           "array_depth": 1,
           "optional": false,
           "comment": [
-            "The list of spot assets owned by this account, and their balances"
-          ]
-        },
-        {
-          "name": "mark_prices",
-          "lite_name": "mp",
-          "semantic_type": "MarkPrice",
-          "json_type": "MarkPrice",
-          "index": 3,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The list of mark prices for the assets owned by this account"
+            "The list of spot assets owned by this main account, and their balances"
           ]
         }
       ],
-      "comment": []
+      "comment": [
+        "The funding account summary, that reports the total equity and spot balances of a funding (main) account"
+      ]
     },
     {
       "name": "ApiOrderbookLevelsRequest",
@@ -4814,26 +4784,11 @@
           ]
         },
         {
-          "name": "oco_limit_price",
-          "lite_name": "ol",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'63038.01'",
-          "comment": [
-            "If a OCO order is specified, this must contain the other limit price",
-            "User must sign both limit prices. Depending on which trigger condition is activated, a different limit price is used",
-            "The smart contract will always validate both limit prices, by arranging them in ascending order"
-          ]
-        },
-        {
           "name": "is_buying_asset",
           "lite_name": "ib",
           "semantic_type": "bool",
           "json_type": "boolean",
-          "index": 4,
+          "index": 3,
           "array_depth": 0,
           "optional": false,
           "example": "true",
@@ -5111,40 +5066,11 @@
           ]
         },
         {
-          "name": "taker_fee_percentage_cap",
-          "lite_name": "tf",
-          "semantic_type": "int32",
-          "json_type": "number",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0.05'",
-          "comment": [
-            "The taker fee percentage cap signed by the order.",
-            "This is the maximum taker fee percentage the order sender is willing to pay for the order.",
-            "Expressed in 1/100th of a basis point. Eg. 100 = 1bps, 10,000 = 1%",
-            ""
-          ]
-        },
-        {
-          "name": "maker_fee_percentage_cap",
-          "lite_name": "mf",
-          "semantic_type": "int32",
-          "json_type": "number",
-          "index": 5,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0.03'",
-          "comment": [
-            "Same as TakerFeePercentageCap, but for the maker fee. Negative for maker rebates"
-          ]
-        },
-        {
           "name": "post_only",
           "lite_name": "po",
           "semantic_type": "bool",
           "json_type": "boolean",
-          "index": 6,
+          "index": 4,
           "array_depth": 0,
           "optional": false,
           "example": "false",
@@ -5165,7 +5091,7 @@
           "lite_name": "ro",
           "semantic_type": "bool",
           "json_type": "boolean",
-          "index": 7,
+          "index": 5,
           "array_depth": 0,
           "optional": false,
           "example": "false",
@@ -5178,7 +5104,7 @@
           "lite_name": "l",
           "semantic_type": "OrderLeg",
           "json_type": "OrderLeg",
-          "index": 8,
+          "index": 6,
           "array_depth": 1,
           "optional": false,
           "comment": [
@@ -5191,7 +5117,7 @@
           "lite_name": "s",
           "semantic_type": "Signature",
           "json_type": "Signature",
-          "index": 9,
+          "index": 7,
           "array_depth": 0,
           "optional": false,
           "comment": [
@@ -5203,7 +5129,7 @@
           "lite_name": "m",
           "semantic_type": "OrderMetadata",
           "json_type": "OrderMetadata",
-          "index": 10,
+          "index": 8,
           "array_depth": 0,
           "optional": false,
           "comment": [
@@ -5215,7 +5141,7 @@
           "lite_name": "s1",
           "semantic_type": "OrderState",
           "json_type": "OrderState",
-          "index": 11,
+          "index": 9,
           "array_depth": 0,
           "optional": false,
           "comment": [
