@@ -169,7 +169,6 @@ STREAM: v1.mini.s
         ' -w 360
         ```
 <hr class="solid">
-
 ### Mini Ticker Delta
 ```
 STREAM: v1.mini.d
@@ -338,7 +337,6 @@ STREAM: v1.mini.d
         ' -w 360
         ```
 <hr class="solid">
-
 ### Ticker Snap
 ```
 STREAM: v1.ticker.s
@@ -548,7 +546,6 @@ STREAM: v1.ticker.s
         ' -w 360
         ```
 <hr class="solid">
-
 ### Ticker Delta
 ```
 STREAM: v1.ticker.d
@@ -758,7 +755,6 @@ STREAM: v1.ticker.d
         ' -w 360
         ```
 <hr class="solid">
-
 ## Orderbook
 ### Orderbook Snap
 ```
@@ -937,7 +933,6 @@ STREAM: v1.book.s
         ' -w 360
         ```
 <hr class="solid">
-
 ### Orderbook Delta
 ```
 STREAM: v1.book.d
@@ -1115,7 +1110,6 @@ STREAM: v1.book.d
         ' -w 360
         ```
 <hr class="solid">
-
 ## Trade
 ### Public Trades
 ```
@@ -1296,7 +1290,6 @@ STREAM: v1.trade
         ' -w 360
         ```
 <hr class="solid">
-
 ## Candlestick
 ### Candlestick
 ```

@@ -71,7 +71,6 @@ def write_stream(
     write_errors(ctx, md, stream.on_subscribe_errors)
     write_stream_rpc_try_it_out(ctx, md, gateway, stream)
     md.writeln('<hr class="solid">')
-    md.writeln("")
 
 
 def write_stream_feed_selector(
@@ -223,7 +222,6 @@ def write_rpc(ctx: CodegenCtx, md: MarkdownWriter, gateway: Gateway, rpc: RPC) -
     write_errors(ctx, md, rpc.on_request_errors)
     write_rpc_try_it_out(ctx, md, gateway, rpc)
     md.writeln('<hr class="solid">')
-    md.writeln("")
 
 
 def write_rpc_request(ctx: CodegenCtx, md: MarkdownWriter, rpc: RPC) -> None:

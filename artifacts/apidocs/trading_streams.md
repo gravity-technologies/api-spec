@@ -93,16 +93,16 @@ STREAM: v1.order
 
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
-            |order_id|oi|string|True|[Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend|
+            |order_id|oi|string|False|[Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend|
             |sub_account_id|sa|string|True|The subaccount initiating the order|
-            |is_market|im|boolean|True|If the order is a market order<br>Market Orders do not have a limit price, and are always executed according to the maker order price.<br>Market Orders must always be taker orders|
+            |is_market|im|boolean|False|If the order is a market order<br>Market Orders do not have a limit price, and are always executed according to the maker order price.<br>Market Orders must always be taker orders|
             |time_in_force|ti|TimeInForce|True|Four supported types of orders: GTT, IOC, AON, FOK:<ul><br><li>PARTIAL EXECUTION = GTT / IOC - allows partial size execution on each leg</li><br><li>FULL EXECUTION = AON / FOK - only allows full size execution on all legs</li><br><li>TAKER ONLY = IOC / FOK - only allows taker orders</li><br><li>MAKER OR TAKER = GTT / AON - allows maker or taker orders</li><br></ul>Exchange only supports (GTT, IOC, FOK)<br>RFQ Maker only supports (GTT, AON), RFQ Taker only supports (FOK)|
-            |post_only|po|boolean|True|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order.<br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
-            |reduce_only|ro|boolean|True|If True, Order must reduce the position size, or be cancelled|
+            |post_only|po|boolean|False|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order.<br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
+            |reduce_only|ro|boolean|False|If True, Order must reduce the position size, or be cancelled|
             |legs|l|[OrderLeg]|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
             |signature|s|Signature|True|The signature approving this order|
             |metadata|m|OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
-            |state|s1|OrderState|True|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
+            |state|s1|OrderState|False|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
             ??? info "TimeInForce"
                 |                       | Must Fill All | Can Fill Partial |
                 | -                     | -             | -                |
@@ -138,7 +138,7 @@ STREAM: v1.order
                 |Name|Lite|Type|Required| Description |
                 |-|-|-|-|-|
                 |client_order_id|co|string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
-                |create_time|ct|string|True|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
+                |create_time|ct|string|False|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
             ??? info "OrderState"
                 |Name|Lite|Type|Required| Description |
                 |-|-|-|-|-|
@@ -331,7 +331,6 @@ STREAM: v1.order
         ' -w 360
         ```
 <hr class="solid">
-
 ### Order State
 ```
 STREAM: v1.state
@@ -570,7 +569,6 @@ STREAM: v1.state
         ' -w 360
         ```
 <hr class="solid">
-
 ## Trade
 ### Private Trade
 ```
@@ -799,7 +797,6 @@ STREAM: v1.fill
         ' -w 360
         ```
 <hr class="solid">
-
 ### Positions
 ```
 STREAM: v1.position
@@ -1008,7 +1005,6 @@ STREAM: v1.position
         ' -w 360
         ```
 <hr class="solid">
-
 ## Transfer
 ### Deposit
 ```
@@ -1171,7 +1167,6 @@ STREAM: v1.deposit
         ' -w 360
         ```
 <hr class="solid">
-
 ### Transfer
 ```
 STREAM: v1.transfer
@@ -1365,7 +1360,6 @@ STREAM: v1.transfer
         ' -w 360
         ```
 <hr class="solid">
-
 ### Withdrawal
 ```
 STREAM: v1.withdrawal
