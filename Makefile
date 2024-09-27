@@ -7,6 +7,7 @@ help: ## Show this help
 .PHONY: run
 run: ## Run the project
 	uv run python -m codegen.main
+	make format
 
 .PHONY: test
 test: ## Run the tests

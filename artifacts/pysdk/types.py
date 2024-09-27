@@ -557,32 +557,32 @@ class ApiMiniTickerRequest:
 @dataclass
 class MiniTicker:
     # Time at which the event was emitted in unix nanoseconds
-    event_time: str | None
+    event_time: str | None = None
     """
     The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
     """
-    instrument: str | None
+    instrument: str | None = None
     # The mark price of the instrument, expressed in `9` decimals
-    mark_price: str | None
+    mark_price: str | None = None
     # The index price of the instrument, expressed in `9` decimals
-    index_price: str | None
+    index_price: str | None = None
     # The last traded price of the instrument (also close price), expressed in `9` decimals
-    last_price: str | None
+    last_price: str | None = None
     # The number of assets traded in the last trade, expressed in underlying asset decimal units
-    last_size: str | None
+    last_size: str | None = None
     # The mid price of the instrument, expressed in `9` decimals
-    mid_price: str | None
+    mid_price: str | None = None
     # The best bid price of the instrument, expressed in `9` decimals
-    best_bid_price: str | None
+    best_bid_price: str | None = None
     # The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units
-    best_bid_size: str | None
+    best_bid_size: str | None = None
     # The best ask price of the instrument, expressed in `9` decimals
-    best_ask_price: str | None
+    best_ask_price: str | None = None
     # The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units
-    best_ask_size: str | None
+    best_ask_size: str | None = None
 
 
 @dataclass
@@ -621,58 +621,58 @@ class Ticker:
     """
 
     # Time at which the event was emitted in unix nanoseconds
-    event_time: str | None
+    event_time: str | None = None
     """
     The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]
     For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]
     For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
     """
-    instrument: str | None
+    instrument: str | None = None
     # The mark price of the instrument, expressed in `9` decimals
-    mark_price: str | None
+    mark_price: str | None = None
     # The index price of the instrument, expressed in `9` decimals
-    index_price: str | None
+    index_price: str | None = None
     # The last traded price of the instrument (also close price), expressed in `9` decimals
-    last_price: str | None
+    last_price: str | None = None
     # The number of assets traded in the last trade, expressed in underlying asset decimal units
-    last_size: str | None
+    last_size: str | None = None
     # The mid price of the instrument, expressed in `9` decimals
-    mid_price: str | None
+    mid_price: str | None = None
     # The best bid price of the instrument, expressed in `9` decimals
-    best_bid_price: str | None
+    best_bid_price: str | None = None
     # The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units
-    best_bid_size: str | None
+    best_bid_size: str | None = None
     # The best ask price of the instrument, expressed in `9` decimals
-    best_ask_price: str | None
+    best_ask_price: str | None = None
     # The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units
-    best_ask_size: str | None
+    best_ask_size: str | None = None
     # The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)
-    funding_rate_8_h_curr: str | None
+    funding_rate_8_h_curr: str | None = None
     # The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)
-    funding_rate_8_h_avg: str | None
+    funding_rate_8_h_avg: str | None = None
     # The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)
-    interest_rate: str | None
+    interest_rate: str | None = None
     # [Options] The forward price of the option, expressed in `9` decimals
-    forward_price: str | None
+    forward_price: str | None = None
     # The 24 hour taker buy volume of the instrument, expressed in underlying asset decimal units
-    buy_volume_24_h_u: str | None
+    buy_volume_24_h_u: str | None = None
     # The 24 hour taker sell volume of the instrument, expressed in underlying asset decimal units
-    sell_volume_24_h_u: str | None
+    sell_volume_24_h_u: str | None = None
     # The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units
-    buy_volume_24_h_q: str | None
+    buy_volume_24_h_q: str | None = None
     # The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units
-    sell_volume_24_h_q: str | None
+    sell_volume_24_h_q: str | None = None
     # The 24 hour highest traded price of the instrument, expressed in `9` decimals
-    high_price: str | None
+    high_price: str | None = None
     # The 24 hour lowest traded price of the instrument, expressed in `9` decimals
-    low_price: str | None
+    low_price: str | None = None
     # The 24 hour first traded price of the instrument, expressed in `9` decimals
-    open_price: str | None
+    open_price: str | None = None
     # The open interest in the instrument, expressed in underlying asset decimal units
-    open_interest: str | None
+    open_interest: str | None = None
     # The ratio of accounts that are net long vs net short on this instrument
-    long_short_ratio: str | None
+    long_short_ratio: str | None = None
 
 
 @dataclass
@@ -824,15 +824,15 @@ class ApiGetInstrumentResponse:
 @dataclass
 class ApiGetFilteredInstrumentsRequest:
     # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
-    kind: list[Kind]
+    kind: list[Kind] | None = None
     # The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned
-    underlying: list[Currency]
+    underlying: list[Currency] | None = None
     # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
-    quote: list[Currency]
+    quote: list[Currency] | None = None
     # Request for active instruments only
-    is_active: bool
+    is_active: bool | None = None
     # The limit to query for. Defaults to 500; Max 100000
-    limit: int
+    limit: int | None = None
 
 
 @dataclass
@@ -1190,7 +1190,7 @@ class WSResponseV1:
 @dataclass
 class ApiGetAllInstrumentsRequest:
     # Fetch only active instruments
-    is_active: bool | None
+    is_active: bool | None = None
 
 
 @dataclass
@@ -1255,7 +1255,7 @@ class OrderMetadata:
     """
     client_order_id: str
     # [Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds
-    create_time: str
+    create_time: str | None = None
 
 
 @dataclass
@@ -1284,16 +1284,8 @@ class Order:
     This minimizes the amount of trust users have to offer to GRVT
     """
 
-    # [Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
-    order_id: str
     # The subaccount initiating the order
     sub_account_id: str
-    """
-    If the order is a market order
-    Market Orders do not have a limit price, and are always executed according to the maker order price.
-    Market Orders must always be taker orders
-    """
-    is_market: bool
     """
     Four supported types of orders: GTT, IOC, AON, FOK:<ul>
     <li>PARTIAL EXECUTION = GTT / IOC - allows partial size execution on each leg</li>
@@ -1305,6 +1297,23 @@ class Order:
     """
     time_in_force: TimeInForce
     """
+    The legs present in this order
+    The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice
+    """
+    legs: list[OrderLeg]
+    # The signature approving this order
+    signature: Signature
+    # Order Metadata, ignored by the smart contract, and unsigned by the client
+    metadata: OrderMetadata
+    # [Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
+    order_id: str | None = None
+    """
+    If the order is a market order
+    Market Orders do not have a limit price, and are always executed according to the maker order price.
+    Market Orders must always be taker orders
+    """
+    is_market: bool | None = None
+    """
     If True, Order must be a maker order. It has to fill the orderbook instead of match it.
     If False, Order can be either a maker or taker order.
 
@@ -1315,20 +1324,11 @@ class Order:
     | Must Be Maker | AON + True    | GTC + True       |
 
     """
-    post_only: bool
+    post_only: bool | None = None
     # If True, Order must reduce the position size, or be cancelled
-    reduce_only: bool
-    """
-    The legs present in this order
-    The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice
-    """
-    legs: list[OrderLeg]
-    # The signature approving this order
-    signature: Signature
-    # Order Metadata, ignored by the smart contract, and unsigned by the client
-    metadata: OrderMetadata
+    reduce_only: bool | None = None
     # [Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client
-    state: OrderState
+    state: OrderState | None = None
 
 
 @dataclass
@@ -1620,6 +1620,90 @@ class FlatReferral:
 class ApiGetListFlatReferralResponse:
     # The list of flat referrals
     flat_referrals: list[FlatReferral]
+
+
+@dataclass
+class ApiGetLatestLPSnapshotRequest:
+    # The kind filter to apply
+    kind: Kind
+    # The underlying filter to apply
+    underlying: Currency
+
+
+@dataclass
+class LPSnapshot:
+    # The main account id
+    main_account_id: str
+    # The LP Asset
+    lp_asset: str
+    # Underlying multiplier
+    underlying_multiplier: str
+    # Market share multiplier
+    market_share_multiplier: str
+    # Fast market multiplier
+    bid_fast_market_multiplier: int
+    # Fast market multiplier
+    ask_fast_market_multiplier: int
+    # Liquidty score
+    liquidity_score: str
+    # The time when the snapshot was calculated
+    calculate_at: str
+
+
+@dataclass
+class ApiGetLatestLPSnapshotResponse:
+    # The latest LP snapshot
+    snapshot: LPSnapshot
+
+
+@dataclass
+class ApiGetLPLeaderboardRequest:
+    # Start time of the epoch - phase
+    start_interval: str
+    # The number of accounts to return
+    limit: int
+    # The kind filter to apply
+    kind: Kind
+    # The underlying filter to apply
+    underlying: Currency
+
+
+@dataclass
+class LPPoint:
+    # The main account id
+    main_account_id: str
+    # The LP Asset
+    lp_asset: str
+    # Start time of the epoch - phase
+    start_interval: str
+    # Liquidty score
+    liquidity_score: str
+    # The rank of user in the LP leaderboard
+    rank: int
+
+
+@dataclass
+class ApiGetLPLeaderboardResponse:
+    # The list of LP points
+    points: list[LPPoint]
+
+
+@dataclass
+class ApiGetLPPointRequest:
+    # Start time of the epoch - phase
+    start_interval: str
+    # The kind filter to apply
+    kind: Kind
+    # The underlying filter to apply
+    underlying: Currency
+
+
+@dataclass
+class ApiGetLPPointResponse:
+    # LP points of user
+    point: LPPoint
+    # The number of maker
+    maker_count: int
 
 
 @dataclass

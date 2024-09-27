@@ -124,6 +124,7 @@ LITE ENDPOINT: lite/v1/instrument
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1003|404|Data Not Found|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -132,6 +133,11 @@ LITE ENDPOINT: lite/v1/instrument
             "code":1001,
             "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1003,
+            "message":"Data Not Found",
+            "status":404
         }
         ```
     </section>
@@ -169,7 +175,6 @@ LITE ENDPOINT: lite/v1/instrument
         '
         ```
 <hr class="solid">
-
 ### Get All Instruments
 ```
 FULL ENDPOINT: full/v1/all_instruments
@@ -337,7 +342,6 @@ LITE ENDPOINT: lite/v1/all_instruments
         '
         ```
 <hr class="solid">
-
 ### Get Filtered Instruments
 ```
 FULL ENDPOINT: full/v1/instruments
@@ -351,11 +355,11 @@ LITE ENDPOINT: lite/v1/instruments
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |kind|k|[Kind]|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
-        |underlying|u|[Currency]|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
-        |quote|q|[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
-        |is_active|ia|boolean|True|Request for active instruments only|
-        |limit|l|number|True|The limit to query for. Defaults to 500; Max 100000|
+        |kind|k|[Kind]|False|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
+        |underlying|u|[Currency]|False|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
+        |quote|q|[Currency]|False|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
+        |is_active|ia|boolean|False|Request for active instruments only|
+        |limit|l|number|False|The limit to query for. Defaults to 500; Max 100000|
         ??? info "Kind"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -560,7 +564,6 @@ LITE ENDPOINT: lite/v1/instruments
         '
         ```
 <hr class="solid">
-
 ## Ticker
 ### Mini Ticker
 ```
@@ -682,7 +685,6 @@ LITE ENDPOINT: lite/v1/mini
         '
         ```
 <hr class="solid">
-
 ### Ticker
 ```
 FULL ENDPOINT: full/v1/ticker
@@ -831,7 +833,6 @@ LITE ENDPOINT: lite/v1/ticker
         '
         ```
 <hr class="solid">
-
 ## Orderbook
 ### Orderbook Levels
 ```
@@ -973,7 +974,6 @@ LITE ENDPOINT: lite/v1/book
         '
         ```
 <hr class="solid">
-
 ## Trade
 ### Public Trades
 ```
@@ -1112,7 +1112,6 @@ LITE ENDPOINT: lite/v1/trades
         '
         ```
 <hr class="solid">
-
 ### Public Trade History
 ```
 FULL ENDPOINT: full/v1/trade_history
@@ -1257,7 +1256,6 @@ LITE ENDPOINT: lite/v1/trade_history
         '
         ```
 <hr class="solid">
-
 ## Candlestick
 ### Candlestick
 ```
@@ -1442,7 +1440,6 @@ LITE ENDPOINT: lite/v1/kline
         '
         ```
 <hr class="solid">
-
 ## Settlement
 ### Funding Rate
 ```
@@ -1571,7 +1568,6 @@ LITE ENDPOINT: lite/v1/funding
         '
         ```
 <hr class="solid">
-
 ### Settlement Price
 ```
 FULL ENDPOINT: full/v1/settlement
