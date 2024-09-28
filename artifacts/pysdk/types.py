@@ -71,7 +71,7 @@ class Currency(Enum):
 
 
 class InstrumentSettlementPeriod(Enum):
-    # Instrument settles through perpetual hourly funding cycles
+    # Instrument settles through perpetual funding cycles
     PERPETUAL = "PERPETUAL"
     # Instrument settles at an expiry date, marked as a daily instrument
     DAILY = "DAILY"
@@ -277,6 +277,12 @@ class ApiPositionsResponse:
 
 @dataclass
 class ApiPrivateTradeHistoryRequest:
+    """
+    Query for all historical trades made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
     # The sub account ID to request for
     sub_account_id: str
     # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
@@ -289,10 +295,14 @@ class ApiPrivateTradeHistoryRequest:
     expiration: str
     # The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned
     strike_price: str
+    # The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
+    start_time: str | None = None
+    # The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
+    end_time: str | None = None
     # The limit to query for. Defaults to 500; Max 1000
-    limit: int
+    limit: int | None = None
     # The cursor to indicate when to start the query from
-    cursor: str
+    cursor: str | None = None
 
 
 @dataclass
@@ -343,16 +353,16 @@ class PrivateTrade:
     When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
     """
     client_order_id: str
+    # A trade index
+    trade_index: int
 
 
 @dataclass
 class ApiPrivateTradeHistoryResponse:
-    # The total number of private trades matching the request filter
-    total: int
-    # The cursor to indicate when to start the query from
-    next: str
     # The private trades matching the request asset
     results: list[PrivateTrade]
+    # The cursor to indicate when to start the query from
+    next: str
 
 
 @dataclass
@@ -432,28 +442,29 @@ class ApiSubAccountHistoryRequest:
     The request to get the history of a sub account
     SubAccount Summary values are snapshotted once every hour
     No snapshots are taken if the sub account has no activity in the hourly window
-    The history is returned in reverse chronological order
     History is preserved only for the last 30 days
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
     """
 
     # The sub account ID to request for
     sub_account_id: str
     # Start time of sub account history in unix nanoseconds
-    start_time: str
+    start_time: str | None = None
     # End time of sub account history in unix nanoseconds
-    end_time: str
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
     # The cursor to indicate when to start the next query from
-    cursor: str
+    cursor: str | None = None
 
 
 @dataclass
 class ApiSubAccountHistoryResponse:
-    # The total number of sub account snapshots matching the request filter
-    total: int
-    # The cursor to indicate when to start the next query from
-    next: str
     # The sub account history matching the request sub account
     results: list[SubAccount]
+    # The cursor to indicate when to start the next query from
+    next: str
 
 
 @dataclass
@@ -730,6 +741,8 @@ class PublicTrade:
     venue: Venue
     # If the trade was a liquidation
     is_liquidation: bool
+    # A trade index
+    trade_index: int
 
 
 @dataclass
@@ -744,6 +757,8 @@ class ApiPublicTradeHistoryRequest:
     Perform historical lookup of public trades in any given instrument.
     This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
     Only data from the last three months will be retained.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
     """
 
     """
@@ -753,16 +768,22 @@ class ApiPublicTradeHistoryRequest:
     For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]
     """
     instrument: str
+    # The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
+    start_time: str | None = None
+    # The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
+    end_time: str | None = None
     # The limit to query for. Defaults to 500; Max 1000
-    limit: int
+    limit: int | None = None
     # The cursor to indicate when to start the query from
-    cursor: str
+    cursor: str | None = None
 
 
 @dataclass
 class ApiPublicTradeHistoryResponse:
     # The public trades matching the request asset
     results: list[PublicTrade]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
 
 
 @dataclass
@@ -787,16 +808,14 @@ class Instrument:
     """
 
     instrument: str
+    # The asset ID used for instrument signing.
+    asset_id: str
     # The underlying currency
     underlying: Currency
     # The quote currency
     quote: Currency
     # The kind of instrument
     kind: Kind
-    # The expiry time of the instrument in unix nanoseconds
-    expiry: str
-    # The strike price of the instrument, expressed in `9` decimals
-    strike_price: str
     # Venues that this instrument can be traded at
     venues: list[Venue]
     # The settlement period of the instrument
@@ -813,6 +832,10 @@ class Instrument:
     min_block_trade_size: str
     # Creation time in unix nanoseconds
     create_time: str
+    # The expiry time of the instrument in unix nanoseconds
+    expiry: str | None = None
+    # The strike price of the instrument, expressed in `9` decimals
+    strike_price: str | None = None
 
 
 @dataclass
@@ -845,7 +868,8 @@ class ApiGetFilteredInstrumentsResponse:
 class ApiCandlestickRequest:
     """
     Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.
-    startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent candlesticks are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the candlesticks starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the candlesticks ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the candlesticks between `startTime` and `endTime` are returned up to `limit`.</li></ul>
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
     """
 
     """
@@ -860,11 +884,13 @@ class ApiCandlestickRequest:
     # The type of candlestick data to retrieve
     type: CandlestickType
     # Start time of kline data in unix nanoseconds
-    start_time: str
+    start_time: str | None = None
     # End time of kline data in unix nanoseconds
-    end_time: str
-    # The limit to query for. Defaults to 500; Max 1500
-    limit: int
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
 
 
 @dataclass
@@ -900,15 +926,16 @@ class Candlestick:
 class ApiCandlestickResponse:
     # The candlestick result set for given interval
     results: list[Candlestick]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
 
 
 @dataclass
 class ApiFundingRateRequest:
     """
     Lookup the historical funding rate of various pairs.
-    startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent funding rates are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the funding rates starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the funding rates ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the funding rates between `startTime` and `endTime` are returned up to `limit`.</li></ul>
 
-    The instrument is also optional. When left empty, all perpetual instruments are returned.
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
     """
 
     """
@@ -919,11 +946,13 @@ class ApiFundingRateRequest:
     """
     instrument: str
     # Start time of funding rate in unix nanoseconds
-    start_time: str
+    start_time: str | None = None
     # End time of funding rate in unix nanoseconds
-    end_time: str
-    # The limit to query for. Defaults to 90; Max 300
-    limit: int
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
 
 
 @dataclass
@@ -948,31 +977,34 @@ class FundingRate:
 class ApiFundingRateResponse:
     # The funding rate result set for given interval
     results: list[FundingRate]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
 
 
 @dataclass
 class ApiSettlementPriceRequest:
     """
     Lookup the historical settlement price of various pairs.
-    startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent settlement prices are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the settlement prices starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the settlement prices ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the settlement prices between `startTime` and `endTime` are returned up to `limit`.</li></ul>
 
-    The instrument is also optional. When left empty, all perpetual instruments are returned.
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
     """
 
     # The underlying currency to select
     underlying: Currency
     # The quote currency to select
     quote: Currency
-    # Start time of kline data in unix nanoseconds
-    start_time: str
-    # End time of kline data in unix nanoseconds
-    end_time: str
     # The expiration time to select in unix nanoseconds
     expiration: str
     # The strike price to select
     strike_price: str
-    # The limit to query for. Defaults to 30; Max 100
-    limit: int
+    # Start time of kline data in unix nanoseconds
+    start_time: str | None = None
+    # End time of kline data in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
 
 
 @dataclass
@@ -991,6 +1023,8 @@ class APISettlementPrice:
 class ApiSettlementPriceResponse:
     # The funding rate result set for given interval
     results: list[APISettlementPrice]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
 
 
 @dataclass
@@ -1039,6 +1073,8 @@ class WSOrderbookLevelsFeedSelectorV1:
 class WSOrderbookLevelsFeedDataV1:
     # Stream name
     stream: str
+    # Primary selector
+    selector: str
     # A running sequence number that determines global message order within the specific stream
     sequence_number: str
     # An orderbook levels object matching the request filter
@@ -1075,6 +1111,8 @@ class WSMiniTickerFeedSelectorV1:
 class WSMiniTickerFeedDataV1:
     # Stream name
     stream: str
+    # Primary selector
+    selector: str
     # A running sequence number that determines global message order within the specific stream
     sequence_number: str
     # A mini ticker matching the request filter
@@ -1111,6 +1149,8 @@ class WSTickerFeedSelectorV1:
 class WSTickerFeedDataV1:
     # Stream name
     stream: str
+    # Primary selector
+    selector: str
     # A running sequence number that determines global message order within the specific stream
     sequence_number: str
     # A ticker matching the request filter
@@ -1141,6 +1181,8 @@ class WSPublicTradesFeedSelectorV1:
 class WSPublicTradesFeedDataV1:
     # Stream name
     stream: str
+    # Primary selector
+    selector: str
     # A running sequence number that determines global message order within the specific stream
     sequence_number: str
     # A public trade matching the request filter
@@ -1171,6 +1213,8 @@ class WSCandlestickFeedSelectorV1:
 class WSCandlestickFeedDataV1:
     # Stream name
     stream: str
+    # Primary selector
+    selector: str
     # A running sequence number that determines global message order within the specific stream
     sequence_number: str
     # A candlestick entry matching the request filters
@@ -1391,6 +1435,12 @@ class ApiOpenOrdersResponse:
 
 @dataclass
 class ApiOrderHistoryRequest:
+    """
+    Retrieves the order history for the account.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
     # The subaccount ID to filter by
     sub_account_id: str
     # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
@@ -1403,20 +1453,22 @@ class ApiOrderHistoryRequest:
     expiration: list[str]
     # The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned
     strike_price: list[str]
+    # The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
+    start_time: str | None = None
+    # The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
+    end_time: str | None = None
     # The limit to query for. Defaults to 500; Max 1000
-    limit: int
+    limit: int | None = None
     # The cursor to indicate when to start the query from
-    cursor: str
+    cursor: str | None = None
 
 
 @dataclass
 class ApiOrderHistoryResponse:
-    # The total number of orders matching the request filter
-    total: int
-    # The cursor to indicate when to start the query from
-    next: str
     # The Open Orders matching the request filter
     orders: list[Order]
+    # The cursor to indicate when to start the query from
+    next: str
 
 
 @dataclass
@@ -1592,12 +1644,12 @@ class ApiFindEcosystemLeaderboardResponse:
 class ApiGetListFlatReferralRequest:
     # The off chain referrer account id to get all flat referrals
     referral_id: str
-    # Optional. Start time in unix nanoseconds
-    start_time: str
-    # Optional. End time in unix nanoseconds
-    end_time: str
     # The off chain account id to get all user's referrers
     account_id: str
+    # Optional. Start time in unix nanoseconds
+    start_time: str | None = None
+    # Optional. End time in unix nanoseconds
+    end_time: str | None = None
 
 
 @dataclass
@@ -1723,9 +1775,9 @@ class ApiSubAccountTradeRequest:
     # Optional. The starting time in unix nanoseconds of a specific interval to query
     start_interval: str
     # Optional. Start time in unix nanoseconds
-    start_time: str
+    start_time: str | None = None
     # Optional. End time in unix nanoseconds
-    end_time: str
+    end_time: str | None = None
 
 
 @dataclass
@@ -1761,9 +1813,11 @@ class ApiSubAccountTradeAggregationRequest:
     # Optional. The starting time in unix nanoseconds of a specific interval to query
     start_interval: str
     # Optional. Start time in unix nanoseconds
-    start_time: str
+    start_time: str | None = None
     # Optional. End time in unix nanoseconds
-    end_time: str
+    end_time: str | None = None
+    # The cursor to indicate when to start the next query from
+    cursor: str | None = None
 
 
 @dataclass
@@ -1780,6 +1834,8 @@ class SubAccountTradeAggregation:
 class ApiSubAccountTradeAggregationResponse:
     # The sub account trade aggregation result set for given interval
     results: list[SubAccountTradeAggregation]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
 
 
 @dataclass
@@ -1850,6 +1906,8 @@ class WSOrderFeedSelectorV1:
 class WSOrderFeedDataV1:
     # Stream name
     stream: str
+    # Primary selector
+    selector: str
     # A running sequence number that determines global message order within the specific stream
     sequence_number: str
     # The order object being created or updated
@@ -1889,6 +1947,8 @@ class OrderStateFeed:
 class WSOrderStateFeedDataV1:
     # Stream name
     stream: str
+    # Primary selector
+    selector: str
     # A running sequence number that determines global message order within the specific stream
     sequence_number: str
     # The Order State Feed
@@ -1911,6 +1971,8 @@ class WSPositionsFeedSelectorV1:
 class WSPositionsFeedDataV1:
     # Stream name
     stream: str
+    # Primary selector
+    selector: str
     # A running sequence number that determines global message order within the specific stream
     sequence_number: str
     # A Position being created or updated matching the request filter
@@ -1933,6 +1995,8 @@ class WSPrivateTradeFeedSelectorV1:
 class WSPrivateTradeFeedDataV1:
     # The websocket channel to which the response is sent
     stream: str
+    # Primary selector
+    selector: str
     # A running sequence number that determines global message order within the specific stream
     sequence_number: str
     # A private trade matching the request filter
@@ -1961,6 +2025,8 @@ class Transfer:
 class WSTransferFeedDataV1:
     # The websocket channel to which the response is sent
     stream: str
+    # Primary selector
+    selector: str
     # A running sequence number that determines global message order within the specific stream
     sequence_number: str
     # The Transfer object
@@ -1983,6 +2049,8 @@ class Deposit:
 class WSDepositFeedDataV1:
     # The websocket channel to which the response is sent
     stream: str
+    # Primary selector
+    selector: str
     # A running sequence number that determines global message order within the specific stream
     sequence_number: str
     # The Deposit object
@@ -2007,6 +2075,8 @@ class Withdrawal:
 class WSWithdrawalFeedDataV1:
     # The websocket channel to which the response is sent
     stream: str
+    # Primary selector
+    selector: str
     # A running sequence number that determines global message order within the specific stream
     sequence_number: str
     # The Withdrawal object
@@ -2085,18 +2155,20 @@ class ApiDepositHistoryRequest:
     """
     The request to get the historical deposits of an account
     The history is returned in reverse chronological order
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
     """
 
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int
-    # The cursor to indicate when to start the next query from
-    cursor: str
     # The token currency to query for, if nil or empty, return all deposits. Otherwise, only entries matching the filter will be returned
     token_currency: list[Currency]
     # The start time to query for in unix nanoseconds
-    start_time: str
+    start_time: str | None = None
     # The end time to query for in unix nanoseconds
-    end_time: str
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the next query from
+    cursor: str | None = None
 
 
 @dataclass
@@ -2117,12 +2189,10 @@ class DepositHistory:
 
 @dataclass
 class ApiDepositHistoryResponse:
-    # The total number of deposits matching the request account
-    total: int
-    # The cursor to indicate when to start the next query from
-    next: str
     # The deposit history matching the request account
     results: list[DepositHistory]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
 
 
 @dataclass
@@ -2130,18 +2200,20 @@ class ApiTransferHistoryRequest:
     """
     The request to get the historical transfers of an account
     The history is returned in reverse chronological order
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
     """
 
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int
-    # The cursor to indicate when to start the next query from
-    cursor: str
     # The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned
     token_currency: list[Currency]
     # The start time to query for in unix nanoseconds
-    start_time: str
+    start_time: str | None = None
     # The end time to query for in unix nanoseconds
-    end_time: str
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the next query from
+    cursor: str | None = None
 
 
 @dataclass
@@ -2168,12 +2240,10 @@ class TransferHistory:
 
 @dataclass
 class ApiTransferHistoryResponse:
-    # The total number of transfers matching the request account
-    total: int
-    # The cursor to indicate when to start the next query from
-    next: str
     # The transfer history matching the request account
     results: list[TransferHistory]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
 
 
 @dataclass
@@ -2181,18 +2251,20 @@ class ApiWithdrawalHistoryRequest:
     """
     The request to get the historical withdrawals of an account
     The history is returned in reverse chronological order
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
     """
 
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int
-    # The cursor to indicate when to start the next query from
-    cursor: str
     # The token currency to query for, if nil or empty, return all withdrawals. Otherwise, only entries matching the filter will be returned
     token_currency: list[Currency]
     # The start time to query for in unix nanoseconds
-    start_time: str
+    start_time: str | None = None
     # The end time to query for in unix nanoseconds
-    end_time: str
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the next query from
+    cursor: str | None = None
 
 
 @dataclass
@@ -2215,9 +2287,7 @@ class WithdrawalHistory:
 
 @dataclass
 class ApiWithdrawalHistoryResponse:
-    # The total number of withdrawals matching the request account
-    total: int
-    # The cursor to indicate when to start the next query from
-    next: str
     # The withdrawals history matching the request account
     results: list[WithdrawalHistory]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None

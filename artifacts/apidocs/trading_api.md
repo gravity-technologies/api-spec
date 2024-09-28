@@ -1480,7 +1480,7 @@ LITE ENDPOINT: lite/v1/order_history
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiOrderHistoryRequest"
-        Retrieves the order history for the account.<br>
+        Retrieves the order history for the account.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -1490,8 +1490,10 @@ LITE ENDPOINT: lite/v1/order_history
         |quote|q|[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         |expiration|e|[string]|True|The expiration time to apply in nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned|
         |strike_price|sp|[string]|True|The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned|
-        |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
-        |cursor|c|string|True|The cursor to indicate when to start the query from|
+        |start_time|st|string|False|The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned|
+        |end_time|et|string|False|The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned|
+        |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
+        |cursor|c|string|False|The cursor to indicate when to start the query from|
         ??? info "Kind"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -1530,8 +1532,10 @@ LITE ENDPOINT: lite/v1/order_history
             "quote": ["USDT", "USDC"],
             "expiration": ["1697788800000000000"],
             "strike_price": ["65000.0"],
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": ""
         }
         ```
         ```json
@@ -1542,8 +1546,10 @@ LITE ENDPOINT: lite/v1/order_history
             "q": ["USDT", "USDC"],
             "e": ["1697788800000000000"],
             "sp": ["65000.0"],
+            "st": 1697788800000000000,
+            "et": 1697788800000000000,
             "l": 500,
-            "c": "Qw0918="
+            "c": ""
         }
         ```
     </section>
@@ -1552,9 +1558,8 @@ LITE ENDPOINT: lite/v1/order_history
     !!! info "ApiOrderHistoryResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |total|t|number|True|The total number of orders matching the request filter|
-        |next|n|string|True|The cursor to indicate when to start the query from|
         |orders|o|[Order]|True|The Open Orders matching the request filter|
+        |next|n|string|True|The cursor to indicate when to start the query from|
         ??? info "Order"
             Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
@@ -1655,8 +1660,6 @@ LITE ENDPOINT: lite/v1/order_history
     !!! success
         ```json
         {
-            "total": 500,
-            "next": "Qw0918=",
             "orders": [{
                 "order_id": "0x1234567890abcdef",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -1689,7 +1692,8 @@ LITE ENDPOINT: lite/v1/order_history
                     "traded_size": ["3.0", "6.0"],
                     "update_time": "1697788800000000000"
                 }
-            }]
+            }],
+            "next": "Qw0918="
         }
         ```
     </section>
@@ -1735,8 +1739,10 @@ LITE ENDPOINT: lite/v1/order_history
             "quote": ["USDT", "USDC"],
             "expiration": ["1697788800000000000"],
             "strike_price": ["65000.0"],
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": ""
         }
         '
         ```
@@ -1751,8 +1757,10 @@ LITE ENDPOINT: lite/v1/order_history
             "quote": ["USDT", "USDC"],
             "expiration": ["1697788800000000000"],
             "strike_price": ["65000.0"],
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": ""
         }
         '
         ```
@@ -1767,8 +1775,10 @@ LITE ENDPOINT: lite/v1/order_history
             "quote": ["USDT", "USDC"],
             "expiration": ["1697788800000000000"],
             "strike_price": ["65000.0"],
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": ""
         }
         '
         ```
@@ -1783,8 +1793,10 @@ LITE ENDPOINT: lite/v1/order_history
             "quote": ["USDT", "USDC"],
             "expiration": ["1697788800000000000"],
             "strike_price": ["65000.0"],
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": ""
         }
         '
         ```
@@ -1799,7 +1811,7 @@ LITE ENDPOINT: lite/v1/trade_history
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiPrivateTradeHistoryRequest"
-        Query for all historical trades made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.<br>
+        Query for all historical trades made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -1809,8 +1821,10 @@ LITE ENDPOINT: lite/v1/trade_history
         |quote|q|[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         |expiration|e|string|True|The expiration time to apply in unix nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned|
         |strike_price|sp|string|True|The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned|
-        |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
-        |cursor|c|string|True|The cursor to indicate when to start the query from|
+        |start_time|st|string|False|The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned|
+        |end_time|et|string|False|The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned|
+        |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
+        |cursor|c|string|False|The cursor to indicate when to start the query from|
         ??? info "Kind"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -1849,8 +1863,10 @@ LITE ENDPOINT: lite/v1/trade_history
             "quote": ["USDT", "USDC"],
             "expiration": "1697788800000000000",
             "strike_price": 65000.0,
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": Qw0918=
         }
         ```
         ```json
@@ -1861,8 +1877,10 @@ LITE ENDPOINT: lite/v1/trade_history
             "q": ["USDT", "USDC"],
             "e": "1697788800000000000",
             "sp": 65000.0,
+            "st": 1697788800000000000,
+            "et": 1697788800000000000,
             "l": 500,
-            "c": "Qw0918="
+            "c": Qw0918=
         }
         ```
     </section>
@@ -1871,9 +1889,8 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! info "ApiPrivateTradeHistoryResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |total|t|number|True|The total number of private trades matching the request filter|
-        |next|n|string|True|The cursor to indicate when to start the query from|
         |results|r|[PrivateTrade]|True|The private trades matching the request asset|
+        |next|n|string|True|The cursor to indicate when to start the query from|
         ??? info "PrivateTrade"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -1895,6 +1912,7 @@ LITE ENDPOINT: lite/v1/trade_history
             |order_id|oi|string|True|An order identifier|
             |venue|v|Venue|True|The venue where the trade occurred|
             |client_order_id|co|string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
+            |trade_index|ti1|number|True|A trade index|
             ??? info "Venue"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
@@ -1906,8 +1924,6 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! success
         ```json
         {
-            "total": 52,
-            "next": "Qw0918=",
             "results": [{
                 "event_time": "1697788800000000000",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -1926,8 +1942,10 @@ LITE ENDPOINT: lite/v1/trade_history
                 "trade_id": "209358",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
-                "client_order_id": "23042"
-            }]
+                "client_order_id": "23042",
+                "trade_index": "2"
+            }],
+            "next": Qw0918=
         }
         ```
     </section>
@@ -1973,8 +1991,10 @@ LITE ENDPOINT: lite/v1/trade_history
             "quote": ["USDT", "USDC"],
             "expiration": "1697788800000000000",
             "strike_price": 65000.0,
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": Qw0918=
         }
         '
         ```
@@ -1989,8 +2009,10 @@ LITE ENDPOINT: lite/v1/trade_history
             "quote": ["USDT", "USDC"],
             "expiration": "1697788800000000000",
             "strike_price": 65000.0,
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": Qw0918=
         }
         '
         ```
@@ -2005,8 +2027,10 @@ LITE ENDPOINT: lite/v1/trade_history
             "quote": ["USDT", "USDC"],
             "expiration": "1697788800000000000",
             "strike_price": 65000.0,
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": Qw0918=
         }
         '
         ```
@@ -2021,8 +2045,10 @@ LITE ENDPOINT: lite/v1/trade_history
             "quote": ["USDT", "USDC"],
             "expiration": "1697788800000000000",
             "strike_price": 65000.0,
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": Qw0918=
         }
         '
         ```
@@ -2362,15 +2388,15 @@ LITE ENDPOINT: lite/v1/deposit_history
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiDepositHistoryRequest"
-        The request to get the historical deposits of an account<br>The history is returned in reverse chronological order<br>
+        The request to get the historical deposits of an account<br>The history is returned in reverse chronological order<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
-        |cursor|c|string|True|The cursor to indicate when to start the next query from|
         |token_currency|tc|[Currency]|True|The token currency to query for, if nil or empty, return all deposits. Otherwise, only entries matching the filter will be returned|
-        |start_time|st|string|True|The start time to query for in unix nanoseconds|
-        |end_time|et|string|True|The end time to query for in unix nanoseconds|
+        |start_time|st|string|False|The start time to query for in unix nanoseconds|
+        |end_time|et|string|False|The end time to query for in unix nanoseconds|
+        |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
+        |cursor|c|string|False|The cursor to indicate when to start the next query from|
         ??? info "Currency"
             The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -2385,20 +2411,20 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! question "Query"
         ```json
         {
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         ```
         ```json
         {
-            "l": 500,
-            "c": "Qw0918=",
             "tc": ["USDT", "USDC"],
             "st": "1697788800000000000",
-            "et": "1697788800000000000"
+            "et": "1697788800000000000",
+            "l": 500,
+            "c": ""
         }
         ```
     </section>
@@ -2407,9 +2433,8 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! info "ApiDepositHistoryResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |total|t|number|True|The total number of deposits matching the request account|
-        |next|n|string|True|The cursor to indicate when to start the next query from|
         |results|r|[DepositHistory]|True|The deposit history matching the request account|
+        |next|n|string|False|The cursor to indicate when to start the next query from|
         ??? info "DepositHistory"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -2433,8 +2458,6 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! success
         ```json
         {
-            "total": 52,
-            "next": "Qw0918=",
             "results": [{
                 "tx_id": "1028403",
                 "tx_hash": "0x10000101000203040506",
@@ -2442,7 +2465,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "token_currency": "USDT",
                 "num_tokens": "1500.0",
                 "event_time": "1697788800000000000"
-            }]
+            }],
+            "next": "Qw0918="
         }
         ```
     </section>
@@ -2482,11 +2506,11 @@ LITE ENDPOINT: lite/v1/deposit_history
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -2495,11 +2519,11 @@ LITE ENDPOINT: lite/v1/deposit_history
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -2508,11 +2532,11 @@ LITE ENDPOINT: lite/v1/deposit_history
         curl --location 'https://trades.testnet.grvt.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -2521,11 +2545,11 @@ LITE ENDPOINT: lite/v1/deposit_history
         curl --location 'https://trades.grvt.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -2754,15 +2778,15 @@ LITE ENDPOINT: lite/v1/transfer_history
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiTransferHistoryRequest"
-        The request to get the historical transfers of an account<br>The history is returned in reverse chronological order<br>
+        The request to get the historical transfers of an account<br>The history is returned in reverse chronological order<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
-        |cursor|c|string|True|The cursor to indicate when to start the next query from|
         |token_currency|tc|[Currency]|True|The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned|
-        |start_time|st|string|True|The start time to query for in unix nanoseconds|
-        |end_time|et|string|True|The end time to query for in unix nanoseconds|
+        |start_time|st|string|False|The start time to query for in unix nanoseconds|
+        |end_time|et|string|False|The end time to query for in unix nanoseconds|
+        |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
+        |cursor|c|string|False|The cursor to indicate when to start the next query from|
         ??? info "Currency"
             The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -2777,20 +2801,20 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! question "Query"
         ```json
         {
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         ```
         ```json
         {
-            "l": 500,
-            "c": "Qw0918=",
             "tc": ["USDT", "USDC"],
             "st": "1697788800000000000",
-            "et": "1697788800000000000"
+            "et": "1697788800000000000",
+            "l": 500,
+            "c": ""
         }
         ```
     </section>
@@ -2799,9 +2823,8 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! info "ApiTransferHistoryResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |total|t|number|True|The total number of transfers matching the request account|
-        |next|n|string|True|The cursor to indicate when to start the next query from|
         |results|r|[TransferHistory]|True|The transfer history matching the request account|
+        |next|n|string|False|The cursor to indicate when to start the next query from|
         ??? info "TransferHistory"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -2837,8 +2860,6 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! success
         ```json
         {
-            "total": 52,
-            "next": "Qw0918=",
             "results": [{
                 "tx_id": "1028403",
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2856,7 +2877,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "nonce": "1234567890"
                 },
                 "event_time": "1697788800000000000"
-            }]
+            }],
+            "next": "Qw0918="
         }
         ```
     </section>
@@ -2890,11 +2912,11 @@ LITE ENDPOINT: lite/v1/transfer_history
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -2903,11 +2925,11 @@ LITE ENDPOINT: lite/v1/transfer_history
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -2916,11 +2938,11 @@ LITE ENDPOINT: lite/v1/transfer_history
         curl --location 'https://trades.testnet.grvt.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -2929,11 +2951,11 @@ LITE ENDPOINT: lite/v1/transfer_history
         curl --location 'https://trades.grvt.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -3148,15 +3170,15 @@ LITE ENDPOINT: lite/v1/withdrawal_history
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiWithdrawalHistoryRequest"
-        The request to get the historical withdrawals of an account<br>The history is returned in reverse chronological order<br>
+        The request to get the historical withdrawals of an account<br>The history is returned in reverse chronological order<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
-        |cursor|c|string|True|The cursor to indicate when to start the next query from|
         |token_currency|tc|[Currency]|True|The token currency to query for, if nil or empty, return all withdrawals. Otherwise, only entries matching the filter will be returned|
-        |start_time|st|string|True|The start time to query for in unix nanoseconds|
-        |end_time|et|string|True|The end time to query for in unix nanoseconds|
+        |start_time|st|string|False|The start time to query for in unix nanoseconds|
+        |end_time|et|string|False|The end time to query for in unix nanoseconds|
+        |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
+        |cursor|c|string|False|The cursor to indicate when to start the next query from|
         ??? info "Currency"
             The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -3171,20 +3193,20 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! question "Query"
         ```json
         {
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         ```
         ```json
         {
-            "l": 500,
-            "c": "Qw0918=",
             "tc": ["USDT", "USDC"],
             "st": "1697788800000000000",
-            "et": "1697788800000000000"
+            "et": "1697788800000000000",
+            "l": 500,
+            "c": ""
         }
         ```
     </section>
@@ -3193,9 +3215,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! info "ApiWithdrawalHistoryResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |total|t|number|True|The total number of withdrawals matching the request account|
-        |next|n|string|True|The cursor to indicate when to start the next query from|
         |results|r|[WithdrawalHistory]|True|The withdrawals history matching the request account|
+        |next|n|string|False|The cursor to indicate when to start the next query from|
         ??? info "WithdrawalHistory"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -3229,8 +3250,6 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! success
         ```json
         {
-            "total": 52,
-            "next": "Qw0918=",
             "results": [{
                 "tx_id": "1028403",
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3246,7 +3265,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "nonce": "1234567890"
                 },
                 "event_time": "1697788800000000000"
-            }]
+            }],
+            "next": "Qw0918="
         }
         ```
     </section>
@@ -3286,11 +3306,11 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -3299,11 +3319,11 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -3312,11 +3332,11 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         curl --location 'https://trades.testnet.grvt.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -3325,11 +3345,11 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         curl --location 'https://trades.grvt.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "limit": 500,
-            "cursor": "Qw0918=",
             "token_currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000"
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -3546,14 +3566,15 @@ LITE ENDPOINT: lite/v1/account_history
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiSubAccountHistoryRequest"
-        The request to get the history of a sub account<br>SubAccount Summary values are snapshotted once every hour<br>No snapshots are taken if the sub account has no activity in the hourly window<br>The history is returned in reverse chronological order<br>History is preserved only for the last 30 days<br>
+        The request to get the history of a sub account<br>SubAccount Summary values are snapshotted once every hour<br>No snapshots are taken if the sub account has no activity in the hourly window<br>History is preserved only for the last 30 days<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |sub_account_id|sa|string|True|The sub account ID to request for|
-        |start_time|st|string|True|Start time of sub account history in unix nanoseconds|
-        |end_time|et|string|True|End time of sub account history in unix nanoseconds|
-        |cursor|c|string|True|The cursor to indicate when to start the next query from|
+        |start_time|st|string|False|Start time of sub account history in unix nanoseconds|
+        |end_time|et|string|False|End time of sub account history in unix nanoseconds|
+        |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
+        |cursor|c|string|False|The cursor to indicate when to start the next query from|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -3562,7 +3583,8 @@ LITE ENDPOINT: lite/v1/account_history
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "cursor": "Qw0918="
+            "limit": 500,
+            "cursor": Qw0918=
         }
         ```
         ```json
@@ -3570,7 +3592,8 @@ LITE ENDPOINT: lite/v1/account_history
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "st": "1697788800000000000",
             "et": "1697788800000000000",
-            "c": "Qw0918="
+            "l": 500,
+            "c": Qw0918=
         }
         ```
     </section>
@@ -3579,9 +3602,8 @@ LITE ENDPOINT: lite/v1/account_history
     !!! info "ApiSubAccountHistoryResponse"
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
-        |total|t|number|True|The total number of sub account snapshots matching the request filter|
-        |next|n|string|True|The cursor to indicate when to start the next query from|
         |results|r|[SubAccount]|True|The sub account history matching the request sub account|
+        |next|n|string|True|The cursor to indicate when to start the next query from|
         ??? info "SubAccount"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -3647,8 +3669,6 @@ LITE ENDPOINT: lite/v1/account_history
     !!! success
         ```json
         {
-            "total": 52,
-            "next": "Qw0918=",
             "results": [{
                 "event_time": "1697788800000000000",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -3680,7 +3700,8 @@ LITE ENDPOINT: lite/v1/account_history
                     "quote_index_price": "1.0000102"
                 }],
                 "settle_index_price": "1.0000102"
-            }]
+            }],
+            "next": Qw0918=
         }
         ```
     </section>
@@ -3723,7 +3744,8 @@ LITE ENDPOINT: lite/v1/account_history
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "cursor": "Qw0918="
+            "limit": 500,
+            "cursor": Qw0918=
         }
         '
         ```
@@ -3735,7 +3757,8 @@ LITE ENDPOINT: lite/v1/account_history
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "cursor": "Qw0918="
+            "limit": 500,
+            "cursor": Qw0918=
         }
         '
         ```
@@ -3747,7 +3770,8 @@ LITE ENDPOINT: lite/v1/account_history
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "cursor": "Qw0918="
+            "limit": 500,
+            "cursor": Qw0918=
         }
         '
         ```
@@ -3759,7 +3783,8 @@ LITE ENDPOINT: lite/v1/account_history
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "cursor": "Qw0918="
+            "limit": 500,
+            "cursor": Qw0918=
         }
         '
         ```

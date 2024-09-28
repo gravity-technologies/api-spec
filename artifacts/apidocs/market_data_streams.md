@@ -50,6 +50,7 @@ STREAM: v1.mini.s
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|Stream name|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|MiniTicker|True|A mini ticker matching the request filter|
         ??? info "MiniTicker"
@@ -72,6 +73,7 @@ STREAM: v1.mini.s
         ```json
         {
             "stream": "v1.mini.s",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "event_time": "1697788800000000000",
@@ -91,6 +93,7 @@ STREAM: v1.mini.s
         ```json
         {
             "s": "v1.mini.s",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "et": "1697788800000000000",
@@ -218,6 +221,7 @@ STREAM: v1.mini.d
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|Stream name|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|MiniTicker|True|A mini ticker matching the request filter|
         ??? info "MiniTicker"
@@ -240,6 +244,7 @@ STREAM: v1.mini.d
         ```json
         {
             "stream": "v1.mini.s",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "event_time": "1697788800000000000",
@@ -259,6 +264,7 @@ STREAM: v1.mini.d
         ```json
         {
             "s": "v1.mini.s",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "et": "1697788800000000000",
@@ -386,6 +392,7 @@ STREAM: v1.ticker.s
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|Stream name|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|Ticker|True|A ticker matching the request filter|
         ??? info "Ticker"
@@ -423,6 +430,7 @@ STREAM: v1.ticker.s
         ```json
         {
             "stream": "v1.ticker.s",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "event_time": "1697788800000000000",
@@ -455,6 +463,7 @@ STREAM: v1.ticker.s
         ```json
         {
             "s": "v1.ticker.s",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "et": "1697788800000000000",
@@ -595,6 +604,7 @@ STREAM: v1.ticker.d
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|Stream name|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|Ticker|True|A ticker matching the request filter|
         ??? info "Ticker"
@@ -632,6 +642,7 @@ STREAM: v1.ticker.d
         ```json
         {
             "stream": "v1.ticker.s",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "event_time": "1697788800000000000",
@@ -664,6 +675,7 @@ STREAM: v1.ticker.d
         ```json
         {
             "s": "v1.ticker.s",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "et": "1697788800000000000",
@@ -807,6 +819,7 @@ STREAM: v1.book.s
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|Stream name|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|OrderbookLevels|True|An orderbook levels object matching the request filter|
         ??? info "OrderbookLevels"
@@ -834,6 +847,7 @@ STREAM: v1.book.s
         ```json
         {
             "stream": "v1.book.s",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "event_time": "1697788800000000000",
@@ -854,6 +868,7 @@ STREAM: v1.book.s
         ```json
         {
             "s": "v1.book.s",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "et": "1697788800000000000",
@@ -984,6 +999,7 @@ STREAM: v1.book.d
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|Stream name|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|OrderbookLevels|True|An orderbook levels object matching the request filter|
         ??? info "OrderbookLevels"
@@ -1011,6 +1027,7 @@ STREAM: v1.book.d
         ```json
         {
             "stream": "v1.book.s",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "event_time": "1697788800000000000",
@@ -1031,6 +1048,7 @@ STREAM: v1.book.d
         ```json
         {
             "s": "v1.book.s",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "et": "1697788800000000000",
@@ -1160,6 +1178,7 @@ STREAM: v1.trade
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|Stream name|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|PublicTrade|True|A public trade matching the request filter|
         ??? info "PublicTrade"
@@ -1179,6 +1198,7 @@ STREAM: v1.trade
             |trade_id|ti|string|True|A trade identifier|
             |venue|v|Venue|True|The venue where the trade occurred|
             |is_liquidation|il|boolean|True|If the trade was a liquidation|
+            |trade_index|ti1|number|True|A trade index|
             ??? info "Venue"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
@@ -1191,6 +1211,7 @@ STREAM: v1.trade
         ```json
         {
             "stream": "v1.trade",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "event_time": "1697788800000000000",
@@ -1204,13 +1225,15 @@ STREAM: v1.trade
                 "forward_price": "65038.01",
                 "trade_id": "1234567890",
                 "venue": "ORDERBOOK",
-                "is_liquidation": false
+                "is_liquidation": false,
+                "trade_index": "2"
             }
         }
         ```
         ```json
         {
             "s": "v1.trade",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "et": "1697788800000000000",
@@ -1224,7 +1247,8 @@ STREAM: v1.trade
                 "fp": "65038.01",
                 "ti": "1234567890",
                 "v": "ORDERBOOK",
-                "il": false
+                "il": false,
+                "ti1": "2"
             }
         }
         ```
@@ -1369,6 +1393,7 @@ STREAM: v1.candle
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|Stream name|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|Candlestick|True|A candlestick entry matching the request filters|
         ??? info "Candlestick"
@@ -1392,6 +1417,7 @@ STREAM: v1.candle
         ```json
         {
             "stream": "v1.candle",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "open_time": "1697788800000000000",
@@ -1410,6 +1436,7 @@ STREAM: v1.candle
         ```json
         {
             "s": "v1.candle",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "ot": "1697788800000000000",
