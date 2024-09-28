@@ -86,6 +86,7 @@ STREAM: v1.order
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|Stream name|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|Order|True|The order object being created or updated|
         ??? info "Order"
@@ -189,6 +190,7 @@ STREAM: v1.order
         ```json
         {
             "stream": "v1.order",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "order_id": "0x1234567890abcdef",
@@ -228,6 +230,7 @@ STREAM: v1.order
         ```json
         {
             "s": "v1.order",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "oi": "0x1234567890abcdef",
@@ -416,6 +419,7 @@ STREAM: v1.state
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|Stream name|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|OrderStateFeed|True|The Order State Feed|
         ??? info "OrderStateFeed"
@@ -473,6 +477,7 @@ STREAM: v1.state
         ```json
         {
             "stream": "v1.state",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "order_id": "10000101000203040506",
@@ -489,6 +494,7 @@ STREAM: v1.state
         ```json
         {
             "s": "v1.state",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "oi": "10000101000203040506",
@@ -646,6 +652,7 @@ STREAM: v1.fill
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|The websocket channel to which the response is sent|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|PrivateTrade|True|A private trade matching the request filter|
         ??? info "PrivateTrade"
@@ -669,6 +676,7 @@ STREAM: v1.fill
             |order_id|oi|string|True|An order identifier|
             |venue|v|Venue|True|The venue where the trade occurred|
             |client_order_id|co|string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
+            |trade_index|ti1|number|True|A trade index|
             ??? info "Venue"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
@@ -681,6 +689,7 @@ STREAM: v1.fill
         ```json
         {
             "stream": "v1.fill",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "event_time": "1697788800000000000",
@@ -700,13 +709,15 @@ STREAM: v1.fill
                 "trade_id": "209358",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
-                "client_order_id": "23042"
+                "client_order_id": "23042",
+                "trade_index": "2"
             }
         }
         ```
         ```json
         {
             "s": "v1.fill",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "et": "1697788800000000000",
@@ -726,7 +737,8 @@ STREAM: v1.fill
                 "ti": "209358",
                 "oi": "0x10000101000203040506",
                 "v": "ORDERBOOK",
-                "co": "23042"
+                "co": "23042",
+                "ti1": "2"
             }
         }
         ```
@@ -875,6 +887,7 @@ STREAM: v1.position
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|Stream name|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|Positions|True|A Position being created or updated matching the request filter|
         ??? info "Positions"
@@ -899,6 +912,7 @@ STREAM: v1.position
         ```json
         {
             "stream": "v1.position",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "event_time": "1697788800000000000",
@@ -920,6 +934,7 @@ STREAM: v1.position
         ```json
         {
             "s": "v1.position",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "et": "1697788800000000000",
@@ -1055,6 +1070,7 @@ STREAM: v1.deposit
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|The websocket channel to which the response is sent|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|Deposit|True|The Deposit object|
         ??? info "Deposit"
@@ -1079,6 +1095,7 @@ STREAM: v1.deposit
         ```json
         {
             "stream": "v1.deposit",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "tx_hash": "0x1234567890123456789012345678901234567890123456789012345678901234",
@@ -1091,6 +1108,7 @@ STREAM: v1.deposit
         ```json
         {
             "s": "v1.deposit",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "th": "0x1234567890123456789012345678901234567890123456789012345678901234",
@@ -1216,6 +1234,7 @@ STREAM: v1.transfer
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|The websocket channel to which the response is sent|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|Transfer|True|The Transfer object|
         ??? info "Transfer"
@@ -1252,6 +1271,7 @@ STREAM: v1.transfer
         ```json
         {
             "stream": "v1.transfer",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -1274,6 +1294,7 @@ STREAM: v1.transfer
         ```json
         {
             "s": "v1.transfer",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -1409,6 +1430,7 @@ STREAM: v1.withdrawal
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |stream|s|string|True|The websocket channel to which the response is sent|
+        |selector|s1|string|True|Primary selector|
         |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
         |feed|f|Withdrawal|True|The Withdrawal object|
         ??? info "Withdrawal"
@@ -1443,6 +1465,7 @@ STREAM: v1.withdrawal
         ```json
         {
             "stream": "v1.withdrawal",
+            "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -1463,6 +1486,7 @@ STREAM: v1.withdrawal
         ```json
         {
             "s": "v1.withdrawal",
+            "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",

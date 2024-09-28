@@ -1308,13 +1308,42 @@
             ]
           },
           {
+            "name": "start_time",
+            "lite_name": "st",
+            "semantic_type": "int64",
+            "json_type": "string",
+            "index": 6,
+            "array_depth": 0,
+            "optional": true,
+            "default": "0",
+            "example": "1697788800000000000",
+            "comment": [
+              "The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned"
+            ]
+          },
+          {
+            "name": "end_time",
+            "lite_name": "et",
+            "semantic_type": "int64",
+            "json_type": "string",
+            "index": 7,
+            "array_depth": 0,
+            "optional": true,
+            "default": "now()",
+            "example": "1697788800000000000",
+            "comment": [
+              "The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned"
+            ]
+          },
+          {
             "name": "limit",
             "lite_name": "l",
             "semantic_type": "uint32",
             "json_type": "number",
-            "index": 6,
+            "index": 8,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "500",
             "example": "500",
             "comment": [
               "The limit to query for. Defaults to 500; Max 1000"
@@ -1325,17 +1354,20 @@
             "lite_name": "c",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 7,
+            "index": 9,
             "array_depth": 0,
-            "optional": false,
-            "example": "'Qw0918='",
+            "optional": true,
+            "default": "''",
+            "example": "Qw0918=",
             "comment": [
               "The cursor to indicate when to start the query from"
             ]
           }
         ],
         "comment": [
-          "Query for all historical trades made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade."
+          "Query for all historical trades made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.",
+          "",
+          "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
         ]
       },
       {
@@ -1583,6 +1615,19 @@
               "",
               "When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId"
             ]
+          },
+          {
+            "name": "trade_index",
+            "lite_name": "ti1",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 19,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'2'",
+            "comment": [
+              "A trade index"
+            ]
           }
         ],
         "comment": []
@@ -1592,16 +1637,15 @@
         "is_root": true,
         "fields": [
           {
-            "name": "total",
-            "lite_name": "t",
-            "semantic_type": "uint32",
-            "json_type": "number",
+            "name": "results",
+            "lite_name": "r",
+            "semantic_type": "PrivateTrade",
+            "json_type": "PrivateTrade",
             "index": 0,
-            "array_depth": 0,
+            "array_depth": 1,
             "optional": false,
-            "example": "52",
             "comment": [
-              "The total number of private trades matching the request filter"
+              "The private trades matching the request asset"
             ]
           },
           {
@@ -1612,21 +1656,9 @@
             "index": 1,
             "array_depth": 0,
             "optional": false,
-            "example": "'Qw0918='",
+            "example": "Qw0918=",
             "comment": [
               "The cursor to indicate when to start the query from"
-            ]
-          },
-          {
-            "name": "results",
-            "lite_name": "r",
-            "semantic_type": "PrivateTrade",
-            "json_type": "PrivateTrade",
-            "index": 2,
-            "array_depth": 1,
-            "optional": false,
-            "comment": [
-              "The private trades matching the request asset"
             ]
           }
         ],
@@ -1913,7 +1945,8 @@
             "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'1697788800000000000'",
             "comment": [
               "Start time of sub account history in unix nanoseconds"
@@ -1926,10 +1959,25 @@
             "json_type": "string",
             "index": 2,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "now()",
             "example": "'1697788800000000000'",
             "comment": [
               "End time of sub account history in unix nanoseconds"
+            ]
+          },
+          {
+            "name": "limit",
+            "lite_name": "l",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 3,
+            "array_depth": 0,
+            "optional": true,
+            "default": "500",
+            "example": "500",
+            "comment": [
+              "The limit to query for. Defaults to 500; Max 1000"
             ]
           },
           {
@@ -1937,10 +1985,11 @@
             "lite_name": "c",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 3,
+            "index": 4,
             "array_depth": 0,
-            "optional": false,
-            "example": "'Qw0918='",
+            "optional": true,
+            "default": "''",
+            "example": "Qw0918=",
             "comment": [
               "The cursor to indicate when to start the next query from"
             ]
@@ -1950,8 +1999,9 @@
           "The request to get the history of a sub account",
           "SubAccount Summary values are snapshotted once every hour",
           "No snapshots are taken if the sub account has no activity in the hourly window",
-          "The history is returned in reverse chronological order",
-          "History is preserved only for the last 30 days"
+          "History is preserved only for the last 30 days",
+          "",
+          "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
         ]
       },
       {
@@ -1959,16 +2009,15 @@
         "is_root": true,
         "fields": [
           {
-            "name": "total",
-            "lite_name": "t",
-            "semantic_type": "uint32",
-            "json_type": "number",
+            "name": "results",
+            "lite_name": "r",
+            "semantic_type": "SubAccount",
+            "json_type": "SubAccount",
             "index": 0,
-            "array_depth": 0,
+            "array_depth": 1,
             "optional": false,
-            "example": "52",
             "comment": [
-              "The total number of sub account snapshots matching the request filter"
+              "The sub account history matching the request sub account"
             ]
           },
           {
@@ -1979,21 +2028,9 @@
             "index": 1,
             "array_depth": 0,
             "optional": false,
-            "example": "'Qw0918='",
+            "example": "Qw0918=",
             "comment": [
               "The cursor to indicate when to start the next query from"
-            ]
-          },
-          {
-            "name": "results",
-            "lite_name": "r",
-            "semantic_type": "SubAccount",
-            "json_type": "SubAccount",
-            "index": 2,
-            "array_depth": 1,
-            "optional": false,
-            "comment": [
-              "The sub account history matching the request sub account"
             ]
           }
         ],
@@ -3087,6 +3124,19 @@
             "comment": [
               "If the trade was a liquidation"
             ]
+          },
+          {
+            "name": "trade_index",
+            "lite_name": "ti1",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 12,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'2'",
+            "comment": [
+              "A trade index"
+            ]
           }
         ],
         "comment": [
@@ -3133,13 +3183,42 @@
             ]
           },
           {
+            "name": "start_time",
+            "lite_name": "st",
+            "semantic_type": "int64",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": true,
+            "default": "0",
+            "example": "1697788800000000000",
+            "comment": [
+              "The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned"
+            ]
+          },
+          {
+            "name": "end_time",
+            "lite_name": "et",
+            "semantic_type": "int64",
+            "json_type": "string",
+            "index": 2,
+            "array_depth": 0,
+            "optional": true,
+            "default": "now()",
+            "example": "1697788800000000000",
+            "comment": [
+              "The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned"
+            ]
+          },
+          {
             "name": "limit",
             "lite_name": "l",
             "semantic_type": "uint32",
             "json_type": "number",
-            "index": 1,
+            "index": 3,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "500",
             "example": "500",
             "comment": [
               "The limit to query for. Defaults to 500; Max 1000"
@@ -3150,10 +3229,11 @@
             "lite_name": "c",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 2,
+            "index": 4,
             "array_depth": 0,
-            "optional": false,
-            "example": "'Qw0918='",
+            "optional": true,
+            "default": "''",
+            "example": "''",
             "comment": [
               "The cursor to indicate when to start the query from"
             ]
@@ -3162,7 +3242,9 @@
         "comment": [
           "Perform historical lookup of public trades in any given instrument.",
           "This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.",
-          "Only data from the last three months will be retained."
+          "Only data from the last three months will be retained.",
+          "",
+          "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
         ]
       },
       {
@@ -3179,6 +3261,20 @@
             "optional": false,
             "comment": [
               "The public trades matching the request asset"
+            ]
+          },
+          {
+            "name": "next",
+            "lite_name": "n",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": true,
+            "default": "''",
+            "example": "'Qw0918='",
+            "comment": [
+              "The cursor to indicate when to start the next query from"
             ]
           }
         ],
@@ -3230,11 +3326,24 @@
             ]
           },
           {
+            "name": "asset_id",
+            "lite_name": "ai",
+            "semantic_type": "uint256",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'0x030501'",
+            "comment": [
+              "The asset ID used for instrument signing."
+            ]
+          },
+          {
             "name": "underlying",
             "lite_name": "u",
             "semantic_type": "Currency",
             "json_type": "Currency",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'BTC'",
@@ -3247,7 +3356,7 @@
             "lite_name": "q",
             "semantic_type": "Currency",
             "json_type": "Currency",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "example": "'USDT'",
@@ -3260,7 +3369,7 @@
             "lite_name": "k",
             "semantic_type": "Kind",
             "json_type": "Kind",
-            "index": 3,
+            "index": 4,
             "array_depth": 0,
             "optional": false,
             "example": "'PERPETUAL'",
@@ -3273,9 +3382,10 @@
             "lite_name": "e",
             "semantic_type": "timestamp",
             "json_type": "string",
-            "index": 4,
+            "index": 5,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'1697788800000000000'",
             "comment": [
               "The expiry time of the instrument in unix nanoseconds"
@@ -3286,9 +3396,10 @@
             "lite_name": "sp",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 5,
+            "index": 6,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'65038.01'",
             "comment": [
               "The strike price of the instrument, expressed in `9` decimals"
@@ -3299,7 +3410,7 @@
             "lite_name": "v",
             "semantic_type": "Venue",
             "json_type": "Venue",
-            "index": 6,
+            "index": 7,
             "array_depth": 1,
             "optional": false,
             "example": "['ORDERBOOK']",
@@ -3312,7 +3423,7 @@
             "lite_name": "sp1",
             "semantic_type": "InstrumentSettlementPeriod",
             "json_type": "InstrumentSettlementPeriod",
-            "index": 7,
+            "index": 8,
             "array_depth": 0,
             "optional": false,
             "example": "'PERPETUAL'",
@@ -3325,7 +3436,7 @@
             "lite_name": "ud",
             "semantic_type": "int8",
             "json_type": "number",
-            "index": 8,
+            "index": 9,
             "array_depth": 0,
             "optional": false,
             "example": "3",
@@ -3338,7 +3449,7 @@
             "lite_name": "qd",
             "semantic_type": "int8",
             "json_type": "number",
-            "index": 9,
+            "index": 10,
             "array_depth": 0,
             "optional": false,
             "example": "3",
@@ -3351,7 +3462,7 @@
             "lite_name": "ts",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 10,
+            "index": 11,
             "array_depth": 0,
             "optional": false,
             "example": "'0.01'",
@@ -3364,7 +3475,7 @@
             "lite_name": "ms",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 11,
+            "index": 12,
             "array_depth": 0,
             "optional": false,
             "example": "'0.01'",
@@ -3377,7 +3488,7 @@
             "lite_name": "mb",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 12,
+            "index": 13,
             "array_depth": 0,
             "optional": false,
             "example": "'5.0'",
@@ -3390,7 +3501,7 @@
             "lite_name": "ct",
             "semantic_type": "timestamp",
             "json_type": "string",
-            "index": 13,
+            "index": 14,
             "array_depth": 0,
             "optional": false,
             "example": "'1697788800000000000'",
@@ -3569,7 +3680,8 @@
             "json_type": "string",
             "index": 3,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'1697788800000000000'",
             "comment": [
               "Start time of kline data in unix nanoseconds"
@@ -3582,7 +3694,8 @@
             "json_type": "string",
             "index": 4,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "now()",
             "example": "'1697788800000000000'",
             "comment": [
               "End time of kline data in unix nanoseconds"
@@ -3595,16 +3708,32 @@
             "json_type": "number",
             "index": 5,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "500",
             "example": "500",
             "comment": [
-              "The limit to query for. Defaults to 500; Max 1500"
+              "The limit to query for. Defaults to 500; Max 1000"
+            ]
+          },
+          {
+            "name": "cursor",
+            "lite_name": "c",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 6,
+            "array_depth": 0,
+            "optional": true,
+            "default": "''",
+            "example": "''",
+            "comment": [
+              "The cursor to indicate when to start the query from"
             ]
           }
         ],
         "comment": [
           "Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.",
-          "startTime and endTime are optional parameters. The semantics of these parameters are as follows:\u003cul\u003e\u003cli\u003eIf both `startTime` and `endTime` are not set, the most recent candlesticks are returned up to `limit`.\u003c/li\u003e\u003cli\u003eIf `startTime` is set and `endTime` is not set, the candlesticks starting from `startTime` are returned up to `limit`.\u003c/li\u003e\u003cli\u003eIf `startTime` is not set and `endTime` is set, the candlesticks ending at `endTime` are returned up to `limit`.\u003c/li\u003e\u003cli\u003eIf both `startTime` and `endTime` are set, the candlesticks between `startTime` and `endTime` are returned up to `limit`.\u003c/li\u003e\u003c/ul\u003e"
+          "",
+          "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
         ]
       },
       {
@@ -3764,6 +3893,20 @@
             "comment": [
               "The candlestick result set for given interval"
             ]
+          },
+          {
+            "name": "next",
+            "lite_name": "n",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": true,
+            "default": "''",
+            "example": "'Qw0918='",
+            "comment": [
+              "The cursor to indicate when to start the next query from"
+            ]
           }
         ],
         "comment": []
@@ -3795,7 +3938,8 @@
             "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'1697788800000000000'",
             "comment": [
               "Start time of funding rate in unix nanoseconds"
@@ -3808,7 +3952,8 @@
             "json_type": "string",
             "index": 2,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "now()",
             "example": "'1697788800000000000'",
             "comment": [
               "End time of funding rate in unix nanoseconds"
@@ -3821,18 +3966,32 @@
             "json_type": "number",
             "index": 3,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "500",
             "example": "500",
             "comment": [
-              "The limit to query for. Defaults to 90; Max 300"
+              "The limit to query for. Defaults to 500; Max 1000"
+            ]
+          },
+          {
+            "name": "cursor",
+            "lite_name": "c",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 4,
+            "array_depth": 0,
+            "optional": true,
+            "default": "''",
+            "example": "''",
+            "comment": [
+              "The cursor to indicate when to start the query from"
             ]
           }
         ],
         "comment": [
           "Lookup the historical funding rate of various pairs.",
-          "startTime and endTime are optional parameters. The semantics of these parameters are as follows:\u003cul\u003e\u003cli\u003eIf both `startTime` and `endTime` are not set, the most recent funding rates are returned up to `limit`.\u003c/li\u003e\u003cli\u003eIf `startTime` is set and `endTime` is not set, the funding rates starting from `startTime` are returned up to `limit`.\u003c/li\u003e\u003cli\u003eIf `startTime` is not set and `endTime` is set, the funding rates ending at `endTime` are returned up to `limit`.\u003c/li\u003e\u003cli\u003eIf both `startTime` and `endTime` are set, the funding rates between `startTime` and `endTime` are returned up to `limit`.\u003c/li\u003e\u003c/ul\u003e",
           "",
-          "The instrument is also optional. When left empty, all perpetual instruments are returned."
+          "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
         ]
       },
       {
@@ -3912,6 +4071,20 @@
             "comment": [
               "The funding rate result set for given interval"
             ]
+          },
+          {
+            "name": "next",
+            "lite_name": "n",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": true,
+            "default": "''",
+            "example": "'Qw0918='",
+            "comment": [
+              "The cursor to indicate when to start the next query from"
+            ]
           }
         ],
         "comment": []
@@ -3947,37 +4120,11 @@
             ]
           },
           {
-            "name": "start_time",
-            "lite_name": "st",
-            "semantic_type": "timestamp",
-            "json_type": "string",
-            "index": 2,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'1697788800000000000'",
-            "comment": [
-              "Start time of kline data in unix nanoseconds"
-            ]
-          },
-          {
-            "name": "end_time",
-            "lite_name": "et",
-            "semantic_type": "timestamp",
-            "json_type": "string",
-            "index": 3,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'1697788800000000000'",
-            "comment": [
-              "End time of kline data in unix nanoseconds"
-            ]
-          },
-          {
             "name": "expiration",
             "lite_name": "e",
             "semantic_type": "timestamp",
             "json_type": "string",
-            "index": 4,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'1697788800000000000'",
@@ -3990,12 +4137,40 @@
             "lite_name": "sp",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 5,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "example": "65000.0",
             "comment": [
               "The strike price to select"
+            ]
+          },
+          {
+            "name": "start_time",
+            "lite_name": "st",
+            "semantic_type": "timestamp",
+            "json_type": "string",
+            "index": 4,
+            "array_depth": 0,
+            "optional": true,
+            "default": "0",
+            "example": "'1697788800000000000'",
+            "comment": [
+              "Start time of kline data in unix nanoseconds"
+            ]
+          },
+          {
+            "name": "end_time",
+            "lite_name": "et",
+            "semantic_type": "timestamp",
+            "json_type": "string",
+            "index": 5,
+            "array_depth": 0,
+            "optional": true,
+            "default": "now()",
+            "example": "'1697788800000000000'",
+            "comment": [
+              "End time of kline data in unix nanoseconds"
             ]
           },
           {
@@ -4005,18 +4180,32 @@
             "json_type": "number",
             "index": 6,
             "array_depth": 0,
-            "optional": false,
-            "example": "500",
+            "optional": true,
+            "default": "30",
+            "example": "20",
             "comment": [
-              "The limit to query for. Defaults to 30; Max 100"
+              "The limit to query for. Defaults to 500; Max 1000"
+            ]
+          },
+          {
+            "name": "cursor",
+            "lite_name": "c",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 7,
+            "array_depth": 0,
+            "optional": true,
+            "default": "''",
+            "example": "''",
+            "comment": [
+              "The cursor to indicate when to start the query from"
             ]
           }
         ],
         "comment": [
           "Lookup the historical settlement price of various pairs.",
-          "startTime and endTime are optional parameters. The semantics of these parameters are as follows:\u003cul\u003e\u003cli\u003eIf both `startTime` and `endTime` are not set, the most recent settlement prices are returned up to `limit`.\u003c/li\u003e\u003cli\u003eIf `startTime` is set and `endTime` is not set, the settlement prices starting from `startTime` are returned up to `limit`.\u003c/li\u003e\u003cli\u003eIf `startTime` is not set and `endTime` is set, the settlement prices ending at `endTime` are returned up to `limit`.\u003c/li\u003e\u003cli\u003eIf both `startTime` and `endTime` are set, the settlement prices between `startTime` and `endTime` are returned up to `limit`.\u003c/li\u003e\u003c/ul\u003e",
           "",
-          "The instrument is also optional. When left empty, all perpetual instruments are returned."
+          "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
         ]
       },
       {
@@ -4092,6 +4281,20 @@
             "optional": false,
             "comment": [
               "The funding rate result set for given interval"
+            ]
+          },
+          {
+            "name": "next",
+            "lite_name": "n",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": true,
+            "default": "''",
+            "example": "'Qw0918='",
+            "comment": [
+              "The cursor to indicate when to start the next query from"
             ]
           }
         ],
@@ -4249,11 +4452,24 @@
             ]
           },
           {
+            "name": "selector",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC_USDT_Perp'",
+            "comment": [
+              "Primary selector"
+            ]
+          },
+          {
             "name": "sequence_number",
             "lite_name": "sn",
             "semantic_type": "uint64",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'872634876'",
@@ -4266,7 +4482,7 @@
             "lite_name": "f",
             "semantic_type": "OrderbookLevels",
             "json_type": "OrderbookLevels",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -4341,11 +4557,24 @@
             ]
           },
           {
+            "name": "selector",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC_USDT_Perp'",
+            "comment": [
+              "Primary selector"
+            ]
+          },
+          {
             "name": "sequence_number",
             "lite_name": "sn",
             "semantic_type": "uint64",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'872634876'",
@@ -4358,7 +4587,7 @@
             "lite_name": "f",
             "semantic_type": "MiniTicker",
             "json_type": "MiniTicker",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -4433,11 +4662,24 @@
             ]
           },
           {
+            "name": "selector",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC_USDT_Perp'",
+            "comment": [
+              "Primary selector"
+            ]
+          },
+          {
             "name": "sequence_number",
             "lite_name": "sn",
             "semantic_type": "uint64",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'872634876'",
@@ -4450,7 +4692,7 @@
             "lite_name": "f",
             "semantic_type": "Ticker",
             "json_type": "Ticker",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -4537,11 +4779,24 @@
             ]
           },
           {
+            "name": "selector",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC_USDT_Perp'",
+            "comment": [
+              "Primary selector"
+            ]
+          },
+          {
             "name": "sequence_number",
             "lite_name": "sn",
             "semantic_type": "uint64",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'872634876'",
@@ -4554,7 +4809,7 @@
             "lite_name": "f",
             "semantic_type": "PublicTrade",
             "json_type": "PublicTrade",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -4635,11 +4890,24 @@
             ]
           },
           {
+            "name": "selector",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC_USDT_Perp'",
+            "comment": [
+              "Primary selector"
+            ]
+          },
+          {
             "name": "sequence_number",
             "lite_name": "sn",
             "semantic_type": "uint64",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'872634876'",
@@ -4652,7 +4920,7 @@
             "lite_name": "f",
             "semantic_type": "Candlestick",
             "json_type": "Candlestick",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -5160,7 +5428,7 @@
             "index": 9,
             "array_depth": 0,
             "optional": true,
-            "default": "null",
+            "default": "''",
             "comment": [
               "[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client"
             ]
@@ -5488,13 +5756,42 @@
             ]
           },
           {
+            "name": "start_time",
+            "lite_name": "st",
+            "semantic_type": "int64",
+            "json_type": "string",
+            "index": 6,
+            "array_depth": 0,
+            "optional": true,
+            "default": "0",
+            "example": "1697788800000000000",
+            "comment": [
+              "The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned"
+            ]
+          },
+          {
+            "name": "end_time",
+            "lite_name": "et",
+            "semantic_type": "int64",
+            "json_type": "string",
+            "index": 7,
+            "array_depth": 0,
+            "optional": true,
+            "default": "now()",
+            "example": "1697788800000000000",
+            "comment": [
+              "The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned"
+            ]
+          },
+          {
             "name": "limit",
             "lite_name": "l",
             "semantic_type": "uint32",
             "json_type": "number",
-            "index": 6,
+            "index": 8,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "500",
             "example": "500",
             "comment": [
               "The limit to query for. Defaults to 500; Max 1000"
@@ -5505,17 +5802,20 @@
             "lite_name": "c",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 7,
+            "index": 9,
             "array_depth": 0,
-            "optional": false,
-            "example": "'Qw0918='",
+            "optional": true,
+            "default": "''",
+            "example": "''",
             "comment": [
               "The cursor to indicate when to start the query from"
             ]
           }
         ],
         "comment": [
-          "Retrieves the order history for the account."
+          "Retrieves the order history for the account.",
+          "",
+          "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
         ]
       },
       {
@@ -5523,16 +5823,15 @@
         "is_root": true,
         "fields": [
           {
-            "name": "total",
-            "lite_name": "t",
-            "semantic_type": "uint32",
-            "json_type": "number",
+            "name": "orders",
+            "lite_name": "o",
+            "semantic_type": "Order",
+            "json_type": "Order",
             "index": 0,
-            "array_depth": 0,
+            "array_depth": 1,
             "optional": false,
-            "example": "500",
             "comment": [
-              "The total number of orders matching the request filter"
+              "The Open Orders matching the request filter"
             ]
           },
           {
@@ -5546,18 +5845,6 @@
             "example": "'Qw0918='",
             "comment": [
               "The cursor to indicate when to start the query from"
-            ]
-          },
-          {
-            "name": "orders",
-            "lite_name": "o",
-            "semantic_type": "Order",
-            "json_type": "Order",
-            "index": 2,
-            "array_depth": 1,
-            "optional": false,
-            "comment": [
-              "The Open Orders matching the request filter"
             ]
           }
         ],
@@ -6354,7 +6641,8 @@
             "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'1697788800000000000'",
             "comment": [
               "Optional. Start time in unix nanoseconds"
@@ -6367,7 +6655,8 @@
             "json_type": "string",
             "index": 2,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "now()",
             "example": "'1697788800000000000'",
             "comment": [
               "Optional. End time in unix nanoseconds"
@@ -6957,7 +7246,8 @@
             "json_type": "string",
             "index": 4,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'1697788800000000000'",
             "comment": [
               "Optional. Start time in unix nanoseconds"
@@ -6970,7 +7260,8 @@
             "json_type": "string",
             "index": 5,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "now()",
             "example": "'1697788800000000000'",
             "comment": [
               "Optional. End time in unix nanoseconds"
@@ -7149,7 +7440,8 @@
             "json_type": "string",
             "index": 5,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'1697788800000000000'",
             "comment": [
               "Optional. Start time in unix nanoseconds"
@@ -7162,10 +7454,25 @@
             "json_type": "string",
             "index": 6,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "now()",
             "example": "'1697788800000000000'",
             "comment": [
               "Optional. End time in unix nanoseconds"
+            ]
+          },
+          {
+            "name": "cursor",
+            "lite_name": "c",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 7,
+            "array_depth": 0,
+            "optional": true,
+            "default": "",
+            "example": "Qw0918=",
+            "comment": [
+              "The cursor to indicate when to start the next query from"
             ]
           }
         ],
@@ -7235,6 +7542,20 @@
             "optional": false,
             "comment": [
               "The sub account trade aggregation result set for given interval"
+            ]
+          },
+          {
+            "name": "next",
+            "lite_name": "n",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": true,
+            "default": "''",
+            "example": "'Qw0918='",
+            "comment": [
+              "The cursor to indicate when to start the next query from"
             ]
           }
         ],
@@ -7527,11 +7848,24 @@
             ]
           },
           {
+            "name": "selector",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC_USDT_Perp'",
+            "comment": [
+              "Primary selector"
+            ]
+          },
+          {
             "name": "sequence_number",
             "lite_name": "sn",
             "semantic_type": "uint64",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'872634876'",
@@ -7544,7 +7878,7 @@
             "lite_name": "f",
             "semantic_type": "Order",
             "json_type": "Order",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -7685,11 +8019,24 @@
             ]
           },
           {
+            "name": "selector",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC_USDT_Perp'",
+            "comment": [
+              "Primary selector"
+            ]
+          },
+          {
             "name": "sequence_number",
             "lite_name": "sn",
             "semantic_type": "uint64",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'872634876'",
@@ -7702,7 +8049,7 @@
             "lite_name": "f",
             "semantic_type": "OrderStateFeed",
             "json_type": "OrderStateFeed",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -7795,11 +8142,24 @@
             ]
           },
           {
+            "name": "selector",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC_USDT_Perp'",
+            "comment": [
+              "Primary selector"
+            ]
+          },
+          {
             "name": "sequence_number",
             "lite_name": "sn",
             "semantic_type": "uint64",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'872634876'",
@@ -7812,7 +8172,7 @@
             "lite_name": "f",
             "semantic_type": "Positions",
             "json_type": "Positions",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -7903,11 +8263,24 @@
             ]
           },
           {
+            "name": "selector",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC_USDT_Perp'",
+            "comment": [
+              "Primary selector"
+            ]
+          },
+          {
             "name": "sequence_number",
             "lite_name": "sn",
             "semantic_type": "uint64",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'872634876'",
@@ -7920,7 +8293,7 @@
             "lite_name": "f",
             "semantic_type": "PrivateTrade",
             "json_type": "PrivateTrade",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -8045,11 +8418,24 @@
             ]
           },
           {
+            "name": "selector",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC_USDT_Perp'",
+            "comment": [
+              "Primary selector"
+            ]
+          },
+          {
             "name": "sequence_number",
             "lite_name": "sn",
             "semantic_type": "uint64",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'872634876'",
@@ -8062,7 +8448,7 @@
             "lite_name": "f",
             "semantic_type": "Transfer",
             "json_type": "Transfer",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -8151,11 +8537,24 @@
             ]
           },
           {
+            "name": "selector",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC_USDT_Perp'",
+            "comment": [
+              "Primary selector"
+            ]
+          },
+          {
             "name": "sequence_number",
             "lite_name": "sn",
             "semantic_type": "uint64",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'872634876'",
@@ -8168,7 +8567,7 @@
             "lite_name": "f",
             "semantic_type": "Deposit",
             "json_type": "Deposit",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -8269,11 +8668,24 @@
             ]
           },
           {
+            "name": "selector",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC_USDT_Perp'",
+            "comment": [
+              "Primary selector"
+            ]
+          },
+          {
             "name": "sequence_number",
             "lite_name": "sn",
             "semantic_type": "uint64",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "example": "'872634876'",
@@ -8286,7 +8698,7 @@
             "lite_name": "f",
             "semantic_type": "Withdrawal",
             "json_type": "Withdrawal",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -8536,37 +8948,11 @@
         "is_root": true,
         "fields": [
           {
-            "name": "limit",
-            "lite_name": "l",
-            "semantic_type": "uint32",
-            "json_type": "number",
-            "index": 0,
-            "array_depth": 0,
-            "optional": false,
-            "example": "500",
-            "comment": [
-              "The limit to query for. Defaults to 500; Max 1000"
-            ]
-          },
-          {
-            "name": "cursor",
-            "lite_name": "c",
-            "semantic_type": "string",
-            "json_type": "string",
-            "index": 1,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'Qw0918='",
-            "comment": [
-              "The cursor to indicate when to start the next query from"
-            ]
-          },
-          {
             "name": "token_currency",
             "lite_name": "tc",
             "semantic_type": "Currency",
             "json_type": "Currency",
-            "index": 2,
+            "index": 0,
             "array_depth": 1,
             "optional": false,
             "example": "['USDT', 'USDC']",
@@ -8579,9 +8965,10 @@
             "lite_name": "st",
             "semantic_type": "timestamp",
             "json_type": "string",
-            "index": 3,
+            "index": 1,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'1697788800000000000'",
             "comment": [
               "The start time to query for in unix nanoseconds"
@@ -8592,18 +8979,49 @@
             "lite_name": "et",
             "semantic_type": "timestamp",
             "json_type": "string",
-            "index": 4,
+            "index": 2,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "now()",
             "example": "'1697788800000000000'",
             "comment": [
               "The end time to query for in unix nanoseconds"
+            ]
+          },
+          {
+            "name": "limit",
+            "lite_name": "l",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 3,
+            "array_depth": 0,
+            "optional": true,
+            "default": "500",
+            "example": "500",
+            "comment": [
+              "The limit to query for. Defaults to 500; Max 1000"
+            ]
+          },
+          {
+            "name": "cursor",
+            "lite_name": "c",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 4,
+            "array_depth": 0,
+            "optional": true,
+            "default": "''",
+            "example": "''",
+            "comment": [
+              "The cursor to indicate when to start the next query from"
             ]
           }
         ],
         "comment": [
           "The request to get the historical deposits of an account",
-          "The history is returned in reverse chronological order"
+          "The history is returned in reverse chronological order",
+          "",
+          "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
         ]
       },
       {
@@ -8696,16 +9114,15 @@
         "is_root": true,
         "fields": [
           {
-            "name": "total",
-            "lite_name": "t",
-            "semantic_type": "uint32",
-            "json_type": "number",
+            "name": "results",
+            "lite_name": "r",
+            "semantic_type": "DepositHistory",
+            "json_type": "DepositHistory",
             "index": 0,
-            "array_depth": 0,
+            "array_depth": 1,
             "optional": false,
-            "example": "52",
             "comment": [
-              "The total number of deposits matching the request account"
+              "The deposit history matching the request account"
             ]
           },
           {
@@ -8715,22 +9132,11 @@
             "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "''",
             "example": "'Qw0918='",
             "comment": [
               "The cursor to indicate when to start the next query from"
-            ]
-          },
-          {
-            "name": "results",
-            "lite_name": "r",
-            "semantic_type": "DepositHistory",
-            "json_type": "DepositHistory",
-            "index": 2,
-            "array_depth": 1,
-            "optional": false,
-            "comment": [
-              "The deposit history matching the request account"
             ]
           }
         ],
@@ -8741,37 +9147,11 @@
         "is_root": true,
         "fields": [
           {
-            "name": "limit",
-            "lite_name": "l",
-            "semantic_type": "uint32",
-            "json_type": "number",
-            "index": 0,
-            "array_depth": 0,
-            "optional": false,
-            "example": "500",
-            "comment": [
-              "The limit to query for. Defaults to 500; Max 1000"
-            ]
-          },
-          {
-            "name": "cursor",
-            "lite_name": "c",
-            "semantic_type": "string",
-            "json_type": "string",
-            "index": 1,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'Qw0918='",
-            "comment": [
-              "The cursor to indicate when to start the next query from"
-            ]
-          },
-          {
             "name": "token_currency",
             "lite_name": "tc",
             "semantic_type": "Currency",
             "json_type": "Currency",
-            "index": 2,
+            "index": 0,
             "array_depth": 1,
             "optional": false,
             "example": "['USDT', 'USDC']",
@@ -8784,9 +9164,10 @@
             "lite_name": "st",
             "semantic_type": "timestamp",
             "json_type": "string",
-            "index": 3,
+            "index": 1,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'1697788800000000000'",
             "comment": [
               "The start time to query for in unix nanoseconds"
@@ -8797,18 +9178,49 @@
             "lite_name": "et",
             "semantic_type": "timestamp",
             "json_type": "string",
-            "index": 4,
+            "index": 2,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "now()",
             "example": "'1697788800000000000'",
             "comment": [
               "The end time to query for in unix nanoseconds"
+            ]
+          },
+          {
+            "name": "limit",
+            "lite_name": "l",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 3,
+            "array_depth": 0,
+            "optional": true,
+            "default": "500",
+            "example": "500",
+            "comment": [
+              "The limit to query for. Defaults to 500; Max 1000"
+            ]
+          },
+          {
+            "name": "cursor",
+            "lite_name": "c",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 4,
+            "array_depth": 0,
+            "optional": true,
+            "default": "''",
+            "example": "''",
+            "comment": [
+              "The cursor to indicate when to start the next query from"
             ]
           }
         ],
         "comment": [
           "The request to get the historical transfers of an account",
-          "The history is returned in reverse chronological order"
+          "The history is returned in reverse chronological order",
+          "",
+          "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
         ]
       },
       {
@@ -8939,16 +9351,15 @@
         "is_root": true,
         "fields": [
           {
-            "name": "total",
-            "lite_name": "t",
-            "semantic_type": "uint32",
-            "json_type": "number",
+            "name": "results",
+            "lite_name": "r",
+            "semantic_type": "TransferHistory",
+            "json_type": "TransferHistory",
             "index": 0,
-            "array_depth": 0,
+            "array_depth": 1,
             "optional": false,
-            "example": "52",
             "comment": [
-              "The total number of transfers matching the request account"
+              "The transfer history matching the request account"
             ]
           },
           {
@@ -8958,22 +9369,11 @@
             "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "''",
             "example": "'Qw0918='",
             "comment": [
               "The cursor to indicate when to start the next query from"
-            ]
-          },
-          {
-            "name": "results",
-            "lite_name": "r",
-            "semantic_type": "TransferHistory",
-            "json_type": "TransferHistory",
-            "index": 2,
-            "array_depth": 1,
-            "optional": false,
-            "comment": [
-              "The transfer history matching the request account"
             ]
           }
         ],
@@ -8984,37 +9384,11 @@
         "is_root": true,
         "fields": [
           {
-            "name": "limit",
-            "lite_name": "l",
-            "semantic_type": "uint32",
-            "json_type": "number",
-            "index": 0,
-            "array_depth": 0,
-            "optional": false,
-            "example": "500",
-            "comment": [
-              "The limit to query for. Defaults to 500; Max 1000"
-            ]
-          },
-          {
-            "name": "cursor",
-            "lite_name": "c",
-            "semantic_type": "string",
-            "json_type": "string",
-            "index": 1,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'Qw0918='",
-            "comment": [
-              "The cursor to indicate when to start the next query from"
-            ]
-          },
-          {
             "name": "token_currency",
             "lite_name": "tc",
             "semantic_type": "Currency",
             "json_type": "Currency",
-            "index": 2,
+            "index": 0,
             "array_depth": 1,
             "optional": false,
             "example": "['USDT', 'USDC']",
@@ -9027,9 +9401,10 @@
             "lite_name": "st",
             "semantic_type": "timestamp",
             "json_type": "string",
-            "index": 3,
+            "index": 1,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'1697788800000000000'",
             "comment": [
               "The start time to query for in unix nanoseconds"
@@ -9040,18 +9415,49 @@
             "lite_name": "et",
             "semantic_type": "timestamp",
             "json_type": "string",
-            "index": 4,
+            "index": 2,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "now()",
             "example": "'1697788800000000000'",
             "comment": [
               "The end time to query for in unix nanoseconds"
+            ]
+          },
+          {
+            "name": "limit",
+            "lite_name": "l",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 3,
+            "array_depth": 0,
+            "optional": true,
+            "default": "500",
+            "example": "500",
+            "comment": [
+              "The limit to query for. Defaults to 500; Max 1000"
+            ]
+          },
+          {
+            "name": "cursor",
+            "lite_name": "c",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 4,
+            "array_depth": 0,
+            "optional": true,
+            "default": "''",
+            "example": "''",
+            "comment": [
+              "The cursor to indicate when to start the next query from"
             ]
           }
         ],
         "comment": [
           "The request to get the historical withdrawals of an account",
-          "The history is returned in reverse chronological order"
+          "The history is returned in reverse chronological order",
+          "",
+          "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
         ]
       },
       {
@@ -9156,16 +9562,15 @@
         "is_root": true,
         "fields": [
           {
-            "name": "total",
-            "lite_name": "t",
-            "semantic_type": "uint32",
-            "json_type": "number",
+            "name": "results",
+            "lite_name": "r",
+            "semantic_type": "WithdrawalHistory",
+            "json_type": "WithdrawalHistory",
             "index": 0,
-            "array_depth": 0,
+            "array_depth": 1,
             "optional": false,
-            "example": "52",
             "comment": [
-              "The total number of withdrawals matching the request account"
+              "The withdrawals history matching the request account"
             ]
           },
           {
@@ -9175,22 +9580,11 @@
             "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "''",
             "example": "'Qw0918='",
             "comment": [
               "The cursor to indicate when to start the next query from"
-            ]
-          },
-          {
-            "name": "results",
-            "lite_name": "r",
-            "semantic_type": "WithdrawalHistory",
-            "json_type": "WithdrawalHistory",
-            "index": 2,
-            "array_depth": 1,
-            "optional": false,
-            "comment": [
-              "The withdrawals history matching the request account"
             ]
           }
         ],
@@ -9407,7 +9801,7 @@
             "name": "PERPETUAL",
             "value": 1,
             "comment": [
-              "Instrument settles through perpetual hourly funding cycles"
+              "Instrument settles through perpetual funding cycles"
             ]
           },
           {

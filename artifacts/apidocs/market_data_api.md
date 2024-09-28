@@ -40,11 +40,12 @@ LITE ENDPOINT: lite/v1/instrument
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
             |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |asset_id|ai|string|True|The asset ID used for instrument signing.|
             |underlying|u|Currency|True|The underlying currency|
             |quote|q|Currency|True|The quote currency|
             |kind|k|Kind|True|The kind of instrument|
-            |expiry|e|string|True|The expiry time of the instrument in unix nanoseconds|
-            |strike_price|sp|string|True|The strike price of the instrument, expressed in `9` decimals|
+            |expiry|e|string|False|The expiry time of the instrument in unix nanoseconds|
+            |strike_price|sp|string|False|The strike price of the instrument, expressed in `9` decimals|
             |venues|v|[Venue]|True|Venues that this instrument can be traded at|
             |settlement_period|sp1|InstrumentSettlementPeriod|True|The settlement period of the instrument|
             |underlying_decimals|ud|number|True|The smallest denomination of the underlying asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
@@ -89,7 +90,7 @@ LITE ENDPOINT: lite/v1/instrument
             ??? info "InstrumentSettlementPeriod"
                 |Value| Description |
                 |-|-|
-                |`PERPETUAL` = 1|Instrument settles through perpetual hourly funding cycles|
+                |`PERPETUAL` = 1|Instrument settles through perpetual funding cycles|
                 |`DAILY` = 2|Instrument settles at an expiry date, marked as a daily instrument|
                 |`WEEKLY` = 3|Instrument settles at an expiry date, marked as a weekly instrument|
                 |`MONTHLY` = 4|Instrument settles at an expiry date, marked as a monthly instrument|
@@ -101,6 +102,7 @@ LITE ENDPOINT: lite/v1/instrument
         {
             "results": {
                 "instrument": "BTC_USDT_Perp",
+                "asset_id": "0x030501",
                 "underlying": "BTC",
                 "quote": "USDT",
                 "kind": "PERPETUAL",
@@ -213,11 +215,12 @@ LITE ENDPOINT: lite/v1/all_instruments
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
             |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |asset_id|ai|string|True|The asset ID used for instrument signing.|
             |underlying|u|Currency|True|The underlying currency|
             |quote|q|Currency|True|The quote currency|
             |kind|k|Kind|True|The kind of instrument|
-            |expiry|e|string|True|The expiry time of the instrument in unix nanoseconds|
-            |strike_price|sp|string|True|The strike price of the instrument, expressed in `9` decimals|
+            |expiry|e|string|False|The expiry time of the instrument in unix nanoseconds|
+            |strike_price|sp|string|False|The strike price of the instrument, expressed in `9` decimals|
             |venues|v|[Venue]|True|Venues that this instrument can be traded at|
             |settlement_period|sp1|InstrumentSettlementPeriod|True|The settlement period of the instrument|
             |underlying_decimals|ud|number|True|The smallest denomination of the underlying asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
@@ -262,7 +265,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             ??? info "InstrumentSettlementPeriod"
                 |Value| Description |
                 |-|-|
-                |`PERPETUAL` = 1|Instrument settles through perpetual hourly funding cycles|
+                |`PERPETUAL` = 1|Instrument settles through perpetual funding cycles|
                 |`DAILY` = 2|Instrument settles at an expiry date, marked as a daily instrument|
                 |`WEEKLY` = 3|Instrument settles at an expiry date, marked as a weekly instrument|
                 |`MONTHLY` = 4|Instrument settles at an expiry date, marked as a monthly instrument|
@@ -274,6 +277,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         {
             "results": [{
                 "instrument": "BTC_USDT_Perp",
+                "asset_id": "0x030501",
                 "underlying": "BTC",
                 "quote": "USDT",
                 "kind": "PERPETUAL",
@@ -419,11 +423,12 @@ LITE ENDPOINT: lite/v1/instruments
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
             |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |asset_id|ai|string|True|The asset ID used for instrument signing.|
             |underlying|u|Currency|True|The underlying currency|
             |quote|q|Currency|True|The quote currency|
             |kind|k|Kind|True|The kind of instrument|
-            |expiry|e|string|True|The expiry time of the instrument in unix nanoseconds|
-            |strike_price|sp|string|True|The strike price of the instrument, expressed in `9` decimals|
+            |expiry|e|string|False|The expiry time of the instrument in unix nanoseconds|
+            |strike_price|sp|string|False|The strike price of the instrument, expressed in `9` decimals|
             |venues|v|[Venue]|True|Venues that this instrument can be traded at|
             |settlement_period|sp1|InstrumentSettlementPeriod|True|The settlement period of the instrument|
             |underlying_decimals|ud|number|True|The smallest denomination of the underlying asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
@@ -468,7 +473,7 @@ LITE ENDPOINT: lite/v1/instruments
             ??? info "InstrumentSettlementPeriod"
                 |Value| Description |
                 |-|-|
-                |`PERPETUAL` = 1|Instrument settles through perpetual hourly funding cycles|
+                |`PERPETUAL` = 1|Instrument settles through perpetual funding cycles|
                 |`DAILY` = 2|Instrument settles at an expiry date, marked as a daily instrument|
                 |`WEEKLY` = 3|Instrument settles at an expiry date, marked as a weekly instrument|
                 |`MONTHLY` = 4|Instrument settles at an expiry date, marked as a monthly instrument|
@@ -480,6 +485,7 @@ LITE ENDPOINT: lite/v1/instruments
         {
             "results": [{
                 "instrument": "BTC_USDT_Perp",
+                "asset_id": "0x030501",
                 "underlying": "BTC",
                 "quote": "USDT",
                 "kind": "PERPETUAL",
@@ -1029,6 +1035,7 @@ LITE ENDPOINT: lite/v1/trades
             |trade_id|ti|string|True|A trade identifier|
             |venue|v|Venue|True|The venue where the trade occurred|
             |is_liquidation|il|boolean|True|If the trade was a liquidation|
+            |trade_index|ti1|number|True|A trade index|
             ??? info "Venue"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
@@ -1052,7 +1059,8 @@ LITE ENDPOINT: lite/v1/trades
                 "forward_price": "65038.01",
                 "trade_id": "1234567890",
                 "venue": "ORDERBOOK",
-                "is_liquidation": false
+                "is_liquidation": false,
+                "trade_index": "2"
             }]
         }
         ```
@@ -1121,28 +1129,34 @@ LITE ENDPOINT: lite/v1/trade_history
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiPublicTradeHistoryRequest"
-        Perform historical lookup of public trades in any given instrument.<br>This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>Only data from the last three months will be retained.<br>
+        Perform historical lookup of public trades in any given instrument.<br>This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>Only data from the last three months will be retained.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
-        |limit|l|number|True|The limit to query for. Defaults to 500; Max 1000|
-        |cursor|c|string|True|The cursor to indicate when to start the query from|
+        |start_time|st|string|False|The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned|
+        |end_time|et|string|False|The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned|
+        |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
+        |cursor|c|string|False|The cursor to indicate when to start the query from|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         ```json
         {
             "instrument": "BTC_USDT_Perp",
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": ""
         }
         ```
         ```json
         {
             "i": "BTC_USDT_Perp",
+            "st": 1697788800000000000,
+            "et": 1697788800000000000,
             "l": 500,
-            "c": "Qw0918="
+            "c": ""
         }
         ```
     </section>
@@ -1152,6 +1166,7 @@ LITE ENDPOINT: lite/v1/trade_history
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |results|r|[PublicTrade]|True|The public trades matching the request asset|
+        |next|n|string|False|The cursor to indicate when to start the next query from|
         ??? info "PublicTrade"
             All private RFQs and Private AXEs will be filtered out from the responses<br>
 
@@ -1169,6 +1184,7 @@ LITE ENDPOINT: lite/v1/trade_history
             |trade_id|ti|string|True|A trade identifier|
             |venue|v|Venue|True|The venue where the trade occurred|
             |is_liquidation|il|boolean|True|If the trade was a liquidation|
+            |trade_index|ti1|number|True|A trade index|
             ??? info "Venue"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
@@ -1192,8 +1208,10 @@ LITE ENDPOINT: lite/v1/trade_history
                 "forward_price": "65038.01",
                 "trade_id": "1234567890",
                 "venue": "ORDERBOOK",
-                "is_liquidation": false
-            }]
+                "is_liquidation": false,
+                "trade_index": "2"
+            }],
+            "next": "Qw0918="
         }
         ```
     </section>
@@ -1220,8 +1238,10 @@ LITE ENDPOINT: lite/v1/trade_history
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/trade_history' \
         --data '{
             "instrument": "BTC_USDT_Perp",
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": ""
         }
         '
         ```
@@ -1230,8 +1250,10 @@ LITE ENDPOINT: lite/v1/trade_history
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trade_history' \
         --data '{
             "instrument": "BTC_USDT_Perp",
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": ""
         }
         '
         ```
@@ -1240,8 +1262,10 @@ LITE ENDPOINT: lite/v1/trade_history
         curl --location 'https://market-data.testnet.grvt.io/full/v1/trade_history' \
         --data '{
             "instrument": "BTC_USDT_Perp",
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": ""
         }
         '
         ```
@@ -1250,8 +1274,10 @@ LITE ENDPOINT: lite/v1/trade_history
         curl --location 'https://market-data.grvt.io/full/v1/trade_history' \
         --data '{
             "instrument": "BTC_USDT_Perp",
+            "start_time": 1697788800000000000,
+            "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": "Qw0918="
+            "cursor": ""
         }
         '
         ```
@@ -1266,16 +1292,17 @@ LITE ENDPOINT: lite/v1/kline
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiCandlestickRequest"
-        Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.<br>startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent candlesticks are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the candlesticks starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the candlesticks ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the candlesticks between `startTime` and `endTime` are returned up to `limit`.</li></ul><br>
+        Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
         |interval|i1|CandlestickInterval|True|The interval of each candlestick|
         |type|t|CandlestickType|True|The type of candlestick data to retrieve|
-        |start_time|st|string|True|Start time of kline data in unix nanoseconds|
-        |end_time|et|string|True|End time of kline data in unix nanoseconds|
-        |limit|l|number|True|The limit to query for. Defaults to 500; Max 1500|
+        |start_time|st|string|False|Start time of kline data in unix nanoseconds|
+        |end_time|et|string|False|End time of kline data in unix nanoseconds|
+        |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
+        |cursor|c|string|False|The cursor to indicate when to start the query from|
         ??? info "CandlestickInterval"
             |Value| Description |
             |-|-|
@@ -1314,7 +1341,8 @@ LITE ENDPOINT: lite/v1/kline
             "type": "TRADE",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "limit": 500
+            "limit": 500,
+            "cursor": ""
         }
         ```
         ```json
@@ -1324,7 +1352,8 @@ LITE ENDPOINT: lite/v1/kline
             "t": "TRADE",
             "st": "1697788800000000000",
             "et": "1697788800000000000",
-            "l": 500
+            "l": 500,
+            "c": ""
         }
         ```
     </section>
@@ -1334,6 +1363,7 @@ LITE ENDPOINT: lite/v1/kline
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |results|r|[Candlestick]|True|The candlestick result set for given interval|
+        |next|n|string|False|The cursor to indicate when to start the next query from|
         ??? info "Candlestick"
             <br>
 
@@ -1365,7 +1395,8 @@ LITE ENDPOINT: lite/v1/kline
                 "volume_q": "123456.78",
                 "trades": 123456,
                 "instrument": "BTC_USDT_Perp"
-            }]
+            }],
+            "next": "Qw0918="
         }
         ```
     </section>
@@ -1396,7 +1427,8 @@ LITE ENDPOINT: lite/v1/kline
             "type": "TRADE",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "limit": 500
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -1409,7 +1441,8 @@ LITE ENDPOINT: lite/v1/kline
             "type": "TRADE",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "limit": 500
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -1422,7 +1455,8 @@ LITE ENDPOINT: lite/v1/kline
             "type": "TRADE",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "limit": 500
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -1435,7 +1469,8 @@ LITE ENDPOINT: lite/v1/kline
             "type": "TRADE",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "limit": 500
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -1450,14 +1485,15 @@ LITE ENDPOINT: lite/v1/funding
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiFundingRateRequest"
-        Lookup the historical funding rate of various pairs.<br>startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent funding rates are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the funding rates starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the funding rates ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the funding rates between `startTime` and `endTime` are returned up to `limit`.</li></ul><br><br>The instrument is also optional. When left empty, all perpetual instruments are returned.<br>
+        Lookup the historical funding rate of various pairs.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |instrument|i|string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
-        |start_time|st|string|True|Start time of funding rate in unix nanoseconds|
-        |end_time|et|string|True|End time of funding rate in unix nanoseconds|
-        |limit|l|number|True|The limit to query for. Defaults to 90; Max 300|
+        |start_time|st|string|False|Start time of funding rate in unix nanoseconds|
+        |end_time|et|string|False|End time of funding rate in unix nanoseconds|
+        |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
+        |cursor|c|string|False|The cursor to indicate when to start the query from|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -1466,7 +1502,8 @@ LITE ENDPOINT: lite/v1/funding
             "instrument": "BTC_USDT_Perp",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "limit": 500
+            "limit": 500,
+            "cursor": ""
         }
         ```
         ```json
@@ -1474,7 +1511,8 @@ LITE ENDPOINT: lite/v1/funding
             "i": "BTC_USDT_Perp",
             "st": "1697788800000000000",
             "et": "1697788800000000000",
-            "l": 500
+            "l": 500,
+            "c": ""
         }
         ```
     </section>
@@ -1484,6 +1522,7 @@ LITE ENDPOINT: lite/v1/funding
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |results|r|[FundingRate]|True|The funding rate result set for given interval|
+        |next|n|string|False|The cursor to indicate when to start the next query from|
         ??? info "FundingRate"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -1501,7 +1540,8 @@ LITE ENDPOINT: lite/v1/funding
                 "funding_rate": "6.78",
                 "funding_time": "1697788800000000000",
                 "mark_price": "65038.01"
-            }]
+            }],
+            "next": "Qw0918="
         }
         ```
     </section>
@@ -1530,7 +1570,8 @@ LITE ENDPOINT: lite/v1/funding
             "instrument": "BTC_USDT_Perp",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "limit": 500
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -1541,7 +1582,8 @@ LITE ENDPOINT: lite/v1/funding
             "instrument": "BTC_USDT_Perp",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "limit": 500
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -1552,7 +1594,8 @@ LITE ENDPOINT: lite/v1/funding
             "instrument": "BTC_USDT_Perp",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "limit": 500
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -1563,7 +1606,8 @@ LITE ENDPOINT: lite/v1/funding
             "instrument": "BTC_USDT_Perp",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
-            "limit": 500
+            "limit": 500,
+            "cursor": ""
         }
         '
         ```
@@ -1577,17 +1621,18 @@ LITE ENDPOINT: lite/v1/settlement
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiSettlementPriceRequest"
-        Lookup the historical settlement price of various pairs.<br>startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><li>If both `startTime` and `endTime` are not set, the most recent settlement prices are returned up to `limit`.</li><li>If `startTime` is set and `endTime` is not set, the settlement prices starting from `startTime` are returned up to `limit`.</li><li>If `startTime` is not set and `endTime` is set, the settlement prices ending at `endTime` are returned up to `limit`.</li><li>If both `startTime` and `endTime` are set, the settlement prices between `startTime` and `endTime` are returned up to `limit`.</li></ul><br><br>The instrument is also optional. When left empty, all perpetual instruments are returned.<br>
+        Lookup the historical settlement price of various pairs.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |underlying|u|Currency|True|The underlying currency to select|
         |quote|q|Currency|True|The quote currency to select|
-        |start_time|st|string|True|Start time of kline data in unix nanoseconds|
-        |end_time|et|string|True|End time of kline data in unix nanoseconds|
         |expiration|e|string|True|The expiration time to select in unix nanoseconds|
         |strike_price|sp|string|True|The strike price to select|
-        |limit|l|number|True|The limit to query for. Defaults to 30; Max 100|
+        |start_time|st|string|False|Start time of kline data in unix nanoseconds|
+        |end_time|et|string|False|End time of kline data in unix nanoseconds|
+        |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
+        |cursor|c|string|False|The cursor to indicate when to start the query from|
         ??? info "Currency"
             The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -1613,22 +1658,24 @@ LITE ENDPOINT: lite/v1/settlement
         {
             "underlying": "BTC",
             "quote": "USDT",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
             "expiration": "1697788800000000000",
             "strike_price": 65000.0,
-            "limit": 500
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
+            "limit": 20,
+            "cursor": ""
         }
         ```
         ```json
         {
             "u": "BTC",
             "q": "USDT",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
             "e": "1697788800000000000",
             "sp": 65000.0,
-            "l": 500
+            "st": "1697788800000000000",
+            "et": "1697788800000000000",
+            "l": 20,
+            "c": ""
         }
         ```
     </section>
@@ -1638,6 +1685,7 @@ LITE ENDPOINT: lite/v1/settlement
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |results|r|[APISettlementPrice]|True|The funding rate result set for given interval|
+        |next|n|string|False|The cursor to indicate when to start the next query from|
         ??? info "APISettlementPrice"
             |Name|Lite|Type|Required| Description |
             |-|-|-|-|-|
@@ -1673,7 +1721,8 @@ LITE ENDPOINT: lite/v1/settlement
                 "quote": "USDT",
                 "settlement_time": "1697788800000000000",
                 "settlement_price": "65038.01"
-            }]
+            }],
+            "next": "Qw0918="
         }
         ```
     </section>
@@ -1701,11 +1750,12 @@ LITE ENDPOINT: lite/v1/settlement
         --data '{
             "underlying": "BTC",
             "quote": "USDT",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
             "expiration": "1697788800000000000",
             "strike_price": 65000.0,
-            "limit": 500
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
+            "limit": 20,
+            "cursor": ""
         }
         '
         ```
@@ -1715,11 +1765,12 @@ LITE ENDPOINT: lite/v1/settlement
         --data '{
             "underlying": "BTC",
             "quote": "USDT",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
             "expiration": "1697788800000000000",
             "strike_price": 65000.0,
-            "limit": 500
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
+            "limit": 20,
+            "cursor": ""
         }
         '
         ```
@@ -1729,11 +1780,12 @@ LITE ENDPOINT: lite/v1/settlement
         --data '{
             "underlying": "BTC",
             "quote": "USDT",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
             "expiration": "1697788800000000000",
             "strike_price": 65000.0,
-            "limit": 500
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
+            "limit": 20,
+            "cursor": ""
         }
         '
         ```
@@ -1743,11 +1795,12 @@ LITE ENDPOINT: lite/v1/settlement
         --data '{
             "underlying": "BTC",
             "quote": "USDT",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
             "expiration": "1697788800000000000",
             "strike_price": 65000.0,
-            "limit": 500
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
+            "limit": 20,
+            "cursor": ""
         }
         '
         ```
