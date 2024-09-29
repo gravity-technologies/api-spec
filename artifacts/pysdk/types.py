@@ -60,6 +60,8 @@ class CandlestickType(Enum):
 
 
 class Currency(Enum):
+    # the USD fiat currency
+    USD = "USD"
     # the USDC token
     USDC = "USDC"
     # the USDT token
@@ -102,6 +104,8 @@ class MarginType(Enum):
 
 
 class OrderRejectReason(Enum):
+    # order is not cancelled or rejected
+    UNSPECIFIED = "UNSPECIFIED"
     # client called a Cancel API
     CLIENT_CANCEL = "CLIENT_CANCEL"
     # client called a Bulk Cancel API

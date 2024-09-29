@@ -9657,6 +9657,13 @@
         "name": "Currency",
         "values": [
           {
+            "name": "USD",
+            "value": 1,
+            "comment": [
+              "the USD fiat currency"
+            ]
+          },
+          {
             "name": "USDC",
             "value": 2,
             "comment": [
@@ -9789,6 +9796,13 @@
       {
         "name": "OrderRejectReason",
         "values": [
+          {
+            "name": "UNSPECIFIED",
+            "value": 0,
+            "comment": [
+              "order is not cancelled or rejected"
+            ]
+          },
           {
             "name": "CLIENT_CANCEL",
             "value": 1,
@@ -10103,6 +10117,13 @@
             "value": 1,
             "comment": [
               "the trade is cleared on the orderbook venue"
+            ]
+          },
+          {
+            "name": "RFQ",
+            "value": 2,
+            "comment": [
+              "the trade is cleared on the RFQ venue"
             ]
           }
         ],

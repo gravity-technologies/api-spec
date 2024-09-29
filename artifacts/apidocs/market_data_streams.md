@@ -1203,6 +1203,7 @@ STREAM: v1.trade
                 |Value| Description |
                 |-|-|
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
+                |`RFQ` = 2|the trade is cleared on the RFQ venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
