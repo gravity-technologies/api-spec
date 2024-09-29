@@ -87,6 +87,11 @@
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
+              },
+              {
+                "code": 1003,
+                "message": "Data Not Found",
+                "status": 404
               }
             ]
           },
@@ -103,6 +108,11 @@
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
+              },
+              {
+                "code": 1003,
+                "message": "Data Not Found",
+                "status": 404
               }
             ]
           },
@@ -119,6 +129,26 @@
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
+              },
+              {
+                "code": 1003,
+                "message": "Data Not Found",
+                "status": 404
+              },
+              {
+                "code": 3004,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3005,
+                "message": "Depth is invalid",
+                "status": 400
+              },
+              {
+                "code": 3006,
+                "message": "Aggregate is invalid",
+                "status": 400
               }
             ]
           },
@@ -211,7 +241,33 @@
             "auth_required": false,
             "feed_selector": "WSMiniTickerFeedSelectorV1",
             "feed": "WSMiniTickerFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1001,
+                "message": "Internal Server Error",
+                "status": 500
+              },
+              {
+                "code": 3004,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 1003,
+                "message": "Data Not Found",
+                "status": 404
+              },
+              {
+                "code": 3002,
+                "message": "Feed format is invalid",
+                "status": 400
+              },
+              {
+                "code": 3003,
+                "message": "Feed rate is invalid",
+                "status": 400
+              }
+            ]
           },
           {
             "namespace": "Ticker",
@@ -220,7 +276,33 @@
             "auth_required": false,
             "feed_selector": "WSMiniTickerFeedSelectorV1",
             "feed": "WSMiniTickerFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1001,
+                "message": "Internal Server Error",
+                "status": 500
+              },
+              {
+                "code": 3004,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 1003,
+                "message": "Data Not Found",
+                "status": 404
+              },
+              {
+                "code": 3002,
+                "message": "Feed format is invalid",
+                "status": 400
+              },
+              {
+                "code": 3003,
+                "message": "Feed rate is invalid",
+                "status": 400
+              }
+            ]
           },
           {
             "namespace": "Ticker",
@@ -229,7 +311,28 @@
             "auth_required": false,
             "feed_selector": "WSTickerFeedSelectorV1",
             "feed": "WSTickerFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1001,
+                "message": "Internal Server Error",
+                "status": 500
+              },
+              {
+                "code": 3004,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 1003,
+                "message": "Data Not Found",
+                "status": 404
+              },
+              {
+                "code": 3003,
+                "message": "Feed rate is invalid",
+                "status": 400
+              }
+            ]
           },
           {
             "namespace": "Ticker",
@@ -238,7 +341,28 @@
             "auth_required": false,
             "feed_selector": "WSTickerFeedSelectorV1",
             "feed": "WSTickerFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1001,
+                "message": "Internal Server Error",
+                "status": 500
+              },
+              {
+                "code": 3004,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 1003,
+                "message": "Data Not Found",
+                "status": 404
+              },
+              {
+                "code": 3003,
+                "message": "Feed rate is invalid",
+                "status": 400
+              }
+            ]
           },
           {
             "namespace": "Orderbook",
@@ -247,7 +371,43 @@
             "auth_required": false,
             "feed_selector": "WSOrderbookLevelsFeedSelectorV1",
             "feed": "WSOrderbookLevelsFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1001,
+                "message": "Internal Server Error",
+                "status": 500
+              },
+              {
+                "code": 3004,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 1003,
+                "message": "Data Not Found",
+                "status": 404
+              },
+              {
+                "code": 3002,
+                "message": "Feed format is invalid",
+                "status": 400
+              },
+              {
+                "code": 3003,
+                "message": "Feed rate is invalid",
+                "status": 400
+              },
+              {
+                "code": 3005,
+                "message": "Depth is invalid",
+                "status": 400
+              },
+              {
+                "code": 3006,
+                "message": "Aggregate is invalid",
+                "status": 400
+              }
+            ]
           },
           {
             "namespace": "Orderbook",
@@ -256,7 +416,43 @@
             "auth_required": false,
             "feed_selector": "WSOrderbookLevelsFeedSelectorV1",
             "feed": "WSOrderbookLevelsFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1001,
+                "message": "Internal Server Error",
+                "status": 500
+              },
+              {
+                "code": 3004,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 1003,
+                "message": "Data Not Found",
+                "status": 404
+              },
+              {
+                "code": 3002,
+                "message": "Feed format is invalid",
+                "status": 400
+              },
+              {
+                "code": 3003,
+                "message": "Feed rate is invalid",
+                "status": 400
+              },
+              {
+                "code": 3005,
+                "message": "Depth is invalid",
+                "status": 400
+              },
+              {
+                "code": 3006,
+                "message": "Aggregate is invalid",
+                "status": 400
+              }
+            ]
           },
           {
             "namespace": "Trade",
@@ -4300,7 +4496,7 @@
             "example": "500",
             "comment": [
               "The minimal rate at which we publish feeds (in milliseconds)",
-              "Delta (100, 200, 500, 1000, 5000)",
+              "Delta (40, 100, 200, 500, 1000, 5000)",
               "Snapshot (500, 1000, 5000)"
             ],
             "selector": "secondary"
@@ -4313,9 +4509,9 @@
             "index": 2,
             "array_depth": 0,
             "optional": false,
-            "example": "100",
+            "example": "40",
             "comment": [
-              "Depth of the order book to be retrieved (API/Snapshot max is 100, Delta max is 1000)"
+              "Depth of the order book to be retrieved (10, 40, 200, 500)"
             ],
             "selector": "secondary"
           },
@@ -4433,7 +4629,7 @@
             "example": "500",
             "comment": [
               "The minimal rate at which we publish feeds (in milliseconds)",
-              "Delta (raw, 50, 100, 200, 500, 1000, 5000)",
+              "Delta (0, 40, 100, 200, 500, 1000, 5000)",
               "Snapshot (200, 500, 1000, 5000)"
             ],
             "selector": "secondary"

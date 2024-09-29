@@ -657,6 +657,7 @@ LITE ENDPOINT: lite/v1/mini
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1003|404|Data Not Found|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -665,6 +666,11 @@ LITE ENDPOINT: lite/v1/mini
             "code":1001,
             "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1003,
+            "message":"Data Not Found",
+            "status":404
         }
         ```
     </section>
@@ -805,6 +811,7 @@ LITE ENDPOINT: lite/v1/ticker
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1003|404|Data Not Found|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -813,6 +820,11 @@ LITE ENDPOINT: lite/v1/ticker
             "code":1001,
             "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1003,
+            "message":"Data Not Found",
+            "status":404
         }
         ```
     </section>
@@ -938,6 +950,10 @@ LITE ENDPOINT: lite/v1/book
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1003|404|Data Not Found|
+        |3004|400|Instrument is invalid|
+        |3005|400|Depth is invalid|
+        |3006|400|Aggregate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -946,6 +962,26 @@ LITE ENDPOINT: lite/v1/book
             "code":1001,
             "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1003,
+            "message":"Data Not Found",
+            "status":404
+        }
+        {
+            "code":3004,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3005,
+            "message":"Depth is invalid",
+            "status":400
+        }
+        {
+            "code":3006,
+            "message":"Aggregate is invalid",
+            "status":400
         }
         ```
     </section>

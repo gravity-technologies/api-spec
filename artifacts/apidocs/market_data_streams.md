@@ -14,7 +14,7 @@ STREAM: v1.mini.s
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (raw, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
+        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0, 40, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -116,10 +116,40 @@ STREAM: v1.mini.s
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1001|500|Internal Server Error|
+        |3004|400|Instrument is invalid|
+        |1003|404|Data Not Found|
+        |3002|400|Feed format is invalid|
+        |3003|400|Feed rate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1001,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        {
+            "code":3004,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":1003,
+            "message":"Data Not Found",
+            "status":404
+        }
+        {
+            "code":3002,
+            "message":"Feed format is invalid",
+            "status":400
+        }
+        {
+            "code":3003,
+            "message":"Feed rate is invalid",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -185,7 +215,7 @@ STREAM: v1.mini.d
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (raw, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
+        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0, 40, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -287,10 +317,40 @@ STREAM: v1.mini.d
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1001|500|Internal Server Error|
+        |3004|400|Instrument is invalid|
+        |1003|404|Data Not Found|
+        |3002|400|Feed format is invalid|
+        |3003|400|Feed rate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1001,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        {
+            "code":3004,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":1003,
+            "message":"Data Not Found",
+            "status":404
+        }
+        {
+            "code":3002,
+            "message":"Feed format is invalid",
+            "status":400
+        }
+        {
+            "code":3003,
+            "message":"Feed rate is invalid",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -499,10 +559,34 @@ STREAM: v1.ticker.s
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1001|500|Internal Server Error|
+        |3004|400|Instrument is invalid|
+        |1003|404|Data Not Found|
+        |3003|400|Feed rate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1001,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        {
+            "code":3004,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":1003,
+            "message":"Data Not Found",
+            "status":404
+        }
+        {
+            "code":3003,
+            "message":"Feed rate is invalid",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -711,10 +795,34 @@ STREAM: v1.ticker.d
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1001|500|Internal Server Error|
+        |3004|400|Instrument is invalid|
+        |1003|404|Data Not Found|
+        |3003|400|Feed rate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1001,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        {
+            "code":3004,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":1003,
+            "message":"Data Not Found",
+            "status":404
+        }
+        {
+            "code":3003,
+            "message":"Feed rate is invalid",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -781,8 +889,8 @@ STREAM: v1.book.s
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
-        |depth<br>`d` |number|True|Depth of the order book to be retrieved (API/Snapshot max is 100, Delta max is 1000)|
+        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (40, 100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
+        |depth<br>`d` |number|True|Depth of the order book to be retrieved (10, 40, 200, 500)|
         |aggregate<br>`a` |number|True|The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -791,7 +899,7 @@ STREAM: v1.book.s
         ```json
         {
             "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-100-10"],
+            "feed":["BTC_USDT_Perp@500-40-10"],
             "method":"subscribe",
             "is_full":true
         }
@@ -799,7 +907,7 @@ STREAM: v1.book.s
         ```json
         {
             "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-100-10"],
+            "feed":["BTC_USDT_Perp@500-40-10"],
             "method":"subscribe",
             "is_full":false
         }
@@ -808,7 +916,7 @@ STREAM: v1.book.s
         ```json
         {
             "stream":"v1.book.s",
-            "subs":["BTC_USDT_Perp@500-100-10"],
+            "subs":["BTC_USDT_Perp@500-40-10"],
             "unsubs":[]
         }
         ```
@@ -892,10 +1000,52 @@ STREAM: v1.book.s
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1001|500|Internal Server Error|
+        |3004|400|Instrument is invalid|
+        |1003|404|Data Not Found|
+        |3002|400|Feed format is invalid|
+        |3003|400|Feed rate is invalid|
+        |3005|400|Depth is invalid|
+        |3006|400|Aggregate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1001,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        {
+            "code":3004,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":1003,
+            "message":"Data Not Found",
+            "status":404
+        }
+        {
+            "code":3002,
+            "message":"Feed format is invalid",
+            "status":400
+        }
+        {
+            "code":3003,
+            "message":"Feed rate is invalid",
+            "status":400
+        }
+        {
+            "code":3005,
+            "message":"Depth is invalid",
+            "status":400
+        }
+        {
+            "code":3006,
+            "message":"Aggregate is invalid",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -905,7 +1055,7 @@ STREAM: v1.book.s
         -x '
         {
             "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-100-10"],
+            "feed":["BTC_USDT_Perp@500-40-10"],
             "method":"subscribe",
             "is_full":true
         }
@@ -917,7 +1067,7 @@ STREAM: v1.book.s
         -x '
         {
             "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-100-10"],
+            "feed":["BTC_USDT_Perp@500-40-10"],
             "method":"subscribe",
             "is_full":true
         }
@@ -929,7 +1079,7 @@ STREAM: v1.book.s
         -x '
         {
             "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-100-10"],
+            "feed":["BTC_USDT_Perp@500-40-10"],
             "method":"subscribe",
             "is_full":true
         }
@@ -941,7 +1091,7 @@ STREAM: v1.book.s
         -x '
         {
             "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-100-10"],
+            "feed":["BTC_USDT_Perp@500-40-10"],
             "method":"subscribe",
             "is_full":true
         }
@@ -961,8 +1111,8 @@ STREAM: v1.book.d
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
-        |depth<br>`d` |number|True|Depth of the order book to be retrieved (API/Snapshot max is 100, Delta max is 1000)|
+        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (40, 100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
+        |depth<br>`d` |number|True|Depth of the order book to be retrieved (10, 40, 200, 500)|
         |aggregate<br>`a` |number|True|The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -971,7 +1121,7 @@ STREAM: v1.book.d
         ```json
         {
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-100-10"],
+            "feed":["BTC_USDT_Perp@500-40-10"],
             "method":"subscribe",
             "is_full":true
         }
@@ -979,7 +1129,7 @@ STREAM: v1.book.d
         ```json
         {
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-100-10"],
+            "feed":["BTC_USDT_Perp@500-40-10"],
             "method":"subscribe",
             "is_full":false
         }
@@ -988,7 +1138,7 @@ STREAM: v1.book.d
         ```json
         {
             "stream":"v1.book.d",
-            "subs":["BTC_USDT_Perp@500-100-10"],
+            "subs":["BTC_USDT_Perp@500-40-10"],
             "unsubs":[]
         }
         ```
@@ -1072,10 +1222,52 @@ STREAM: v1.book.d
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1001|500|Internal Server Error|
+        |3004|400|Instrument is invalid|
+        |1003|404|Data Not Found|
+        |3002|400|Feed format is invalid|
+        |3003|400|Feed rate is invalid|
+        |3005|400|Depth is invalid|
+        |3006|400|Aggregate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1001,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        {
+            "code":3004,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":1003,
+            "message":"Data Not Found",
+            "status":404
+        }
+        {
+            "code":3002,
+            "message":"Feed format is invalid",
+            "status":400
+        }
+        {
+            "code":3003,
+            "message":"Feed rate is invalid",
+            "status":400
+        }
+        {
+            "code":3005,
+            "message":"Depth is invalid",
+            "status":400
+        }
+        {
+            "code":3006,
+            "message":"Aggregate is invalid",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -1085,7 +1277,7 @@ STREAM: v1.book.d
         -x '
         {
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-100-10"],
+            "feed":["BTC_USDT_Perp@500-40-10"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1097,7 +1289,7 @@ STREAM: v1.book.d
         -x '
         {
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-100-10"],
+            "feed":["BTC_USDT_Perp@500-40-10"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1109,7 +1301,7 @@ STREAM: v1.book.d
         -x '
         {
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-100-10"],
+            "feed":["BTC_USDT_Perp@500-40-10"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1121,7 +1313,7 @@ STREAM: v1.book.d
         -x '
         {
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-100-10"],
+            "feed":["BTC_USDT_Perp@500-40-10"],
             "method":"subscribe",
             "is_full":true
         }
