@@ -11,13 +11,13 @@ STREAM: v1.order
     !!! info "WSOrderFeedSelectorV1"
         Subscribes to a feed of order updates pertaining to orders made by your account.<br>Each Order can be uniquely identified by its `order_id` or `client_order_id` (if client designs well).<br>Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both.<br>
 
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
-        |sub_account_id|sa|string|True|The subaccount ID to filter by|
-        |kind|k|Kind|True|The kind filter to apply.|
-        |underlying|u|Currency|True|The underlying filter to apply.|
-        |quote|q|Currency|True|The quote filter to apply.|
-        |state_filter|sf|OrderStateFilter|True|create only, update only, all|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
+        |kind<br>`k` |Kind|True|The kind filter to apply.|
+        |underlying<br>`u` |Currency|True|The underlying filter to apply.|
+        |quote<br>`q` |Currency|True|The quote filter to apply.|
+        |state_filter<br>`sf` |OrderStateFilter|True|create only, update only, all|
         ??? info "Kind"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -83,27 +83,27 @@ STREAM: v1.order
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSOrderFeedDataV1"
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
-        |stream|s|string|True|Stream name|
-        |selector|s1|string|True|Primary selector|
-        |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
-        |feed|f|Order|True|The order object being created or updated|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |stream<br>`s` |string|True|Stream name|
+        |selector<br>`s1` |string|True|Primary selector|
+        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
+        |feed<br>`f` |Order|True|The order object being created or updated|
         ??? info "Order"
             Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
-            |Name|Lite|Type|Required| Description |
-            |-|-|-|-|-|
-            |order_id|oi|string|False|[Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend|
-            |sub_account_id|sa|string|True|The subaccount initiating the order|
-            |is_market|im|boolean|False|If the order is a market order<br>Market Orders do not have a limit price, and are always executed according to the maker order price.<br>Market Orders must always be taker orders|
-            |time_in_force|ti|TimeInForce|True|Four supported types of orders: GTT, IOC, AON, FOK:<ul><br><li>PARTIAL EXECUTION = GTT / IOC - allows partial size execution on each leg</li><br><li>FULL EXECUTION = AON / FOK - only allows full size execution on all legs</li><br><li>TAKER ONLY = IOC / FOK - only allows taker orders</li><br><li>MAKER OR TAKER = GTT / AON - allows maker or taker orders</li><br></ul>Exchange only supports (GTT, IOC, FOK)<br>RFQ Maker only supports (GTT, AON), RFQ Taker only supports (FOK)|
-            |post_only|po|boolean|False|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order.<br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
-            |reduce_only|ro|boolean|False|If True, Order must reduce the position size, or be cancelled|
-            |legs|l|[OrderLeg]|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
-            |signature|s|Signature|True|The signature approving this order|
-            |metadata|m|OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
-            |state|s1|OrderState|False|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |order_id<br>`oi` |string|False<br>`0`|[Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend|
+            |sub_account_id<br>`sa` |string|True|The subaccount initiating the order|
+            |is_market<br>`im` |boolean|False<br>`false`|If the order is a market order<br>Market Orders do not have a limit price, and are always executed according to the maker order price.<br>Market Orders must always be taker orders|
+            |time_in_force<br>`ti` |TimeInForce|True|Four supported types of orders: GTT, IOC, AON, FOK:<ul><br><li>PARTIAL EXECUTION = GTT / IOC - allows partial size execution on each leg</li><br><li>FULL EXECUTION = AON / FOK - only allows full size execution on all legs</li><br><li>TAKER ONLY = IOC / FOK - only allows taker orders</li><br><li>MAKER OR TAKER = GTT / AON - allows maker or taker orders</li><br></ul>Exchange only supports (GTT, IOC, FOK)<br>RFQ Maker only supports (GTT, AON), RFQ Taker only supports (FOK)|
+            |post_only<br>`po` |boolean|False<br>`false`|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order.<br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
+            |reduce_only<br>`ro` |boolean|False<br>`false`|If True, Order must reduce the position size, or be cancelled|
+            |legs<br>`l` |[OrderLeg]|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
+            |signature<br>`s` |Signature|True|The signature approving this order|
+            |metadata<br>`m` |OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
+            |state<br>`s1` |OrderState|False<br>`''`|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
             ??? info "TimeInForce"
                 |                       | Must Fill All | Can Fill Partial |
                 | -                     | -             | -                |
@@ -118,36 +118,36 @@ STREAM: v1.order
                 |`IMMEDIATE_OR_CANCEL` = 3|IOC - Fill the order as much as possible, when hitting the orderbook. Then cancel it|
                 |`FILL_OR_KILL` = 4|FOK - Both AoN and IoC. Either fill the full order when hitting the orderbook, or cancel it|
             ??? info "OrderLeg"
-                |Name|Lite|Type|Required| Description |
-                |-|-|-|-|-|
-                |instrument|i|string|True|The instrument to trade in this leg|
-                |size|s|string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
-                |limit_price|lp|string|False|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
-                |is_buying_asset|ib|boolean|True|Specifies if the order leg is a buy or sell|
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |instrument<br>`i` |string|True|The instrument to trade in this leg|
+                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
+                |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
+                |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
-                |Name|Lite|Type|Required| Description |
-                |-|-|-|-|-|
-                |signer|s|string|True|The address (public key) of the wallet signing the payload|
-                |r|r|string|True|Signature R|
-                |s|s1|string|True|Signature S|
-                |v|v|number|True|Signature V|
-                |expiration|e|string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
-                |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
+                |r<br>`r` |string|True|Signature R|
+                |s<br>`s1` |string|True|Signature S|
+                |v<br>`v` |number|True|Signature V|
+                |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
+                |nonce<br>`n` |number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
             ??? info "OrderMetadata"
                 Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
-                |Name|Lite|Type|Required| Description |
-                |-|-|-|-|-|
-                |client_order_id|co|string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
-                |create_time|ct|string|False|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
+                |create_time<br>`ct` |string|False<br>`0`|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
             ??? info "OrderState"
-                |Name|Lite|Type|Required| Description |
-                |-|-|-|-|-|
-                |status|s|OrderStatus|True|The status of the order|
-                |reject_reason|rr|OrderRejectReason|True|The reason for rejection or cancellation|
-                |book_size|bs|[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
-                |traded_size|ts|[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
-                |update_time|ut|string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |status<br>`s` |OrderStatus|True|The status of the order|
+                |reject_reason<br>`rr` |OrderRejectReason|True|The reason for rejection or cancellation|
+                |book_size<br>`bs` |[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
+                |traded_size<br>`ts` |[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
+                |update_time<br>`ut` |string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
                 ??? info "OrderStatus"
                     |Value| Description |
                     |-|-|
@@ -344,13 +344,13 @@ STREAM: v1.state
     !!! info "WSOrderStateFeedSelectorV1"
         Subscribes to a feed of order updates pertaining to orders made by your account.<br>Unlike the Order Stream, this only streams state updates, drastically improving throughput, and latency.<br>Each Order can be uniquely identified by its `order_id` or `client_order_id` (if client designs well).<br>Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both.<br>
 
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
-        |sub_account_id|sa|string|True|The subaccount ID to filter by|
-        |kind|k|Kind|True|The kind filter to apply.|
-        |underlying|u|Currency|True|The underlying filter to apply.|
-        |quote|q|Currency|True|The quote filter to apply.|
-        |state_filter|sf|OrderStateFilter|True|create only, update only, all|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
+        |kind<br>`k` |Kind|True|The kind filter to apply.|
+        |underlying<br>`u` |Currency|True|The underlying filter to apply.|
+        |quote<br>`q` |Currency|True|The quote filter to apply.|
+        |state_filter<br>`sf` |OrderStateFilter|True|create only, update only, all|
         ??? info "Kind"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -416,25 +416,25 @@ STREAM: v1.state
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSOrderStateFeedDataV1"
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
-        |stream|s|string|True|Stream name|
-        |selector|s1|string|True|Primary selector|
-        |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
-        |feed|f|OrderStateFeed|True|The Order State Feed|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |stream<br>`s` |string|True|Stream name|
+        |selector<br>`s1` |string|True|Primary selector|
+        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
+        |feed<br>`f` |OrderStateFeed|True|The Order State Feed|
         ??? info "OrderStateFeed"
-            |Name|Lite|Type|Required| Description |
-            |-|-|-|-|-|
-            |order_id|oi|string|True|A unique 128-bit identifier for the order, deterministically generated within the GRVT backend|
-            |order_state|os|OrderState|True|The order state object being created or updated|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |order_id<br>`oi` |string|True|A unique 128-bit identifier for the order, deterministically generated within the GRVT backend|
+            |order_state<br>`os` |OrderState|True|The order state object being created or updated|
             ??? info "OrderState"
-                |Name|Lite|Type|Required| Description |
-                |-|-|-|-|-|
-                |status|s|OrderStatus|True|The status of the order|
-                |reject_reason|rr|OrderRejectReason|True|The reason for rejection or cancellation|
-                |book_size|bs|[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
-                |traded_size|ts|[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
-                |update_time|ut|string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |status<br>`s` |OrderStatus|True|The status of the order|
+                |reject_reason<br>`rr` |OrderRejectReason|True|The reason for rejection or cancellation|
+                |book_size<br>`bs` |[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
+                |traded_size<br>`ts` |[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
+                |update_time<br>`ut` |string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
                 ??? info "OrderStatus"
                     |Value| Description |
                     |-|-|
@@ -584,12 +584,12 @@ STREAM: v1.fill
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSPrivateTradeFeedSelectorV1"
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
-        |sub_account_id|sa|string|True|The sub account ID to request for|
-        |kind|k|Kind|True|The kind filter to apply.|
-        |underlying|u|Currency|True|The underlying filter to apply.|
-        |quote|q|Currency|True|The quote filter to apply.|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |sub_account_id<br>`sa` |string|True|The sub account ID to request for|
+        |kind<br>`k` |Kind|True|The kind filter to apply.|
+        |underlying<br>`u` |Currency|True|The underlying filter to apply.|
+        |quote<br>`q` |Currency|True|The quote filter to apply.|
         ??? info "Kind"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -649,33 +649,33 @@ STREAM: v1.fill
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSPrivateTradeFeedDataV1"
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
-        |stream|s|string|True|The websocket channel to which the response is sent|
-        |selector|s1|string|True|Primary selector|
-        |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
-        |feed|f|PrivateTrade|True|A private trade matching the request filter|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |stream<br>`s` |string|True|The websocket channel to which the response is sent|
+        |selector<br>`s1` |string|True|Primary selector|
+        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
+        |feed<br>`f` |PrivateTrade|True|A private trade matching the request filter|
         ??? info "PrivateTrade"
-            |Name|Lite|Type|Required| Description |
-            |-|-|-|-|-|
-            |event_time|et|string|True|Time at which the event was emitted in unix nanoseconds|
-            |sub_account_id|sa|string|True|The sub account ID that participated in the trade|
-            |instrument|i|string|True|The instrument being represented|
-            |is_buyer|ib|boolean|True|The side that the subaccount took on the trade|
-            |is_taker|it|boolean|True|The role that the subaccount took on the trade|
-            |size|s|string|True|The number of assets being traded, expressed in underlying asset decimal units|
-            |price|p|string|True|The traded price, expressed in `9` decimals|
-            |mark_price|mp|string|True|The mark price of the instrument at point of trade, expressed in `9` decimals|
-            |index_price|ip|string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
-            |interest_rate|ir|string|True|The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)|
-            |forward_price|fp|string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
-            |realized_pnl|rp|string|True|The realized PnL of the trade, expressed in quote asset decimal units (0 if increasing position size)|
-            |fee|f|string|True|The fees paid on the trade, expressed in quote asset decimal unit (negative if maker rebate applied)|
-            |fee_rate|fr|string|True|The fee rate paid on the trade|
-            |trade_id|ti|string|True|A trade identifier|
-            |order_id|oi|string|True|An order identifier|
-            |venue|v|Venue|True|The venue where the trade occurred|
-            |client_order_id|co|string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
+            |sub_account_id<br>`sa` |string|True|The sub account ID that participated in the trade|
+            |instrument<br>`i` |string|True|The instrument being represented|
+            |is_buyer<br>`ib` |boolean|True|The side that the subaccount took on the trade|
+            |is_taker<br>`it` |boolean|True|The role that the subaccount took on the trade|
+            |size<br>`s` |string|True|The number of assets being traded, expressed in underlying asset decimal units|
+            |price<br>`p` |string|True|The traded price, expressed in `9` decimals|
+            |mark_price<br>`mp` |string|True|The mark price of the instrument at point of trade, expressed in `9` decimals|
+            |index_price<br>`ip` |string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
+            |interest_rate<br>`ir` |string|True|The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)|
+            |forward_price<br>`fp` |string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
+            |realized_pnl<br>`rp` |string|True|The realized PnL of the trade, expressed in quote asset decimal units (0 if increasing position size)|
+            |fee<br>`f` |string|True|The fees paid on the trade, expressed in quote asset decimal unit (negative if maker rebate applied)|
+            |fee_rate<br>`fr` |string|True|The fee rate paid on the trade|
+            |trade_id<br>`ti` |string|True|A trade identifier|
+            |order_id<br>`oi` |string|True|An order identifier|
+            |venue<br>`v` |Venue|True|The venue where the trade occurred|
+            |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
             ??? info "Venue"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
@@ -816,12 +816,12 @@ STREAM: v1.position
     !!! info "WSPositionsFeedSelectorV1"
         Subscribes to a feed of position updates. This happens when a trade is executed.<br>
 
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
-        |sub_account_id|sa|string|True|The subaccount ID to filter by|
-        |kind|k|Kind|True|The kind filter to apply.|
-        |underlying|u|Currency|True|The underlying filter to apply.|
-        |quote|q|Currency|True|The quote filter to apply.|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
+        |kind<br>`k` |Kind|True|The kind filter to apply.|
+        |underlying<br>`u` |Currency|True|The underlying filter to apply.|
+        |quote<br>`q` |Currency|True|The quote filter to apply.|
         ??? info "Kind"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -881,28 +881,28 @@ STREAM: v1.position
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSPositionsFeedDataV1"
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
-        |stream|s|string|True|Stream name|
-        |selector|s1|string|True|Primary selector|
-        |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
-        |feed|f|Positions|True|A Position being created or updated matching the request filter|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |stream<br>`s` |string|True|Stream name|
+        |selector<br>`s1` |string|True|Primary selector|
+        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
+        |feed<br>`f` |Positions|True|A Position being created or updated matching the request filter|
         ??? info "Positions"
-            |Name|Lite|Type|Required| Description |
-            |-|-|-|-|-|
-            |event_time|et|string|True|Time at which the event was emitted in unix nanoseconds|
-            |sub_account_id|sa|string|True|The sub account ID that participated in the trade|
-            |instrument|i|string|True|The instrument being represented|
-            |size|s|string|True|The size of the position, expressed in underlying asset decimal units. Negative for short positions|
-            |notional|n|string|True|The notional value of the position, negative for short assets, expressed in quote asset decimal units|
-            |entry_price|ep|string|True|The entry price of the position, expressed in `9` decimals<br>Whenever increasing the size of a position, the entry price is updated to the new average entry price<br>`new_entry_price = (old_entry_price * old_size + trade_price * trade_size) / (old_size + trade_size)`|
-            |exit_price|ep1|string|True|The exit price of the position, expressed in `9` decimals<br>Whenever decreasing the size of a position, the exit price is updated to the new average exit price<br>`new_exit_price = (old_exit_price * old_exit_trade_size + trade_price * trade_size) / (old_exit_trade_size + trade_size)`|
-            |mark_price|mp|string|True|The mark price of the position, expressed in `9` decimals|
-            |unrealized_pnl|up|string|True|The unrealized PnL of the position, expressed in quote asset decimal units<br>`unrealized_pnl = (mark_price - entry_price) * size`|
-            |realized_pnl|rp|string|True|The realized PnL of the position, expressed in quote asset decimal units<br>`realized_pnl = (exit_price - entry_price) * exit_trade_size`|
-            |total_pnl|tp|string|True|The total PnL of the position, expressed in quote asset decimal units<br>`total_pnl = realized_pnl + unrealized_pnl`|
-            |roi|r|string|True|The ROI of the position, expressed as a percentage<br>`roi = (total_pnl / (entry_price * abs(size))) * 100^`|
-            |quote_index_price|qi|string|True|The index price of the quote currency. (reported in `USD`)|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
+            |sub_account_id<br>`sa` |string|True|The sub account ID that participated in the trade|
+            |instrument<br>`i` |string|True|The instrument being represented|
+            |size<br>`s` |string|True|The size of the position, expressed in underlying asset decimal units. Negative for short positions|
+            |notional<br>`n` |string|True|The notional value of the position, negative for short assets, expressed in quote asset decimal units|
+            |entry_price<br>`ep` |string|True|The entry price of the position, expressed in `9` decimals<br>Whenever increasing the size of a position, the entry price is updated to the new average entry price<br>`new_entry_price = (old_entry_price * old_size + trade_price * trade_size) / (old_size + trade_size)`|
+            |exit_price<br>`ep1` |string|True|The exit price of the position, expressed in `9` decimals<br>Whenever decreasing the size of a position, the exit price is updated to the new average exit price<br>`new_exit_price = (old_exit_price * old_exit_trade_size + trade_price * trade_size) / (old_exit_trade_size + trade_size)`|
+            |mark_price<br>`mp` |string|True|The mark price of the position, expressed in `9` decimals|
+            |unrealized_pnl<br>`up` |string|True|The unrealized PnL of the position, expressed in quote asset decimal units<br>`unrealized_pnl = (mark_price - entry_price) * size`|
+            |realized_pnl<br>`rp` |string|True|The realized PnL of the position, expressed in quote asset decimal units<br>`realized_pnl = (exit_price - entry_price) * exit_trade_size`|
+            |total_pnl<br>`tp` |string|True|The total PnL of the position, expressed in quote asset decimal units<br>`total_pnl = realized_pnl + unrealized_pnl`|
+            |roi<br>`r` |string|True|The ROI of the position, expressed as a percentage<br>`roi = (total_pnl / (entry_price * abs(size))) * 100^`|
+            |quote_index_price<br>`qi` |string|True|The index price of the quote currency. (reported in `USD`)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -1028,8 +1028,8 @@ STREAM: v1.deposit
     !!! info "EmptyRequest"
         Used for requests that do not require any parameters<br>
 
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -1064,19 +1064,19 @@ STREAM: v1.deposit
     !!! info "WSDepositFeedDataV1"
         Subscribes to a feed of deposit updates.<br>
 
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
-        |stream|s|string|True|The websocket channel to which the response is sent|
-        |selector|s1|string|True|Primary selector|
-        |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
-        |feed|f|Deposit|True|The Deposit object|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |stream<br>`s` |string|True|The websocket channel to which the response is sent|
+        |selector<br>`s1` |string|True|Primary selector|
+        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
+        |feed<br>`f` |Deposit|True|The Deposit object|
         ??? info "Deposit"
-            |Name|Lite|Type|Required| Description |
-            |-|-|-|-|-|
-            |tx_hash|th|string|True|The hash of the bridgemint event producing the deposit|
-            |to_account_id|ta|string|True|The account to deposit into|
-            |token_currency|tc|Currency|True|The token currency to deposit|
-            |num_tokens|nt|string|True|The number of tokens to deposit|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |tx_hash<br>`th` |string|True|The hash of the bridgemint event producing the deposit|
+            |to_account_id<br>`ta` |string|True|The account to deposit into|
+            |token_currency<br>`tc` |Currency|True|The token currency to deposit|
+            |num_tokens<br>`nt` |string|True|The number of tokens to deposit|
             ??? info "Currency"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -1192,8 +1192,8 @@ STREAM: v1.transfer
     !!! info "EmptyRequest"
         Used for requests that do not require any parameters<br>
 
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -1228,22 +1228,22 @@ STREAM: v1.transfer
     !!! info "WSTransferFeedDataV1"
         Subscribes to a feed of transfer updates.<br>
 
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
-        |stream|s|string|True|The websocket channel to which the response is sent|
-        |selector|s1|string|True|Primary selector|
-        |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
-        |feed|f|Transfer|True|The Transfer object|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |stream<br>`s` |string|True|The websocket channel to which the response is sent|
+        |selector<br>`s1` |string|True|Primary selector|
+        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
+        |feed<br>`f` |Transfer|True|The Transfer object|
         ??? info "Transfer"
-            |Name|Lite|Type|Required| Description |
-            |-|-|-|-|-|
-            |from_account_id|fa|string|True|The account to transfer from|
-            |from_sub_account_id|fs|string|True|The subaccount to transfer from (0 if transferring from main account)|
-            |to_account_id|ta|string|True|The account to deposit into|
-            |to_sub_account_id|ts|string|True|The subaccount to transfer to (0 if transferring to main account)|
-            |token_currency|tc|Currency|True|The token currency to transfer|
-            |num_tokens|nt|string|True|The number of tokens to transfer|
-            |signature|s|Signature|True|The signature of the transfer|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |from_account_id<br>`fa` |string|True|The account to transfer from|
+            |from_sub_account_id<br>`fs` |string|True|The subaccount to transfer from (0 if transferring from main account)|
+            |to_account_id<br>`ta` |string|True|The account to deposit into|
+            |to_sub_account_id<br>`ts` |string|True|The subaccount to transfer to (0 if transferring to main account)|
+            |token_currency<br>`tc` |Currency|True|The token currency to transfer|
+            |num_tokens<br>`nt` |string|True|The number of tokens to transfer|
+            |signature<br>`s` |Signature|True|The signature of the transfer|
             ??? info "Currency"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -1254,14 +1254,14 @@ STREAM: v1.transfer
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
             ??? info "Signature"
-                |Name|Lite|Type|Required| Description |
-                |-|-|-|-|-|
-                |signer|s|string|True|The address (public key) of the wallet signing the payload|
-                |r|r|string|True|Signature R|
-                |s|s1|string|True|Signature S|
-                |v|v|number|True|Signature V|
-                |expiration|e|string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
-                |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
+                |r<br>`r` |string|True|Signature R|
+                |s<br>`s1` |string|True|Signature S|
+                |v<br>`v` |number|True|Signature V|
+                |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
+                |nonce<br>`n` |number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -1388,8 +1388,8 @@ STREAM: v1.withdrawal
     !!! info "EmptyRequest"
         Used for requests that do not require any parameters<br>
 
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -1424,20 +1424,20 @@ STREAM: v1.withdrawal
     !!! info "WSWithdrawalFeedDataV1"
         Subscribes to a feed of withdrawal updates.<br>
 
-        |Name|Lite|Type|Required| Description |
-        |-|-|-|-|-|
-        |stream|s|string|True|The websocket channel to which the response is sent|
-        |selector|s1|string|True|Primary selector|
-        |sequence_number|sn|string|True|A running sequence number that determines global message order within the specific stream|
-        |feed|f|Withdrawal|True|The Withdrawal object|
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |stream<br>`s` |string|True|The websocket channel to which the response is sent|
+        |selector<br>`s1` |string|True|Primary selector|
+        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
+        |feed<br>`f` |Withdrawal|True|The Withdrawal object|
         ??? info "Withdrawal"
-            |Name|Lite|Type|Required| Description |
-            |-|-|-|-|-|
-            |from_account_id|fa|string|True|The subaccount to withdraw from|
-            |to_eth_address|te|string|True|The ethereum address to withdraw to|
-            |token_currency|tc|Currency|True|The token currency to withdraw|
-            |num_tokens|nt|string|True|The number of tokens to withdraw|
-            |signature|s|Signature|True|The signature of the withdrawal|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |from_account_id<br>`fa` |string|True|The subaccount to withdraw from|
+            |to_eth_address<br>`te` |string|True|The ethereum address to withdraw to|
+            |token_currency<br>`tc` |Currency|True|The token currency to withdraw|
+            |num_tokens<br>`nt` |string|True|The number of tokens to withdraw|
+            |signature<br>`s` |Signature|True|The signature of the withdrawal|
             ??? info "Currency"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -1448,14 +1448,14 @@ STREAM: v1.withdrawal
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
             ??? info "Signature"
-                |Name|Lite|Type|Required| Description |
-                |-|-|-|-|-|
-                |signer|s|string|True|The address (public key) of the wallet signing the payload|
-                |r|r|string|True|Signature R|
-                |s|s1|string|True|Signature S|
-                |v|v|number|True|Signature V|
-                |expiration|e|string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
-                |nonce|n|number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
+                |r<br>`r` |string|True|Signature R|
+                |s<br>`s1` |string|True|Signature S|
+                |v<br>`v` |number|True|Signature V|
+                |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
+                |nonce<br>`n` |number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success

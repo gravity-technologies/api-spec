@@ -360,15 +360,16 @@ def write_struct_schema(
     write_comment(md, struct.comment)
 
     # Field Table
-    md.writeln("|Name|Lite|Type|Required| Description |")
-    md.writeln("|-|-|-|-|-|")
+    md.writeln("|Name<br>`Lite`|Type|Required<br>`Default`| Description |")
+    md.writeln("|-|-|-|-|")
     for field in struct.fields:
         json_type = field.json_type
         for _ in range(field.array_depth):
             json_type = f"[{json_type}]"
         md.writeln(
-            f"|{field.name}|{field.lite_name}|{json_type}|"
-            + f"{not field.optional}|{"<br>".join(field.comment)}|"
+            f"|{field.name}<br>`{field.lite_name}` |{json_type}|"
+            + f"{ f'False<br>`{field.default}`' if field.optional else 'True' }|"
+            + f"{'<br>'.join(field.comment)}|"
         )
 
     # Field Import Table

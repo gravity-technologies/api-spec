@@ -35,6 +35,7 @@ class Field:
     index: int
     array_depth: int
     optional: bool
+    default: str | None
     example: str | None
     comment: list[str]
     selector: str | None
