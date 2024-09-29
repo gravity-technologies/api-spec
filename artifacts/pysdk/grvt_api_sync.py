@@ -1,5 +1,11 @@
+from enum import Enum
+
+from dacite import Config, from_dict
+
 from . import types
 from .grvt_api_base import GrvtApiConfig, GrvtApiSyncBase, GrvtError
+
+# mypy: disable-error-code="no-any-return"
 
 
 class GrvtApiSync(GrvtApiSyncBase):
@@ -14,7 +20,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(False, self.md_rpc + "/full/v1/instrument", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiGetInstrumentResponse(**resp)
+        return from_dict(types.ApiGetInstrumentResponse, resp, Config(cast=[Enum]))
 
     def get_all_instruments_v1(
         self, req: types.ApiGetAllInstrumentsRequest
@@ -22,7 +28,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(False, self.md_rpc + "/full/v1/all_instruments", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiGetAllInstrumentsResponse(**resp)
+        return from_dict(types.ApiGetAllInstrumentsResponse, resp, Config(cast=[Enum]))
 
     def get_filtered_instruments_v1(
         self, req: types.ApiGetFilteredInstrumentsRequest
@@ -30,7 +36,9 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(False, self.md_rpc + "/full/v1/instruments", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiGetFilteredInstrumentsResponse(**resp)
+        return from_dict(
+            types.ApiGetFilteredInstrumentsResponse, resp, Config(cast=[Enum])
+        )
 
     def mini_ticker_v1(
         self, req: types.ApiMiniTickerRequest
@@ -38,7 +46,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(False, self.md_rpc + "/full/v1/mini", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiMiniTickerResponse(**resp)
+        return from_dict(types.ApiMiniTickerResponse, resp, Config(cast=[Enum]))
 
     def ticker_v1(
         self, req: types.ApiTickerRequest
@@ -46,7 +54,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(False, self.md_rpc + "/full/v1/ticker", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiTickerResponse(**resp)
+        return from_dict(types.ApiTickerResponse, resp, Config(cast=[Enum]))
 
     def orderbook_levels_v1(
         self, req: types.ApiOrderbookLevelsRequest
@@ -54,7 +62,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(False, self.md_rpc + "/full/v1/book", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiOrderbookLevelsResponse(**resp)
+        return from_dict(types.ApiOrderbookLevelsResponse, resp, Config(cast=[Enum]))
 
     def public_trades_v1(
         self, req: types.ApiPublicTradesRequest
@@ -62,7 +70,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(False, self.md_rpc + "/full/v1/trades", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiPublicTradesResponse(**resp)
+        return from_dict(types.ApiPublicTradesResponse, resp, Config(cast=[Enum]))
 
     def public_trade_history_v1(
         self, req: types.ApiPublicTradeHistoryRequest
@@ -70,7 +78,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(False, self.md_rpc + "/full/v1/trade_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiPublicTradeHistoryResponse(**resp)
+        return from_dict(types.ApiPublicTradeHistoryResponse, resp, Config(cast=[Enum]))
 
     def candlestick_v1(
         self, req: types.ApiCandlestickRequest
@@ -78,7 +86,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(False, self.md_rpc + "/full/v1/kline", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiCandlestickResponse(**resp)
+        return from_dict(types.ApiCandlestickResponse, resp, Config(cast=[Enum]))
 
     def funding_rate_v1(
         self, req: types.ApiFundingRateRequest
@@ -86,7 +94,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(False, self.md_rpc + "/full/v1/funding", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiFundingRateResponse(**resp)
+        return from_dict(types.ApiFundingRateResponse, resp, Config(cast=[Enum]))
 
     def settlement_price_v1(
         self, req: types.ApiSettlementPriceRequest
@@ -94,7 +102,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(False, self.md_rpc + "/full/v1/settlement", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiSettlementPriceResponse(**resp)
+        return from_dict(types.ApiSettlementPriceResponse, resp, Config(cast=[Enum]))
 
     def create_order_v1(
         self, req: types.ApiCreateOrderRequest
@@ -102,7 +110,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/create_order", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiCreateOrderResponse(**resp)
+        return from_dict(types.ApiCreateOrderResponse, resp, Config(cast=[Enum]))
 
     def cancel_order_v1(
         self, req: types.ApiCancelOrderRequest
@@ -110,7 +118,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/cancel_order", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.AckResponse(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
     def cancel_all_orders_v1(
         self, req: types.ApiCancelAllOrdersRequest
@@ -118,7 +126,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/cancel_all_orders", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.AckResponse(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
     def get_order_v1(
         self, req: types.ApiGetOrderRequest
@@ -126,7 +134,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/order", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiGetOrderResponse(**resp)
+        return from_dict(types.ApiGetOrderResponse, resp, Config(cast=[Enum]))
 
     def open_orders_v1(
         self, req: types.ApiOpenOrdersRequest
@@ -134,7 +142,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/open_orders", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiOpenOrdersResponse(**resp)
+        return from_dict(types.ApiOpenOrdersResponse, resp, Config(cast=[Enum]))
 
     def order_history_v1(
         self, req: types.ApiOrderHistoryRequest
@@ -142,7 +150,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/order_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiOrderHistoryResponse(**resp)
+        return from_dict(types.ApiOrderHistoryResponse, resp, Config(cast=[Enum]))
 
     def private_trade_history_v1(
         self, req: types.ApiPrivateTradeHistoryRequest
@@ -150,7 +158,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/trade_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiPrivateTradeHistoryResponse(**resp)
+        return from_dict(types.ApiPrivateTradeHistoryResponse, resp, Config(cast=[Enum]))
 
     def positions_v1(
         self, req: types.ApiPositionsRequest
@@ -158,13 +166,13 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/positions", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiPositionsResponse(**resp)
+        return from_dict(types.ApiPositionsResponse, resp, Config(cast=[Enum]))
 
     def deposit_v1(self, req: types.ApiDepositRequest) -> types.AckResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/deposit", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.AckResponse(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
     def deposit_history_v1(
         self, req: types.ApiDepositHistoryRequest
@@ -172,13 +180,13 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/deposit_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiDepositHistoryResponse(**resp)
+        return from_dict(types.ApiDepositHistoryResponse, resp, Config(cast=[Enum]))
 
     def transfer_v1(self, req: types.ApiTransferRequest) -> types.AckResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/transfer", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.AckResponse(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
     def transfer_history_v1(
         self, req: types.ApiTransferHistoryRequest
@@ -186,7 +194,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/transfer_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiTransferHistoryResponse(**resp)
+        return from_dict(types.ApiTransferHistoryResponse, resp, Config(cast=[Enum]))
 
     def withdrawal_v1(
         self, req: types.ApiWithdrawalRequest
@@ -194,7 +202,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/withdrawal", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.AckResponse(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
     def withdrawal_history_v1(
         self, req: types.ApiWithdrawalHistoryRequest
@@ -202,7 +210,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/withdrawal_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiWithdrawalHistoryResponse(**resp)
+        return from_dict(types.ApiWithdrawalHistoryResponse, resp, Config(cast=[Enum]))
 
     def sub_account_summary_v1(
         self, req: types.ApiSubAccountSummaryRequest
@@ -210,7 +218,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiSubAccountSummaryResponse(**resp)
+        return from_dict(types.ApiSubAccountSummaryResponse, resp, Config(cast=[Enum]))
 
     def sub_account_history_v1(
         self, req: types.ApiSubAccountHistoryRequest
@@ -218,7 +226,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/account_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiSubAccountHistoryResponse(**resp)
+        return from_dict(types.ApiSubAccountHistoryResponse, resp, Config(cast=[Enum]))
 
     def aggregated_account_summary_v1(
         self, req: types.EmptyRequest
@@ -226,7 +234,9 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/aggregated_account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiAggregatedAccountSummaryResponse(**resp)
+        return from_dict(
+            types.ApiAggregatedAccountSummaryResponse, resp, Config(cast=[Enum])
+        )
 
     def funding_account_summary_v1(
         self, req: types.EmptyRequest
@@ -234,4 +244,6 @@ class GrvtApiSync(GrvtApiSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/funding_account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return types.ApiFundingAccountSummaryResponse(**resp)
+        return from_dict(
+            types.ApiFundingAccountSummaryResponse, resp, Config(cast=[Enum])
+        )
