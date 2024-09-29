@@ -32,6 +32,7 @@ STREAM: v1.order
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -41,6 +42,7 @@ STREAM: v1.order
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -159,6 +161,7 @@ STREAM: v1.order
                 ??? info "OrderRejectReason"
                     |Value| Description |
                     |-|-|
+                    |`UNSPECIFIED` = 0|order is not cancelled or rejected|
                     |`CLIENT_CANCEL` = 1|client called a Cancel API|
                     |`CLIENT_BULK_CANCEL` = 2|client called a Bulk Cancel API|
                     |`CLIENT_SESSION_END` = 3|client called a Session Cancel API, or set the WebSocket connection to 'cancelOrdersOnTerminate'|
@@ -365,6 +368,7 @@ STREAM: v1.state
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -374,6 +378,7 @@ STREAM: v1.state
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -446,6 +451,7 @@ STREAM: v1.state
                 ??? info "OrderRejectReason"
                     |Value| Description |
                     |-|-|
+                    |`UNSPECIFIED` = 0|order is not cancelled or rejected|
                     |`CLIENT_CANCEL` = 1|client called a Cancel API|
                     |`CLIENT_BULK_CANCEL` = 2|client called a Bulk Cancel API|
                     |`CLIENT_SESSION_END` = 3|client called a Session Cancel API, or set the WebSocket connection to 'cancelOrdersOnTerminate'|
@@ -604,6 +610,7 @@ STREAM: v1.fill
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -613,6 +620,7 @@ STREAM: v1.fill
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -682,6 +690,7 @@ STREAM: v1.fill
                 |Value| Description |
                 |-|-|
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
+                |`RFQ` = 2|the trade is cleared on the RFQ venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -836,6 +845,7 @@ STREAM: v1.position
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -845,6 +855,7 @@ STREAM: v1.position
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -1082,6 +1093,7 @@ STREAM: v1.deposit
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -1249,6 +1261,7 @@ STREAM: v1.transfer
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -1443,6 +1456,7 @@ STREAM: v1.withdrawal
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|

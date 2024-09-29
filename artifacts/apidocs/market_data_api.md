@@ -59,6 +59,7 @@ LITE ENDPOINT: lite/v1/instrument
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -68,6 +69,7 @@ LITE ENDPOINT: lite/v1/instrument
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -87,6 +89,7 @@ LITE ENDPOINT: lite/v1/instrument
                 |Value| Description |
                 |-|-|
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
+                |`RFQ` = 2|the trade is cleared on the RFQ venue|
             ??? info "InstrumentSettlementPeriod"
                 |Value| Description |
                 |-|-|
@@ -234,6 +237,7 @@ LITE ENDPOINT: lite/v1/all_instruments
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -243,6 +247,7 @@ LITE ENDPOINT: lite/v1/all_instruments
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -262,6 +267,7 @@ LITE ENDPOINT: lite/v1/all_instruments
                 |Value| Description |
                 |-|-|
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
+                |`RFQ` = 2|the trade is cleared on the RFQ venue|
             ??? info "InstrumentSettlementPeriod"
                 |Value| Description |
                 |-|-|
@@ -378,6 +384,7 @@ LITE ENDPOINT: lite/v1/instruments
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -387,6 +394,7 @@ LITE ENDPOINT: lite/v1/instruments
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -442,6 +450,7 @@ LITE ENDPOINT: lite/v1/instruments
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -451,6 +460,7 @@ LITE ENDPOINT: lite/v1/instruments
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -470,6 +480,7 @@ LITE ENDPOINT: lite/v1/instruments
                 |Value| Description |
                 |-|-|
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
+                |`RFQ` = 2|the trade is cleared on the RFQ venue|
             ??? info "InstrumentSettlementPeriod"
                 |Value| Description |
                 |-|-|
@@ -1040,6 +1051,7 @@ LITE ENDPOINT: lite/v1/trades
                 |Value| Description |
                 |-|-|
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
+                |`RFQ` = 2|the trade is cleared on the RFQ venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -1185,6 +1197,7 @@ LITE ENDPOINT: lite/v1/trade_history
                 |Value| Description |
                 |-|-|
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
+                |`RFQ` = 2|the trade is cleared on the RFQ venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -1628,6 +1641,7 @@ LITE ENDPOINT: lite/v1/settlement
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -1637,6 +1651,7 @@ LITE ENDPOINT: lite/v1/settlement
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -1684,6 +1699,7 @@ LITE ENDPOINT: lite/v1/settlement
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -1693,6 +1709,7 @@ LITE ENDPOINT: lite/v1/settlement
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|

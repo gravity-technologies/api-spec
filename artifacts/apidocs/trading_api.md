@@ -86,6 +86,7 @@ LITE ENDPOINT: lite/v1/create_order
                 ??? info "OrderRejectReason"
                     |Value| Description |
                     |-|-|
+                    |`UNSPECIFIED` = 0|order is not cancelled or rejected|
                     |`CLIENT_CANCEL` = 1|client called a Cancel API|
                     |`CLIENT_BULK_CANCEL` = 2|client called a Bulk Cancel API|
                     |`CLIENT_SESSION_END` = 3|client called a Session Cancel API, or set the WebSocket connection to 'cancelOrdersOnTerminate'|
@@ -265,6 +266,7 @@ LITE ENDPOINT: lite/v1/create_order
                 ??? info "OrderRejectReason"
                     |Value| Description |
                     |-|-|
+                    |`UNSPECIFIED` = 0|order is not cancelled or rejected|
                     |`CLIENT_CANCEL` = 1|client called a Cancel API|
                     |`CLIENT_BULK_CANCEL` = 2|client called a Bulk Cancel API|
                     |`CLIENT_SESSION_END` = 3|client called a Session Cancel API, or set the WebSocket connection to 'cancelOrdersOnTerminate'|
@@ -1039,6 +1041,7 @@ LITE ENDPOINT: lite/v1/order
                 ??? info "OrderRejectReason"
                     |Value| Description |
                     |-|-|
+                    |`UNSPECIFIED` = 0|order is not cancelled or rejected|
                     |`CLIENT_CANCEL` = 1|client called a Cancel API|
                     |`CLIENT_BULK_CANCEL` = 2|client called a Bulk Cancel API|
                     |`CLIENT_SESSION_END` = 3|client called a Session Cancel API, or set the WebSocket connection to 'cancelOrdersOnTerminate'|
@@ -1216,6 +1219,7 @@ LITE ENDPOINT: lite/v1/open_orders
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -1225,6 +1229,7 @@ LITE ENDPOINT: lite/v1/open_orders
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -1327,6 +1332,7 @@ LITE ENDPOINT: lite/v1/open_orders
                 ??? info "OrderRejectReason"
                     |Value| Description |
                     |-|-|
+                    |`UNSPECIFIED` = 0|order is not cancelled or rejected|
                     |`CLIENT_CANCEL` = 1|client called a Cancel API|
                     |`CLIENT_BULK_CANCEL` = 2|client called a Bulk Cancel API|
                     |`CLIENT_SESSION_END` = 3|client called a Session Cancel API, or set the WebSocket connection to 'cancelOrdersOnTerminate'|
@@ -1508,6 +1514,7 @@ LITE ENDPOINT: lite/v1/order_history
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -1517,6 +1524,7 @@ LITE ENDPOINT: lite/v1/order_history
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -1626,6 +1634,7 @@ LITE ENDPOINT: lite/v1/order_history
                 ??? info "OrderRejectReason"
                     |Value| Description |
                     |-|-|
+                    |`UNSPECIFIED` = 0|order is not cancelled or rejected|
                     |`CLIENT_CANCEL` = 1|client called a Cancel API|
                     |`CLIENT_BULK_CANCEL` = 2|client called a Bulk Cancel API|
                     |`CLIENT_SESSION_END` = 3|client called a Session Cancel API, or set the WebSocket connection to 'cancelOrdersOnTerminate'|
@@ -1825,6 +1834,7 @@ LITE ENDPOINT: lite/v1/trade_history
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -1834,6 +1844,7 @@ LITE ENDPOINT: lite/v1/trade_history
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -1900,6 +1911,7 @@ LITE ENDPOINT: lite/v1/trade_history
                 |Value| Description |
                 |-|-|
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
+                |`RFQ` = 2|the trade is cleared on the RFQ venue|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -2056,6 +2068,7 @@ LITE ENDPOINT: lite/v1/positions
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -2065,6 +2078,7 @@ LITE ENDPOINT: lite/v1/positions
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -2236,6 +2250,7 @@ LITE ENDPOINT: lite/v1/deposit
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -2374,6 +2389,7 @@ LITE ENDPOINT: lite/v1/deposit_history
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -2421,6 +2437,7 @@ LITE ENDPOINT: lite/v1/deposit_history
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -2551,6 +2568,7 @@ LITE ENDPOINT: lite/v1/transfer
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -2764,6 +2782,7 @@ LITE ENDPOINT: lite/v1/transfer_history
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -2814,6 +2833,7 @@ LITE ENDPOINT: lite/v1/transfer_history
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -2955,6 +2975,7 @@ LITE ENDPOINT: lite/v1/withdrawal
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -3156,6 +3177,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
 
             |Value| Description |
             |-|-|
+            |`USD` = 1|the USD fiat currency|
             |`USDC` = 2|the USDC token|
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
@@ -3204,6 +3226,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -3386,6 +3409,7 @@ LITE ENDPOINT: lite/v1/account_summary
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -3401,6 +3425,7 @@ LITE ENDPOINT: lite/v1/account_summary
 
                     |Value| Description |
                     |-|-|
+                    |`USD` = 1|the USD fiat currency|
                     |`USDC` = 2|the USDC token|
                     |`USDT` = 3|the USDT token|
                     |`ETH` = 4|the ETH token|
@@ -3601,6 +3626,7 @@ LITE ENDPOINT: lite/v1/account_history
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -3616,6 +3642,7 @@ LITE ENDPOINT: lite/v1/account_history
 
                     |Value| Description |
                     |-|-|
+                    |`USD` = 1|the USD fiat currency|
                     |`USDC` = 2|the USDC token|
                     |`USDT` = 3|the USDT token|
                     |`ETH` = 4|the ETH token|
@@ -3807,6 +3834,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
@@ -3930,6 +3958,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
 
                 |Value| Description |
                 |-|-|
+                |`USD` = 1|the USD fiat currency|
                 |`USDC` = 2|the USDC token|
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
