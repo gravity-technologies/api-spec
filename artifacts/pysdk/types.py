@@ -291,10 +291,6 @@ class ApiPrivateTradeHistoryRequest:
     underlying: list[Currency]
     # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
     quote: list[Currency]
-    # The expiration time to apply in unix nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned
-    expiration: str
-    # The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned
-    strike_price: str
     # The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
     start_time: str | None = None
     # The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
@@ -353,8 +349,6 @@ class PrivateTrade:
     When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
     """
     client_order_id: str
-    # A trade index
-    trade_index: int
 
 
 @dataclass
@@ -739,10 +733,6 @@ class PublicTrade:
     trade_id: str
     # The venue where the trade occurred
     venue: Venue
-    # If the trade was a liquidation
-    is_liquidation: bool
-    # A trade index
-    trade_index: int
 
 
 @dataclass
@@ -933,7 +923,7 @@ class ApiCandlestickResponse:
 @dataclass
 class ApiFundingRateRequest:
     """
-    Lookup the historical funding rate of various pairs.
+    Lookup the historical funding rate of a perpetual future.
 
     Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
     """
@@ -993,13 +983,9 @@ class ApiSettlementPriceRequest:
     underlying: Currency
     # The quote currency to select
     quote: Currency
-    # The expiration time to select in unix nanoseconds
-    expiration: str
-    # The strike price to select
-    strike_price: str
-    # Start time of kline data in unix nanoseconds
+    # Start time of settlement price in unix nanoseconds
     start_time: str | None = None
-    # End time of kline data in unix nanoseconds
+    # End time of settlement price in unix nanoseconds
     end_time: str | None = None
     # The limit to query for. Defaults to 500; Max 1000
     limit: int | None = None
@@ -1249,13 +1235,14 @@ class OrderLeg:
     instrument: str
     # The total number of assets to trade in this leg, expressed in underlying asset decimal units.
     size: str
-    """
-    The limit price of the order leg, expressed in `9` decimals.
-    This is the total amount of base currency to pay/receive for all legs.
-    """
-    limit_price: str
     # Specifies if the order leg is a buy or sell
     is_buying_asset: bool
+    """
+    The limit price of the order leg, expressed in `9` decimals.
+    This is the number of quote currency units to pay/receive for this leg.
+    This should be `null/0` if the order is a market order
+    """
+    limit_price: str | None = None
 
 
 @dataclass
@@ -1392,9 +1379,9 @@ class ApiCancelOrderRequest:
     # The subaccount ID cancelling the order
     sub_account_id: str
     # Cancel the order with this `order_id`
-    order_id: str
+    order_id: str | None = None
     # Cancel the order with this `client_order_id`
-    client_order_id: str
+    client_order_id: str | None = None
 
 
 @dataclass
@@ -1449,10 +1436,6 @@ class ApiOrderHistoryRequest:
     underlying: list[Currency]
     # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
     quote: list[Currency]
-    # The expiration time to apply in nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned
-    expiration: list[str]
-    # The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned
-    strike_price: list[str]
     # The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
     start_time: str | None = None
     # The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
@@ -1487,9 +1470,9 @@ class ApiOrderStateRequest:
     # The subaccount ID to filter by
     sub_account_id: str
     # Filter for `order_id`
-    order_id: str
+    order_id: str | None = None
     # Filter for `client_order_id`
-    client_order_id: str
+    client_order_id: str | None = None
 
 
 @dataclass
@@ -1503,9 +1486,9 @@ class ApiGetOrderRequest:
     # The subaccount ID to filter by
     sub_account_id: str
     # Filter for `order_id`
-    order_id: str
+    order_id: str | None = None
     # Filter for `client_order_id`
-    client_order_id: str
+    client_order_id: str | None = None
 
 
 @dataclass
