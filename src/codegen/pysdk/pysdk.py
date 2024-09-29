@@ -125,15 +125,14 @@ def write_rpc_api(spec_root: SpecRoot, f: TextIOWrapper, is_async: bool) -> None
     class_name = "GrvtApiAsync" if is_async else "GrvtApiSync"
     base_class = "GrvtApiAsyncBase" if is_async else "GrvtApiSyncBase"
 
+    f.write("from enum import Enum\n\n")
+    f.write("from dacite import Config, from_dict\n\n")
     f.write("from . import types\n")
     if is_async:
-        f.write(
-            f"from .grvt_api_base import {base_class}, GrvtApiConfig, GrvtError\n\n\n"
-        )
+        f.write(f"from .grvt_api_base import {base_class}, GrvtApiConfig, GrvtError\n\n")
     else:
-        f.write(
-            f"from .grvt_api_base import GrvtApiConfig, {base_class}, GrvtError\n\n\n"
-        )
+        f.write(f"from .grvt_api_base import GrvtApiConfig, {base_class}, GrvtError\n\n")
+    f.write('# mypy: disable-error-code="no-any-return"\n\n')
     f.write(f"class {class_name}({base_class}):\n")
     f.write("    def __init__(self, config: GrvtApiConfig):\n")
     f.write("        super().__init__(config)\n")
@@ -157,7 +156,10 @@ def write_rpc_api(spec_root: SpecRoot, f: TextIOWrapper, is_async: bool) -> None
             )
             f.write('        if resp.get("code"):\n')
             f.write("            return GrvtError(**resp)\n")
-            f.write(f"        return types.{rpc.response}(**resp)\n")
+            f.write(
+                f"        return from_dict(types.{rpc.response},"
+                + " resp, Config(cast=[Enum]))\n"
+            )
             if i < len(spec_root.gateways) - 1 or j < len(gateway.rpcs) - 1:
                 f.write("\n")
 
