@@ -1282,37 +1282,11 @@
             ]
           },
           {
-            "name": "expiration",
-            "lite_name": "e",
-            "semantic_type": "int64",
-            "json_type": "string",
-            "index": 4,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'1697788800000000000'",
-            "comment": [
-              "The expiration time to apply in unix nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned"
-            ]
-          },
-          {
-            "name": "strike_price",
-            "lite_name": "sp",
-            "semantic_type": "string",
-            "json_type": "string",
-            "index": 5,
-            "array_depth": 0,
-            "optional": false,
-            "example": "65000.0",
-            "comment": [
-              "The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned"
-            ]
-          },
-          {
             "name": "start_time",
             "lite_name": "st",
             "semantic_type": "int64",
             "json_type": "string",
-            "index": 6,
+            "index": 4,
             "array_depth": 0,
             "optional": true,
             "default": "0",
@@ -1326,7 +1300,7 @@
             "lite_name": "et",
             "semantic_type": "int64",
             "json_type": "string",
-            "index": 7,
+            "index": 5,
             "array_depth": 0,
             "optional": true,
             "default": "now()",
@@ -1340,7 +1314,7 @@
             "lite_name": "l",
             "semantic_type": "uint32",
             "json_type": "number",
-            "index": 8,
+            "index": 6,
             "array_depth": 0,
             "optional": true,
             "default": "500",
@@ -1354,11 +1328,11 @@
             "lite_name": "c",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 9,
+            "index": 7,
             "array_depth": 0,
             "optional": true,
             "default": "''",
-            "example": "Qw0918=",
+            "example": "''",
             "comment": [
               "The cursor to indicate when to start the query from"
             ]
@@ -1615,19 +1589,6 @@
               "",
               "When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId"
             ]
-          },
-          {
-            "name": "trade_index",
-            "lite_name": "ti1",
-            "semantic_type": "uint32",
-            "json_type": "number",
-            "index": 19,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'2'",
-            "comment": [
-              "A trade index"
-            ]
           }
         ],
         "comment": []
@@ -1656,7 +1617,7 @@
             "index": 1,
             "array_depth": 0,
             "optional": false,
-            "example": "Qw0918=",
+            "example": "'Qw0918='",
             "comment": [
               "The cursor to indicate when to start the query from"
             ]
@@ -1989,7 +1950,7 @@
             "array_depth": 0,
             "optional": true,
             "default": "''",
-            "example": "Qw0918=",
+            "example": "''",
             "comment": [
               "The cursor to indicate when to start the next query from"
             ]
@@ -2028,7 +1989,7 @@
             "index": 1,
             "array_depth": 0,
             "optional": false,
-            "example": "Qw0918=",
+            "example": "'Qw0918='",
             "comment": [
               "The cursor to indicate when to start the next query from"
             ]
@@ -3111,32 +3072,6 @@
             "comment": [
               "The venue where the trade occurred"
             ]
-          },
-          {
-            "name": "is_liquidation",
-            "lite_name": "il",
-            "semantic_type": "bool",
-            "json_type": "boolean",
-            "index": 11,
-            "array_depth": 0,
-            "optional": false,
-            "example": "false",
-            "comment": [
-              "If the trade was a liquidation"
-            ]
-          },
-          {
-            "name": "trade_index",
-            "lite_name": "ti1",
-            "semantic_type": "uint32",
-            "json_type": "number",
-            "index": 12,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'2'",
-            "comment": [
-              "A trade index"
-            ]
           }
         ],
         "comment": [
@@ -3989,7 +3924,7 @@
           }
         ],
         "comment": [
-          "Lookup the historical funding rate of various pairs.",
+          "Lookup the historical funding rate of a perpetual future.",
           "",
           "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
         ]
@@ -4120,43 +4055,17 @@
             ]
           },
           {
-            "name": "expiration",
-            "lite_name": "e",
-            "semantic_type": "timestamp",
-            "json_type": "string",
-            "index": 2,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'1697788800000000000'",
-            "comment": [
-              "The expiration time to select in unix nanoseconds"
-            ]
-          },
-          {
-            "name": "strike_price",
-            "lite_name": "sp",
-            "semantic_type": "string",
-            "json_type": "string",
-            "index": 3,
-            "array_depth": 0,
-            "optional": false,
-            "example": "65000.0",
-            "comment": [
-              "The strike price to select"
-            ]
-          },
-          {
             "name": "start_time",
             "lite_name": "st",
             "semantic_type": "timestamp",
             "json_type": "string",
-            "index": 4,
+            "index": 2,
             "array_depth": 0,
             "optional": true,
             "default": "0",
             "example": "'1697788800000000000'",
             "comment": [
-              "Start time of kline data in unix nanoseconds"
+              "Start time of settlement price in unix nanoseconds"
             ]
           },
           {
@@ -4164,13 +4073,13 @@
             "lite_name": "et",
             "semantic_type": "timestamp",
             "json_type": "string",
-            "index": 5,
+            "index": 3,
             "array_depth": 0,
             "optional": true,
             "default": "now()",
             "example": "'1697788800000000000'",
             "comment": [
-              "End time of kline data in unix nanoseconds"
+              "End time of settlement price in unix nanoseconds"
             ]
           },
           {
@@ -4178,7 +4087,7 @@
             "lite_name": "l",
             "semantic_type": "uint32",
             "json_type": "number",
-            "index": 6,
+            "index": 4,
             "array_depth": 0,
             "optional": true,
             "default": "30",
@@ -4192,7 +4101,7 @@
             "lite_name": "c",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 7,
+            "index": 5,
             "array_depth": 0,
             "optional": true,
             "default": "''",
@@ -5055,11 +4964,13 @@
             "json_type": "string",
             "index": 2,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'65038.01'",
             "comment": [
               "The limit price of the order leg, expressed in `9` decimals.",
-              "This is the total amount of base currency to pay/receive for all legs."
+              "This is the number of quote currency units to pay/receive for this leg.",
+              "This should be `null/0` if the order is a market order"
             ]
           },
           {
@@ -5508,7 +5419,8 @@
             "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'0x1028403'",
             "comment": [
               "Cancel the order with this `order_id`"
@@ -5521,7 +5433,8 @@
             "json_type": "string",
             "index": 2,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'23042'",
             "comment": [
               "Cancel the order with this `client_order_id`"
@@ -5529,7 +5442,7 @@
           }
         ],
         "comment": [
-          "Cancel an order on the orderbook for this trading account."
+          "Cancel an order on the orderbook for this trading account. Either `order_id` or `client_order_id` must be provided."
         ]
       },
       {
@@ -5730,37 +5643,11 @@
             ]
           },
           {
-            "name": "expiration",
-            "lite_name": "e",
-            "semantic_type": "int64",
-            "json_type": "string",
-            "index": 4,
-            "array_depth": 1,
-            "optional": false,
-            "example": "['1697788800000000000']",
-            "comment": [
-              "The expiration time to apply in nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned"
-            ]
-          },
-          {
-            "name": "strike_price",
-            "lite_name": "sp",
-            "semantic_type": "string",
-            "json_type": "string",
-            "index": 5,
-            "array_depth": 1,
-            "optional": false,
-            "example": "['65000.0']",
-            "comment": [
-              "The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned"
-            ]
-          },
-          {
             "name": "start_time",
             "lite_name": "st",
             "semantic_type": "int64",
             "json_type": "string",
-            "index": 6,
+            "index": 4,
             "array_depth": 0,
             "optional": true,
             "default": "0",
@@ -5774,7 +5661,7 @@
             "lite_name": "et",
             "semantic_type": "int64",
             "json_type": "string",
-            "index": 7,
+            "index": 5,
             "array_depth": 0,
             "optional": true,
             "default": "now()",
@@ -5788,7 +5675,7 @@
             "lite_name": "l",
             "semantic_type": "uint32",
             "json_type": "number",
-            "index": 8,
+            "index": 6,
             "array_depth": 0,
             "optional": true,
             "default": "500",
@@ -5802,7 +5689,7 @@
             "lite_name": "c",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 9,
+            "index": 7,
             "array_depth": 0,
             "optional": true,
             "default": "''",
@@ -5904,7 +5791,8 @@
             "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'0x1028403'",
             "comment": [
               "Filter for `order_id`"
@@ -5917,14 +5805,17 @@
             "json_type": "string",
             "index": 2,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'23042'",
             "comment": [
               "Filter for `client_order_id`"
             ]
           }
         ],
-        "comment": []
+        "comment": [
+          "Retrieve the order state for the account. Either `order_id` or `client_order_id` must be provided."
+        ]
       },
       {
         "name": "ApiOrderStateResponse",
@@ -5969,7 +5860,8 @@
             "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'0x1028403'",
             "comment": [
               "Filter for `order_id`"
@@ -5982,14 +5874,17 @@
             "json_type": "string",
             "index": 2,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "0",
             "example": "'23042'",
             "comment": [
               "Filter for `client_order_id`"
             ]
           }
         ],
-        "comment": []
+        "comment": [
+          "Retrieve the order for the account. Either `order_id` or `client_order_id` must be provided."
+        ]
       },
       {
         "name": "ApiGetOrderResponse",
@@ -7470,7 +7365,7 @@
             "array_depth": 0,
             "optional": true,
             "default": "",
-            "example": "Qw0918=",
+            "example": "''",
             "comment": [
               "The cursor to indicate when to start the next query from"
             ]

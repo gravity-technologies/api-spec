@@ -122,7 +122,7 @@ STREAM: v1.order
                 |-|-|-|-|-|
                 |instrument|i|string|True|The instrument to trade in this leg|
                 |size|s|string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
-                |limit_price|lp|string|True|The limit price of the order leg, expressed in `9` decimals.<br>This is the total amount of base currency to pay/receive for all legs.|
+                |limit_price|lp|string|False|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset|ib|boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
                 |Name|Lite|Type|Required| Description |
@@ -676,7 +676,6 @@ STREAM: v1.fill
             |order_id|oi|string|True|An order identifier|
             |venue|v|Venue|True|The venue where the trade occurred|
             |client_order_id|co|string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
-            |trade_index|ti1|number|True|A trade index|
             ??? info "Venue"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
@@ -709,8 +708,7 @@ STREAM: v1.fill
                 "trade_id": "209358",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
-                "client_order_id": "23042",
-                "trade_index": "2"
+                "client_order_id": "23042"
             }
         }
         ```
@@ -737,8 +735,7 @@ STREAM: v1.fill
                 "ti": "209358",
                 "oi": "0x10000101000203040506",
                 "v": "ORDERBOOK",
-                "co": "23042",
-                "ti1": "2"
+                "co": "23042"
             }
         }
         ```

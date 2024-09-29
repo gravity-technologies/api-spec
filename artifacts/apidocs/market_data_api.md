@@ -1034,8 +1034,6 @@ LITE ENDPOINT: lite/v1/trades
             |forward_price|fp|string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
             |trade_id|ti|string|True|A trade identifier|
             |venue|v|Venue|True|The venue where the trade occurred|
-            |is_liquidation|il|boolean|True|If the trade was a liquidation|
-            |trade_index|ti1|number|True|A trade index|
             ??? info "Venue"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
@@ -1058,9 +1056,7 @@ LITE ENDPOINT: lite/v1/trades
                 "interest_rate": 0.0003,
                 "forward_price": "65038.01",
                 "trade_id": "1234567890",
-                "venue": "ORDERBOOK",
-                "is_liquidation": false,
-                "trade_index": "2"
+                "venue": "ORDERBOOK"
             }]
         }
         ```
@@ -1183,8 +1179,6 @@ LITE ENDPOINT: lite/v1/trade_history
             |forward_price|fp|string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
             |trade_id|ti|string|True|A trade identifier|
             |venue|v|Venue|True|The venue where the trade occurred|
-            |is_liquidation|il|boolean|True|If the trade was a liquidation|
-            |trade_index|ti1|number|True|A trade index|
             ??? info "Venue"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
@@ -1207,9 +1201,7 @@ LITE ENDPOINT: lite/v1/trade_history
                 "interest_rate": 0.0003,
                 "forward_price": "65038.01",
                 "trade_id": "1234567890",
-                "venue": "ORDERBOOK",
-                "is_liquidation": false,
-                "trade_index": "2"
+                "venue": "ORDERBOOK"
             }],
             "next": "Qw0918="
         }
@@ -1485,7 +1477,7 @@ LITE ENDPOINT: lite/v1/funding
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiFundingRateRequest"
-        Lookup the historical funding rate of various pairs.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
+        Lookup the historical funding rate of a perpetual future.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
@@ -1627,10 +1619,8 @@ LITE ENDPOINT: lite/v1/settlement
         |-|-|-|-|-|
         |underlying|u|Currency|True|The underlying currency to select|
         |quote|q|Currency|True|The quote currency to select|
-        |expiration|e|string|True|The expiration time to select in unix nanoseconds|
-        |strike_price|sp|string|True|The strike price to select|
-        |start_time|st|string|False|Start time of kline data in unix nanoseconds|
-        |end_time|et|string|False|End time of kline data in unix nanoseconds|
+        |start_time|st|string|False|Start time of settlement price in unix nanoseconds|
+        |end_time|et|string|False|End time of settlement price in unix nanoseconds|
         |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
         |cursor|c|string|False|The cursor to indicate when to start the query from|
         ??? info "Currency"
@@ -1658,8 +1648,6 @@ LITE ENDPOINT: lite/v1/settlement
         {
             "underlying": "BTC",
             "quote": "USDT",
-            "expiration": "1697788800000000000",
-            "strike_price": 65000.0,
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 20,
@@ -1670,8 +1658,6 @@ LITE ENDPOINT: lite/v1/settlement
         {
             "u": "BTC",
             "q": "USDT",
-            "e": "1697788800000000000",
-            "sp": 65000.0,
             "st": "1697788800000000000",
             "et": "1697788800000000000",
             "l": 20,
@@ -1750,8 +1736,6 @@ LITE ENDPOINT: lite/v1/settlement
         --data '{
             "underlying": "BTC",
             "quote": "USDT",
-            "expiration": "1697788800000000000",
-            "strike_price": 65000.0,
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 20,
@@ -1765,8 +1749,6 @@ LITE ENDPOINT: lite/v1/settlement
         --data '{
             "underlying": "BTC",
             "quote": "USDT",
-            "expiration": "1697788800000000000",
-            "strike_price": 65000.0,
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 20,
@@ -1780,8 +1762,6 @@ LITE ENDPOINT: lite/v1/settlement
         --data '{
             "underlying": "BTC",
             "quote": "USDT",
-            "expiration": "1697788800000000000",
-            "strike_price": 65000.0,
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 20,
@@ -1795,8 +1775,6 @@ LITE ENDPOINT: lite/v1/settlement
         --data '{
             "underlying": "BTC",
             "quote": "USDT",
-            "expiration": "1697788800000000000",
-            "strike_price": 65000.0,
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 20,

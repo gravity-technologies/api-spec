@@ -1197,8 +1197,6 @@ STREAM: v1.trade
             |forward_price|fp|string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
             |trade_id|ti|string|True|A trade identifier|
             |venue|v|Venue|True|The venue where the trade occurred|
-            |is_liquidation|il|boolean|True|If the trade was a liquidation|
-            |trade_index|ti1|number|True|A trade index|
             ??? info "Venue"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
@@ -1224,9 +1222,7 @@ STREAM: v1.trade
                 "interest_rate": 0.0003,
                 "forward_price": "65038.01",
                 "trade_id": "1234567890",
-                "venue": "ORDERBOOK",
-                "is_liquidation": false,
-                "trade_index": "2"
+                "venue": "ORDERBOOK"
             }
         }
         ```
@@ -1246,9 +1242,7 @@ STREAM: v1.trade
                 "ir": 0.0003,
                 "fp": "65038.01",
                 "ti": "1234567890",
-                "v": "ORDERBOOK",
-                "il": false,
-                "ti1": "2"
+                "v": "ORDERBOOK"
             }
         }
         ```

@@ -49,7 +49,7 @@ LITE ENDPOINT: lite/v1/create_order
                 |-|-|-|-|-|
                 |instrument|i|string|True|The instrument to trade in this leg|
                 |size|s|string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
-                |limit_price|lp|string|True|The limit price of the order leg, expressed in `9` decimals.<br>This is the total amount of base currency to pay/receive for all legs.|
+                |limit_price|lp|string|False|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset|ib|boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
                 |Name|Lite|Type|Required| Description |
@@ -228,7 +228,7 @@ LITE ENDPOINT: lite/v1/create_order
                 |-|-|-|-|-|
                 |instrument|i|string|True|The instrument to trade in this leg|
                 |size|s|string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
-                |limit_price|lp|string|True|The limit price of the order leg, expressed in `9` decimals.<br>This is the total amount of base currency to pay/receive for all legs.|
+                |limit_price|lp|string|False|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset|ib|boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
                 |Name|Lite|Type|Required| Description |
@@ -692,13 +692,13 @@ LITE ENDPOINT: lite/v1/cancel_order
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiCancelOrderRequest"
-        Cancel an order on the orderbook for this trading account.<br>
+        Cancel an order on the orderbook for this trading account. Either `order_id` or `client_order_id` must be provided.<br>
 
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |sub_account_id|sa|string|True|The subaccount ID cancelling the order|
-        |order_id|oi|string|True|Cancel the order with this `order_id`|
-        |client_order_id|co|string|True|Cancel the order with this `client_order_id`|
+        |order_id|oi|string|False|Cancel the order with this `order_id`|
+        |client_order_id|co|string|False|Cancel the order with this `client_order_id`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -938,11 +938,13 @@ LITE ENDPOINT: lite/v1/order
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "ApiGetOrderRequest"
+        Retrieve the order for the account. Either `order_id` or `client_order_id` must be provided.<br>
+
         |Name|Lite|Type|Required| Description |
         |-|-|-|-|-|
         |sub_account_id|sa|string|True|The subaccount ID to filter by|
-        |order_id|oi|string|True|Filter for `order_id`|
-        |client_order_id|co|string|True|Filter for `client_order_id`|
+        |order_id|oi|string|False|Filter for `order_id`|
+        |client_order_id|co|string|False|Filter for `client_order_id`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -1000,7 +1002,7 @@ LITE ENDPOINT: lite/v1/order
                 |-|-|-|-|-|
                 |instrument|i|string|True|The instrument to trade in this leg|
                 |size|s|string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
-                |limit_price|lp|string|True|The limit price of the order leg, expressed in `9` decimals.<br>This is the total amount of base currency to pay/receive for all legs.|
+                |limit_price|lp|string|False|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset|ib|boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
                 |Name|Lite|Type|Required| Description |
@@ -1288,7 +1290,7 @@ LITE ENDPOINT: lite/v1/open_orders
                 |-|-|-|-|-|
                 |instrument|i|string|True|The instrument to trade in this leg|
                 |size|s|string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
-                |limit_price|lp|string|True|The limit price of the order leg, expressed in `9` decimals.<br>This is the total amount of base currency to pay/receive for all legs.|
+                |limit_price|lp|string|False|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset|ib|boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
                 |Name|Lite|Type|Required| Description |
@@ -1488,8 +1490,6 @@ LITE ENDPOINT: lite/v1/order_history
         |kind|k|[Kind]|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
         |underlying|u|[Currency]|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
         |quote|q|[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
-        |expiration|e|[string]|True|The expiration time to apply in nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned|
-        |strike_price|sp|[string]|True|The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned|
         |start_time|st|string|False|The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned|
         |end_time|et|string|False|The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned|
         |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
@@ -1530,8 +1530,6 @@ LITE ENDPOINT: lite/v1/order_history
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "expiration": ["1697788800000000000"],
-            "strike_price": ["65000.0"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
             "limit": 500,
@@ -1544,8 +1542,6 @@ LITE ENDPOINT: lite/v1/order_history
             "k": ["PERPETUAL"],
             "u": ["BTC", "ETH"],
             "q": ["USDT", "USDC"],
-            "e": ["1697788800000000000"],
-            "sp": ["65000.0"],
             "st": 1697788800000000000,
             "et": 1697788800000000000,
             "l": 500,
@@ -1593,7 +1589,7 @@ LITE ENDPOINT: lite/v1/order_history
                 |-|-|-|-|-|
                 |instrument|i|string|True|The instrument to trade in this leg|
                 |size|s|string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
-                |limit_price|lp|string|True|The limit price of the order leg, expressed in `9` decimals.<br>This is the total amount of base currency to pay/receive for all legs.|
+                |limit_price|lp|string|False|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset|ib|boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
                 |Name|Lite|Type|Required| Description |
@@ -1737,8 +1733,6 @@ LITE ENDPOINT: lite/v1/order_history
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "expiration": ["1697788800000000000"],
-            "strike_price": ["65000.0"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
             "limit": 500,
@@ -1755,8 +1749,6 @@ LITE ENDPOINT: lite/v1/order_history
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "expiration": ["1697788800000000000"],
-            "strike_price": ["65000.0"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
             "limit": 500,
@@ -1773,8 +1765,6 @@ LITE ENDPOINT: lite/v1/order_history
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "expiration": ["1697788800000000000"],
-            "strike_price": ["65000.0"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
             "limit": 500,
@@ -1791,8 +1781,6 @@ LITE ENDPOINT: lite/v1/order_history
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "expiration": ["1697788800000000000"],
-            "strike_price": ["65000.0"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
             "limit": 500,
@@ -1819,8 +1807,6 @@ LITE ENDPOINT: lite/v1/trade_history
         |kind|k|[Kind]|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
         |underlying|u|[Currency]|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
         |quote|q|[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
-        |expiration|e|string|True|The expiration time to apply in unix nanoseconds. If nil, this defaults to all expirations. Otherwise, only entries matching the filter will be returned|
-        |strike_price|sp|string|True|The strike price to apply. If nil, this defaults to all strike prices. Otherwise, only entries matching the filter will be returned|
         |start_time|st|string|False|The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned|
         |end_time|et|string|False|The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned|
         |limit|l|number|False|The limit to query for. Defaults to 500; Max 1000|
@@ -1861,12 +1847,10 @@ LITE ENDPOINT: lite/v1/trade_history
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "expiration": "1697788800000000000",
-            "strike_price": 65000.0,
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": Qw0918=
+            "cursor": ""
         }
         ```
         ```json
@@ -1875,12 +1859,10 @@ LITE ENDPOINT: lite/v1/trade_history
             "k": ["PERPETUAL"],
             "u": ["BTC", "ETH"],
             "q": ["USDT", "USDC"],
-            "e": "1697788800000000000",
-            "sp": 65000.0,
             "st": 1697788800000000000,
             "et": 1697788800000000000,
             "l": 500,
-            "c": Qw0918=
+            "c": ""
         }
         ```
     </section>
@@ -1912,7 +1894,6 @@ LITE ENDPOINT: lite/v1/trade_history
             |order_id|oi|string|True|An order identifier|
             |venue|v|Venue|True|The venue where the trade occurred|
             |client_order_id|co|string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
-            |trade_index|ti1|number|True|A trade index|
             ??? info "Venue"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
@@ -1942,10 +1923,9 @@ LITE ENDPOINT: lite/v1/trade_history
                 "trade_id": "209358",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
-                "client_order_id": "23042",
-                "trade_index": "2"
+                "client_order_id": "23042"
             }],
-            "next": Qw0918=
+            "next": "Qw0918="
         }
         ```
     </section>
@@ -1989,12 +1969,10 @@ LITE ENDPOINT: lite/v1/trade_history
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "expiration": "1697788800000000000",
-            "strike_price": 65000.0,
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": Qw0918=
+            "cursor": ""
         }
         '
         ```
@@ -2007,12 +1985,10 @@ LITE ENDPOINT: lite/v1/trade_history
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "expiration": "1697788800000000000",
-            "strike_price": 65000.0,
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": Qw0918=
+            "cursor": ""
         }
         '
         ```
@@ -2025,12 +2001,10 @@ LITE ENDPOINT: lite/v1/trade_history
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "expiration": "1697788800000000000",
-            "strike_price": 65000.0,
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": Qw0918=
+            "cursor": ""
         }
         '
         ```
@@ -2043,12 +2017,10 @@ LITE ENDPOINT: lite/v1/trade_history
             "kind": ["PERPETUAL"],
             "underlying": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "expiration": "1697788800000000000",
-            "strike_price": 65000.0,
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
             "limit": 500,
-            "cursor": Qw0918=
+            "cursor": ""
         }
         '
         ```
@@ -3584,7 +3556,7 @@ LITE ENDPOINT: lite/v1/account_history
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
-            "cursor": Qw0918=
+            "cursor": ""
         }
         ```
         ```json
@@ -3593,7 +3565,7 @@ LITE ENDPOINT: lite/v1/account_history
             "st": "1697788800000000000",
             "et": "1697788800000000000",
             "l": 500,
-            "c": Qw0918=
+            "c": ""
         }
         ```
     </section>
@@ -3701,7 +3673,7 @@ LITE ENDPOINT: lite/v1/account_history
                 }],
                 "settle_index_price": "1.0000102"
             }],
-            "next": Qw0918=
+            "next": "Qw0918="
         }
         ```
     </section>
@@ -3745,7 +3717,7 @@ LITE ENDPOINT: lite/v1/account_history
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
-            "cursor": Qw0918=
+            "cursor": ""
         }
         '
         ```
@@ -3758,7 +3730,7 @@ LITE ENDPOINT: lite/v1/account_history
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
-            "cursor": Qw0918=
+            "cursor": ""
         }
         '
         ```
@@ -3771,7 +3743,7 @@ LITE ENDPOINT: lite/v1/account_history
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
-            "cursor": Qw0918=
+            "cursor": ""
         }
         '
         ```
@@ -3784,7 +3756,7 @@ LITE ENDPOINT: lite/v1/account_history
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
-            "cursor": Qw0918=
+            "cursor": ""
         }
         '
         ```
