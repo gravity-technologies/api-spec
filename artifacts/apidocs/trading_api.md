@@ -48,7 +48,7 @@ LITE ENDPOINT: lite/v1/create_order
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |instrument<br>`i` |string|True|The instrument to trade in this leg|
-                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
+                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
                 |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
@@ -228,7 +228,7 @@ LITE ENDPOINT: lite/v1/create_order
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |instrument<br>`i` |string|True|The instrument to trade in this leg|
-                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
+                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
                 |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
@@ -340,33 +340,32 @@ LITE ENDPOINT: lite/v1/create_order
         |-|-|-|
         |1000|401|You are not authorized to access this functionality|
         |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
         |1003|404|Data Not Found|
-        |1004|401|Logged in user does not match the sub account|
-        |1005|500|Unknown Error|
-        |2001|401|Order signature is from an unauthorized signer|
-        |2002|401|Order signature has expired|
-        |2003|401|Order signature does not match payload|
-        |2004|401|Order sub account does not match logged in user|
-        |2005|400|Order ID should be empty when creating an order|
-        |2006|400|Client Order ID should be supplied when creating an order|
-        |2007|400|Client Order ID overlaps with existing active order|
-        |2010|400|Orderbook Orders must have a TimeInForce of GTT/IOC/FOK|
-        |2011|400|RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK|
-        |2012|400|Post Only can only be set to true for GTT/AON orders|
-        |2013|400|Market Order must always be supplied without a limit price|
-        |2014|400|Limit Order must always be supplied with a limit price|
-        |2016|400|Order must contain at least one leg|
-        |2017|400|Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice|
-        |2018|400|Orderbook Orders must contain only one leg|
-        |2019|400|Order state must be empty upon creation|
-        |2020|400|Order execution metadata must be empty upon creation|
-        |2021|400|Order Legs contain one or more inactive derivative|
-        |2022|400|Unsupported Instrument Requested|
-        |2023|400|Order size smaller than min size|
-        |2024|400|Order size smaller than min block size in block trade venue|
-        |2025|400|Invalid limit price tick|
-        |2026|400|Liquidation Order is not supported|
+        |1004|500|Unknown Error|
+        |2000|401|Order signature is from an unauthorized signer|
+        |2001|401|Order signature has expired|
+        |2002|401|Order signature does not match payload|
+        |2003|401|Order sub account does not match logged in user|
+        |2010|400|Order ID should be empty when creating an order|
+        |2011|400|Client Order ID should be supplied when creating an order|
+        |2012|400|Client Order ID overlaps with existing active order|
+        |2030|400|Orderbook Orders must have a TimeInForce of GTT/IOC/FOK|
+        |2031|400|RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK|
+        |2032|400|Post Only can only be set to true for GTT/AON orders|
+        |2020|400|Market Order must always be supplied without a limit price|
+        |2021|400|Limit Order must always be supplied with a limit price|
+        |2040|400|Order must contain at least one leg|
+        |2041|400|Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice|
+        |2042|400|Orderbook Orders must contain only one leg|
+        |2050|400|Order state must be empty upon creation|
+        |2051|400|Order execution metadata must be empty upon creation|
+        |2060|400|Order Legs contain one or more inactive derivative|
+        |2061|400|Unsupported Instrument Requested|
+        |2062|400|Order size smaller than min size|
+        |2063|400|Order size smaller than min block size in block trade venue|
+        |2064|400|Invalid limit price tick|
+        |2070|400|Liquidation Order is not supported|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -383,7 +382,7 @@ LITE ENDPOINT: lite/v1/create_order
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
         }
         {
@@ -393,126 +392,121 @@ LITE ENDPOINT: lite/v1/create_order
         }
         {
             "code":1004,
-            "message":"Logged in user does not match the sub account",
-            "status":401
-        }
-        {
-            "code":1005,
             "message":"Unknown Error",
             "status":500
         }
         {
-            "code":2001,
+            "code":2000,
             "message":"Order signature is from an unauthorized signer",
             "status":401
         }
         {
-            "code":2002,
+            "code":2001,
             "message":"Order signature has expired",
             "status":401
         }
         {
-            "code":2003,
+            "code":2002,
             "message":"Order signature does not match payload",
             "status":401
         }
         {
-            "code":2004,
+            "code":2003,
             "message":"Order sub account does not match logged in user",
             "status":401
         }
         {
-            "code":2005,
+            "code":2010,
             "message":"Order ID should be empty when creating an order",
             "status":400
         }
         {
-            "code":2006,
+            "code":2011,
             "message":"Client Order ID should be supplied when creating an order",
             "status":400
         }
         {
-            "code":2007,
+            "code":2012,
             "message":"Client Order ID overlaps with existing active order",
             "status":400
         }
         {
-            "code":2010,
+            "code":2030,
             "message":"Orderbook Orders must have a TimeInForce of GTT/IOC/FOK",
             "status":400
         }
         {
-            "code":2011,
+            "code":2031,
             "message":"RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK",
             "status":400
         }
         {
-            "code":2012,
+            "code":2032,
             "message":"Post Only can only be set to true for GTT/AON orders",
             "status":400
         }
         {
-            "code":2013,
+            "code":2020,
             "message":"Market Order must always be supplied without a limit price",
             "status":400
         }
         {
-            "code":2014,
+            "code":2021,
             "message":"Limit Order must always be supplied with a limit price",
             "status":400
         }
         {
-            "code":2016,
+            "code":2040,
             "message":"Order must contain at least one leg",
             "status":400
         }
         {
-            "code":2017,
+            "code":2041,
             "message":"Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice",
             "status":400
         }
         {
-            "code":2018,
+            "code":2042,
             "message":"Orderbook Orders must contain only one leg",
             "status":400
         }
         {
-            "code":2019,
+            "code":2050,
             "message":"Order state must be empty upon creation",
             "status":400
         }
         {
-            "code":2020,
+            "code":2051,
             "message":"Order execution metadata must be empty upon creation",
             "status":400
         }
         {
-            "code":2021,
+            "code":2060,
             "message":"Order Legs contain one or more inactive derivative",
             "status":400
         }
         {
-            "code":2022,
+            "code":2061,
             "message":"Unsupported Instrument Requested",
             "status":400
         }
         {
-            "code":2023,
+            "code":2062,
             "message":"Order size smaller than min size",
             "status":400
         }
         {
-            "code":2024,
+            "code":2063,
             "message":"Order size smaller than min block size in block trade venue",
             "status":400
         }
         {
-            "code":2025,
+            "code":2064,
             "message":"Invalid limit price tick",
             "status":400
         }
         {
-            "code":2026,
+            "code":2070,
             "message":"Liquidation Order is not supported",
             "status":400
         }
@@ -741,13 +735,19 @@ LITE ENDPOINT: lite/v1/cancel_order
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |3021|400|Either order ID or client order ID must be supplied|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -755,13 +755,13 @@ LITE ENDPOINT: lite/v1/cancel_order
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
         }
         {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
+            "code":3021,
+            "message":"Either order ID or client order ID must be supplied",
+            "status":400
         }
         ```
     </section>
@@ -826,17 +826,55 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID cancelling all orders|
+        |kind<br>`k` |[Kind]|False<br>`all`|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be cancelled|
+        |base<br>`b` |[Currency]|False<br>`all`|The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be cancelled|
+        |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be cancelled|
+        ??? info "Kind"
+            The list of asset kinds that are supported on the GRVT exchange<br>
+
+            |Value| Description |
+            |-|-|
+            |`PERPETUAL` = 1|the perpetual asset kind|
+            |`FUTURE` = 2|the future asset kind|
+            |`CALL` = 3|the call option asset kind|
+            |`PUT` = 4|the put option asset kind|
+        ??? info "Currency"
+            The list of Currencies that are supported on the GRVT exchange<br>
+
+            |Value| Description |
+            |-|-|
+            |`USD` = 1|the USD fiat currency|
+            |`USDC` = 2|the USDC token|
+            |`USDT` = 3|the USDT token|
+            |`ETH` = 4|the ETH token|
+            |`BTC` = 5|the BTC token|
+        ??? info "Currency"
+            The list of Currencies that are supported on the GRVT exchange<br>
+
+            |Value| Description |
+            |-|-|
+            |`USD` = 1|the USD fiat currency|
+            |`USDC` = 2|the USDC token|
+            |`USDT` = 3|the USDT token|
+            |`ETH` = 4|the ETH token|
+            |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         ```json
         {
-            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "kind": ["PERPETUAL"],
+            "base": ["BTC", "ETH"],
+            "quote": ["USDT", "USDC"]
         }
         ```
         ```json
         {
-            "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "k": ["PERPETUAL"],
+            "b": ["BTC", "ETH"],
+            "q": ["USDT", "USDC"]
         }
         ```
     </section>
@@ -862,14 +900,18 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
-        |2004|401|Order sub account does not match logged in user|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -877,18 +919,8 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
-        }
-        {
-            "code":2004,
-            "message":"Order sub account does not match logged in user",
-            "status":401
-        }
-        {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
         }
         ```
     </section>
@@ -899,7 +931,10 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "kind": ["PERPETUAL"],
+            "base": ["BTC", "ETH"],
+            "quote": ["USDT", "USDC"]
         }
         '
         ```
@@ -908,7 +943,10 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "kind": ["PERPETUAL"],
+            "base": ["BTC", "ETH"],
+            "quote": ["USDT", "USDC"]
         }
         '
         ```
@@ -917,7 +955,10 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "kind": ["PERPETUAL"],
+            "base": ["BTC", "ETH"],
+            "quote": ["USDT", "USDC"]
         }
         '
         ```
@@ -926,7 +967,10 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         curl --location 'https://trades.grvt.io/full/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "kind": ["PERPETUAL"],
+            "base": ["BTC", "ETH"],
+            "quote": ["USDT", "USDC"]
         }
         '
         ```
@@ -1003,7 +1047,7 @@ LITE ENDPOINT: lite/v1/order
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |instrument<br>`i` |string|True|The instrument to trade in this leg|
-                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
+                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
                 |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
@@ -1113,14 +1157,20 @@ LITE ENDPOINT: lite/v1/order
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
-        |1003|404|Data Not Found|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1003|404|Data Not Found|
+        |3021|400|Either order ID or client order ID must be supplied|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -1128,7 +1178,7 @@ LITE ENDPOINT: lite/v1/order
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
         }
         {
@@ -1137,9 +1187,9 @@ LITE ENDPOINT: lite/v1/order
             "status":404
         }
         {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
+            "code":3021,
+            "message":"Either order ID or client order ID must be supplied",
+            "status":400
         }
         ```
     </section>
@@ -1202,9 +1252,9 @@ LITE ENDPOINT: lite/v1/open_orders
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
-        |kind<br>`k` |[Kind]|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
-        |underlying<br>`u` |[Currency]|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
-        |quote<br>`q` |[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
+        |kind<br>`k` |[Kind]|False<br>`all`|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
+        |base<br>`b` |[Currency]|False<br>`all`|The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned|
+        |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         ??? info "Kind"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -1241,7 +1291,7 @@ LITE ENDPOINT: lite/v1/open_orders
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
         }
         ```
@@ -1249,7 +1299,7 @@ LITE ENDPOINT: lite/v1/open_orders
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
-            "u": ["BTC", "ETH"],
+            "b": ["BTC", "ETH"],
             "q": ["USDT", "USDC"]
         }
         ```
@@ -1294,7 +1344,7 @@ LITE ENDPOINT: lite/v1/open_orders
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |instrument<br>`i` |string|True|The instrument to trade in this leg|
-                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
+                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
                 |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
@@ -1404,13 +1454,18 @@ LITE ENDPOINT: lite/v1/open_orders
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -1418,13 +1473,8 @@ LITE ENDPOINT: lite/v1/open_orders
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
-        }
-        {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
         }
         ```
     </section>
@@ -1437,7 +1487,7 @@ LITE ENDPOINT: lite/v1/open_orders
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
         }
         '
@@ -1449,7 +1499,7 @@ LITE ENDPOINT: lite/v1/open_orders
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
         }
         '
@@ -1461,7 +1511,7 @@ LITE ENDPOINT: lite/v1/open_orders
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
         }
         '
@@ -1473,7 +1523,7 @@ LITE ENDPOINT: lite/v1/open_orders
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
         }
         '
@@ -1493,9 +1543,9 @@ LITE ENDPOINT: lite/v1/order_history
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
-        |kind<br>`k` |[Kind]|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
-        |underlying<br>`u` |[Currency]|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
-        |quote<br>`q` |[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
+        |kind<br>`k` |[Kind]|False<br>`all`|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
+        |base<br>`b` |[Currency]|False<br>`all`|The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned|
+        |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         |start_time<br>`st` |string|False<br>`0`|The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned|
         |end_time<br>`et` |string|False<br>`now()`|The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
@@ -1536,7 +1586,7 @@ LITE ENDPOINT: lite/v1/order_history
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
@@ -1548,7 +1598,7 @@ LITE ENDPOINT: lite/v1/order_history
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
-            "u": ["BTC", "ETH"],
+            "b": ["BTC", "ETH"],
             "q": ["USDT", "USDC"],
             "st": 1697788800000000000,
             "et": 1697788800000000000,
@@ -1596,7 +1646,7 @@ LITE ENDPOINT: lite/v1/order_history
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |instrument<br>`i` |string|True|The instrument to trade in this leg|
-                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
+                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
                 |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
@@ -1707,13 +1757,18 @@ LITE ENDPOINT: lite/v1/order_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -1721,13 +1776,8 @@ LITE ENDPOINT: lite/v1/order_history
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
-        }
-        {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
         }
         ```
     </section>
@@ -1740,7 +1790,7 @@ LITE ENDPOINT: lite/v1/order_history
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
@@ -1756,7 +1806,7 @@ LITE ENDPOINT: lite/v1/order_history
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
@@ -1772,7 +1822,7 @@ LITE ENDPOINT: lite/v1/order_history
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
@@ -1788,7 +1838,7 @@ LITE ENDPOINT: lite/v1/order_history
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
@@ -1799,7 +1849,7 @@ LITE ENDPOINT: lite/v1/order_history
         ```
 <hr class="solid">
 ## Trade
-### Private Trade History
+### Fill History
 ```
 FULL ENDPOINT: full/v1/trade_history
 LITE ENDPOINT: lite/v1/trade_history
@@ -1807,15 +1857,15 @@ LITE ENDPOINT: lite/v1/trade_history
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiPrivateTradeHistoryRequest"
-        Query for all historical trades made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
+    !!! info "ApiFillHistoryRequest"
+        Query for all historical fills made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The sub account ID to request for|
-        |kind<br>`k` |[Kind]|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
-        |underlying<br>`u` |[Currency]|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
-        |quote<br>`q` |[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
+        |kind<br>`k` |[Kind]|False<br>`all`|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
+        |base<br>`b` |[Currency]|False<br>`all`|The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned|
+        |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         |start_time<br>`st` |string|False<br>`0`|The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned|
         |end_time<br>`et` |string|False<br>`now()`|The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
@@ -1856,7 +1906,7 @@ LITE ENDPOINT: lite/v1/trade_history
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
@@ -1868,7 +1918,7 @@ LITE ENDPOINT: lite/v1/trade_history
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
-            "u": ["BTC", "ETH"],
+            "b": ["BTC", "ETH"],
             "q": ["USDT", "USDC"],
             "st": 1697788800000000000,
             "et": 1697788800000000000,
@@ -1879,12 +1929,12 @@ LITE ENDPOINT: lite/v1/trade_history
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiPrivateTradeHistoryResponse"
+    !!! info "ApiFillHistoryResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[PrivateTrade]|True|The private trades matching the request asset|
+        |results<br>`r` |[Fill]|True|The private trades matching the request asset|
         |next<br>`n` |string|True|The cursor to indicate when to start the query from|
-        ??? info "PrivateTrade"
+        ??? info "Fill"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
@@ -1892,7 +1942,7 @@ LITE ENDPOINT: lite/v1/trade_history
             |instrument<br>`i` |string|True|The instrument being represented|
             |is_buyer<br>`ib` |boolean|True|The side that the subaccount took on the trade|
             |is_taker<br>`it` |boolean|True|The role that the subaccount took on the trade|
-            |size<br>`s` |string|True|The number of assets being traded, expressed in underlying asset decimal units|
+            |size<br>`s` |string|True|The number of assets being traded, expressed in base asset decimal units|
             |price<br>`p` |string|True|The traded price, expressed in `9` decimals|
             |mark_price<br>`mp` |string|True|The mark price of the instrument at point of trade, expressed in `9` decimals|
             |index_price<br>`ip` |string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
@@ -1946,13 +1996,18 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -1960,13 +2015,8 @@ LITE ENDPOINT: lite/v1/trade_history
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
-        }
-        {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
         }
         ```
     </section>
@@ -1979,7 +2029,7 @@ LITE ENDPOINT: lite/v1/trade_history
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
@@ -1995,7 +2045,7 @@ LITE ENDPOINT: lite/v1/trade_history
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
@@ -2011,7 +2061,7 @@ LITE ENDPOINT: lite/v1/trade_history
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
@@ -2027,7 +2077,7 @@ LITE ENDPOINT: lite/v1/trade_history
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "start_time": 1697788800000000000,
             "end_time": 1697788800000000000,
@@ -2051,9 +2101,9 @@ LITE ENDPOINT: lite/v1/positions
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The sub account ID to request for|
-        |kind<br>`k` |[Kind]|True|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
-        |underlying<br>`u` |[Currency]|True|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
-        |quote<br>`q` |[Currency]|True|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
+        |kind<br>`k` |[Kind]|False<br>`all`|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
+        |base<br>`b` |[Currency]|False<br>`all`|The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned|
+        |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         ??? info "Kind"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -2090,7 +2140,7 @@ LITE ENDPOINT: lite/v1/positions
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
         }
         ```
@@ -2098,7 +2148,7 @@ LITE ENDPOINT: lite/v1/positions
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
-            "u": ["BTC", "ETH"],
+            "b": ["BTC", "ETH"],
             "q": ["USDT", "USDC"]
         }
         ```
@@ -2115,7 +2165,7 @@ LITE ENDPOINT: lite/v1/positions
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
             |sub_account_id<br>`sa` |string|True|The sub account ID that participated in the trade|
             |instrument<br>`i` |string|True|The instrument being represented|
-            |size<br>`s` |string|True|The size of the position, expressed in underlying asset decimal units. Negative for short positions|
+            |size<br>`s` |string|True|The size of the position, expressed in base asset decimal units. Negative for short positions|
             |notional<br>`n` |string|True|The notional value of the position, negative for short assets, expressed in quote asset decimal units|
             |entry_price<br>`ep` |string|True|The entry price of the position, expressed in `9` decimals<br>Whenever increasing the size of a position, the entry price is updated to the new average entry price<br>`new_entry_price = (old_entry_price * old_size + trade_price * trade_size) / (old_size + trade_size)`|
             |exit_price<br>`ep1` |string|True|The exit price of the position, expressed in `9` decimals<br>Whenever decreasing the size of a position, the exit price is updated to the new average exit price<br>`new_exit_price = (old_exit_price * old_exit_trade_size + trade_price * trade_size) / (old_exit_trade_size + trade_size)`|
@@ -2153,13 +2203,18 @@ LITE ENDPOINT: lite/v1/positions
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -2167,13 +2222,8 @@ LITE ENDPOINT: lite/v1/positions
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
-        }
-        {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
         }
         ```
     </section>
@@ -2186,7 +2236,7 @@ LITE ENDPOINT: lite/v1/positions
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
         }
         '
@@ -2198,7 +2248,7 @@ LITE ENDPOINT: lite/v1/positions
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
         }
         '
@@ -2210,7 +2260,7 @@ LITE ENDPOINT: lite/v1/positions
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
         }
         '
@@ -2222,7 +2272,7 @@ LITE ENDPOINT: lite/v1/positions
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"]
         }
         '
@@ -2295,13 +2345,18 @@ LITE ENDPOINT: lite/v1/deposit
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -2309,13 +2364,8 @@ LITE ENDPOINT: lite/v1/deposit
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
-        }
-        {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
         }
         ```
     </section>
@@ -2464,13 +2514,18 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -2478,13 +2533,8 @@ LITE ENDPOINT: lite/v1/deposit_history
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
-        }
-        {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
         }
         ```
     </section>
@@ -2644,13 +2694,18 @@ LITE ENDPOINT: lite/v1/transfer
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -2658,13 +2713,8 @@ LITE ENDPOINT: lite/v1/transfer
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
-        }
-        {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
         }
         ```
     </section>
@@ -2879,21 +2929,27 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
+            "code":1002,
+            "message":"Request could not be processed, largely due to invalid encoding",
+            "status":400
         }
         ```
     </section>
@@ -3047,13 +3103,18 @@ LITE ENDPOINT: lite/v1/withdrawal
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -3061,13 +3122,8 @@ LITE ENDPOINT: lite/v1/withdrawal
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
-        }
-        {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
         }
         ```
     </section>
@@ -3270,13 +3326,18 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -3284,13 +3345,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
-        }
-        {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
         }
         ```
     </section>
@@ -3387,7 +3443,7 @@ LITE ENDPOINT: lite/v1/account_summary
         ??? info "SubAccount"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
-            |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
+            |event_time<br>`et` |string|True|Time at which the event was emitted in uix nanoseconds|
             |sub_account_id<br>`sa` |string|True|The sub account ID this entry refers to|
             |margin_type<br>`mt` |MarginType|True|The type of margin algorithm this subaccount uses|
             |settle_currency<br>`sc` |Currency|True|The settlement, margin, and reporting currency of this account.<br>This subaccount can only open positions quoted in this currency<br><br>In the future, when users select a Multi-Currency Margin Type, this will be USD<br>All other assets are converted to this currency for the purpose of calculating margin|
@@ -3436,7 +3492,7 @@ LITE ENDPOINT: lite/v1/account_summary
                 |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
                 |sub_account_id<br>`sa` |string|True|The sub account ID that participated in the trade|
                 |instrument<br>`i` |string|True|The instrument being represented|
-                |size<br>`s` |string|True|The size of the position, expressed in underlying asset decimal units. Negative for short positions|
+                |size<br>`s` |string|True|The size of the position, expressed in base asset decimal units. Negative for short positions|
                 |notional<br>`n` |string|True|The notional value of the position, negative for short assets, expressed in quote asset decimal units|
                 |entry_price<br>`ep` |string|True|The entry price of the position, expressed in `9` decimals<br>Whenever increasing the size of a position, the entry price is updated to the new average entry price<br>`new_entry_price = (old_entry_price * old_size + trade_price * trade_size) / (old_size + trade_size)`|
                 |exit_price<br>`ep1` |string|True|The exit price of the position, expressed in `9` decimals<br>Whenever decreasing the size of a position, the exit price is updated to the new average exit price<br>`new_exit_price = (old_exit_price * old_exit_trade_size + trade_price * trade_size) / (old_exit_trade_size + trade_size)`|
@@ -3491,13 +3547,18 @@ LITE ENDPOINT: lite/v1/account_summary
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1000|401|You are not authorized to access this functionality|
         |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
-        |2004|401|Order sub account does not match logged in user|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -3505,13 +3566,8 @@ LITE ENDPOINT: lite/v1/account_summary
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
-        }
-        {
-            "code":2004,
-            "message":"Order sub account does not match logged in user",
-            "status":401
         }
         ```
     </section>
@@ -3604,7 +3660,7 @@ LITE ENDPOINT: lite/v1/account_history
         ??? info "SubAccount"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
-            |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
+            |event_time<br>`et` |string|True|Time at which the event was emitted in uix nanoseconds|
             |sub_account_id<br>`sa` |string|True|The sub account ID this entry refers to|
             |margin_type<br>`mt` |MarginType|True|The type of margin algorithm this subaccount uses|
             |settle_currency<br>`sc` |Currency|True|The settlement, margin, and reporting currency of this account.<br>This subaccount can only open positions quoted in this currency<br><br>In the future, when users select a Multi-Currency Margin Type, this will be USD<br>All other assets are converted to this currency for the purpose of calculating margin|
@@ -3653,7 +3709,7 @@ LITE ENDPOINT: lite/v1/account_history
                 |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
                 |sub_account_id<br>`sa` |string|True|The sub account ID that participated in the trade|
                 |instrument<br>`i` |string|True|The instrument being represented|
-                |size<br>`s` |string|True|The size of the position, expressed in underlying asset decimal units. Negative for short positions|
+                |size<br>`s` |string|True|The size of the position, expressed in base asset decimal units. Negative for short positions|
                 |notional<br>`n` |string|True|The notional value of the position, negative for short assets, expressed in quote asset decimal units|
                 |entry_price<br>`ep` |string|True|The entry price of the position, expressed in `9` decimals<br>Whenever increasing the size of a position, the entry price is updated to the new average entry price<br>`new_entry_price = (old_entry_price * old_size + trade_price * trade_size) / (old_size + trade_size)`|
                 |exit_price<br>`ep1` |string|True|The exit price of the position, expressed in `9` decimals<br>Whenever decreasing the size of a position, the exit price is updated to the new average exit price<br>`new_exit_price = (old_exit_price * old_exit_trade_size + trade_price * trade_size) / (old_exit_trade_size + trade_size)`|
@@ -3709,13 +3765,18 @@ LITE ENDPOINT: lite/v1/account_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
         |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
         {
             "code":1001,
             "message":"Internal Server Error",
@@ -3723,13 +3784,8 @@ LITE ENDPOINT: lite/v1/account_history
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
-        }
-        {
-            "code":1000,
-            "message":"You are not authorized to access this functionality",
-            "status":401
         }
         ```
     </section>
@@ -3860,7 +3916,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -3872,7 +3928,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
         }
         ```
@@ -3984,7 +4040,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
-        |1002|400|Invalid Request|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -3996,7 +4052,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         }
         {
             "code":1002,
-            "message":"Invalid Request",
+            "message":"Request could not be processed, largely due to invalid encoding",
             "status":400
         }
         ```

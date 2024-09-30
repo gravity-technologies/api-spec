@@ -9,50 +9,12 @@ STREAM: v1.order
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSOrderFeedSelectorV1"
-        Subscribes to a feed of order updates pertaining to orders made by your account.<br>Each Order can be uniquely identified by its `order_id` or `client_order_id` (if client designs well).<br>Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both.<br>
+        Subscribes to a feed of order updates pertaining to orders made by your account.<br>Each Order can be uniquely identified by its `order_id` or `client_order_id`.<br>To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).<br>Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
-        |kind<br>`k` |Kind|True|The kind filter to apply.|
-        |underlying<br>`u` |Currency|True|The underlying filter to apply.|
-        |quote<br>`q` |Currency|True|The quote filter to apply.|
-        |state_filter<br>`sf` |OrderStateFilter|True|create only, update only, all|
-        ??? info "Kind"
-            The list of asset kinds that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`PERPETUAL` = 1|the perpetual asset kind|
-            |`FUTURE` = 2|the future asset kind|
-            |`CALL` = 3|the call option asset kind|
-            |`PUT` = 4|the put option asset kind|
-        ??? info "Currency"
-            The list of Currencies that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`USD` = 1|the USD fiat currency|
-            |`USDC` = 2|the USDC token|
-            |`USDT` = 3|the USDT token|
-            |`ETH` = 4|the ETH token|
-            |`BTC` = 5|the BTC token|
-        ??? info "Currency"
-            The list of Currencies that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`USD` = 1|the USD fiat currency|
-            |`USDC` = 2|the USDC token|
-            |`USDT` = 3|the USDT token|
-            |`ETH` = 4|the ETH token|
-            |`BTC` = 5|the BTC token|
-        ??? info "OrderStateFilter"
-            |Value| Description |
-            |-|-|
-            |`C` = 1|create only filter|
-            |`U` = 2|update only filter|
-            |`A` = 3|create and update filter|
+        |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -60,7 +22,7 @@ STREAM: v1.order
         ```json
         {
             "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -68,7 +30,7 @@ STREAM: v1.order
         ```json
         {
             "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":false
         }
@@ -77,7 +39,7 @@ STREAM: v1.order
         ```json
         {
             "stream":"v1.order",
-            "subs":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "unsubs":[]
         }
         ```
@@ -123,7 +85,7 @@ STREAM: v1.order
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |instrument<br>`i` |string|True|The instrument to trade in this leg|
-                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in underlying asset decimal units.|
+                |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
                 |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
             ??? info "Signature"
@@ -276,10 +238,52 @@ STREAM: v1.order
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3020|400|Sub account ID must be an uint64 integer|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
+        {
+            "code":1001,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        {
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
+            "status":400
+        }
+        {
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
+        {
+            "code":3000,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3020,
+            "message":"Sub account ID must be an uint64 integer",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -291,7 +295,7 @@ STREAM: v1.order
         -x '
         {
             "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -304,7 +308,7 @@ STREAM: v1.order
         -x '
         {
             "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -317,7 +321,7 @@ STREAM: v1.order
         -x '
         {
             "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -330,7 +334,7 @@ STREAM: v1.order
         -x '
         {
             "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -345,50 +349,12 @@ STREAM: v1.state
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSOrderStateFeedSelectorV1"
-        Subscribes to a feed of order updates pertaining to orders made by your account.<br>Unlike the Order Stream, this only streams state updates, drastically improving throughput, and latency.<br>Each Order can be uniquely identified by its `order_id` or `client_order_id` (if client designs well).<br>Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both.<br>
+        Subscribes to a feed of order updates pertaining to orders made by your account.<br>Unlike the Order Stream, this only streams state updates, drastically improving throughput, and latency.<br>Each Order can be uniquely identified by its `order_id` or `client_order_id`.<br>To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).<br>Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
-        |kind<br>`k` |Kind|True|The kind filter to apply.|
-        |underlying<br>`u` |Currency|True|The underlying filter to apply.|
-        |quote<br>`q` |Currency|True|The quote filter to apply.|
-        |state_filter<br>`sf` |OrderStateFilter|True|create only, update only, all|
-        ??? info "Kind"
-            The list of asset kinds that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`PERPETUAL` = 1|the perpetual asset kind|
-            |`FUTURE` = 2|the future asset kind|
-            |`CALL` = 3|the call option asset kind|
-            |`PUT` = 4|the put option asset kind|
-        ??? info "Currency"
-            The list of Currencies that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`USD` = 1|the USD fiat currency|
-            |`USDC` = 2|the USDC token|
-            |`USDT` = 3|the USDT token|
-            |`ETH` = 4|the ETH token|
-            |`BTC` = 5|the BTC token|
-        ??? info "Currency"
-            The list of Currencies that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`USD` = 1|the USD fiat currency|
-            |`USDC` = 2|the USDC token|
-            |`USDT` = 3|the USDT token|
-            |`ETH` = 4|the ETH token|
-            |`BTC` = 5|the BTC token|
-        ??? info "OrderStateFilter"
-            |Value| Description |
-            |-|-|
-            |`C` = 1|create only filter|
-            |`U` = 2|update only filter|
-            |`A` = 3|create and update filter|
+        |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -396,7 +362,7 @@ STREAM: v1.state
         ```json
         {
             "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -404,7 +370,7 @@ STREAM: v1.state
         ```json
         {
             "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":false
         }
@@ -413,7 +379,7 @@ STREAM: v1.state
         ```json
         {
             "stream":"v1.state",
-            "subs":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "unsubs":[]
         }
         ```
@@ -431,6 +397,7 @@ STREAM: v1.state
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |order_id<br>`oi` |string|True|A unique 128-bit identifier for the order, deterministically generated within the GRVT backend|
+            |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client|
             |order_state<br>`os` |OrderState|True|The order state object being created or updated|
             ??? info "OrderState"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -487,6 +454,7 @@ STREAM: v1.state
             "sequence_number": "872634876",
             "feed": {
                 "order_id": "10000101000203040506",
+                "client_order_id": "23042",
                 "order_state": {
                     "status": "PENDING",
                     "reject_reason": "CLIENT_CANCEL",
@@ -504,6 +472,7 @@ STREAM: v1.state
             "sn": "872634876",
             "f": {
                 "oi": "10000101000203040506",
+                "co": "23042",
                 "os": {
                     "s": "PENDING",
                     "rr": "CLIENT_CANCEL",
@@ -520,10 +489,52 @@ STREAM: v1.state
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3020|400|Sub account ID must be an uint64 integer|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
+        {
+            "code":1001,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        {
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
+            "status":400
+        }
+        {
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
+        {
+            "code":3000,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3020,
+            "message":"Sub account ID must be an uint64 integer",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -535,7 +546,7 @@ STREAM: v1.state
         -x '
         {
             "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -548,7 +559,7 @@ STREAM: v1.state
         -x '
         {
             "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -561,7 +572,7 @@ STREAM: v1.state
         -x '
         {
             "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -574,57 +585,28 @@ STREAM: v1.state
         -x '
         {
             "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT@C"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
         ' -w 360
         ```
 <hr class="solid">
-## Trade
-### Private Trade
+## Execution
+### Fill
 ```
 STREAM: v1.fill
 ```
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSPrivateTradeFeedSelectorV1"
+    !!! info "WSFillFeedSelectorV1"
+        Subscribes to a feed of private trade updates. This happens when a trade is executed.<br>To subscribe to all private trades, specify an empty `instrument` (eg. `2345123`).<br>Otherwise, specify the `instrument` to only receive private trades for that instrument (eg. `2345123-BTC_USDT_Perp`).<br>
+
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The sub account ID to request for|
-        |kind<br>`k` |Kind|True|The kind filter to apply.|
-        |underlying<br>`u` |Currency|True|The underlying filter to apply.|
-        |quote<br>`q` |Currency|True|The quote filter to apply.|
-        ??? info "Kind"
-            The list of asset kinds that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`PERPETUAL` = 1|the perpetual asset kind|
-            |`FUTURE` = 2|the future asset kind|
-            |`CALL` = 3|the call option asset kind|
-            |`PUT` = 4|the put option asset kind|
-        ??? info "Currency"
-            The list of Currencies that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`USD` = 1|the USD fiat currency|
-            |`USDC` = 2|the USDC token|
-            |`USDT` = 3|the USDT token|
-            |`ETH` = 4|the ETH token|
-            |`BTC` = 5|the BTC token|
-        ??? info "Currency"
-            The list of Currencies that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`USD` = 1|the USD fiat currency|
-            |`USDC` = 2|the USDC token|
-            |`USDT` = 3|the USDT token|
-            |`ETH` = 4|the ETH token|
-            |`BTC` = 5|the BTC token|
+        |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -632,7 +614,7 @@ STREAM: v1.fill
         ```json
         {
             "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -640,7 +622,7 @@ STREAM: v1.fill
         ```json
         {
             "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":false
         }
@@ -649,21 +631,21 @@ STREAM: v1.fill
         ```json
         {
             "stream":"v1.fill",
-            "subs":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "unsubs":[]
         }
         ```
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSPrivateTradeFeedDataV1"
+    !!! info "WSFillFeedDataV1"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|The websocket channel to which the response is sent|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
-        |feed<br>`f` |PrivateTrade|True|A private trade matching the request filter|
-        ??? info "PrivateTrade"
+        |feed<br>`f` |Fill|True|A private trade matching the request filter|
+        ??? info "Fill"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
@@ -671,7 +653,7 @@ STREAM: v1.fill
             |instrument<br>`i` |string|True|The instrument being represented|
             |is_buyer<br>`ib` |boolean|True|The side that the subaccount took on the trade|
             |is_taker<br>`it` |boolean|True|The role that the subaccount took on the trade|
-            |size<br>`s` |string|True|The number of assets being traded, expressed in underlying asset decimal units|
+            |size<br>`s` |string|True|The number of assets being traded, expressed in base asset decimal units|
             |price<br>`p` |string|True|The traded price, expressed in `9` decimals|
             |mark_price<br>`mp` |string|True|The mark price of the instrument at point of trade, expressed in `9` decimals|
             |index_price<br>`ip` |string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
@@ -754,10 +736,52 @@ STREAM: v1.fill
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3020|400|Sub account ID must be an uint64 integer|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
+        {
+            "code":1001,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        {
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
+            "status":400
+        }
+        {
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
+        {
+            "code":3000,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3020,
+            "message":"Sub account ID must be an uint64 integer",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -769,7 +793,7 @@ STREAM: v1.fill
         -x '
         {
             "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -782,7 +806,7 @@ STREAM: v1.fill
         -x '
         {
             "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -795,7 +819,7 @@ STREAM: v1.fill
         -x '
         {
             "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -808,7 +832,7 @@ STREAM: v1.fill
         -x '
         {
             "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -823,43 +847,12 @@ STREAM: v1.position
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSPositionsFeedSelectorV1"
-        Subscribes to a feed of position updates. This happens when a trade is executed.<br>
+        Subscribes to a feed of position updates. This happens when a trade is executed.<br>To subscribe to all positions, specify an empty `instrument` (eg. `2345123`).<br>Otherwise, specify the `instrument` to only receive positions for that instrument (eg. `2345123-BTC_USDT_Perp`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
-        |kind<br>`k` |Kind|True|The kind filter to apply.|
-        |underlying<br>`u` |Currency|True|The underlying filter to apply.|
-        |quote<br>`q` |Currency|True|The quote filter to apply.|
-        ??? info "Kind"
-            The list of asset kinds that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`PERPETUAL` = 1|the perpetual asset kind|
-            |`FUTURE` = 2|the future asset kind|
-            |`CALL` = 3|the call option asset kind|
-            |`PUT` = 4|the put option asset kind|
-        ??? info "Currency"
-            The list of Currencies that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`USD` = 1|the USD fiat currency|
-            |`USDC` = 2|the USDC token|
-            |`USDT` = 3|the USDT token|
-            |`ETH` = 4|the ETH token|
-            |`BTC` = 5|the BTC token|
-        ??? info "Currency"
-            The list of Currencies that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`USD` = 1|the USD fiat currency|
-            |`USDC` = 2|the USDC token|
-            |`USDT` = 3|the USDT token|
-            |`ETH` = 4|the ETH token|
-            |`BTC` = 5|the BTC token|
+        |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -867,7 +860,7 @@ STREAM: v1.position
         ```json
         {
             "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -875,7 +868,7 @@ STREAM: v1.position
         ```json
         {
             "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":false
         }
@@ -884,7 +877,7 @@ STREAM: v1.position
         ```json
         {
             "stream":"v1.position",
-            "subs":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "unsubs":[]
         }
         ```
@@ -904,7 +897,7 @@ STREAM: v1.position
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
             |sub_account_id<br>`sa` |string|True|The sub account ID that participated in the trade|
             |instrument<br>`i` |string|True|The instrument being represented|
-            |size<br>`s` |string|True|The size of the position, expressed in underlying asset decimal units. Negative for short positions|
+            |size<br>`s` |string|True|The size of the position, expressed in base asset decimal units. Negative for short positions|
             |notional<br>`n` |string|True|The notional value of the position, negative for short assets, expressed in quote asset decimal units|
             |entry_price<br>`ep` |string|True|The entry price of the position, expressed in `9` decimals<br>Whenever increasing the size of a position, the entry price is updated to the new average entry price<br>`new_entry_price = (old_entry_price * old_size + trade_price * trade_size) / (old_size + trade_size)`|
             |exit_price<br>`ep1` |string|True|The exit price of the position, expressed in `9` decimals<br>Whenever decreasing the size of a position, the exit price is updated to the new average exit price<br>`new_exit_price = (old_exit_price * old_exit_trade_size + trade_price * trade_size) / (old_exit_trade_size + trade_size)`|
@@ -967,10 +960,52 @@ STREAM: v1.position
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1000|401|You are not authorized to access this functionality|
+        |1001|500|Internal Server Error|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3020|400|Sub account ID must be an uint64 integer|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1000,
+            "message":"You are not authorized to access this functionality",
+            "status":401
+        }
+        {
+            "code":1001,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        {
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
+            "status":400
+        }
+        {
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
+        {
+            "code":3000,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3020,
+            "message":"Sub account ID must be an uint64 integer",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -982,7 +1017,7 @@ STREAM: v1.position
         -x '
         {
             "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -995,7 +1030,7 @@ STREAM: v1.position
         -x '
         {
             "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1008,7 +1043,7 @@ STREAM: v1.position
         -x '
         {
             "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1021,7 +1056,7 @@ STREAM: v1.position
         -x '
         {
             "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-PERPETUAL-BTC-USDT"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1133,10 +1168,28 @@ STREAM: v1.deposit
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
+            "status":400
+        }
+        {
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -1330,10 +1383,28 @@ STREAM: v1.transfer
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
+            "status":400
+        }
+        {
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -1521,10 +1592,28 @@ STREAM: v1.withdrawal
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
+            "status":400
+        }
+        {
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
