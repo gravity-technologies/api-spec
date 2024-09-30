@@ -186,7 +186,7 @@
             "namespace": "Trade",
             "name": "RPCTradeV1",
             "version": 1,
-            "route": "/trades",
+            "route": "/trade",
             "auth_required": false,
             "request": "ApiTradeRequest",
             "response": "ApiTradeResponse",
@@ -984,10 +984,10 @@
             ]
           },
           {
-            "namespace": "Trade",
+            "namespace": "Execution",
             "name": "RPCFillHistoryV1",
             "version": 1,
-            "route": "/trade_history",
+            "route": "/fill_history",
             "auth_required": true,
             "request": "ApiFillHistoryRequest",
             "response": "ApiFillHistoryResponse",
@@ -1010,7 +1010,7 @@
             ]
           },
           {
-            "namespace": "Trade",
+            "namespace": "Execution",
             "name": "RPCPositionsV1",
             "version": 1,
             "route": "/positions",

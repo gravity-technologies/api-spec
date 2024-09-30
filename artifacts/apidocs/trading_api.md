@@ -1848,11 +1848,11 @@ LITE ENDPOINT: lite/v1/order_history
         '
         ```
 <hr class="solid">
-## Trade
+## Execution
 ### Fill History
 ```
-FULL ENDPOINT: full/v1/trade_history
-LITE ENDPOINT: lite/v1/trade_history
+FULL ENDPOINT: full/v1/fill_history
+LITE ENDPOINT: lite/v1/fill_history
 ```
 
 === "Request"
@@ -2024,7 +2024,7 @@ LITE ENDPOINT: lite/v1/trade_history
     -8<- "sections/auth.md"
     !!! example "Try DEV"
         ```bash
-        curl --location 'https://trades.dev.gravitymarkets.io/full/v1/trade_history' \
+        curl --location 'https://trades.dev.gravitymarkets.io/full/v1/fill_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -2040,7 +2040,7 @@ LITE ENDPOINT: lite/v1/trade_history
         ```
     !!! example "Try STG"
         ```bash
-        curl --location 'https://trades.stg.gravitymarkets.io/full/v1/trade_history' \
+        curl --location 'https://trades.stg.gravitymarkets.io/full/v1/fill_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -2056,7 +2056,7 @@ LITE ENDPOINT: lite/v1/trade_history
         ```
     !!! example "Try TESTNET"
         ```bash
-        curl --location 'https://trades.testnet.grvt.io/full/v1/trade_history' \
+        curl --location 'https://trades.testnet.grvt.io/full/v1/fill_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -2072,7 +2072,7 @@ LITE ENDPOINT: lite/v1/trade_history
         ```
     !!! example "Try PROD"
         ```bash
-        curl --location 'https://trades.grvt.io/full/v1/trade_history' \
+        curl --location 'https://trades.grvt.io/full/v1/fill_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",

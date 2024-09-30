@@ -1066,8 +1066,8 @@ LITE ENDPOINT: lite/v1/book
 ## Trade
 ### Trade
 ```
-FULL ENDPOINT: full/v1/trades
-LITE ENDPOINT: lite/v1/trades
+FULL ENDPOINT: full/v1/trade
+LITE ENDPOINT: lite/v1/trade
 ```
 
 === "Request"
@@ -1171,7 +1171,7 @@ LITE ENDPOINT: lite/v1/trades
 === "Try it out"
     !!! example "Try DEV"
         ```bash
-        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/trades' \
+        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/trade' \
         --data '{
             "instrument": "BTC_USDT_Perp",
             "limit": 500
@@ -1180,7 +1180,7 @@ LITE ENDPOINT: lite/v1/trades
         ```
     !!! example "Try STG"
         ```bash
-        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trades' \
+        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trade' \
         --data '{
             "instrument": "BTC_USDT_Perp",
             "limit": 500
@@ -1189,7 +1189,7 @@ LITE ENDPOINT: lite/v1/trades
         ```
     !!! example "Try TESTNET"
         ```bash
-        curl --location 'https://market-data.testnet.grvt.io/full/v1/trades' \
+        curl --location 'https://market-data.testnet.grvt.io/full/v1/trade' \
         --data '{
             "instrument": "BTC_USDT_Perp",
             "limit": 500
@@ -1198,7 +1198,7 @@ LITE ENDPOINT: lite/v1/trades
         ```
     !!! example "Try PROD"
         ```bash
-        curl --location 'https://market-data.grvt.io/full/v1/trades' \
+        curl --location 'https://market-data.grvt.io/full/v1/trade' \
         --data '{
             "instrument": "BTC_USDT_Perp",
             "limit": 500

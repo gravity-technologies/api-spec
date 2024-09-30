@@ -65,7 +65,7 @@ class GrvtApiSync(GrvtApiSyncBase):
         return from_dict(types.ApiOrderbookLevelsResponse, resp, Config(cast=[Enum]))
 
     def trade_v1(self, req: types.ApiTradeRequest) -> types.ApiTradeResponse | GrvtError:
-        resp = self._post(False, self.md_rpc + "/full/v1/trades", req)
+        resp = self._post(False, self.md_rpc + "/full/v1/trade", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiTradeResponse, resp, Config(cast=[Enum]))
@@ -153,7 +153,7 @@ class GrvtApiSync(GrvtApiSyncBase):
     def fill_history_v1(
         self, req: types.ApiFillHistoryRequest
     ) -> types.ApiFillHistoryResponse | GrvtError:
-        resp = self._post(True, self.td_rpc + "/full/v1/trade_history", req)
+        resp = self._post(True, self.td_rpc + "/full/v1/fill_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiFillHistoryResponse, resp, Config(cast=[Enum]))
