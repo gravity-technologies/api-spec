@@ -36,6 +36,11 @@
                 "status": 500
               },
               {
+                "code": 1002,
+                "message": "Request could not be processed, largely due to invalid encoding",
+                "status": 400
+              },
+              {
                 "code": 1003,
                 "message": "Data Not Found",
                 "status": 404
@@ -55,6 +60,11 @@
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
+              },
+              {
+                "code": 1002,
+                "message": "Request could not be processed, largely due to invalid encoding",
+                "status": 400
               }
             ]
           },
@@ -71,6 +81,11 @@
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
+              },
+              {
+                "code": 1002,
+                "message": "Request could not be processed, largely due to invalid encoding",
+                "status": 400
               }
             ]
           },
@@ -87,6 +102,11 @@
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
+              },
+              {
+                "code": 1002,
+                "message": "Request could not be processed, largely due to invalid encoding",
+                "status": 400
               },
               {
                 "code": 1003,
@@ -110,6 +130,11 @@
                 "status": 500
               },
               {
+                "code": 1002,
+                "message": "Request could not be processed, largely due to invalid encoding",
+                "status": 400
+              },
+              {
                 "code": 1003,
                 "message": "Data Not Found",
                 "status": 404
@@ -131,22 +156,27 @@
                 "status": 500
               },
               {
+                "code": 1002,
+                "message": "Request could not be processed, largely due to invalid encoding",
+                "status": 400
+              },
+              {
                 "code": 1003,
                 "message": "Data Not Found",
                 "status": 404
               },
               {
-                "code": 3004,
+                "code": 3000,
                 "message": "Instrument is invalid",
                 "status": 400
               },
               {
-                "code": 3005,
+                "code": 3031,
                 "message": "Depth is invalid",
                 "status": 400
               },
               {
-                "code": 3006,
+                "code": 5006,
                 "message": "Aggregate is invalid",
                 "status": 400
               }
@@ -154,33 +184,43 @@
           },
           {
             "namespace": "Trade",
-            "name": "RPCPublicTradesV1",
+            "name": "RPCTradeV1",
             "version": 1,
             "route": "/trades",
             "auth_required": false,
-            "request": "ApiPublicTradesRequest",
-            "response": "ApiPublicTradesResponse",
+            "request": "ApiTradeRequest",
+            "response": "ApiTradeResponse",
             "on_request_errors": [
               {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
+              },
+              {
+                "code": 1002,
+                "message": "Request could not be processed, largely due to invalid encoding",
+                "status": 400
               }
             ]
           },
           {
             "namespace": "Trade",
-            "name": "RPCPublicTradeHistoryV1",
+            "name": "RPCTradeHistoryV1",
             "version": 1,
             "route": "/trade_history",
             "auth_required": false,
-            "request": "ApiPublicTradeHistoryRequest",
-            "response": "ApiPublicTradeHistoryResponse",
+            "request": "ApiTradeHistoryRequest",
+            "response": "ApiTradeHistoryResponse",
             "on_request_errors": [
               {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
+              },
+              {
+                "code": 1002,
+                "message": "Request could not be processed, largely due to invalid encoding",
+                "status": 400
               }
             ]
           },
@@ -197,6 +237,11 @@
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
+              },
+              {
+                "code": 1002,
+                "message": "Request could not be processed, largely due to invalid encoding",
+                "status": 400
               }
             ]
           },
@@ -213,6 +258,11 @@
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
+              },
+              {
+                "code": 1002,
+                "message": "Request could not be processed, largely due to invalid encoding",
+                "status": 400
               }
             ]
           },
@@ -229,6 +279,11 @@
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
+              },
+              {
+                "code": 1002,
+                "message": "Request could not be processed, largely due to invalid encoding",
+                "status": 400
               }
             ]
           }
@@ -248,22 +303,32 @@
                 "status": 500
               },
               {
-                "code": 3004,
-                "message": "Instrument is invalid",
-                "status": 400
-              },
-              {
                 "code": 1003,
                 "message": "Data Not Found",
                 "status": 404
               },
               {
-                "code": 3002,
-                "message": "Feed format is invalid",
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
                 "status": 400
               },
               {
-                "code": 3003,
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              },
+              {
+                "code": 3000,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3030,
                 "message": "Feed rate is invalid",
                 "status": 400
               }
@@ -283,22 +348,32 @@
                 "status": 500
               },
               {
-                "code": 3004,
-                "message": "Instrument is invalid",
-                "status": 400
-              },
-              {
                 "code": 1003,
                 "message": "Data Not Found",
                 "status": 404
               },
               {
-                "code": 3002,
-                "message": "Feed format is invalid",
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
                 "status": 400
               },
               {
-                "code": 3003,
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              },
+              {
+                "code": 3000,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3030,
                 "message": "Feed rate is invalid",
                 "status": 400
               }
@@ -318,17 +393,32 @@
                 "status": 500
               },
               {
-                "code": 3004,
-                "message": "Instrument is invalid",
-                "status": 400
-              },
-              {
                 "code": 1003,
                 "message": "Data Not Found",
                 "status": 404
               },
               {
-                "code": 3003,
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+                "status": 400
+              },
+              {
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              },
+              {
+                "code": 3000,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3030,
                 "message": "Feed rate is invalid",
                 "status": 400
               }
@@ -348,17 +438,32 @@
                 "status": 500
               },
               {
-                "code": 3004,
-                "message": "Instrument is invalid",
-                "status": 400
-              },
-              {
                 "code": 1003,
                 "message": "Data Not Found",
                 "status": 404
               },
               {
-                "code": 3003,
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+                "status": 400
+              },
+              {
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              },
+              {
+                "code": 3000,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3030,
                 "message": "Feed rate is invalid",
                 "status": 400
               }
@@ -378,32 +483,42 @@
                 "status": 500
               },
               {
-                "code": 3004,
-                "message": "Instrument is invalid",
-                "status": 400
-              },
-              {
                 "code": 1003,
                 "message": "Data Not Found",
                 "status": 404
               },
               {
-                "code": 3002,
-                "message": "Feed format is invalid",
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
                 "status": 400
               },
               {
-                "code": 3003,
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              },
+              {
+                "code": 3000,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3030,
                 "message": "Feed rate is invalid",
                 "status": 400
               },
               {
-                "code": 3005,
+                "code": 3031,
                 "message": "Depth is invalid",
                 "status": 400
               },
               {
-                "code": 3006,
+                "code": 5006,
                 "message": "Aggregate is invalid",
                 "status": 400
               }
@@ -423,32 +538,42 @@
                 "status": 500
               },
               {
-                "code": 3004,
-                "message": "Instrument is invalid",
-                "status": 400
-              },
-              {
                 "code": 1003,
                 "message": "Data Not Found",
                 "status": 404
               },
               {
-                "code": 3002,
-                "message": "Feed format is invalid",
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
                 "status": 400
               },
               {
-                "code": 3003,
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              },
+              {
+                "code": 3000,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3030,
                 "message": "Feed rate is invalid",
                 "status": 400
               },
               {
-                "code": 3005,
+                "code": 3031,
                 "message": "Depth is invalid",
                 "status": 400
               },
               {
-                "code": 3006,
+                "code": 5006,
                 "message": "Aggregate is invalid",
                 "status": 400
               }
@@ -456,12 +581,43 @@
           },
           {
             "namespace": "Trade",
-            "name": "StreamPublicTradesV1",
+            "name": "StreamTradeV1",
             "channel": "v1.trade",
             "auth_required": false,
-            "feed_selector": "WSPublicTradesFeedSelectorV1",
-            "feed": "WSPublicTradesFeedDataV1",
-            "on_subscribe_errors": []
+            "feed_selector": "WSTradeFeedSelectorV1",
+            "feed": "WSTradeFeedDataV1",
+            "on_subscribe_errors": [
+              {
+                "code": 1001,
+                "message": "Internal Server Error",
+                "status": 500
+              },
+              {
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+                "status": 400
+              },
+              {
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              },
+              {
+                "code": 3000,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3011,
+                "message": "Limit exceeds min or max value",
+                "status": 400
+              }
+            ]
           },
           {
             "namespace": "Candlestick",
@@ -470,7 +626,43 @@
             "auth_required": false,
             "feed_selector": "WSCandlestickFeedSelectorV1",
             "feed": "WSCandlestickFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1001,
+                "message": "Internal Server Error",
+                "status": 500
+              },
+              {
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+                "status": 400
+              },
+              {
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              },
+              {
+                "code": 3000,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3040,
+                "message": "Candlestick interval is invalid",
+                "status": 400
+              },
+              {
+                "code": 3041,
+                "message": "Candlestick type is invalid",
+                "status": 400
+              }
+            ]
           }
         ]
       },
@@ -516,7 +708,7 @@
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
               },
               {
@@ -526,126 +718,121 @@
               },
               {
                 "code": 1004,
-                "message": "Logged in user does not match the sub account",
-                "status": 401
-              },
-              {
-                "code": 1005,
                 "message": "Unknown Error",
                 "status": 500
               },
               {
-                "code": 2001,
+                "code": 2000,
                 "message": "Order signature is from an unauthorized signer",
                 "status": 401
               },
               {
-                "code": 2002,
+                "code": 2001,
                 "message": "Order signature has expired",
                 "status": 401
               },
               {
-                "code": 2003,
+                "code": 2002,
                 "message": "Order signature does not match payload",
                 "status": 401
               },
               {
-                "code": 2004,
+                "code": 2003,
                 "message": "Order sub account does not match logged in user",
                 "status": 401
               },
               {
-                "code": 2005,
+                "code": 2010,
                 "message": "Order ID should be empty when creating an order",
                 "status": 400
               },
               {
-                "code": 2006,
+                "code": 2011,
                 "message": "Client Order ID should be supplied when creating an order",
                 "status": 400
               },
               {
-                "code": 2007,
+                "code": 2012,
                 "message": "Client Order ID overlaps with existing active order",
                 "status": 400
               },
               {
-                "code": 2010,
+                "code": 2030,
                 "message": "Orderbook Orders must have a TimeInForce of GTT/IOC/FOK",
                 "status": 400
               },
               {
-                "code": 2011,
+                "code": 2031,
                 "message": "RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK",
                 "status": 400
               },
               {
-                "code": 2012,
+                "code": 2032,
                 "message": "Post Only can only be set to true for GTT/AON orders",
                 "status": 400
               },
               {
-                "code": 2013,
+                "code": 2020,
                 "message": "Market Order must always be supplied without a limit price",
                 "status": 400
               },
               {
-                "code": 2014,
+                "code": 2021,
                 "message": "Limit Order must always be supplied with a limit price",
                 "status": 400
               },
               {
-                "code": 2016,
+                "code": 2040,
                 "message": "Order must contain at least one leg",
                 "status": 400
               },
               {
-                "code": 2017,
+                "code": 2041,
                 "message": "Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice",
                 "status": 400
               },
               {
-                "code": 2018,
+                "code": 2042,
                 "message": "Orderbook Orders must contain only one leg",
                 "status": 400
               },
               {
-                "code": 2019,
+                "code": 2050,
                 "message": "Order state must be empty upon creation",
                 "status": 400
               },
               {
-                "code": 2020,
+                "code": 2051,
                 "message": "Order execution metadata must be empty upon creation",
                 "status": 400
               },
               {
-                "code": 2021,
+                "code": 2060,
                 "message": "Order Legs contain one or more inactive derivative",
                 "status": 400
               },
               {
-                "code": 2022,
+                "code": 2061,
                 "message": "Unsupported Instrument Requested",
                 "status": 400
               },
               {
-                "code": 2023,
+                "code": 2062,
                 "message": "Order size smaller than min size",
                 "status": 400
               },
               {
-                "code": 2024,
+                "code": 2063,
                 "message": "Order size smaller than min block size in block trade venue",
                 "status": 400
               },
               {
-                "code": 2025,
+                "code": 2064,
                 "message": "Invalid limit price tick",
                 "status": 400
               },
               {
-                "code": 2026,
+                "code": 2070,
                 "message": "Liquidation Order is not supported",
                 "status": 400
               }
@@ -661,19 +848,24 @@
             "response": "AckResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
               },
               {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
+                "code": 3021,
+                "message": "Either order ID or client order ID must be supplied",
+                "status": 400
               }
             ]
           },
@@ -687,24 +879,19 @@
             "response": "AckResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
-              },
-              {
-                "code": 2004,
-                "message": "Order sub account does not match logged in user",
-                "status": 401
-              },
-              {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
               }
             ]
           },
@@ -718,13 +905,18 @@
             "response": "ApiGetOrderResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
               },
               {
@@ -733,9 +925,9 @@
                 "status": 404
               },
               {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
+                "code": 3021,
+                "message": "Either order ID or client order ID must be supplied",
+                "status": 400
               }
             ]
           },
@@ -749,19 +941,19 @@
             "response": "ApiOpenOrdersResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
-              },
-              {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
               }
             ]
           },
@@ -775,31 +967,36 @@
             "response": "ApiOrderHistoryResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
-              },
-              {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
               }
             ]
           },
           {
             "namespace": "Trade",
-            "name": "RPCPrivateTradeHistoryV1",
+            "name": "RPCFillHistoryV1",
             "version": 1,
             "route": "/trade_history",
             "auth_required": true,
-            "request": "ApiPrivateTradeHistoryRequest",
-            "response": "ApiPrivateTradeHistoryResponse",
+            "request": "ApiFillHistoryRequest",
+            "response": "ApiFillHistoryResponse",
             "on_request_errors": [
+              {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
               {
                 "code": 1001,
                 "message": "Internal Server Error",
@@ -807,13 +1004,8 @@
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
-              },
-              {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
               }
             ]
           },
@@ -827,19 +1019,19 @@
             "response": "ApiPositionsResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
-              },
-              {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
               }
             ]
           },
@@ -853,19 +1045,19 @@
             "response": "AckResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
-              },
-              {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
               }
             ]
           },
@@ -879,19 +1071,19 @@
             "response": "ApiDepositHistoryResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
-              },
-              {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
               }
             ]
           },
@@ -905,19 +1097,19 @@
             "response": "AckResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
-              },
-              {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
               }
             ]
           },
@@ -931,14 +1123,19 @@
             "response": "ApiTransferHistoryResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
+                "code": 1002,
+                "message": "Request could not be processed, largely due to invalid encoding",
+                "status": 400
               }
             ]
           },
@@ -952,19 +1149,19 @@
             "response": "AckResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
-              },
-              {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
               }
             ]
           },
@@ -978,19 +1175,19 @@
             "response": "ApiWithdrawalHistoryResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
-              },
-              {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
               }
             ]
           },
@@ -1004,19 +1201,19 @@
             "response": "ApiSubAccountSummaryResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
-              },
-              {
-                "code": 2004,
-                "message": "Order sub account does not match logged in user",
-                "status": 401
               }
             ]
           },
@@ -1030,19 +1227,19 @@
             "response": "ApiSubAccountHistoryResponse",
             "on_request_errors": [
               {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
                 "code": 1001,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
-              },
-              {
-                "code": 1000,
-                "message": "You are not authorized to access this functionality",
-                "status": 401
               }
             ]
           },
@@ -1062,7 +1259,7 @@
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
               }
             ]
@@ -1083,7 +1280,7 @@
               },
               {
                 "code": 1002,
-                "message": "Invalid Request",
+                "message": "Request could not be processed, largely due to invalid encoding",
                 "status": 400
               }
             ]
@@ -1097,7 +1294,43 @@
             "auth_required": true,
             "feed_selector": "WSOrderFeedSelectorV1",
             "feed": "WSOrderFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
+                "code": 1001,
+                "message": "Internal Server Error",
+                "status": 500
+              },
+              {
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+                "status": 400
+              },
+              {
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              },
+              {
+                "code": 3000,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3020,
+                "message": "Sub account ID must be an uint64 integer",
+                "status": 400
+              }
+            ]
           },
           {
             "namespace": "Order",
@@ -1106,25 +1339,133 @@
             "auth_required": true,
             "feed_selector": "WSOrderStateFeedSelectorV1",
             "feed": "WSOrderStateFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
+                "code": 1001,
+                "message": "Internal Server Error",
+                "status": 500
+              },
+              {
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+                "status": 400
+              },
+              {
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              },
+              {
+                "code": 3000,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3020,
+                "message": "Sub account ID must be an uint64 integer",
+                "status": 400
+              }
+            ]
           },
           {
-            "namespace": "Trade",
-            "name": "StreamPrivateTradeV1",
+            "namespace": "Execution",
+            "name": "StreamFillV1",
             "channel": "v1.fill",
             "auth_required": true,
-            "feed_selector": "WSPrivateTradeFeedSelectorV1",
-            "feed": "WSPrivateTradeFeedDataV1",
-            "on_subscribe_errors": []
+            "feed_selector": "WSFillFeedSelectorV1",
+            "feed": "WSFillFeedDataV1",
+            "on_subscribe_errors": [
+              {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
+                "code": 1001,
+                "message": "Internal Server Error",
+                "status": 500
+              },
+              {
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+                "status": 400
+              },
+              {
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              },
+              {
+                "code": 3000,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3020,
+                "message": "Sub account ID must be an uint64 integer",
+                "status": 400
+              }
+            ]
           },
           {
-            "namespace": "Trade",
+            "namespace": "Execution",
             "name": "StreamPositionsV1",
             "channel": "v1.position",
             "auth_required": true,
             "feed_selector": "WSPositionsFeedSelectorV1",
             "feed": "WSPositionsFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1000,
+                "message": "You are not authorized to access this functionality",
+                "status": 401
+              },
+              {
+                "code": 1001,
+                "message": "Internal Server Error",
+                "status": 500
+              },
+              {
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+                "status": 400
+              },
+              {
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              },
+              {
+                "code": 3000,
+                "message": "Instrument is invalid",
+                "status": 400
+              },
+              {
+                "code": 3020,
+                "message": "Sub account ID must be an uint64 integer",
+                "status": 400
+              }
+            ]
           },
           {
             "namespace": "Transfer",
@@ -1133,7 +1474,23 @@
             "auth_required": true,
             "feed_selector": "EmptyRequest",
             "feed": "WSDepositFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+                "status": 400
+              },
+              {
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              }
+            ]
           },
           {
             "namespace": "Transfer",
@@ -1142,7 +1499,23 @@
             "auth_required": true,
             "feed_selector": "EmptyRequest",
             "feed": "WSTransferFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+                "status": 400
+              },
+              {
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              }
+            ]
           },
           {
             "namespace": "Transfer",
@@ -1151,7 +1524,23 @@
             "auth_required": true,
             "feed_selector": "EmptyRequest",
             "feed": "WSWithdrawalFeedDataV1",
-            "on_subscribe_errors": []
+            "on_subscribe_errors": [
+              {
+                "code": 1101,
+                "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+                "status": 400
+              },
+              {
+                "code": 1102,
+                "message": "Wrong number of primary selectors",
+                "status": 400
+              },
+              {
+                "code": 1103,
+                "message": "Wrong number of secondary selectors",
+                "status": 400
+              }
+            ]
           }
         ]
       }
@@ -1181,23 +1570,25 @@
             "json_type": "Kind",
             "index": 1,
             "array_depth": 1,
-            "optional": false,
+            "optional": true,
+            "default": "all",
             "example": "['PERPETUAL']",
             "comment": [
               "The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned"
             ]
           },
           {
-            "name": "underlying",
-            "lite_name": "u",
+            "name": "base",
+            "lite_name": "b",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 2,
             "array_depth": 1,
-            "optional": false,
+            "optional": true,
+            "default": "all",
             "example": "['BTC', 'ETH']",
             "comment": [
-              "The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned"
+              "The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned"
             ]
           },
           {
@@ -1207,7 +1598,8 @@
             "json_type": "Currency",
             "index": 3,
             "array_depth": 1,
-            "optional": false,
+            "optional": true,
+            "default": "all",
             "example": "['USDT', 'USDC']",
             "comment": [
               "The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned"
@@ -1271,7 +1663,7 @@
             "optional": false,
             "example": "'2635000.50'",
             "comment": [
-              "The size of the position, expressed in underlying asset decimal units. Negative for short positions"
+              "The size of the position, expressed in base asset decimal units. Negative for short positions"
             ]
           },
           {
@@ -1422,7 +1814,7 @@
         "comment": []
       },
       {
-        "name": "ApiPrivateTradeHistoryRequest",
+        "name": "ApiFillHistoryRequest",
         "is_root": true,
         "fields": [
           {
@@ -1445,23 +1837,25 @@
             "json_type": "Kind",
             "index": 1,
             "array_depth": 1,
-            "optional": false,
+            "optional": true,
+            "default": "all",
             "example": "['PERPETUAL']",
             "comment": [
               "The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned"
             ]
           },
           {
-            "name": "underlying",
-            "lite_name": "u",
+            "name": "base",
+            "lite_name": "b",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 2,
             "array_depth": 1,
-            "optional": false,
+            "optional": true,
+            "default": "all",
             "example": "['BTC', 'ETH']",
             "comment": [
-              "The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned"
+              "The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned"
             ]
           },
           {
@@ -1471,7 +1865,8 @@
             "json_type": "Currency",
             "index": 3,
             "array_depth": 1,
-            "optional": false,
+            "optional": true,
+            "default": "all",
             "example": "['USDT', 'USDC']",
             "comment": [
               "The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned"
@@ -1535,13 +1930,13 @@
           }
         ],
         "comment": [
-          "Query for all historical trades made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.",
+          "Query for all historical fills made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.",
           "",
           "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
         ]
       },
       {
-        "name": "PrivateTrade",
+        "name": "Fill",
         "is_root": false,
         "fields": [
           {
@@ -1619,7 +2014,7 @@
             "optional": false,
             "example": "'0.30'",
             "comment": [
-              "The number of assets being traded, expressed in underlying asset decimal units"
+              "The number of assets being traded, expressed in base asset decimal units"
             ]
           },
           {
@@ -1790,14 +2185,14 @@
         "comment": []
       },
       {
-        "name": "ApiPrivateTradeHistoryResponse",
+        "name": "ApiFillHistoryResponse",
         "is_root": true,
         "fields": [
           {
             "name": "results",
             "lite_name": "r",
-            "semantic_type": "PrivateTrade",
-            "json_type": "PrivateTrade",
+            "semantic_type": "Fill",
+            "json_type": "Fill",
             "index": 0,
             "array_depth": 1,
             "optional": false,
@@ -1901,7 +2296,7 @@
             "optional": false,
             "example": "'1697788800000000000'",
             "comment": [
-              "Time at which the event was emitted in unix nanoseconds"
+              "Time at which the event was emitted in uix nanoseconds"
             ]
           },
           {
@@ -2343,10 +2738,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           },
           {
@@ -2357,9 +2749,9 @@
             "index": 1,
             "array_depth": 0,
             "optional": false,
-            "example": "100",
+            "example": "40",
             "comment": [
-              "Depth of the order book to be retrieved (API/Snapshot max is 100, Delta max is 1000)"
+              "Depth of the order book to be retrieved (10, 40, 200, 500)"
             ]
           },
           {
@@ -2407,7 +2799,7 @@
             "optional": false,
             "example": "'3456.78'",
             "comment": [
-              "The number of assets offered, expressed in underlying asset decimal units"
+              "The number of assets offered, expressed in base asset decimal units"
             ]
           },
           {
@@ -2453,10 +2845,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           },
           {
@@ -2519,10 +2908,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           }
         ],
@@ -2557,10 +2943,7 @@
             "optional": true,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           },
           {
@@ -2612,7 +2995,7 @@
             "optional": true,
             "example": "'123456.78'",
             "comment": [
-              "The number of assets traded in the last trade, expressed in underlying asset decimal units"
+              "The number of assets traded in the last trade, expressed in base asset decimal units"
             ]
           },
           {
@@ -2651,7 +3034,7 @@
             "optional": true,
             "example": "'123456.78'",
             "comment": [
-              "The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units"
+              "The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units"
             ]
           },
           {
@@ -2677,7 +3060,7 @@
             "optional": true,
             "example": "'123456.78'",
             "comment": [
-              "The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units"
+              "The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units"
             ]
           }
         ],
@@ -2716,10 +3099,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           }
         ],
@@ -2754,10 +3134,7 @@
             "optional": true,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           },
           {
@@ -2809,7 +3186,7 @@
             "optional": true,
             "example": "'123456.78'",
             "comment": [
-              "The number of assets traded in the last trade, expressed in underlying asset decimal units"
+              "The number of assets traded in the last trade, expressed in base asset decimal units"
             ]
           },
           {
@@ -2848,7 +3225,7 @@
             "optional": true,
             "example": "'123456.78'",
             "comment": [
-              "The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units"
+              "The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units"
             ]
           },
           {
@@ -2874,7 +3251,7 @@
             "optional": true,
             "example": "'123456.78'",
             "comment": [
-              "The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units"
+              "The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units"
             ]
           },
           {
@@ -2939,7 +3316,7 @@
             "optional": true,
             "example": "'123456.78'",
             "comment": [
-              "The 24 hour taker buy volume of the instrument, expressed in underlying asset decimal units"
+              "The 24 hour taker buy volume of the instrument, expressed in base asset decimal units"
             ]
           },
           {
@@ -2952,7 +3329,7 @@
             "optional": true,
             "example": "'123456.78'",
             "comment": [
-              "The 24 hour taker sell volume of the instrument, expressed in underlying asset decimal units"
+              "The 24 hour taker sell volume of the instrument, expressed in base asset decimal units"
             ]
           },
           {
@@ -3030,7 +3407,7 @@
             "optional": true,
             "example": "'123456.78'",
             "comment": [
-              "The open interest in the instrument, expressed in underlying asset decimal units"
+              "The open interest in the instrument, expressed in base asset decimal units"
             ]
           },
           {
@@ -3082,7 +3459,7 @@
         "comment": []
       },
       {
-        "name": "ApiPublicTradesRequest",
+        "name": "ApiTradeRequest",
         "is_root": true,
         "fields": [
           {
@@ -3095,10 +3472,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           },
           {
@@ -3116,12 +3490,12 @@
           }
         ],
         "comment": [
-          "Retrieves up to 1000 of the most recent public trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.",
+          "Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.",
           "This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape."
         ]
       },
       {
-        "name": "PublicTrade",
+        "name": "Trade",
         "is_root": false,
         "fields": [
           {
@@ -3147,10 +3521,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           },
           {
@@ -3176,7 +3547,7 @@
             "optional": false,
             "example": "'123456.78'",
             "comment": [
-              "The number of assets being traded, expressed in underlying asset decimal units"
+              "The number of assets being traded, expressed in base asset decimal units"
             ]
           },
           {
@@ -3275,14 +3646,14 @@
         ]
       },
       {
-        "name": "ApiPublicTradesResponse",
+        "name": "ApiTradeResponse",
         "is_root": true,
         "fields": [
           {
             "name": "results",
             "lite_name": "r",
-            "semantic_type": "PublicTrade",
-            "json_type": "PublicTrade",
+            "semantic_type": "Trade",
+            "json_type": "Trade",
             "index": 0,
             "array_depth": 1,
             "optional": false,
@@ -3294,7 +3665,7 @@
         "comment": []
       },
       {
-        "name": "ApiPublicTradeHistoryRequest",
+        "name": "ApiTradeHistoryRequest",
         "is_root": true,
         "fields": [
           {
@@ -3307,10 +3678,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           },
           {
@@ -3379,14 +3747,14 @@
         ]
       },
       {
-        "name": "ApiPublicTradeHistoryResponse",
+        "name": "ApiTradeHistoryResponse",
         "is_root": true,
         "fields": [
           {
             "name": "results",
             "lite_name": "r",
-            "semantic_type": "PublicTrade",
-            "json_type": "PublicTrade",
+            "semantic_type": "Trade",
+            "json_type": "Trade",
             "index": 0,
             "array_depth": 1,
             "optional": false,
@@ -3425,10 +3793,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           }
         ],
@@ -3450,10 +3815,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           },
           {
@@ -3470,8 +3832,8 @@
             ]
           },
           {
-            "name": "underlying",
-            "lite_name": "u",
+            "name": "base",
+            "lite_name": "b",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 2,
@@ -3479,7 +3841,7 @@
             "optional": false,
             "example": "'BTC'",
             "comment": [
-              "The underlying currency"
+              "The base currency"
             ]
           },
           {
@@ -3572,7 +3934,7 @@
             "optional": false,
             "example": "3",
             "comment": [
-              "The smallest denomination of the underlying asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)"
+              "The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)"
             ]
           },
           {
@@ -3611,7 +3973,7 @@
             "optional": false,
             "example": "'0.01'",
             "comment": [
-              "The minimum contract size, expressed in underlying asset decimal units"
+              "The minimum contract size, expressed in base asset decimal units"
             ]
           },
           {
@@ -3624,7 +3986,7 @@
             "optional": false,
             "example": "'5.0'",
             "comment": [
-              "The minimum block trade size, expressed in underlying asset decimal units"
+              "The minimum block trade size, expressed in base asset decimal units"
             ]
           },
           {
@@ -3681,8 +4043,8 @@
             ]
           },
           {
-            "name": "underlying",
-            "lite_name": "u",
+            "name": "base",
+            "lite_name": "b",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 1,
@@ -3691,7 +4053,7 @@
             "default": "all",
             "example": "['BTC', 'ETH']",
             "comment": [
-              "The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned"
+              "The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned"
             ]
           },
           {
@@ -3774,10 +4136,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           },
           {
@@ -3959,7 +4318,7 @@
             "optional": false,
             "example": "'123456.78'",
             "comment": [
-              "The underlying volume transacted, expressed in underlying asset decimal units"
+              "The underlying volume transacted, expressed in base asset decimal units"
             ]
           },
           {
@@ -3998,10 +4357,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           }
         ],
@@ -4056,10 +4412,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           },
           {
@@ -4139,10 +4492,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           },
           {
@@ -4225,8 +4575,8 @@
         "is_root": true,
         "fields": [
           {
-            "name": "underlying",
-            "lite_name": "u",
+            "name": "base",
+            "lite_name": "b",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 0,
@@ -4234,7 +4584,7 @@
             "optional": false,
             "example": "'BTC'",
             "comment": [
-              "The underlying currency to select"
+              "The base currency to select"
             ]
           },
           {
@@ -4318,8 +4668,8 @@
         "is_root": false,
         "fields": [
           {
-            "name": "underlying",
-            "lite_name": "u",
+            "name": "base",
+            "lite_name": "b",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 0,
@@ -4327,7 +4677,7 @@
             "optional": false,
             "example": "'BTC'",
             "comment": [
-              "The underlying currency of the settlement price"
+              "The base currency of the settlement price"
             ]
           },
           {
@@ -4478,10 +4828,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ],
             "selector": "primary"
           },
@@ -4611,10 +4958,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ],
             "selector": "primary"
           },
@@ -4716,10 +5060,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ],
             "selector": "primary"
           },
@@ -4827,7 +5168,7 @@
         "comment": []
       },
       {
-        "name": "WSPublicTradesFeedSelectorV1",
+        "name": "WSTradeFeedSelectorV1",
         "is_root": true,
         "fields": [
           {
@@ -4840,10 +5181,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ],
             "selector": "primary"
           },
@@ -4867,7 +5205,7 @@
         ]
       },
       {
-        "name": "WSPublicTradesFeedDataV1",
+        "name": "WSTradeFeedDataV1",
         "is_root": true,
         "fields": [
           {
@@ -4912,8 +5250,8 @@
           {
             "name": "feed",
             "lite_name": "f",
-            "semantic_type": "PublicTrade",
-            "json_type": "PublicTrade",
+            "semantic_type": "Trade",
+            "json_type": "Trade",
             "index": 3,
             "array_depth": 0,
             "optional": false,
@@ -4938,10 +5276,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ],
             "selector": "primary"
           },
@@ -5150,7 +5485,7 @@
             "optional": false,
             "example": "'10.5'",
             "comment": [
-              "The total number of assets to trade in this leg, expressed in underlying asset decimal units."
+              "The total number of assets to trade in this leg, expressed in base asset decimal units."
             ]
           },
           {
@@ -5676,6 +6011,48 @@
             "comment": [
               "The subaccount ID cancelling all orders"
             ]
+          },
+          {
+            "name": "kind",
+            "lite_name": "k",
+            "semantic_type": "Kind",
+            "json_type": "Kind",
+            "index": 1,
+            "array_depth": 1,
+            "optional": true,
+            "default": "all",
+            "example": "['PERPETUAL']",
+            "comment": [
+              "The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be cancelled"
+            ]
+          },
+          {
+            "name": "base",
+            "lite_name": "b",
+            "semantic_type": "Currency",
+            "json_type": "Currency",
+            "index": 2,
+            "array_depth": 1,
+            "optional": true,
+            "default": "all",
+            "example": "['BTC', 'ETH']",
+            "comment": [
+              "The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be cancelled"
+            ]
+          },
+          {
+            "name": "quote",
+            "lite_name": "q",
+            "semantic_type": "Currency",
+            "json_type": "Currency",
+            "index": 3,
+            "array_depth": 1,
+            "optional": true,
+            "default": "all",
+            "example": "['USDT', 'USDC']",
+            "comment": [
+              "The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be cancelled"
+            ]
           }
         ],
         "comment": [
@@ -5726,23 +6103,25 @@
             "json_type": "Kind",
             "index": 1,
             "array_depth": 1,
-            "optional": false,
+            "optional": true,
+            "default": "all",
             "example": "['PERPETUAL']",
             "comment": [
               "The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned"
             ]
           },
           {
-            "name": "underlying",
-            "lite_name": "u",
+            "name": "base",
+            "lite_name": "b",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 2,
             "array_depth": 1,
-            "optional": false,
+            "optional": true,
+            "default": "all",
             "example": "['BTC', 'ETH']",
             "comment": [
-              "The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned"
+              "The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned"
             ]
           },
           {
@@ -5752,7 +6131,8 @@
             "json_type": "Currency",
             "index": 3,
             "array_depth": 1,
-            "optional": false,
+            "optional": true,
+            "default": "all",
             "example": "['USDT', 'USDC']",
             "comment": [
               "The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned"
@@ -5806,23 +6186,25 @@
             "json_type": "Kind",
             "index": 1,
             "array_depth": 1,
-            "optional": false,
+            "optional": true,
+            "default": "all",
             "example": "['PERPETUAL']",
             "comment": [
               "The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned"
             ]
           },
           {
-            "name": "underlying",
-            "lite_name": "u",
+            "name": "base",
+            "lite_name": "b",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 2,
             "array_depth": 1,
-            "optional": false,
+            "optional": true,
+            "default": "all",
             "example": "['BTC', 'ETH']",
             "comment": [
-              "The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned"
+              "The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned"
             ]
           },
           {
@@ -5832,7 +6214,8 @@
             "json_type": "Currency",
             "index": 3,
             "array_depth": 1,
-            "optional": false,
+            "optional": true,
+            "default": "all",
             "example": "['USDT', 'USDC']",
             "comment": [
               "The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned"
@@ -6895,8 +7278,8 @@
             ]
           },
           {
-            "name": "underlying",
-            "lite_name": "u",
+            "name": "base",
+            "lite_name": "b",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 1,
@@ -6904,7 +7287,7 @@
             "optional": false,
             "example": "'BTC'",
             "comment": [
-              "The underlying filter to apply"
+              "The base filter to apply"
             ]
           }
         ],
@@ -7086,8 +7469,8 @@
             ]
           },
           {
-            "name": "underlying",
-            "lite_name": "u",
+            "name": "base",
+            "lite_name": "b",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 3,
@@ -7095,7 +7478,7 @@
             "optional": false,
             "example": "'BTC'",
             "comment": [
-              "The underlying filter to apply"
+              "The base filter to apply"
             ]
           }
         ],
@@ -7225,8 +7608,8 @@
             ]
           },
           {
-            "name": "underlying",
-            "lite_name": "u",
+            "name": "base",
+            "lite_name": "b",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 2,
@@ -7234,7 +7617,7 @@
             "optional": false,
             "example": "'BTC'",
             "comment": [
-              "The underlying filter to apply"
+              "The base filter to apply"
             ]
           }
         ],
@@ -7286,10 +7669,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]",
-              "For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]",
-              "For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]",
-              "For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]"
+              "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
             ]
           },
           {
@@ -7860,65 +8240,26 @@
             "selector": "primary"
           },
           {
-            "name": "kind",
-            "lite_name": "k",
-            "semantic_type": "Kind",
-            "json_type": "Kind",
+            "name": "instrument",
+            "lite_name": "i",
+            "semantic_type": "asset",
+            "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
-            "example": "'PERPETUAL'",
+            "optional": true,
+            "default": "'all'",
+            "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The kind filter to apply."
+              "The instrument filter to apply."
             ],
             "selector": "primary"
-          },
-          {
-            "name": "underlying",
-            "lite_name": "u",
-            "semantic_type": "Currency",
-            "json_type": "Currency",
-            "index": 2,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'BTC'",
-            "comment": [
-              "The underlying filter to apply."
-            ],
-            "selector": "primary"
-          },
-          {
-            "name": "quote",
-            "lite_name": "q",
-            "semantic_type": "Currency",
-            "json_type": "Currency",
-            "index": 3,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'USDT'",
-            "comment": [
-              "The quote filter to apply."
-            ],
-            "selector": "primary"
-          },
-          {
-            "name": "state_filter",
-            "lite_name": "sf",
-            "semantic_type": "OrderStateFilter",
-            "json_type": "OrderStateFilter",
-            "index": 4,
-            "array_depth": 0,
-            "optional": false,
-            "comment": [
-              "create only, update only, all"
-            ],
-            "selector": "secondary"
           }
         ],
         "comment": [
           "Subscribes to a feed of order updates pertaining to orders made by your account.",
-          "Each Order can be uniquely identified by its `order_id` or `client_order_id` (if client designs well).",
-          "Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both."
+          "Each Order can be uniquely identified by its `order_id` or `client_order_id`.",
+          "To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).",
+          "Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`)."
         ]
       },
       {
@@ -7998,66 +8339,27 @@
             "selector": "primary"
           },
           {
-            "name": "kind",
-            "lite_name": "k",
-            "semantic_type": "Kind",
-            "json_type": "Kind",
+            "name": "instrument",
+            "lite_name": "i",
+            "semantic_type": "asset",
+            "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
-            "example": "'PERPETUAL'",
+            "optional": true,
+            "default": "'all'",
+            "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The kind filter to apply."
+              "The instrument filter to apply."
             ],
             "selector": "primary"
-          },
-          {
-            "name": "underlying",
-            "lite_name": "u",
-            "semantic_type": "Currency",
-            "json_type": "Currency",
-            "index": 2,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'BTC'",
-            "comment": [
-              "The underlying filter to apply."
-            ],
-            "selector": "primary"
-          },
-          {
-            "name": "quote",
-            "lite_name": "q",
-            "semantic_type": "Currency",
-            "json_type": "Currency",
-            "index": 3,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'USDT'",
-            "comment": [
-              "The quote filter to apply."
-            ],
-            "selector": "primary"
-          },
-          {
-            "name": "state_filter",
-            "lite_name": "sf",
-            "semantic_type": "OrderStateFilter",
-            "json_type": "OrderStateFilter",
-            "index": 4,
-            "array_depth": 0,
-            "optional": false,
-            "comment": [
-              "create only, update only, all"
-            ],
-            "selector": "secondary"
           }
         ],
         "comment": [
           "Subscribes to a feed of order updates pertaining to orders made by your account.",
           "Unlike the Order Stream, this only streams state updates, drastically improving throughput, and latency.",
-          "Each Order can be uniquely identified by its `order_id` or `client_order_id` (if client designs well).",
-          "Use `stateFilter = c` to only receive create events, `stateFilter = u` to only receive update events, and `stateFilter = a` to receive both."
+          "Each Order can be uniquely identified by its `order_id` or `client_order_id`.",
+          "To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).",
+          "Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`)."
         ]
       },
       {
@@ -8078,11 +8380,24 @@
             ]
           },
           {
+            "name": "client_order_id",
+            "lite_name": "co",
+            "semantic_type": "uint64",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'23042'",
+            "comment": [
+              "A unique identifier for the active order within a subaccount, specified by the client"
+            ]
+          },
+          {
             "name": "order_state",
             "lite_name": "os",
             "semantic_type": "OrderState",
             "json_type": "OrderState",
-            "index": 1,
+            "index": 2,
             "array_depth": 0,
             "optional": false,
             "comment": [
@@ -8169,50 +8484,25 @@
             "selector": "primary"
           },
           {
-            "name": "kind",
-            "lite_name": "k",
-            "semantic_type": "Kind",
-            "json_type": "Kind",
+            "name": "instrument",
+            "lite_name": "i",
+            "semantic_type": "asset",
+            "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
-            "example": "'PERPETUAL'",
+            "optional": true,
+            "default": "'all'",
+            "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The kind filter to apply."
-            ],
-            "selector": "primary"
-          },
-          {
-            "name": "underlying",
-            "lite_name": "u",
-            "semantic_type": "Currency",
-            "json_type": "Currency",
-            "index": 2,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'BTC'",
-            "comment": [
-              "The underlying filter to apply."
-            ],
-            "selector": "primary"
-          },
-          {
-            "name": "quote",
-            "lite_name": "q",
-            "semantic_type": "Currency",
-            "json_type": "Currency",
-            "index": 3,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'USDT'",
-            "comment": [
-              "The quote filter to apply."
+              "The instrument filter to apply."
             ],
             "selector": "primary"
           }
         ],
         "comment": [
-          "Subscribes to a feed of position updates. This happens when a trade is executed."
+          "Subscribes to a feed of position updates. This happens when a trade is executed.",
+          "To subscribe to all positions, specify an empty `instrument` (eg. `2345123`).",
+          "Otherwise, specify the `instrument` to only receive positions for that instrument (eg. `2345123-BTC_USDT_Perp`)."
         ]
       },
       {
@@ -8274,7 +8564,7 @@
         "comment": []
       },
       {
-        "name": "WSPrivateTradeFeedSelectorV1",
+        "name": "WSFillFeedSelectorV1",
         "is_root": true,
         "fields": [
           {
@@ -8292,52 +8582,29 @@
             "selector": "primary"
           },
           {
-            "name": "kind",
-            "lite_name": "k",
-            "semantic_type": "Kind",
-            "json_type": "Kind",
+            "name": "instrument",
+            "lite_name": "i",
+            "semantic_type": "asset",
+            "json_type": "string",
             "index": 1,
             "array_depth": 0,
-            "optional": false,
-            "example": "'PERPETUAL'",
+            "optional": true,
+            "default": "'all'",
+            "example": "'BTC_USDT_Perp'",
             "comment": [
-              "The kind filter to apply."
-            ],
-            "selector": "primary"
-          },
-          {
-            "name": "underlying",
-            "lite_name": "u",
-            "semantic_type": "Currency",
-            "json_type": "Currency",
-            "index": 2,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'BTC'",
-            "comment": [
-              "The underlying filter to apply."
-            ],
-            "selector": "primary"
-          },
-          {
-            "name": "quote",
-            "lite_name": "q",
-            "semantic_type": "Currency",
-            "json_type": "Currency",
-            "index": 3,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'USDT'",
-            "comment": [
-              "The quote filter to apply."
+              "The instrument filter to apply."
             ],
             "selector": "primary"
           }
         ],
-        "comment": []
+        "comment": [
+          "Subscribes to a feed of private trade updates. This happens when a trade is executed.",
+          "To subscribe to all private trades, specify an empty `instrument` (eg. `2345123`).",
+          "Otherwise, specify the `instrument` to only receive private trades for that instrument (eg. `2345123-BTC_USDT_Perp`)."
+        ]
       },
       {
-        "name": "WSPrivateTradeFeedDataV1",
+        "name": "WSFillFeedDataV1",
         "is_root": true,
         "fields": [
           {
@@ -8382,8 +8649,8 @@
           {
             "name": "feed",
             "lite_name": "f",
-            "semantic_type": "PrivateTrade",
-            "json_type": "PrivateTrade",
+            "semantic_type": "Fill",
+            "json_type": "Fill",
             "index": 3,
             "array_depth": 0,
             "optional": false,
@@ -10172,33 +10439,6 @@
             "value": 25,
             "comment": [
               "the order has multiple legs, but multiple legs are not supported by this venue"
-            ]
-          }
-        ],
-        "comment": []
-      },
-      {
-        "name": "OrderStateFilter",
-        "values": [
-          {
-            "name": "C",
-            "value": 1,
-            "comment": [
-              "create only filter"
-            ]
-          },
-          {
-            "name": "U",
-            "value": 2,
-            "comment": [
-              "update only filter"
-            ]
-          },
-          {
-            "name": "A",
-            "value": 3,
-            "comment": [
-              "create and update filter"
             ]
           }
         ],

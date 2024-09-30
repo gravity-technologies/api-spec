@@ -15,7 +15,7 @@ LITE ENDPOINT: lite/v1/instrument
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -39,20 +39,20 @@ LITE ENDPOINT: lite/v1/instrument
         ??? info "Instrument"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
-            |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |asset_id<br>`ai` |string|True|The asset ID used for instrument signing.|
-            |underlying<br>`u` |Currency|True|The underlying currency|
+            |base<br>`b` |Currency|True|The base currency|
             |quote<br>`q` |Currency|True|The quote currency|
             |kind<br>`k` |Kind|True|The kind of instrument|
             |expiry<br>`e` |string|False<br>`0`|The expiry time of the instrument in unix nanoseconds|
             |strike_price<br>`sp` |string|False<br>`0`|The strike price of the instrument, expressed in `9` decimals|
             |venues<br>`v` |[Venue]|True|Venues that this instrument can be traded at|
             |settlement_period<br>`sp1` |InstrumentSettlementPeriod|True|The settlement period of the instrument|
-            |underlying_decimals<br>`ud` |number|True|The smallest denomination of the underlying asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
+            |underlying_decimals<br>`ud` |number|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
             |quote_decimals<br>`qd` |number|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
             |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
-            |min_size<br>`ms` |string|True|The minimum contract size, expressed in underlying asset decimal units|
-            |min_block_trade_size<br>`mb` |string|True|The minimum block trade size, expressed in underlying asset decimal units|
+            |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
+            |min_block_trade_size<br>`mb` |string|True|The minimum block trade size, expressed in base asset decimal units|
             |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
             ??? info "Currency"
                 The list of Currencies that are supported on the GRVT exchange<br>
@@ -106,7 +106,7 @@ LITE ENDPOINT: lite/v1/instrument
             "results": {
                 "instrument": "BTC_USDT_Perp",
                 "asset_id": "0x030501",
-                "underlying": "BTC",
+                "base": "BTC",
                 "quote": "USDT",
                 "kind": "PERPETUAL",
                 "expiry": "1697788800000000000",
@@ -129,6 +129,7 @@ LITE ENDPOINT: lite/v1/instrument
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
         |1003|404|Data Not Found|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -138,6 +139,11 @@ LITE ENDPOINT: lite/v1/instrument
             "code":1001,
             "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Request could not be processed, largely due to invalid encoding",
+            "status":400
         }
         {
             "code":1003,
@@ -217,20 +223,20 @@ LITE ENDPOINT: lite/v1/all_instruments
         ??? info "Instrument"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
-            |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |asset_id<br>`ai` |string|True|The asset ID used for instrument signing.|
-            |underlying<br>`u` |Currency|True|The underlying currency|
+            |base<br>`b` |Currency|True|The base currency|
             |quote<br>`q` |Currency|True|The quote currency|
             |kind<br>`k` |Kind|True|The kind of instrument|
             |expiry<br>`e` |string|False<br>`0`|The expiry time of the instrument in unix nanoseconds|
             |strike_price<br>`sp` |string|False<br>`0`|The strike price of the instrument, expressed in `9` decimals|
             |venues<br>`v` |[Venue]|True|Venues that this instrument can be traded at|
             |settlement_period<br>`sp1` |InstrumentSettlementPeriod|True|The settlement period of the instrument|
-            |underlying_decimals<br>`ud` |number|True|The smallest denomination of the underlying asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
+            |underlying_decimals<br>`ud` |number|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
             |quote_decimals<br>`qd` |number|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
             |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
-            |min_size<br>`ms` |string|True|The minimum contract size, expressed in underlying asset decimal units|
-            |min_block_trade_size<br>`mb` |string|True|The minimum block trade size, expressed in underlying asset decimal units|
+            |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
+            |min_block_trade_size<br>`mb` |string|True|The minimum block trade size, expressed in base asset decimal units|
             |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
             ??? info "Currency"
                 The list of Currencies that are supported on the GRVT exchange<br>
@@ -284,7 +290,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             "results": [{
                 "instrument": "BTC_USDT_Perp",
                 "asset_id": "0x030501",
-                "underlying": "BTC",
+                "base": "BTC",
                 "quote": "USDT",
                 "kind": "PERPETUAL",
                 "expiry": "1697788800000000000",
@@ -307,6 +313,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -315,6 +322,11 @@ LITE ENDPOINT: lite/v1/all_instruments
             "code":1001,
             "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Request could not be processed, largely due to invalid encoding",
+            "status":400
         }
         ```
     </section>
@@ -366,7 +378,7 @@ LITE ENDPOINT: lite/v1/instruments
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |kind<br>`k` |[Kind]|False<br>`all`|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
-        |underlying<br>`u` |[Currency]|False<br>`all`|The underlying filter to apply. If nil, this defaults to all underlyings. Otherwise, only entries matching the filter will be returned|
+        |base<br>`b` |[Currency]|False<br>`all`|The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned|
         |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         |is_active<br>`ia` |boolean|False<br>`false`|Request for active instruments only|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 100000|
@@ -405,7 +417,7 @@ LITE ENDPOINT: lite/v1/instruments
         ```json
         {
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "is_active": true,
             "limit": 500
@@ -414,7 +426,7 @@ LITE ENDPOINT: lite/v1/instruments
         ```json
         {
             "k": ["PERPETUAL"],
-            "u": ["BTC", "ETH"],
+            "b": ["BTC", "ETH"],
             "q": ["USDT", "USDC"],
             "ia": true,
             "l": 500
@@ -430,20 +442,20 @@ LITE ENDPOINT: lite/v1/instruments
         ??? info "Instrument"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
-            |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |asset_id<br>`ai` |string|True|The asset ID used for instrument signing.|
-            |underlying<br>`u` |Currency|True|The underlying currency|
+            |base<br>`b` |Currency|True|The base currency|
             |quote<br>`q` |Currency|True|The quote currency|
             |kind<br>`k` |Kind|True|The kind of instrument|
             |expiry<br>`e` |string|False<br>`0`|The expiry time of the instrument in unix nanoseconds|
             |strike_price<br>`sp` |string|False<br>`0`|The strike price of the instrument, expressed in `9` decimals|
             |venues<br>`v` |[Venue]|True|Venues that this instrument can be traded at|
             |settlement_period<br>`sp1` |InstrumentSettlementPeriod|True|The settlement period of the instrument|
-            |underlying_decimals<br>`ud` |number|True|The smallest denomination of the underlying asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
+            |underlying_decimals<br>`ud` |number|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
             |quote_decimals<br>`qd` |number|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
             |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
-            |min_size<br>`ms` |string|True|The minimum contract size, expressed in underlying asset decimal units|
-            |min_block_trade_size<br>`mb` |string|True|The minimum block trade size, expressed in underlying asset decimal units|
+            |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
+            |min_block_trade_size<br>`mb` |string|True|The minimum block trade size, expressed in base asset decimal units|
             |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
             ??? info "Currency"
                 The list of Currencies that are supported on the GRVT exchange<br>
@@ -497,7 +509,7 @@ LITE ENDPOINT: lite/v1/instruments
             "results": [{
                 "instrument": "BTC_USDT_Perp",
                 "asset_id": "0x030501",
-                "underlying": "BTC",
+                "base": "BTC",
                 "quote": "USDT",
                 "kind": "PERPETUAL",
                 "expiry": "1697788800000000000",
@@ -520,6 +532,7 @@ LITE ENDPOINT: lite/v1/instruments
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -529,6 +542,11 @@ LITE ENDPOINT: lite/v1/instruments
             "message":"Internal Server Error",
             "status":500
         }
+        {
+            "code":1002,
+            "message":"Request could not be processed, largely due to invalid encoding",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -537,7 +555,7 @@ LITE ENDPOINT: lite/v1/instruments
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/instruments' \
         --data '{
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "is_active": true,
             "limit": 500
@@ -549,7 +567,7 @@ LITE ENDPOINT: lite/v1/instruments
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/instruments' \
         --data '{
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "is_active": true,
             "limit": 500
@@ -561,7 +579,7 @@ LITE ENDPOINT: lite/v1/instruments
         curl --location 'https://market-data.testnet.grvt.io/full/v1/instruments' \
         --data '{
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "is_active": true,
             "limit": 500
@@ -573,7 +591,7 @@ LITE ENDPOINT: lite/v1/instruments
         curl --location 'https://market-data.grvt.io/full/v1/instruments' \
         --data '{
             "kind": ["PERPETUAL"],
-            "underlying": ["BTC", "ETH"],
+            "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
             "is_active": true,
             "limit": 500
@@ -595,7 +613,7 @@ LITE ENDPOINT: lite/v1/mini
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -620,16 +638,16 @@ LITE ENDPOINT: lite/v1/mini
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|False<br>`None`|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|False<br>`None`|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument, expressed in `9` decimals|
             |index_price<br>`ip` |string|False<br>`None`|The index price of the instrument, expressed in `9` decimals|
             |last_price<br>`lp` |string|False<br>`None`|The last traded price of the instrument (also close price), expressed in `9` decimals|
-            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in underlying asset decimal units|
+            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in base asset decimal units|
             |mid_price<br>`mp1` |string|False<br>`None`|The mid price of the instrument, expressed in `9` decimals|
             |best_bid_price<br>`bb` |string|False<br>`None`|The best bid price of the instrument, expressed in `9` decimals|
-            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units|
+            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
             |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
-            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units|
+            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -657,6 +675,7 @@ LITE ENDPOINT: lite/v1/mini
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
         |1003|404|Data Not Found|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -666,6 +685,11 @@ LITE ENDPOINT: lite/v1/mini
             "code":1001,
             "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Request could not be processed, largely due to invalid encoding",
+            "status":400
         }
         {
             "code":1003,
@@ -721,7 +745,7 @@ LITE ENDPOINT: lite/v1/ticker
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -748,28 +772,28 @@ LITE ENDPOINT: lite/v1/ticker
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|False<br>`None`|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|False<br>`None`|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument, expressed in `9` decimals|
             |index_price<br>`ip` |string|False<br>`None`|The index price of the instrument, expressed in `9` decimals|
             |last_price<br>`lp` |string|False<br>`None`|The last traded price of the instrument (also close price), expressed in `9` decimals|
-            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in underlying asset decimal units|
+            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in base asset decimal units|
             |mid_price<br>`mp1` |string|False<br>`None`|The mid price of the instrument, expressed in `9` decimals|
             |best_bid_price<br>`bb` |string|False<br>`None`|The best bid price of the instrument, expressed in `9` decimals|
-            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units|
+            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
             |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
-            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units|
+            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
             |funding_rate_8_h_curr<br>`fr` |string|False<br>`None`|The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)|
             |funding_rate_8_h_avg<br>`fr1` |string|False<br>`None`|The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)|
             |interest_rate<br>`ir` |string|False<br>`None`|The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)|
             |forward_price<br>`fp` |string|False<br>`None`|[Options] The forward price of the option, expressed in `9` decimals|
-            |buy_volume_24_h_u<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in underlying asset decimal units|
-            |sell_volume_24_h_u<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in underlying asset decimal units|
+            |buy_volume_24_h_u<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in base asset decimal units|
+            |sell_volume_24_h_u<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in base asset decimal units|
             |buy_volume_24_h_q<br>`bv1` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units|
             |sell_volume_24_h_q<br>`sv1` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units|
             |high_price<br>`hp` |string|False<br>`None`|The 24 hour highest traded price of the instrument, expressed in `9` decimals|
             |low_price<br>`lp1` |string|False<br>`None`|The 24 hour lowest traded price of the instrument, expressed in `9` decimals|
             |open_price<br>`op` |string|False<br>`None`|The 24 hour first traded price of the instrument, expressed in `9` decimals|
-            |open_interest<br>`oi` |string|False<br>`None`|The open interest in the instrument, expressed in underlying asset decimal units|
+            |open_interest<br>`oi` |string|False<br>`None`|The open interest in the instrument, expressed in base asset decimal units|
             |long_short_ratio<br>`ls1` |string|False<br>`None`|The ratio of accounts that are net long vs net short on this instrument|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -811,6 +835,7 @@ LITE ENDPOINT: lite/v1/ticker
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
         |1003|404|Data Not Found|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -820,6 +845,11 @@ LITE ENDPOINT: lite/v1/ticker
             "code":1001,
             "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Request could not be processed, largely due to invalid encoding",
+            "status":400
         }
         {
             "code":1003,
@@ -876,8 +906,8 @@ LITE ENDPOINT: lite/v1/book
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
-        |depth<br>`d` |number|True|Depth of the order book to be retrieved (API/Snapshot max is 100, Delta max is 1000)|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
+        |depth<br>`d` |number|True|Depth of the order book to be retrieved (10, 40, 200, 500)|
         |aggregate<br>`a` |number|True|The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -885,14 +915,14 @@ LITE ENDPOINT: lite/v1/book
         ```json
         {
             "instrument": "BTC_USDT_Perp",
-            "depth": 100,
+            "depth": 40,
             "aggregate": 10
         }
         ```
         ```json
         {
             "i": "BTC_USDT_Perp",
-            "d": 100,
+            "d": 40,
             "a": 10
         }
         ```
@@ -907,20 +937,20 @@ LITE ENDPOINT: lite/v1/book
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |bids<br>`b` |[OrderbookLevel]|True|The list of best bids up till query depth|
             |asks<br>`a` |[OrderbookLevel]|True|The list of best asks up till query depth|
             ??? info "OrderbookLevel"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
-                |size<br>`s` |string|True|The number of assets offered, expressed in underlying asset decimal units|
+                |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
                 |num_orders<br>`no` |number|True|The number of open orders at this level|
             ??? info "OrderbookLevel"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
-                |size<br>`s` |string|True|The number of assets offered, expressed in underlying asset decimal units|
+                |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
                 |num_orders<br>`no` |number|True|The number of open orders at this level|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -950,10 +980,11 @@ LITE ENDPOINT: lite/v1/book
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
         |1003|404|Data Not Found|
-        |3004|400|Instrument is invalid|
-        |3005|400|Depth is invalid|
-        |3006|400|Aggregate is invalid|
+        |3000|400|Instrument is invalid|
+        |3031|400|Depth is invalid|
+        |5006|400|Aggregate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -964,22 +995,27 @@ LITE ENDPOINT: lite/v1/book
             "status":500
         }
         {
+            "code":1002,
+            "message":"Request could not be processed, largely due to invalid encoding",
+            "status":400
+        }
+        {
             "code":1003,
             "message":"Data Not Found",
             "status":404
         }
         {
-            "code":3004,
+            "code":3000,
             "message":"Instrument is invalid",
             "status":400
         }
         {
-            "code":3005,
+            "code":3031,
             "message":"Depth is invalid",
             "status":400
         }
         {
-            "code":3006,
+            "code":5006,
             "message":"Aggregate is invalid",
             "status":400
         }
@@ -991,7 +1027,7 @@ LITE ENDPOINT: lite/v1/book
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/book' \
         --data '{
             "instrument": "BTC_USDT_Perp",
-            "depth": 100,
+            "depth": 40,
             "aggregate": 10
         }
         '
@@ -1001,7 +1037,7 @@ LITE ENDPOINT: lite/v1/book
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/book' \
         --data '{
             "instrument": "BTC_USDT_Perp",
-            "depth": 100,
+            "depth": 40,
             "aggregate": 10
         }
         '
@@ -1011,7 +1047,7 @@ LITE ENDPOINT: lite/v1/book
         curl --location 'https://market-data.testnet.grvt.io/full/v1/book' \
         --data '{
             "instrument": "BTC_USDT_Perp",
-            "depth": 100,
+            "depth": 40,
             "aggregate": 10
         }
         '
@@ -1021,14 +1057,14 @@ LITE ENDPOINT: lite/v1/book
         curl --location 'https://market-data.grvt.io/full/v1/book' \
         --data '{
             "instrument": "BTC_USDT_Perp",
-            "depth": 100,
+            "depth": 40,
             "aggregate": 10
         }
         '
         ```
 <hr class="solid">
 ## Trade
-### Public Trades
+### Trade
 ```
 FULL ENDPOINT: full/v1/trades
 LITE ENDPOINT: lite/v1/trades
@@ -1036,12 +1072,12 @@ LITE ENDPOINT: lite/v1/trades
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiPublicTradesRequest"
-        Retrieves up to 1000 of the most recent public trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.<br>This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>
+    !!! info "ApiTradeRequest"
+        Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.<br>This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |limit<br>`l` |number|True|The limit to query for. Defaults to 500; Max 1000|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -1061,19 +1097,19 @@ LITE ENDPOINT: lite/v1/trades
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiPublicTradesResponse"
+    !!! info "ApiTradeResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[PublicTrade]|True|The public trades matching the request asset|
-        ??? info "PublicTrade"
+        |results<br>`r` |[Trade]|True|The public trades matching the request asset|
+        ??? info "Trade"
             All private RFQs and Private AXEs will be filtered out from the responses<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |is_taker_buyer<br>`it` |boolean|True|If taker was the buyer on the trade|
-            |size<br>`s` |string|True|The number of assets being traded, expressed in underlying asset decimal units|
+            |size<br>`s` |string|True|The number of assets being traded, expressed in base asset decimal units|
             |price<br>`p` |string|True|The traded price, expressed in `9` decimals|
             |mark_price<br>`mp` |string|True|The mark price of the instrument at point of trade, expressed in `9` decimals|
             |index_price<br>`ip` |string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
@@ -1115,6 +1151,7 @@ LITE ENDPOINT: lite/v1/trades
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1123,6 +1160,11 @@ LITE ENDPOINT: lite/v1/trades
             "code":1001,
             "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Request could not be processed, largely due to invalid encoding",
+            "status":400
         }
         ```
     </section>
@@ -1164,7 +1206,7 @@ LITE ENDPOINT: lite/v1/trades
         '
         ```
 <hr class="solid">
-### Public Trade History
+### Trade History
 ```
 FULL ENDPOINT: full/v1/trade_history
 LITE ENDPOINT: lite/v1/trade_history
@@ -1172,12 +1214,12 @@ LITE ENDPOINT: lite/v1/trade_history
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiPublicTradeHistoryRequest"
+    !!! info "ApiTradeHistoryRequest"
         Perform historical lookup of public trades in any given instrument.<br>This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>Only data from the last three months will be retained.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |start_time<br>`st` |string|False<br>`0`|The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned|
         |end_time<br>`et` |string|False<br>`now()`|The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
@@ -1206,20 +1248,20 @@ LITE ENDPOINT: lite/v1/trade_history
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiPublicTradeHistoryResponse"
+    !!! info "ApiTradeHistoryResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[PublicTrade]|True|The public trades matching the request asset|
+        |results<br>`r` |[Trade]|True|The public trades matching the request asset|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "PublicTrade"
+        ??? info "Trade"
             All private RFQs and Private AXEs will be filtered out from the responses<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |is_taker_buyer<br>`it` |boolean|True|If taker was the buyer on the trade|
-            |size<br>`s` |string|True|The number of assets being traded, expressed in underlying asset decimal units|
+            |size<br>`s` |string|True|The number of assets being traded, expressed in base asset decimal units|
             |price<br>`p` |string|True|The traded price, expressed in `9` decimals|
             |mark_price<br>`mp` |string|True|The mark price of the instrument at point of trade, expressed in `9` decimals|
             |index_price<br>`ip` |string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
@@ -1262,6 +1304,7 @@ LITE ENDPOINT: lite/v1/trade_history
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1270,6 +1313,11 @@ LITE ENDPOINT: lite/v1/trade_history
             "code":1001,
             "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Request could not be processed, largely due to invalid encoding",
+            "status":400
         }
         ```
     </section>
@@ -1337,7 +1385,7 @@ LITE ENDPOINT: lite/v1/kline
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |interval<br>`i1` |CandlestickInterval|True|The interval of each candlestick|
         |type<br>`t` |CandlestickType|True|The type of candlestick data to retrieve|
         |start_time<br>`st` |string|False<br>`0`|Start time of kline data in unix nanoseconds|
@@ -1416,10 +1464,10 @@ LITE ENDPOINT: lite/v1/kline
             |close<br>`c` |string|True|The close price, expressed in underlying currency resolution units|
             |high<br>`h` |string|True|The high price, expressed in underlying currency resolution units|
             |low<br>`l` |string|True|The low price, expressed in underlying currency resolution units|
-            |volume_u<br>`vu` |string|True|The underlying volume transacted, expressed in underlying asset decimal units|
+            |volume_u<br>`vu` |string|True|The underlying volume transacted, expressed in base asset decimal units|
             |volume_q<br>`vq` |string|True|The quote volume transacted, expressed in quote asset decimal units|
             |trades<br>`t` |number|True|The number of trades transacted|
-            |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -1447,6 +1495,7 @@ LITE ENDPOINT: lite/v1/kline
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1455,6 +1504,11 @@ LITE ENDPOINT: lite/v1/kline
             "code":1001,
             "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Request could not be processed, largely due to invalid encoding",
+            "status":400
         }
         ```
     </section>
@@ -1530,7 +1584,7 @@ LITE ENDPOINT: lite/v1/funding
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |start_time<br>`st` |string|False<br>`0`|Start time of funding rate in unix nanoseconds|
         |end_time<br>`et` |string|False<br>`now()`|End time of funding rate in unix nanoseconds|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
@@ -1567,7 +1621,7 @@ LITE ENDPOINT: lite/v1/funding
         ??? info "FundingRate"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
-            |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |funding_rate<br>`fr` |number|True|The funding rate of the instrument, expressed in centibeeps|
             |funding_time<br>`ft` |string|True|The funding timestamp of the funding rate, expressed in unix nanoseconds|
             |mark_price<br>`mp` |string|True|The mark price of the instrument at funding timestamp, expressed in `9` decimals|
@@ -1592,6 +1646,7 @@ LITE ENDPOINT: lite/v1/funding
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1600,6 +1655,11 @@ LITE ENDPOINT: lite/v1/funding
             "code":1001,
             "message":"Internal Server Error",
             "status":500
+        }
+        {
+            "code":1002,
+            "message":"Request could not be processed, largely due to invalid encoding",
+            "status":400
         }
         ```
     </section>
@@ -1666,7 +1726,7 @@ LITE ENDPOINT: lite/v1/settlement
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |underlying<br>`u` |Currency|True|The underlying currency to select|
+        |base<br>`b` |Currency|True|The base currency to select|
         |quote<br>`q` |Currency|True|The quote currency to select|
         |start_time<br>`st` |string|False<br>`0`|Start time of settlement price in unix nanoseconds|
         |end_time<br>`et` |string|False<br>`now()`|End time of settlement price in unix nanoseconds|
@@ -1697,7 +1757,7 @@ LITE ENDPOINT: lite/v1/settlement
     !!! question "Query"
         ```json
         {
-            "underlying": "BTC",
+            "base": "BTC",
             "quote": "USDT",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
@@ -1707,7 +1767,7 @@ LITE ENDPOINT: lite/v1/settlement
         ```
         ```json
         {
-            "u": "BTC",
+            "b": "BTC",
             "q": "USDT",
             "st": "1697788800000000000",
             "et": "1697788800000000000",
@@ -1726,7 +1786,7 @@ LITE ENDPOINT: lite/v1/settlement
         ??? info "APISettlementPrice"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
-            |underlying<br>`u` |Currency|True|The underlying currency of the settlement price|
+            |base<br>`b` |Currency|True|The base currency of the settlement price|
             |quote<br>`q` |Currency|True|The quote currency of the settlement price|
             |settlement_time<br>`st` |string|True|The settlement timestamp of the settlement price, expressed in unix nanoseconds|
             |settlement_price<br>`sp` |string|True|The settlement price, expressed in `9` decimals|
@@ -1756,7 +1816,7 @@ LITE ENDPOINT: lite/v1/settlement
         ```json
         {
             "results": [{
-                "underlying": "BTC",
+                "base": "BTC",
                 "quote": "USDT",
                 "settlement_time": "1697788800000000000",
                 "settlement_price": "65038.01"
@@ -1771,6 +1831,7 @@ LITE ENDPOINT: lite/v1/settlement
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
+        |1002|400|Request could not be processed, largely due to invalid encoding|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1780,6 +1841,11 @@ LITE ENDPOINT: lite/v1/settlement
             "message":"Internal Server Error",
             "status":500
         }
+        {
+            "code":1002,
+            "message":"Request could not be processed, largely due to invalid encoding",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -1787,7 +1853,7 @@ LITE ENDPOINT: lite/v1/settlement
         ```bash
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/settlement' \
         --data '{
-            "underlying": "BTC",
+            "base": "BTC",
             "quote": "USDT",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
@@ -1800,7 +1866,7 @@ LITE ENDPOINT: lite/v1/settlement
         ```bash
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/settlement' \
         --data '{
-            "underlying": "BTC",
+            "base": "BTC",
             "quote": "USDT",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
@@ -1813,7 +1879,7 @@ LITE ENDPOINT: lite/v1/settlement
         ```bash
         curl --location 'https://market-data.testnet.grvt.io/full/v1/settlement' \
         --data '{
-            "underlying": "BTC",
+            "base": "BTC",
             "quote": "USDT",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
@@ -1826,7 +1892,7 @@ LITE ENDPOINT: lite/v1/settlement
         ```bash
         curl --location 'https://market-data.grvt.io/full/v1/settlement' \
         --data '{
-            "underlying": "BTC",
+            "base": "BTC",
             "quote": "USDT",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",

@@ -13,7 +13,7 @@ STREAM: v1.mini.s
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0, 40, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -57,16 +57,16 @@ STREAM: v1.mini.s
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|False<br>`None`|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|False<br>`None`|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument, expressed in `9` decimals|
             |index_price<br>`ip` |string|False<br>`None`|The index price of the instrument, expressed in `9` decimals|
             |last_price<br>`lp` |string|False<br>`None`|The last traded price of the instrument (also close price), expressed in `9` decimals|
-            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in underlying asset decimal units|
+            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in base asset decimal units|
             |mid_price<br>`mp1` |string|False<br>`None`|The mid price of the instrument, expressed in `9` decimals|
             |best_bid_price<br>`bb` |string|False<br>`None`|The best bid price of the instrument, expressed in `9` decimals|
-            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units|
+            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
             |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
-            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units|
+            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -117,10 +117,12 @@ STREAM: v1.mini.s
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
-        |3004|400|Instrument is invalid|
         |1003|404|Data Not Found|
-        |3002|400|Feed format is invalid|
-        |3003|400|Feed rate is invalid|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3030|400|Feed rate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -131,22 +133,32 @@ STREAM: v1.mini.s
             "status":500
         }
         {
-            "code":3004,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
             "code":1003,
             "message":"Data Not Found",
             "status":404
         }
         {
-            "code":3002,
-            "message":"Feed format is invalid",
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
             "status":400
         }
         {
-            "code":3003,
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
+        {
+            "code":3000,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3030,
             "message":"Feed rate is invalid",
             "status":400
         }
@@ -214,7 +226,7 @@ STREAM: v1.mini.d
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0, 40, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -258,16 +270,16 @@ STREAM: v1.mini.d
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|False<br>`None`|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|False<br>`None`|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument, expressed in `9` decimals|
             |index_price<br>`ip` |string|False<br>`None`|The index price of the instrument, expressed in `9` decimals|
             |last_price<br>`lp` |string|False<br>`None`|The last traded price of the instrument (also close price), expressed in `9` decimals|
-            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in underlying asset decimal units|
+            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in base asset decimal units|
             |mid_price<br>`mp1` |string|False<br>`None`|The mid price of the instrument, expressed in `9` decimals|
             |best_bid_price<br>`bb` |string|False<br>`None`|The best bid price of the instrument, expressed in `9` decimals|
-            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units|
+            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
             |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
-            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units|
+            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -318,10 +330,12 @@ STREAM: v1.mini.d
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
-        |3004|400|Instrument is invalid|
         |1003|404|Data Not Found|
-        |3002|400|Feed format is invalid|
-        |3003|400|Feed rate is invalid|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3030|400|Feed rate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -332,22 +346,32 @@ STREAM: v1.mini.d
             "status":500
         }
         {
-            "code":3004,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
             "code":1003,
             "message":"Data Not Found",
             "status":404
         }
         {
-            "code":3002,
-            "message":"Feed format is invalid",
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
             "status":400
         }
         {
-            "code":3003,
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
+        {
+            "code":3000,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3030,
             "message":"Feed rate is invalid",
             "status":400
         }
@@ -415,7 +439,7 @@ STREAM: v1.ticker.s
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -461,28 +485,28 @@ STREAM: v1.ticker.s
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|False<br>`None`|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|False<br>`None`|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument, expressed in `9` decimals|
             |index_price<br>`ip` |string|False<br>`None`|The index price of the instrument, expressed in `9` decimals|
             |last_price<br>`lp` |string|False<br>`None`|The last traded price of the instrument (also close price), expressed in `9` decimals|
-            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in underlying asset decimal units|
+            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in base asset decimal units|
             |mid_price<br>`mp1` |string|False<br>`None`|The mid price of the instrument, expressed in `9` decimals|
             |best_bid_price<br>`bb` |string|False<br>`None`|The best bid price of the instrument, expressed in `9` decimals|
-            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units|
+            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
             |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
-            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units|
+            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
             |funding_rate_8_h_curr<br>`fr` |string|False<br>`None`|The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)|
             |funding_rate_8_h_avg<br>`fr1` |string|False<br>`None`|The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)|
             |interest_rate<br>`ir` |string|False<br>`None`|The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)|
             |forward_price<br>`fp` |string|False<br>`None`|[Options] The forward price of the option, expressed in `9` decimals|
-            |buy_volume_24_h_u<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in underlying asset decimal units|
-            |sell_volume_24_h_u<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in underlying asset decimal units|
+            |buy_volume_24_h_u<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in base asset decimal units|
+            |sell_volume_24_h_u<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in base asset decimal units|
             |buy_volume_24_h_q<br>`bv1` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units|
             |sell_volume_24_h_q<br>`sv1` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units|
             |high_price<br>`hp` |string|False<br>`None`|The 24 hour highest traded price of the instrument, expressed in `9` decimals|
             |low_price<br>`lp1` |string|False<br>`None`|The 24 hour lowest traded price of the instrument, expressed in `9` decimals|
             |open_price<br>`op` |string|False<br>`None`|The 24 hour first traded price of the instrument, expressed in `9` decimals|
-            |open_interest<br>`oi` |string|False<br>`None`|The open interest in the instrument, expressed in underlying asset decimal units|
+            |open_interest<br>`oi` |string|False<br>`None`|The open interest in the instrument, expressed in base asset decimal units|
             |long_short_ratio<br>`ls1` |string|False<br>`None`|The ratio of accounts that are net long vs net short on this instrument|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -560,9 +584,12 @@ STREAM: v1.ticker.s
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
-        |3004|400|Instrument is invalid|
         |1003|404|Data Not Found|
-        |3003|400|Feed rate is invalid|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3030|400|Feed rate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -573,17 +600,32 @@ STREAM: v1.ticker.s
             "status":500
         }
         {
-            "code":3004,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
             "code":1003,
             "message":"Data Not Found",
             "status":404
         }
         {
-            "code":3003,
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
+            "status":400
+        }
+        {
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
+        {
+            "code":3000,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3030,
             "message":"Feed rate is invalid",
             "status":400
         }
@@ -651,7 +693,7 @@ STREAM: v1.ticker.d
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -697,28 +739,28 @@ STREAM: v1.ticker.d
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|False<br>`None`|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|False<br>`None`|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument, expressed in `9` decimals|
             |index_price<br>`ip` |string|False<br>`None`|The index price of the instrument, expressed in `9` decimals|
             |last_price<br>`lp` |string|False<br>`None`|The last traded price of the instrument (also close price), expressed in `9` decimals|
-            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in underlying asset decimal units|
+            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in base asset decimal units|
             |mid_price<br>`mp1` |string|False<br>`None`|The mid price of the instrument, expressed in `9` decimals|
             |best_bid_price<br>`bb` |string|False<br>`None`|The best bid price of the instrument, expressed in `9` decimals|
-            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in underlying asset decimal units|
+            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
             |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
-            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in underlying asset decimal units|
+            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
             |funding_rate_8_h_curr<br>`fr` |string|False<br>`None`|The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)|
             |funding_rate_8_h_avg<br>`fr1` |string|False<br>`None`|The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)|
             |interest_rate<br>`ir` |string|False<br>`None`|The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)|
             |forward_price<br>`fp` |string|False<br>`None`|[Options] The forward price of the option, expressed in `9` decimals|
-            |buy_volume_24_h_u<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in underlying asset decimal units|
-            |sell_volume_24_h_u<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in underlying asset decimal units|
+            |buy_volume_24_h_u<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in base asset decimal units|
+            |sell_volume_24_h_u<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in base asset decimal units|
             |buy_volume_24_h_q<br>`bv1` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units|
             |sell_volume_24_h_q<br>`sv1` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units|
             |high_price<br>`hp` |string|False<br>`None`|The 24 hour highest traded price of the instrument, expressed in `9` decimals|
             |low_price<br>`lp1` |string|False<br>`None`|The 24 hour lowest traded price of the instrument, expressed in `9` decimals|
             |open_price<br>`op` |string|False<br>`None`|The 24 hour first traded price of the instrument, expressed in `9` decimals|
-            |open_interest<br>`oi` |string|False<br>`None`|The open interest in the instrument, expressed in underlying asset decimal units|
+            |open_interest<br>`oi` |string|False<br>`None`|The open interest in the instrument, expressed in base asset decimal units|
             |long_short_ratio<br>`ls1` |string|False<br>`None`|The ratio of accounts that are net long vs net short on this instrument|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -796,9 +838,12 @@ STREAM: v1.ticker.d
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
-        |3004|400|Instrument is invalid|
         |1003|404|Data Not Found|
-        |3003|400|Feed rate is invalid|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3030|400|Feed rate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -809,17 +854,32 @@ STREAM: v1.ticker.d
             "status":500
         }
         {
-            "code":3004,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
             "code":1003,
             "message":"Data Not Found",
             "status":404
         }
         {
-            "code":3003,
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
+            "status":400
+        }
+        {
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
+        {
+            "code":3000,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3030,
             "message":"Feed rate is invalid",
             "status":400
         }
@@ -888,7 +948,7 @@ STREAM: v1.book.s
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (40, 100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
         |depth<br>`d` |number|True|Depth of the order book to be retrieved (10, 40, 200, 500)|
         |aggregate<br>`a` |number|True|The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)|
@@ -934,20 +994,20 @@ STREAM: v1.book.s
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |bids<br>`b` |[OrderbookLevel]|True|The list of best bids up till query depth|
             |asks<br>`a` |[OrderbookLevel]|True|The list of best asks up till query depth|
             ??? info "OrderbookLevel"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
-                |size<br>`s` |string|True|The number of assets offered, expressed in underlying asset decimal units|
+                |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
                 |num_orders<br>`no` |number|True|The number of open orders at this level|
             ??? info "OrderbookLevel"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
-                |size<br>`s` |string|True|The number of assets offered, expressed in underlying asset decimal units|
+                |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
                 |num_orders<br>`no` |number|True|The number of open orders at this level|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -1001,12 +1061,14 @@ STREAM: v1.book.s
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
-        |3004|400|Instrument is invalid|
         |1003|404|Data Not Found|
-        |3002|400|Feed format is invalid|
-        |3003|400|Feed rate is invalid|
-        |3005|400|Depth is invalid|
-        |3006|400|Aggregate is invalid|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3030|400|Feed rate is invalid|
+        |3031|400|Depth is invalid|
+        |5006|400|Aggregate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1017,32 +1079,42 @@ STREAM: v1.book.s
             "status":500
         }
         {
-            "code":3004,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
             "code":1003,
             "message":"Data Not Found",
             "status":404
         }
         {
-            "code":3002,
-            "message":"Feed format is invalid",
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
             "status":400
         }
         {
-            "code":3003,
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
+        {
+            "code":3000,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3030,
             "message":"Feed rate is invalid",
             "status":400
         }
         {
-            "code":3005,
+            "code":3031,
             "message":"Depth is invalid",
             "status":400
         }
         {
-            "code":3006,
+            "code":5006,
             "message":"Aggregate is invalid",
             "status":400
         }
@@ -1110,7 +1182,7 @@ STREAM: v1.book.d
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (40, 100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
         |depth<br>`d` |number|True|Depth of the order book to be retrieved (10, 40, 200, 500)|
         |aggregate<br>`a` |number|True|The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)|
@@ -1156,20 +1228,20 @@ STREAM: v1.book.d
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |bids<br>`b` |[OrderbookLevel]|True|The list of best bids up till query depth|
             |asks<br>`a` |[OrderbookLevel]|True|The list of best asks up till query depth|
             ??? info "OrderbookLevel"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
-                |size<br>`s` |string|True|The number of assets offered, expressed in underlying asset decimal units|
+                |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
                 |num_orders<br>`no` |number|True|The number of open orders at this level|
             ??? info "OrderbookLevel"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
-                |size<br>`s` |string|True|The number of assets offered, expressed in underlying asset decimal units|
+                |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
                 |num_orders<br>`no` |number|True|The number of open orders at this level|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -1223,12 +1295,14 @@ STREAM: v1.book.d
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|500|Internal Server Error|
-        |3004|400|Instrument is invalid|
         |1003|404|Data Not Found|
-        |3002|400|Feed format is invalid|
-        |3003|400|Feed rate is invalid|
-        |3005|400|Depth is invalid|
-        |3006|400|Aggregate is invalid|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3030|400|Feed rate is invalid|
+        |3031|400|Depth is invalid|
+        |5006|400|Aggregate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1239,32 +1313,42 @@ STREAM: v1.book.d
             "status":500
         }
         {
-            "code":3004,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
             "code":1003,
             "message":"Data Not Found",
             "status":404
         }
         {
-            "code":3002,
-            "message":"Feed format is invalid",
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
             "status":400
         }
         {
-            "code":3003,
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
+        {
+            "code":3000,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3030,
             "message":"Feed rate is invalid",
             "status":400
         }
         {
-            "code":3005,
+            "code":3031,
             "message":"Depth is invalid",
             "status":400
         }
         {
-            "code":3006,
+            "code":5006,
             "message":"Aggregate is invalid",
             "status":400
         }
@@ -1321,19 +1405,19 @@ STREAM: v1.book.d
         ```
 <hr class="solid">
 ## Trade
-### Public Trades
+### Trade
 ```
 STREAM: v1.trade
 ```
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSPublicTradesFeedSelectorV1"
+    !!! info "WSTradeFeedSelectorV1"
         Subscribes to a stream of Public Trades for an instrument.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |limit<br>`l` |number|True|The limit to query for. Defaults to 500; Max 1000|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -1366,22 +1450,22 @@ STREAM: v1.trade
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSPublicTradesFeedDataV1"
+    !!! info "WSTradeFeedDataV1"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
-        |feed<br>`f` |PublicTrade|True|A public trade matching the request filter|
-        ??? info "PublicTrade"
+        |feed<br>`f` |Trade|True|A public trade matching the request filter|
+        ??? info "Trade"
             All private RFQs and Private AXEs will be filtered out from the responses<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |is_taker_buyer<br>`it` |boolean|True|If taker was the buyer on the trade|
-            |size<br>`s` |string|True|The number of assets being traded, expressed in underlying asset decimal units|
+            |size<br>`s` |string|True|The number of assets being traded, expressed in base asset decimal units|
             |price<br>`p` |string|True|The traded price, expressed in `9` decimals|
             |mark_price<br>`mp` |string|True|The mark price of the instrument at point of trade, expressed in `9` decimals|
             |index_price<br>`ip` |string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
@@ -1445,10 +1529,46 @@ STREAM: v1.trade
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1001|500|Internal Server Error|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3011|400|Limit exceeds min or max value|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1001,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        {
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
+            "status":400
+        }
+        {
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
+        {
+            "code":3000,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3011,
+            "message":"Limit exceeds min or max value",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -1514,7 +1634,7 @@ STREAM: v1.candle
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |interval<br>`i1` |CandlestickInterval|True|The interval of each candlestick|
         |type<br>`t` |CandlestickType|True|The type of candlestick data to retrieve|
         ??? info "CandlestickInterval"
@@ -1594,10 +1714,10 @@ STREAM: v1.candle
             |close<br>`c` |string|True|The close price, expressed in underlying currency resolution units|
             |high<br>`h` |string|True|The high price, expressed in underlying currency resolution units|
             |low<br>`l` |string|True|The low price, expressed in underlying currency resolution units|
-            |volume_u<br>`vu` |string|True|The underlying volume transacted, expressed in underlying asset decimal units|
+            |volume_u<br>`vu` |string|True|The underlying volume transacted, expressed in base asset decimal units|
             |volume_q<br>`vq` |string|True|The quote volume transacted, expressed in quote asset decimal units|
             |trades<br>`t` |number|True|The number of trades transacted|
-            |instrument<br>`i` |string|True|The readable name of the instrument. For Perpetual: ETH_USDT_Perp [Underlying Quote Perp]<br>For Future: BTC_USDT_Fut_20Oct23 [Underlying Quote Fut DateFormat]<br>For Call: ETH_USDT_Call_20Oct23_4123 [Underlying Quote Call DateFormat StrikePrice]<br>For Put: ETH_USDT_Put_20Oct23_4123 [Underlying Quote Put DateFormat StrikePrice]|
+            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -1645,10 +1765,52 @@ STREAM: v1.candle
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1001|500|Internal Server Error|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3040|400|Candlestick interval is invalid|
+        |3041|400|Candlestick type is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1001,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        {
+            "code":1101,
+            "message":"Feed Format must be in the format of <primary>@<secondary>",
+            "status":400
+        }
+        {
+            "code":1102,
+            "message":"Wrong number of primary selectors",
+            "status":400
+        }
+        {
+            "code":1103,
+            "message":"Wrong number of secondary selectors",
+            "status":400
+        }
+        {
+            "code":3000,
+            "message":"Instrument is invalid",
+            "status":400
+        }
+        {
+            "code":3040,
+            "message":"Candlestick interval is invalid",
+            "status":400
+        }
+        {
+            "code":3041,
+            "message":"Candlestick type is invalid",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
