@@ -67,7 +67,7 @@ class GrvtApiAsync(GrvtApiAsyncBase):
     async def trade_v1(
         self, req: types.ApiTradeRequest
     ) -> types.ApiTradeResponse | GrvtError:
-        resp = await self._post(False, self.md_rpc + "/full/v1/trades", req)
+        resp = await self._post(False, self.md_rpc + "/full/v1/trade", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiTradeResponse, resp, Config(cast=[Enum]))
@@ -155,7 +155,7 @@ class GrvtApiAsync(GrvtApiAsyncBase):
     async def fill_history_v1(
         self, req: types.ApiFillHistoryRequest
     ) -> types.ApiFillHistoryResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/trade_history", req)
+        resp = await self._post(True, self.td_rpc + "/full/v1/fill_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiFillHistoryResponse, resp, Config(cast=[Enum]))
