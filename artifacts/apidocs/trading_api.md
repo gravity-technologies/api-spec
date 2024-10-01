@@ -1588,8 +1588,8 @@ LITE ENDPOINT: lite/v1/order_history
             "kind": ["PERPETUAL"],
             "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -1600,8 +1600,8 @@ LITE ENDPOINT: lite/v1/order_history
             "k": ["PERPETUAL"],
             "b": ["BTC", "ETH"],
             "q": ["USDT", "USDC"],
-            "st": 1697788800000000000,
-            "et": 1697788800000000000,
+            "st": "1697788800000000000",
+            "et": "1697788800000000000",
             "l": 500,
             "c": ""
         }
@@ -1792,8 +1792,8 @@ LITE ENDPOINT: lite/v1/order_history
             "kind": ["PERPETUAL"],
             "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -1808,8 +1808,8 @@ LITE ENDPOINT: lite/v1/order_history
             "kind": ["PERPETUAL"],
             "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -1824,8 +1824,8 @@ LITE ENDPOINT: lite/v1/order_history
             "kind": ["PERPETUAL"],
             "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -1840,8 +1840,8 @@ LITE ENDPOINT: lite/v1/order_history
             "kind": ["PERPETUAL"],
             "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -1908,8 +1908,8 @@ LITE ENDPOINT: lite/v1/fill_history
             "kind": ["PERPETUAL"],
             "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -1920,8 +1920,8 @@ LITE ENDPOINT: lite/v1/fill_history
             "k": ["PERPETUAL"],
             "b": ["BTC", "ETH"],
             "q": ["USDT", "USDC"],
-            "st": 1697788800000000000,
-            "et": 1697788800000000000,
+            "st": "1697788800000000000",
+            "et": "1697788800000000000",
             "l": 500,
             "c": ""
         }
@@ -2031,8 +2031,8 @@ LITE ENDPOINT: lite/v1/fill_history
             "kind": ["PERPETUAL"],
             "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -2047,8 +2047,8 @@ LITE ENDPOINT: lite/v1/fill_history
             "kind": ["PERPETUAL"],
             "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -2063,8 +2063,8 @@ LITE ENDPOINT: lite/v1/fill_history
             "kind": ["PERPETUAL"],
             "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -2079,8 +2079,8 @@ LITE ENDPOINT: lite/v1/fill_history
             "kind": ["PERPETUAL"],
             "base": ["BTC", "ETH"],
             "quote": ["USDT", "USDC"],
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }

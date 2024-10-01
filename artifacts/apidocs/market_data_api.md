@@ -1230,8 +1230,8 @@ LITE ENDPOINT: lite/v1/trade_history
         ```json
         {
             "instrument": "BTC_USDT_Perp",
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -1239,8 +1239,8 @@ LITE ENDPOINT: lite/v1/trade_history
         ```json
         {
             "i": "BTC_USDT_Perp",
-            "st": 1697788800000000000,
-            "et": 1697788800000000000,
+            "st": "1697788800000000000",
+            "et": "1697788800000000000",
             "l": 500,
             "c": ""
         }
@@ -1327,8 +1327,8 @@ LITE ENDPOINT: lite/v1/trade_history
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/trade_history' \
         --data '{
             "instrument": "BTC_USDT_Perp",
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -1339,8 +1339,8 @@ LITE ENDPOINT: lite/v1/trade_history
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trade_history' \
         --data '{
             "instrument": "BTC_USDT_Perp",
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -1351,8 +1351,8 @@ LITE ENDPOINT: lite/v1/trade_history
         curl --location 'https://market-data.testnet.grvt.io/full/v1/trade_history' \
         --data '{
             "instrument": "BTC_USDT_Perp",
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -1363,8 +1363,8 @@ LITE ENDPOINT: lite/v1/trade_history
         curl --location 'https://market-data.grvt.io/full/v1/trade_history' \
         --data '{
             "instrument": "BTC_USDT_Perp",
-            "start_time": 1697788800000000000,
-            "end_time": 1697788800000000000,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": ""
         }
@@ -1708,195 +1708,6 @@ LITE ENDPOINT: lite/v1/funding
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-<hr class="solid">
-### Settlement Price
-```
-FULL ENDPOINT: full/v1/settlement
-LITE ENDPOINT: lite/v1/settlement
-```
-
-=== "Request"
-    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiSettlementPriceRequest"
-        Lookup the historical settlement price of various pairs.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |base<br>`b` |Currency|True|The base currency to select|
-        |quote<br>`q` |Currency|True|The quote currency to select|
-        |start_time<br>`st` |string|False<br>`0`|Start time of settlement price in unix nanoseconds|
-        |end_time<br>`et` |string|False<br>`now()`|End time of settlement price in unix nanoseconds|
-        |limit<br>`l` |number|False<br>`30`|The limit to query for. Defaults to 500; Max 1000|
-        |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
-        ??? info "Currency"
-            The list of Currencies that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`USD` = 1|the USD fiat currency|
-            |`USDC` = 2|the USDC token|
-            |`USDT` = 3|the USDT token|
-            |`ETH` = 4|the ETH token|
-            |`BTC` = 5|the BTC token|
-        ??? info "Currency"
-            The list of Currencies that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`USD` = 1|the USD fiat currency|
-            |`USDC` = 2|the USDC token|
-            |`USDT` = 3|the USDT token|
-            |`ETH` = 4|the ETH token|
-            |`BTC` = 5|the BTC token|
-    </section>
-    <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        ```json
-        {
-            "base": "BTC",
-            "quote": "USDT",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 20,
-            "cursor": ""
-        }
-        ```
-        ```json
-        {
-            "b": "BTC",
-            "q": "USDT",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 20,
-            "c": ""
-        }
-        ```
-    </section>
-=== "Response"
-    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiSettlementPriceResponse"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |results<br>`r` |[APISettlementPrice]|True|The funding rate result set for given interval|
-        |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "APISettlementPrice"
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |base<br>`b` |Currency|True|The base currency of the settlement price|
-            |quote<br>`q` |Currency|True|The quote currency of the settlement price|
-            |settlement_time<br>`st` |string|True|The settlement timestamp of the settlement price, expressed in unix nanoseconds|
-            |settlement_price<br>`sp` |string|True|The settlement price, expressed in `9` decimals|
-            ??? info "Currency"
-                The list of Currencies that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`USD` = 1|the USD fiat currency|
-                |`USDC` = 2|the USDC token|
-                |`USDT` = 3|the USDT token|
-                |`ETH` = 4|the ETH token|
-                |`BTC` = 5|the BTC token|
-            ??? info "Currency"
-                The list of Currencies that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`USD` = 1|the USD fiat currency|
-                |`USDC` = 2|the USDC token|
-                |`USDT` = 3|the USDT token|
-                |`ETH` = 4|the ETH token|
-                |`BTC` = 5|the BTC token|
-    </section>
-    <section markdown="1" style="float: right; width: 30%;">
-    !!! success
-        ```json
-        {
-            "results": [{
-                "base": "BTC",
-                "quote": "USDT",
-                "settlement_time": "1697788800000000000",
-                "settlement_price": "65038.01"
-            }],
-            "next": "Qw0918="
-        }
-        ```
-    </section>
-=== "Errors"
-    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "Error Codes"
-        |Code|HttpStatus| Description |
-        |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
-    </section>
-    <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
-        ```json
-        {
-            "code":1001,
-            "message":"Internal Server Error",
-            "status":500
-        }
-        {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
-            "status":400
-        }
-        ```
-    </section>
-=== "Try it out"
-    !!! example "Try DEV"
-        ```bash
-        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/settlement' \
-        --data '{
-            "base": "BTC",
-            "quote": "USDT",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 20,
-            "cursor": ""
-        }
-        '
-        ```
-    !!! example "Try STG"
-        ```bash
-        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/settlement' \
-        --data '{
-            "base": "BTC",
-            "quote": "USDT",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 20,
-            "cursor": ""
-        }
-        '
-        ```
-    !!! example "Try TESTNET"
-        ```bash
-        curl --location 'https://market-data.testnet.grvt.io/full/v1/settlement' \
-        --data '{
-            "base": "BTC",
-            "quote": "USDT",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 20,
-            "cursor": ""
-        }
-        '
-        ```
-    !!! example "Try PROD"
-        ```bash
-        curl --location 'https://market-data.grvt.io/full/v1/settlement' \
-        --data '{
-            "base": "BTC",
-            "quote": "USDT",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 20,
             "cursor": ""
         }
         '
