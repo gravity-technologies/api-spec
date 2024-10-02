@@ -15,12 +15,34 @@ STREAM: v1.order
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
         |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.order",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -29,6 +51,7 @@ STREAM: v1.order
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.order",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -38,9 +61,12 @@ STREAM: v1.order
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.order",
             "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "unsubs":[]
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -238,8 +264,9 @@ STREAM: v1.order
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
@@ -251,11 +278,16 @@ STREAM: v1.order
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
@@ -294,6 +326,7 @@ STREAM: v1.order
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.order",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -307,6 +340,7 @@ STREAM: v1.order
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.order",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -320,6 +354,7 @@ STREAM: v1.order
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.order",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -333,6 +368,7 @@ STREAM: v1.order
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.order",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -355,12 +391,34 @@ STREAM: v1.state
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
         |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.state",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -369,6 +427,7 @@ STREAM: v1.state
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.state",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -378,9 +437,12 @@ STREAM: v1.state
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.state",
             "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "unsubs":[]
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -489,8 +551,9 @@ STREAM: v1.state
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
@@ -502,11 +565,16 @@ STREAM: v1.state
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
@@ -545,6 +613,7 @@ STREAM: v1.state
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.state",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -558,6 +627,7 @@ STREAM: v1.state
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.state",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -571,6 +641,7 @@ STREAM: v1.state
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.state",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -584,6 +655,7 @@ STREAM: v1.state
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.state",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -607,12 +679,34 @@ STREAM: v1.fill
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The sub account ID to request for|
         |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -621,6 +715,7 @@ STREAM: v1.fill
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -630,9 +725,12 @@ STREAM: v1.fill
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.fill",
             "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "unsubs":[]
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -736,8 +834,9 @@ STREAM: v1.fill
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
@@ -749,11 +848,16 @@ STREAM: v1.fill
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
@@ -792,6 +896,7 @@ STREAM: v1.fill
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -805,6 +910,7 @@ STREAM: v1.fill
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -818,6 +924,7 @@ STREAM: v1.fill
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -831,6 +938,7 @@ STREAM: v1.fill
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -853,12 +961,34 @@ STREAM: v1.position
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
         |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.position",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -867,6 +997,7 @@ STREAM: v1.position
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.position",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -876,9 +1007,12 @@ STREAM: v1.position
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.position",
             "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "unsubs":[]
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -960,8 +1094,9 @@ STREAM: v1.position
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
@@ -973,11 +1108,16 @@ STREAM: v1.position
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
@@ -1016,6 +1156,7 @@ STREAM: v1.position
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.position",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -1029,6 +1170,7 @@ STREAM: v1.position
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.position",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -1042,6 +1184,7 @@ STREAM: v1.position
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.position",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -1055,6 +1198,7 @@ STREAM: v1.position
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.position",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -1071,27 +1215,51 @@ STREAM: v1.deposit
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "EmptyRequest"
-        Used for requests that do not require any parameters<br>
+    !!! info "WSDepositFeedSelectorV1"
+        Subscribes to a feed of deposits. This will execute when there is any deposit to selected account.<br>To subscribe to a main account, specify the account ID (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
+        |main_account_id<br>`ma` |string|True|The main account ID to request for|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.deposit",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.deposit",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":false
         }
@@ -1099,9 +1267,12 @@ STREAM: v1.deposit
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.deposit",
-            "subs":[""],
-            "unsubs":[]
+            "subs":["'$GRVT_MAIN_ACCOUNT_ID'"],
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -1168,6 +1339,7 @@ STREAM: v1.deposit
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1001|403|You are not authorized to access this functionality|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
@@ -1175,6 +1347,11 @@ STREAM: v1.deposit
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
         {
             "code":1101,
             "message":"Feed Format must be in the format of <primary>@<secondary>",
@@ -1200,8 +1377,9 @@ STREAM: v1.deposit
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.deposit",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1213,8 +1391,9 @@ STREAM: v1.deposit
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.deposit",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1226,8 +1405,9 @@ STREAM: v1.deposit
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.deposit",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1239,8 +1419,9 @@ STREAM: v1.deposit
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.deposit",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1254,27 +1435,52 @@ STREAM: v1.transfer
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "EmptyRequest"
-        Used for requests that do not require any parameters<br>
+    !!! info "WSTransferFeedSelectorV1"
+        Subscribes to a feed of transfers. This will execute when there is any transfer to or from the selected account.<br>To subscribe to a main account, specify the account ID (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a`).<br>To subscribe to a sub account, specify the main account and the sub account dash separated (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a-1920109784202388`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
+        |main_account_id<br>`ma` |string|True|The main account ID to request for|
+        |sub_account_id<br>`sa` |string|False<br>`'0'`|The sub account ID to request for|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.transfer",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.transfer",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":false
         }
@@ -1282,9 +1488,12 @@ STREAM: v1.transfer
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.transfer",
-            "subs":[""],
-            "unsubs":[]
+            "subs":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -1383,13 +1592,20 @@ STREAM: v1.transfer
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1001|403|You are not authorized to access this functionality|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
+        |3020|400|Sub account ID must be an uint64 integer|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
         {
             "code":1101,
             "message":"Feed Format must be in the format of <primary>@<secondary>",
@@ -1405,6 +1621,11 @@ STREAM: v1.transfer
             "message":"Wrong number of secondary selectors",
             "status":400
         }
+        {
+            "code":3020,
+            "message":"Sub account ID must be an uint64 integer",
+            "status":400
+        }
         ```
     </section>
 === "Try it out"
@@ -1415,8 +1636,9 @@ STREAM: v1.transfer
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.transfer",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1428,8 +1650,9 @@ STREAM: v1.transfer
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.transfer",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1441,8 +1664,9 @@ STREAM: v1.transfer
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.transfer",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1454,8 +1678,9 @@ STREAM: v1.transfer
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.transfer",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1469,27 +1694,51 @@ STREAM: v1.withdrawal
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "EmptyRequest"
-        Used for requests that do not require any parameters<br>
+    !!! info "WSWithdrawalFeedSelectorV1"
+        Subscribes to a feed of withdrawals. This will execute when there is any withdrawal from the selected account.<br>To subscribe to a main account, specify the account ID (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
+        |main_account_id<br>`ma` |string|True|The main account ID to request for|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.withdrawal",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.withdrawal",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":false
         }
@@ -1497,9 +1746,12 @@ STREAM: v1.withdrawal
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.withdrawal",
-            "subs":[""],
-            "unsubs":[]
+            "subs":["'$GRVT_MAIN_ACCOUNT_ID'"],
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -1592,6 +1844,7 @@ STREAM: v1.withdrawal
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1001|403|You are not authorized to access this functionality|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
@@ -1599,6 +1852,11 @@ STREAM: v1.withdrawal
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
+        {
+            "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
         {
             "code":1101,
             "message":"Feed Format must be in the format of <primary>@<secondary>",
@@ -1624,8 +1882,9 @@ STREAM: v1.withdrawal
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.withdrawal",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1637,8 +1896,9 @@ STREAM: v1.withdrawal
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.withdrawal",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1650,8 +1910,9 @@ STREAM: v1.withdrawal
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.withdrawal",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1663,8 +1924,9 @@ STREAM: v1.withdrawal
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
+            "id":1,
             "stream":"v1.withdrawal",
-            "feed":[""],
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
