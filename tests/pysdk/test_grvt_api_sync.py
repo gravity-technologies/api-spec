@@ -23,9 +23,9 @@ def test_get_all_instruments() -> None:
     resp = api.get_all_instruments_v1(types.ApiGetAllInstrumentsRequest(is_active=True))
     if isinstance(resp, GrvtError):
         raise ValueError(f"Received error: {resp}")
-    if resp.results is None:
+    if resp.result is None:
         raise ValueError("Expected results to be non-null")
-    if len(resp.results) == 0:
+    if len(resp.result) == 0:
         raise ValueError("Expected results to be non-empty")
 
 
@@ -48,7 +48,7 @@ def test_open_orders() -> None:
     if isinstance(resp, GrvtError):
         print(f"Received error: {resp}")  # noqa: T201
         return None
-    if resp.orders is None:
+    if resp.result is None:
         raise ValueError("Expected orders to be non-null")
-    if len(resp.orders) == 0:
+    if len(resp.result) == 0:
         print("Expected orders to be non-empty")  # noqa: T201

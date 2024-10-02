@@ -31,17 +31,17 @@
             "response": "ApiGetInstrumentResponse",
             "on_request_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               },
               {
-                "code": 1003,
+                "code": 1004,
                 "message": "Data Not Found",
                 "status": 404
               }
@@ -57,13 +57,13 @@
             "response": "ApiGetAllInstrumentsResponse",
             "on_request_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -78,13 +78,13 @@
             "response": "ApiGetFilteredInstrumentsResponse",
             "on_request_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -99,17 +99,17 @@
             "response": "ApiMiniTickerResponse",
             "on_request_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               },
               {
-                "code": 1003,
+                "code": 1004,
                 "message": "Data Not Found",
                 "status": 404
               }
@@ -125,17 +125,17 @@
             "response": "ApiTickerResponse",
             "on_request_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               },
               {
-                "code": 1003,
+                "code": 1004,
                 "message": "Data Not Found",
                 "status": 404
               }
@@ -151,17 +151,17 @@
             "response": "ApiOrderbookLevelsResponse",
             "on_request_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               },
               {
-                "code": 1003,
+                "code": 1004,
                 "message": "Data Not Found",
                 "status": 404
               },
@@ -173,11 +173,6 @@
               {
                 "code": 3031,
                 "message": "Depth is invalid",
-                "status": 400
-              },
-              {
-                "code": 5006,
-                "message": "Aggregate is invalid",
                 "status": 400
               }
             ]
@@ -192,13 +187,13 @@
             "response": "ApiTradeResponse",
             "on_request_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -213,13 +208,13 @@
             "response": "ApiTradeHistoryResponse",
             "on_request_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -234,13 +229,13 @@
             "response": "ApiCandlestickResponse",
             "on_request_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -255,13 +250,13 @@
             "response": "ApiFundingRateResponse",
             "on_request_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -277,12 +272,12 @@
             "feed": "WSMiniTickerFeedDataV1",
             "on_subscribe_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1003,
+                "code": 1004,
                 "message": "Data Not Found",
                 "status": 404
               },
@@ -322,12 +317,12 @@
             "feed": "WSMiniTickerFeedDataV1",
             "on_subscribe_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1003,
+                "code": 1004,
                 "message": "Data Not Found",
                 "status": 404
               },
@@ -367,12 +362,12 @@
             "feed": "WSTickerFeedDataV1",
             "on_subscribe_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1003,
+                "code": 1004,
                 "message": "Data Not Found",
                 "status": 404
               },
@@ -412,12 +407,12 @@
             "feed": "WSTickerFeedDataV1",
             "on_subscribe_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1003,
+                "code": 1004,
                 "message": "Data Not Found",
                 "status": 404
               },
@@ -457,12 +452,12 @@
             "feed": "WSOrderbookLevelsFeedDataV1",
             "on_subscribe_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1003,
+                "code": 1004,
                 "message": "Data Not Found",
                 "status": 404
               },
@@ -494,11 +489,6 @@
               {
                 "code": 3031,
                 "message": "Depth is invalid",
-                "status": 400
-              },
-              {
-                "code": 5006,
-                "message": "Aggregate is invalid",
                 "status": 400
               }
             ]
@@ -512,12 +502,12 @@
             "feed": "WSOrderbookLevelsFeedDataV1",
             "on_subscribe_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1003,
+                "code": 1004,
                 "message": "Data Not Found",
                 "status": 404
               },
@@ -550,11 +540,6 @@
                 "code": 3031,
                 "message": "Depth is invalid",
                 "status": 400
-              },
-              {
-                "code": 5006,
-                "message": "Aggregate is invalid",
-                "status": 400
               }
             ]
           },
@@ -567,7 +552,7 @@
             "feed": "WSTradeFeedDataV1",
             "on_subscribe_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
@@ -607,7 +592,7 @@
             "feed": "WSCandlestickFeedDataV1",
             "on_subscribe_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
@@ -677,48 +662,53 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               },
               {
-                "code": 1003,
+                "code": 1004,
                 "message": "Data Not Found",
                 "status": 404
               },
               {
-                "code": 1004,
+                "code": 1005,
                 "message": "Unknown Error",
                 "status": 500
               },
               {
                 "code": 2000,
                 "message": "Order signature is from an unauthorized signer",
-                "status": 401
+                "status": 403
               },
               {
                 "code": 2001,
                 "message": "Order signature has expired",
-                "status": 401
+                "status": 403
               },
               {
                 "code": 2002,
                 "message": "Order signature does not match payload",
-                "status": 401
+                "status": 403
               },
               {
                 "code": 2003,
                 "message": "Order sub account does not match logged in user",
-                "status": 401
+                "status": 403
               },
               {
                 "code": 2010,
@@ -828,17 +818,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               },
               {
@@ -859,17 +854,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -885,21 +885,26 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               },
               {
-                "code": 1003,
+                "code": 1004,
                 "message": "Data Not Found",
                 "status": 404
               },
@@ -921,17 +926,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -947,17 +957,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -973,17 +988,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -999,17 +1019,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -1025,17 +1050,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -1051,17 +1081,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -1077,17 +1112,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -1103,17 +1143,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -1129,17 +1174,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -1155,17 +1205,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -1181,17 +1236,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -1207,17 +1267,22 @@
             "on_request_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -1232,13 +1297,13 @@
             "response": "ApiAggregatedAccountSummaryResponse",
             "on_request_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -1253,13 +1318,13 @@
             "response": "ApiFundingAccountSummaryResponse",
             "on_request_errors": [
               {
-                "code": 1001,
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
               {
-                "code": 1002,
-                "message": "Request could not be processed, largely due to invalid encoding",
+                "code": 1003,
+                "message": "Request could not be processed due to malformed syntax",
                 "status": 400
               }
             ]
@@ -1276,11 +1341,16 @@
             "on_subscribe_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
@@ -1321,11 +1391,16 @@
             "on_subscribe_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
@@ -1366,11 +1441,16 @@
             "on_subscribe_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
@@ -1411,11 +1491,16 @@
             "on_subscribe_errors": [
               {
                 "code": 1000,
-                "message": "You are not authorized to access this functionality",
+                "message": "You need to authenticate prior to using this functionality",
                 "status": 401
               },
               {
                 "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
+              {
+                "code": 1002,
                 "message": "Internal Server Error",
                 "status": 500
               },
@@ -1451,9 +1536,14 @@
             "name": "StreamDepositV1",
             "channel": "v1.deposit",
             "auth_required": true,
-            "feed_selector": "EmptyRequest",
+            "feed_selector": "WSDepositFeedSelectorV1",
             "feed": "WSDepositFeedDataV1",
             "on_subscribe_errors": [
+              {
+                "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
               {
                 "code": 1101,
                 "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
@@ -1476,9 +1566,14 @@
             "name": "StreamTransferV1",
             "channel": "v1.transfer",
             "auth_required": true,
-            "feed_selector": "EmptyRequest",
+            "feed_selector": "WSTransferFeedSelectorV1",
             "feed": "WSTransferFeedDataV1",
             "on_subscribe_errors": [
+              {
+                "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
               {
                 "code": 1101,
                 "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
@@ -1493,6 +1588,11 @@
                 "code": 1103,
                 "message": "Wrong number of secondary selectors",
                 "status": 400
+              },
+              {
+                "code": 3020,
+                "message": "Sub account ID must be an uint64 integer",
+                "status": 400
               }
             ]
           },
@@ -1501,9 +1601,14 @@
             "name": "StreamWithdrawalV1",
             "channel": "v1.withdrawal",
             "auth_required": true,
-            "feed_selector": "EmptyRequest",
+            "feed_selector": "WSWithdrawalFeedSelectorV1",
             "feed": "WSWithdrawalFeedDataV1",
             "on_subscribe_errors": [
+              {
+                "code": 1001,
+                "message": "You are not authorized to access this functionality",
+                "status": 403
+              },
               {
                 "code": 1101,
                 "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
@@ -1778,7 +1883,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "Positions",
             "json_type": "Positions",
@@ -2168,7 +2273,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "Fill",
             "json_type": "Fill",
@@ -2275,7 +2380,7 @@
             "optional": false,
             "example": "'1697788800000000000'",
             "comment": [
-              "Time at which the event was emitted in uix nanoseconds"
+              "Time at which the event was emitted in unix nanoseconds"
             ]
           },
           {
@@ -2436,7 +2541,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "SubAccount",
             "json_type": "SubAccount",
@@ -2540,7 +2645,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "SubAccount",
             "json_type": "SubAccount",
@@ -2595,7 +2700,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "SubAccount",
             "json_type": "SubAccount",
@@ -2610,8 +2715,8 @@
         "comment": []
       },
       {
-        "name": "ApiAggregatedAccountSummaryResponse",
-        "is_root": true,
+        "name": "AggregatedAccountSummary",
+        "is_root": false,
         "fields": [
           {
             "name": "main_account_id",
@@ -2652,12 +2757,31 @@
             ]
           }
         ],
+        "comment": []
+      },
+      {
+        "name": "ApiAggregatedAccountSummaryResponse",
+        "is_root": true,
+        "fields": [
+          {
+            "name": "result",
+            "lite_name": "r",
+            "semantic_type": "AggregatedAccountSummary",
+            "json_type": "AggregatedAccountSummary",
+            "index": 0,
+            "array_depth": 0,
+            "optional": false,
+            "comment": [
+              "The aggregated account summary"
+            ]
+          }
+        ],
         "comment": [
           "The aggregated account summary, that reports the total equity and spot balances of a funding (main) account, and its constituent trading (sub) accounts"
         ]
       },
       {
-        "name": "ApiFundingAccountSummaryResponse",
+        "name": "FundingAccountSummary",
         "is_root": true,
         "fields": [
           {
@@ -2704,6 +2828,27 @@
         ]
       },
       {
+        "name": "ApiFundingAccountSummaryResponse",
+        "is_root": true,
+        "fields": [
+          {
+            "name": "result",
+            "lite_name": "r",
+            "semantic_type": "FundingAccountSummary",
+            "json_type": "FundingAccountSummary",
+            "index": 0,
+            "array_depth": 0,
+            "optional": false,
+            "comment": [
+              "The funding account summary"
+            ]
+          }
+        ],
+        "comment": [
+          "The funding account summary, that reports the total equity and spot balances of a funding (main) account"
+        ]
+      },
+      {
         "name": "ApiOrderbookLevelsRequest",
         "is_root": true,
         "fields": [
@@ -2728,22 +2873,9 @@
             "index": 1,
             "array_depth": 0,
             "optional": false,
-            "example": "40",
+            "example": "50",
             "comment": [
-              "Depth of the order book to be retrieved (10, 40, 200, 500)"
-            ]
-          },
-          {
-            "name": "aggregate",
-            "lite_name": "a",
-            "semantic_type": "uint32",
-            "json_type": "number",
-            "index": 2,
-            "array_depth": 0,
-            "optional": false,
-            "example": "10",
-            "comment": [
-              "The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)"
+              "Depth of the order book to be retrieved (10, 50, 100, 500)"
             ]
           }
         ],
@@ -2859,7 +2991,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "OrderbookLevels",
             "json_type": "OrderbookLevels",
@@ -3050,7 +3182,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "MiniTicker",
             "json_type": "MiniTicker",
@@ -3423,7 +3555,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "Ticker",
             "json_type": "Ticker",
@@ -3629,7 +3761,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "Trade",
             "json_type": "Trade",
@@ -3730,7 +3862,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "Trade",
             "json_type": "Trade",
@@ -3989,7 +4121,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "Instrument",
             "json_type": "Instrument",
@@ -4087,7 +4219,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "Instrument",
             "json_type": "Instrument",
@@ -4349,7 +4481,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "Candlestick",
             "json_type": "Candlestick",
@@ -4521,7 +4653,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "FundingRate",
             "json_type": "FundingRate",
@@ -4706,7 +4838,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "APISettlementPrice",
             "json_type": "APISettlementPrice",
@@ -4739,16 +4871,31 @@
         "is_root": true,
         "fields": [
           {
+            "name": "request_id",
+            "lite_name": "ri",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 0,
+            "array_depth": 0,
+            "optional": true,
+            "default": "0",
+            "example": "123",
+            "comment": [
+              "Optional Field which is used to match the response by the client.",
+              "If not passed, this field will not be returned"
+            ]
+          },
+          {
             "name": "stream",
             "lite_name": "s",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 0,
+            "index": 1,
             "array_depth": 0,
             "optional": false,
             "example": "'v1.ticker.d'",
             "comment": [
-              "The channel to subscribe to (eg: ticker.s / ticker.d "
+              "The channel to subscribe to (eg: ticker.s / ticker.d)"
             ]
           },
           {
@@ -4756,12 +4903,12 @@
             "lite_name": "f",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 1,
+            "index": 2,
             "array_depth": 1,
             "optional": false,
             "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
             "comment": [
-              "The list of feeds to subscribe to (eg: "
+              "The list of feeds to subscribe to"
             ]
           },
           {
@@ -4769,7 +4916,7 @@
             "lite_name": "m",
             "semantic_type": "string",
             "json_type": "string",
-            "index": 2,
+            "index": 3,
             "array_depth": 0,
             "optional": false,
             "example": "'subscribe'",
@@ -4782,16 +4929,113 @@
             "lite_name": "if",
             "semantic_type": "bool",
             "json_type": "boolean",
-            "index": 3,
+            "index": 4,
             "array_depth": 0,
-            "optional": false,
+            "optional": true,
+            "default": "false",
             "example": "true",
             "comment": [
               "Whether the request is for full data or lite data"
             ]
           }
         ],
-        "comment": []
+        "comment": [
+          "All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.",
+          "If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).",
+          "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
+        ]
+      },
+      {
+        "name": "WSResponseV1",
+        "is_root": true,
+        "fields": [
+          {
+            "name": "request_id",
+            "lite_name": "ri",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 0,
+            "array_depth": 0,
+            "optional": true,
+            "default": "0",
+            "example": "123",
+            "comment": [
+              "Optional Field which is used to match the response by the client.",
+              "If not passed, this field will not be returned"
+            ]
+          },
+          {
+            "name": "stream",
+            "lite_name": "s",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'v1.ticker.d'",
+            "comment": [
+              "The channel to subscribe to (eg: ticker.s / ticker.d)"
+            ]
+          },
+          {
+            "name": "subs",
+            "lite_name": "s1",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 2,
+            "array_depth": 1,
+            "optional": false,
+            "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
+            "comment": [
+              "The list of feeds subscribed to"
+            ]
+          },
+          {
+            "name": "unsubs",
+            "lite_name": "u",
+            "semantic_type": "string",
+            "json_type": "string",
+            "index": 3,
+            "array_depth": 1,
+            "optional": false,
+            "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
+            "comment": [
+              "The list of feeds unsubscribed from"
+            ]
+          },
+          {
+            "name": "num_snapshots",
+            "lite_name": "ns",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 4,
+            "array_depth": 1,
+            "optional": false,
+            "example": "10",
+            "comment": [
+              "The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`"
+            ]
+          },
+          {
+            "name": "first_sequence_number",
+            "lite_name": "fs",
+            "semantic_type": "uint64",
+            "json_type": "string",
+            "index": 5,
+            "array_depth": 1,
+            "optional": false,
+            "example": "872634876",
+            "comment": [
+              "The first sequence number to expect for each subscribed feed. Returned in same order as `subs`"
+            ]
+          }
+        ],
+        "comment": [
+          "All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.",
+          "If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.",
+          "To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:\u003cul\u003e\u003cli\u003eAll snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas\u003c/li\u003e\u003cli\u003eNum snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots\u003c/li\u003e\u003cli\u003eFirst sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots\u003c/li\u003e\u003cli\u003eSequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect\u003c/li\u003e\u003cli\u003eDuplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.\u003c/li\u003e\u003c/ul\u003e",
+          "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
+        ]
       },
       {
         "name": "WSOrderbookLevelsFeedSelectorV1",
@@ -4822,8 +5066,8 @@
             "example": "500",
             "comment": [
               "The minimal rate at which we publish feeds (in milliseconds)",
-              "Delta (40, 100, 200, 500, 1000, 5000)",
-              "Snapshot (500, 1000, 5000)"
+              "Delta (50, 100, 500, 1000)",
+              "Snapshot (500, 1000)"
             ],
             "selector": "secondary"
           },
@@ -4834,24 +5078,13 @@
             "json_type": "number",
             "index": 2,
             "array_depth": 0,
-            "optional": false,
-            "example": "40",
+            "optional": true,
+            "default": "'0'",
+            "example": "50",
             "comment": [
-              "Depth of the order book to be retrieved (10, 40, 200, 500)"
-            ],
-            "selector": "secondary"
-          },
-          {
-            "name": "aggregate",
-            "lite_name": "a",
-            "semantic_type": "uint32",
-            "json_type": "number",
-            "index": 3,
-            "array_depth": 0,
-            "optional": false,
-            "example": "10",
-            "comment": [
-              "The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)"
+              "Depth of the order book to be retrieved",
+              "Delta(0 - `unlimited`)",
+              "Snapshot(10, 50, 100, 500)"
             ],
             "selector": "secondary"
           }
@@ -4861,6 +5094,8 @@
           "Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.",
           "",
           "The Delta feed will work as follows:\u003cul\u003e\u003cli\u003eOn subscription, the server will send a full snapshot of all levels of the Orderbook.\u003c/li\u003e\u003cli\u003eAfter the snapshot, the server will only send levels that have changed in value.\u003c/li\u003e\u003c/ul\u003e",
+          "",
+          "Subscription Pattern:\u003cul\u003e\u003cli\u003eDelta - `instrument@rate`\u003c/li\u003e\u003cli\u003eSnapshot - `instrument@rate-depth`\u003c/li\u003e\u003c/ul\u003e",
           "",
           "Field Semantics:\u003cul\u003e\u003cli\u003e[DeltaOnly] If a level is not updated, level not published\u003c/li\u003e\u003cli\u003eIf a level is updated, {size: '123'}\u003c/li\u003e\u003cli\u003eIf a level is set to zero, {size: '0'}\u003c/li\u003e\u003cli\u003eIncoming levels will be published as soon as price moves\u003c/li\u003e\u003cli\u003eOutgoing levels will be published with `size = 0`\u003c/li\u003e\u003c/ul\u003e"
         ]
@@ -4952,7 +5187,7 @@
             "example": "500",
             "comment": [
               "The minimal rate at which we publish feeds (in milliseconds)",
-              "Delta (0, 40, 100, 200, 500, 1000, 5000)",
+              "Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)",
               "Snapshot (200, 500, 1000, 5000)"
             ],
             "selector": "secondary"
@@ -5132,7 +5367,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "Ticker",
             "json_type": "Ticker",
@@ -5350,52 +5585,6 @@
         "comment": []
       },
       {
-        "name": "WSResponseV1",
-        "is_root": true,
-        "fields": [
-          {
-            "name": "stream",
-            "lite_name": "s",
-            "semantic_type": "string",
-            "json_type": "string",
-            "index": 0,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'v1.ticker.d'",
-            "comment": [
-              "The channel to subscribe to (eg: ticker.s / ticker.d "
-            ]
-          },
-          {
-            "name": "subs",
-            "lite_name": "s1",
-            "semantic_type": "string",
-            "json_type": "string",
-            "index": 1,
-            "array_depth": 1,
-            "optional": false,
-            "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
-            "comment": [
-              "The list of feeds subscribed to"
-            ]
-          },
-          {
-            "name": "unsubs",
-            "lite_name": "u",
-            "semantic_type": "string",
-            "json_type": "string",
-            "index": 2,
-            "array_depth": 1,
-            "optional": false,
-            "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
-            "comment": [
-              "The list of feeds unsubscribed to"
-            ]
-          }
-        ],
-        "comment": []
-      },
-      {
         "name": "ApiGetAllInstrumentsRequest",
         "is_root": true,
         "fields": [
@@ -5423,7 +5612,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "Instrument",
             "json_type": "Instrument",
@@ -5891,8 +6080,8 @@
         "is_root": true,
         "fields": [
           {
-            "name": "order",
-            "lite_name": "o",
+            "name": "result",
+            "lite_name": "r",
             "semantic_type": "Order",
             "json_type": "Order",
             "index": 0,
@@ -5960,8 +6149,8 @@
         "is_root": true,
         "fields": [
           {
-            "name": "order",
-            "lite_name": "o",
+            "name": "result",
+            "lite_name": "r",
             "semantic_type": "Order",
             "json_type": "Order",
             "index": 0,
@@ -6043,8 +6232,8 @@
         "is_root": true,
         "fields": [
           {
-            "name": "num_cancelled",
-            "lite_name": "nc",
+            "name": "result",
+            "lite_name": "r",
             "semantic_type": "uint32",
             "json_type": "number",
             "index": 0,
@@ -6125,8 +6314,8 @@
         "is_root": true,
         "fields": [
           {
-            "name": "orders",
-            "lite_name": "o",
+            "name": "result",
+            "lite_name": "r",
             "semantic_type": "Order",
             "json_type": "Order",
             "index": 0,
@@ -6268,8 +6457,8 @@
         "is_root": true,
         "fields": [
           {
-            "name": "orders",
-            "lite_name": "o",
+            "name": "result",
+            "lite_name": "r",
             "semantic_type": "Order",
             "json_type": "Order",
             "index": 0,
@@ -6304,11 +6493,11 @@
         ]
       },
       {
-        "name": "AckResponse",
-        "is_root": true,
+        "name": "Ack",
+        "is_root": false,
         "fields": [
           {
-            "name": "acknowledgement",
+            "name": "ack",
             "lite_name": "a",
             "semantic_type": "bool",
             "json_type": "boolean",
@@ -6318,6 +6507,25 @@
             "example": "'true'",
             "comment": [
               "Gravity has acknowledged that the request has been successfully received and it will process it in the backend"
+            ]
+          }
+        ],
+        "comment": []
+      },
+      {
+        "name": "AckResponse",
+        "is_root": true,
+        "fields": [
+          {
+            "name": "result",
+            "lite_name": "r",
+            "semantic_type": "Ack",
+            "json_type": "Ack",
+            "index": 0,
+            "array_depth": 0,
+            "optional": false,
+            "comment": [
+              "The Ack Object"
             ]
           }
         ],
@@ -6449,8 +6657,8 @@
         "is_root": true,
         "fields": [
           {
-            "name": "order",
-            "lite_name": "o",
+            "name": "result",
+            "lite_name": "r",
             "semantic_type": "Order",
             "json_type": "Order",
             "index": 0,
@@ -7240,41 +7448,8 @@
         "comment": []
       },
       {
-        "name": "ApiGetLatestLPSnapshotRequest",
-        "is_root": true,
-        "fields": [
-          {
-            "name": "kind",
-            "lite_name": "k",
-            "semantic_type": "Kind",
-            "json_type": "Kind",
-            "index": 0,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'PERPETUAL'",
-            "comment": [
-              "The kind filter to apply"
-            ]
-          },
-          {
-            "name": "base",
-            "lite_name": "b",
-            "semantic_type": "Currency",
-            "json_type": "Currency",
-            "index": 1,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'BTC'",
-            "comment": [
-              "The base filter to apply"
-            ]
-          }
-        ],
-        "comment": []
-      },
-      {
         "name": "LPSnapshot",
-        "is_root": false,
+        "is_root": true,
         "fields": [
           {
             "name": "main_account_id",
@@ -7316,8 +7491,8 @@
             ]
           },
           {
-            "name": "market_share_multiplier",
-            "lite_name": "ms",
+            "name": "maker_trading_volume",
+            "lite_name": "mt",
             "semantic_type": "uint256",
             "json_type": "string",
             "index": 3,
@@ -7325,7 +7500,7 @@
             "optional": false,
             "example": "'10000101000203040506'",
             "comment": [
-              "Market share multiplier"
+              "Maker trading volume"
             ]
           },
           {
@@ -7364,7 +7539,7 @@
             "optional": false,
             "example": "'10000101000203040506'",
             "comment": [
-              "Liquidty score"
+              "Liquidity score"
             ]
           },
           {
@@ -7381,9 +7556,275 @@
             ]
           }
         ],
-        "comment": [
-          ""
-        ]
+        "comment": []
+      },
+      {
+        "name": "ApproximateLPSnapshot",
+        "is_root": true,
+        "fields": [
+          {
+            "name": "main_account_id",
+            "lite_name": "ma",
+            "semantic_type": "uint256",
+            "json_type": "string",
+            "index": 0,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'10000101000203040506'",
+            "comment": [
+              "The main account id"
+            ]
+          },
+          {
+            "name": "underlying_multiplier",
+            "lite_name": "um",
+            "semantic_type": "uint64",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'52'",
+            "comment": [
+              "Underlying multiplier"
+            ]
+          },
+          {
+            "name": "market_share_multiplier",
+            "lite_name": "ms",
+            "semantic_type": "uint64",
+            "json_type": "string",
+            "index": 2,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'10000101000203040506'",
+            "comment": [
+              "Market share multiplier"
+            ]
+          },
+          {
+            "name": "bid_fast_market_multiplier",
+            "lite_name": "bf",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 3,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'52'",
+            "comment": [
+              "Fast market multiplier"
+            ]
+          },
+          {
+            "name": "ask_fast_market_multiplier",
+            "lite_name": "af",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 4,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'52'",
+            "comment": [
+              "Fast market multiplier"
+            ]
+          },
+          {
+            "name": "liquidity_score",
+            "lite_name": "ls",
+            "semantic_type": "uint256",
+            "json_type": "string",
+            "index": 5,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'10000101000203040506'",
+            "comment": [
+              "Liquidity score"
+            ]
+          },
+          {
+            "name": "calculate_at",
+            "lite_name": "ca",
+            "semantic_type": "timestamp",
+            "json_type": "string",
+            "index": 6,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'1726790400000000000'",
+            "comment": [
+              "The time when the snapshot was calculated"
+            ]
+          }
+        ],
+        "comment": []
+      },
+      {
+        "name": "LPPoint",
+        "is_root": true,
+        "fields": [
+          {
+            "name": "main_account_id",
+            "lite_name": "ma",
+            "semantic_type": "uint256",
+            "json_type": "string",
+            "index": 0,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'10000101000203040506'",
+            "comment": [
+              "The main account id"
+            ]
+          },
+          {
+            "name": "lp_asset",
+            "lite_name": "la",
+            "semantic_type": "uint64",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'10000'",
+            "comment": [
+              "The LP Asset"
+            ]
+          },
+          {
+            "name": "start_interval",
+            "lite_name": "si",
+            "semantic_type": "timestamp",
+            "json_type": "string",
+            "index": 2,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'1726790400000000000'",
+            "comment": [
+              "Start time of the epoch - phase"
+            ]
+          },
+          {
+            "name": "liquidity_score",
+            "lite_name": "ls",
+            "semantic_type": "uint256",
+            "json_type": "string",
+            "index": 3,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'10000101000203040506'",
+            "comment": [
+              "Liquidity score"
+            ]
+          },
+          {
+            "name": "rank",
+            "lite_name": "r",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 4,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'52'",
+            "comment": [
+              "The rank of user in the LP leaderboard"
+            ]
+          }
+        ],
+        "comment": []
+      },
+      {
+        "name": "ApproximateLPPoint",
+        "is_root": true,
+        "fields": [
+          {
+            "name": "main_account_id",
+            "lite_name": "ma",
+            "semantic_type": "uint256",
+            "json_type": "string",
+            "index": 0,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'10000101000203040506'",
+            "comment": [
+              "The main account id"
+            ]
+          },
+          {
+            "name": "liquidity_score",
+            "lite_name": "ls",
+            "semantic_type": "uint256",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'10000101000203040506'",
+            "comment": [
+              "Liquidity score"
+            ]
+          },
+          {
+            "name": "rank",
+            "lite_name": "r",
+            "semantic_type": "uint32",
+            "json_type": "number",
+            "index": 2,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'52'",
+            "comment": [
+              "The rank of user in the LP leaderboard"
+            ]
+          }
+        ],
+        "comment": []
+      },
+      {
+        "name": "QueryGetLatestLPSnapshotResponse",
+        "is_root": true,
+        "fields": [
+          {
+            "name": "snapshot",
+            "lite_name": "s",
+            "semantic_type": "LPSnapshot",
+            "json_type": "LPSnapshot",
+            "index": 0,
+            "array_depth": 0,
+            "optional": false,
+            "comment": [
+              "The latest LP snapshot"
+            ]
+          }
+        ],
+        "comment": []
+      },
+      {
+        "name": "ApiGetLatestLPSnapshotRequest",
+        "is_root": true,
+        "fields": [
+          {
+            "name": "kind",
+            "lite_name": "k",
+            "semantic_type": "Kind",
+            "json_type": "Kind",
+            "index": 0,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'PERPETUAL'",
+            "comment": [
+              "The kind filter to apply"
+            ]
+          },
+          {
+            "name": "base",
+            "lite_name": "b",
+            "semantic_type": "Currency",
+            "json_type": "Currency",
+            "index": 1,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'BTC'",
+            "comment": [
+              "The base filter to apply"
+            ]
+          }
+        ],
+        "comment": []
       },
       {
         "name": "ApiGetLatestLPSnapshotResponse",
@@ -7392,8 +7833,8 @@
           {
             "name": "snapshot",
             "lite_name": "s",
-            "semantic_type": "LPSnapshot",
-            "json_type": "LPSnapshot",
+            "semantic_type": "ApproximateLPSnapshot",
+            "json_type": "ApproximateLPSnapshot",
             "index": 0,
             "array_depth": 0,
             "optional": false,
@@ -7462,80 +7903,6 @@
           }
         ],
         "comment": []
-      },
-      {
-        "name": "LPPoint",
-        "is_root": false,
-        "fields": [
-          {
-            "name": "main_account_id",
-            "lite_name": "ma",
-            "semantic_type": "uint256",
-            "json_type": "string",
-            "index": 0,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'10000101000203040506'",
-            "comment": [
-              "The main account id"
-            ]
-          },
-          {
-            "name": "lp_asset",
-            "lite_name": "la",
-            "semantic_type": "uint64",
-            "json_type": "string",
-            "index": 1,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'10000'",
-            "comment": [
-              "The LP Asset"
-            ]
-          },
-          {
-            "name": "start_interval",
-            "lite_name": "si",
-            "semantic_type": "timestamp",
-            "json_type": "string",
-            "index": 2,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'1726790400000000000'",
-            "comment": [
-              "Start time of the epoch - phase"
-            ]
-          },
-          {
-            "name": "liquidity_score",
-            "lite_name": "ls",
-            "semantic_type": "uint256",
-            "json_type": "string",
-            "index": 3,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'10000101000203040506'",
-            "comment": [
-              "Liquidty score"
-            ]
-          },
-          {
-            "name": "rank",
-            "lite_name": "r",
-            "semantic_type": "uint32",
-            "json_type": "number",
-            "index": 4,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'52'",
-            "comment": [
-              "The rank of user in the LP leaderboard"
-            ]
-          }
-        ],
-        "comment": [
-          ""
-        ]
       },
       {
         "name": "ApiGetLPLeaderboardResponse",
@@ -7609,8 +7976,8 @@
           {
             "name": "point",
             "lite_name": "p",
-            "semantic_type": "LPPoint",
-            "json_type": "LPPoint",
+            "semantic_type": "ApproximateLPPoint",
+            "json_type": "ApproximateLPPoint",
             "index": 0,
             "array_depth": 0,
             "optional": false,
@@ -7801,7 +8168,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "SubAccountTrade",
             "json_type": "SubAccountTrade",
@@ -7983,7 +8350,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "SubAccountTradeAggregation",
             "json_type": "SubAccountTradeAggregation",
@@ -8641,6 +9008,46 @@
         "comment": []
       },
       {
+        "name": "WSTransferFeedSelectorV1",
+        "is_root": true,
+        "fields": [
+          {
+            "name": "main_account_id",
+            "lite_name": "ma",
+            "semantic_type": "address",
+            "json_type": "string",
+            "index": 0,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'$GRVT_MAIN_ACCOUNT_ID'",
+            "comment": [
+              "The main account ID to request for"
+            ],
+            "selector": "primary"
+          },
+          {
+            "name": "sub_account_id",
+            "lite_name": "sa",
+            "semantic_type": "uint64",
+            "json_type": "string",
+            "index": 1,
+            "array_depth": 0,
+            "optional": true,
+            "default": "'0'",
+            "example": "'$GRVT_SUB_ACCOUNT_ID'",
+            "comment": [
+              "The sub account ID to request for"
+            ],
+            "selector": "primary"
+          }
+        ],
+        "comment": [
+          "Subscribes to a feed of transfers. This will execute when there is any transfer to or from the selected account.",
+          "To subscribe to a main account, specify the account ID (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a`).",
+          "To subscribe to a sub account, specify the main account and the sub account dash separated (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a-1920109784202388`)."
+        ]
+      },
+      {
         "name": "Transfer",
         "is_root": false,
         "fields": [
@@ -8798,6 +9205,30 @@
         ]
       },
       {
+        "name": "WSDepositFeedSelectorV1",
+        "is_root": true,
+        "fields": [
+          {
+            "name": "main_account_id",
+            "lite_name": "ma",
+            "semantic_type": "address",
+            "json_type": "string",
+            "index": 0,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'$GRVT_MAIN_ACCOUNT_ID'",
+            "comment": [
+              "The main account ID to request for"
+            ],
+            "selector": "primary"
+          }
+        ],
+        "comment": [
+          "Subscribes to a feed of deposits. This will execute when there is any deposit to selected account.",
+          "To subscribe to a main account, specify the account ID (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a`)."
+        ]
+      },
+      {
         "name": "Deposit",
         "is_root": false,
         "fields": [
@@ -8914,6 +9345,30 @@
         ],
         "comment": [
           "Subscribes to a feed of deposit updates."
+        ]
+      },
+      {
+        "name": "WSWithdrawalFeedSelectorV1",
+        "is_root": true,
+        "fields": [
+          {
+            "name": "main_account_id",
+            "lite_name": "ma",
+            "semantic_type": "address",
+            "json_type": "string",
+            "index": 0,
+            "array_depth": 0,
+            "optional": false,
+            "example": "'$GRVT_MAIN_ACCOUNT_ID'",
+            "comment": [
+              "The main account ID to request for"
+            ],
+            "selector": "primary"
+          }
+        ],
+        "comment": [
+          "Subscribes to a feed of withdrawals. This will execute when there is any withdrawal from the selected account.",
+          "To subscribe to a main account, specify the account ID (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a`)."
         ]
       },
       {
@@ -9451,7 +9906,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "DepositHistory",
             "json_type": "DepositHistory",
@@ -9688,7 +10143,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "TransferHistory",
             "json_type": "TransferHistory",
@@ -9899,7 +10354,7 @@
         "is_root": true,
         "fields": [
           {
-            "name": "results",
+            "name": "result",
             "lite_name": "r",
             "semantic_type": "WithdrawalHistory",
             "json_type": "WithdrawalHistory",

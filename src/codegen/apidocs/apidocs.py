@@ -83,6 +83,8 @@ def write_stream_feed_selector(
     # Left Section
     write_left_section(md)
     write_struct_schema(ctx, md, ctx.struct_map[stream.feed_selector], True)
+    write_struct_schema(ctx, md, ctx.struct_map["WSRequestV1"], False)
+    write_struct_schema(ctx, md, ctx.struct_map["WSResponseV1"], False)
     write_section_end(md)
 
     # Right Section
@@ -126,6 +128,7 @@ def write_stream_feed_request(
 ) -> None:
     md.writeln("{")
     md.indent()
+    md.writeln('"id":1,')
     md.writeln(f'"stream":"{stream.channel}",')
     md.writeln(f'"feed":["{selector}"],')
     md.writeln('"method":"subscribe",')
@@ -138,9 +141,12 @@ def write_stream_feed_response(md: MarkdownWriter, stream: Stream, selector: str
     md.writeln("```json")
     md.writeln("{")
     md.indent()
+    md.writeln('"id":1,')
     md.writeln(f'"stream":"{stream.channel}",')
     md.writeln(f'"subs":["{selector}"],')
-    md.writeln('"unsubs":[]')
+    md.writeln('"unsubs":[],')
+    md.writeln('"num_snapshots":[1],')
+    md.writeln('"first_sequence_number":[2813]')
     md.dedent()
     md.writeln("}")
     md.writeln("```")

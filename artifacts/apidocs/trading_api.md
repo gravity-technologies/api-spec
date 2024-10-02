@@ -195,7 +195,7 @@ LITE ENDPOINT: lite/v1/create_order
     !!! info "ApiCreateOrderResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |order<br>`o` |Order|True|The created order|
+        |result<br>`r` |Order|True|The created order|
         ??? info "Order"
             Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
@@ -297,7 +297,7 @@ LITE ENDPOINT: lite/v1/create_order
     !!! success
         ```json
         {
-            "order": {
+            "result": {
                 "order_id": "0x1234567890abcdef",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
@@ -338,15 +338,16 @@ LITE ENDPOINT: lite/v1/create_order
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
-        |1003|404|Data Not Found|
-        |1004|500|Unknown Error|
-        |2000|401|Order signature is from an unauthorized signer|
-        |2001|401|Order signature has expired|
-        |2002|401|Order signature does not match payload|
-        |2003|401|Order sub account does not match logged in user|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1004|404|Data Not Found|
+        |1005|500|Unknown Error|
+        |2000|403|Order signature is from an unauthorized signer|
+        |2001|403|Order signature has expired|
+        |2002|403|Order signature does not match payload|
+        |2003|403|Order sub account does not match logged in user|
         |2010|400|Order ID should be empty when creating an order|
         |2011|400|Client Order ID should be supplied when creating an order|
         |2012|400|Client Order ID overlaps with existing active order|
@@ -372,48 +373,53 @@ LITE ENDPOINT: lite/v1/create_order
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         {
-            "code":1003,
+            "code":1004,
             "message":"Data Not Found",
             "status":404
         }
         {
-            "code":1004,
+            "code":1005,
             "message":"Unknown Error",
             "status":500
         }
         {
             "code":2000,
             "message":"Order signature is from an unauthorized signer",
-            "status":401
+            "status":403
         }
         {
             "code":2001,
             "message":"Order signature has expired",
-            "status":401
+            "status":403
         }
         {
             "code":2002,
             "message":"Order signature does not match payload",
-            "status":401
+            "status":403
         }
         {
             "code":2003,
             "message":"Order sub account does not match logged in user",
-            "status":401
+            "status":403
         }
         {
             "code":2010,
@@ -720,13 +726,19 @@ LITE ENDPOINT: lite/v1/cancel_order
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |acknowledgement<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
+        |result<br>`r` |Ack|True|The Ack Object|
+        ??? info "Ack"
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |ack<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
         ```json
         {
-            "acknowledgement": "true"
+            "result": {
+                "ack": "true"
+            }
         }
         ```
     </section>
@@ -735,9 +747,10 @@ LITE ENDPOINT: lite/v1/cancel_order
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
         |3021|400|Either order ID or client order ID must be supplied|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -745,17 +758,22 @@ LITE ENDPOINT: lite/v1/cancel_order
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         {
@@ -885,13 +903,19 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |acknowledgement<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
+        |result<br>`r` |Ack|True|The Ack Object|
+        ??? info "Ack"
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |ack<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
         ```json
         {
-            "acknowledgement": "true"
+            "result": {
+                "ack": "true"
+            }
         }
         ```
     </section>
@@ -900,26 +924,32 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -1014,7 +1044,7 @@ LITE ENDPOINT: lite/v1/order
     !!! info "ApiGetOrderResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |order<br>`o` |Order|True|The order object for the requested filter|
+        |result<br>`r` |Order|True|The order object for the requested filter|
         ??? info "Order"
             Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
@@ -1116,7 +1146,7 @@ LITE ENDPOINT: lite/v1/order
     !!! success
         ```json
         {
-            "order": {
+            "result": {
                 "order_id": "0x1234567890abcdef",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
@@ -1157,10 +1187,11 @@ LITE ENDPOINT: lite/v1/order
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
-        |1003|404|Data Not Found|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1004|404|Data Not Found|
         |3021|400|Either order ID or client order ID must be supplied|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -1168,21 +1199,26 @@ LITE ENDPOINT: lite/v1/order
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         {
-            "code":1003,
+            "code":1004,
             "message":"Data Not Found",
             "status":404
         }
@@ -1311,7 +1347,7 @@ LITE ENDPOINT: lite/v1/open_orders
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |orders<br>`o` |[Order]|True|The Open Orders matching the request filter|
+        |result<br>`r` |[Order]|True|The Open Orders matching the request filter|
         ??? info "Order"
             Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
@@ -1413,7 +1449,7 @@ LITE ENDPOINT: lite/v1/open_orders
     !!! success
         ```json
         {
-            "orders": [{
+            "result": [{
                 "order_id": "0x1234567890abcdef",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
@@ -1454,26 +1490,32 @@ LITE ENDPOINT: lite/v1/open_orders
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -1612,7 +1654,7 @@ LITE ENDPOINT: lite/v1/order_history
     !!! info "ApiOrderHistoryResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |orders<br>`o` |[Order]|True|The Open Orders matching the request filter|
+        |result<br>`r` |[Order]|True|The Open Orders matching the request filter|
         |next<br>`n` |string|True|The cursor to indicate when to start the query from|
         ??? info "Order"
             Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
@@ -1715,7 +1757,7 @@ LITE ENDPOINT: lite/v1/order_history
     !!! success
         ```json
         {
-            "orders": [{
+            "result": [{
                 "order_id": "0x1234567890abcdef",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
@@ -1757,26 +1799,32 @@ LITE ENDPOINT: lite/v1/order_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -1932,7 +1980,7 @@ LITE ENDPOINT: lite/v1/fill_history
     !!! info "ApiFillHistoryResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[Fill]|True|The private trades matching the request asset|
+        |result<br>`r` |[Fill]|True|The private trades matching the request asset|
         |next<br>`n` |string|True|The cursor to indicate when to start the query from|
         ??? info "Fill"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1967,7 +2015,7 @@ LITE ENDPOINT: lite/v1/fill_history
     !!! success
         ```json
         {
-            "results": [{
+            "result": [{
                 "event_time": "1697788800000000000",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
@@ -1996,26 +2044,32 @@ LITE ENDPOINT: lite/v1/fill_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -2158,7 +2212,7 @@ LITE ENDPOINT: lite/v1/positions
     !!! info "ApiPositionsResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[Positions]|True|The positions matching the request filter|
+        |result<br>`r` |[Positions]|True|The positions matching the request filter|
         ??? info "Positions"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
@@ -2180,7 +2234,7 @@ LITE ENDPOINT: lite/v1/positions
     !!! success
         ```json
         {
-            "results": [{
+            "result": [{
                 "event_time": "1697788800000000000",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
@@ -2203,26 +2257,32 @@ LITE ENDPOINT: lite/v1/positions
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -2330,13 +2390,19 @@ LITE ENDPOINT: lite/v1/deposit
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |acknowledgement<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
+        |result<br>`r` |Ack|True|The Ack Object|
+        ??? info "Ack"
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |ack<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
         ```json
         {
-            "acknowledgement": "true"
+            "result": {
+                "ack": "true"
+            }
         }
         ```
     </section>
@@ -2345,26 +2411,32 @@ LITE ENDPOINT: lite/v1/deposit
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -2471,7 +2543,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! info "ApiDepositHistoryResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[DepositHistory]|True|The deposit history matching the request account|
+        |result<br>`r` |[DepositHistory]|True|The deposit history matching the request account|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
         ??? info "DepositHistory"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -2497,7 +2569,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! success
         ```json
         {
-            "results": [{
+            "result": [{
                 "tx_id": "1028403",
                 "tx_hash": "0x10000101000203040506",
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2514,26 +2586,32 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -2679,13 +2757,19 @@ LITE ENDPOINT: lite/v1/transfer
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |acknowledgement<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
+        |result<br>`r` |Ack|True|The Ack Object|
+        ??? info "Ack"
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |ack<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
         ```json
         {
-            "acknowledgement": "true"
+            "result": {
+                "ack": "true"
+            }
         }
         ```
     </section>
@@ -2694,26 +2778,32 @@ LITE ENDPOINT: lite/v1/transfer
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -2864,7 +2954,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! info "ApiTransferHistoryResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[TransferHistory]|True|The transfer history matching the request account|
+        |result<br>`r` |[TransferHistory]|True|The transfer history matching the request account|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
         ??? info "TransferHistory"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -2902,7 +2992,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! success
         ```json
         {
-            "results": [{
+            "result": [{
                 "tx_id": "1028403",
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -2929,26 +3019,32 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -3088,13 +3184,19 @@ LITE ENDPOINT: lite/v1/withdrawal
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |acknowledgement<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
+        |result<br>`r` |Ack|True|The Ack Object|
+        ??? info "Ack"
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |ack<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
         ```json
         {
-            "acknowledgement": "true"
+            "result": {
+                "ack": "true"
+            }
         }
         ```
     </section>
@@ -3103,26 +3205,32 @@ LITE ENDPOINT: lite/v1/withdrawal
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -3265,7 +3373,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! info "ApiWithdrawalHistoryResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[WithdrawalHistory]|True|The withdrawals history matching the request account|
+        |result<br>`r` |[WithdrawalHistory]|True|The withdrawals history matching the request account|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
         ??? info "WithdrawalHistory"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -3301,7 +3409,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! success
         ```json
         {
-            "results": [{
+            "result": [{
                 "tx_id": "1028403",
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3326,26 +3434,32 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -3439,11 +3553,11 @@ LITE ENDPOINT: lite/v1/account_summary
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |SubAccount|True|The sub account matching the request sub account|
+        |result<br>`r` |SubAccount|True|The sub account matching the request sub account|
         ??? info "SubAccount"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
-            |event_time<br>`et` |string|True|Time at which the event was emitted in uix nanoseconds|
+            |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
             |sub_account_id<br>`sa` |string|True|The sub account ID this entry refers to|
             |margin_type<br>`mt` |MarginType|True|The type of margin algorithm this subaccount uses|
             |settle_currency<br>`sc` |Currency|True|The settlement, margin, and reporting currency of this account.<br>This subaccount can only open positions quoted in this currency<br><br>In the future, when users select a Multi-Currency Margin Type, this will be USD<br>All other assets are converted to this currency for the purpose of calculating margin|
@@ -3507,7 +3621,7 @@ LITE ENDPOINT: lite/v1/account_summary
     !!! success
         ```json
         {
-            "results": {
+            "result": {
                 "event_time": "1697788800000000000",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "margin_type": "SIMPLE_CROSS_MARGIN",
@@ -3547,26 +3661,32 @@ LITE ENDPOINT: lite/v1/account_summary
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -3655,12 +3775,12 @@ LITE ENDPOINT: lite/v1/account_history
     !!! info "ApiSubAccountHistoryResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[SubAccount]|True|The sub account history matching the request sub account|
+        |result<br>`r` |[SubAccount]|True|The sub account history matching the request sub account|
         |next<br>`n` |string|True|The cursor to indicate when to start the next query from|
         ??? info "SubAccount"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
-            |event_time<br>`et` |string|True|Time at which the event was emitted in uix nanoseconds|
+            |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
             |sub_account_id<br>`sa` |string|True|The sub account ID this entry refers to|
             |margin_type<br>`mt` |MarginType|True|The type of margin algorithm this subaccount uses|
             |settle_currency<br>`sc` |Currency|True|The settlement, margin, and reporting currency of this account.<br>This subaccount can only open positions quoted in this currency<br><br>In the future, when users select a Multi-Currency Margin Type, this will be USD<br>All other assets are converted to this currency for the purpose of calculating margin|
@@ -3724,7 +3844,7 @@ LITE ENDPOINT: lite/v1/account_history
     !!! success
         ```json
         {
-            "results": [{
+            "result": [{
                 "event_time": "1697788800000000000",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "margin_type": "SIMPLE_CROSS_MARGIN",
@@ -3765,26 +3885,32 @@ LITE ENDPOINT: lite/v1/account_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1000|401|You are not authorized to access this functionality|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
             "code":1000,
-            "message":"You are not authorized to access this functionality",
+            "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
         {
             "code":1001,
+            "message":"You are not authorized to access this functionality",
+            "status":403
+        }
+        {
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -3876,37 +4002,43 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |main_account_id<br>`ma` |string|True|The main account ID of the account to which the summary belongs|
-        |total_equity<br>`te` |string|True|Total equity of the main (+ sub) account, denominated in USD|
-        |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this main (+ sub) account, and their balances|
-        ??? info "SpotBalance"
+        |result<br>`r` |AggregatedAccountSummary|True|The aggregated account summary|
+        ??? info "AggregatedAccountSummary"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
-            |currency<br>`c` |Currency|True|The currency you hold a spot balance in|
-            |balance<br>`b` |string|True|This currency's balance in this trading account.|
-            |index_price<br>`ip` |string|True|The index price of this currency. (reported in `USD`)|
-            ??? info "Currency"
-                The list of Currencies that are supported on the GRVT exchange<br>
+            |main_account_id<br>`ma` |string|True|The main account ID of the account to which the summary belongs|
+            |total_equity<br>`te` |string|True|Total equity of the main (+ sub) account, denominated in USD|
+            |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this main (+ sub) account, and their balances|
+            ??? info "SpotBalance"
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |currency<br>`c` |Currency|True|The currency you hold a spot balance in|
+                |balance<br>`b` |string|True|This currency's balance in this trading account.|
+                |index_price<br>`ip` |string|True|The index price of this currency. (reported in `USD`)|
+                ??? info "Currency"
+                    The list of Currencies that are supported on the GRVT exchange<br>
 
-                |Value| Description |
-                |-|-|
-                |`USD` = 1|the USD fiat currency|
-                |`USDC` = 2|the USDC token|
-                |`USDT` = 3|the USDT token|
-                |`ETH` = 4|the ETH token|
-                |`BTC` = 5|the BTC token|
+                    |Value| Description |
+                    |-|-|
+                    |`USD` = 1|the USD fiat currency|
+                    |`USDC` = 2|the USDC token|
+                    |`USDT` = 3|the USDT token|
+                    |`ETH` = 4|the ETH token|
+                    |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
         ```json
         {
-            "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "total_equity": "3945034.23",
-            "spot_balances": [{
-                "currency": "USDT",
-                "balance": "123456.78",
-                "index_price": "1.0000102"
-            }]
+            "result": {
+                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "total_equity": "3945034.23",
+                "spot_balances": [{
+                    "currency": "USDT",
+                    "balance": "123456.78",
+                    "index_price": "1.0000102"
+                }]
+            }
         }
         ```
     </section>
@@ -3915,20 +4047,20 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -4000,37 +4132,45 @@ LITE ENDPOINT: lite/v1/funding_account_summary
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |main_account_id<br>`ma` |string|True|The main account ID of the account to which the summary belongs|
-        |total_equity<br>`te` |string|True|Total equity of the main account, denominated in USD|
-        |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this main account, and their balances|
-        ??? info "SpotBalance"
+        |result<br>`r` |FundingAccountSummary|True|The funding account summary|
+        ??? info "FundingAccountSummary"
+            The funding account summary, that reports the total equity and spot balances of a funding (main) account<br>
+
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
-            |currency<br>`c` |Currency|True|The currency you hold a spot balance in|
-            |balance<br>`b` |string|True|This currency's balance in this trading account.|
-            |index_price<br>`ip` |string|True|The index price of this currency. (reported in `USD`)|
-            ??? info "Currency"
-                The list of Currencies that are supported on the GRVT exchange<br>
+            |main_account_id<br>`ma` |string|True|The main account ID of the account to which the summary belongs|
+            |total_equity<br>`te` |string|True|Total equity of the main account, denominated in USD|
+            |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this main account, and their balances|
+            ??? info "SpotBalance"
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |currency<br>`c` |Currency|True|The currency you hold a spot balance in|
+                |balance<br>`b` |string|True|This currency's balance in this trading account.|
+                |index_price<br>`ip` |string|True|The index price of this currency. (reported in `USD`)|
+                ??? info "Currency"
+                    The list of Currencies that are supported on the GRVT exchange<br>
 
-                |Value| Description |
-                |-|-|
-                |`USD` = 1|the USD fiat currency|
-                |`USDC` = 2|the USDC token|
-                |`USDT` = 3|the USDT token|
-                |`ETH` = 4|the ETH token|
-                |`BTC` = 5|the BTC token|
+                    |Value| Description |
+                    |-|-|
+                    |`USD` = 1|the USD fiat currency|
+                    |`USDC` = 2|the USDC token|
+                    |`USDT` = 3|the USDT token|
+                    |`ETH` = 4|the ETH token|
+                    |`BTC` = 5|the BTC token|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
         ```json
         {
-            "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "total_equity": "3945034.23",
-            "spot_balances": [{
-                "currency": "USDT",
-                "balance": "123456.78",
-                "index_price": "1.0000102"
-            }]
+            "result": {
+                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "total_equity": "3945034.23",
+                "spot_balances": [{
+                    "currency": "USDT",
+                    "balance": "123456.78",
+                    "index_price": "1.0000102"
+                }]
+            }
         }
         ```
     </section>
@@ -4039,20 +4179,20 @@ LITE ENDPOINT: lite/v1/funding_account_summary
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```

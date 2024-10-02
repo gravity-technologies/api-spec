@@ -14,13 +14,35 @@ STREAM: v1.mini.s
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0, 40, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
+        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -29,6 +51,7 @@ STREAM: v1.mini.s
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -38,9 +61,12 @@ STREAM: v1.mini.s
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.mini.s",
             "subs":["BTC_USDT_Perp@500"],
-            "unsubs":[]
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -116,8 +142,8 @@ STREAM: v1.mini.s
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1003|404|Data Not Found|
+        |1002|500|Internal Server Error|
+        |1004|404|Data Not Found|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
@@ -128,12 +154,12 @@ STREAM: v1.mini.s
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1003,
+            "code":1004,
             "message":"Data Not Found",
             "status":404
         }
@@ -170,6 +196,7 @@ STREAM: v1.mini.s
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -182,6 +209,7 @@ STREAM: v1.mini.s
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -194,6 +222,7 @@ STREAM: v1.mini.s
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -206,6 +235,7 @@ STREAM: v1.mini.s
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -227,13 +257,35 @@ STREAM: v1.mini.d
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0, 40, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
+        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -242,6 +294,7 @@ STREAM: v1.mini.d
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -251,9 +304,12 @@ STREAM: v1.mini.d
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.mini.d",
             "subs":["BTC_USDT_Perp@500"],
-            "unsubs":[]
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -329,8 +385,8 @@ STREAM: v1.mini.d
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1003|404|Data Not Found|
+        |1002|500|Internal Server Error|
+        |1004|404|Data Not Found|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
@@ -341,12 +397,12 @@ STREAM: v1.mini.d
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1003,
+            "code":1004,
             "message":"Data Not Found",
             "status":404
         }
@@ -383,6 +439,7 @@ STREAM: v1.mini.d
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -395,6 +452,7 @@ STREAM: v1.mini.d
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -407,6 +465,7 @@ STREAM: v1.mini.d
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -419,6 +478,7 @@ STREAM: v1.mini.d
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -441,12 +501,34 @@ STREAM: v1.ticker.s
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -455,6 +537,7 @@ STREAM: v1.ticker.s
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -464,9 +547,12 @@ STREAM: v1.ticker.s
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.ticker.s",
             "subs":["BTC_USDT_Perp@500"],
-            "unsubs":[]
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -583,8 +669,8 @@ STREAM: v1.ticker.s
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1003|404|Data Not Found|
+        |1002|500|Internal Server Error|
+        |1004|404|Data Not Found|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
@@ -595,12 +681,12 @@ STREAM: v1.ticker.s
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1003,
+            "code":1004,
             "message":"Data Not Found",
             "status":404
         }
@@ -637,6 +723,7 @@ STREAM: v1.ticker.s
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -649,6 +736,7 @@ STREAM: v1.ticker.s
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -661,6 +749,7 @@ STREAM: v1.ticker.s
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -673,6 +762,7 @@ STREAM: v1.ticker.s
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -695,12 +785,34 @@ STREAM: v1.ticker.d
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -709,6 +821,7 @@ STREAM: v1.ticker.d
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -718,9 +831,12 @@ STREAM: v1.ticker.d
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.ticker.d",
             "subs":["BTC_USDT_Perp@500"],
-            "unsubs":[]
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -837,8 +953,8 @@ STREAM: v1.ticker.d
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1003|404|Data Not Found|
+        |1002|500|Internal Server Error|
+        |1004|404|Data Not Found|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
@@ -849,12 +965,12 @@ STREAM: v1.ticker.d
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1003,
+            "code":1004,
             "message":"Data Not Found",
             "status":404
         }
@@ -891,6 +1007,7 @@ STREAM: v1.ticker.d
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -903,6 +1020,7 @@ STREAM: v1.ticker.d
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -915,6 +1033,7 @@ STREAM: v1.ticker.d
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -927,6 +1046,7 @@ STREAM: v1.ticker.d
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -944,30 +1064,52 @@ STREAM: v1.book.s
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSOrderbookLevelsFeedSelectorV1"
-        Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.<br>Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul><br>
+        Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.<br>Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul><br><br>Subscription Pattern:<ul><li>Delta - `instrument@rate`</li><li>Snapshot - `instrument@rate-depth`</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (40, 100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
-        |depth<br>`d` |number|True|Depth of the order book to be retrieved (10, 40, 200, 500)|
-        |aggregate<br>`a` |number|True|The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)|
+        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (50, 100, 500, 1000)<br>Snapshot (500, 1000)|
+        |depth<br>`d` |number|False<br>`'0'`|Depth of the order book to be retrieved<br>Delta(0 - `unlimited`)<br>Snapshot(10, 50, 100, 500)|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-40-10"],
+            "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":true
         }
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-40-10"],
+            "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":false
         }
@@ -975,9 +1117,12 @@ STREAM: v1.book.s
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.book.s",
-            "subs":["BTC_USDT_Perp@500-40-10"],
-            "unsubs":[]
+            "subs":["BTC_USDT_Perp@500-50"],
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -1060,26 +1205,25 @@ STREAM: v1.book.s
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1003|404|Data Not Found|
+        |1002|500|Internal Server Error|
+        |1004|404|Data Not Found|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
         |3031|400|Depth is invalid|
-        |5006|400|Aggregate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1003,
+            "code":1004,
             "message":"Data Not Found",
             "status":404
         }
@@ -1113,11 +1257,6 @@ STREAM: v1.book.s
             "message":"Depth is invalid",
             "status":400
         }
-        {
-            "code":5006,
-            "message":"Aggregate is invalid",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
@@ -1126,8 +1265,9 @@ STREAM: v1.book.s
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-40-10"],
+            "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1138,8 +1278,9 @@ STREAM: v1.book.s
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-40-10"],
+            "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1150,8 +1291,9 @@ STREAM: v1.book.s
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-40-10"],
+            "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1162,8 +1304,9 @@ STREAM: v1.book.s
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-40-10"],
+            "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1178,30 +1321,52 @@ STREAM: v1.book.d
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
     !!! info "WSOrderbookLevelsFeedSelectorV1"
-        Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.<br>Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul><br>
+        Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.<br>Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul><br><br>Subscription Pattern:<ul><li>Delta - `instrument@rate`</li><li>Snapshot - `instrument@rate-depth`</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (40, 100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
-        |depth<br>`d` |number|True|Depth of the order book to be retrieved (10, 40, 200, 500)|
-        |aggregate<br>`a` |number|True|The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)|
+        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (50, 100, 500, 1000)<br>Snapshot (500, 1000)|
+        |depth<br>`d` |number|False<br>`'0'`|Depth of the order book to be retrieved<br>Delta(0 - `unlimited`)<br>Snapshot(10, 50, 100, 500)|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-40-10"],
+            "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":true
         }
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-40-10"],
+            "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":false
         }
@@ -1209,9 +1374,12 @@ STREAM: v1.book.d
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.book.d",
-            "subs":["BTC_USDT_Perp@500-40-10"],
-            "unsubs":[]
+            "subs":["BTC_USDT_Perp@500-50"],
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -1294,26 +1462,25 @@ STREAM: v1.book.d
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1003|404|Data Not Found|
+        |1002|500|Internal Server Error|
+        |1004|404|Data Not Found|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
         |3031|400|Depth is invalid|
-        |5006|400|Aggregate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1003,
+            "code":1004,
             "message":"Data Not Found",
             "status":404
         }
@@ -1347,11 +1514,6 @@ STREAM: v1.book.d
             "message":"Depth is invalid",
             "status":400
         }
-        {
-            "code":5006,
-            "message":"Aggregate is invalid",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
@@ -1360,8 +1522,9 @@ STREAM: v1.book.d
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-40-10"],
+            "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1372,8 +1535,9 @@ STREAM: v1.book.d
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-40-10"],
+            "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1384,8 +1548,9 @@ STREAM: v1.book.d
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-40-10"],
+            "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1396,8 +1561,9 @@ STREAM: v1.book.d
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-40-10"],
+            "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1419,12 +1585,34 @@ STREAM: v1.trade
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |limit<br>`l` |number|True|The limit to query for. Defaults to 500; Max 1000|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1433,6 +1621,7 @@ STREAM: v1.trade
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1442,9 +1631,12 @@ STREAM: v1.trade
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.trade",
             "subs":["BTC_USDT_Perp@500"],
-            "unsubs":[]
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -1529,7 +1721,7 @@ STREAM: v1.trade
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
+        |1002|500|Internal Server Error|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
@@ -1540,7 +1732,7 @@ STREAM: v1.trade
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
@@ -1577,6 +1769,7 @@ STREAM: v1.trade
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1589,6 +1782,7 @@ STREAM: v1.trade
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1601,6 +1795,7 @@ STREAM: v1.trade
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1613,6 +1808,7 @@ STREAM: v1.trade
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1665,12 +1861,34 @@ STREAM: v1.candle
             |`MARK` = 2|Tracks mark prices|
             |`INDEX` = 3|Tracks index prices|
             |`MID` = 4|Tracks book mid prices|
+    ??? info "WSRequestV1"
+        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+    ??? info "WSResponseV1"
+        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
         ```json
         {
+            "id":1,
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "method":"subscribe",
@@ -1679,6 +1897,7 @@ STREAM: v1.candle
         ```
         ```json
         {
+            "id":1,
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "method":"subscribe",
@@ -1688,9 +1907,12 @@ STREAM: v1.candle
         **JSON RPC Response**
         ```json
         {
+            "id":1,
             "stream":"v1.candle",
             "subs":["BTC_USDT_Perp@CI_1_M-TRADE"],
-            "unsubs":[]
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
         }
         ```
     </section>
@@ -1765,7 +1987,7 @@ STREAM: v1.candle
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
+        |1002|500|Internal Server Error|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
@@ -1777,7 +1999,7 @@ STREAM: v1.candle
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
@@ -1819,6 +2041,7 @@ STREAM: v1.candle
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "method":"subscribe",
@@ -1831,6 +2054,7 @@ STREAM: v1.candle
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "method":"subscribe",
@@ -1843,6 +2067,7 @@ STREAM: v1.candle
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "method":"subscribe",
@@ -1855,6 +2080,7 @@ STREAM: v1.candle
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
+            "id":1,
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "method":"subscribe",

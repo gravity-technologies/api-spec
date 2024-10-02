@@ -35,7 +35,7 @@ LITE ENDPOINT: lite/v1/instrument
     !!! info "ApiGetInstrumentResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |Instrument|True|The instrument matching the request asset|
+        |result<br>`r` |Instrument|True|The instrument matching the request asset|
         ??? info "Instrument"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
@@ -103,7 +103,7 @@ LITE ENDPOINT: lite/v1/instrument
     !!! success
         ```json
         {
-            "results": {
+            "result": {
                 "instrument": "BTC_USDT_Perp",
                 "asset_id": "0x030501",
                 "base": "BTC",
@@ -128,25 +128,25 @@ LITE ENDPOINT: lite/v1/instrument
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
-        |1003|404|Data Not Found|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1004|404|Data Not Found|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         {
-            "code":1003,
+            "code":1004,
             "message":"Data Not Found",
             "status":404
         }
@@ -219,7 +219,7 @@ LITE ENDPOINT: lite/v1/all_instruments
     !!! info "ApiGetAllInstrumentsResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[Instrument]|True|List of instruments|
+        |result<br>`r` |[Instrument]|True|List of instruments|
         ??? info "Instrument"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
@@ -287,7 +287,7 @@ LITE ENDPOINT: lite/v1/all_instruments
     !!! success
         ```json
         {
-            "results": [{
+            "result": [{
                 "instrument": "BTC_USDT_Perp",
                 "asset_id": "0x030501",
                 "base": "BTC",
@@ -312,20 +312,20 @@ LITE ENDPOINT: lite/v1/all_instruments
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -438,7 +438,7 @@ LITE ENDPOINT: lite/v1/instruments
     !!! info "ApiGetFilteredInstrumentsResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[Instrument]|True|The instruments matching the request filter|
+        |result<br>`r` |[Instrument]|True|The instruments matching the request filter|
         ??? info "Instrument"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
@@ -506,7 +506,7 @@ LITE ENDPOINT: lite/v1/instruments
     !!! success
         ```json
         {
-            "results": [{
+            "result": [{
                 "instrument": "BTC_USDT_Perp",
                 "asset_id": "0x030501",
                 "base": "BTC",
@@ -531,20 +531,20 @@ LITE ENDPOINT: lite/v1/instruments
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -633,7 +633,7 @@ LITE ENDPOINT: lite/v1/mini
     !!! info "ApiMiniTickerResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |MiniTicker|True|The mini ticker matching the request asset|
+        |result<br>`r` |MiniTicker|True|The mini ticker matching the request asset|
         ??? info "MiniTicker"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
@@ -653,7 +653,7 @@ LITE ENDPOINT: lite/v1/mini
     !!! success
         ```json
         {
-            "results": {
+            "result": {
                 "event_time": "1697788800000000000",
                 "instrument": "BTC_USDT_Perp",
                 "mark_price": "65038.01",
@@ -674,25 +674,25 @@ LITE ENDPOINT: lite/v1/mini
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
-        |1003|404|Data Not Found|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1004|404|Data Not Found|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         {
-            "code":1003,
+            "code":1004,
             "message":"Data Not Found",
             "status":404
         }
@@ -765,7 +765,7 @@ LITE ENDPOINT: lite/v1/ticker
     !!! info "ApiTickerResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |Ticker|True|The mini ticker matching the request asset|
+        |result<br>`r` |Ticker|True|The mini ticker matching the request asset|
         ??? info "Ticker"
             Derived data such as the below, will not be included by default:<br>  - 24 hour volume (`buyVolume + sellVolume`)<br>  - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>  - 24 hour average trade price (`volumeQ / volumeU`)<br>  - 24 hour average trade volume (`volume / trades`)<br>  - 24 hour percentage change (`24hStatChange / 24hStat`)<br>  - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br><br>To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>Ticker extensions are currently under design to offer you more convenience.<br>These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br><br>
 
@@ -800,7 +800,7 @@ LITE ENDPOINT: lite/v1/ticker
     !!! success
         ```json
         {
-            "results": {
+            "result": {
                 "event_time": "1697788800000000000",
                 "instrument": "BTC_USDT_Perp",
                 "mark_price": "65038.01",
@@ -834,25 +834,25 @@ LITE ENDPOINT: lite/v1/ticker
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
-        |1003|404|Data Not Found|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1004|404|Data Not Found|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         {
-            "code":1003,
+            "code":1004,
             "message":"Data Not Found",
             "status":404
         }
@@ -907,23 +907,20 @@ LITE ENDPOINT: lite/v1/book
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |depth<br>`d` |number|True|Depth of the order book to be retrieved (10, 40, 200, 500)|
-        |aggregate<br>`a` |number|True|The number of levels to aggregate into one level (1 = no aggregation, 10/100/1000 = aggregate 10/100/1000 levels into 1)|
+        |depth<br>`d` |number|True|Depth of the order book to be retrieved (10, 50, 100, 500)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         ```json
         {
             "instrument": "BTC_USDT_Perp",
-            "depth": 40,
-            "aggregate": 10
+            "depth": 50
         }
         ```
         ```json
         {
             "i": "BTC_USDT_Perp",
-            "d": 40,
-            "a": 10
+            "d": 50
         }
         ```
     </section>
@@ -932,7 +929,7 @@ LITE ENDPOINT: lite/v1/book
     !!! info "ApiOrderbookLevelsResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |OrderbookLevels|True|The orderbook levels objects matching the request asset|
+        |result<br>`r` |OrderbookLevels|True|The orderbook levels objects matching the request asset|
         ??? info "OrderbookLevels"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
@@ -957,7 +954,7 @@ LITE ENDPOINT: lite/v1/book
     !!! success
         ```json
         {
-            "results": {
+            "result": {
                 "event_time": "1697788800000000000",
                 "instrument": "BTC_USDT_Perp",
                 "bids": [{
@@ -979,28 +976,27 @@ LITE ENDPOINT: lite/v1/book
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
-        |1003|404|Data Not Found|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1004|404|Data Not Found|
         |3000|400|Instrument is invalid|
         |3031|400|Depth is invalid|
-        |5006|400|Aggregate is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         {
-            "code":1003,
+            "code":1004,
             "message":"Data Not Found",
             "status":404
         }
@@ -1014,11 +1010,6 @@ LITE ENDPOINT: lite/v1/book
             "message":"Depth is invalid",
             "status":400
         }
-        {
-            "code":5006,
-            "message":"Aggregate is invalid",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
@@ -1027,8 +1018,7 @@ LITE ENDPOINT: lite/v1/book
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/book' \
         --data '{
             "instrument": "BTC_USDT_Perp",
-            "depth": 40,
-            "aggregate": 10
+            "depth": 50
         }
         '
         ```
@@ -1037,8 +1027,7 @@ LITE ENDPOINT: lite/v1/book
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/book' \
         --data '{
             "instrument": "BTC_USDT_Perp",
-            "depth": 40,
-            "aggregate": 10
+            "depth": 50
         }
         '
         ```
@@ -1047,8 +1036,7 @@ LITE ENDPOINT: lite/v1/book
         curl --location 'https://market-data.testnet.grvt.io/full/v1/book' \
         --data '{
             "instrument": "BTC_USDT_Perp",
-            "depth": 40,
-            "aggregate": 10
+            "depth": 50
         }
         '
         ```
@@ -1057,8 +1045,7 @@ LITE ENDPOINT: lite/v1/book
         curl --location 'https://market-data.grvt.io/full/v1/book' \
         --data '{
             "instrument": "BTC_USDT_Perp",
-            "depth": 40,
-            "aggregate": 10
+            "depth": 50
         }
         '
         ```
@@ -1100,7 +1087,7 @@ LITE ENDPOINT: lite/v1/trade
     !!! info "ApiTradeResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[Trade]|True|The public trades matching the request asset|
+        |result<br>`r` |[Trade]|True|The public trades matching the request asset|
         ??? info "Trade"
             All private RFQs and Private AXEs will be filtered out from the responses<br>
 
@@ -1129,7 +1116,7 @@ LITE ENDPOINT: lite/v1/trade
     !!! success
         ```json
         {
-            "results": [{
+            "result": [{
                 "event_time": "1697788800000000000",
                 "instrument": "BTC_USDT_Perp",
                 "is_taker_buyer": true,
@@ -1150,20 +1137,20 @@ LITE ENDPOINT: lite/v1/trade
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -1251,7 +1238,7 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! info "ApiTradeHistoryResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[Trade]|True|The public trades matching the request asset|
+        |result<br>`r` |[Trade]|True|The public trades matching the request asset|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
         ??? info "Trade"
             All private RFQs and Private AXEs will be filtered out from the responses<br>
@@ -1281,7 +1268,7 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! success
         ```json
         {
-            "results": [{
+            "result": [{
                 "event_time": "1697788800000000000",
                 "instrument": "BTC_USDT_Perp",
                 "is_taker_buyer": true,
@@ -1303,20 +1290,20 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -1451,7 +1438,7 @@ LITE ENDPOINT: lite/v1/kline
     !!! info "ApiCandlestickResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[Candlestick]|True|The candlestick result set for given interval|
+        |result<br>`r` |[Candlestick]|True|The candlestick result set for given interval|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
         ??? info "Candlestick"
             <br>
@@ -1473,7 +1460,7 @@ LITE ENDPOINT: lite/v1/kline
     !!! success
         ```json
         {
-            "results": [{
+            "result": [{
                 "open_time": "1697788800000000000",
                 "close_time": "1697788800000000000",
                 "open": "123456.78",
@@ -1494,20 +1481,20 @@ LITE ENDPOINT: lite/v1/kline
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
@@ -1616,7 +1603,7 @@ LITE ENDPOINT: lite/v1/funding
     !!! info "ApiFundingRateResponse"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |results<br>`r` |[FundingRate]|True|The funding rate result set for given interval|
+        |result<br>`r` |[FundingRate]|True|The funding rate result set for given interval|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
         ??? info "FundingRate"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1630,7 +1617,7 @@ LITE ENDPOINT: lite/v1/funding
     !!! success
         ```json
         {
-            "results": [{
+            "result": [{
                 "instrument": "BTC_USDT_Perp",
                 "funding_rate": "6.78",
                 "funding_time": "1697788800000000000",
@@ -1645,20 +1632,20 @@ LITE ENDPOINT: lite/v1/funding
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
-        |1001|500|Internal Server Error|
-        |1002|400|Request could not be processed, largely due to invalid encoding|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
         ```json
         {
-            "code":1001,
+            "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
         {
-            "code":1002,
-            "message":"Request could not be processed, largely due to invalid encoding",
+            "code":1003,
+            "message":"Request could not be processed due to malformed syntax",
             "status":400
         }
         ```
