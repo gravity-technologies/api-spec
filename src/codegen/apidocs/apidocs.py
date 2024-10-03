@@ -530,4 +530,4 @@ def write_section_end(md: MarkdownWriter) -> None:
 
 
 def write_code_block(md: MarkdownWriter, language: str) -> None:
-    md.writeln(f'``` {{ .{language} .linenums="1" .copy }}')
+    md.writeln(f"``` {{ .{language} .copy }}")

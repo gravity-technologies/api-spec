@@ -19,12 +19,12 @@ LITE ENDPOINT: lite/v1/instrument
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp"
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp"
         }
@@ -98,7 +98,7 @@ LITE ENDPOINT: lite/v1/instrument
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "instrument": "BTC_USDT_Perp",
@@ -128,7 +128,7 @@ LITE ENDPOINT: lite/v1/instrument
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -149,7 +149,7 @@ LITE ENDPOINT: lite/v1/instrument
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/instrument' \
         --data '{
             "instrument": "BTC_USDT_Perp"
@@ -157,7 +157,7 @@ LITE ENDPOINT: lite/v1/instrument
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/instrument' \
         --data '{
             "instrument": "BTC_USDT_Perp"
@@ -165,7 +165,7 @@ LITE ENDPOINT: lite/v1/instrument
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/full/v1/instrument' \
         --data '{
             "instrument": "BTC_USDT_Perp"
@@ -173,7 +173,7 @@ LITE ENDPOINT: lite/v1/instrument
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/full/v1/instrument' \
         --data '{
             "instrument": "BTC_USDT_Perp"
@@ -183,7 +183,7 @@ LITE ENDPOINT: lite/v1/instrument
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/instrument' \
         --data '{
             "i": "BTC_USDT_Perp"
@@ -191,7 +191,7 @@ LITE ENDPOINT: lite/v1/instrument
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/instrument' \
         --data '{
             "i": "BTC_USDT_Perp"
@@ -199,7 +199,7 @@ LITE ENDPOINT: lite/v1/instrument
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/lite/v1/instrument' \
         --data '{
             "i": "BTC_USDT_Perp"
@@ -207,7 +207,7 @@ LITE ENDPOINT: lite/v1/instrument
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/lite/v1/instrument' \
         --data '{
             "i": "BTC_USDT_Perp"
@@ -233,12 +233,12 @@ LITE ENDPOINT: lite/v1/all_instruments
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "is_active": true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "ia": true
         }
@@ -312,7 +312,7 @@ LITE ENDPOINT: lite/v1/all_instruments
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "instrument": "BTC_USDT_Perp",
@@ -341,7 +341,7 @@ LITE ENDPOINT: lite/v1/all_instruments
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -357,7 +357,7 @@ LITE ENDPOINT: lite/v1/all_instruments
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/all_instruments' \
         --data '{
             "is_active": true
@@ -365,7 +365,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/all_instruments' \
         --data '{
             "is_active": true
@@ -373,7 +373,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/full/v1/all_instruments' \
         --data '{
             "is_active": true
@@ -381,7 +381,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/full/v1/all_instruments' \
         --data '{
             "is_active": true
@@ -391,7 +391,7 @@ LITE ENDPOINT: lite/v1/all_instruments
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/all_instruments' \
         --data '{
             "ia": true
@@ -399,7 +399,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/all_instruments' \
         --data '{
             "ia": true
@@ -407,7 +407,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/lite/v1/all_instruments' \
         --data '{
             "ia": true
@@ -415,7 +415,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/lite/v1/all_instruments' \
         --data '{
             "ia": true
@@ -474,7 +474,7 @@ LITE ENDPOINT: lite/v1/instruments
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "kind": ["PERPETUAL"],
             "base": ["BTC", "ETH"],
@@ -483,7 +483,7 @@ LITE ENDPOINT: lite/v1/instruments
             "limit": 500
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "k": ["PERPETUAL"],
             "b": ["BTC", "ETH"],
@@ -561,7 +561,7 @@ LITE ENDPOINT: lite/v1/instruments
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "instrument": "BTC_USDT_Perp",
@@ -590,7 +590,7 @@ LITE ENDPOINT: lite/v1/instruments
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -606,7 +606,7 @@ LITE ENDPOINT: lite/v1/instruments
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/instruments' \
         --data '{
             "kind": ["PERPETUAL"],
@@ -618,7 +618,7 @@ LITE ENDPOINT: lite/v1/instruments
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/instruments' \
         --data '{
             "kind": ["PERPETUAL"],
@@ -630,7 +630,7 @@ LITE ENDPOINT: lite/v1/instruments
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/full/v1/instruments' \
         --data '{
             "kind": ["PERPETUAL"],
@@ -642,7 +642,7 @@ LITE ENDPOINT: lite/v1/instruments
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/full/v1/instruments' \
         --data '{
             "kind": ["PERPETUAL"],
@@ -656,7 +656,7 @@ LITE ENDPOINT: lite/v1/instruments
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/instruments' \
         --data '{
             "k": ["PERPETUAL"],
@@ -668,7 +668,7 @@ LITE ENDPOINT: lite/v1/instruments
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/instruments' \
         --data '{
             "k": ["PERPETUAL"],
@@ -680,7 +680,7 @@ LITE ENDPOINT: lite/v1/instruments
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/lite/v1/instruments' \
         --data '{
             "k": ["PERPETUAL"],
@@ -692,7 +692,7 @@ LITE ENDPOINT: lite/v1/instruments
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/lite/v1/instruments' \
         --data '{
             "k": ["PERPETUAL"],
@@ -723,12 +723,12 @@ LITE ENDPOINT: lite/v1/mini
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp"
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp"
         }
@@ -757,7 +757,7 @@ LITE ENDPOINT: lite/v1/mini
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "event_time": "1697788800000000000",
@@ -786,7 +786,7 @@ LITE ENDPOINT: lite/v1/mini
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -807,7 +807,7 @@ LITE ENDPOINT: lite/v1/mini
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/mini' \
         --data '{
             "instrument": "BTC_USDT_Perp"
@@ -815,7 +815,7 @@ LITE ENDPOINT: lite/v1/mini
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/mini' \
         --data '{
             "instrument": "BTC_USDT_Perp"
@@ -823,7 +823,7 @@ LITE ENDPOINT: lite/v1/mini
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/full/v1/mini' \
         --data '{
             "instrument": "BTC_USDT_Perp"
@@ -831,7 +831,7 @@ LITE ENDPOINT: lite/v1/mini
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/full/v1/mini' \
         --data '{
             "instrument": "BTC_USDT_Perp"
@@ -841,7 +841,7 @@ LITE ENDPOINT: lite/v1/mini
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/mini' \
         --data '{
             "i": "BTC_USDT_Perp"
@@ -849,7 +849,7 @@ LITE ENDPOINT: lite/v1/mini
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/mini' \
         --data '{
             "i": "BTC_USDT_Perp"
@@ -857,7 +857,7 @@ LITE ENDPOINT: lite/v1/mini
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/lite/v1/mini' \
         --data '{
             "i": "BTC_USDT_Perp"
@@ -865,7 +865,7 @@ LITE ENDPOINT: lite/v1/mini
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/lite/v1/mini' \
         --data '{
             "i": "BTC_USDT_Perp"
@@ -891,12 +891,12 @@ LITE ENDPOINT: lite/v1/ticker
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp"
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp"
         }
@@ -940,7 +940,7 @@ LITE ENDPOINT: lite/v1/ticker
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "event_time": "1697788800000000000",
@@ -982,7 +982,7 @@ LITE ENDPOINT: lite/v1/ticker
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -1003,7 +1003,7 @@ LITE ENDPOINT: lite/v1/ticker
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/ticker' \
         --data '{
             "instrument": "BTC_USDT_Perp"
@@ -1011,7 +1011,7 @@ LITE ENDPOINT: lite/v1/ticker
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/ticker' \
         --data '{
             "instrument": "BTC_USDT_Perp"
@@ -1019,7 +1019,7 @@ LITE ENDPOINT: lite/v1/ticker
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/full/v1/ticker' \
         --data '{
             "instrument": "BTC_USDT_Perp"
@@ -1027,7 +1027,7 @@ LITE ENDPOINT: lite/v1/ticker
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/full/v1/ticker' \
         --data '{
             "instrument": "BTC_USDT_Perp"
@@ -1037,7 +1037,7 @@ LITE ENDPOINT: lite/v1/ticker
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/ticker' \
         --data '{
             "i": "BTC_USDT_Perp"
@@ -1045,7 +1045,7 @@ LITE ENDPOINT: lite/v1/ticker
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/ticker' \
         --data '{
             "i": "BTC_USDT_Perp"
@@ -1053,7 +1053,7 @@ LITE ENDPOINT: lite/v1/ticker
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/lite/v1/ticker' \
         --data '{
             "i": "BTC_USDT_Perp"
@@ -1061,7 +1061,7 @@ LITE ENDPOINT: lite/v1/ticker
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/lite/v1/ticker' \
         --data '{
             "i": "BTC_USDT_Perp"
@@ -1089,13 +1089,13 @@ LITE ENDPOINT: lite/v1/book
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp",
             "depth": 50
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp",
             "d": 50
@@ -1130,7 +1130,7 @@ LITE ENDPOINT: lite/v1/book
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "event_time": "1697788800000000000",
@@ -1162,7 +1162,7 @@ LITE ENDPOINT: lite/v1/book
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -1193,7 +1193,7 @@ LITE ENDPOINT: lite/v1/book
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/book' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1202,7 +1202,7 @@ LITE ENDPOINT: lite/v1/book
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/book' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1211,7 +1211,7 @@ LITE ENDPOINT: lite/v1/book
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/full/v1/book' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1220,7 +1220,7 @@ LITE ENDPOINT: lite/v1/book
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/full/v1/book' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1231,7 +1231,7 @@ LITE ENDPOINT: lite/v1/book
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/book' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1240,7 +1240,7 @@ LITE ENDPOINT: lite/v1/book
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/book' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1249,7 +1249,7 @@ LITE ENDPOINT: lite/v1/book
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/lite/v1/book' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1258,7 +1258,7 @@ LITE ENDPOINT: lite/v1/book
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/lite/v1/book' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1287,13 +1287,13 @@ LITE ENDPOINT: lite/v1/trade
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp",
             "limit": 500
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp",
             "l": 500
@@ -1332,7 +1332,7 @@ LITE ENDPOINT: lite/v1/trade
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "event_time": "1697788800000000000",
@@ -1360,7 +1360,7 @@ LITE ENDPOINT: lite/v1/trade
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -1376,7 +1376,7 @@ LITE ENDPOINT: lite/v1/trade
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/trade' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1385,7 +1385,7 @@ LITE ENDPOINT: lite/v1/trade
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trade' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1394,7 +1394,7 @@ LITE ENDPOINT: lite/v1/trade
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/full/v1/trade' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1403,7 +1403,7 @@ LITE ENDPOINT: lite/v1/trade
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/full/v1/trade' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1414,7 +1414,7 @@ LITE ENDPOINT: lite/v1/trade
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/trade' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1423,7 +1423,7 @@ LITE ENDPOINT: lite/v1/trade
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/trade' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1432,7 +1432,7 @@ LITE ENDPOINT: lite/v1/trade
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/lite/v1/trade' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1441,7 +1441,7 @@ LITE ENDPOINT: lite/v1/trade
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/lite/v1/trade' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1472,7 +1472,7 @@ LITE ENDPOINT: lite/v1/trade_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp",
             "start_time": "1697788800000000000",
@@ -1481,7 +1481,7 @@ LITE ENDPOINT: lite/v1/trade_history
             "cursor": ""
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp",
             "st": "1697788800000000000",
@@ -1524,7 +1524,7 @@ LITE ENDPOINT: lite/v1/trade_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "event_time": "1697788800000000000",
@@ -1553,7 +1553,7 @@ LITE ENDPOINT: lite/v1/trade_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -1569,7 +1569,7 @@ LITE ENDPOINT: lite/v1/trade_history
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/trade_history' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1581,7 +1581,7 @@ LITE ENDPOINT: lite/v1/trade_history
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trade_history' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1593,7 +1593,7 @@ LITE ENDPOINT: lite/v1/trade_history
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/full/v1/trade_history' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1605,7 +1605,7 @@ LITE ENDPOINT: lite/v1/trade_history
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/full/v1/trade_history' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1619,7 +1619,7 @@ LITE ENDPOINT: lite/v1/trade_history
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/trade_history' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1631,7 +1631,7 @@ LITE ENDPOINT: lite/v1/trade_history
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/trade_history' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1643,7 +1643,7 @@ LITE ENDPOINT: lite/v1/trade_history
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/lite/v1/trade_history' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1655,7 +1655,7 @@ LITE ENDPOINT: lite/v1/trade_history
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/lite/v1/trade_history' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1720,7 +1720,7 @@ LITE ENDPOINT: lite/v1/kline
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp",
             "interval": "CI_1_M",
@@ -1731,7 +1731,7 @@ LITE ENDPOINT: lite/v1/kline
             "cursor": ""
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp",
             "i1": "CI_1_M",
@@ -1768,7 +1768,7 @@ LITE ENDPOINT: lite/v1/kline
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "open_time": "1697788800000000000",
@@ -1796,7 +1796,7 @@ LITE ENDPOINT: lite/v1/kline
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -1812,7 +1812,7 @@ LITE ENDPOINT: lite/v1/kline
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/kline' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1826,7 +1826,7 @@ LITE ENDPOINT: lite/v1/kline
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/kline' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1840,7 +1840,7 @@ LITE ENDPOINT: lite/v1/kline
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/full/v1/kline' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1854,7 +1854,7 @@ LITE ENDPOINT: lite/v1/kline
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/full/v1/kline' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -1870,7 +1870,7 @@ LITE ENDPOINT: lite/v1/kline
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/kline' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1884,7 +1884,7 @@ LITE ENDPOINT: lite/v1/kline
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/kline' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1898,7 +1898,7 @@ LITE ENDPOINT: lite/v1/kline
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/lite/v1/kline' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1912,7 +1912,7 @@ LITE ENDPOINT: lite/v1/kline
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/lite/v1/kline' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -1949,7 +1949,7 @@ LITE ENDPOINT: lite/v1/funding
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp",
             "start_time": "1697788800000000000",
@@ -1958,7 +1958,7 @@ LITE ENDPOINT: lite/v1/funding
             "cursor": ""
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp",
             "st": "1697788800000000000",
@@ -1985,7 +1985,7 @@ LITE ENDPOINT: lite/v1/funding
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "instrument": "BTC_USDT_Perp",
@@ -2007,7 +2007,7 @@ LITE ENDPOINT: lite/v1/funding
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -2023,7 +2023,7 @@ LITE ENDPOINT: lite/v1/funding
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/funding' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -2035,7 +2035,7 @@ LITE ENDPOINT: lite/v1/funding
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/funding' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -2047,7 +2047,7 @@ LITE ENDPOINT: lite/v1/funding
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/full/v1/funding' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -2059,7 +2059,7 @@ LITE ENDPOINT: lite/v1/funding
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/full/v1/funding' \
         --data '{
             "instrument": "BTC_USDT_Perp",
@@ -2073,7 +2073,7 @@ LITE ENDPOINT: lite/v1/funding
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/funding' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -2085,7 +2085,7 @@ LITE ENDPOINT: lite/v1/funding
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/funding' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -2097,7 +2097,7 @@ LITE ENDPOINT: lite/v1/funding
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.testnet.grvt.io/lite/v1/funding' \
         --data '{
             "i": "BTC_USDT_Perp",
@@ -2109,7 +2109,7 @@ LITE ENDPOINT: lite/v1/funding
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://market-data.grvt.io/lite/v1/funding' \
         --data '{
             "i": "BTC_USDT_Perp",

@@ -40,7 +40,7 @@ STREAM: v1.mini.s
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.mini.s",
@@ -49,7 +49,7 @@ STREAM: v1.mini.s
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.mini.s",
@@ -59,7 +59,7 @@ STREAM: v1.mini.s
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.mini.s",
@@ -96,7 +96,7 @@ STREAM: v1.mini.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.mini.s",
             "selector": "BTC_USDT_Perp",
@@ -116,7 +116,7 @@ STREAM: v1.mini.s
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.mini.s",
             "s1": "BTC_USDT_Perp",
@@ -152,7 +152,7 @@ STREAM: v1.mini.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -193,7 +193,7 @@ STREAM: v1.mini.s
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -206,7 +206,7 @@ STREAM: v1.mini.s
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -219,7 +219,7 @@ STREAM: v1.mini.s
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -232,7 +232,7 @@ STREAM: v1.mini.s
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -247,7 +247,7 @@ STREAM: v1.mini.s
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -260,7 +260,7 @@ STREAM: v1.mini.s
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -273,7 +273,7 @@ STREAM: v1.mini.s
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -286,7 +286,7 @@ STREAM: v1.mini.s
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -339,7 +339,7 @@ STREAM: v1.mini.d
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.mini.d",
@@ -348,7 +348,7 @@ STREAM: v1.mini.d
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.mini.d",
@@ -358,7 +358,7 @@ STREAM: v1.mini.d
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.mini.d",
@@ -395,7 +395,7 @@ STREAM: v1.mini.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.mini.s",
             "selector": "BTC_USDT_Perp",
@@ -415,7 +415,7 @@ STREAM: v1.mini.d
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.mini.s",
             "s1": "BTC_USDT_Perp",
@@ -451,7 +451,7 @@ STREAM: v1.mini.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -492,7 +492,7 @@ STREAM: v1.mini.d
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -505,7 +505,7 @@ STREAM: v1.mini.d
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -518,7 +518,7 @@ STREAM: v1.mini.d
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -531,7 +531,7 @@ STREAM: v1.mini.d
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -546,7 +546,7 @@ STREAM: v1.mini.d
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -559,7 +559,7 @@ STREAM: v1.mini.d
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -572,7 +572,7 @@ STREAM: v1.mini.d
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -585,7 +585,7 @@ STREAM: v1.mini.d
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -638,7 +638,7 @@ STREAM: v1.ticker.s
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.ticker.s",
@@ -647,7 +647,7 @@ STREAM: v1.ticker.s
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.ticker.s",
@@ -657,7 +657,7 @@ STREAM: v1.ticker.s
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.ticker.s",
@@ -709,7 +709,7 @@ STREAM: v1.ticker.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.ticker.s",
             "selector": "BTC_USDT_Perp",
@@ -742,7 +742,7 @@ STREAM: v1.ticker.s
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.ticker.s",
             "s1": "BTC_USDT_Perp",
@@ -791,7 +791,7 @@ STREAM: v1.ticker.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -832,7 +832,7 @@ STREAM: v1.ticker.s
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -845,7 +845,7 @@ STREAM: v1.ticker.s
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -858,7 +858,7 @@ STREAM: v1.ticker.s
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -871,7 +871,7 @@ STREAM: v1.ticker.s
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -886,7 +886,7 @@ STREAM: v1.ticker.s
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -899,7 +899,7 @@ STREAM: v1.ticker.s
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -912,7 +912,7 @@ STREAM: v1.ticker.s
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -925,7 +925,7 @@ STREAM: v1.ticker.s
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -978,7 +978,7 @@ STREAM: v1.ticker.d
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.ticker.d",
@@ -987,7 +987,7 @@ STREAM: v1.ticker.d
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.ticker.d",
@@ -997,7 +997,7 @@ STREAM: v1.ticker.d
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.ticker.d",
@@ -1049,7 +1049,7 @@ STREAM: v1.ticker.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.ticker.s",
             "selector": "BTC_USDT_Perp",
@@ -1082,7 +1082,7 @@ STREAM: v1.ticker.d
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.ticker.s",
             "s1": "BTC_USDT_Perp",
@@ -1131,7 +1131,7 @@ STREAM: v1.ticker.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -1172,7 +1172,7 @@ STREAM: v1.ticker.d
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -1185,7 +1185,7 @@ STREAM: v1.ticker.d
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -1198,7 +1198,7 @@ STREAM: v1.ticker.d
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -1211,7 +1211,7 @@ STREAM: v1.ticker.d
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -1226,7 +1226,7 @@ STREAM: v1.ticker.d
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -1239,7 +1239,7 @@ STREAM: v1.ticker.d
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -1252,7 +1252,7 @@ STREAM: v1.ticker.d
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -1265,7 +1265,7 @@ STREAM: v1.ticker.d
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -1320,7 +1320,7 @@ STREAM: v1.book.s
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.book.s",
@@ -1329,7 +1329,7 @@ STREAM: v1.book.s
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.book.s",
@@ -1339,7 +1339,7 @@ STREAM: v1.book.s
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.book.s",
@@ -1381,7 +1381,7 @@ STREAM: v1.book.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.book.s",
             "selector": "BTC_USDT_Perp",
@@ -1402,7 +1402,7 @@ STREAM: v1.book.s
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.book.s",
             "s1": "BTC_USDT_Perp",
@@ -1440,7 +1440,7 @@ STREAM: v1.book.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -1486,7 +1486,7 @@ STREAM: v1.book.s
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -1499,7 +1499,7 @@ STREAM: v1.book.s
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -1512,7 +1512,7 @@ STREAM: v1.book.s
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -1525,7 +1525,7 @@ STREAM: v1.book.s
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -1540,7 +1540,7 @@ STREAM: v1.book.s
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -1553,7 +1553,7 @@ STREAM: v1.book.s
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -1566,7 +1566,7 @@ STREAM: v1.book.s
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -1579,7 +1579,7 @@ STREAM: v1.book.s
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -1633,7 +1633,7 @@ STREAM: v1.book.d
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.book.d",
@@ -1642,7 +1642,7 @@ STREAM: v1.book.d
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.book.d",
@@ -1652,7 +1652,7 @@ STREAM: v1.book.d
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.book.d",
@@ -1694,7 +1694,7 @@ STREAM: v1.book.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.book.s",
             "selector": "BTC_USDT_Perp",
@@ -1715,7 +1715,7 @@ STREAM: v1.book.d
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.book.s",
             "s1": "BTC_USDT_Perp",
@@ -1752,7 +1752,7 @@ STREAM: v1.book.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -1793,7 +1793,7 @@ STREAM: v1.book.d
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -1806,7 +1806,7 @@ STREAM: v1.book.d
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -1819,7 +1819,7 @@ STREAM: v1.book.d
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -1832,7 +1832,7 @@ STREAM: v1.book.d
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -1847,7 +1847,7 @@ STREAM: v1.book.d
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -1860,7 +1860,7 @@ STREAM: v1.book.d
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -1873,7 +1873,7 @@ STREAM: v1.book.d
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -1886,7 +1886,7 @@ STREAM: v1.book.d
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -1940,7 +1940,7 @@ STREAM: v1.trade
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.trade",
@@ -1949,7 +1949,7 @@ STREAM: v1.trade
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.trade",
@@ -1959,7 +1959,7 @@ STREAM: v1.trade
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.trade",
@@ -2005,7 +2005,7 @@ STREAM: v1.trade
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.trade",
             "selector": "BTC_USDT_Perp",
@@ -2025,7 +2025,7 @@ STREAM: v1.trade
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.trade",
             "s1": "BTC_USDT_Perp",
@@ -2060,7 +2060,7 @@ STREAM: v1.trade
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -2096,7 +2096,7 @@ STREAM: v1.trade
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -2109,7 +2109,7 @@ STREAM: v1.trade
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -2122,7 +2122,7 @@ STREAM: v1.trade
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -2135,7 +2135,7 @@ STREAM: v1.trade
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -2150,7 +2150,7 @@ STREAM: v1.trade
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -2163,7 +2163,7 @@ STREAM: v1.trade
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -2176,7 +2176,7 @@ STREAM: v1.trade
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -2189,7 +2189,7 @@ STREAM: v1.trade
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -2272,7 +2272,7 @@ STREAM: v1.candle
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.candle",
@@ -2281,7 +2281,7 @@ STREAM: v1.candle
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.candle",
@@ -2291,7 +2291,7 @@ STREAM: v1.candle
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.candle",
@@ -2329,7 +2329,7 @@ STREAM: v1.candle
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.candle",
             "selector": "BTC_USDT_Perp",
@@ -2348,7 +2348,7 @@ STREAM: v1.candle
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.candle",
             "s1": "BTC_USDT_Perp",
@@ -2383,7 +2383,7 @@ STREAM: v1.candle
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -2424,7 +2424,7 @@ STREAM: v1.candle
 === "Try it out"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -2437,7 +2437,7 @@ STREAM: v1.candle
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -2450,7 +2450,7 @@ STREAM: v1.candle
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -2463,7 +2463,7 @@ STREAM: v1.candle
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
@@ -2478,7 +2478,7 @@ STREAM: v1.candle
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
@@ -2491,7 +2491,7 @@ STREAM: v1.candle
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
@@ -2504,7 +2504,7 @@ STREAM: v1.candle
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
@@ -2517,7 +2517,7 @@ STREAM: v1.candle
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {

@@ -40,7 +40,7 @@ STREAM: v1.order
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.order",
@@ -49,7 +49,7 @@ STREAM: v1.order
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.order",
@@ -59,7 +59,7 @@ STREAM: v1.order
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.order",
@@ -178,7 +178,7 @@ STREAM: v1.order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.order",
             "selector": "BTC_USDT_Perp",
@@ -218,7 +218,7 @@ STREAM: v1.order
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.order",
             "s1": "BTC_USDT_Perp",
@@ -275,7 +275,7 @@ STREAM: v1.order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -322,7 +322,7 @@ STREAM: v1.order
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -336,7 +336,7 @@ STREAM: v1.order
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -350,7 +350,7 @@ STREAM: v1.order
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -364,7 +364,7 @@ STREAM: v1.order
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -380,7 +380,7 @@ STREAM: v1.order
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -394,7 +394,7 @@ STREAM: v1.order
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -408,7 +408,7 @@ STREAM: v1.order
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -422,7 +422,7 @@ STREAM: v1.order
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -476,7 +476,7 @@ STREAM: v1.state
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.state",
@@ -485,7 +485,7 @@ STREAM: v1.state
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.state",
@@ -495,7 +495,7 @@ STREAM: v1.state
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.state",
@@ -569,7 +569,7 @@ STREAM: v1.state
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.state",
             "selector": "BTC_USDT_Perp",
@@ -587,7 +587,7 @@ STREAM: v1.state
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.state",
             "s1": "BTC_USDT_Perp",
@@ -622,7 +622,7 @@ STREAM: v1.state
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -669,7 +669,7 @@ STREAM: v1.state
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -683,7 +683,7 @@ STREAM: v1.state
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -697,7 +697,7 @@ STREAM: v1.state
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -711,7 +711,7 @@ STREAM: v1.state
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -727,7 +727,7 @@ STREAM: v1.state
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -741,7 +741,7 @@ STREAM: v1.state
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -755,7 +755,7 @@ STREAM: v1.state
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -769,7 +769,7 @@ STREAM: v1.state
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -824,7 +824,7 @@ STREAM: v1.fill
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.fill",
@@ -833,7 +833,7 @@ STREAM: v1.fill
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.fill",
@@ -843,7 +843,7 @@ STREAM: v1.fill
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.fill",
@@ -894,7 +894,7 @@ STREAM: v1.fill
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.fill",
             "selector": "BTC_USDT_Perp",
@@ -921,7 +921,7 @@ STREAM: v1.fill
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.fill",
             "s1": "BTC_USDT_Perp",
@@ -965,7 +965,7 @@ STREAM: v1.fill
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -1012,7 +1012,7 @@ STREAM: v1.fill
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1026,7 +1026,7 @@ STREAM: v1.fill
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1040,7 +1040,7 @@ STREAM: v1.fill
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1054,7 +1054,7 @@ STREAM: v1.fill
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1070,7 +1070,7 @@ STREAM: v1.fill
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1084,7 +1084,7 @@ STREAM: v1.fill
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1098,7 +1098,7 @@ STREAM: v1.fill
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1112,7 +1112,7 @@ STREAM: v1.fill
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1166,7 +1166,7 @@ STREAM: v1.position
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.position",
@@ -1175,7 +1175,7 @@ STREAM: v1.position
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.position",
@@ -1185,7 +1185,7 @@ STREAM: v1.position
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.position",
@@ -1224,7 +1224,7 @@ STREAM: v1.position
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.position",
             "selector": "BTC_USDT_Perp",
@@ -1246,7 +1246,7 @@ STREAM: v1.position
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.position",
             "s1": "BTC_USDT_Perp",
@@ -1285,7 +1285,7 @@ STREAM: v1.position
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -1332,7 +1332,7 @@ STREAM: v1.position
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1346,7 +1346,7 @@ STREAM: v1.position
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1360,7 +1360,7 @@ STREAM: v1.position
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1374,7 +1374,7 @@ STREAM: v1.position
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1390,7 +1390,7 @@ STREAM: v1.position
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1404,7 +1404,7 @@ STREAM: v1.position
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1418,7 +1418,7 @@ STREAM: v1.position
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1432,7 +1432,7 @@ STREAM: v1.position
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1486,7 +1486,7 @@ STREAM: v1.deposit
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.deposit",
@@ -1495,7 +1495,7 @@ STREAM: v1.deposit
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.deposit",
@@ -1505,7 +1505,7 @@ STREAM: v1.deposit
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.deposit",
@@ -1547,7 +1547,7 @@ STREAM: v1.deposit
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.deposit",
             "selector": "BTC_USDT_Perp",
@@ -1560,7 +1560,7 @@ STREAM: v1.deposit
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.deposit",
             "s1": "BTC_USDT_Perp",
@@ -1586,7 +1586,7 @@ STREAM: v1.deposit
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1001,
             "message":"You are not authorized to access this functionality",
@@ -1613,7 +1613,7 @@ STREAM: v1.deposit
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1627,7 +1627,7 @@ STREAM: v1.deposit
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1641,7 +1641,7 @@ STREAM: v1.deposit
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1655,7 +1655,7 @@ STREAM: v1.deposit
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1671,7 +1671,7 @@ STREAM: v1.deposit
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1685,7 +1685,7 @@ STREAM: v1.deposit
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1699,7 +1699,7 @@ STREAM: v1.deposit
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1713,7 +1713,7 @@ STREAM: v1.deposit
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1767,7 +1767,7 @@ STREAM: v1.transfer
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.transfer",
@@ -1776,7 +1776,7 @@ STREAM: v1.transfer
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.transfer",
@@ -1786,7 +1786,7 @@ STREAM: v1.transfer
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.transfer",
@@ -1840,7 +1840,7 @@ STREAM: v1.transfer
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.transfer",
             "selector": "BTC_USDT_Perp",
@@ -1863,7 +1863,7 @@ STREAM: v1.transfer
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.transfer",
             "s1": "BTC_USDT_Perp",
@@ -1900,7 +1900,7 @@ STREAM: v1.transfer
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1001,
             "message":"You are not authorized to access this functionality",
@@ -1932,7 +1932,7 @@ STREAM: v1.transfer
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1946,7 +1946,7 @@ STREAM: v1.transfer
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1960,7 +1960,7 @@ STREAM: v1.transfer
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1974,7 +1974,7 @@ STREAM: v1.transfer
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -1990,7 +1990,7 @@ STREAM: v1.transfer
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -2004,7 +2004,7 @@ STREAM: v1.transfer
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -2018,7 +2018,7 @@ STREAM: v1.transfer
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -2032,7 +2032,7 @@ STREAM: v1.transfer
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -2085,7 +2085,7 @@ STREAM: v1.withdrawal
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.withdrawal",
@@ -2094,7 +2094,7 @@ STREAM: v1.withdrawal
             "is_full":true
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.withdrawal",
@@ -2104,7 +2104,7 @@ STREAM: v1.withdrawal
         }
         ```
         **JSON RPC Response**
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "request_id":1,
             "stream":"v1.withdrawal",
@@ -2156,7 +2156,7 @@ STREAM: v1.withdrawal
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "stream": "v1.withdrawal",
             "selector": "BTC_USDT_Perp",
@@ -2177,7 +2177,7 @@ STREAM: v1.withdrawal
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "s": "v1.withdrawal",
             "s1": "BTC_USDT_Perp",
@@ -2211,7 +2211,7 @@ STREAM: v1.withdrawal
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1001,
             "message":"You are not authorized to access this functionality",
@@ -2238,7 +2238,7 @@ STREAM: v1.withdrawal
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -2252,7 +2252,7 @@ STREAM: v1.withdrawal
         ' -w 360
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -2266,7 +2266,7 @@ STREAM: v1.withdrawal
         ' -w 360
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -2280,7 +2280,7 @@ STREAM: v1.withdrawal
         ' -w 360
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -2296,7 +2296,7 @@ STREAM: v1.withdrawal
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -2310,7 +2310,7 @@ STREAM: v1.withdrawal
         ' -w 360
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -2324,7 +2324,7 @@ STREAM: v1.withdrawal
         ' -w 360
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
@@ -2338,7 +2338,7 @@ STREAM: v1.withdrawal
         ' -w 360
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '

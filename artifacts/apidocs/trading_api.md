@@ -115,7 +115,7 @@ LITE ENDPOINT: lite/v1/create_order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "order": {
                 "order_id": "0x1234567890abcdef",
@@ -152,7 +152,7 @@ LITE ENDPOINT: lite/v1/create_order
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "o": {
                 "oi": "0x1234567890abcdef",
@@ -295,7 +295,7 @@ LITE ENDPOINT: lite/v1/create_order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "order_id": "0x1234567890abcdef",
@@ -370,7 +370,7 @@ LITE ENDPOINT: lite/v1/create_order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -522,7 +522,7 @@ LITE ENDPOINT: lite/v1/create_order
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/create_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -563,7 +563,7 @@ LITE ENDPOINT: lite/v1/create_order
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/create_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -604,7 +604,7 @@ LITE ENDPOINT: lite/v1/create_order
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/create_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -645,7 +645,7 @@ LITE ENDPOINT: lite/v1/create_order
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/create_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -688,7 +688,7 @@ LITE ENDPOINT: lite/v1/create_order
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/create_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -729,7 +729,7 @@ LITE ENDPOINT: lite/v1/create_order
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/create_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -770,7 +770,7 @@ LITE ENDPOINT: lite/v1/create_order
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/create_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -811,7 +811,7 @@ LITE ENDPOINT: lite/v1/create_order
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/create_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -872,14 +872,14 @@ LITE ENDPOINT: lite/v1/cancel_order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042"
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "oi": "0x1028403",
@@ -902,7 +902,7 @@ LITE ENDPOINT: lite/v1/cancel_order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "ack": "true"
@@ -923,7 +923,7 @@ LITE ENDPOINT: lite/v1/cancel_order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -955,7 +955,7 @@ LITE ENDPOINT: lite/v1/cancel_order
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -966,7 +966,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/cancel_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -977,7 +977,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -988,7 +988,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/cancel_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1001,7 +1001,7 @@ LITE ENDPOINT: lite/v1/cancel_order
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cancel_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1012,7 +1012,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/cancel_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1023,7 +1023,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/cancel_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1034,7 +1034,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/cancel_order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1095,7 +1095,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
@@ -1103,7 +1103,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             "quote": ["USDT", "USDC"]
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
@@ -1127,7 +1127,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "ack": "true"
@@ -1147,7 +1147,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -1174,7 +1174,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1186,7 +1186,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1198,7 +1198,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1210,7 +1210,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1224,7 +1224,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1236,7 +1236,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1248,7 +1248,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1260,7 +1260,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/cancel_all_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1292,14 +1292,14 @@ LITE ENDPOINT: lite/v1/order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042"
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "oi": "0x1028403",
@@ -1412,7 +1412,7 @@ LITE ENDPOINT: lite/v1/order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "order_id": "0x1234567890abcdef",
@@ -1464,7 +1464,7 @@ LITE ENDPOINT: lite/v1/order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -1501,7 +1501,7 @@ LITE ENDPOINT: lite/v1/order
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1512,7 +1512,7 @@ LITE ENDPOINT: lite/v1/order
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1523,7 +1523,7 @@ LITE ENDPOINT: lite/v1/order
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1534,7 +1534,7 @@ LITE ENDPOINT: lite/v1/order
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1547,7 +1547,7 @@ LITE ENDPOINT: lite/v1/order
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1558,7 +1558,7 @@ LITE ENDPOINT: lite/v1/order
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1569,7 +1569,7 @@ LITE ENDPOINT: lite/v1/order
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1580,7 +1580,7 @@ LITE ENDPOINT: lite/v1/order
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/order' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1639,7 +1639,7 @@ LITE ENDPOINT: lite/v1/open_orders
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
@@ -1647,7 +1647,7 @@ LITE ENDPOINT: lite/v1/open_orders
             "quote": ["USDT", "USDC"]
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
@@ -1763,7 +1763,7 @@ LITE ENDPOINT: lite/v1/open_orders
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "order_id": "0x1234567890abcdef",
@@ -1813,7 +1813,7 @@ LITE ENDPOINT: lite/v1/open_orders
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -1840,7 +1840,7 @@ LITE ENDPOINT: lite/v1/open_orders
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/open_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1852,7 +1852,7 @@ LITE ENDPOINT: lite/v1/open_orders
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/open_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1864,7 +1864,7 @@ LITE ENDPOINT: lite/v1/open_orders
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/open_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1876,7 +1876,7 @@ LITE ENDPOINT: lite/v1/open_orders
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/open_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1890,7 +1890,7 @@ LITE ENDPOINT: lite/v1/open_orders
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/open_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1902,7 +1902,7 @@ LITE ENDPOINT: lite/v1/open_orders
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/open_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1914,7 +1914,7 @@ LITE ENDPOINT: lite/v1/open_orders
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/open_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1926,7 +1926,7 @@ LITE ENDPOINT: lite/v1/open_orders
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/open_orders' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -1992,7 +1992,7 @@ LITE ENDPOINT: lite/v1/order_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
@@ -2004,7 +2004,7 @@ LITE ENDPOINT: lite/v1/order_history
             "cursor": ""
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
@@ -2123,7 +2123,7 @@ LITE ENDPOINT: lite/v1/order_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "order_id": "0x1234567890abcdef",
@@ -2174,7 +2174,7 @@ LITE ENDPOINT: lite/v1/order_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -2201,7 +2201,7 @@ LITE ENDPOINT: lite/v1/order_history
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/order_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2217,7 +2217,7 @@ LITE ENDPOINT: lite/v1/order_history
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/order_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2233,7 +2233,7 @@ LITE ENDPOINT: lite/v1/order_history
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/order_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2249,7 +2249,7 @@ LITE ENDPOINT: lite/v1/order_history
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/order_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2267,7 +2267,7 @@ LITE ENDPOINT: lite/v1/order_history
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/order_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2283,7 +2283,7 @@ LITE ENDPOINT: lite/v1/order_history
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/order_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2299,7 +2299,7 @@ LITE ENDPOINT: lite/v1/order_history
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/order_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2315,7 +2315,7 @@ LITE ENDPOINT: lite/v1/order_history
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/order_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2386,7 +2386,7 @@ LITE ENDPOINT: lite/v1/fill_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
@@ -2398,7 +2398,7 @@ LITE ENDPOINT: lite/v1/fill_history
             "cursor": ""
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
@@ -2449,7 +2449,7 @@ LITE ENDPOINT: lite/v1/fill_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "event_time": "1697788800000000000",
@@ -2487,7 +2487,7 @@ LITE ENDPOINT: lite/v1/fill_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -2514,7 +2514,7 @@ LITE ENDPOINT: lite/v1/fill_history
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/fill_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2530,7 +2530,7 @@ LITE ENDPOINT: lite/v1/fill_history
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/fill_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2546,7 +2546,7 @@ LITE ENDPOINT: lite/v1/fill_history
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/fill_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2562,7 +2562,7 @@ LITE ENDPOINT: lite/v1/fill_history
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/fill_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2580,7 +2580,7 @@ LITE ENDPOINT: lite/v1/fill_history
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/fill_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2596,7 +2596,7 @@ LITE ENDPOINT: lite/v1/fill_history
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/fill_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2612,7 +2612,7 @@ LITE ENDPOINT: lite/v1/fill_history
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/fill_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2628,7 +2628,7 @@ LITE ENDPOINT: lite/v1/fill_history
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/fill_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2694,7 +2694,7 @@ LITE ENDPOINT: lite/v1/positions
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "kind": ["PERPETUAL"],
@@ -2702,7 +2702,7 @@ LITE ENDPOINT: lite/v1/positions
             "quote": ["USDT", "USDC"]
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "k": ["PERPETUAL"],
@@ -2736,7 +2736,7 @@ LITE ENDPOINT: lite/v1/positions
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "event_time": "1697788800000000000",
@@ -2768,7 +2768,7 @@ LITE ENDPOINT: lite/v1/positions
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -2795,7 +2795,7 @@ LITE ENDPOINT: lite/v1/positions
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/positions' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2807,7 +2807,7 @@ LITE ENDPOINT: lite/v1/positions
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/positions' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2819,7 +2819,7 @@ LITE ENDPOINT: lite/v1/positions
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/positions' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2831,7 +2831,7 @@ LITE ENDPOINT: lite/v1/positions
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/positions' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2845,7 +2845,7 @@ LITE ENDPOINT: lite/v1/positions
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/positions' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2857,7 +2857,7 @@ LITE ENDPOINT: lite/v1/positions
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/positions' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2869,7 +2869,7 @@ LITE ENDPOINT: lite/v1/positions
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/positions' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2881,7 +2881,7 @@ LITE ENDPOINT: lite/v1/positions
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/positions' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -2924,14 +2924,14 @@ LITE ENDPOINT: lite/v1/deposit
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "currency": "USDT",
             "num_tokens": "1500.0"
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "c": "USDT",
@@ -2954,7 +2954,7 @@ LITE ENDPOINT: lite/v1/deposit
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "ack": "true"
@@ -2974,7 +2974,7 @@ LITE ENDPOINT: lite/v1/deposit
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -3001,7 +3001,7 @@ LITE ENDPOINT: lite/v1/deposit
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/deposit' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3012,7 +3012,7 @@ LITE ENDPOINT: lite/v1/deposit
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/deposit' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3023,7 +3023,7 @@ LITE ENDPOINT: lite/v1/deposit
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/deposit' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3034,7 +3034,7 @@ LITE ENDPOINT: lite/v1/deposit
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/deposit' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3047,7 +3047,7 @@ LITE ENDPOINT: lite/v1/deposit
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/deposit' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3058,7 +3058,7 @@ LITE ENDPOINT: lite/v1/deposit
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/deposit' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3069,7 +3069,7 @@ LITE ENDPOINT: lite/v1/deposit
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/deposit' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3080,7 +3080,7 @@ LITE ENDPOINT: lite/v1/deposit
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/deposit' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3123,7 +3123,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
@@ -3132,7 +3132,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             "cursor": ""
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "c": ["USDT", "USDC"],
             "st": "1697788800000000000",
@@ -3171,7 +3171,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "tx_id": "1028403",
@@ -3197,7 +3197,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -3224,7 +3224,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3237,7 +3237,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3250,7 +3250,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3263,7 +3263,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3278,7 +3278,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3291,7 +3291,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3304,7 +3304,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3317,7 +3317,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3373,7 +3373,7 @@ LITE ENDPOINT: lite/v1/transfer
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -3391,7 +3391,7 @@ LITE ENDPOINT: lite/v1/transfer
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "fs": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -3425,7 +3425,7 @@ LITE ENDPOINT: lite/v1/transfer
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "ack": "true"
@@ -3445,7 +3445,7 @@ LITE ENDPOINT: lite/v1/transfer
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -3472,7 +3472,7 @@ LITE ENDPOINT: lite/v1/transfer
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/transfer' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3494,7 +3494,7 @@ LITE ENDPOINT: lite/v1/transfer
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/transfer' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3516,7 +3516,7 @@ LITE ENDPOINT: lite/v1/transfer
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/transfer' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3538,7 +3538,7 @@ LITE ENDPOINT: lite/v1/transfer
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/transfer' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3562,7 +3562,7 @@ LITE ENDPOINT: lite/v1/transfer
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/transfer' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3584,7 +3584,7 @@ LITE ENDPOINT: lite/v1/transfer
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/transfer' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3606,7 +3606,7 @@ LITE ENDPOINT: lite/v1/transfer
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/transfer' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3628,7 +3628,7 @@ LITE ENDPOINT: lite/v1/transfer
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/transfer' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3682,7 +3682,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
@@ -3691,7 +3691,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             "cursor": ""
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "c": ["USDT", "USDC"],
             "st": "1697788800000000000",
@@ -3742,7 +3742,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "tx_id": "1028403",
@@ -3778,7 +3778,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -3805,7 +3805,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3818,7 +3818,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3831,7 +3831,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3844,7 +3844,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3859,7 +3859,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3872,7 +3872,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3885,7 +3885,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3898,7 +3898,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -3952,7 +3952,7 @@ LITE ENDPOINT: lite/v1/withdrawal
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3968,7 +3968,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             }
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "te": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -4000,7 +4000,7 @@ LITE ENDPOINT: lite/v1/withdrawal
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "ack": "true"
@@ -4020,7 +4020,7 @@ LITE ENDPOINT: lite/v1/withdrawal
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -4047,7 +4047,7 @@ LITE ENDPOINT: lite/v1/withdrawal
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/withdrawal' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4067,7 +4067,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/withdrawal' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4087,7 +4087,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/withdrawal' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4107,7 +4107,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/withdrawal' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4129,7 +4129,7 @@ LITE ENDPOINT: lite/v1/withdrawal
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/withdrawal' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4149,7 +4149,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/withdrawal' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4169,7 +4169,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/withdrawal' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4189,7 +4189,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/withdrawal' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4241,7 +4241,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
@@ -4250,7 +4250,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             "cursor": ""
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "c": ["USDT", "USDC"],
             "st": "1697788800000000000",
@@ -4299,7 +4299,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "tx_id": "1028403",
@@ -4333,7 +4333,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -4360,7 +4360,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4373,7 +4373,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4386,7 +4386,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4399,7 +4399,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4414,7 +4414,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4427,7 +4427,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4440,7 +4440,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4453,7 +4453,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4483,12 +4483,12 @@ LITE ENDPOINT: lite/v1/account_summary
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'"
         }
@@ -4567,7 +4567,7 @@ LITE ENDPOINT: lite/v1/account_summary
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "event_time": "1697788800000000000",
@@ -4616,7 +4616,7 @@ LITE ENDPOINT: lite/v1/account_summary
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -4643,7 +4643,7 @@ LITE ENDPOINT: lite/v1/account_summary
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4652,7 +4652,7 @@ LITE ENDPOINT: lite/v1/account_summary
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4661,7 +4661,7 @@ LITE ENDPOINT: lite/v1/account_summary
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4670,7 +4670,7 @@ LITE ENDPOINT: lite/v1/account_summary
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4681,7 +4681,7 @@ LITE ENDPOINT: lite/v1/account_summary
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4690,7 +4690,7 @@ LITE ENDPOINT: lite/v1/account_summary
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4699,7 +4699,7 @@ LITE ENDPOINT: lite/v1/account_summary
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4708,7 +4708,7 @@ LITE ENDPOINT: lite/v1/account_summary
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4739,7 +4739,7 @@ LITE ENDPOINT: lite/v1/account_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "start_time": "1697788800000000000",
@@ -4748,7 +4748,7 @@ LITE ENDPOINT: lite/v1/account_history
             "cursor": ""
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "st": "1697788800000000000",
@@ -4830,7 +4830,7 @@ LITE ENDPOINT: lite/v1/account_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": [{
                 "event_time": "1697788800000000000",
@@ -4880,7 +4880,7 @@ LITE ENDPOINT: lite/v1/account_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -4907,7 +4907,7 @@ LITE ENDPOINT: lite/v1/account_history
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/account_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4920,7 +4920,7 @@ LITE ENDPOINT: lite/v1/account_history
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/account_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4933,7 +4933,7 @@ LITE ENDPOINT: lite/v1/account_history
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/account_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4946,7 +4946,7 @@ LITE ENDPOINT: lite/v1/account_history
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/account_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4961,7 +4961,7 @@ LITE ENDPOINT: lite/v1/account_history
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/account_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4974,7 +4974,7 @@ LITE ENDPOINT: lite/v1/account_history
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/account_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -4987,7 +4987,7 @@ LITE ENDPOINT: lite/v1/account_history
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/account_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5000,7 +5000,7 @@ LITE ENDPOINT: lite/v1/account_history
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/account_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5030,11 +5030,11 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
         }
         ```
@@ -5072,7 +5072,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -5096,7 +5096,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -5113,7 +5113,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/aggregated_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5121,7 +5121,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/aggregated_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5129,7 +5129,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/aggregated_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5137,7 +5137,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/aggregated_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5147,7 +5147,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/aggregated_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5155,7 +5155,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/aggregated_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5163,7 +5163,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/aggregated_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5171,7 +5171,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/aggregated_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5196,11 +5196,11 @@ LITE ENDPOINT: lite/v1/funding_account_summary
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
         }
         ```
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
         }
         ```
@@ -5240,7 +5240,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "result": {
                 "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -5264,7 +5264,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ``` { .json .linenums="1" .copy }
+        ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -5281,7 +5281,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
     -8<- "sections/auth.md"
     <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
     !!! example "Try DEV Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/funding_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5289,7 +5289,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         '
         ```
     !!! example "Try STG Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/funding_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5297,7 +5297,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         '
         ```
     !!! example "Try TESTNET Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/full/v1/funding_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5305,7 +5305,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         '
         ```
     !!! example "Try PROD Full"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/full/v1/funding_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5315,7 +5315,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
     </section>
     <section markdown="1" style="float: right; width: 50%;">
     !!! example "Try DEV Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/funding_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5323,7 +5323,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         '
         ```
     !!! example "Try STG Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/funding_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5331,7 +5331,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         '
         ```
     !!! example "Try TESTNET Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.testnet.grvt.io/lite/v1/funding_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
@@ -5339,7 +5339,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         '
         ```
     !!! example "Try PROD Lite"
-        ``` { .bash .linenums="1" .copy }
+        ``` { .bash .copy }
         curl --location 'https://trades.grvt.io/lite/v1/funding_account_summary' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
