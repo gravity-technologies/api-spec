@@ -1469,7 +1469,6 @@ STREAM: v1.book.d
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
-        |3031|400|Depth is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1507,11 +1506,6 @@ STREAM: v1.book.d
         {
             "code":3030,
             "message":"Feed rate is invalid",
-            "status":400
-        }
-        {
-            "code":3031,
-            "message":"Depth is invalid",
             "status":400
         }
         ```
@@ -1663,7 +1657,7 @@ STREAM: v1.trade
             |index_price<br>`ip` |string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
             |interest_rate<br>`ir` |string|True|The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)|
             |forward_price<br>`fp` |string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
-            |trade_id<br>`ti` |string|True|A trade identifier|
+            |trade_id<br>`ti` |string|True|A trade identifier, globally unique, and monotonically increasing (not by `1`).<br>All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.<br>`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.|
             |venue<br>`v` |Venue|True|The venue where the trade occurred|
             ??? info "Venue"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
@@ -1690,7 +1684,7 @@ STREAM: v1.trade
                 "index_price": "65038.01",
                 "interest_rate": 0.0003,
                 "forward_price": "65038.01",
-                "trade_id": "1234567890",
+                "trade_id": "209358:2",
                 "venue": "ORDERBOOK"
             }
         }
@@ -1710,7 +1704,7 @@ STREAM: v1.trade
                 "ip": "65038.01",
                 "ir": 0.0003,
                 "fp": "65038.01",
-                "ti": "1234567890",
+                "ti": "209358:2",
                 "v": "ORDERBOOK"
             }
         }
