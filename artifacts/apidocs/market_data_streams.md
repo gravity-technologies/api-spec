@@ -40,18 +40,18 @@ STREAM: v1.mini.s
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -59,9 +59,9 @@ STREAM: v1.mini.s
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.s",
             "subs":["BTC_USDT_Perp@500"],
             "unsubs":[],
@@ -96,7 +96,7 @@ STREAM: v1.mini.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.mini.s",
             "selector": "BTC_USDT_Perp",
@@ -116,7 +116,7 @@ STREAM: v1.mini.s
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.mini.s",
             "s1": "BTC_USDT_Perp",
@@ -152,7 +152,7 @@ STREAM: v1.mini.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -191,12 +191,13 @@ STREAM: v1.mini.s
         ```
     </section>
 === "Try it out"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -204,12 +205,12 @@ STREAM: v1.mini.s
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -217,12 +218,12 @@ STREAM: v1.mini.s
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -230,12 +231,12 @@ STREAM: v1.mini.s
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -243,6 +244,61 @@ STREAM: v1.mini.s
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.mini.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.mini.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.mini.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.mini.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ### Mini Ticker Delta
 ```
@@ -283,18 +339,18 @@ STREAM: v1.mini.d
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -302,9 +358,9 @@ STREAM: v1.mini.d
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.d",
             "subs":["BTC_USDT_Perp@500"],
             "unsubs":[],
@@ -339,7 +395,7 @@ STREAM: v1.mini.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.mini.s",
             "selector": "BTC_USDT_Perp",
@@ -359,7 +415,7 @@ STREAM: v1.mini.d
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.mini.s",
             "s1": "BTC_USDT_Perp",
@@ -395,7 +451,7 @@ STREAM: v1.mini.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -434,12 +490,13 @@ STREAM: v1.mini.d
         ```
     </section>
 === "Try it out"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -447,12 +504,12 @@ STREAM: v1.mini.d
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -460,12 +517,12 @@ STREAM: v1.mini.d
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -473,12 +530,12 @@ STREAM: v1.mini.d
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.mini.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -486,6 +543,61 @@ STREAM: v1.mini.d
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.mini.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.mini.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.mini.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.mini.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ### Ticker Snap
 ```
@@ -526,18 +638,18 @@ STREAM: v1.ticker.s
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -545,9 +657,9 @@ STREAM: v1.ticker.s
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.s",
             "subs":["BTC_USDT_Perp@500"],
             "unsubs":[],
@@ -597,7 +709,7 @@ STREAM: v1.ticker.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.ticker.s",
             "selector": "BTC_USDT_Perp",
@@ -630,7 +742,7 @@ STREAM: v1.ticker.s
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.ticker.s",
             "s1": "BTC_USDT_Perp",
@@ -679,7 +791,7 @@ STREAM: v1.ticker.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -718,12 +830,13 @@ STREAM: v1.ticker.s
         ```
     </section>
 === "Try it out"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -731,12 +844,12 @@ STREAM: v1.ticker.s
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -744,12 +857,12 @@ STREAM: v1.ticker.s
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -757,12 +870,12 @@ STREAM: v1.ticker.s
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.s",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -770,6 +883,61 @@ STREAM: v1.ticker.s
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.ticker.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.ticker.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.ticker.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.ticker.s",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ### Ticker Delta
 ```
@@ -810,18 +978,18 @@ STREAM: v1.ticker.d
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -829,9 +997,9 @@ STREAM: v1.ticker.d
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.d",
             "subs":["BTC_USDT_Perp@500"],
             "unsubs":[],
@@ -881,7 +1049,7 @@ STREAM: v1.ticker.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.ticker.s",
             "selector": "BTC_USDT_Perp",
@@ -914,7 +1082,7 @@ STREAM: v1.ticker.d
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.ticker.s",
             "s1": "BTC_USDT_Perp",
@@ -963,7 +1131,7 @@ STREAM: v1.ticker.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -1002,12 +1170,13 @@ STREAM: v1.ticker.d
         ```
     </section>
 === "Try it out"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1015,12 +1184,12 @@ STREAM: v1.ticker.d
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1028,12 +1197,12 @@ STREAM: v1.ticker.d
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1041,12 +1210,12 @@ STREAM: v1.ticker.d
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.ticker.d",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1054,6 +1223,61 @@ STREAM: v1.ticker.d
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.ticker.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.ticker.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.ticker.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.ticker.d",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ## Orderbook
 ### Orderbook Snap
@@ -1096,18 +1320,18 @@ STREAM: v1.book.s
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.s",
             "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.s",
             "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
@@ -1115,9 +1339,9 @@ STREAM: v1.book.s
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.s",
             "subs":["BTC_USDT_Perp@500-50"],
             "unsubs":[],
@@ -1157,7 +1381,7 @@ STREAM: v1.book.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.book.s",
             "selector": "BTC_USDT_Perp",
@@ -1178,7 +1402,7 @@ STREAM: v1.book.s
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.book.s",
             "s1": "BTC_USDT_Perp",
@@ -1216,7 +1440,7 @@ STREAM: v1.book.s
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -1260,12 +1484,13 @@ STREAM: v1.book.s
         ```
     </section>
 === "Try it out"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.s",
             "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
@@ -1273,12 +1498,12 @@ STREAM: v1.book.s
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.s",
             "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
@@ -1286,12 +1511,12 @@ STREAM: v1.book.s
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.s",
             "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
@@ -1299,12 +1524,12 @@ STREAM: v1.book.s
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.s",
             "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
@@ -1312,6 +1537,61 @@ STREAM: v1.book.s
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.book.s",
+            "feed":["BTC_USDT_Perp@500-50"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.book.s",
+            "feed":["BTC_USDT_Perp@500-50"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.book.s",
+            "feed":["BTC_USDT_Perp@500-50"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.book.s",
+            "feed":["BTC_USDT_Perp@500-50"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ### Orderbook Delta
 ```
@@ -1353,18 +1633,18 @@ STREAM: v1.book.d
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.d",
             "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.d",
             "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
@@ -1372,9 +1652,9 @@ STREAM: v1.book.d
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.d",
             "subs":["BTC_USDT_Perp@500-50"],
             "unsubs":[],
@@ -1414,7 +1694,7 @@ STREAM: v1.book.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.book.s",
             "selector": "BTC_USDT_Perp",
@@ -1435,7 +1715,7 @@ STREAM: v1.book.d
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.book.s",
             "s1": "BTC_USDT_Perp",
@@ -1472,7 +1752,7 @@ STREAM: v1.book.d
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -1511,12 +1791,13 @@ STREAM: v1.book.d
         ```
     </section>
 === "Try it out"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.d",
             "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
@@ -1524,12 +1805,12 @@ STREAM: v1.book.d
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.d",
             "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
@@ -1537,12 +1818,12 @@ STREAM: v1.book.d
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.d",
             "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
@@ -1550,12 +1831,12 @@ STREAM: v1.book.d
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.book.d",
             "feed":["BTC_USDT_Perp@500-50"],
             "method":"subscribe",
@@ -1563,6 +1844,61 @@ STREAM: v1.book.d
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.book.d",
+            "feed":["BTC_USDT_Perp@500-50"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.book.d",
+            "feed":["BTC_USDT_Perp@500-50"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.book.d",
+            "feed":["BTC_USDT_Perp@500-50"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.book.d",
+            "feed":["BTC_USDT_Perp@500-50"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ## Trade
 ### Trade
@@ -1604,18 +1940,18 @@ STREAM: v1.trade
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1623,9 +1959,9 @@ STREAM: v1.trade
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.trade",
             "subs":["BTC_USDT_Perp@500"],
             "unsubs":[],
@@ -1669,7 +2005,7 @@ STREAM: v1.trade
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.trade",
             "selector": "BTC_USDT_Perp",
@@ -1689,7 +2025,7 @@ STREAM: v1.trade
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.trade",
             "s1": "BTC_USDT_Perp",
@@ -1724,7 +2060,7 @@ STREAM: v1.trade
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -1758,12 +2094,13 @@ STREAM: v1.trade
         ```
     </section>
 === "Try it out"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1771,12 +2108,12 @@ STREAM: v1.trade
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1784,12 +2121,12 @@ STREAM: v1.trade
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1797,12 +2134,12 @@ STREAM: v1.trade
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.trade",
             "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
@@ -1810,6 +2147,61 @@ STREAM: v1.trade
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.trade",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.trade",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.trade",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.trade",
+            "feed":["BTC_USDT_Perp@500"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ## Candlestick
 ### Candlestick
@@ -1880,18 +2272,18 @@ STREAM: v1.candle
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "method":"subscribe",
@@ -1899,9 +2291,9 @@ STREAM: v1.candle
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.candle",
             "subs":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "unsubs":[],
@@ -1937,7 +2329,7 @@ STREAM: v1.candle
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.candle",
             "selector": "BTC_USDT_Perp",
@@ -1956,7 +2348,7 @@ STREAM: v1.candle
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.candle",
             "s1": "BTC_USDT_Perp",
@@ -1991,7 +2383,7 @@ STREAM: v1.candle
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
@@ -2030,12 +2422,13 @@ STREAM: v1.candle
         ```
     </section>
 === "Try it out"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "method":"subscribe",
@@ -2043,12 +2436,12 @@ STREAM: v1.candle
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "method":"subscribe",
@@ -2056,12 +2449,12 @@ STREAM: v1.candle
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.testnet.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "method":"subscribe",
@@ -2069,12 +2462,12 @@ STREAM: v1.candle
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://market-data.grvt.io/ws" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.candle",
             "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
             "method":"subscribe",
@@ -2082,4 +2475,59 @@ STREAM: v1.candle
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.candle",
+            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.candle",
+            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.testnet.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.candle",
+            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://market-data.grvt.io/ws" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.candle",
+            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">

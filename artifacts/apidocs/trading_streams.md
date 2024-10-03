@@ -40,18 +40,18 @@ STREAM: v1.order
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.order",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.order",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -59,9 +59,9 @@ STREAM: v1.order
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.order",
             "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "unsubs":[],
@@ -178,7 +178,7 @@ STREAM: v1.order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.order",
             "selector": "BTC_USDT_Perp",
@@ -218,7 +218,7 @@ STREAM: v1.order
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.order",
             "s1": "BTC_USDT_Perp",
@@ -275,7 +275,7 @@ STREAM: v1.order
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -320,13 +320,14 @@ STREAM: v1.order
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.order",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -334,13 +335,13 @@ STREAM: v1.order
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.order",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -348,13 +349,13 @@ STREAM: v1.order
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.order",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -362,13 +363,13 @@ STREAM: v1.order
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.order",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -376,6 +377,65 @@ STREAM: v1.order
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.order",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.order",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.order",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.order",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ### Order State
 ```
@@ -416,18 +476,18 @@ STREAM: v1.state
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.state",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.state",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -435,9 +495,9 @@ STREAM: v1.state
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.state",
             "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "unsubs":[],
@@ -509,7 +569,7 @@ STREAM: v1.state
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.state",
             "selector": "BTC_USDT_Perp",
@@ -527,7 +587,7 @@ STREAM: v1.state
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.state",
             "s1": "BTC_USDT_Perp",
@@ -562,7 +622,7 @@ STREAM: v1.state
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -607,13 +667,14 @@ STREAM: v1.state
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.state",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -621,13 +682,13 @@ STREAM: v1.state
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.state",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -635,13 +696,13 @@ STREAM: v1.state
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.state",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -649,13 +710,13 @@ STREAM: v1.state
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.state",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -663,6 +724,65 @@ STREAM: v1.state
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.state",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.state",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.state",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.state",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ## Execution
 ### Fill
@@ -704,18 +824,18 @@ STREAM: v1.fill
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -723,9 +843,9 @@ STREAM: v1.fill
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.fill",
             "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "unsubs":[],
@@ -774,7 +894,7 @@ STREAM: v1.fill
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.fill",
             "selector": "BTC_USDT_Perp",
@@ -801,7 +921,7 @@ STREAM: v1.fill
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.fill",
             "s1": "BTC_USDT_Perp",
@@ -845,7 +965,7 @@ STREAM: v1.fill
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -890,13 +1010,14 @@ STREAM: v1.fill
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -904,13 +1025,13 @@ STREAM: v1.fill
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -918,13 +1039,13 @@ STREAM: v1.fill
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -932,13 +1053,13 @@ STREAM: v1.fill
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.fill",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -946,6 +1067,65 @@ STREAM: v1.fill
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.fill",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.fill",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.fill",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.fill",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ### Positions
 ```
@@ -986,18 +1166,18 @@ STREAM: v1.position
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.position",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.position",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -1005,9 +1185,9 @@ STREAM: v1.position
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.position",
             "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "unsubs":[],
@@ -1044,7 +1224,7 @@ STREAM: v1.position
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.position",
             "selector": "BTC_USDT_Perp",
@@ -1066,7 +1246,7 @@ STREAM: v1.position
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.position",
             "s1": "BTC_USDT_Perp",
@@ -1105,7 +1285,7 @@ STREAM: v1.position
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
@@ -1150,13 +1330,14 @@ STREAM: v1.position
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.position",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -1164,13 +1345,13 @@ STREAM: v1.position
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.position",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -1178,13 +1359,13 @@ STREAM: v1.position
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.position",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -1192,13 +1373,13 @@ STREAM: v1.position
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.position",
             "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
             "method":"subscribe",
@@ -1206,6 +1387,65 @@ STREAM: v1.position
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.position",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.position",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.position",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.position",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ## Transfer
 ### Deposit
@@ -1246,18 +1486,18 @@ STREAM: v1.deposit
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.deposit",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.deposit",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1265,9 +1505,9 @@ STREAM: v1.deposit
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.deposit",
             "subs":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "unsubs":[],
@@ -1307,7 +1547,7 @@ STREAM: v1.deposit
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.deposit",
             "selector": "BTC_USDT_Perp",
@@ -1320,7 +1560,7 @@ STREAM: v1.deposit
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.deposit",
             "s1": "BTC_USDT_Perp",
@@ -1346,7 +1586,7 @@ STREAM: v1.deposit
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1001,
             "message":"You are not authorized to access this functionality",
@@ -1371,13 +1611,14 @@ STREAM: v1.deposit
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.deposit",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1385,13 +1626,13 @@ STREAM: v1.deposit
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.deposit",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1399,13 +1640,13 @@ STREAM: v1.deposit
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.deposit",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1413,13 +1654,13 @@ STREAM: v1.deposit
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.deposit",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1427,6 +1668,65 @@ STREAM: v1.deposit
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.deposit",
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.deposit",
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.deposit",
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.deposit",
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ### Transfer
 ```
@@ -1467,18 +1767,18 @@ STREAM: v1.transfer
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.transfer",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.transfer",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1486,9 +1786,9 @@ STREAM: v1.transfer
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.transfer",
             "subs":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "unsubs":[],
@@ -1540,7 +1840,7 @@ STREAM: v1.transfer
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.transfer",
             "selector": "BTC_USDT_Perp",
@@ -1563,7 +1863,7 @@ STREAM: v1.transfer
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.transfer",
             "s1": "BTC_USDT_Perp",
@@ -1600,7 +1900,7 @@ STREAM: v1.transfer
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1001,
             "message":"You are not authorized to access this functionality",
@@ -1630,13 +1930,14 @@ STREAM: v1.transfer
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.transfer",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1644,13 +1945,13 @@ STREAM: v1.transfer
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.transfer",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1658,13 +1959,13 @@ STREAM: v1.transfer
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.transfer",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1672,13 +1973,13 @@ STREAM: v1.transfer
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.transfer",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1686,6 +1987,65 @@ STREAM: v1.transfer
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.transfer",
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.transfer",
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.transfer",
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.transfer",
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
 ### Withdrawal
 ```
@@ -1725,18 +2085,18 @@ STREAM: v1.withdrawal
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
         **JSON RPC Request**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.withdrawal",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
             "is_full":true
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.withdrawal",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1744,9 +2104,9 @@ STREAM: v1.withdrawal
         }
         ```
         **JSON RPC Response**
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.withdrawal",
             "subs":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "unsubs":[],
@@ -1796,7 +2156,7 @@ STREAM: v1.withdrawal
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "stream": "v1.withdrawal",
             "selector": "BTC_USDT_Perp",
@@ -1817,7 +2177,7 @@ STREAM: v1.withdrawal
             }
         }
         ```
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "s": "v1.withdrawal",
             "s1": "BTC_USDT_Perp",
@@ -1851,7 +2211,7 @@ STREAM: v1.withdrawal
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
-        ```json
+        ``` { .json .linenums="1" .copy }
         {
             "code":1001,
             "message":"You are not authorized to access this functionality",
@@ -1876,13 +2236,14 @@ STREAM: v1.withdrawal
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    !!! example "dev"
-        ```bash
+    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+    !!! example "Try DEV Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.withdrawal",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1890,13 +2251,13 @@ STREAM: v1.withdrawal
         }
         ' -w 360
         ```
-    !!! example "stg"
-        ```bash
+    !!! example "Try STG Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.withdrawal",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1904,13 +2265,13 @@ STREAM: v1.withdrawal
         }
         ' -w 360
         ```
-    !!! example "testnet"
-        ```bash
+    !!! example "Try TESTNET Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.testnet.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.withdrawal",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1918,13 +2279,13 @@ STREAM: v1.withdrawal
         }
         ' -w 360
         ```
-    !!! example "prod"
-        ```bash
+    !!! example "Try PROD Full"
+        ``` { .bash .linenums="1" .copy }
         wscat -c "wss://trades.grvt.io/ws" \
         -H "Cookie: $GRVT_COOKIE" \
         -x '
         {
-            "id":1,
+            "request_id":1,
             "stream":"v1.withdrawal",
             "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
             "method":"subscribe",
@@ -1932,4 +2293,63 @@ STREAM: v1.withdrawal
         }
         ' -w 360
         ```
+    </section>
+    <section markdown="1" style="float: right; width: 50%;">
+    !!! example "Try DEV Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.withdrawal",
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try STG Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.withdrawal",
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try TESTNET Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.testnet.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.withdrawal",
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    !!! example "Try PROD Lite"
+        ``` { .bash .linenums="1" .copy }
+        wscat -c "wss://trades.grvt.io/ws" \
+        -H "Cookie: $GRVT_COOKIE" \
+        -x '
+        {
+            "request_id":1,
+            "stream":"v1.withdrawal",
+            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":false
+        }
+        ' -w 360
+        ```
+    </section>
 <hr class="solid">
