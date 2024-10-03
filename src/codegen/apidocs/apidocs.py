@@ -20,6 +20,7 @@ def generate(spec_root: SpecRoot) -> None:
             gateway,
             f"artifacts/apidocs/{inflection.underscore(gateway.name).lower()}_streams.md",
         )
+    write_structs_and_enums(ctx, spec_root)
 
 
 def write_gateway_streams(ctx: CodegenCtx, gateway: Gateway, artifact_path: str) -> None:
@@ -49,6 +50,27 @@ def write_gateway_rpcs(ctx: CodegenCtx, gateway: Gateway, artifact_path: str) ->
                 md.writeln(f"## {rpc.namespace}")
                 last_namespace = rpc.namespace
             write_rpc(ctx, md, gateway, rpc)
+
+
+def write_structs_and_enums(ctx: CodegenCtx, spec_root: SpecRoot) -> None:
+    for struct in spec_root.structs:
+        with open(
+            "artifacts/apidocs/schemas/"
+            + inflection.underscore(struct.name).lower()
+            + ".md",
+            "w",
+        ) as f:
+            md = MarkdownWriter(f)
+            write_struct_schema(ctx, md, struct, True)
+    for enum in spec_root.enums:
+        with open(
+            "artifacts/apidocs/schemas/"
+            + inflection.underscore(enum.name).lower()
+            + ".md",
+            "w",
+        ) as f:
+            md = MarkdownWriter(f)
+            write_enum_schema(md, enum, True)
 
 
 ###########
@@ -398,10 +420,11 @@ def write_struct_schema(
     ctx: CodegenCtx, md: MarkdownWriter, struct: Struct, is_root: bool
 ) -> None:
     # Header
+    path = "schemas/" + inflection.underscore(struct.name).lower() + ".md"
     if is_root:
-        md.writeln(f'!!! info "{struct.name}"')
+        md.writeln(f'!!! info "[{struct.name}]({path})"')
     else:
-        md.writeln(f'??? info "{struct.name}"')
+        md.writeln(f'??? info "[{struct.name}]({path})"')
     md.indent()
 
     # Comment
@@ -429,8 +452,13 @@ def write_struct_schema(
     md.dedent()
 
 
-def write_enum_schema(md: MarkdownWriter, enum: Enum) -> None:
-    md.writeln(f'??? info "{enum.name}"')
+def write_enum_schema(md: MarkdownWriter, enum: Enum, is_root: bool = False) -> None:
+    # Header
+    path = "schemas/" + inflection.underscore(enum.name).lower() + ".md"
+    if is_root:
+        md.writeln(f'!!! info "[{enum.name}]({path})"')
+    else:
+        md.writeln(f'??? info "[{enum.name}]({path})"')
     md.indent()
 
     # Comment
