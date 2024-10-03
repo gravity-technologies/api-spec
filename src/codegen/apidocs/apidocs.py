@@ -152,6 +152,11 @@ def write_stream_feed_request(
     md.indent()
     md.writeln('"request_id":1,')
     md.writeln(f'"stream":"{stream.channel}",')
+
+    # ugly hack I know...
+    if stream.channel == "v1.book.d":
+        selector = "BTC_USDT_Perp@500"
+
     md.writeln(f'"feed":["{selector}"],')
     md.writeln('"method":"subscribe",')
     md.writeln(f'"is_full":{str(is_full).lower()}')

@@ -1637,7 +1637,7 @@ STREAM: v1.book.d
         {
             "request_id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-50"],
+            "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1646,7 +1646,7 @@ STREAM: v1.book.d
         {
             "request_id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-50"],
+            "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":false
         }
@@ -1799,7 +1799,7 @@ STREAM: v1.book.d
         {
             "request_id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-50"],
+            "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1812,7 +1812,7 @@ STREAM: v1.book.d
         {
             "request_id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-50"],
+            "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1825,7 +1825,7 @@ STREAM: v1.book.d
         {
             "request_id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-50"],
+            "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1838,7 +1838,7 @@ STREAM: v1.book.d
         {
             "request_id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-50"],
+            "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":true
         }
@@ -1853,7 +1853,7 @@ STREAM: v1.book.d
         {
             "request_id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-50"],
+            "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":false
         }
@@ -1866,7 +1866,7 @@ STREAM: v1.book.d
         {
             "request_id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-50"],
+            "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":false
         }
@@ -1879,7 +1879,7 @@ STREAM: v1.book.d
         {
             "request_id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-50"],
+            "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":false
         }
@@ -1892,7 +1892,7 @@ STREAM: v1.book.d
         {
             "request_id":1,
             "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500-50"],
+            "feed":["BTC_USDT_Perp@500"],
             "method":"subscribe",
             "is_full":false
         }
