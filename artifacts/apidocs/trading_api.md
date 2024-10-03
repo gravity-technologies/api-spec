@@ -2353,7 +2353,7 @@ LITE ENDPOINT: lite/v1/deposit
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |to_account_id<br>`ta` |string|True|The main account to deposit into|
-        |token_currency<br>`tc` |Currency|True|The token currency to deposit|
+        |currency<br>`c` |Currency|True|The token currency to deposit|
         |num_tokens<br>`nt` |string|True|The number of tokens to deposit, quoted in token_currency decimals|
         ??? info "Currency"
             The list of Currencies that are supported on the GRVT exchange<br>
@@ -2371,14 +2371,14 @@ LITE ENDPOINT: lite/v1/deposit
         ```json
         {
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0"
         }
         ```
         ```json
         {
             "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "tc": "USDT",
+            "c": "USDT",
             "nt": "1500.0"
         }
         ```
@@ -2449,7 +2449,7 @@ LITE ENDPOINT: lite/v1/deposit
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0"
         }
         '
@@ -2460,7 +2460,7 @@ LITE ENDPOINT: lite/v1/deposit
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0"
         }
         '
@@ -2471,7 +2471,7 @@ LITE ENDPOINT: lite/v1/deposit
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0"
         }
         '
@@ -2482,7 +2482,7 @@ LITE ENDPOINT: lite/v1/deposit
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0"
         }
         '
@@ -2501,11 +2501,11 @@ LITE ENDPOINT: lite/v1/deposit_history
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |token_currency<br>`tc` |[Currency]|True|The token currency to query for, if nil or empty, return all deposits. Otherwise, only entries matching the filter will be returned|
+        |currency<br>`c` |[Currency]|True|The token currency to query for, if nil or empty, return all deposits. Otherwise, only entries matching the filter will be returned|
         |start_time<br>`st` |string|False<br>`0`|The start time to query for in unix nanoseconds|
         |end_time<br>`et` |string|False<br>`now()`|The end time to query for in unix nanoseconds|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
-        |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the next query from|
+        |cursor<br>`c1` |string|False<br>`''`|The cursor to indicate when to start the next query from|
         ??? info "Currency"
             The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -2521,7 +2521,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! question "Query"
         ```json
         {
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -2530,11 +2530,11 @@ LITE ENDPOINT: lite/v1/deposit_history
         ```
         ```json
         {
-            "tc": ["USDT", "USDC"],
+            "c": ["USDT", "USDC"],
             "st": "1697788800000000000",
             "et": "1697788800000000000",
             "l": 500,
-            "c": ""
+            "c1": ""
         }
         ```
     </section>
@@ -2551,7 +2551,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             |tx_id<br>`ti` |string|True|The transaction ID of the deposit|
             |tx_hash<br>`th` |string|True|The txHash of the bridgemint event|
             |to_account_id<br>`ta` |string|True|The account to deposit into|
-            |token_currency<br>`tc` |Currency|True|The token currency to deposit|
+            |currency<br>`c` |Currency|True|The token currency to deposit|
             |num_tokens<br>`nt` |string|True|The number of tokens to deposit|
             |event_time<br>`et` |string|True|The timestamp of the deposit in unix nanoseconds|
             ??? info "Currency"
@@ -2573,7 +2573,7 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "tx_id": "1028403",
                 "tx_hash": "0x10000101000203040506",
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "token_currency": "USDT",
+                "currency": "USDT",
                 "num_tokens": "1500.0",
                 "event_time": "1697788800000000000"
             }],
@@ -2623,7 +2623,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -2636,7 +2636,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -2649,7 +2649,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         curl --location 'https://trades.testnet.grvt.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -2662,7 +2662,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         curl --location 'https://trades.grvt.io/full/v1/deposit_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -2688,7 +2688,7 @@ LITE ENDPOINT: lite/v1/transfer
         |from_sub_account_id<br>`fs` |string|True|The subaccount to transfer from (0 if transferring from main account)|
         |to_account_id<br>`ta` |string|True|The main account to deposit into|
         |to_sub_account_id<br>`ts` |string|True|The subaccount to transfer to (0 if transferring to main account)|
-        |token_currency<br>`tc` |Currency|True|The token currency to transfer|
+        |currency<br>`c` |Currency|True|The token currency to transfer|
         |num_tokens<br>`nt` |string|True|The number of tokens to transfer, quoted in tokenCurrency decimal units|
         |signature<br>`s` |Signature|True|The signature of the transfer|
         ??? info "Currency"
@@ -2719,7 +2719,7 @@ LITE ENDPOINT: lite/v1/transfer
             "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2737,7 +2737,7 @@ LITE ENDPOINT: lite/v1/transfer
             "fs": "'$GRVT_SUB_ACCOUNT_ID'",
             "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "ts": "'$GRVT_SUB_ACCOUNT_ID'",
-            "tc": "USDT",
+            "c": "USDT",
             "nt": "1500.0",
             "s": {
                 "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2819,7 +2819,7 @@ LITE ENDPOINT: lite/v1/transfer
             "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2841,7 +2841,7 @@ LITE ENDPOINT: lite/v1/transfer
             "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2863,7 +2863,7 @@ LITE ENDPOINT: lite/v1/transfer
             "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2885,7 +2885,7 @@ LITE ENDPOINT: lite/v1/transfer
             "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -2912,11 +2912,11 @@ LITE ENDPOINT: lite/v1/transfer_history
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |token_currency<br>`tc` |[Currency]|True|The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned|
+        |currency<br>`c` |[Currency]|True|The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned|
         |start_time<br>`st` |string|False<br>`0`|The start time to query for in unix nanoseconds|
         |end_time<br>`et` |string|False<br>`now()`|The end time to query for in unix nanoseconds|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
-        |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the next query from|
+        |cursor<br>`c1` |string|False<br>`''`|The cursor to indicate when to start the next query from|
         ??? info "Currency"
             The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -2932,7 +2932,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! question "Query"
         ```json
         {
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -2941,11 +2941,11 @@ LITE ENDPOINT: lite/v1/transfer_history
         ```
         ```json
         {
-            "tc": ["USDT", "USDC"],
+            "c": ["USDT", "USDC"],
             "st": "1697788800000000000",
             "et": "1697788800000000000",
             "l": 500,
-            "c": ""
+            "c1": ""
         }
         ```
     </section>
@@ -2964,7 +2964,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             |from_sub_account_id<br>`fs` |string|True|The subaccount to transfer from (0 if transferring from main account)|
             |to_account_id<br>`ta` |string|True|The account to deposit into|
             |to_sub_account_id<br>`ts` |string|True|The subaccount to transfer to (0 if transferring to main account)|
-            |token_currency<br>`tc` |Currency|True|The token currency to transfer|
+            |currency<br>`c` |Currency|True|The token currency to transfer|
             |num_tokens<br>`nt` |string|True|The number of tokens to transfer|
             |signature<br>`s` |Signature|True|The signature of the transfer|
             |event_time<br>`et` |string|True|The timestamp of the transfer in unix nanoseconds|
@@ -2998,7 +2998,7 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                "token_currency": "USDT",
+                "currency": "USDT",
                 "num_tokens": "1500.0",
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3056,7 +3056,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -3069,7 +3069,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -3082,7 +3082,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         curl --location 'https://trades.testnet.grvt.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -3095,7 +3095,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         curl --location 'https://trades.grvt.io/full/v1/transfer_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -3119,7 +3119,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         |-|-|-|-|
         |from_account_id<br>`fa` |string|True|The main account to withdraw from|
         |to_eth_address<br>`te` |string|True|The Ethereum wallet to withdraw into|
-        |token_currency<br>`tc` |Currency|True|The token currency to withdraw|
+        |currency<br>`c` |Currency|True|The token currency to withdraw|
         |num_tokens<br>`nt` |string|True|The number of tokens to withdraw, quoted in tokenCurrency decimal units|
         |signature<br>`s` |Signature|True|The signature of the withdrawal|
         ??? info "Currency"
@@ -3148,7 +3148,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         {
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3164,7 +3164,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         {
             "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "te": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "tc": "USDT",
+            "c": "USDT",
             "nt": "1500.0",
             "s": {
                 "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3244,7 +3244,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         --data '{
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3264,7 +3264,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         --data '{
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3284,7 +3284,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         --data '{
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3304,7 +3304,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         --data '{
             "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "token_currency": "USDT",
+            "currency": "USDT",
             "num_tokens": "1500.0",
             "signature": {
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3331,11 +3331,11 @@ LITE ENDPOINT: lite/v1/withdrawal_history
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |token_currency<br>`tc` |[Currency]|True|The token currency to query for, if nil or empty, return all withdrawals. Otherwise, only entries matching the filter will be returned|
+        |currency<br>`c` |[Currency]|True|The token currency to query for, if nil or empty, return all withdrawals. Otherwise, only entries matching the filter will be returned|
         |start_time<br>`st` |string|False<br>`0`|The start time to query for in unix nanoseconds|
         |end_time<br>`et` |string|False<br>`now()`|The end time to query for in unix nanoseconds|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
-        |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the next query from|
+        |cursor<br>`c1` |string|False<br>`''`|The cursor to indicate when to start the next query from|
         ??? info "Currency"
             The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -3351,7 +3351,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! question "Query"
         ```json
         {
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -3360,11 +3360,11 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         ```
         ```json
         {
-            "tc": ["USDT", "USDC"],
+            "c": ["USDT", "USDC"],
             "st": "1697788800000000000",
             "et": "1697788800000000000",
             "l": 500,
-            "c": ""
+            "c1": ""
         }
         ```
     </section>
@@ -3381,7 +3381,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             |tx_id<br>`ti` |string|True|The transaction ID of the withdrawal|
             |from_account_id<br>`fa` |string|True|The subaccount to withdraw from|
             |to_eth_address<br>`te` |string|True|The ethereum address to withdraw to|
-            |token_currency<br>`tc` |Currency|True|The token currency to withdraw|
+            |currency<br>`c` |Currency|True|The token currency to withdraw|
             |num_tokens<br>`nt` |string|True|The number of tokens to withdraw|
             |signature<br>`s` |Signature|True|The signature of the withdrawal|
             |event_time<br>`et` |string|True|The timestamp of the withdrawal in unix nanoseconds|
@@ -3413,7 +3413,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "tx_id": "1028403",
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "token_currency": "USDT",
+                "currency": "USDT",
                 "num_tokens": "1500.0",
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3471,7 +3471,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         curl --location 'https://trades.dev.gravitymarkets.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -3484,7 +3484,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         curl --location 'https://trades.stg.gravitymarkets.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -3497,7 +3497,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         curl --location 'https://trades.testnet.grvt.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
@@ -3510,7 +3510,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         curl --location 'https://trades.grvt.io/full/v1/withdrawal_history' \
         --header "Cookie: $GRVT_COOKIE" \
         --data '{
-            "token_currency": ["USDT", "USDC"],
+            "currency": ["USDT", "USDC"],
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,

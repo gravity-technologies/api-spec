@@ -1292,7 +1292,7 @@ STREAM: v1.deposit
             |-|-|-|-|
             |tx_hash<br>`th` |string|True|The hash of the bridgemint event producing the deposit|
             |to_account_id<br>`ta` |string|True|The account to deposit into|
-            |token_currency<br>`tc` |Currency|True|The token currency to deposit|
+            |currency<br>`c` |Currency|True|The token currency to deposit|
             |num_tokens<br>`nt` |string|True|The number of tokens to deposit|
             ??? info "Currency"
                 The list of Currencies that are supported on the GRVT exchange<br>
@@ -1315,7 +1315,7 @@ STREAM: v1.deposit
             "feed": {
                 "tx_hash": "0x1234567890123456789012345678901234567890123456789012345678901234",
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "token_currency": "USDT",
+                "currency": "USDT",
                 "num_tokens": "10.50"
             }
         }
@@ -1328,7 +1328,7 @@ STREAM: v1.deposit
             "f": {
                 "th": "0x1234567890123456789012345678901234567890123456789012345678901234",
                 "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "tc": "USDT",
+                "c": "USDT",
                 "nt": "10.50"
             }
         }
@@ -1515,7 +1515,7 @@ STREAM: v1.transfer
             |from_sub_account_id<br>`fs` |string|True|The subaccount to transfer from (0 if transferring from main account)|
             |to_account_id<br>`ta` |string|True|The account to deposit into|
             |to_sub_account_id<br>`ts` |string|True|The subaccount to transfer to (0 if transferring to main account)|
-            |token_currency<br>`tc` |Currency|True|The token currency to transfer|
+            |currency<br>`c` |Currency|True|The token currency to transfer|
             |num_tokens<br>`nt` |string|True|The number of tokens to transfer|
             |signature<br>`s` |Signature|True|The signature of the transfer|
             ??? info "Currency"
@@ -1550,7 +1550,7 @@ STREAM: v1.transfer
                 "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                "token_currency": "USDT",
+                "currency": "USDT",
                 "num_tokens": "10.50",
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -1573,7 +1573,7 @@ STREAM: v1.transfer
                 "fs": "'$GRVT_SUB_ACCOUNT_ID'",
                 "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "ts": "'$GRVT_SUB_ACCOUNT_ID'",
-                "tc": "USDT",
+                "c": "USDT",
                 "nt": "10.50",
                 "s": {
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -1771,7 +1771,7 @@ STREAM: v1.withdrawal
             |-|-|-|-|
             |from_account_id<br>`fa` |string|True|The subaccount to withdraw from|
             |to_eth_address<br>`te` |string|True|The ethereum address to withdraw to|
-            |token_currency<br>`tc` |Currency|True|The token currency to withdraw|
+            |currency<br>`c` |Currency|True|The token currency to withdraw|
             |num_tokens<br>`nt` |string|True|The number of tokens to withdraw|
             |signature<br>`s` |Signature|True|The signature of the withdrawal|
             ??? info "Currency"
@@ -1804,7 +1804,7 @@ STREAM: v1.withdrawal
             "feed": {
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "token_currency": "USDT",
+                "currency": "USDT",
                 "num_tokens": "10.50",
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -1825,7 +1825,7 @@ STREAM: v1.withdrawal
             "f": {
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "te": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "tc": "USDT",
+                "c": "USDT",
                 "nt": "10.50",
                 "s": {
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",

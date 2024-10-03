@@ -581,14 +581,14 @@ STREAM: v1.ticker.s
             |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
             |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
             |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
-            |funding_rate_8_h_curr<br>`fr` |string|False<br>`None`|The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)|
-            |funding_rate_8_h_avg<br>`fr1` |string|False<br>`None`|The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)|
+            |funding_rate_8h_curr<br>`fr` |string|False<br>`None`|The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)|
+            |funding_rate_8h_avg<br>`fr1` |string|False<br>`None`|The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)|
             |interest_rate<br>`ir` |string|False<br>`None`|The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)|
             |forward_price<br>`fp` |string|False<br>`None`|[Options] The forward price of the option, expressed in `9` decimals|
-            |buy_volume_24_h_u<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in base asset decimal units|
-            |sell_volume_24_h_u<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in base asset decimal units|
-            |buy_volume_24_h_q<br>`bv1` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units|
-            |sell_volume_24_h_q<br>`sv1` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units|
+            |buy_volume_24h_b<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in base asset decimal units|
+            |sell_volume_24h_b<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in base asset decimal units|
+            |buy_volume_24h_q<br>`bv1` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units|
+            |sell_volume_24h_q<br>`sv1` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units|
             |high_price<br>`hp` |string|False<br>`None`|The 24 hour highest traded price of the instrument, expressed in `9` decimals|
             |low_price<br>`lp1` |string|False<br>`None`|The 24 hour lowest traded price of the instrument, expressed in `9` decimals|
             |open_price<br>`op` |string|False<br>`None`|The 24 hour first traded price of the instrument, expressed in `9` decimals|
@@ -614,14 +614,14 @@ STREAM: v1.ticker.s
                 "best_bid_size": "123456.78",
                 "best_ask_price": "65038.01",
                 "best_ask_size": "123456.78",
-                "funding_rate_8_h_curr": 0.0003,
-                "funding_rate_8_h_avg": 0.0003,
+                "funding_rate_8h_curr": 0.0003,
+                "funding_rate_8h_avg": 0.0003,
                 "interest_rate": 0.0003,
                 "forward_price": "65038.01",
-                "buy_volume_24_h_u": "123456.78",
-                "sell_volume_24_h_u": "123456.78",
-                "buy_volume_24_h_q": "123456.78",
-                "sell_volume_24_h_q": "123456.78",
+                "buy_volume_24h_b": "123456.78",
+                "sell_volume_24h_b": "123456.78",
+                "buy_volume_24h_q": "123456.78",
+                "sell_volume_24h_q": "123456.78",
                 "high_price": "65038.01",
                 "low_price": "65038.01",
                 "open_price": "65038.01",
@@ -865,14 +865,14 @@ STREAM: v1.ticker.d
             |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
             |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
             |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
-            |funding_rate_8_h_curr<br>`fr` |string|False<br>`None`|The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)|
-            |funding_rate_8_h_avg<br>`fr1` |string|False<br>`None`|The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)|
+            |funding_rate_8h_curr<br>`fr` |string|False<br>`None`|The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)|
+            |funding_rate_8h_avg<br>`fr1` |string|False<br>`None`|The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)|
             |interest_rate<br>`ir` |string|False<br>`None`|The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)|
             |forward_price<br>`fp` |string|False<br>`None`|[Options] The forward price of the option, expressed in `9` decimals|
-            |buy_volume_24_h_u<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in base asset decimal units|
-            |sell_volume_24_h_u<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in base asset decimal units|
-            |buy_volume_24_h_q<br>`bv1` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units|
-            |sell_volume_24_h_q<br>`sv1` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units|
+            |buy_volume_24h_b<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in base asset decimal units|
+            |sell_volume_24h_b<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in base asset decimal units|
+            |buy_volume_24h_q<br>`bv1` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units|
+            |sell_volume_24h_q<br>`sv1` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units|
             |high_price<br>`hp` |string|False<br>`None`|The 24 hour highest traded price of the instrument, expressed in `9` decimals|
             |low_price<br>`lp1` |string|False<br>`None`|The 24 hour lowest traded price of the instrument, expressed in `9` decimals|
             |open_price<br>`op` |string|False<br>`None`|The 24 hour first traded price of the instrument, expressed in `9` decimals|
@@ -898,14 +898,14 @@ STREAM: v1.ticker.d
                 "best_bid_size": "123456.78",
                 "best_ask_price": "65038.01",
                 "best_ask_size": "123456.78",
-                "funding_rate_8_h_curr": 0.0003,
-                "funding_rate_8_h_avg": 0.0003,
+                "funding_rate_8h_curr": 0.0003,
+                "funding_rate_8h_avg": 0.0003,
                 "interest_rate": 0.0003,
                 "forward_price": "65038.01",
-                "buy_volume_24_h_u": "123456.78",
-                "sell_volume_24_h_u": "123456.78",
-                "buy_volume_24_h_q": "123456.78",
-                "sell_volume_24_h_q": "123456.78",
+                "buy_volume_24h_b": "123456.78",
+                "sell_volume_24h_b": "123456.78",
+                "buy_volume_24h_q": "123456.78",
+                "sell_volume_24h_q": "123456.78",
                 "high_price": "65038.01",
                 "low_price": "65038.01",
                 "open_price": "65038.01",
@@ -1930,7 +1930,7 @@ STREAM: v1.candle
             |close<br>`c` |string|True|The close price, expressed in underlying currency resolution units|
             |high<br>`h` |string|True|The high price, expressed in underlying currency resolution units|
             |low<br>`l` |string|True|The low price, expressed in underlying currency resolution units|
-            |volume_u<br>`vu` |string|True|The underlying volume transacted, expressed in base asset decimal units|
+            |volume_b<br>`vb` |string|True|The underlying volume transacted, expressed in base asset decimal units|
             |volume_q<br>`vq` |string|True|The quote volume transacted, expressed in quote asset decimal units|
             |trades<br>`t` |number|True|The number of trades transacted|
             |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
@@ -1949,7 +1949,7 @@ STREAM: v1.candle
                 "close": "123456.78",
                 "high": "123456.78",
                 "low": "123456.78",
-                "volume_u": "123456.78",
+                "volume_b": "123456.78",
                 "volume_q": "123456.78",
                 "trades": 123456,
                 "instrument": "BTC_USDT_Perp"
@@ -1968,7 +1968,7 @@ STREAM: v1.candle
                 "c": "123456.78",
                 "h": "123456.78",
                 "l": "123456.78",
-                "vu": "123456.78",
+                "vb": "123456.78",
                 "vq": "123456.78",
                 "t": 123456,
                 "i": "BTC_USDT_Perp"
