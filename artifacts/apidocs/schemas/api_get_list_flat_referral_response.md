@@ -1,8 +1,8 @@
-!!! info "[ApiGetListFlatReferralResponse](schemas/api_get_list_flat_referral_response.md)"
+!!! info "[ApiGetListFlatReferralResponse](/../../schemas/api_get_list_flat_referral_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |flat_referrals<br>`fr` |[FlatReferral]|True|The list of flat referrals|
-    ??? info "[FlatReferral](schemas/flat_referral.md)"
+    ??? info "[FlatReferral](/../../schemas/flat_referral)"
         <br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |

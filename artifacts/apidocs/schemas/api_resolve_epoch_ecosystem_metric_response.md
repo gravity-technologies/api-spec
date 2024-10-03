@@ -1,4 +1,4 @@
-!!! info "[ApiResolveEpochEcosystemMetricResponse](schemas/api_resolve_epoch_ecosystem_metric_response.md)"
+!!! info "[ApiResolveEpochEcosystemMetricResponse](/../../schemas/api_resolve_epoch_ecosystem_metric_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |epoch_name<br>`en` |string|True|The name of the epoch|

@@ -1,4 +1,4 @@
-!!! info "[CandlestickInterval](schemas/candlestick_interval.md)"
+!!! info "[CandlestickInterval](/../../schemas/candlestick_interval)"
     |Value| Description |
     |-|-|
     |`CI_1_M` = 1|1 minute|

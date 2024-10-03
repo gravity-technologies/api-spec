@@ -1,4 +1,4 @@
-!!! info "[WSRequestV1](schemas/ws_request_v1.md)"
+!!! info "[WSRequestV1](/../../schemas/ws_request_v1)"
     All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

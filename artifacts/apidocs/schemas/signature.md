@@ -1,4 +1,4 @@
-!!! info "[Signature](schemas/signature.md)"
+!!! info "[Signature](/../../schemas/signature)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|

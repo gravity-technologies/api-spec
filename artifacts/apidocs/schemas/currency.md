@@ -1,4 +1,4 @@
-!!! info "[Currency](schemas/currency.md)"
+!!! info "[Currency](/../../schemas/currency)"
     The list of Currencies that are supported on the GRVT exchange<br>
 
     |Value| Description |

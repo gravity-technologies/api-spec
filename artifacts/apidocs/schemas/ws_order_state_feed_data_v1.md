@@ -1,17 +1,17 @@
-!!! info "[WSOrderStateFeedDataV1](schemas/ws_order_state_feed_data_v1.md)"
+!!! info "[WSOrderStateFeedDataV1](/../../schemas/ws_order_state_feed_data_v1)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |stream<br>`s` |string|True|Stream name|
     |selector<br>`s1` |string|True|Primary selector|
     |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
     |feed<br>`f` |OrderStateFeed|True|The Order State Feed|
-    ??? info "[OrderStateFeed](schemas/order_state_feed.md)"
+    ??? info "[OrderStateFeed](/../../schemas/order_state_feed)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |order_id<br>`oi` |string|True|A unique 128-bit identifier for the order, deterministically generated within the GRVT backend|
         |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client|
         |order_state<br>`os` |OrderState|True|The order state object being created or updated|
-        ??? info "[OrderState](schemas/order_state.md)"
+        ??? info "[OrderState](/../../schemas/order_state)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |status<br>`s` |OrderStatus|True|The status of the order|
@@ -19,7 +19,7 @@
             |book_size<br>`bs` |[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
             |traded_size<br>`ts` |[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
             |update_time<br>`ut` |string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
-            ??? info "[OrderStatus](schemas/order_status.md)"
+            ??? info "[OrderStatus](/../../schemas/order_status)"
                 |Value| Description |
                 |-|-|
                 |`PENDING` = 1|Order is waiting for Trigger Condition to be hit|
@@ -27,7 +27,7 @@
                 |`FILLED` = 3|Order is fully filled and hence closed|
                 |`REJECTED` = 4|Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)|
                 |`CANCELLED` = 5|Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)|
-            ??? info "[OrderRejectReason](schemas/order_reject_reason.md)"
+            ??? info "[OrderRejectReason](/../../schemas/order_reject_reason)"
                 |Value| Description |
                 |-|-|
                 |`UNSPECIFIED` = 0|order is not cancelled or rejected|

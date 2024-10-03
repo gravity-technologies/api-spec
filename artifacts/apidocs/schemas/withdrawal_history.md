@@ -1,4 +1,4 @@
-!!! info "[WithdrawalHistory](schemas/withdrawal_history.md)"
+!!! info "[WithdrawalHistory](/../../schemas/withdrawal_history)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |tx_id<br>`ti` |string|True|The transaction ID of the withdrawal|
@@ -8,7 +8,7 @@
     |num_tokens<br>`nt` |string|True|The number of tokens to withdraw|
     |signature<br>`s` |Signature|True|The signature of the withdrawal|
     |event_time<br>`et` |string|True|The timestamp of the withdrawal in unix nanoseconds|
-    ??? info "[Currency](schemas/currency.md)"
+    ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 
         |Value| Description |
@@ -18,7 +18,7 @@
         |`USDT` = 3|the USDT token|
         |`ETH` = 4|the ETH token|
         |`BTC` = 5|the BTC token|
-    ??? info "[Signature](schemas/signature.md)"
+    ??? info "[Signature](/../../schemas/signature)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|

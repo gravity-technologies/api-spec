@@ -1,8 +1,8 @@
-!!! info "[QueryGetLatestLPSnapshotResponse](schemas/query_get_latest_lp_snapshot_response.md)"
+!!! info "[QueryGetLatestLPSnapshotResponse](/../../schemas/query_get_latest_lp_snapshot_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |snapshot<br>`s` |LPSnapshot|True|The latest LP snapshot|
-    ??? info "[LPSnapshot](schemas/lp_snapshot.md)"
+    ??? info "[LPSnapshot](/../../schemas/lp_snapshot)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |main_account_id<br>`ma` |string|True|The main account id|

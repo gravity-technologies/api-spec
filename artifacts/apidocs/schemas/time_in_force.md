@@ -1,4 +1,4 @@
-!!! info "[TimeInForce](schemas/time_in_force.md)"
+!!! info "[TimeInForce](/../../schemas/time_in_force)"
     |                       | Must Fill All | Can Fill Partial |
     | -                     | -             | -                |
     | Must Fill Immediately | FOK           | IOC              |

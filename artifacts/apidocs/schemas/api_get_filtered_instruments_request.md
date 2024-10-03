@@ -1,4 +1,4 @@
-!!! info "[ApiGetFilteredInstrumentsRequest](schemas/api_get_filtered_instruments_request.md)"
+!!! info "[ApiGetFilteredInstrumentsRequest](/../../schemas/api_get_filtered_instruments_request)"
     Fetch a list of instruments based on the filters provided<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -8,7 +8,7 @@
     |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
     |is_active<br>`ia` |boolean|False<br>`false`|Request for active instruments only|
     |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 100000|
-    ??? info "[Kind](schemas/kind.md)"
+    ??? info "[Kind](/../../schemas/kind)"
         The list of asset kinds that are supported on the GRVT exchange<br>
 
         |Value| Description |
@@ -17,7 +17,7 @@
         |`FUTURE` = 2|the future asset kind|
         |`CALL` = 3|the call option asset kind|
         |`PUT` = 4|the put option asset kind|
-    ??? info "[Currency](schemas/currency.md)"
+    ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 
         |Value| Description |
@@ -27,7 +27,7 @@
         |`USDT` = 3|the USDT token|
         |`ETH` = 4|the ETH token|
         |`BTC` = 5|the BTC token|
-    ??? info "[Currency](schemas/currency.md)"
+    ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 
         |Value| Description |

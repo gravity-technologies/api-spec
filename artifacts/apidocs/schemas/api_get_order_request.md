@@ -1,4 +1,4 @@
-!!! info "[ApiGetOrderRequest](schemas/api_get_order_request.md)"
+!!! info "[ApiGetOrderRequest](/../../schemas/api_get_order_request)"
     Retrieve the order for the account. Either `order_id` or `client_order_id` must be provided.<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

@@ -1,4 +1,4 @@
-!!! info "[MarginType](schemas/margin_type.md)"
+!!! info "[MarginType](/../../schemas/margin_type)"
     |Value| Description |
     |-|-|
     |`SIMPLE_CROSS_MARGIN` = 2|Simple Cross Margin Mode: all assets have a predictable margin impact, the whole subaccount shares a single margin|

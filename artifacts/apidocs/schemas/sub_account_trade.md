@@ -1,4 +1,4 @@
-!!! info "[SubAccountTrade](schemas/sub_account_trade.md)"
+!!! info "[SubAccountTrade](/../../schemas/sub_account_trade)"
     <br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

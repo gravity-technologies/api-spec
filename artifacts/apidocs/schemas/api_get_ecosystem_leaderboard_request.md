@@ -1,4 +1,4 @@
-!!! info "[ApiGetEcosystemLeaderboardRequest](schemas/api_get_ecosystem_leaderboard_request.md)"
+!!! info "[ApiGetEcosystemLeaderboardRequest](/../../schemas/api_get_ecosystem_leaderboard_request)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |calculate_from<br>`cf` |string|True|Start time of the epoch - phase|

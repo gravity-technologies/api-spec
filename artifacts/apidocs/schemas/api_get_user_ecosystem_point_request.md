@@ -1,4 +1,4 @@
-!!! info "[ApiGetUserEcosystemPointRequest](schemas/api_get_user_ecosystem_point_request.md)"
+!!! info "[ApiGetUserEcosystemPointRequest](/../../schemas/api_get_user_ecosystem_point_request)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |account_id<br>`ai` |string|True|The off chain account id|

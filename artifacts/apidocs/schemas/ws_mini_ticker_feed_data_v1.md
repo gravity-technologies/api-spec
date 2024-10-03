@@ -1,11 +1,11 @@
-!!! info "[WSMiniTickerFeedDataV1](schemas/ws_mini_ticker_feed_data_v1.md)"
+!!! info "[WSMiniTickerFeedDataV1](/../../schemas/ws_mini_ticker_feed_data_v1)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |stream<br>`s` |string|True|Stream name|
     |selector<br>`s1` |string|True|Primary selector|
     |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
     |feed<br>`f` |MiniTicker|True|A mini ticker matching the request filter|
-    ??? info "[MiniTicker](schemas/mini_ticker.md)"
+    ??? info "[MiniTicker](/../../schemas/mini_ticker)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|

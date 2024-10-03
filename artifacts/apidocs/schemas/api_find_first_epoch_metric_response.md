@@ -1,4 +1,4 @@
-!!! info "[ApiFindFirstEpochMetricResponse](schemas/api_find_first_epoch_metric_response.md)"
+!!! info "[ApiFindFirstEpochMetricResponse](/../../schemas/api_find_first_epoch_metric_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |phase_zero_metric<br>`pz` |EcosystemMetric|True|Phase zero metric|
@@ -7,7 +7,7 @@
     |total<br>`t` |number|True|The total number of accounts in the ecosystem|
     |total_point<br>`tp` |string|True|Total ecosystem point of the first epoch|
     |last_calculated_at<br>`lc` |string|True|The time when the ecosystem points were last calculated|
-    ??? info "[EcosystemMetric](schemas/ecosystem_metric.md)"
+    ??? info "[EcosystemMetric](/../../schemas/ecosystem_metric)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |direct_invite_count<br>`di` |number|True|Direct invite count|
@@ -15,7 +15,7 @@
         |direct_invite_trading_volume<br>`di1` |string|True|Direct invite trading volume|
         |indirect_invite_trading_volume<br>`ii1` |string|True|Indirect invite trading volume|
         |total_point<br>`tp` |string|True|Total ecosystem point of this epoch/phase|
-    ??? info "[EcosystemMetric](schemas/ecosystem_metric.md)"
+    ??? info "[EcosystemMetric](/../../schemas/ecosystem_metric)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |direct_invite_count<br>`di` |number|True|Direct invite count|

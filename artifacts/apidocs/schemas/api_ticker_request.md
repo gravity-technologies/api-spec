@@ -1,4 +1,4 @@
-!!! info "[ApiTickerRequest](schemas/api_ticker_request.md)"
+!!! info "[ApiTickerRequest](/../../schemas/api_ticker_request)"
     Retrieves a single ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful.<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

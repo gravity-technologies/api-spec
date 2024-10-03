@@ -1,9 +1,9 @@
-!!! info "[ApiFundingRateResponse](schemas/api_funding_rate_response.md)"
+!!! info "[ApiFundingRateResponse](/../../schemas/api_funding_rate_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |result<br>`r` |[FundingRate]|True|The funding rate result set for given interval|
     |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-    ??? info "[FundingRate](schemas/funding_rate.md)"
+    ??? info "[FundingRate](/../../schemas/funding_rate)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|

@@ -1,4 +1,4 @@
-!!! info "[ApiOrderStateRequest](schemas/api_order_state_request.md)"
+!!! info "[ApiOrderStateRequest](/../../schemas/api_order_state_request)"
     Retrieve the order state for the account. Either `order_id` or `client_order_id` must be provided.<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

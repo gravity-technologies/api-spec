@@ -1,4 +1,4 @@
-!!! info "[Trade](schemas/trade.md)"
+!!! info "[Trade](/../../schemas/trade)"
     All private RFQs and Private AXEs will be filtered out from the responses<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -14,7 +14,7 @@
     |forward_price<br>`fp` |string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
     |trade_id<br>`ti` |string|True|A trade identifier, globally unique, and monotonically increasing (not by `1`).<br>All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.<br>`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.|
     |venue<br>`v` |Venue|True|The venue where the trade occurred|
-    ??? info "[Venue](schemas/venue.md)"
+    ??? info "[Venue](/../../schemas/venue)"
         The list of Trading Venues that are supported on the GRVT exchange<br>
 
         |Value| Description |

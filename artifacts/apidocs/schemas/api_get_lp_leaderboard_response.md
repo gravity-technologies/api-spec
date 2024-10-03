@@ -1,8 +1,8 @@
-!!! info "[ApiGetLPLeaderboardResponse](schemas/api_get_lp_leaderboard_response.md)"
+!!! info "[ApiGetLPLeaderboardResponse](/../../schemas/api_get_lp_leaderboard_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |points<br>`p` |[LPPoint]|True|The list of LP points|
-    ??? info "[LPPoint](schemas/lp_point.md)"
+    ??? info "[LPPoint](/../../schemas/lp_point)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |main_account_id<br>`ma` |string|True|The main account id|

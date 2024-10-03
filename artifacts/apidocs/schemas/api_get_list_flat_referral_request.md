@@ -1,4 +1,4 @@
-!!! info "[ApiGetListFlatReferralRequest](schemas/api_get_list_flat_referral_request.md)"
+!!! info "[ApiGetListFlatReferralRequest](/../../schemas/api_get_list_flat_referral_request)"
     startTime and endTime are optional parameters. The semantics of these parameters are as follows:<ul><br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

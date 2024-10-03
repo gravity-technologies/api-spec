@@ -1,9 +1,9 @@
-!!! info "[ApiTransferHistoryResponse](schemas/api_transfer_history_response.md)"
+!!! info "[ApiTransferHistoryResponse](/../../schemas/api_transfer_history_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |result<br>`r` |[TransferHistory]|True|The transfer history matching the request account|
     |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-    ??? info "[TransferHistory](schemas/transfer_history.md)"
+    ??? info "[TransferHistory](/../../schemas/transfer_history)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |tx_id<br>`ti` |string|True|The transaction ID of the transfer|
@@ -15,7 +15,7 @@
         |num_tokens<br>`nt` |string|True|The number of tokens to transfer|
         |signature<br>`s` |Signature|True|The signature of the transfer|
         |event_time<br>`et` |string|True|The timestamp of the transfer in unix nanoseconds|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -25,7 +25,7 @@
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
-        ??? info "[Signature](schemas/signature.md)"
+        ??? info "[Signature](/../../schemas/signature)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|

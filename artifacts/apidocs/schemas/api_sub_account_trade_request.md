@@ -1,4 +1,4 @@
-!!! info "[ApiSubAccountTradeRequest](schemas/api_sub_account_trade_request.md)"
+!!! info "[ApiSubAccountTradeRequest](/../../schemas/api_sub_account_trade_request)"
     startTime are optional parameters. The semantics of these parameters are as follows:<ul><br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -9,7 +9,7 @@
     |start_interval<br>`si` |string|True|Optional. The starting time in unix nanoseconds of a specific interval to query|
     |start_time<br>`st` |string|False<br>`0`|Optional. Start time in unix nanoseconds|
     |end_time<br>`et` |string|False<br>`now()`|Optional. End time in unix nanoseconds|
-    ??? info "[SubAccountTradeInterval](schemas/sub_account_trade_interval.md)"
+    ??? info "[SubAccountTradeInterval](/../../schemas/sub_account_trade_interval)"
         |Value| Description |
         |-|-|
         |`SAT_1_MO` = 1|1 month|

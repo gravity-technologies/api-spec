@@ -1,11 +1,11 @@
-!!! info "[WSPositionsFeedDataV1](schemas/ws_positions_feed_data_v1.md)"
+!!! info "[WSPositionsFeedDataV1](/../../schemas/ws_positions_feed_data_v1)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |stream<br>`s` |string|True|Stream name|
     |selector<br>`s1` |string|True|Primary selector|
     |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
     |feed<br>`f` |Positions|True|A Position being created or updated matching the request filter|
-    ??? info "[Positions](schemas/positions.md)"
+    ??? info "[Positions](/../../schemas/positions)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|

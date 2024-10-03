@@ -1,4 +1,4 @@
-!!! info "[FlatReferral](schemas/flat_referral.md)"
+!!! info "[FlatReferral](/../../schemas/flat_referral)"
     <br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

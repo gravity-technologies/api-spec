@@ -1,8 +1,8 @@
-!!! info "[ApiFindTraderLeaderboardResponse](schemas/api_find_trader_leaderboard_response.md)"
+!!! info "[ApiFindTraderLeaderboardResponse](/../../schemas/api_find_trader_leaderboard_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |users<br>`u` |[TraderLeaderboardUser]|True|The list of trader leaderboard users|
-    ??? info "[TraderLeaderboardUser](schemas/trader_leaderboard_user.md)"
+    ??? info "[TraderLeaderboardUser](/../../schemas/trader_leaderboard_user)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |account_id<br>`ai` |string|True|The off chain account id|

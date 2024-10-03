@@ -1,8 +1,8 @@
-!!! info "[ApiLatestSnapSubAccountsResponse](schemas/api_latest_snap_sub_accounts_response.md)"
+!!! info "[ApiLatestSnapSubAccountsResponse](/../../schemas/api_latest_snap_sub_accounts_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |result<br>`r` |[SubAccount]|True|The sub account history matching the request sub account|
-    ??? info "[SubAccount](schemas/sub_account.md)"
+    ??? info "[SubAccount](/../../schemas/sub_account)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
@@ -17,12 +17,12 @@
         |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this sub account, and their balances|
         |positions<br>`p` |[Positions]|True|The list of positions owned by this sub account|
         |settle_index_price<br>`si` |string|True|The index price of the settle currency. (reported in `USD`)|
-        ??? info "[MarginType](schemas/margin_type.md)"
+        ??? info "[MarginType](/../../schemas/margin_type)"
             |Value| Description |
             |-|-|
             |`SIMPLE_CROSS_MARGIN` = 2|Simple Cross Margin Mode: all assets have a predictable margin impact, the whole subaccount shares a single margin|
             |`PORTFOLIO_CROSS_MARGIN` = 3|Portfolio Cross Margin Mode: asset margin impact is analysed on portfolio level, the whole subaccount shares a single margin|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -32,13 +32,13 @@
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
-        ??? info "[SpotBalance](schemas/spot_balance.md)"
+        ??? info "[SpotBalance](/../../schemas/spot_balance)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |currency<br>`c` |Currency|True|The currency you hold a spot balance in|
             |balance<br>`b` |string|True|This currency's balance in this trading account.|
             |index_price<br>`ip` |string|True|The index price of this currency. (reported in `USD`)|
-            ??? info "[Currency](schemas/currency.md)"
+            ??? info "[Currency](/../../schemas/currency)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -48,7 +48,7 @@
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-        ??? info "[Positions](schemas/positions.md)"
+        ??? info "[Positions](/../../schemas/positions)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|

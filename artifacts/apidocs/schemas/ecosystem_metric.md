@@ -1,4 +1,4 @@
-!!! info "[EcosystemMetric](schemas/ecosystem_metric.md)"
+!!! info "[EcosystemMetric](/../../schemas/ecosystem_metric)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |direct_invite_count<br>`di` |number|True|Direct invite count|

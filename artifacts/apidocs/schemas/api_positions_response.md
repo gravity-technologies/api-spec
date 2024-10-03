@@ -1,8 +1,8 @@
-!!! info "[ApiPositionsResponse](schemas/api_positions_response.md)"
+!!! info "[ApiPositionsResponse](/../../schemas/api_positions_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |result<br>`r` |[Positions]|True|The positions matching the request filter|
-    ??? info "[Positions](schemas/positions.md)"
+    ??? info "[Positions](/../../schemas/positions)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|

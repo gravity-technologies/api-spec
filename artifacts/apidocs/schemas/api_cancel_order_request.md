@@ -1,4 +1,4 @@
-!!! info "[ApiCancelOrderRequest](schemas/api_cancel_order_request.md)"
+!!! info "[ApiCancelOrderRequest](/../../schemas/api_cancel_order_request)"
     Cancel an order on the orderbook for this trading account. Either `order_id` or `client_order_id` must be provided.<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

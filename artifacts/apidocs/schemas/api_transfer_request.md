@@ -1,4 +1,4 @@
-!!! info "[ApiTransferRequest](schemas/api_transfer_request.md)"
+!!! info "[ApiTransferRequest](/../../schemas/api_transfer_request)"
     This API allows you to transfer funds in multiple different ways<ul><br><li>Between SubAccounts within your Main Account</li><br><li>Between your MainAccount and your SubAccounts</li><br><li>To other MainAccounts that you have previously allowlisted</li><br></ul><br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -10,7 +10,7 @@
     |currency<br>`c` |Currency|True|The token currency to transfer|
     |num_tokens<br>`nt` |string|True|The number of tokens to transfer, quoted in tokenCurrency decimal units|
     |signature<br>`s` |Signature|True|The signature of the transfer|
-    ??? info "[Currency](schemas/currency.md)"
+    ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 
         |Value| Description |
@@ -20,7 +20,7 @@
         |`USDT` = 3|the USDT token|
         |`ETH` = 4|the ETH token|
         |`BTC` = 5|the BTC token|
-    ??? info "[Signature](schemas/signature.md)"
+    ??? info "[Signature](/../../schemas/signature)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|

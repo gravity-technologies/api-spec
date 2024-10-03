@@ -1,4 +1,4 @@
-!!! info "[ApiWithdrawalRequest](schemas/api_withdrawal_request.md)"
+!!! info "[ApiWithdrawalRequest](/../../schemas/api_withdrawal_request)"
     Leverage this API to initialize a withdrawal from GRVT's Hyperchain onto Ethereum.<br>Do take note that the bridging process does take time. The GRVT UI will help you keep track of bridging progress, and notify you once its complete.<br><br>If not withdrawing the entirety of your balance, there is a minimum withdrawal amount. Currently that amount is ~25 USDT.<br>Withdrawal fees also apply to cover the cost of the Ethereum transaction.<br>Note that your funds will always remain in self-custory throughout the withdrawal process. At no stage does GRVT gain control over your funds.<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -8,7 +8,7 @@
     |currency<br>`c` |Currency|True|The token currency to withdraw|
     |num_tokens<br>`nt` |string|True|The number of tokens to withdraw, quoted in tokenCurrency decimal units|
     |signature<br>`s` |Signature|True|The signature of the withdrawal|
-    ??? info "[Currency](schemas/currency.md)"
+    ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 
         |Value| Description |
@@ -18,7 +18,7 @@
         |`USDT` = 3|the USDT token|
         |`ETH` = 4|the ETH token|
         |`BTC` = 5|the BTC token|
-    ??? info "[Signature](schemas/signature.md)"
+    ??? info "[Signature](/../../schemas/signature)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|

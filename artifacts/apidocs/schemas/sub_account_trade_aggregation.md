@@ -1,4 +1,4 @@
-!!! info "[SubAccountTradeAggregation](schemas/sub_account_trade_aggregation.md)"
+!!! info "[SubAccountTradeAggregation](/../../schemas/sub_account_trade_aggregation)"
     Similar to sub-account trade, but not divided by individual assets.<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

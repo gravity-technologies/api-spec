@@ -1,4 +1,4 @@
-!!! info "[EcosystemPoint](schemas/ecosystem_point.md)"
+!!! info "[EcosystemPoint](/../../schemas/ecosystem_point)"
     <br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

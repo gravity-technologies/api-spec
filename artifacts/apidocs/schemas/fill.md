@@ -1,4 +1,4 @@
-!!! info "[Fill](schemas/fill.md)"
+!!! info "[Fill](/../../schemas/fill)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
@@ -19,7 +19,7 @@
     |order_id<br>`oi` |string|True|An order identifier|
     |venue<br>`v` |Venue|True|The venue where the trade occurred|
     |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
-    ??? info "[Venue](schemas/venue.md)"
+    ??? info "[Venue](/../../schemas/venue)"
         The list of Trading Venues that are supported on the GRVT exchange<br>
 
         |Value| Description |

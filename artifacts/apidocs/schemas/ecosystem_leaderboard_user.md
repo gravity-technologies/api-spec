@@ -1,4 +1,4 @@
-!!! info "[EcosystemLeaderboardUser](schemas/ecosystem_leaderboard_user.md)"
+!!! info "[EcosystemLeaderboardUser](/../../schemas/ecosystem_leaderboard_user)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |account_id<br>`ai` |string|True|The off chain account id|

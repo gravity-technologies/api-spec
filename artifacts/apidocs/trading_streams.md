@@ -8,14 +8,14 @@ STREAM: v1.order
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSOrderFeedSelectorV1](schemas/ws_order_feed_selector_v1.md)"
+    !!! info "[WSOrderFeedSelectorV1](/../../schemas/ws_order_feed_selector_v1)"
         Subscribes to a feed of order updates pertaining to orders made by your account.<br>Each Order can be uniquely identified by its `order_id` or `client_order_id`.<br>To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).<br>Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
         |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
-    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
+    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -25,7 +25,7 @@ STREAM: v1.order
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
+    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -72,14 +72,14 @@ STREAM: v1.order
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSOrderFeedDataV1](schemas/ws_order_feed_data_v1.md)"
+    !!! info "[WSOrderFeedDataV1](/../../schemas/ws_order_feed_data_v1)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Order|True|The order object being created or updated|
-        ??? info "[Order](schemas/order.md)"
+        ??? info "[Order](/../../schemas/order)"
             Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -94,7 +94,7 @@ STREAM: v1.order
             |signature<br>`s` |Signature|True|The signature approving this order|
             |metadata<br>`m` |OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state<br>`s1` |OrderState|False<br>`''`|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
-            ??? info "[TimeInForce](schemas/time_in_force.md)"
+            ??? info "[TimeInForce](/../../schemas/time_in_force)"
                 |                       | Must Fill All | Can Fill Partial |
                 | -                     | -             | -                |
                 | Must Fill Immediately | FOK           | IOC              |
@@ -107,14 +107,14 @@ STREAM: v1.order
                 |`ALL_OR_NONE` = 2|AON - Either fill the whole order or none of it (Block Trades Only)|
                 |`IMMEDIATE_OR_CANCEL` = 3|IOC - Fill the order as much as possible, when hitting the orderbook. Then cancel it|
                 |`FILL_OR_KILL` = 4|FOK - Both AoN and IoC. Either fill the full order when hitting the orderbook, or cancel it|
-            ??? info "[OrderLeg](schemas/order_leg.md)"
+            ??? info "[OrderLeg](/../../schemas/order_leg)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |instrument<br>`i` |string|True|The instrument to trade in this leg|
                 |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
                 |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
-            ??? info "[Signature](schemas/signature.md)"
+            ??? info "[Signature](/../../schemas/signature)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
@@ -123,14 +123,14 @@ STREAM: v1.order
                 |v<br>`v` |number|True|Signature V|
                 |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce<br>`n` |number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
-            ??? info "[OrderMetadata](schemas/order_metadata.md)"
+            ??? info "[OrderMetadata](/../../schemas/order_metadata)"
                 Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
                 |create_time<br>`ct` |string|False<br>`0`|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
-            ??? info "[OrderState](schemas/order_state.md)"
+            ??? info "[OrderState](/../../schemas/order_state)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |status<br>`s` |OrderStatus|True|The status of the order|
@@ -138,7 +138,7 @@ STREAM: v1.order
                 |book_size<br>`bs` |[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
                 |traded_size<br>`ts` |[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time<br>`ut` |string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
-                ??? info "[OrderStatus](schemas/order_status.md)"
+                ??? info "[OrderStatus](/../../schemas/order_status)"
                     |Value| Description |
                     |-|-|
                     |`PENDING` = 1|Order is waiting for Trigger Condition to be hit|
@@ -146,7 +146,7 @@ STREAM: v1.order
                     |`FILLED` = 3|Order is fully filled and hence closed|
                     |`REJECTED` = 4|Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)|
                     |`CANCELLED` = 5|Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)|
-                ??? info "[OrderRejectReason](schemas/order_reject_reason.md)"
+                ??? info "[OrderRejectReason](/../../schemas/order_reject_reason)"
                     |Value| Description |
                     |-|-|
                     |`UNSPECIFIED` = 0|order is not cancelled or rejected|
@@ -444,14 +444,14 @@ STREAM: v1.state
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSOrderStateFeedSelectorV1](schemas/ws_order_state_feed_selector_v1.md)"
+    !!! info "[WSOrderStateFeedSelectorV1](/../../schemas/ws_order_state_feed_selector_v1)"
         Subscribes to a feed of order updates pertaining to orders made by your account.<br>Unlike the Order Stream, this only streams state updates, drastically improving throughput, and latency.<br>Each Order can be uniquely identified by its `order_id` or `client_order_id`.<br>To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).<br>Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
         |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
-    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
+    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -461,7 +461,7 @@ STREAM: v1.state
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
+    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -508,20 +508,20 @@ STREAM: v1.state
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSOrderStateFeedDataV1](schemas/ws_order_state_feed_data_v1.md)"
+    !!! info "[WSOrderStateFeedDataV1](/../../schemas/ws_order_state_feed_data_v1)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |OrderStateFeed|True|The Order State Feed|
-        ??? info "[OrderStateFeed](schemas/order_state_feed.md)"
+        ??? info "[OrderStateFeed](/../../schemas/order_state_feed)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |order_id<br>`oi` |string|True|A unique 128-bit identifier for the order, deterministically generated within the GRVT backend|
             |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client|
             |order_state<br>`os` |OrderState|True|The order state object being created or updated|
-            ??? info "[OrderState](schemas/order_state.md)"
+            ??? info "[OrderState](/../../schemas/order_state)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |status<br>`s` |OrderStatus|True|The status of the order|
@@ -529,7 +529,7 @@ STREAM: v1.state
                 |book_size<br>`bs` |[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
                 |traded_size<br>`ts` |[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time<br>`ut` |string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
-                ??? info "[OrderStatus](schemas/order_status.md)"
+                ??? info "[OrderStatus](/../../schemas/order_status)"
                     |Value| Description |
                     |-|-|
                     |`PENDING` = 1|Order is waiting for Trigger Condition to be hit|
@@ -537,7 +537,7 @@ STREAM: v1.state
                     |`FILLED` = 3|Order is fully filled and hence closed|
                     |`REJECTED` = 4|Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)|
                     |`CANCELLED` = 5|Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)|
-                ??? info "[OrderRejectReason](schemas/order_reject_reason.md)"
+                ??? info "[OrderRejectReason](/../../schemas/order_reject_reason)"
                     |Value| Description |
                     |-|-|
                     |`UNSPECIFIED` = 0|order is not cancelled or rejected|
@@ -792,14 +792,14 @@ STREAM: v1.fill
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSFillFeedSelectorV1](schemas/ws_fill_feed_selector_v1.md)"
+    !!! info "[WSFillFeedSelectorV1](/../../schemas/ws_fill_feed_selector_v1)"
         Subscribes to a feed of private trade updates. This happens when a trade is executed.<br>To subscribe to all private trades, specify an empty `instrument` (eg. `2345123`).<br>Otherwise, specify the `instrument` to only receive private trades for that instrument (eg. `2345123-BTC_USDT_Perp`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The sub account ID to request for|
         |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
-    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
+    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -809,7 +809,7 @@ STREAM: v1.fill
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
+    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -856,14 +856,14 @@ STREAM: v1.fill
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSFillFeedDataV1](schemas/ws_fill_feed_data_v1.md)"
+    !!! info "[WSFillFeedDataV1](/../../schemas/ws_fill_feed_data_v1)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|The websocket channel to which the response is sent|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Fill|True|A private trade matching the request filter|
-        ??? info "[Fill](schemas/fill.md)"
+        ??? info "[Fill](/../../schemas/fill)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
@@ -884,7 +884,7 @@ STREAM: v1.fill
             |order_id<br>`oi` |string|True|An order identifier|
             |venue<br>`v` |Venue|True|The venue where the trade occurred|
             |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
-            ??? info "[Venue](schemas/venue.md)"
+            ??? info "[Venue](/../../schemas/venue)"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -1134,14 +1134,14 @@ STREAM: v1.position
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSPositionsFeedSelectorV1](schemas/ws_positions_feed_selector_v1.md)"
+    !!! info "[WSPositionsFeedSelectorV1](/../../schemas/ws_positions_feed_selector_v1)"
         Subscribes to a feed of position updates. This happens when a trade is executed.<br>To subscribe to all positions, specify an empty `instrument` (eg. `2345123`).<br>Otherwise, specify the `instrument` to only receive positions for that instrument (eg. `2345123-BTC_USDT_Perp`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
         |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
-    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
+    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1151,7 +1151,7 @@ STREAM: v1.position
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
+    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1198,14 +1198,14 @@ STREAM: v1.position
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSPositionsFeedDataV1](schemas/ws_positions_feed_data_v1.md)"
+    !!! info "[WSPositionsFeedDataV1](/../../schemas/ws_positions_feed_data_v1)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Positions|True|A Position being created or updated matching the request filter|
-        ??? info "[Positions](schemas/positions.md)"
+        ??? info "[Positions](/../../schemas/positions)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
@@ -1455,13 +1455,13 @@ STREAM: v1.deposit
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSDepositFeedSelectorV1](schemas/ws_deposit_feed_selector_v1.md)"
+    !!! info "[WSDepositFeedSelectorV1](/../../schemas/ws_deposit_feed_selector_v1)"
         Subscribes to a feed of deposits. This will execute when there is any deposit to selected account.<br>To subscribe to a main account, specify the account ID (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |main_account_id<br>`ma` |string|True|The main account ID to request for|
-    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
+    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1471,7 +1471,7 @@ STREAM: v1.deposit
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
+    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1518,7 +1518,7 @@ STREAM: v1.deposit
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSDepositFeedDataV1](schemas/ws_deposit_feed_data_v1.md)"
+    !!! info "[WSDepositFeedDataV1](/../../schemas/ws_deposit_feed_data_v1)"
         Subscribes to a feed of deposit updates.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1527,14 +1527,14 @@ STREAM: v1.deposit
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Deposit|True|The Deposit object|
-        ??? info "[Deposit](schemas/deposit.md)"
+        ??? info "[Deposit](/../../schemas/deposit)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |tx_hash<br>`th` |string|True|The hash of the bridgemint event producing the deposit|
             |to_account_id<br>`ta` |string|True|The account to deposit into|
             |currency<br>`c` |Currency|True|The token currency to deposit|
             |num_tokens<br>`nt` |string|True|The number of tokens to deposit|
-            ??? info "[Currency](schemas/currency.md)"
+            ??? info "[Currency](/../../schemas/currency)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -1735,14 +1735,14 @@ STREAM: v1.transfer
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSTransferFeedSelectorV1](schemas/ws_transfer_feed_selector_v1.md)"
+    !!! info "[WSTransferFeedSelectorV1](/../../schemas/ws_transfer_feed_selector_v1)"
         Subscribes to a feed of transfers. This will execute when there is any transfer to or from the selected account.<br>To subscribe to a main account, specify the account ID (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a`).<br>To subscribe to a sub account, specify the main account and the sub account dash separated (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a-1920109784202388`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |main_account_id<br>`ma` |string|True|The main account ID to request for|
         |sub_account_id<br>`sa` |string|False<br>`'0'`|The sub account ID to request for|
-    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
+    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1752,7 +1752,7 @@ STREAM: v1.transfer
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
+    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1799,7 +1799,7 @@ STREAM: v1.transfer
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSTransferFeedDataV1](schemas/ws_transfer_feed_data_v1.md)"
+    !!! info "[WSTransferFeedDataV1](/../../schemas/ws_transfer_feed_data_v1)"
         Subscribes to a feed of transfer updates.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1808,7 +1808,7 @@ STREAM: v1.transfer
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Transfer|True|The Transfer object|
-        ??? info "[Transfer](schemas/transfer.md)"
+        ??? info "[Transfer](/../../schemas/transfer)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |from_account_id<br>`fa` |string|True|The account to transfer from|
@@ -1818,7 +1818,7 @@ STREAM: v1.transfer
             |currency<br>`c` |Currency|True|The token currency to transfer|
             |num_tokens<br>`nt` |string|True|The number of tokens to transfer|
             |signature<br>`s` |Signature|True|The signature of the transfer|
-            ??? info "[Currency](schemas/currency.md)"
+            ??? info "[Currency](/../../schemas/currency)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -1828,7 +1828,7 @@ STREAM: v1.transfer
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-            ??? info "[Signature](schemas/signature.md)"
+            ??? info "[Signature](/../../schemas/signature)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
@@ -2054,13 +2054,13 @@ STREAM: v1.withdrawal
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSWithdrawalFeedSelectorV1](schemas/ws_withdrawal_feed_selector_v1.md)"
+    !!! info "[WSWithdrawalFeedSelectorV1](/../../schemas/ws_withdrawal_feed_selector_v1)"
         Subscribes to a feed of withdrawals. This will execute when there is any withdrawal from the selected account.<br>To subscribe to a main account, specify the account ID (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a`).<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |main_account_id<br>`ma` |string|True|The main account ID to request for|
-    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
+    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -2070,7 +2070,7 @@ STREAM: v1.withdrawal
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
+    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -2117,7 +2117,7 @@ STREAM: v1.withdrawal
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSWithdrawalFeedDataV1](schemas/ws_withdrawal_feed_data_v1.md)"
+    !!! info "[WSWithdrawalFeedDataV1](/../../schemas/ws_withdrawal_feed_data_v1)"
         Subscribes to a feed of withdrawal updates.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -2126,7 +2126,7 @@ STREAM: v1.withdrawal
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Withdrawal|True|The Withdrawal object|
-        ??? info "[Withdrawal](schemas/withdrawal.md)"
+        ??? info "[Withdrawal](/../../schemas/withdrawal)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |from_account_id<br>`fa` |string|True|The subaccount to withdraw from|
@@ -2134,7 +2134,7 @@ STREAM: v1.withdrawal
             |currency<br>`c` |Currency|True|The token currency to withdraw|
             |num_tokens<br>`nt` |string|True|The number of tokens to withdraw|
             |signature<br>`s` |Signature|True|The signature of the withdrawal|
-            ??? info "[Currency](schemas/currency.md)"
+            ??? info "[Currency](/../../schemas/currency)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -2144,7 +2144,7 @@ STREAM: v1.withdrawal
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-            ??? info "[Signature](schemas/signature.md)"
+            ??? info "[Signature](/../../schemas/signature)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|

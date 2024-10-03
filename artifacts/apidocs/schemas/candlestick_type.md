@@ -1,4 +1,4 @@
-!!! info "[CandlestickType](schemas/candlestick_type.md)"
+!!! info "[CandlestickType](/../../schemas/candlestick_type)"
     |Value| Description |
     |-|-|
     |`TRADE` = 1|Tracks traded prices|

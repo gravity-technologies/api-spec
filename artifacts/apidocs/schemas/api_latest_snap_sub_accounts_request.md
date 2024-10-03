@@ -1,4 +1,4 @@
-!!! info "[ApiLatestSnapSubAccountsRequest](schemas/api_latest_snap_sub_accounts_request.md)"
+!!! info "[ApiLatestSnapSubAccountsRequest](/../../schemas/api_latest_snap_sub_accounts_request)"
     The request to get the latest snapshot of list sub account<br><br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
