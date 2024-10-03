@@ -535,11 +535,6 @@
                 "code": 3030,
                 "message": "Feed rate is invalid",
                 "status": 400
-              },
-              {
-                "code": 3031,
-                "message": "Depth is invalid",
-                "status": 400
               }
             ]
           },
@@ -2208,14 +2203,16 @@
           {
             "name": "trade_id",
             "lite_name": "ti",
-            "semantic_type": "uint64",
+            "semantic_type": "string",
             "json_type": "string",
             "index": 14,
             "array_depth": 0,
             "optional": false,
-            "example": "'209358'",
+            "example": "'209358:2'",
             "comment": [
-              "A trade identifier"
+              "A trade identifier, globally unique, and monotonically increasing (not by `1`).",
+              "All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.",
+              "`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`."
             ]
           },
           {
@@ -3729,14 +3726,16 @@
           {
             "name": "trade_id",
             "lite_name": "ti",
-            "semantic_type": "uint64",
+            "semantic_type": "string",
             "json_type": "string",
             "index": 9,
             "array_depth": 0,
             "optional": false,
-            "example": "'1234567890'",
+            "example": "'209358:2'",
             "comment": [
-              "A trade identifier"
+              "A trade identifier, globally unique, and monotonically increasing (not by `1`).",
+              "All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.",
+              "`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`."
             ]
           },
           {
