@@ -10,7 +10,7 @@ LITE ENDPOINT: lite/v1/instrument
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiGetInstrumentRequest"
+    !!! info "[ApiGetInstrumentRequest](schemas/api_get_instrument_request.md)"
         Fetch a single instrument by supplying the asset or instrument name<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -32,11 +32,11 @@ LITE ENDPOINT: lite/v1/instrument
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiGetInstrumentResponse"
+    !!! info "[ApiGetInstrumentResponse](schemas/api_get_instrument_response.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |Instrument|True|The instrument matching the request asset|
-        ??? info "Instrument"
+        ??? info "[Instrument](schemas/instrument.md)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
@@ -51,7 +51,7 @@ LITE ENDPOINT: lite/v1/instrument
             |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
             |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
             |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
-            ??? info "Currency"
+            ??? info "[Currency](schemas/currency.md)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -61,7 +61,7 @@ LITE ENDPOINT: lite/v1/instrument
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-            ??? info "Currency"
+            ??? info "[Currency](schemas/currency.md)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -71,7 +71,7 @@ LITE ENDPOINT: lite/v1/instrument
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-            ??? info "Kind"
+            ??? info "[Kind](schemas/kind.md)"
                 The list of asset kinds that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -80,14 +80,14 @@ LITE ENDPOINT: lite/v1/instrument
                 |`FUTURE` = 2|the future asset kind|
                 |`CALL` = 3|the call option asset kind|
                 |`PUT` = 4|the put option asset kind|
-            ??? info "Venue"
+            ??? info "[Venue](schemas/venue.md)"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
                 |Value| Description |
                 |-|-|
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
                 |`RFQ` = 2|the trade is cleared on the RFQ venue|
-            ??? info "InstrumentSettlementPeriod"
+            ??? info "[InstrumentSettlementPeriod](schemas/instrument_settlement_period.md)"
                 |Value| Description |
                 |-|-|
                 |`PERPETUAL` = 1|Instrument settles through perpetual funding cycles|
@@ -224,7 +224,7 @@ LITE ENDPOINT: lite/v1/all_instruments
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiGetAllInstrumentsRequest"
+    !!! info "[ApiGetAllInstrumentsRequest](schemas/api_get_all_instruments_request.md)"
         Fetch all instruments<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -246,11 +246,11 @@ LITE ENDPOINT: lite/v1/all_instruments
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiGetAllInstrumentsResponse"
+    !!! info "[ApiGetAllInstrumentsResponse](schemas/api_get_all_instruments_response.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[Instrument]|True|List of instruments|
-        ??? info "Instrument"
+        ??? info "[Instrument](schemas/instrument.md)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
@@ -265,7 +265,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
             |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
             |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
-            ??? info "Currency"
+            ??? info "[Currency](schemas/currency.md)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -275,7 +275,7 @@ LITE ENDPOINT: lite/v1/all_instruments
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-            ??? info "Currency"
+            ??? info "[Currency](schemas/currency.md)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -285,7 +285,7 @@ LITE ENDPOINT: lite/v1/all_instruments
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-            ??? info "Kind"
+            ??? info "[Kind](schemas/kind.md)"
                 The list of asset kinds that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -294,14 +294,14 @@ LITE ENDPOINT: lite/v1/all_instruments
                 |`FUTURE` = 2|the future asset kind|
                 |`CALL` = 3|the call option asset kind|
                 |`PUT` = 4|the put option asset kind|
-            ??? info "Venue"
+            ??? info "[Venue](schemas/venue.md)"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
                 |Value| Description |
                 |-|-|
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
                 |`RFQ` = 2|the trade is cleared on the RFQ venue|
-            ??? info "InstrumentSettlementPeriod"
+            ??? info "[InstrumentSettlementPeriod](schemas/instrument_settlement_period.md)"
                 |Value| Description |
                 |-|-|
                 |`PERPETUAL` = 1|Instrument settles through perpetual funding cycles|
@@ -432,7 +432,7 @@ LITE ENDPOINT: lite/v1/instruments
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiGetFilteredInstrumentsRequest"
+    !!! info "[ApiGetFilteredInstrumentsRequest](schemas/api_get_filtered_instruments_request.md)"
         Fetch a list of instruments based on the filters provided<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -442,7 +442,7 @@ LITE ENDPOINT: lite/v1/instruments
         |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         |is_active<br>`ia` |boolean|False<br>`false`|Request for active instruments only|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 100000|
-        ??? info "Kind"
+        ??? info "[Kind](schemas/kind.md)"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -451,7 +451,7 @@ LITE ENDPOINT: lite/v1/instruments
             |`FUTURE` = 2|the future asset kind|
             |`CALL` = 3|the call option asset kind|
             |`PUT` = 4|the put option asset kind|
-        ??? info "Currency"
+        ??? info "[Currency](schemas/currency.md)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -461,7 +461,7 @@ LITE ENDPOINT: lite/v1/instruments
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
-        ??? info "Currency"
+        ??? info "[Currency](schemas/currency.md)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -495,11 +495,11 @@ LITE ENDPOINT: lite/v1/instruments
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiGetFilteredInstrumentsResponse"
+    !!! info "[ApiGetFilteredInstrumentsResponse](schemas/api_get_filtered_instruments_response.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[Instrument]|True|The instruments matching the request filter|
-        ??? info "Instrument"
+        ??? info "[Instrument](schemas/instrument.md)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
@@ -514,7 +514,7 @@ LITE ENDPOINT: lite/v1/instruments
             |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
             |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
             |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
-            ??? info "Currency"
+            ??? info "[Currency](schemas/currency.md)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -524,7 +524,7 @@ LITE ENDPOINT: lite/v1/instruments
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-            ??? info "Currency"
+            ??? info "[Currency](schemas/currency.md)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -534,7 +534,7 @@ LITE ENDPOINT: lite/v1/instruments
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-            ??? info "Kind"
+            ??? info "[Kind](schemas/kind.md)"
                 The list of asset kinds that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -543,14 +543,14 @@ LITE ENDPOINT: lite/v1/instruments
                 |`FUTURE` = 2|the future asset kind|
                 |`CALL` = 3|the call option asset kind|
                 |`PUT` = 4|the put option asset kind|
-            ??? info "Venue"
+            ??? info "[Venue](schemas/venue.md)"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
                 |Value| Description |
                 |-|-|
                 |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
                 |`RFQ` = 2|the trade is cleared on the RFQ venue|
-            ??? info "InstrumentSettlementPeriod"
+            ??? info "[InstrumentSettlementPeriod](schemas/instrument_settlement_period.md)"
                 |Value| Description |
                 |-|-|
                 |`PERPETUAL` = 1|Instrument settles through perpetual funding cycles|
@@ -714,7 +714,7 @@ LITE ENDPOINT: lite/v1/mini
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiMiniTickerRequest"
+    !!! info "[ApiMiniTickerRequest](schemas/api_mini_ticker_request.md)"
         Retrieves a single mini ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -736,11 +736,11 @@ LITE ENDPOINT: lite/v1/mini
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiMiniTickerResponse"
+    !!! info "[ApiMiniTickerResponse](schemas/api_mini_ticker_response.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |MiniTicker|True|The mini ticker matching the request asset|
-        ??? info "MiniTicker"
+        ??? info "[MiniTicker](schemas/mini_ticker.md)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
@@ -882,7 +882,7 @@ LITE ENDPOINT: lite/v1/ticker
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiTickerRequest"
+    !!! info "[ApiTickerRequest](schemas/api_ticker_request.md)"
         Retrieves a single ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -904,11 +904,11 @@ LITE ENDPOINT: lite/v1/ticker
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiTickerResponse"
+    !!! info "[ApiTickerResponse](schemas/api_ticker_response.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |Ticker|True|The mini ticker matching the request asset|
-        ??? info "Ticker"
+        ??? info "[Ticker](schemas/ticker.md)"
             Derived data such as the below, will not be included by default:<br>  - 24 hour volume (`buyVolume + sellVolume`)<br>  - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>  - 24 hour average trade price (`volumeQ / volumeU`)<br>  - 24 hour average trade volume (`volume / trades`)<br>  - 24 hour percentage change (`24hStatChange / 24hStat`)<br>  - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br><br>To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>Ticker extensions are currently under design to offer you more convenience.<br>These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br><br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1079,7 +1079,7 @@ LITE ENDPOINT: lite/v1/book
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiOrderbookLevelsRequest"
+    !!! info "[ApiOrderbookLevelsRequest](schemas/api_orderbook_levels_request.md)"
         Retrieves aggregated price depth for a single instrument, with a maximum depth of 10 levels. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1104,24 +1104,24 @@ LITE ENDPOINT: lite/v1/book
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiOrderbookLevelsResponse"
+    !!! info "[ApiOrderbookLevelsResponse](schemas/api_orderbook_levels_response.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |OrderbookLevels|True|The orderbook levels objects matching the request asset|
-        ??? info "OrderbookLevels"
+        ??? info "[OrderbookLevels](schemas/orderbook_levels.md)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
             |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |bids<br>`b` |[OrderbookLevel]|True|The list of best bids up till query depth|
             |asks<br>`a` |[OrderbookLevel]|True|The list of best asks up till query depth|
-            ??? info "OrderbookLevel"
+            ??? info "[OrderbookLevel](schemas/orderbook_level.md)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
                 |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
                 |num_orders<br>`no` |number|True|The number of open orders at this level|
-            ??? info "OrderbookLevel"
+            ??? info "[OrderbookLevel](schemas/orderbook_level.md)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
@@ -1277,7 +1277,7 @@ LITE ENDPOINT: lite/v1/trade
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiTradeRequest"
+    !!! info "[ApiTradeRequest](schemas/api_trade_request.md)"
         Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.<br>This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1302,11 +1302,11 @@ LITE ENDPOINT: lite/v1/trade
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiTradeResponse"
+    !!! info "[ApiTradeResponse](schemas/api_trade_response.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[Trade]|True|The public trades matching the request asset|
-        ??? info "Trade"
+        ??? info "[Trade](schemas/trade.md)"
             All private RFQs and Private AXEs will be filtered out from the responses<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1322,7 +1322,7 @@ LITE ENDPOINT: lite/v1/trade
             |forward_price<br>`fp` |string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
             |trade_id<br>`ti` |string|True|A trade identifier, globally unique, and monotonically increasing (not by `1`).<br>All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.<br>`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.|
             |venue<br>`v` |Venue|True|The venue where the trade occurred|
-            ??? info "Venue"
+            ??? info "[Venue](schemas/venue.md)"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -1459,7 +1459,7 @@ LITE ENDPOINT: lite/v1/trade_history
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiTradeHistoryRequest"
+    !!! info "[ApiTradeHistoryRequest](schemas/api_trade_history_request.md)"
         Perform historical lookup of public trades in any given instrument.<br>This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>Only data from the last three months will be retained.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1493,12 +1493,12 @@ LITE ENDPOINT: lite/v1/trade_history
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiTradeHistoryResponse"
+    !!! info "[ApiTradeHistoryResponse](schemas/api_trade_history_response.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[Trade]|True|The public trades matching the request asset|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "Trade"
+        ??? info "[Trade](schemas/trade.md)"
             All private RFQs and Private AXEs will be filtered out from the responses<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1514,7 +1514,7 @@ LITE ENDPOINT: lite/v1/trade_history
             |forward_price<br>`fp` |string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
             |trade_id<br>`ti` |string|True|A trade identifier, globally unique, and monotonically increasing (not by `1`).<br>All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.<br>`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.|
             |venue<br>`v` |Venue|True|The venue where the trade occurred|
-            ??? info "Venue"
+            ??? info "[Venue](schemas/venue.md)"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -1677,7 +1677,7 @@ LITE ENDPOINT: lite/v1/kline
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiCandlestickRequest"
+    !!! info "[ApiCandlestickRequest](schemas/api_candlestick_request.md)"
         Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1689,7 +1689,7 @@ LITE ENDPOINT: lite/v1/kline
         |end_time<br>`et` |string|False<br>`now()`|End time of kline data in unix nanoseconds|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
         |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
-        ??? info "CandlestickInterval"
+        ??? info "[CandlestickInterval](schemas/candlestick_interval.md)"
             |Value| Description |
             |-|-|
             |`CI_1_M` = 1|1 minute|
@@ -1710,7 +1710,7 @@ LITE ENDPOINT: lite/v1/kline
             |`CI_2_W` = 16|2 weeks|
             |`CI_3_W` = 17|3 weeks|
             |`CI_4_W` = 18|4 weeks|
-        ??? info "CandlestickType"
+        ??? info "[CandlestickType](schemas/candlestick_type.md)"
             |Value| Description |
             |-|-|
             |`TRADE` = 1|Tracks traded prices|
@@ -1745,12 +1745,12 @@ LITE ENDPOINT: lite/v1/kline
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiCandlestickResponse"
+    !!! info "[ApiCandlestickResponse](schemas/api_candlestick_response.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[Candlestick]|True|The candlestick result set for given interval|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "Candlestick"
+        ??? info "[Candlestick](schemas/candlestick.md)"
             <br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1936,7 +1936,7 @@ LITE ENDPOINT: lite/v1/funding
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiFundingRateRequest"
+    !!! info "[ApiFundingRateRequest](schemas/api_funding_rate_request.md)"
         Lookup the historical funding rate of a perpetual future.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1970,12 +1970,12 @@ LITE ENDPOINT: lite/v1/funding
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "ApiFundingRateResponse"
+    !!! info "[ApiFundingRateResponse](schemas/api_funding_rate_response.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[FundingRate]|True|The funding rate result set for given interval|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "FundingRate"
+        ??? info "[FundingRate](schemas/funding_rate.md)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|

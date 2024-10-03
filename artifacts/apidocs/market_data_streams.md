@@ -8,14 +8,14 @@ STREAM: v1.mini.s
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSMiniTickerFeedSelectorV1"
+    !!! info "[WSMiniTickerFeedSelectorV1](schemas/ws_mini_ticker_feed_selector_v1.md)"
         Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.<br>Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
-    ??? info "WSRequestV1"
+    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -25,7 +25,7 @@ STREAM: v1.mini.s
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "WSResponseV1"
+    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -72,14 +72,14 @@ STREAM: v1.mini.s
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSMiniTickerFeedDataV1"
+    !!! info "[WSMiniTickerFeedDataV1](schemas/ws_mini_ticker_feed_data_v1.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |MiniTicker|True|A mini ticker matching the request filter|
-        ??? info "MiniTicker"
+        ??? info "[MiniTicker](schemas/mini_ticker.md)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
@@ -307,14 +307,14 @@ STREAM: v1.mini.d
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSMiniTickerFeedSelectorV1"
+    !!! info "[WSMiniTickerFeedSelectorV1](schemas/ws_mini_ticker_feed_selector_v1.md)"
         Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.<br>Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
-    ??? info "WSRequestV1"
+    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -324,7 +324,7 @@ STREAM: v1.mini.d
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "WSResponseV1"
+    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -371,14 +371,14 @@ STREAM: v1.mini.d
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSMiniTickerFeedDataV1"
+    !!! info "[WSMiniTickerFeedDataV1](schemas/ws_mini_ticker_feed_data_v1.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |MiniTicker|True|A mini ticker matching the request filter|
-        ??? info "MiniTicker"
+        ??? info "[MiniTicker](schemas/mini_ticker.md)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
@@ -606,14 +606,14 @@ STREAM: v1.ticker.s
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSTickerFeedSelectorV1"
+    !!! info "[WSTickerFeedSelectorV1](schemas/ws_ticker_feed_selector_v1.md)"
         Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.<br>Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the ticker.</li><li>After the snapshot, the server will only send deltas of the ticker.</li><li>The server will send a delta if any of the fields in the ticker have changed.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
-    ??? info "WSRequestV1"
+    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -623,7 +623,7 @@ STREAM: v1.ticker.s
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "WSResponseV1"
+    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -670,14 +670,14 @@ STREAM: v1.ticker.s
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSTickerFeedDataV1"
+    !!! info "[WSTickerFeedDataV1](schemas/ws_ticker_feed_data_v1.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Ticker|True|A ticker matching the request filter|
-        ??? info "Ticker"
+        ??? info "[Ticker](schemas/ticker.md)"
             Derived data such as the below, will not be included by default:<br>  - 24 hour volume (`buyVolume + sellVolume`)<br>  - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>  - 24 hour average trade price (`volumeQ / volumeU`)<br>  - 24 hour average trade volume (`volume / trades`)<br>  - 24 hour percentage change (`24hStatChange / 24hStat`)<br>  - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br><br>To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>Ticker extensions are currently under design to offer you more convenience.<br>These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br><br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -946,14 +946,14 @@ STREAM: v1.ticker.d
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSTickerFeedSelectorV1"
+    !!! info "[WSTickerFeedSelectorV1](schemas/ws_ticker_feed_selector_v1.md)"
         Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.<br>Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the ticker.</li><li>After the snapshot, the server will only send deltas of the ticker.</li><li>The server will send a delta if any of the fields in the ticker have changed.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
-    ??? info "WSRequestV1"
+    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -963,7 +963,7 @@ STREAM: v1.ticker.d
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "WSResponseV1"
+    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1010,14 +1010,14 @@ STREAM: v1.ticker.d
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSTickerFeedDataV1"
+    !!! info "[WSTickerFeedDataV1](schemas/ws_ticker_feed_data_v1.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Ticker|True|A ticker matching the request filter|
-        ??? info "Ticker"
+        ??? info "[Ticker](schemas/ticker.md)"
             Derived data such as the below, will not be included by default:<br>  - 24 hour volume (`buyVolume + sellVolume`)<br>  - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>  - 24 hour average trade price (`volumeQ / volumeU`)<br>  - 24 hour average trade volume (`volume / trades`)<br>  - 24 hour percentage change (`24hStatChange / 24hStat`)<br>  - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br><br>To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>Ticker extensions are currently under design to offer you more convenience.<br>These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br><br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1287,7 +1287,7 @@ STREAM: v1.book.s
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSOrderbookLevelsFeedSelectorV1"
+    !!! info "[WSOrderbookLevelsFeedSelectorV1](schemas/ws_orderbook_levels_feed_selector_v1.md)"
         Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.<br>Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul><br><br>Subscription Pattern:<ul><li>Delta - `instrument@rate`</li><li>Snapshot - `instrument@rate-depth`</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1295,7 +1295,7 @@ STREAM: v1.book.s
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (50, 100, 500, 1000)<br>Snapshot (500, 1000)|
         |depth<br>`d` |number|False<br>`'0'`|Depth of the order book to be retrieved<br>Delta(0 - `unlimited`)<br>Snapshot(10, 50, 100, 500)|
-    ??? info "WSRequestV1"
+    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1305,7 +1305,7 @@ STREAM: v1.book.s
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "WSResponseV1"
+    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1352,27 +1352,27 @@ STREAM: v1.book.s
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSOrderbookLevelsFeedDataV1"
+    !!! info "[WSOrderbookLevelsFeedDataV1](schemas/ws_orderbook_levels_feed_data_v1.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |OrderbookLevels|True|An orderbook levels object matching the request filter|
-        ??? info "OrderbookLevels"
+        ??? info "[OrderbookLevels](schemas/orderbook_levels.md)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
             |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |bids<br>`b` |[OrderbookLevel]|True|The list of best bids up till query depth|
             |asks<br>`a` |[OrderbookLevel]|True|The list of best asks up till query depth|
-            ??? info "OrderbookLevel"
+            ??? info "[OrderbookLevel](schemas/orderbook_level.md)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
                 |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
                 |num_orders<br>`no` |number|True|The number of open orders at this level|
-            ??? info "OrderbookLevel"
+            ??? info "[OrderbookLevel](schemas/orderbook_level.md)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
@@ -1600,7 +1600,7 @@ STREAM: v1.book.d
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSOrderbookLevelsFeedSelectorV1"
+    !!! info "[WSOrderbookLevelsFeedSelectorV1](schemas/ws_orderbook_levels_feed_selector_v1.md)"
         Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.<br>Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul><br><br>Subscription Pattern:<ul><li>Delta - `instrument@rate`</li><li>Snapshot - `instrument@rate-depth`</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1608,7 +1608,7 @@ STREAM: v1.book.d
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (50, 100, 500, 1000)<br>Snapshot (500, 1000)|
         |depth<br>`d` |number|False<br>`'0'`|Depth of the order book to be retrieved<br>Delta(0 - `unlimited`)<br>Snapshot(10, 50, 100, 500)|
-    ??? info "WSRequestV1"
+    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1618,7 +1618,7 @@ STREAM: v1.book.d
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "WSResponseV1"
+    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1665,27 +1665,27 @@ STREAM: v1.book.d
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSOrderbookLevelsFeedDataV1"
+    !!! info "[WSOrderbookLevelsFeedDataV1](schemas/ws_orderbook_levels_feed_data_v1.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |OrderbookLevels|True|An orderbook levels object matching the request filter|
-        ??? info "OrderbookLevels"
+        ??? info "[OrderbookLevels](schemas/orderbook_levels.md)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
             |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
             |bids<br>`b` |[OrderbookLevel]|True|The list of best bids up till query depth|
             |asks<br>`a` |[OrderbookLevel]|True|The list of best asks up till query depth|
-            ??? info "OrderbookLevel"
+            ??? info "[OrderbookLevel](schemas/orderbook_level.md)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
                 |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
                 |num_orders<br>`no` |number|True|The number of open orders at this level|
-            ??? info "OrderbookLevel"
+            ??? info "[OrderbookLevel](schemas/orderbook_level.md)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
@@ -1908,14 +1908,14 @@ STREAM: v1.trade
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSTradeFeedSelectorV1"
+    !!! info "[WSTradeFeedSelectorV1](schemas/ws_trade_feed_selector_v1.md)"
         Subscribes to a stream of Public Trades for an instrument.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |limit<br>`l` |number|True|The limit to query for. Defaults to 500; Max 1000|
-    ??? info "WSRequestV1"
+    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1925,7 +1925,7 @@ STREAM: v1.trade
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "WSResponseV1"
+    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1972,14 +1972,14 @@ STREAM: v1.trade
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSTradeFeedDataV1"
+    !!! info "[WSTradeFeedDataV1](schemas/ws_trade_feed_data_v1.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Trade|True|A public trade matching the request filter|
-        ??? info "Trade"
+        ??? info "[Trade](schemas/trade.md)"
             All private RFQs and Private AXEs will be filtered out from the responses<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1995,7 +1995,7 @@ STREAM: v1.trade
             |forward_price<br>`fp` |string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
             |trade_id<br>`ti` |string|True|A trade identifier, globally unique, and monotonically increasing (not by `1`).<br>All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.<br>`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.|
             |venue<br>`v` |Venue|True|The venue where the trade occurred|
-            ??? info "Venue"
+            ??? info "[Venue](schemas/venue.md)"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -2211,7 +2211,7 @@ STREAM: v1.candle
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSCandlestickFeedSelectorV1"
+    !!! info "[WSCandlestickFeedSelectorV1](schemas/ws_candlestick_feed_selector_v1.md)"
         Subscribes to a stream of Kline/Candlestick updates for an instrument. A Kline is uniquely identified by its open time.<br>A new Kline is published every interval (if it exists). Upon subscription, the server will send the 5 most recent Kline for the requested interval.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -2219,7 +2219,7 @@ STREAM: v1.candle
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |interval<br>`i1` |CandlestickInterval|True|The interval of each candlestick|
         |type<br>`t` |CandlestickType|True|The type of candlestick data to retrieve|
-        ??? info "CandlestickInterval"
+        ??? info "[CandlestickInterval](schemas/candlestick_interval.md)"
             |Value| Description |
             |-|-|
             |`CI_1_M` = 1|1 minute|
@@ -2240,14 +2240,14 @@ STREAM: v1.candle
             |`CI_2_W` = 16|2 weeks|
             |`CI_3_W` = 17|3 weeks|
             |`CI_4_W` = 18|4 weeks|
-        ??? info "CandlestickType"
+        ??? info "[CandlestickType](schemas/candlestick_type.md)"
             |Value| Description |
             |-|-|
             |`TRADE` = 1|Tracks traded prices|
             |`MARK` = 2|Tracks mark prices|
             |`INDEX` = 3|Tracks index prices|
             |`MID` = 4|Tracks book mid prices|
-    ??? info "WSRequestV1"
+    ??? info "[WSRequestV1](schemas/ws_request_v1.md)"
         All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -2257,7 +2257,7 @@ STREAM: v1.candle
         |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
         |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
         |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "WSResponseV1"
+    ??? info "[WSResponseV1](schemas/ws_response_v1.md)"
         All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -2304,14 +2304,14 @@ STREAM: v1.candle
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "WSCandlestickFeedDataV1"
+    !!! info "[WSCandlestickFeedDataV1](schemas/ws_candlestick_feed_data_v1.md)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
         |selector<br>`s1` |string|True|Primary selector|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Candlestick|True|A candlestick entry matching the request filters|
-        ??? info "Candlestick"
+        ??? info "[Candlestick](schemas/candlestick.md)"
             <br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
