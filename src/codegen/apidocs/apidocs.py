@@ -93,10 +93,10 @@ def write_stream_feed_selector(
     md.writeln('!!! question "Query"')
     md.indent()
     md.writeln("**JSON RPC Request**")
-    md.writeln("```json")
+    write_code_block(md, "json")
     write_stream_feed_request(md, stream, selector, True)
     md.writeln("```")
-    md.writeln("```json")
+    write_code_block(md, "json")
     write_stream_feed_request(md, stream, selector, False)
     md.writeln("```")
     md.writeln("**JSON RPC Response**")
@@ -128,7 +128,7 @@ def write_stream_feed_request(
 ) -> None:
     md.writeln("{")
     md.indent()
-    md.writeln('"id":1,')
+    md.writeln('"request_id":1,')
     md.writeln(f'"stream":"{stream.channel}",')
     md.writeln(f'"feed":["{selector}"],')
     md.writeln('"method":"subscribe",')
@@ -138,10 +138,10 @@ def write_stream_feed_request(
 
 
 def write_stream_feed_response(md: MarkdownWriter, stream: Stream, selector: str) -> None:
-    md.writeln("```json")
+    write_code_block(md, "json")
     md.writeln("{")
     md.indent()
-    md.writeln('"id":1,')
+    md.writeln('"request_id":1,')
     md.writeln(f'"stream":"{stream.channel}",')
     md.writeln(f'"subs":["{selector}"],')
     md.writeln('"unsubs":[],')
@@ -166,10 +166,10 @@ def write_stream_feed_data(ctx: CodegenCtx, md: MarkdownWriter, stream: Stream) 
     write_right_section(md)
     md.writeln("!!! success")
     md.indent()
-    md.writeln("```json")
+    write_code_block(md, "json")
     write_struct_example(ctx, md, ctx.struct_map[stream.feed], True, True)
     md.writeln("```")
-    md.writeln("```json")
+    write_code_block(md, "json")
     write_struct_example(ctx, md, ctx.struct_map[stream.feed], True, False)
     md.writeln("```")
     md.dedent()
@@ -190,11 +190,12 @@ def write_stream_rpc_try_it_out(
     if stream.auth_required:
         md.writeln('-8<- "sections/auth.md"')
 
-    # Main Section
+    # Main Section (Full)
+    write_left_section(md, "50%")
     for endpoint in gateway.endpoints:
-        md.writeln(f'!!! example "{endpoint.name}"')
+        md.writeln(f'!!! example "Try {endpoint.name.upper()} Full"')
         md.indent()
-        md.writeln("```bash")
+        write_code_block(md, "bash")
         md.writeln(f'wscat -c "wss://{endpoint.url}/ws" \\')
         if stream.auth_required:
             md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
@@ -204,6 +205,24 @@ def write_stream_rpc_try_it_out(
         md.writeln("' -w 360")
         md.writeln("```")
         md.dedent()
+    write_section_end(md)
+
+    # Main Section (Lite)
+    write_right_section(md, "50%")
+    for endpoint in gateway.endpoints:
+        md.writeln(f'!!! example "Try {endpoint.name.upper()} Lite"')
+        md.indent()
+        write_code_block(md, "bash")
+        md.writeln(f'wscat -c "wss://{endpoint.url}/ws" \\')
+        if stream.auth_required:
+            md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
+        md.writeln("-x '")
+        selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
+        write_stream_feed_request(md, stream, selector, False)
+        md.writeln("' -w 360")
+        md.writeln("```")
+        md.dedent()
+    write_section_end(md)
 
     # Footer
     md.dedent()
@@ -244,10 +263,10 @@ def write_rpc_request(ctx: CodegenCtx, md: MarkdownWriter, rpc: RPC) -> None:
     write_right_section(md)
     md.writeln('!!! question "Query"')
     md.indent()
-    md.writeln("```json")
+    write_code_block(md, "json")
     write_struct_example(ctx, md, ctx.struct_map[rpc.request], True, True)
     md.writeln("```")
-    md.writeln("```json")
+    write_code_block(md, "json")
     write_struct_example(ctx, md, ctx.struct_map[rpc.request], True, False)
     md.writeln("```")
     md.dedent()
@@ -271,7 +290,7 @@ def write_rpc_response(ctx: CodegenCtx, md: MarkdownWriter, rpc: RPC) -> None:
     write_right_section(md)
     md.writeln("!!! success")
     md.indent()
-    md.writeln("```json")
+    write_code_block(md, "json")
     write_struct_example(ctx, md, ctx.struct_map[rpc.response], True)
     md.writeln("```")
     md.dedent()
@@ -292,11 +311,12 @@ def write_rpc_try_it_out(
     if rpc.auth_required:
         md.writeln('-8<- "sections/auth.md"')
 
-    # Main Section
+    # Main Section (Full)
+    write_left_section(md, "50%")
     for endpoint in gateway.endpoints:
-        md.writeln(f'!!! example "Try {endpoint.name.upper()}"')
+        md.writeln(f'!!! example "Try {endpoint.name.upper()} Full"')
         md.indent()
-        md.writeln("```bash")
+        write_code_block(md, "bash")
         md.writeln(
             f"curl --location 'https://{endpoint.url}/full/v{rpc.version}{rpc.route}' \\"
         )
@@ -310,6 +330,28 @@ def write_rpc_try_it_out(
 
         md.writeln("```")
         md.dedent()
+    write_section_end(md)
+
+    # Main Section (Lite)
+    write_right_section(md, "50%")
+    for endpoint in gateway.endpoints:
+        md.writeln(f'!!! example "Try {endpoint.name.upper()} Lite"')
+        md.indent()
+        write_code_block(md, "bash")
+        md.writeln(
+            f"curl --location 'https://{endpoint.url}/lite/v{rpc.version}{rpc.route}' \\"
+        )
+        if rpc.auth_required:
+            md.writeln('--header "Cookie: $GRVT_COOKIE" \\')
+
+        request_struct = ctx.struct_map[rpc.request]
+        md.write("--data '")
+        write_struct_example(ctx, md, request_struct, True, False)
+        md.writeln("'")
+
+        md.writeln("```")
+        md.dedent()
+    write_section_end(md)
 
     # Footer
     md.dedent()
@@ -422,7 +464,7 @@ def write_errors(ctx: CodegenCtx, md: MarkdownWriter, errors: list[Err]) -> None
     write_right_section(md)
     md.writeln("!!! failure")
     md.indent()
-    md.writeln("```json")
+    write_code_block(md, "json")
     for error in errors:
         md.writeln("{")
         md.indent()
@@ -472,16 +514,20 @@ def write_comment(md: MarkdownWriter, comment: list[str]) -> None:
         md.writeln("\n")
 
 
-def write_left_section(md: MarkdownWriter) -> None:
+def write_left_section(md: MarkdownWriter, width: str = "70%") -> None:
     md.writeln(
-        '<section markdown="1" style="float: left; width: 70%;'
+        f'<section markdown="1" style="float: left; width: {width};'
         + ' padding-right: 10px;">'
     )
 
 
-def write_right_section(md: MarkdownWriter) -> None:
-    md.writeln('<section markdown="1" style="float: right; width: 30%;">')
+def write_right_section(md: MarkdownWriter, width: str = "30%") -> None:
+    md.writeln(f'<section markdown="1" style="float: right; width: {width};">')
 
 
 def write_section_end(md: MarkdownWriter) -> None:
     md.writeln("</section>")
+
+
+def write_code_block(md: MarkdownWriter, language: str) -> None:
+    md.writeln(f"``` {{ .{language} .copy }}")
