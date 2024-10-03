@@ -420,7 +420,7 @@ def write_struct_schema(
     ctx: CodegenCtx, md: MarkdownWriter, struct: Struct, is_root: bool
 ) -> None:
     # Header
-    path = "schemas/" + inflection.underscore(struct.name).lower() + ".md"
+    path = "/../../schemas/" + inflection.underscore(struct.name).lower()
     if is_root:
         md.writeln(f'!!! info "[{struct.name}]({path})"')
     else:
@@ -454,7 +454,7 @@ def write_struct_schema(
 
 def write_enum_schema(md: MarkdownWriter, enum: Enum, is_root: bool = False) -> None:
     # Header
-    path = "schemas/" + inflection.underscore(enum.name).lower() + ".md"
+    path = "/../../schemas/" + inflection.underscore(enum.name).lower()
     if is_root:
         md.writeln(f'!!! info "[{enum.name}]({path})"')
     else:

@@ -1,4 +1,4 @@
-!!! info "[ApiGetAllInstrumentsRequest](schemas/api_get_all_instruments_request.md)"
+!!! info "[ApiGetAllInstrumentsRequest](/../../schemas/api_get_all_instruments_request)"
     Fetch all instruments<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

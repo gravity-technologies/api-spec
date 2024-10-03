@@ -1,4 +1,4 @@
-!!! info "[Venue](schemas/venue.md)"
+!!! info "[Venue](/../../schemas/venue)"
     The list of Trading Venues that are supported on the GRVT exchange<br>
 
     |Value| Description |

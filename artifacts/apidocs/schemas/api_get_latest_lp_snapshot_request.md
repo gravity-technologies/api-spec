@@ -1,9 +1,9 @@
-!!! info "[ApiGetLatestLPSnapshotRequest](schemas/api_get_latest_lp_snapshot_request.md)"
+!!! info "[ApiGetLatestLPSnapshotRequest](/../../schemas/api_get_latest_lp_snapshot_request)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |kind<br>`k` |Kind|True|The kind filter to apply|
     |base<br>`b` |Currency|True|The base filter to apply|
-    ??? info "[Kind](schemas/kind.md)"
+    ??? info "[Kind](/../../schemas/kind)"
         The list of asset kinds that are supported on the GRVT exchange<br>
 
         |Value| Description |
@@ -12,7 +12,7 @@
         |`FUTURE` = 2|the future asset kind|
         |`CALL` = 3|the call option asset kind|
         |`PUT` = 4|the put option asset kind|
-    ??? info "[Currency](schemas/currency.md)"
+    ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 
         |Value| Description |

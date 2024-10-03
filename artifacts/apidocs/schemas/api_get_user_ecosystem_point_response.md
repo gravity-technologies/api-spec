@@ -1,8 +1,8 @@
-!!! info "[ApiGetUserEcosystemPointResponse](schemas/api_get_user_ecosystem_point_response.md)"
+!!! info "[ApiGetUserEcosystemPointResponse](/../../schemas/api_get_user_ecosystem_point_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |points<br>`p` |[EcosystemPoint]|True|The list of ecosystem points|
-    ??? info "[EcosystemPoint](schemas/ecosystem_point.md)"
+    ??? info "[EcosystemPoint](/../../schemas/ecosystem_point)"
         <br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |

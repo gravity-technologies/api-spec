@@ -1,4 +1,4 @@
-!!! info "[OrderRejectReason](schemas/order_reject_reason.md)"
+!!! info "[OrderRejectReason](/../../schemas/order_reject_reason)"
     |Value| Description |
     |-|-|
     |`UNSPECIFIED` = 0|order is not cancelled or rejected|

@@ -1,4 +1,4 @@
-!!! info "[OrderStatus](schemas/order_status.md)"
+!!! info "[OrderStatus](/../../schemas/order_status)"
     |Value| Description |
     |-|-|
     |`PENDING` = 1|Order is waiting for Trigger Condition to be hit|

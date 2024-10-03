@@ -1,8 +1,8 @@
-!!! info "[ApiSubAccountTradeResponse](schemas/api_sub_account_trade_response.md)"
+!!! info "[ApiSubAccountTradeResponse](/../../schemas/api_sub_account_trade_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |result<br>`r` |[SubAccountTrade]|True|The sub account trade result set for given interval|
-    ??? info "[SubAccountTrade](schemas/sub_account_trade.md)"
+    ??? info "[SubAccountTrade](/../../schemas/sub_account_trade)"
         <br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |

@@ -1,8 +1,8 @@
-!!! info "[ApiGetInstrumentResponse](schemas/api_get_instrument_response.md)"
+!!! info "[ApiGetInstrumentResponse](/../../schemas/api_get_instrument_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |result<br>`r` |Instrument|True|The instrument matching the request asset|
-    ??? info "[Instrument](schemas/instrument.md)"
+    ??? info "[Instrument](/../../schemas/instrument)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
@@ -17,7 +17,7 @@
         |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
         |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
         |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -27,7 +27,7 @@
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -37,7 +37,7 @@
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
-        ??? info "[Kind](schemas/kind.md)"
+        ??? info "[Kind](/../../schemas/kind)"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -46,14 +46,14 @@
             |`FUTURE` = 2|the future asset kind|
             |`CALL` = 3|the call option asset kind|
             |`PUT` = 4|the put option asset kind|
-        ??? info "[Venue](schemas/venue.md)"
+        ??? info "[Venue](/../../schemas/venue)"
             The list of Trading Venues that are supported on the GRVT exchange<br>
 
             |Value| Description |
             |-|-|
             |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
             |`RFQ` = 2|the trade is cleared on the RFQ venue|
-        ??? info "[InstrumentSettlementPeriod](schemas/instrument_settlement_period.md)"
+        ??? info "[InstrumentSettlementPeriod](/../../schemas/instrument_settlement_period)"
             |Value| Description |
             |-|-|
             |`PERPETUAL` = 1|Instrument settles through perpetual funding cycles|

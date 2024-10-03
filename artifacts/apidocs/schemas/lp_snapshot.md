@@ -1,4 +1,4 @@
-!!! info "[LPSnapshot](schemas/lp_snapshot.md)"
+!!! info "[LPSnapshot](/../../schemas/lp_snapshot)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |main_account_id<br>`ma` |string|True|The main account id|

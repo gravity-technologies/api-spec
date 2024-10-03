@@ -10,13 +10,13 @@ LITE ENDPOINT: lite/v1/create_order
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiCreateOrderRequest](schemas/api_create_order_request.md)"
+    !!! info "[ApiCreateOrderRequest](/../../schemas/api_create_order_request)"
         Create an order on the orderbook for this trading account.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |order<br>`o` |Order|True|The order to create|
-        ??? info "[Order](schemas/order.md)"
+        ??? info "[Order](/../../schemas/order)"
             Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -31,7 +31,7 @@ LITE ENDPOINT: lite/v1/create_order
             |signature<br>`s` |Signature|True|The signature approving this order|
             |metadata<br>`m` |OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state<br>`s1` |OrderState|False<br>`''`|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
-            ??? info "[TimeInForce](schemas/time_in_force.md)"
+            ??? info "[TimeInForce](/../../schemas/time_in_force)"
                 |                       | Must Fill All | Can Fill Partial |
                 | -                     | -             | -                |
                 | Must Fill Immediately | FOK           | IOC              |
@@ -44,14 +44,14 @@ LITE ENDPOINT: lite/v1/create_order
                 |`ALL_OR_NONE` = 2|AON - Either fill the whole order or none of it (Block Trades Only)|
                 |`IMMEDIATE_OR_CANCEL` = 3|IOC - Fill the order as much as possible, when hitting the orderbook. Then cancel it|
                 |`FILL_OR_KILL` = 4|FOK - Both AoN and IoC. Either fill the full order when hitting the orderbook, or cancel it|
-            ??? info "[OrderLeg](schemas/order_leg.md)"
+            ??? info "[OrderLeg](/../../schemas/order_leg)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |instrument<br>`i` |string|True|The instrument to trade in this leg|
                 |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
                 |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
-            ??? info "[Signature](schemas/signature.md)"
+            ??? info "[Signature](/../../schemas/signature)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
@@ -60,14 +60,14 @@ LITE ENDPOINT: lite/v1/create_order
                 |v<br>`v` |number|True|Signature V|
                 |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce<br>`n` |number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
-            ??? info "[OrderMetadata](schemas/order_metadata.md)"
+            ??? info "[OrderMetadata](/../../schemas/order_metadata)"
                 Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
                 |create_time<br>`ct` |string|False<br>`0`|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
-            ??? info "[OrderState](schemas/order_state.md)"
+            ??? info "[OrderState](/../../schemas/order_state)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |status<br>`s` |OrderStatus|True|The status of the order|
@@ -75,7 +75,7 @@ LITE ENDPOINT: lite/v1/create_order
                 |book_size<br>`bs` |[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
                 |traded_size<br>`ts` |[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time<br>`ut` |string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
-                ??? info "[OrderStatus](schemas/order_status.md)"
+                ??? info "[OrderStatus](/../../schemas/order_status)"
                     |Value| Description |
                     |-|-|
                     |`PENDING` = 1|Order is waiting for Trigger Condition to be hit|
@@ -83,7 +83,7 @@ LITE ENDPOINT: lite/v1/create_order
                     |`FILLED` = 3|Order is fully filled and hence closed|
                     |`REJECTED` = 4|Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)|
                     |`CANCELLED` = 5|Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)|
-                ??? info "[OrderRejectReason](schemas/order_reject_reason.md)"
+                ??? info "[OrderRejectReason](/../../schemas/order_reject_reason)"
                     |Value| Description |
                     |-|-|
                     |`UNSPECIFIED` = 0|order is not cancelled or rejected|
@@ -192,11 +192,11 @@ LITE ENDPOINT: lite/v1/create_order
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiCreateOrderResponse](schemas/api_create_order_response.md)"
+    !!! info "[ApiCreateOrderResponse](/../../schemas/api_create_order_response)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |Order|True|The created order|
-        ??? info "[Order](schemas/order.md)"
+        ??? info "[Order](/../../schemas/order)"
             Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -211,7 +211,7 @@ LITE ENDPOINT: lite/v1/create_order
             |signature<br>`s` |Signature|True|The signature approving this order|
             |metadata<br>`m` |OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state<br>`s1` |OrderState|False<br>`''`|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
-            ??? info "[TimeInForce](schemas/time_in_force.md)"
+            ??? info "[TimeInForce](/../../schemas/time_in_force)"
                 |                       | Must Fill All | Can Fill Partial |
                 | -                     | -             | -                |
                 | Must Fill Immediately | FOK           | IOC              |
@@ -224,14 +224,14 @@ LITE ENDPOINT: lite/v1/create_order
                 |`ALL_OR_NONE` = 2|AON - Either fill the whole order or none of it (Block Trades Only)|
                 |`IMMEDIATE_OR_CANCEL` = 3|IOC - Fill the order as much as possible, when hitting the orderbook. Then cancel it|
                 |`FILL_OR_KILL` = 4|FOK - Both AoN and IoC. Either fill the full order when hitting the orderbook, or cancel it|
-            ??? info "[OrderLeg](schemas/order_leg.md)"
+            ??? info "[OrderLeg](/../../schemas/order_leg)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |instrument<br>`i` |string|True|The instrument to trade in this leg|
                 |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
                 |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
-            ??? info "[Signature](schemas/signature.md)"
+            ??? info "[Signature](/../../schemas/signature)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
@@ -240,14 +240,14 @@ LITE ENDPOINT: lite/v1/create_order
                 |v<br>`v` |number|True|Signature V|
                 |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce<br>`n` |number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
-            ??? info "[OrderMetadata](schemas/order_metadata.md)"
+            ??? info "[OrderMetadata](/../../schemas/order_metadata)"
                 Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
                 |create_time<br>`ct` |string|False<br>`0`|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
-            ??? info "[OrderState](schemas/order_state.md)"
+            ??? info "[OrderState](/../../schemas/order_state)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |status<br>`s` |OrderStatus|True|The status of the order|
@@ -255,7 +255,7 @@ LITE ENDPOINT: lite/v1/create_order
                 |book_size<br>`bs` |[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
                 |traded_size<br>`ts` |[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time<br>`ut` |string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
-                ??? info "[OrderStatus](schemas/order_status.md)"
+                ??? info "[OrderStatus](/../../schemas/order_status)"
                     |Value| Description |
                     |-|-|
                     |`PENDING` = 1|Order is waiting for Trigger Condition to be hit|
@@ -263,7 +263,7 @@ LITE ENDPOINT: lite/v1/create_order
                     |`FILLED` = 3|Order is fully filled and hence closed|
                     |`REJECTED` = 4|Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)|
                     |`CANCELLED` = 5|Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)|
-                ??? info "[OrderRejectReason](schemas/order_reject_reason.md)"
+                ??? info "[OrderRejectReason](/../../schemas/order_reject_reason)"
                     |Value| Description |
                     |-|-|
                     |`UNSPECIFIED` = 0|order is not cancelled or rejected|
@@ -861,7 +861,7 @@ LITE ENDPOINT: lite/v1/cancel_order
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiCancelOrderRequest](schemas/api_cancel_order_request.md)"
+    !!! info "[ApiCancelOrderRequest](/../../schemas/api_cancel_order_request)"
         Cancel an order on the orderbook for this trading account. Either `order_id` or `client_order_id` must be provided.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -889,13 +889,13 @@ LITE ENDPOINT: lite/v1/cancel_order
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[AckResponse](schemas/ack_response.md)"
+    !!! info "[AckResponse](/../../schemas/ack_response)"
         Used to acknowledge a request has been received and will be processed<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |Ack|True|The Ack Object|
-        ??? info "[Ack](schemas/ack.md)"
+        ??? info "[Ack](/../../schemas/ack)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |ack<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
@@ -1054,7 +1054,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiCancelAllOrdersRequest](schemas/api_cancel_all_orders_request.md)"
+    !!! info "[ApiCancelAllOrdersRequest](/../../schemas/api_cancel_all_orders_request)"
         Cancel all orders on the orderbook for this trading account. This may not match new orders in flight.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1063,7 +1063,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         |kind<br>`k` |[Kind]|False<br>`all`|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be cancelled|
         |base<br>`b` |[Currency]|False<br>`all`|The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be cancelled|
         |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be cancelled|
-        ??? info "[Kind](schemas/kind.md)"
+        ??? info "[Kind](/../../schemas/kind)"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -1072,7 +1072,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             |`FUTURE` = 2|the future asset kind|
             |`CALL` = 3|the call option asset kind|
             |`PUT` = 4|the put option asset kind|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -1082,7 +1082,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -1114,13 +1114,13 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[AckResponse](schemas/ack_response.md)"
+    !!! info "[AckResponse](/../../schemas/ack_response)"
         Used to acknowledge a request has been received and will be processed<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |Ack|True|The Ack Object|
-        ??? info "[Ack](schemas/ack.md)"
+        ??? info "[Ack](/../../schemas/ack)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |ack<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
@@ -1281,7 +1281,7 @@ LITE ENDPOINT: lite/v1/order
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiGetOrderRequest](schemas/api_get_order_request.md)"
+    !!! info "[ApiGetOrderRequest](/../../schemas/api_get_order_request)"
         Retrieve the order for the account. Either `order_id` or `client_order_id` must be provided.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1309,11 +1309,11 @@ LITE ENDPOINT: lite/v1/order
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiGetOrderResponse](schemas/api_get_order_response.md)"
+    !!! info "[ApiGetOrderResponse](/../../schemas/api_get_order_response)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |Order|True|The order object for the requested filter|
-        ??? info "[Order](schemas/order.md)"
+        ??? info "[Order](/../../schemas/order)"
             Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1328,7 +1328,7 @@ LITE ENDPOINT: lite/v1/order
             |signature<br>`s` |Signature|True|The signature approving this order|
             |metadata<br>`m` |OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state<br>`s1` |OrderState|False<br>`''`|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
-            ??? info "[TimeInForce](schemas/time_in_force.md)"
+            ??? info "[TimeInForce](/../../schemas/time_in_force)"
                 |                       | Must Fill All | Can Fill Partial |
                 | -                     | -             | -                |
                 | Must Fill Immediately | FOK           | IOC              |
@@ -1341,14 +1341,14 @@ LITE ENDPOINT: lite/v1/order
                 |`ALL_OR_NONE` = 2|AON - Either fill the whole order or none of it (Block Trades Only)|
                 |`IMMEDIATE_OR_CANCEL` = 3|IOC - Fill the order as much as possible, when hitting the orderbook. Then cancel it|
                 |`FILL_OR_KILL` = 4|FOK - Both AoN and IoC. Either fill the full order when hitting the orderbook, or cancel it|
-            ??? info "[OrderLeg](schemas/order_leg.md)"
+            ??? info "[OrderLeg](/../../schemas/order_leg)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |instrument<br>`i` |string|True|The instrument to trade in this leg|
                 |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
                 |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
-            ??? info "[Signature](schemas/signature.md)"
+            ??? info "[Signature](/../../schemas/signature)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
@@ -1357,14 +1357,14 @@ LITE ENDPOINT: lite/v1/order
                 |v<br>`v` |number|True|Signature V|
                 |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce<br>`n` |number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
-            ??? info "[OrderMetadata](schemas/order_metadata.md)"
+            ??? info "[OrderMetadata](/../../schemas/order_metadata)"
                 Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
                 |create_time<br>`ct` |string|False<br>`0`|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
-            ??? info "[OrderState](schemas/order_state.md)"
+            ??? info "[OrderState](/../../schemas/order_state)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |status<br>`s` |OrderStatus|True|The status of the order|
@@ -1372,7 +1372,7 @@ LITE ENDPOINT: lite/v1/order
                 |book_size<br>`bs` |[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
                 |traded_size<br>`ts` |[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time<br>`ut` |string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
-                ??? info "[OrderStatus](schemas/order_status.md)"
+                ??? info "[OrderStatus](/../../schemas/order_status)"
                     |Value| Description |
                     |-|-|
                     |`PENDING` = 1|Order is waiting for Trigger Condition to be hit|
@@ -1380,7 +1380,7 @@ LITE ENDPOINT: lite/v1/order
                     |`FILLED` = 3|Order is fully filled and hence closed|
                     |`REJECTED` = 4|Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)|
                     |`CANCELLED` = 5|Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)|
-                ??? info "[OrderRejectReason](schemas/order_reject_reason.md)"
+                ??? info "[OrderRejectReason](/../../schemas/order_reject_reason)"
                     |Value| Description |
                     |-|-|
                     |`UNSPECIFIED` = 0|order is not cancelled or rejected|
@@ -1600,14 +1600,14 @@ LITE ENDPOINT: lite/v1/open_orders
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiOpenOrdersRequest](schemas/api_open_orders_request.md)"
+    !!! info "[ApiOpenOrdersRequest](/../../schemas/api_open_orders_request)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
         |kind<br>`k` |[Kind]|False<br>`all`|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
         |base<br>`b` |[Currency]|False<br>`all`|The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned|
         |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
-        ??? info "[Kind](schemas/kind.md)"
+        ??? info "[Kind](/../../schemas/kind)"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -1616,7 +1616,7 @@ LITE ENDPOINT: lite/v1/open_orders
             |`FUTURE` = 2|the future asset kind|
             |`CALL` = 3|the call option asset kind|
             |`PUT` = 4|the put option asset kind|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -1626,7 +1626,7 @@ LITE ENDPOINT: lite/v1/open_orders
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -1658,13 +1658,13 @@ LITE ENDPOINT: lite/v1/open_orders
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiOpenOrdersResponse](schemas/api_open_orders_response.md)"
+    !!! info "[ApiOpenOrdersResponse](/../../schemas/api_open_orders_response)"
         Retrieves all open orders for the account. This may not match new orders in flight.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[Order]|True|The Open Orders matching the request filter|
-        ??? info "[Order](schemas/order.md)"
+        ??? info "[Order](/../../schemas/order)"
             Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1679,7 +1679,7 @@ LITE ENDPOINT: lite/v1/open_orders
             |signature<br>`s` |Signature|True|The signature approving this order|
             |metadata<br>`m` |OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state<br>`s1` |OrderState|False<br>`''`|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
-            ??? info "[TimeInForce](schemas/time_in_force.md)"
+            ??? info "[TimeInForce](/../../schemas/time_in_force)"
                 |                       | Must Fill All | Can Fill Partial |
                 | -                     | -             | -                |
                 | Must Fill Immediately | FOK           | IOC              |
@@ -1692,14 +1692,14 @@ LITE ENDPOINT: lite/v1/open_orders
                 |`ALL_OR_NONE` = 2|AON - Either fill the whole order or none of it (Block Trades Only)|
                 |`IMMEDIATE_OR_CANCEL` = 3|IOC - Fill the order as much as possible, when hitting the orderbook. Then cancel it|
                 |`FILL_OR_KILL` = 4|FOK - Both AoN and IoC. Either fill the full order when hitting the orderbook, or cancel it|
-            ??? info "[OrderLeg](schemas/order_leg.md)"
+            ??? info "[OrderLeg](/../../schemas/order_leg)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |instrument<br>`i` |string|True|The instrument to trade in this leg|
                 |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
                 |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
-            ??? info "[Signature](schemas/signature.md)"
+            ??? info "[Signature](/../../schemas/signature)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
@@ -1708,14 +1708,14 @@ LITE ENDPOINT: lite/v1/open_orders
                 |v<br>`v` |number|True|Signature V|
                 |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce<br>`n` |number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
-            ??? info "[OrderMetadata](schemas/order_metadata.md)"
+            ??? info "[OrderMetadata](/../../schemas/order_metadata)"
                 Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
                 |create_time<br>`ct` |string|False<br>`0`|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
-            ??? info "[OrderState](schemas/order_state.md)"
+            ??? info "[OrderState](/../../schemas/order_state)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |status<br>`s` |OrderStatus|True|The status of the order|
@@ -1723,7 +1723,7 @@ LITE ENDPOINT: lite/v1/open_orders
                 |book_size<br>`bs` |[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
                 |traded_size<br>`ts` |[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time<br>`ut` |string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
-                ??? info "[OrderStatus](schemas/order_status.md)"
+                ??? info "[OrderStatus](/../../schemas/order_status)"
                     |Value| Description |
                     |-|-|
                     |`PENDING` = 1|Order is waiting for Trigger Condition to be hit|
@@ -1731,7 +1731,7 @@ LITE ENDPOINT: lite/v1/open_orders
                     |`FILLED` = 3|Order is fully filled and hence closed|
                     |`REJECTED` = 4|Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)|
                     |`CANCELLED` = 5|Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)|
-                ??? info "[OrderRejectReason](schemas/order_reject_reason.md)"
+                ??? info "[OrderRejectReason](/../../schemas/order_reject_reason)"
                     |Value| Description |
                     |-|-|
                     |`UNSPECIFIED` = 0|order is not cancelled or rejected|
@@ -1947,7 +1947,7 @@ LITE ENDPOINT: lite/v1/order_history
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiOrderHistoryRequest](schemas/api_order_history_request.md)"
+    !!! info "[ApiOrderHistoryRequest](/../../schemas/api_order_history_request)"
         Retrieves the order history for the account.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -1960,7 +1960,7 @@ LITE ENDPOINT: lite/v1/order_history
         |end_time<br>`et` |string|False<br>`now()`|The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
         |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
-        ??? info "[Kind](schemas/kind.md)"
+        ??? info "[Kind](/../../schemas/kind)"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -1969,7 +1969,7 @@ LITE ENDPOINT: lite/v1/order_history
             |`FUTURE` = 2|the future asset kind|
             |`CALL` = 3|the call option asset kind|
             |`PUT` = 4|the put option asset kind|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -1979,7 +1979,7 @@ LITE ENDPOINT: lite/v1/order_history
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -2019,12 +2019,12 @@ LITE ENDPOINT: lite/v1/order_history
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiOrderHistoryResponse](schemas/api_order_history_response.md)"
+    !!! info "[ApiOrderHistoryResponse](/../../schemas/api_order_history_response)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[Order]|True|The Open Orders matching the request filter|
         |next<br>`n` |string|True|The cursor to indicate when to start the query from|
-        ??? info "[Order](schemas/order.md)"
+        ??? info "[Order](/../../schemas/order)"
             Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -2039,7 +2039,7 @@ LITE ENDPOINT: lite/v1/order_history
             |signature<br>`s` |Signature|True|The signature approving this order|
             |metadata<br>`m` |OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
             |state<br>`s1` |OrderState|False<br>`''`|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
-            ??? info "[TimeInForce](schemas/time_in_force.md)"
+            ??? info "[TimeInForce](/../../schemas/time_in_force)"
                 |                       | Must Fill All | Can Fill Partial |
                 | -                     | -             | -                |
                 | Must Fill Immediately | FOK           | IOC              |
@@ -2052,14 +2052,14 @@ LITE ENDPOINT: lite/v1/order_history
                 |`ALL_OR_NONE` = 2|AON - Either fill the whole order or none of it (Block Trades Only)|
                 |`IMMEDIATE_OR_CANCEL` = 3|IOC - Fill the order as much as possible, when hitting the orderbook. Then cancel it|
                 |`FILL_OR_KILL` = 4|FOK - Both AoN and IoC. Either fill the full order when hitting the orderbook, or cancel it|
-            ??? info "[OrderLeg](schemas/order_leg.md)"
+            ??? info "[OrderLeg](/../../schemas/order_leg)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |instrument<br>`i` |string|True|The instrument to trade in this leg|
                 |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
                 |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
                 |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
-            ??? info "[Signature](schemas/signature.md)"
+            ??? info "[Signature](/../../schemas/signature)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
@@ -2068,14 +2068,14 @@ LITE ENDPOINT: lite/v1/order_history
                 |v<br>`v` |number|True|Signature V|
                 |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
                 |nonce<br>`n` |number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
-            ??? info "[OrderMetadata](schemas/order_metadata.md)"
+            ??? info "[OrderMetadata](/../../schemas/order_metadata)"
                 Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
                 |create_time<br>`ct` |string|False<br>`0`|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
-            ??? info "[OrderState](schemas/order_state.md)"
+            ??? info "[OrderState](/../../schemas/order_state)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |status<br>`s` |OrderStatus|True|The status of the order|
@@ -2083,7 +2083,7 @@ LITE ENDPOINT: lite/v1/order_history
                 |book_size<br>`bs` |[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
                 |traded_size<br>`ts` |[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
                 |update_time<br>`ut` |string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
-                ??? info "[OrderStatus](schemas/order_status.md)"
+                ??? info "[OrderStatus](/../../schemas/order_status)"
                     |Value| Description |
                     |-|-|
                     |`PENDING` = 1|Order is waiting for Trigger Condition to be hit|
@@ -2091,7 +2091,7 @@ LITE ENDPOINT: lite/v1/order_history
                     |`FILLED` = 3|Order is fully filled and hence closed|
                     |`REJECTED` = 4|Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)|
                     |`CANCELLED` = 5|Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)|
-                ??? info "[OrderRejectReason](schemas/order_reject_reason.md)"
+                ??? info "[OrderRejectReason](/../../schemas/order_reject_reason)"
                     |Value| Description |
                     |-|-|
                     |`UNSPECIFIED` = 0|order is not cancelled or rejected|
@@ -2341,7 +2341,7 @@ LITE ENDPOINT: lite/v1/fill_history
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiFillHistoryRequest](schemas/api_fill_history_request.md)"
+    !!! info "[ApiFillHistoryRequest](/../../schemas/api_fill_history_request)"
         Query for all historical fills made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -2354,7 +2354,7 @@ LITE ENDPOINT: lite/v1/fill_history
         |end_time<br>`et` |string|False<br>`now()`|The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
         |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
-        ??? info "[Kind](schemas/kind.md)"
+        ??? info "[Kind](/../../schemas/kind)"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -2363,7 +2363,7 @@ LITE ENDPOINT: lite/v1/fill_history
             |`FUTURE` = 2|the future asset kind|
             |`CALL` = 3|the call option asset kind|
             |`PUT` = 4|the put option asset kind|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -2373,7 +2373,7 @@ LITE ENDPOINT: lite/v1/fill_history
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -2413,12 +2413,12 @@ LITE ENDPOINT: lite/v1/fill_history
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiFillHistoryResponse](schemas/api_fill_history_response.md)"
+    !!! info "[ApiFillHistoryResponse](/../../schemas/api_fill_history_response)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[Fill]|True|The private trades matching the request asset|
         |next<br>`n` |string|True|The cursor to indicate when to start the query from|
-        ??? info "[Fill](schemas/fill.md)"
+        ??? info "[Fill](/../../schemas/fill)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
@@ -2439,7 +2439,7 @@ LITE ENDPOINT: lite/v1/fill_history
             |order_id<br>`oi` |string|True|An order identifier|
             |venue<br>`v` |Venue|True|The venue where the trade occurred|
             |client_order_id<br>`co` |string|True|A unique identifier for the active order within a subaccount, specified by the client<br>This is used to identify the order in the client's system<br>This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer<br>This field will not be propagated to the smart contract, and should not be signed by the client<br>This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected<br>Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]<br>To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]<br><br>When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId|
-            ??? info "[Venue](schemas/venue.md)"
+            ??? info "[Venue](/../../schemas/venue)"
                 The list of Trading Venues that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -2653,7 +2653,7 @@ LITE ENDPOINT: lite/v1/positions
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiPositionsRequest](schemas/api_positions_request.md)"
+    !!! info "[ApiPositionsRequest](/../../schemas/api_positions_request)"
         Query the positions of a sub account<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -2662,7 +2662,7 @@ LITE ENDPOINT: lite/v1/positions
         |kind<br>`k` |[Kind]|False<br>`all`|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
         |base<br>`b` |[Currency]|False<br>`all`|The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned|
         |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
-        ??? info "[Kind](schemas/kind.md)"
+        ??? info "[Kind](/../../schemas/kind)"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -2671,7 +2671,7 @@ LITE ENDPOINT: lite/v1/positions
             |`FUTURE` = 2|the future asset kind|
             |`CALL` = 3|the call option asset kind|
             |`PUT` = 4|the put option asset kind|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -2681,7 +2681,7 @@ LITE ENDPOINT: lite/v1/positions
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -2713,11 +2713,11 @@ LITE ENDPOINT: lite/v1/positions
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiPositionsResponse](schemas/api_positions_response.md)"
+    !!! info "[ApiPositionsResponse](/../../schemas/api_positions_response)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[Positions]|True|The positions matching the request filter|
-        ??? info "[Positions](schemas/positions.md)"
+        ??? info "[Positions](/../../schemas/positions)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
@@ -2903,7 +2903,7 @@ LITE ENDPOINT: lite/v1/deposit
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiDepositRequest](schemas/api_deposit_request.md)"
+    !!! info "[ApiDepositRequest](/../../schemas/api_deposit_request)"
         GRVT runs on a ZKSync Hyperchain which settles directly onto Ethereum.<br>To Deposit funds from your L1 wallet into a GRVT SubAccount, you will be required to submit a deposit transaction directly to Ethereum.<br>GRVT's bridge verifier will scan Ethereum from time to time. Once it receives proof that your deposit has been confirmed on Ethereum, it will initiate the deposit process.<br><br>This current payload is used for alpha testing only.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -2911,7 +2911,7 @@ LITE ENDPOINT: lite/v1/deposit
         |to_account_id<br>`ta` |string|True|The main account to deposit into|
         |currency<br>`c` |Currency|True|The token currency to deposit|
         |num_tokens<br>`nt` |string|True|The number of tokens to deposit, quoted in token_currency decimals|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -2941,13 +2941,13 @@ LITE ENDPOINT: lite/v1/deposit
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[AckResponse](schemas/ack_response.md)"
+    !!! info "[AckResponse](/../../schemas/ack_response)"
         Used to acknowledge a request has been received and will be processed<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |Ack|True|The Ack Object|
-        ??? info "[Ack](schemas/ack.md)"
+        ??? info "[Ack](/../../schemas/ack)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |ack<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
@@ -3100,7 +3100,7 @@ LITE ENDPOINT: lite/v1/deposit_history
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiDepositHistoryRequest](schemas/api_deposit_history_request.md)"
+    !!! info "[ApiDepositHistoryRequest](/../../schemas/api_deposit_history_request)"
         The request to get the historical deposits of an account<br>The history is returned in reverse chronological order<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -3110,7 +3110,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         |end_time<br>`et` |string|False<br>`now()`|The end time to query for in unix nanoseconds|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
         |cursor<br>`c1` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -3144,12 +3144,12 @@ LITE ENDPOINT: lite/v1/deposit_history
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiDepositHistoryResponse](schemas/api_deposit_history_response.md)"
+    !!! info "[ApiDepositHistoryResponse](/../../schemas/api_deposit_history_response)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[DepositHistory]|True|The deposit history matching the request account|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "[DepositHistory](schemas/deposit_history.md)"
+        ??? info "[DepositHistory](/../../schemas/deposit_history)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |tx_id<br>`ti` |string|True|The transaction ID of the deposit|
@@ -3158,7 +3158,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             |currency<br>`c` |Currency|True|The token currency to deposit|
             |num_tokens<br>`nt` |string|True|The number of tokens to deposit|
             |event_time<br>`et` |string|True|The timestamp of the deposit in unix nanoseconds|
-            ??? info "[Currency](schemas/currency.md)"
+            ??? info "[Currency](/../../schemas/currency)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -3339,7 +3339,7 @@ LITE ENDPOINT: lite/v1/transfer
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiTransferRequest](schemas/api_transfer_request.md)"
+    !!! info "[ApiTransferRequest](/../../schemas/api_transfer_request)"
         This API allows you to transfer funds in multiple different ways<ul><br><li>Between SubAccounts within your Main Account</li><br><li>Between your MainAccount and your SubAccounts</li><br><li>To other MainAccounts that you have previously allowlisted</li><br></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -3351,7 +3351,7 @@ LITE ENDPOINT: lite/v1/transfer
         |currency<br>`c` |Currency|True|The token currency to transfer|
         |num_tokens<br>`nt` |string|True|The number of tokens to transfer, quoted in tokenCurrency decimal units|
         |signature<br>`s` |Signature|True|The signature of the transfer|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -3361,7 +3361,7 @@ LITE ENDPOINT: lite/v1/transfer
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
-        ??? info "[Signature](schemas/signature.md)"
+        ??? info "[Signature](/../../schemas/signature)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
@@ -3412,13 +3412,13 @@ LITE ENDPOINT: lite/v1/transfer
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[AckResponse](schemas/ack_response.md)"
+    !!! info "[AckResponse](/../../schemas/ack_response)"
         Used to acknowledge a request has been received and will be processed<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |Ack|True|The Ack Object|
-        ??? info "[Ack](schemas/ack.md)"
+        ??? info "[Ack](/../../schemas/ack)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |ack<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
@@ -3659,7 +3659,7 @@ LITE ENDPOINT: lite/v1/transfer_history
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiTransferHistoryRequest](schemas/api_transfer_history_request.md)"
+    !!! info "[ApiTransferHistoryRequest](/../../schemas/api_transfer_history_request)"
         The request to get the historical transfers of an account<br>The history is returned in reverse chronological order<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -3669,7 +3669,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         |end_time<br>`et` |string|False<br>`now()`|The end time to query for in unix nanoseconds|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
         |cursor<br>`c1` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -3703,12 +3703,12 @@ LITE ENDPOINT: lite/v1/transfer_history
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiTransferHistoryResponse](schemas/api_transfer_history_response.md)"
+    !!! info "[ApiTransferHistoryResponse](/../../schemas/api_transfer_history_response)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[TransferHistory]|True|The transfer history matching the request account|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "[TransferHistory](schemas/transfer_history.md)"
+        ??? info "[TransferHistory](/../../schemas/transfer_history)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |tx_id<br>`ti` |string|True|The transaction ID of the transfer|
@@ -3720,7 +3720,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             |num_tokens<br>`nt` |string|True|The number of tokens to transfer|
             |signature<br>`s` |Signature|True|The signature of the transfer|
             |event_time<br>`et` |string|True|The timestamp of the transfer in unix nanoseconds|
-            ??? info "[Currency](schemas/currency.md)"
+            ??? info "[Currency](/../../schemas/currency)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -3730,7 +3730,7 @@ LITE ENDPOINT: lite/v1/transfer_history
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-            ??? info "[Signature](schemas/signature.md)"
+            ??? info "[Signature](/../../schemas/signature)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
@@ -3920,7 +3920,7 @@ LITE ENDPOINT: lite/v1/withdrawal
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiWithdrawalRequest](schemas/api_withdrawal_request.md)"
+    !!! info "[ApiWithdrawalRequest](/../../schemas/api_withdrawal_request)"
         Leverage this API to initialize a withdrawal from GRVT's Hyperchain onto Ethereum.<br>Do take note that the bridging process does take time. The GRVT UI will help you keep track of bridging progress, and notify you once its complete.<br><br>If not withdrawing the entirety of your balance, there is a minimum withdrawal amount. Currently that amount is ~25 USDT.<br>Withdrawal fees also apply to cover the cost of the Ethereum transaction.<br>Note that your funds will always remain in self-custory throughout the withdrawal process. At no stage does GRVT gain control over your funds.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -3930,7 +3930,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         |currency<br>`c` |Currency|True|The token currency to withdraw|
         |num_tokens<br>`nt` |string|True|The number of tokens to withdraw, quoted in tokenCurrency decimal units|
         |signature<br>`s` |Signature|True|The signature of the withdrawal|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -3940,7 +3940,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
-        ??? info "[Signature](schemas/signature.md)"
+        ??? info "[Signature](/../../schemas/signature)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
@@ -3987,13 +3987,13 @@ LITE ENDPOINT: lite/v1/withdrawal
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[AckResponse](schemas/ack_response.md)"
+    !!! info "[AckResponse](/../../schemas/ack_response)"
         Used to acknowledge a request has been received and will be processed<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |Ack|True|The Ack Object|
-        ??? info "[Ack](schemas/ack.md)"
+        ??? info "[Ack](/../../schemas/ack)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |ack<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|
@@ -4218,7 +4218,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiWithdrawalHistoryRequest](schemas/api_withdrawal_history_request.md)"
+    !!! info "[ApiWithdrawalHistoryRequest](/../../schemas/api_withdrawal_history_request)"
         The request to get the historical withdrawals of an account<br>The history is returned in reverse chronological order<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -4228,7 +4228,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         |end_time<br>`et` |string|False<br>`now()`|The end time to query for in unix nanoseconds|
         |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
         |cursor<br>`c1` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "[Currency](schemas/currency.md)"
+        ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
             |Value| Description |
@@ -4262,12 +4262,12 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiWithdrawalHistoryResponse](schemas/api_withdrawal_history_response.md)"
+    !!! info "[ApiWithdrawalHistoryResponse](/../../schemas/api_withdrawal_history_response)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[WithdrawalHistory]|True|The withdrawals history matching the request account|
         |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "[WithdrawalHistory](schemas/withdrawal_history.md)"
+        ??? info "[WithdrawalHistory](/../../schemas/withdrawal_history)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |tx_id<br>`ti` |string|True|The transaction ID of the withdrawal|
@@ -4277,7 +4277,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             |num_tokens<br>`nt` |string|True|The number of tokens to withdraw|
             |signature<br>`s` |Signature|True|The signature of the withdrawal|
             |event_time<br>`et` |string|True|The timestamp of the withdrawal in unix nanoseconds|
-            ??? info "[Currency](schemas/currency.md)"
+            ??? info "[Currency](/../../schemas/currency)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -4287,7 +4287,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-            ??? info "[Signature](schemas/signature.md)"
+            ??? info "[Signature](/../../schemas/signature)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
@@ -4476,7 +4476,7 @@ LITE ENDPOINT: lite/v1/account_summary
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiSubAccountSummaryRequest](schemas/api_sub_account_summary_request.md)"
+    !!! info "[ApiSubAccountSummaryRequest](/../../schemas/api_sub_account_summary_request)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
@@ -4496,13 +4496,13 @@ LITE ENDPOINT: lite/v1/account_summary
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiSubAccountSummaryResponse](schemas/api_sub_account_summary_response.md)"
+    !!! info "[ApiSubAccountSummaryResponse](/../../schemas/api_sub_account_summary_response)"
         Query for sub-account details, including base currency balance, all derivative positions, margin levels, and P&L.<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |SubAccount|True|The sub account matching the request sub account|
-        ??? info "[SubAccount](schemas/sub_account.md)"
+        ??? info "[SubAccount](/../../schemas/sub_account)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
@@ -4517,12 +4517,12 @@ LITE ENDPOINT: lite/v1/account_summary
             |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this sub account, and their balances|
             |positions<br>`p` |[Positions]|True|The list of positions owned by this sub account|
             |settle_index_price<br>`si` |string|True|The index price of the settle currency. (reported in `USD`)|
-            ??? info "[MarginType](schemas/margin_type.md)"
+            ??? info "[MarginType](/../../schemas/margin_type)"
                 |Value| Description |
                 |-|-|
                 |`SIMPLE_CROSS_MARGIN` = 2|Simple Cross Margin Mode: all assets have a predictable margin impact, the whole subaccount shares a single margin|
                 |`PORTFOLIO_CROSS_MARGIN` = 3|Portfolio Cross Margin Mode: asset margin impact is analysed on portfolio level, the whole subaccount shares a single margin|
-            ??? info "[Currency](schemas/currency.md)"
+            ??? info "[Currency](/../../schemas/currency)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -4532,13 +4532,13 @@ LITE ENDPOINT: lite/v1/account_summary
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-            ??? info "[SpotBalance](schemas/spot_balance.md)"
+            ??? info "[SpotBalance](/../../schemas/spot_balance)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |currency<br>`c` |Currency|True|The currency you hold a spot balance in|
                 |balance<br>`b` |string|True|This currency's balance in this trading account.|
                 |index_price<br>`ip` |string|True|The index price of this currency. (reported in `USD`)|
-                ??? info "[Currency](schemas/currency.md)"
+                ??? info "[Currency](/../../schemas/currency)"
                     The list of Currencies that are supported on the GRVT exchange<br>
 
                     |Value| Description |
@@ -4548,7 +4548,7 @@ LITE ENDPOINT: lite/v1/account_summary
                     |`USDT` = 3|the USDT token|
                     |`ETH` = 4|the ETH token|
                     |`BTC` = 5|the BTC token|
-            ??? info "[Positions](schemas/positions.md)"
+            ??? info "[Positions](/../../schemas/positions)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
@@ -4726,7 +4726,7 @@ LITE ENDPOINT: lite/v1/account_history
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiSubAccountHistoryRequest](schemas/api_sub_account_history_request.md)"
+    !!! info "[ApiSubAccountHistoryRequest](/../../schemas/api_sub_account_history_request)"
         The request to get the history of a sub account<br>SubAccount Summary values are snapshotted once every hour<br>No snapshots are taken if the sub account has no activity in the hourly window<br>History is preserved only for the last 30 days<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -4760,12 +4760,12 @@ LITE ENDPOINT: lite/v1/account_history
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiSubAccountHistoryResponse](schemas/api_sub_account_history_response.md)"
+    !!! info "[ApiSubAccountHistoryResponse](/../../schemas/api_sub_account_history_response)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |[SubAccount]|True|The sub account history matching the request sub account|
         |next<br>`n` |string|True|The cursor to indicate when to start the next query from|
-        ??? info "[SubAccount](schemas/sub_account.md)"
+        ??? info "[SubAccount](/../../schemas/sub_account)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
@@ -4780,12 +4780,12 @@ LITE ENDPOINT: lite/v1/account_history
             |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this sub account, and their balances|
             |positions<br>`p` |[Positions]|True|The list of positions owned by this sub account|
             |settle_index_price<br>`si` |string|True|The index price of the settle currency. (reported in `USD`)|
-            ??? info "[MarginType](schemas/margin_type.md)"
+            ??? info "[MarginType](/../../schemas/margin_type)"
                 |Value| Description |
                 |-|-|
                 |`SIMPLE_CROSS_MARGIN` = 2|Simple Cross Margin Mode: all assets have a predictable margin impact, the whole subaccount shares a single margin|
                 |`PORTFOLIO_CROSS_MARGIN` = 3|Portfolio Cross Margin Mode: asset margin impact is analysed on portfolio level, the whole subaccount shares a single margin|
-            ??? info "[Currency](schemas/currency.md)"
+            ??? info "[Currency](/../../schemas/currency)"
                 The list of Currencies that are supported on the GRVT exchange<br>
 
                 |Value| Description |
@@ -4795,13 +4795,13 @@ LITE ENDPOINT: lite/v1/account_history
                 |`USDT` = 3|the USDT token|
                 |`ETH` = 4|the ETH token|
                 |`BTC` = 5|the BTC token|
-            ??? info "[SpotBalance](schemas/spot_balance.md)"
+            ??? info "[SpotBalance](/../../schemas/spot_balance)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |currency<br>`c` |Currency|True|The currency you hold a spot balance in|
                 |balance<br>`b` |string|True|This currency's balance in this trading account.|
                 |index_price<br>`ip` |string|True|The index price of this currency. (reported in `USD`)|
-                ??? info "[Currency](schemas/currency.md)"
+                ??? info "[Currency](/../../schemas/currency)"
                     The list of Currencies that are supported on the GRVT exchange<br>
 
                     |Value| Description |
@@ -4811,7 +4811,7 @@ LITE ENDPOINT: lite/v1/account_history
                     |`USDT` = 3|the USDT token|
                     |`ETH` = 4|the ETH token|
                     |`BTC` = 5|the BTC token|
-            ??? info "[Positions](schemas/positions.md)"
+            ??? info "[Positions](/../../schemas/positions)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
@@ -5022,7 +5022,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[EmptyRequest](schemas/empty_request.md)"
+    !!! info "[EmptyRequest](/../../schemas/empty_request)"
         Used for requests that do not require any parameters<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -5041,25 +5041,25 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiAggregatedAccountSummaryResponse](schemas/api_aggregated_account_summary_response.md)"
+    !!! info "[ApiAggregatedAccountSummaryResponse](/../../schemas/api_aggregated_account_summary_response)"
         The aggregated account summary, that reports the total equity and spot balances of a funding (main) account, and its constituent trading (sub) accounts<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |AggregatedAccountSummary|True|The aggregated account summary|
-        ??? info "[AggregatedAccountSummary](schemas/aggregated_account_summary.md)"
+        ??? info "[AggregatedAccountSummary](/../../schemas/aggregated_account_summary)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |main_account_id<br>`ma` |string|True|The main account ID of the account to which the summary belongs|
             |total_equity<br>`te` |string|True|Total equity of the main (+ sub) account, denominated in USD|
             |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this main (+ sub) account, and their balances|
-            ??? info "[SpotBalance](schemas/spot_balance.md)"
+            ??? info "[SpotBalance](/../../schemas/spot_balance)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |currency<br>`c` |Currency|True|The currency you hold a spot balance in|
                 |balance<br>`b` |string|True|This currency's balance in this trading account.|
                 |index_price<br>`ip` |string|True|The index price of this currency. (reported in `USD`)|
-                ??? info "[Currency](schemas/currency.md)"
+                ??? info "[Currency](/../../schemas/currency)"
                     The list of Currencies that are supported on the GRVT exchange<br>
 
                     |Value| Description |
@@ -5188,7 +5188,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[EmptyRequest](schemas/empty_request.md)"
+    !!! info "[EmptyRequest](/../../schemas/empty_request)"
         Used for requests that do not require any parameters<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -5207,13 +5207,13 @@ LITE ENDPOINT: lite/v1/funding_account_summary
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiFundingAccountSummaryResponse](schemas/api_funding_account_summary_response.md)"
+    !!! info "[ApiFundingAccountSummaryResponse](/../../schemas/api_funding_account_summary_response)"
         The funding account summary, that reports the total equity and spot balances of a funding (main) account<br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |result<br>`r` |FundingAccountSummary|True|The funding account summary|
-        ??? info "[FundingAccountSummary](schemas/funding_account_summary.md)"
+        ??? info "[FundingAccountSummary](/../../schemas/funding_account_summary)"
             The funding account summary, that reports the total equity and spot balances of a funding (main) account<br>
 
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -5221,13 +5221,13 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             |main_account_id<br>`ma` |string|True|The main account ID of the account to which the summary belongs|
             |total_equity<br>`te` |string|True|Total equity of the main account, denominated in USD|
             |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this main account, and their balances|
-            ??? info "[SpotBalance](schemas/spot_balance.md)"
+            ??? info "[SpotBalance](/../../schemas/spot_balance)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |currency<br>`c` |Currency|True|The currency you hold a spot balance in|
                 |balance<br>`b` |string|True|This currency's balance in this trading account.|
                 |index_price<br>`ip` |string|True|The index price of this currency. (reported in `USD`)|
-                ??? info "[Currency](schemas/currency.md)"
+                ??? info "[Currency](/../../schemas/currency)"
                     The list of Currencies that are supported on the GRVT exchange<br>
 
                     |Value| Description |

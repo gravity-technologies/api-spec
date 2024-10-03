@@ -1,8 +1,8 @@
-!!! info "[ApiGetLatestLPSnapshotResponse](schemas/api_get_latest_lp_snapshot_response.md)"
+!!! info "[ApiGetLatestLPSnapshotResponse](/../../schemas/api_get_latest_lp_snapshot_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |snapshot<br>`s` |ApproximateLPSnapshot|True|The latest LP snapshot|
-    ??? info "[ApproximateLPSnapshot](schemas/approximate_lp_snapshot.md)"
+    ??? info "[ApproximateLPSnapshot](/../../schemas/approximate_lp_snapshot)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |main_account_id<br>`ma` |string|True|The main account id|

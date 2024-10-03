@@ -1,4 +1,4 @@
-!!! info "[ApiGetEcosystemReferralStatResponse](schemas/api_get_ecosystem_referral_stat_response.md)"
+!!! info "[ApiGetEcosystemReferralStatResponse](/../../schemas/api_get_ecosystem_referral_stat_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |direct_invite_count<br>`di` |number|True|Direct invite count|

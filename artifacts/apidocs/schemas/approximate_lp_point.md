@@ -1,4 +1,4 @@
-!!! info "[ApproximateLPPoint](schemas/approximate_lp_point.md)"
+!!! info "[ApproximateLPPoint](/../../schemas/approximate_lp_point)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |main_account_id<br>`ma` |string|True|The main account id|

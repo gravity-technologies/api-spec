@@ -1,8 +1,8 @@
-!!! info "[ApiOrderStateResponse](schemas/api_order_state_response.md)"
+!!! info "[ApiOrderStateResponse](/../../schemas/api_order_state_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |state<br>`s` |OrderState|True|The order state for the requested filter|
-    ??? info "[OrderState](schemas/order_state.md)"
+    ??? info "[OrderState](/../../schemas/order_state)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |status<br>`s` |OrderStatus|True|The status of the order|
@@ -10,7 +10,7 @@
         |book_size<br>`bs` |[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
         |traded_size<br>`ts` |[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
         |update_time<br>`ut` |string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
-        ??? info "[OrderStatus](schemas/order_status.md)"
+        ??? info "[OrderStatus](/../../schemas/order_status)"
             |Value| Description |
             |-|-|
             |`PENDING` = 1|Order is waiting for Trigger Condition to be hit|
@@ -18,7 +18,7 @@
             |`FILLED` = 3|Order is fully filled and hence closed|
             |`REJECTED` = 4|Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)|
             |`CANCELLED` = 5|Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)|
-        ??? info "[OrderRejectReason](schemas/order_reject_reason.md)"
+        ??? info "[OrderRejectReason](/../../schemas/order_reject_reason)"
             |Value| Description |
             |-|-|
             |`UNSPECIFIED` = 0|order is not cancelled or rejected|

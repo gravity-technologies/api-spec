@@ -1,4 +1,4 @@
-!!! info "[OrderLeg](schemas/order_leg.md)"
+!!! info "[OrderLeg](/../../schemas/order_leg)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |instrument<br>`i` |string|True|The instrument to trade in this leg|

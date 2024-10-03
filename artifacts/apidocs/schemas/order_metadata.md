@@ -1,4 +1,4 @@
-!!! info "[OrderMetadata](schemas/order_metadata.md)"
+!!! info "[OrderMetadata](/../../schemas/order_metadata)"
     Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

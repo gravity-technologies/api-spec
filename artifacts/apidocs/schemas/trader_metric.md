@@ -1,4 +1,4 @@
-!!! info "[TraderMetric](schemas/trader_metric.md)"
+!!! info "[TraderMetric](/../../schemas/trader_metric)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |total_fee<br>`tf` |string|True|Total fee paid|

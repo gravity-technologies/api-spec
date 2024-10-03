@@ -1,4 +1,4 @@
-!!! info "[Candlestick](schemas/candlestick.md)"
+!!! info "[Candlestick](/../../schemas/candlestick)"
     <br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

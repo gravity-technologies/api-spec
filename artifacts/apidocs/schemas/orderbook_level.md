@@ -1,4 +1,4 @@
-!!! info "[OrderbookLevel](schemas/orderbook_level.md)"
+!!! info "[OrderbookLevel](/../../schemas/orderbook_level)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|

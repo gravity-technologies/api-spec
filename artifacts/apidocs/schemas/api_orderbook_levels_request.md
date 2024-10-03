@@ -1,4 +1,4 @@
-!!! info "[ApiOrderbookLevelsRequest](schemas/api_orderbook_levels_request.md)"
+!!! info "[ApiOrderbookLevelsRequest](/../../schemas/api_orderbook_levels_request)"
     Retrieves aggregated price depth for a single instrument, with a maximum depth of 10 levels. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

@@ -1,4 +1,4 @@
-!!! info "[Positions](schemas/positions.md)"
+!!! info "[Positions](/../../schemas/positions)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|

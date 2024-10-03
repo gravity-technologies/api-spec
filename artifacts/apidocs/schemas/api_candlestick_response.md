@@ -1,9 +1,9 @@
-!!! info "[ApiCandlestickResponse](schemas/api_candlestick_response.md)"
+!!! info "[ApiCandlestickResponse](/../../schemas/api_candlestick_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |result<br>`r` |[Candlestick]|True|The candlestick result set for given interval|
     |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-    ??? info "[Candlestick](schemas/candlestick.md)"
+    ??? info "[Candlestick](/../../schemas/candlestick)"
         <br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |

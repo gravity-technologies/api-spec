@@ -1,4 +1,4 @@
-!!! info "[Transfer](schemas/transfer.md)"
+!!! info "[Transfer](/../../schemas/transfer)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |from_account_id<br>`fa` |string|True|The account to transfer from|
@@ -8,7 +8,7 @@
     |currency<br>`c` |Currency|True|The token currency to transfer|
     |num_tokens<br>`nt` |string|True|The number of tokens to transfer|
     |signature<br>`s` |Signature|True|The signature of the transfer|
-    ??? info "[Currency](schemas/currency.md)"
+    ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 
         |Value| Description |
@@ -18,7 +18,7 @@
         |`USDT` = 3|the USDT token|
         |`ETH` = 4|the ETH token|
         |`BTC` = 5|the BTC token|
-    ??? info "[Signature](schemas/signature.md)"
+    ??? info "[Signature](/../../schemas/signature)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|

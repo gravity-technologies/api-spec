@@ -1,4 +1,4 @@
-!!! info "[Kind](schemas/kind.md)"
+!!! info "[Kind](/../../schemas/kind)"
     The list of asset kinds that are supported on the GRVT exchange<br>
 
     |Value| Description |

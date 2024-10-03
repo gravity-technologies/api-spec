@@ -1,4 +1,4 @@
-!!! info "[MiniTicker](schemas/mini_ticker.md)"
+!!! info "[MiniTicker](/../../schemas/mini_ticker)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|

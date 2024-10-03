@@ -1,4 +1,4 @@
-!!! info "[ApiSubAccountTradeAggregationRequest](schemas/api_sub_account_trade_aggregation_request.md)"
+!!! info "[ApiSubAccountTradeAggregationRequest](/../../schemas/api_sub_account_trade_aggregation_request)"
     startTime are optional parameters. The semantics of these parameters are as follows:<ul><br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -11,7 +11,7 @@
     |start_time<br>`st` |string|False<br>`0`|Optional. Start time in unix nanoseconds|
     |end_time<br>`et` |string|False<br>`now()`|Optional. End time in unix nanoseconds|
     |cursor<br>`c` |string|False<br>``|The cursor to indicate when to start the next query from|
-    ??? info "[SubAccountTradeInterval](schemas/sub_account_trade_interval.md)"
+    ??? info "[SubAccountTradeInterval](/../../schemas/sub_account_trade_interval)"
         |Value| Description |
         |-|-|
         |`SAT_1_MO` = 1|1 month|

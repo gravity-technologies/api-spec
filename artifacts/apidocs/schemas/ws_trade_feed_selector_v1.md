@@ -1,4 +1,4 @@
-!!! info "[WSTradeFeedSelectorV1](schemas/ws_trade_feed_selector_v1.md)"
+!!! info "[WSTradeFeedSelectorV1](/../../schemas/ws_trade_feed_selector_v1)"
     Subscribes to a stream of Public Trades for an instrument.<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

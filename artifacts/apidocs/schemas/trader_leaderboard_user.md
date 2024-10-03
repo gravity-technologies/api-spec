@@ -1,4 +1,4 @@
-!!! info "[TraderLeaderboardUser](schemas/trader_leaderboard_user.md)"
+!!! info "[TraderLeaderboardUser](/../../schemas/trader_leaderboard_user)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |account_id<br>`ai` |string|True|The off chain account id|

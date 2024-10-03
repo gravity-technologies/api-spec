@@ -1,4 +1,4 @@
-!!! info "[InstrumentSettlementPeriod](schemas/instrument_settlement_period.md)"
+!!! info "[InstrumentSettlementPeriod](/../../schemas/instrument_settlement_period)"
     |Value| Description |
     |-|-|
     |`PERPETUAL` = 1|Instrument settles through perpetual funding cycles|

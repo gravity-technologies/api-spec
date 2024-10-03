@@ -1,4 +1,4 @@
-!!! info "[ApiGetInstrumentRequest](schemas/api_get_instrument_request.md)"
+!!! info "[ApiGetInstrumentRequest](/../../schemas/api_get_instrument_request)"
     Fetch a single instrument by supplying the asset or instrument name<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |

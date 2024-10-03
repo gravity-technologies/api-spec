@@ -1,4 +1,4 @@
-!!! info "[DepositHistory](schemas/deposit_history.md)"
+!!! info "[DepositHistory](/../../schemas/deposit_history)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |tx_id<br>`ti` |string|True|The transaction ID of the deposit|
@@ -7,7 +7,7 @@
     |currency<br>`c` |Currency|True|The token currency to deposit|
     |num_tokens<br>`nt` |string|True|The number of tokens to deposit|
     |event_time<br>`et` |string|True|The timestamp of the deposit in unix nanoseconds|
-    ??? info "[Currency](schemas/currency.md)"
+    ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 
         |Value| Description |

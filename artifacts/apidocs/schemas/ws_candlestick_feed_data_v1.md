@@ -1,11 +1,11 @@
-!!! info "[WSCandlestickFeedDataV1](schemas/ws_candlestick_feed_data_v1.md)"
+!!! info "[WSCandlestickFeedDataV1](/../../schemas/ws_candlestick_feed_data_v1)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |stream<br>`s` |string|True|Stream name|
     |selector<br>`s1` |string|True|Primary selector|
     |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
     |feed<br>`f` |Candlestick|True|A candlestick entry matching the request filters|
-    ??? info "[Candlestick](schemas/candlestick.md)"
+    ??? info "[Candlestick](/../../schemas/candlestick)"
         <br>
 
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |

@@ -1,8 +1,8 @@
-!!! info "[ApiMiniTickerResponse](schemas/api_mini_ticker_response.md)"
+!!! info "[ApiMiniTickerResponse](/../../schemas/api_mini_ticker_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |result<br>`r` |MiniTicker|True|The mini ticker matching the request asset|
-    ??? info "[MiniTicker](schemas/mini_ticker.md)"
+    ??? info "[MiniTicker](/../../schemas/mini_ticker)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
