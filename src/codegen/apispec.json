@@ -3363,7 +3363,7 @@
             ]
           },
           {
-            "name": "funding_rate_8_h_curr",
+            "name": "funding_rate_8h_curr",
             "lite_name": "fr",
             "semantic_type": "string",
             "json_type": "string",
@@ -3376,7 +3376,7 @@
             ]
           },
           {
-            "name": "funding_rate_8_h_avg",
+            "name": "funding_rate_8h_avg",
             "lite_name": "fr1",
             "semantic_type": "string",
             "json_type": "string",
@@ -3415,7 +3415,7 @@
             ]
           },
           {
-            "name": "buy_volume_24_h_u",
+            "name": "buy_volume_24h_b",
             "lite_name": "bv",
             "semantic_type": "string",
             "json_type": "string",
@@ -3428,7 +3428,7 @@
             ]
           },
           {
-            "name": "sell_volume_24_h_u",
+            "name": "sell_volume_24h_b",
             "lite_name": "sv",
             "semantic_type": "string",
             "json_type": "string",
@@ -3441,7 +3441,7 @@
             ]
           },
           {
-            "name": "buy_volume_24_h_q",
+            "name": "buy_volume_24h_q",
             "lite_name": "bv1",
             "semantic_type": "string",
             "json_type": "string",
@@ -3454,7 +3454,7 @@
             ]
           },
           {
-            "name": "sell_volume_24_h_q",
+            "name": "sell_volume_24h_q",
             "lite_name": "sv1",
             "semantic_type": "string",
             "json_type": "string",
@@ -3929,8 +3929,8 @@
             ]
           },
           {
-            "name": "asset_id",
-            "lite_name": "ai",
+            "name": "instrument_hash",
+            "lite_name": "ih",
             "semantic_type": "uint256",
             "json_type": "string",
             "index": 1,
@@ -3981,34 +3981,6 @@
             ]
           },
           {
-            "name": "expiry",
-            "lite_name": "e",
-            "semantic_type": "timestamp",
-            "json_type": "string",
-            "index": 5,
-            "array_depth": 0,
-            "optional": true,
-            "default": "0",
-            "example": "'1697788800000000000'",
-            "comment": [
-              "The expiry time of the instrument in unix nanoseconds"
-            ]
-          },
-          {
-            "name": "strike_price",
-            "lite_name": "sp",
-            "semantic_type": "string",
-            "json_type": "string",
-            "index": 6,
-            "array_depth": 0,
-            "optional": true,
-            "default": "0",
-            "example": "'65038.01'",
-            "comment": [
-              "The strike price of the instrument, expressed in `9` decimals"
-            ]
-          },
-          {
             "name": "venues",
             "lite_name": "v",
             "semantic_type": "Venue",
@@ -4035,8 +4007,8 @@
             ]
           },
           {
-            "name": "underlying_decimals",
-            "lite_name": "ud",
+            "name": "base_decimals",
+            "lite_name": "bd",
             "semantic_type": "int8",
             "json_type": "number",
             "index": 9,
@@ -4084,19 +4056,6 @@
             "example": "'0.01'",
             "comment": [
               "The minimum contract size, expressed in base asset decimal units"
-            ]
-          },
-          {
-            "name": "min_block_trade_size",
-            "lite_name": "mb",
-            "semantic_type": "string",
-            "json_type": "string",
-            "index": 13,
-            "array_depth": 0,
-            "optional": false,
-            "example": "'5.0'",
-            "comment": [
-              "The minimum block trade size, expressed in base asset decimal units"
             ]
           },
           {
@@ -4419,8 +4378,8 @@
             ]
           },
           {
-            "name": "volume_u",
-            "lite_name": "vu",
+            "name": "volume_b",
+            "lite_name": "vb",
             "semantic_type": "string",
             "json_type": "string",
             "index": 6,
@@ -9103,8 +9062,8 @@
             ]
           },
           {
-            "name": "token_currency",
-            "lite_name": "tc",
+            "name": "currency",
+            "lite_name": "c",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 4,
@@ -9258,8 +9217,8 @@
             ]
           },
           {
-            "name": "token_currency",
-            "lite_name": "tc",
+            "name": "currency",
+            "lite_name": "c",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 2,
@@ -9401,8 +9360,8 @@
             ]
           },
           {
-            "name": "token_currency",
-            "lite_name": "tc",
+            "name": "currency",
+            "lite_name": "c",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 2,
@@ -9519,8 +9478,8 @@
             ]
           },
           {
-            "name": "token_currency",
-            "lite_name": "tc",
+            "name": "currency",
+            "lite_name": "c",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 1,
@@ -9584,8 +9543,8 @@
             ]
           },
           {
-            "name": "token_currency",
-            "lite_name": "tc",
+            "name": "currency",
+            "lite_name": "c",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 2,
@@ -9688,8 +9647,8 @@
             ]
           },
           {
-            "name": "token_currency",
-            "lite_name": "tc",
+            "name": "currency",
+            "lite_name": "c",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 4,
@@ -9739,8 +9698,8 @@
         "is_root": true,
         "fields": [
           {
-            "name": "token_currency",
-            "lite_name": "tc",
+            "name": "currency",
+            "lite_name": "c",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 0,
@@ -9795,7 +9754,7 @@
           },
           {
             "name": "cursor",
-            "lite_name": "c",
+            "lite_name": "c1",
             "semantic_type": "string",
             "json_type": "string",
             "index": 4,
@@ -9859,8 +9818,8 @@
             ]
           },
           {
-            "name": "token_currency",
-            "lite_name": "tc",
+            "name": "currency",
+            "lite_name": "c",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 3,
@@ -9938,8 +9897,8 @@
         "is_root": true,
         "fields": [
           {
-            "name": "token_currency",
-            "lite_name": "tc",
+            "name": "currency",
+            "lite_name": "c",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 0,
@@ -9994,7 +9953,7 @@
           },
           {
             "name": "cursor",
-            "lite_name": "c",
+            "lite_name": "c1",
             "semantic_type": "string",
             "json_type": "string",
             "index": 4,
@@ -10084,8 +10043,8 @@
             ]
           },
           {
-            "name": "token_currency",
-            "lite_name": "tc",
+            "name": "currency",
+            "lite_name": "c",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 5,
@@ -10175,8 +10134,8 @@
         "is_root": true,
         "fields": [
           {
-            "name": "token_currency",
-            "lite_name": "tc",
+            "name": "currency",
+            "lite_name": "c",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 0,
@@ -10231,7 +10190,7 @@
           },
           {
             "name": "cursor",
-            "lite_name": "c",
+            "lite_name": "c1",
             "semantic_type": "string",
             "json_type": "string",
             "index": 4,
@@ -10295,8 +10254,8 @@
             ]
           },
           {
-            "name": "token_currency",
-            "lite_name": "tc",
+            "name": "currency",
+            "lite_name": "c",
             "semantic_type": "Currency",
             "json_type": "Currency",
             "index": 3,
