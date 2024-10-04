@@ -2,7 +2,7 @@
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |stream<br>`s` |string|True|Stream name|
-    |selector<br>`s1` |string|True|Primary selector|
+    |selector<br>`s1` |string|True|the feed specified in the JSON RPC Subscribe request|
     |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
     |feed<br>`f` |MiniTicker|True|A mini ticker matching the request filter|
     ??? info "[MiniTicker](/../../schemas/mini_ticker)"
