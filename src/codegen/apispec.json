@@ -5085,7 +5085,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "Primary selector"
+              "the feed specified in the JSON RPC Subscribe request"
             ]
           },
           {
@@ -5187,7 +5187,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "Primary selector"
+              "the feed specified in the JSON RPC Subscribe request"
             ]
           },
           {
@@ -5289,7 +5289,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "Primary selector"
+              "the feed specified in the JSON RPC Subscribe request"
             ]
           },
           {
@@ -5403,7 +5403,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "Primary selector"
+              "the feed specified in the JSON RPC Subscribe request"
             ]
           },
           {
@@ -5511,7 +5511,7 @@
             "optional": false,
             "example": "'BTC_USDT_Perp'",
             "comment": [
-              "Primary selector"
+              "the feed specified in the JSON RPC Subscribe request"
             ]
           },
           {

@@ -76,7 +76,7 @@ STREAM: v1.mini.s
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
+        |selector<br>`s1` |string|True|the feed specified in the JSON RPC Subscribe request|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |MiniTicker|True|A mini ticker matching the request filter|
         ??? info "[MiniTicker](/../../schemas/mini_ticker)"
@@ -375,7 +375,7 @@ STREAM: v1.mini.d
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
+        |selector<br>`s1` |string|True|the feed specified in the JSON RPC Subscribe request|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |MiniTicker|True|A mini ticker matching the request filter|
         ??? info "[MiniTicker](/../../schemas/mini_ticker)"
@@ -674,7 +674,7 @@ STREAM: v1.ticker.s
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
+        |selector<br>`s1` |string|True|the feed specified in the JSON RPC Subscribe request|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Ticker|True|A ticker matching the request filter|
         ??? info "[Ticker](/../../schemas/ticker)"
@@ -1014,7 +1014,7 @@ STREAM: v1.ticker.d
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
+        |selector<br>`s1` |string|True|the feed specified in the JSON RPC Subscribe request|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Ticker|True|A ticker matching the request filter|
         ??? info "[Ticker](/../../schemas/ticker)"
@@ -1356,7 +1356,7 @@ STREAM: v1.book.s
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
+        |selector<br>`s1` |string|True|the feed specified in the JSON RPC Subscribe request|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |OrderbookLevels|True|An orderbook levels object matching the request filter|
         ??? info "[OrderbookLevels](/../../schemas/orderbook_levels)"
@@ -1669,7 +1669,7 @@ STREAM: v1.book.d
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
+        |selector<br>`s1` |string|True|the feed specified in the JSON RPC Subscribe request|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |OrderbookLevels|True|An orderbook levels object matching the request filter|
         ??? info "[OrderbookLevels](/../../schemas/orderbook_levels)"
@@ -1976,7 +1976,7 @@ STREAM: v1.trade
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
+        |selector<br>`s1` |string|True|the feed specified in the JSON RPC Subscribe request|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Trade|True|A public trade matching the request filter|
         ??? info "[Trade](/../../schemas/trade)"
@@ -2308,7 +2308,7 @@ STREAM: v1.candle
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
+        |selector<br>`s1` |string|True|the feed specified in the JSON RPC Subscribe request|
         |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
         |feed<br>`f` |Candlestick|True|A candlestick entry matching the request filters|
         ??? info "[Candlestick](/../../schemas/candlestick)"
