@@ -10,20 +10,17 @@ LITE ENDPOINT: lite/v1/instrument
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiGetInstrumentRequest](/../../schemas/api_get_instrument_request)"
-        Fetch a single instrument by supplying the asset or instrument name<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
+    -8<- "docs/schemas/api_get_instrument_request.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
+        **Full Request**
         ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp"
         }
         ```
+        **Lite Request**
         ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp"
@@ -32,72 +29,11 @@ LITE ENDPOINT: lite/v1/instrument
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiGetInstrumentResponse](/../../schemas/api_get_instrument_response)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |result<br>`r` |Instrument|True|The instrument matching the request asset|
-        ??? info "[Instrument](/../../schemas/instrument)"
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |instrument_hash<br>`ih` |string|True|The asset ID used for instrument signing.|
-            |base<br>`b` |Currency|True|The base currency|
-            |quote<br>`q` |Currency|True|The quote currency|
-            |kind<br>`k` |Kind|True|The kind of instrument|
-            |venues<br>`v` |[Venue]|True|Venues that this instrument can be traded at|
-            |settlement_period<br>`sp1` |InstrumentSettlementPeriod|True|The settlement period of the instrument|
-            |base_decimals<br>`bd` |integer|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
-            |quote_decimals<br>`qd` |integer|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
-            |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
-            |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
-            |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
-            ??? info "[Currency](/../../schemas/currency)"
-                The list of Currencies that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`USD` = 1|the USD fiat currency|
-                |`USDC` = 2|the USDC token|
-                |`USDT` = 3|the USDT token|
-                |`ETH` = 4|the ETH token|
-                |`BTC` = 5|the BTC token|
-            ??? info "[Currency](/../../schemas/currency)"
-                The list of Currencies that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`USD` = 1|the USD fiat currency|
-                |`USDC` = 2|the USDC token|
-                |`USDT` = 3|the USDT token|
-                |`ETH` = 4|the ETH token|
-                |`BTC` = 5|the BTC token|
-            ??? info "[Kind](/../../schemas/kind)"
-                The list of asset kinds that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`PERPETUAL` = 1|the perpetual asset kind|
-                |`FUTURE` = 2|the future asset kind|
-                |`CALL` = 3|the call option asset kind|
-                |`PUT` = 4|the put option asset kind|
-            ??? info "[Venue](/../../schemas/venue)"
-                The list of Trading Venues that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
-                |`RFQ` = 2|the trade is cleared on the RFQ venue|
-            ??? info "[InstrumentSettlementPeriod](/../../schemas/instrument_settlement_period)"
-                |Value| Description |
-                |-|-|
-                |`PERPETUAL` = 1|Instrument settles through perpetual funding cycles|
-                |`DAILY` = 2|Instrument settles at an expiry date, marked as a daily instrument|
-                |`WEEKLY` = 3|Instrument settles at an expiry date, marked as a weekly instrument|
-                |`MONTHLY` = 4|Instrument settles at an expiry date, marked as a monthly instrument|
-                |`QUARTERLY` = 5|Instrument settles at an expiry date, marked as a quarterly instrument|
+    -8<- "docs/schemas/api_get_instrument_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Response**
         ``` { .json .copy }
         {
             "result": {
@@ -116,6 +52,25 @@ LITE ENDPOINT: lite/v1/instrument
             }
         }
         ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "i": "BTC_USDT_Perp",
+                "ih": "0x030501",
+                "b": "BTC",
+                "q": "USDT",
+                "k": "PERPETUAL",
+                "v": ["ORDERBOOK"],
+                "sp1": "PERPETUAL",
+                "bd": 3,
+                "qd": 3,
+                "ts": "0.01",
+                "ms": "0.01",
+                "ct": "1697788800000000000"
+            }
+        }
+        ```
     </section>
 === "Errors"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
@@ -128,21 +83,22 @@ LITE ENDPOINT: lite/v1/instrument
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
+        **Full Error Response**
         ``` { .json .copy }
         {
+            "request_id":1,
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
         {
-            "code":1003,
-            "message":"Request could not be processed due to malformed syntax",
-            "status":400
-        }
-        {
-            "code":1004,
-            "message":"Data Not Found",
-            "status":404
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
         }
         ```
     </section>
@@ -157,7 +113,7 @@ LITE ENDPOINT: lite/v1/instrument
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
             -x '
@@ -181,7 +137,7 @@ LITE ENDPOINT: lite/v1/instrument
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
             -x '
@@ -206,7 +162,7 @@ LITE ENDPOINT: lite/v1/instrument
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
@@ -230,7 +186,7 @@ LITE ENDPOINT: lite/v1/instrument
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
@@ -255,7 +211,7 @@ LITE ENDPOINT: lite/v1/instrument
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
             -x '
@@ -279,7 +235,7 @@ LITE ENDPOINT: lite/v1/instrument
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
             -x '
@@ -304,7 +260,7 @@ LITE ENDPOINT: lite/v1/instrument
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/full" \
             -x '
@@ -328,7 +284,7 @@ LITE ENDPOINT: lite/v1/instrument
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/lite" \
             -x '
@@ -352,20 +308,17 @@ LITE ENDPOINT: lite/v1/all_instruments
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiGetAllInstrumentsRequest](/../../schemas/api_get_all_instruments_request)"
-        Fetch all instruments<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |is_active<br>`ia` |boolean|False<br>`false`|Fetch only active instruments|
+    -8<- "docs/schemas/api_get_all_instruments_request.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
+        **Full Request**
         ``` { .json .copy }
         {
             "is_active": true
         }
         ```
+        **Lite Request**
         ``` { .json .copy }
         {
             "ia": true
@@ -374,72 +327,11 @@ LITE ENDPOINT: lite/v1/all_instruments
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiGetAllInstrumentsResponse](/../../schemas/api_get_all_instruments_response)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |result<br>`r` |[Instrument]|True|List of instruments|
-        ??? info "[Instrument](/../../schemas/instrument)"
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |instrument_hash<br>`ih` |string|True|The asset ID used for instrument signing.|
-            |base<br>`b` |Currency|True|The base currency|
-            |quote<br>`q` |Currency|True|The quote currency|
-            |kind<br>`k` |Kind|True|The kind of instrument|
-            |venues<br>`v` |[Venue]|True|Venues that this instrument can be traded at|
-            |settlement_period<br>`sp1` |InstrumentSettlementPeriod|True|The settlement period of the instrument|
-            |base_decimals<br>`bd` |integer|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
-            |quote_decimals<br>`qd` |integer|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
-            |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
-            |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
-            |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
-            ??? info "[Currency](/../../schemas/currency)"
-                The list of Currencies that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`USD` = 1|the USD fiat currency|
-                |`USDC` = 2|the USDC token|
-                |`USDT` = 3|the USDT token|
-                |`ETH` = 4|the ETH token|
-                |`BTC` = 5|the BTC token|
-            ??? info "[Currency](/../../schemas/currency)"
-                The list of Currencies that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`USD` = 1|the USD fiat currency|
-                |`USDC` = 2|the USDC token|
-                |`USDT` = 3|the USDT token|
-                |`ETH` = 4|the ETH token|
-                |`BTC` = 5|the BTC token|
-            ??? info "[Kind](/../../schemas/kind)"
-                The list of asset kinds that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`PERPETUAL` = 1|the perpetual asset kind|
-                |`FUTURE` = 2|the future asset kind|
-                |`CALL` = 3|the call option asset kind|
-                |`PUT` = 4|the put option asset kind|
-            ??? info "[Venue](/../../schemas/venue)"
-                The list of Trading Venues that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
-                |`RFQ` = 2|the trade is cleared on the RFQ venue|
-            ??? info "[InstrumentSettlementPeriod](/../../schemas/instrument_settlement_period)"
-                |Value| Description |
-                |-|-|
-                |`PERPETUAL` = 1|Instrument settles through perpetual funding cycles|
-                |`DAILY` = 2|Instrument settles at an expiry date, marked as a daily instrument|
-                |`WEEKLY` = 3|Instrument settles at an expiry date, marked as a weekly instrument|
-                |`MONTHLY` = 4|Instrument settles at an expiry date, marked as a monthly instrument|
-                |`QUARTERLY` = 5|Instrument settles at an expiry date, marked as a quarterly instrument|
+    -8<- "docs/schemas/api_get_all_instruments_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Response**
         ``` { .json .copy }
         {
             "result": [{
@@ -458,6 +350,25 @@ LITE ENDPOINT: lite/v1/all_instruments
             }]
         }
         ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "i": "BTC_USDT_Perp",
+                "ih": "0x030501",
+                "b": "BTC",
+                "q": "USDT",
+                "k": "PERPETUAL",
+                "v": ["ORDERBOOK"],
+                "sp1": "PERPETUAL",
+                "bd": 3,
+                "qd": 3,
+                "ts": "0.01",
+                "ms": "0.01",
+                "ct": "1697788800000000000"
+            }]
+        }
+        ```
     </section>
 === "Errors"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
@@ -469,16 +380,22 @@ LITE ENDPOINT: lite/v1/all_instruments
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
+        **Full Error Response**
         ``` { .json .copy }
         {
+            "request_id":1,
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
         {
-            "code":1003,
-            "message":"Request could not be processed due to malformed syntax",
-            "status":400
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
         }
         ```
     </section>
@@ -493,7 +410,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
             -x '
@@ -517,7 +434,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
             -x '
@@ -542,7 +459,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
@@ -566,7 +483,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
@@ -591,7 +508,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
             -x '
@@ -615,7 +532,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
             -x '
@@ -640,7 +557,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/full" \
             -x '
@@ -664,7 +581,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/lite" \
             -x '
@@ -688,48 +605,11 @@ LITE ENDPOINT: lite/v1/instruments
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiGetFilteredInstrumentsRequest](/../../schemas/api_get_filtered_instruments_request)"
-        Fetch a list of instruments based on the filters provided<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |kind<br>`k` |[Kind]|False<br>`all`|The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned|
-        |base<br>`b` |[Currency]|False<br>`all`|The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned|
-        |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
-        |is_active<br>`ia` |boolean|False<br>`false`|Request for active instruments only|
-        |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 100000|
-        ??? info "[Kind](/../../schemas/kind)"
-            The list of asset kinds that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`PERPETUAL` = 1|the perpetual asset kind|
-            |`FUTURE` = 2|the future asset kind|
-            |`CALL` = 3|the call option asset kind|
-            |`PUT` = 4|the put option asset kind|
-        ??? info "[Currency](/../../schemas/currency)"
-            The list of Currencies that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`USD` = 1|the USD fiat currency|
-            |`USDC` = 2|the USDC token|
-            |`USDT` = 3|the USDT token|
-            |`ETH` = 4|the ETH token|
-            |`BTC` = 5|the BTC token|
-        ??? info "[Currency](/../../schemas/currency)"
-            The list of Currencies that are supported on the GRVT exchange<br>
-
-            |Value| Description |
-            |-|-|
-            |`USD` = 1|the USD fiat currency|
-            |`USDC` = 2|the USDC token|
-            |`USDT` = 3|the USDT token|
-            |`ETH` = 4|the ETH token|
-            |`BTC` = 5|the BTC token|
+    -8<- "docs/schemas/api_get_filtered_instruments_request.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
+        **Full Request**
         ``` { .json .copy }
         {
             "kind": ["PERPETUAL"],
@@ -739,6 +619,7 @@ LITE ENDPOINT: lite/v1/instruments
             "limit": 500
         }
         ```
+        **Lite Request**
         ``` { .json .copy }
         {
             "k": ["PERPETUAL"],
@@ -751,72 +632,11 @@ LITE ENDPOINT: lite/v1/instruments
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiGetFilteredInstrumentsResponse](/../../schemas/api_get_filtered_instruments_response)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |result<br>`r` |[Instrument]|True|The instruments matching the request filter|
-        ??? info "[Instrument](/../../schemas/instrument)"
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |instrument_hash<br>`ih` |string|True|The asset ID used for instrument signing.|
-            |base<br>`b` |Currency|True|The base currency|
-            |quote<br>`q` |Currency|True|The quote currency|
-            |kind<br>`k` |Kind|True|The kind of instrument|
-            |venues<br>`v` |[Venue]|True|Venues that this instrument can be traded at|
-            |settlement_period<br>`sp1` |InstrumentSettlementPeriod|True|The settlement period of the instrument|
-            |base_decimals<br>`bd` |integer|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
-            |quote_decimals<br>`qd` |integer|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
-            |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
-            |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
-            |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
-            ??? info "[Currency](/../../schemas/currency)"
-                The list of Currencies that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`USD` = 1|the USD fiat currency|
-                |`USDC` = 2|the USDC token|
-                |`USDT` = 3|the USDT token|
-                |`ETH` = 4|the ETH token|
-                |`BTC` = 5|the BTC token|
-            ??? info "[Currency](/../../schemas/currency)"
-                The list of Currencies that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`USD` = 1|the USD fiat currency|
-                |`USDC` = 2|the USDC token|
-                |`USDT` = 3|the USDT token|
-                |`ETH` = 4|the ETH token|
-                |`BTC` = 5|the BTC token|
-            ??? info "[Kind](/../../schemas/kind)"
-                The list of asset kinds that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`PERPETUAL` = 1|the perpetual asset kind|
-                |`FUTURE` = 2|the future asset kind|
-                |`CALL` = 3|the call option asset kind|
-                |`PUT` = 4|the put option asset kind|
-            ??? info "[Venue](/../../schemas/venue)"
-                The list of Trading Venues that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
-                |`RFQ` = 2|the trade is cleared on the RFQ venue|
-            ??? info "[InstrumentSettlementPeriod](/../../schemas/instrument_settlement_period)"
-                |Value| Description |
-                |-|-|
-                |`PERPETUAL` = 1|Instrument settles through perpetual funding cycles|
-                |`DAILY` = 2|Instrument settles at an expiry date, marked as a daily instrument|
-                |`WEEKLY` = 3|Instrument settles at an expiry date, marked as a weekly instrument|
-                |`MONTHLY` = 4|Instrument settles at an expiry date, marked as a monthly instrument|
-                |`QUARTERLY` = 5|Instrument settles at an expiry date, marked as a quarterly instrument|
+    -8<- "docs/schemas/api_get_filtered_instruments_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Response**
         ``` { .json .copy }
         {
             "result": [{
@@ -835,6 +655,25 @@ LITE ENDPOINT: lite/v1/instruments
             }]
         }
         ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "i": "BTC_USDT_Perp",
+                "ih": "0x030501",
+                "b": "BTC",
+                "q": "USDT",
+                "k": "PERPETUAL",
+                "v": ["ORDERBOOK"],
+                "sp1": "PERPETUAL",
+                "bd": 3,
+                "qd": 3,
+                "ts": "0.01",
+                "ms": "0.01",
+                "ct": "1697788800000000000"
+            }]
+        }
+        ```
     </section>
 === "Errors"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
@@ -846,16 +685,22 @@ LITE ENDPOINT: lite/v1/instruments
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
+        **Full Error Response**
         ``` { .json .copy }
         {
+            "request_id":1,
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
         {
-            "code":1003,
-            "message":"Request could not be processed due to malformed syntax",
-            "status":400
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
         }
         ```
     </section>
@@ -874,7 +719,7 @@ LITE ENDPOINT: lite/v1/instruments
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
             -x '
@@ -906,7 +751,7 @@ LITE ENDPOINT: lite/v1/instruments
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
             -x '
@@ -939,7 +784,7 @@ LITE ENDPOINT: lite/v1/instruments
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
@@ -971,7 +816,7 @@ LITE ENDPOINT: lite/v1/instruments
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
@@ -1004,7 +849,7 @@ LITE ENDPOINT: lite/v1/instruments
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
             -x '
@@ -1036,7 +881,7 @@ LITE ENDPOINT: lite/v1/instruments
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
             -x '
@@ -1069,7 +914,7 @@ LITE ENDPOINT: lite/v1/instruments
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/full" \
             -x '
@@ -1101,7 +946,7 @@ LITE ENDPOINT: lite/v1/instruments
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/lite" \
             -x '
@@ -1130,20 +975,17 @@ LITE ENDPOINT: lite/v1/mini
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiMiniTickerRequest](/../../schemas/api_mini_ticker_request)"
-        Retrieves a single mini ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
+    -8<- "docs/schemas/api_mini_ticker_request.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
+        **Full Request**
         ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp"
         }
         ```
+        **Lite Request**
         ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp"
@@ -1152,27 +994,11 @@ LITE ENDPOINT: lite/v1/mini
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiMiniTickerResponse](/../../schemas/api_mini_ticker_response)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |result<br>`r` |MiniTicker|True|The mini ticker matching the request asset|
-        ??? info "[MiniTicker](/../../schemas/mini_ticker)"
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|False<br>`None`|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument, expressed in `9` decimals|
-            |index_price<br>`ip` |string|False<br>`None`|The index price of the instrument, expressed in `9` decimals|
-            |last_price<br>`lp` |string|False<br>`None`|The last traded price of the instrument (also close price), expressed in `9` decimals|
-            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in base asset decimal units|
-            |mid_price<br>`mp1` |string|False<br>`None`|The mid price of the instrument, expressed in `9` decimals|
-            |best_bid_price<br>`bb` |string|False<br>`None`|The best bid price of the instrument, expressed in `9` decimals|
-            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
-            |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
-            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
+    -8<- "docs/schemas/api_mini_ticker_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Response**
         ``` { .json .copy }
         {
             "result": {
@@ -1190,6 +1016,24 @@ LITE ENDPOINT: lite/v1/mini
             }
         }
         ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "et": "1697788800000000000",
+                "i": "BTC_USDT_Perp",
+                "mp": "65038.01",
+                "ip": "65038.01",
+                "lp": "65038.01",
+                "ls": "123456.78",
+                "mp1": "65038.01",
+                "bb": "65038.01",
+                "bb1": "123456.78",
+                "ba": "65038.01",
+                "ba1": "123456.78"
+            }
+        }
+        ```
     </section>
 === "Errors"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
@@ -1202,21 +1046,22 @@ LITE ENDPOINT: lite/v1/mini
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
+        **Full Error Response**
         ``` { .json .copy }
         {
+            "request_id":1,
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
         {
-            "code":1003,
-            "message":"Request could not be processed due to malformed syntax",
-            "status":400
-        }
-        {
-            "code":1004,
-            "message":"Data Not Found",
-            "status":404
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
         }
         ```
     </section>
@@ -1231,7 +1076,7 @@ LITE ENDPOINT: lite/v1/mini
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
             -x '
@@ -1255,7 +1100,7 @@ LITE ENDPOINT: lite/v1/mini
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
             -x '
@@ -1280,7 +1125,7 @@ LITE ENDPOINT: lite/v1/mini
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
@@ -1304,7 +1149,7 @@ LITE ENDPOINT: lite/v1/mini
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
@@ -1329,7 +1174,7 @@ LITE ENDPOINT: lite/v1/mini
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
             -x '
@@ -1353,7 +1198,7 @@ LITE ENDPOINT: lite/v1/mini
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
             -x '
@@ -1378,7 +1223,7 @@ LITE ENDPOINT: lite/v1/mini
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/full" \
             -x '
@@ -1402,7 +1247,7 @@ LITE ENDPOINT: lite/v1/mini
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/lite" \
             -x '
@@ -1426,20 +1271,17 @@ LITE ENDPOINT: lite/v1/ticker
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiTickerRequest](/../../schemas/api_ticker_request)"
-        Retrieves a single ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
+    -8<- "docs/schemas/api_ticker_request.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
+        **Full Request**
         ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp"
         }
         ```
+        **Lite Request**
         ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp"
@@ -1448,42 +1290,11 @@ LITE ENDPOINT: lite/v1/ticker
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiTickerResponse](/../../schemas/api_ticker_response)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |result<br>`r` |Ticker|True|The mini ticker matching the request asset|
-        ??? info "[Ticker](/../../schemas/ticker)"
-            Derived data such as the below, will not be included by default:<br>  - 24 hour volume (`buyVolume + sellVolume`)<br>  - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>  - 24 hour average trade price (`volumeQ / volumeU`)<br>  - 24 hour average trade volume (`volume / trades`)<br>  - 24 hour percentage change (`24hStatChange / 24hStat`)<br>  - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br><br>To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>Ticker extensions are currently under design to offer you more convenience.<br>These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br><br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|False<br>`None`|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument, expressed in `9` decimals|
-            |index_price<br>`ip` |string|False<br>`None`|The index price of the instrument, expressed in `9` decimals|
-            |last_price<br>`lp` |string|False<br>`None`|The last traded price of the instrument (also close price), expressed in `9` decimals|
-            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in base asset decimal units|
-            |mid_price<br>`mp1` |string|False<br>`None`|The mid price of the instrument, expressed in `9` decimals|
-            |best_bid_price<br>`bb` |string|False<br>`None`|The best bid price of the instrument, expressed in `9` decimals|
-            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
-            |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
-            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
-            |funding_rate_8h_curr<br>`fr` |string|False<br>`None`|The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)|
-            |funding_rate_8h_avg<br>`fr1` |string|False<br>`None`|The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)|
-            |interest_rate<br>`ir` |string|False<br>`None`|The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)|
-            |forward_price<br>`fp` |string|False<br>`None`|[Options] The forward price of the option, expressed in `9` decimals|
-            |buy_volume_24h_b<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in base asset decimal units|
-            |sell_volume_24h_b<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in base asset decimal units|
-            |buy_volume_24h_q<br>`bv1` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units|
-            |sell_volume_24h_q<br>`sv1` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units|
-            |high_price<br>`hp` |string|False<br>`None`|The 24 hour highest traded price of the instrument, expressed in `9` decimals|
-            |low_price<br>`lp1` |string|False<br>`None`|The 24 hour lowest traded price of the instrument, expressed in `9` decimals|
-            |open_price<br>`op` |string|False<br>`None`|The 24 hour first traded price of the instrument, expressed in `9` decimals|
-            |open_interest<br>`oi` |string|False<br>`None`|The open interest in the instrument, expressed in base asset decimal units|
-            |long_short_ratio<br>`ls1` |string|False<br>`None`|The ratio of accounts that are net long vs net short on this instrument|
+    -8<- "docs/schemas/api_ticker_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Response**
         ``` { .json .copy }
         {
             "result": {
@@ -1514,6 +1325,37 @@ LITE ENDPOINT: lite/v1/ticker
             }
         }
         ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "et": "1697788800000000000",
+                "i": "BTC_USDT_Perp",
+                "mp": "65038.01",
+                "ip": "65038.01",
+                "lp": "65038.01",
+                "ls": "123456.78",
+                "mp1": "65038.01",
+                "bb": "65038.01",
+                "bb1": "123456.78",
+                "ba": "65038.01",
+                "ba1": "123456.78",
+                "fr": 0.0003,
+                "fr1": 0.0003,
+                "ir": 0.0003,
+                "fp": "65038.01",
+                "bv": "123456.78",
+                "sv": "123456.78",
+                "bv1": "123456.78",
+                "sv1": "123456.78",
+                "hp": "65038.01",
+                "lp1": "65038.01",
+                "op": "65038.01",
+                "oi": "123456.78",
+                "ls1": "0.5"
+            }
+        }
+        ```
     </section>
 === "Errors"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
@@ -1526,21 +1368,22 @@ LITE ENDPOINT: lite/v1/ticker
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
+        **Full Error Response**
         ``` { .json .copy }
         {
+            "request_id":1,
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
         {
-            "code":1003,
-            "message":"Request could not be processed due to malformed syntax",
-            "status":400
-        }
-        {
-            "code":1004,
-            "message":"Data Not Found",
-            "status":404
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
         }
         ```
     </section>
@@ -1555,7 +1398,7 @@ LITE ENDPOINT: lite/v1/ticker
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
             -x '
@@ -1579,7 +1422,7 @@ LITE ENDPOINT: lite/v1/ticker
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
             -x '
@@ -1604,7 +1447,7 @@ LITE ENDPOINT: lite/v1/ticker
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
@@ -1628,7 +1471,7 @@ LITE ENDPOINT: lite/v1/ticker
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
@@ -1653,7 +1496,7 @@ LITE ENDPOINT: lite/v1/ticker
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
             -x '
@@ -1677,7 +1520,7 @@ LITE ENDPOINT: lite/v1/ticker
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
             -x '
@@ -1702,7 +1545,7 @@ LITE ENDPOINT: lite/v1/ticker
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/full" \
             -x '
@@ -1726,7 +1569,7 @@ LITE ENDPOINT: lite/v1/ticker
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/lite" \
             -x '
@@ -1751,22 +1594,18 @@ LITE ENDPOINT: lite/v1/book
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiOrderbookLevelsRequest](/../../schemas/api_orderbook_levels_request)"
-        Retrieves aggregated price depth for a single instrument, with a maximum depth of 10 levels. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |depth<br>`d` |integer|True|Depth of the order book to be retrieved (10, 50, 100, 500)|
+    -8<- "docs/schemas/api_orderbook_levels_request.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
+        **Full Request**
         ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp",
             "depth": 50
         }
         ```
+        **Lite Request**
         ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp",
@@ -1776,32 +1615,11 @@ LITE ENDPOINT: lite/v1/book
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiOrderbookLevelsResponse](/../../schemas/api_orderbook_levels_response)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |result<br>`r` |OrderbookLevels|True|The orderbook levels objects matching the request asset|
-        ??? info "[OrderbookLevels](/../../schemas/orderbook_levels)"
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |bids<br>`b` |[OrderbookLevel]|True|The list of best bids up till query depth|
-            |asks<br>`a` |[OrderbookLevel]|True|The list of best asks up till query depth|
-            ??? info "[OrderbookLevel](/../../schemas/orderbook_level)"
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
-                |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
-                |num_orders<br>`no` |integer|True|The number of open orders at this level|
-            ??? info "[OrderbookLevel](/../../schemas/orderbook_level)"
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
-                |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
-                |num_orders<br>`no` |integer|True|The number of open orders at this level|
+    -8<- "docs/schemas/api_orderbook_levels_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Response**
         ``` { .json .copy }
         {
             "result": {
@@ -1820,6 +1638,25 @@ LITE ENDPOINT: lite/v1/book
             }
         }
         ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "et": "1697788800000000000",
+                "i": "BTC_USDT_Perp",
+                "b": [{
+                    "p": "65038.01",
+                    "s": "3456.78",
+                    "no": "123"
+                }],
+                "a": [{
+                    "p": "65038.01",
+                    "s": "3456.78",
+                    "no": "123"
+                }]
+            }
+        }
+        ```
     </section>
 === "Errors"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
@@ -1834,31 +1671,22 @@ LITE ENDPOINT: lite/v1/book
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
+        **Full Error Response**
         ``` { .json .copy }
         {
+            "request_id":1,
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
         {
-            "code":1003,
-            "message":"Request could not be processed due to malformed syntax",
-            "status":400
-        }
-        {
-            "code":1004,
-            "message":"Data Not Found",
-            "status":404
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3031,
-            "message":"Depth is invalid",
-            "status":400
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
         }
         ```
     </section>
@@ -1874,7 +1702,7 @@ LITE ENDPOINT: lite/v1/book
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
             -x '
@@ -1900,7 +1728,7 @@ LITE ENDPOINT: lite/v1/book
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
             -x '
@@ -1927,7 +1755,7 @@ LITE ENDPOINT: lite/v1/book
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
@@ -1953,7 +1781,7 @@ LITE ENDPOINT: lite/v1/book
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
@@ -1980,7 +1808,7 @@ LITE ENDPOINT: lite/v1/book
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
             -x '
@@ -2006,7 +1834,7 @@ LITE ENDPOINT: lite/v1/book
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
             -x '
@@ -2033,7 +1861,7 @@ LITE ENDPOINT: lite/v1/book
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/full" \
             -x '
@@ -2059,7 +1887,7 @@ LITE ENDPOINT: lite/v1/book
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/lite" \
             -x '
@@ -2085,22 +1913,18 @@ LITE ENDPOINT: lite/v1/trade
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiTradeRequest](/../../schemas/api_trade_request)"
-        Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.<br>This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |limit<br>`l` |integer|True|The limit to query for. Defaults to 500; Max 1000|
+    -8<- "docs/schemas/api_trade_request.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
+        **Full Request**
         ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp",
             "limit": 500
         }
         ```
+        **Lite Request**
         ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp",
@@ -2110,36 +1934,11 @@ LITE ENDPOINT: lite/v1/trade
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiTradeResponse](/../../schemas/api_trade_response)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |result<br>`r` |[Trade]|True|The public trades matching the request asset|
-        ??? info "[Trade](/../../schemas/trade)"
-            All private RFQs and Private AXEs will be filtered out from the responses<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |is_taker_buyer<br>`it` |boolean|True|If taker was the buyer on the trade|
-            |size<br>`s` |string|True|The number of assets being traded, expressed in base asset decimal units|
-            |price<br>`p` |string|True|The traded price, expressed in `9` decimals|
-            |mark_price<br>`mp` |string|True|The mark price of the instrument at point of trade, expressed in `9` decimals|
-            |index_price<br>`ip` |string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
-            |interest_rate<br>`ir` |string|True|The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)|
-            |forward_price<br>`fp` |string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
-            |trade_id<br>`ti` |string|True|A trade identifier, globally unique, and monotonically increasing (not by `1`).<br>All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.<br>`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.|
-            |venue<br>`v` |Venue|True|The venue where the trade occurred|
-            ??? info "[Venue](/../../schemas/venue)"
-                The list of Trading Venues that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
-                |`RFQ` = 2|the trade is cleared on the RFQ venue|
+    -8<- "docs/schemas/api_trade_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Response**
         ``` { .json .copy }
         {
             "result": [{
@@ -2157,6 +1956,24 @@ LITE ENDPOINT: lite/v1/trade
             }]
         }
         ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "et": "1697788800000000000",
+                "i": "BTC_USDT_Perp",
+                "it": true,
+                "s": "123456.78",
+                "p": "65038.01",
+                "mp": "65038.01",
+                "ip": "65038.01",
+                "ir": 0.0003,
+                "fp": "65038.01",
+                "ti": "209358:2",
+                "v": "ORDERBOOK"
+            }]
+        }
+        ```
     </section>
 === "Errors"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
@@ -2168,16 +1985,22 @@ LITE ENDPOINT: lite/v1/trade
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
+        **Full Error Response**
         ``` { .json .copy }
         {
+            "request_id":1,
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
         {
-            "code":1003,
-            "message":"Request could not be processed due to malformed syntax",
-            "status":400
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
         }
         ```
     </section>
@@ -2193,7 +2016,7 @@ LITE ENDPOINT: lite/v1/trade
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
             -x '
@@ -2219,7 +2042,7 @@ LITE ENDPOINT: lite/v1/trade
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
             -x '
@@ -2246,7 +2069,7 @@ LITE ENDPOINT: lite/v1/trade
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
@@ -2272,7 +2095,7 @@ LITE ENDPOINT: lite/v1/trade
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
@@ -2299,7 +2122,7 @@ LITE ENDPOINT: lite/v1/trade
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
             -x '
@@ -2325,7 +2148,7 @@ LITE ENDPOINT: lite/v1/trade
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
             -x '
@@ -2352,7 +2175,7 @@ LITE ENDPOINT: lite/v1/trade
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/full" \
             -x '
@@ -2378,7 +2201,7 @@ LITE ENDPOINT: lite/v1/trade
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/lite" \
             -x '
@@ -2403,19 +2226,11 @@ LITE ENDPOINT: lite/v1/trade_history
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiTradeHistoryRequest](/../../schemas/api_trade_history_request)"
-        Perform historical lookup of public trades in any given instrument.<br>This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.<br>Only data from the last three months will be retained.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |start_time<br>`st` |string|False<br>`0`|The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned|
-        |end_time<br>`et` |string|False<br>`now()`|The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned|
-        |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
-        |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
+    -8<- "docs/schemas/api_trade_history_request.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
+        **Full Request**
         ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp",
@@ -2425,6 +2240,7 @@ LITE ENDPOINT: lite/v1/trade_history
             "cursor": ""
         }
         ```
+        **Lite Request**
         ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp",
@@ -2437,37 +2253,11 @@ LITE ENDPOINT: lite/v1/trade_history
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiTradeHistoryResponse](/../../schemas/api_trade_history_response)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |result<br>`r` |[Trade]|True|The public trades matching the request asset|
-        |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "[Trade](/../../schemas/trade)"
-            All private RFQs and Private AXEs will be filtered out from the responses<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |is_taker_buyer<br>`it` |boolean|True|If taker was the buyer on the trade|
-            |size<br>`s` |string|True|The number of assets being traded, expressed in base asset decimal units|
-            |price<br>`p` |string|True|The traded price, expressed in `9` decimals|
-            |mark_price<br>`mp` |string|True|The mark price of the instrument at point of trade, expressed in `9` decimals|
-            |index_price<br>`ip` |string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
-            |interest_rate<br>`ir` |string|True|The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)|
-            |forward_price<br>`fp` |string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
-            |trade_id<br>`ti` |string|True|A trade identifier, globally unique, and monotonically increasing (not by `1`).<br>All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.<br>`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.|
-            |venue<br>`v` |Venue|True|The venue where the trade occurred|
-            ??? info "[Venue](/../../schemas/venue)"
-                The list of Trading Venues that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
-                |`RFQ` = 2|the trade is cleared on the RFQ venue|
+    -8<- "docs/schemas/api_trade_history_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Response**
         ``` { .json .copy }
         {
             "result": [{
@@ -2486,6 +2276,25 @@ LITE ENDPOINT: lite/v1/trade_history
             "next": "Qw0918="
         }
         ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "et": "1697788800000000000",
+                "i": "BTC_USDT_Perp",
+                "it": true,
+                "s": "123456.78",
+                "p": "65038.01",
+                "mp": "65038.01",
+                "ip": "65038.01",
+                "ir": 0.0003,
+                "fp": "65038.01",
+                "ti": "209358:2",
+                "v": "ORDERBOOK"
+            }],
+            "n": "Qw0918="
+        }
+        ```
     </section>
 === "Errors"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
@@ -2497,16 +2306,22 @@ LITE ENDPOINT: lite/v1/trade_history
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
+        **Full Error Response**
         ``` { .json .copy }
         {
+            "request_id":1,
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
         {
-            "code":1003,
-            "message":"Request could not be processed due to malformed syntax",
-            "status":400
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
         }
         ```
     </section>
@@ -2525,7 +2340,7 @@ LITE ENDPOINT: lite/v1/trade_history
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
             -x '
@@ -2557,7 +2372,7 @@ LITE ENDPOINT: lite/v1/trade_history
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
             -x '
@@ -2590,7 +2405,7 @@ LITE ENDPOINT: lite/v1/trade_history
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
@@ -2622,7 +2437,7 @@ LITE ENDPOINT: lite/v1/trade_history
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
@@ -2655,7 +2470,7 @@ LITE ENDPOINT: lite/v1/trade_history
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
             -x '
@@ -2687,7 +2502,7 @@ LITE ENDPOINT: lite/v1/trade_history
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
             -x '
@@ -2720,7 +2535,7 @@ LITE ENDPOINT: lite/v1/trade_history
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/full" \
             -x '
@@ -2752,7 +2567,7 @@ LITE ENDPOINT: lite/v1/trade_history
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/lite" \
             -x '
@@ -2781,49 +2596,11 @@ LITE ENDPOINT: lite/v1/kline
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiCandlestickRequest](/../../schemas/api_candlestick_request)"
-        Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |interval<br>`i1` |CandlestickInterval|True|The interval of each candlestick|
-        |type<br>`t` |CandlestickType|True|The type of candlestick data to retrieve|
-        |start_time<br>`st` |string|False<br>`0`|Start time of kline data in unix nanoseconds|
-        |end_time<br>`et` |string|False<br>`now()`|End time of kline data in unix nanoseconds|
-        |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
-        |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
-        ??? info "[CandlestickInterval](/../../schemas/candlestick_interval)"
-            |Value| Description |
-            |-|-|
-            |`CI_1_M` = 1|1 minute|
-            |`CI_3_M` = 2|3 minutes|
-            |`CI_5_M` = 3|5 minutes|
-            |`CI_15_M` = 4|15 minutes|
-            |`CI_30_M` = 5|30 minutes|
-            |`CI_1_H` = 6|1 hour|
-            |`CI_2_H` = 7|2 hour|
-            |`CI_4_H` = 8|4 hour|
-            |`CI_6_H` = 9|6 hour|
-            |`CI_8_H` = 10|8 hour|
-            |`CI_12_H` = 11|12 hour|
-            |`CI_1_D` = 12|1 day|
-            |`CI_3_D` = 13|3 days|
-            |`CI_5_D` = 14|5 days|
-            |`CI_1_W` = 15|1 week|
-            |`CI_2_W` = 16|2 weeks|
-            |`CI_3_W` = 17|3 weeks|
-            |`CI_4_W` = 18|4 weeks|
-        ??? info "[CandlestickType](/../../schemas/candlestick_type)"
-            |Value| Description |
-            |-|-|
-            |`TRADE` = 1|Tracks traded prices|
-            |`MARK` = 2|Tracks mark prices|
-            |`INDEX` = 3|Tracks index prices|
-            |`MID` = 4|Tracks book mid prices|
+    -8<- "docs/schemas/api_candlestick_request.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
+        **Full Request**
         ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp",
@@ -2835,6 +2612,7 @@ LITE ENDPOINT: lite/v1/kline
             "cursor": ""
         }
         ```
+        **Lite Request**
         ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp",
@@ -2849,29 +2627,11 @@ LITE ENDPOINT: lite/v1/kline
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiCandlestickResponse](/../../schemas/api_candlestick_response)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |result<br>`r` |[Candlestick]|True|The candlestick result set for given interval|
-        |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "[Candlestick](/../../schemas/candlestick)"
-            <br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |open_time<br>`ot` |string|True|Open time of kline bar in unix nanoseconds|
-            |close_time<br>`ct` |string|True|Close time of kline bar in unix nanosecond|
-            |open<br>`o` |string|True|The open price, expressed in underlying currency resolution units|
-            |close<br>`c` |string|True|The close price, expressed in underlying currency resolution units|
-            |high<br>`h` |string|True|The high price, expressed in underlying currency resolution units|
-            |low<br>`l` |string|True|The low price, expressed in underlying currency resolution units|
-            |volume_b<br>`vb` |string|True|The underlying volume transacted, expressed in base asset decimal units|
-            |volume_q<br>`vq` |string|True|The quote volume transacted, expressed in quote asset decimal units|
-            |trades<br>`t` |integer|True|The number of trades transacted|
-            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
+    -8<- "docs/schemas/api_candlestick_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Response**
         ``` { .json .copy }
         {
             "result": [{
@@ -2889,6 +2649,24 @@ LITE ENDPOINT: lite/v1/kline
             "next": "Qw0918="
         }
         ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "ot": "1697788800000000000",
+                "ct": "1697788800000000000",
+                "o": "123456.78",
+                "c": "123456.78",
+                "h": "123456.78",
+                "l": "123456.78",
+                "vb": "123456.78",
+                "vq": "123456.78",
+                "t": 123456,
+                "i": "BTC_USDT_Perp"
+            }],
+            "n": "Qw0918="
+        }
+        ```
     </section>
 === "Errors"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
@@ -2900,16 +2678,22 @@ LITE ENDPOINT: lite/v1/kline
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
+        **Full Error Response**
         ``` { .json .copy }
         {
+            "request_id":1,
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
         {
-            "code":1003,
-            "message":"Request could not be processed due to malformed syntax",
-            "status":400
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
         }
         ```
     </section>
@@ -2930,7 +2714,7 @@ LITE ENDPOINT: lite/v1/kline
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
             -x '
@@ -2966,7 +2750,7 @@ LITE ENDPOINT: lite/v1/kline
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
             -x '
@@ -3003,7 +2787,7 @@ LITE ENDPOINT: lite/v1/kline
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
@@ -3039,7 +2823,7 @@ LITE ENDPOINT: lite/v1/kline
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
@@ -3076,7 +2860,7 @@ LITE ENDPOINT: lite/v1/kline
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
             -x '
@@ -3112,7 +2896,7 @@ LITE ENDPOINT: lite/v1/kline
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
             -x '
@@ -3149,7 +2933,7 @@ LITE ENDPOINT: lite/v1/kline
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/full" \
             -x '
@@ -3185,7 +2969,7 @@ LITE ENDPOINT: lite/v1/kline
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/lite" \
             -x '
@@ -3216,19 +3000,11 @@ LITE ENDPOINT: lite/v1/funding
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiFundingRateRequest](/../../schemas/api_funding_rate_request)"
-        Lookup the historical funding rate of a perpetual future.<br><br>Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul><br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |start_time<br>`st` |string|False<br>`0`|Start time of funding rate in unix nanoseconds|
-        |end_time<br>`et` |string|False<br>`now()`|End time of funding rate in unix nanoseconds|
-        |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
-        |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
+    -8<- "docs/schemas/api_funding_rate_request.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
+        **Full Request**
         ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp",
@@ -3238,6 +3014,7 @@ LITE ENDPOINT: lite/v1/funding
             "cursor": ""
         }
         ```
+        **Lite Request**
         ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp",
@@ -3250,21 +3027,11 @@ LITE ENDPOINT: lite/v1/funding
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[ApiFundingRateResponse](/../../schemas/api_funding_rate_response)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |result<br>`r` |[FundingRate]|True|The funding rate result set for given interval|
-        |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-        ??? info "[FundingRate](/../../schemas/funding_rate)"
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |funding_rate<br>`fr` |integer|True|The funding rate of the instrument, expressed in centibeeps|
-            |funding_time<br>`ft` |string|True|The funding timestamp of the funding rate, expressed in unix nanoseconds|
-            |mark_price<br>`mp` |string|True|The mark price of the instrument at funding timestamp, expressed in `9` decimals|
+    -8<- "docs/schemas/api_funding_rate_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Response**
         ``` { .json .copy }
         {
             "result": [{
@@ -3274,6 +3041,18 @@ LITE ENDPOINT: lite/v1/funding
                 "mark_price": "65038.01"
             }],
             "next": "Qw0918="
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "i": "BTC_USDT_Perp",
+                "fr": "6.78",
+                "ft": "1697788800000000000",
+                "mp": "65038.01"
+            }],
+            "n": "Qw0918="
         }
         ```
     </section>
@@ -3287,16 +3066,22 @@ LITE ENDPOINT: lite/v1/funding
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
+        **Full Error Response**
         ``` { .json .copy }
         {
+            "request_id":1,
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
         {
-            "code":1003,
-            "message":"Request could not be processed due to malformed syntax",
-            "status":400
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
         }
         ```
     </section>
@@ -3315,7 +3100,7 @@ LITE ENDPOINT: lite/v1/funding
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
             -x '
@@ -3347,7 +3132,7 @@ LITE ENDPOINT: lite/v1/funding
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
             -x '
@@ -3380,7 +3165,7 @@ LITE ENDPOINT: lite/v1/funding
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
@@ -3412,7 +3197,7 @@ LITE ENDPOINT: lite/v1/funding
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
@@ -3445,7 +3230,7 @@ LITE ENDPOINT: lite/v1/funding
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
             -x '
@@ -3477,7 +3262,7 @@ LITE ENDPOINT: lite/v1/funding
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
             -x '
@@ -3510,7 +3295,7 @@ LITE ENDPOINT: lite/v1/funding
             }
             '
             ```
-        !!! example "WebSocket Full"
+        !!! example "JSONRPC Full"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/full" \
             -x '
@@ -3542,7 +3327,7 @@ LITE ENDPOINT: lite/v1/funding
             }
             '
             ```
-        !!! example "WebSocket Lite"
+        !!! example "JSONRPC Lite"
             ``` { .bash .copy }
             wscat -c "wss://market-data.grvt.io/ws/lite" \
             -x '

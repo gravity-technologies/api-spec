@@ -8,60 +8,16 @@ STREAM: v1.mini.s
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSMiniTickerFeedSelectorV1](/../../schemas/ws_mini_ticker_feed_selector_v1)"
-        Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.<br>Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
+    -8<- "docs/schemas/ws_mini_ticker_feed_selector_v1.md"
     ??? info "JSONRPC Wrappers"
-        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
-            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
-            |params<br>`p` |object|True|The parameters for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |result<br>`r` |object|False<br>`null`|The result for the request|
-            |error<br>`e` |Error|False<br>`null`|The error for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            ??? info "[Error](/../../schemas/error)"
-                An error response<br>
-
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |code<br>`c` |integer|True|The error code for the request|
-                |message<br>`m` |string|True|The error message for the request|
-        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
-            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
-            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+        -8<- "docs/schemas/jsonrpc_request.md"
+        -8<- "docs/schemas/jsonrpc_response.md"
+        -8<- "docs/schemas/ws_subscribe_params.md"
+        -8<- "docs/schemas/ws_subscribe_result.md"
+        -8<- "docs/schemas/ws_unsubscribe_params.md"
+        -8<- "docs/schemas/ws_unsubscribe_result.md"
+        -8<- "docs/schemas/ws_subscribe_request_v1_legacy.md"
+        -8<- "docs/schemas/ws_subscribe_response_v1_legacy.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     ???+ question "Subscribe"
@@ -140,30 +96,11 @@ STREAM: v1.mini.s
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSMiniTickerFeedDataV1](/../../schemas/ws_mini_ticker_feed_data_v1)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
-        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
-        |feed<br>`f` |MiniTicker|True|A mini ticker matching the request filter|
-        ??? info "[MiniTicker](/../../schemas/mini_ticker)"
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|False<br>`None`|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument, expressed in `9` decimals|
-            |index_price<br>`ip` |string|False<br>`None`|The index price of the instrument, expressed in `9` decimals|
-            |last_price<br>`lp` |string|False<br>`None`|The last traded price of the instrument (also close price), expressed in `9` decimals|
-            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in base asset decimal units|
-            |mid_price<br>`mp1` |string|False<br>`None`|The mid price of the instrument, expressed in `9` decimals|
-            |best_bid_price<br>`bb` |string|False<br>`None`|The best bid price of the instrument, expressed in `9` decimals|
-            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
-            |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
-            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
+    -8<- "docs/schemas/ws_mini_ticker_feed_data_v1.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Feed Response**
         ``` { .json .copy }
         {
             "stream": "v1.mini.s",
@@ -184,6 +121,7 @@ STREAM: v1.mini.s
             }
         }
         ```
+        **Lite Feed Response**
         ``` { .json .copy }
         {
             "s": "v1.mini.s",
@@ -217,25 +155,11 @@ STREAM: v1.mini.s
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
-    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-        |result<br>`r` |object|False<br>`null`|The result for the request|
-        |error<br>`e` |Error|False<br>`null`|The error for the request|
-        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[Error](/../../schemas/error)"
-            An error response<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |code<br>`c` |integer|True|The error code for the request|
-            |message<br>`m` |string|True|The error message for the request|
+    -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure "Full Error Response"
+    !!! failure "Error"
+        **Full Error Response**
         ``` { .json .copy }
         {
             "jsonrpc": "2.0",
@@ -246,7 +170,7 @@ STREAM: v1.mini.s
             "id": 123
         }
         ```
-    !!! failure "Lite Error Response"
+        **Lite Error Response**
         ``` { .json .copy }
         {
             "j": "2.0",
@@ -257,7 +181,7 @@ STREAM: v1.mini.s
             "i": 123
         }
         ```
-    !!! failure "Legacy Error Response"
+        **Legacy Error Response**
         ``` { .json .copy }
         {
             "code":1002,
@@ -639,60 +563,16 @@ STREAM: v1.mini.d
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSMiniTickerFeedSelectorV1](/../../schemas/ws_mini_ticker_feed_selector_v1)"
-        Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.<br>Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
+    -8<- "docs/schemas/ws_mini_ticker_feed_selector_v1.md"
     ??? info "JSONRPC Wrappers"
-        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
-            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
-            |params<br>`p` |object|True|The parameters for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |result<br>`r` |object|False<br>`null`|The result for the request|
-            |error<br>`e` |Error|False<br>`null`|The error for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            ??? info "[Error](/../../schemas/error)"
-                An error response<br>
-
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |code<br>`c` |integer|True|The error code for the request|
-                |message<br>`m` |string|True|The error message for the request|
-        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
-            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
-            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+        -8<- "docs/schemas/jsonrpc_request.md"
+        -8<- "docs/schemas/jsonrpc_response.md"
+        -8<- "docs/schemas/ws_subscribe_params.md"
+        -8<- "docs/schemas/ws_subscribe_result.md"
+        -8<- "docs/schemas/ws_unsubscribe_params.md"
+        -8<- "docs/schemas/ws_unsubscribe_result.md"
+        -8<- "docs/schemas/ws_subscribe_request_v1_legacy.md"
+        -8<- "docs/schemas/ws_subscribe_response_v1_legacy.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     ???+ question "Subscribe"
@@ -771,30 +651,11 @@ STREAM: v1.mini.d
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSMiniTickerFeedDataV1](/../../schemas/ws_mini_ticker_feed_data_v1)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
-        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
-        |feed<br>`f` |MiniTicker|True|A mini ticker matching the request filter|
-        ??? info "[MiniTicker](/../../schemas/mini_ticker)"
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|False<br>`None`|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument, expressed in `9` decimals|
-            |index_price<br>`ip` |string|False<br>`None`|The index price of the instrument, expressed in `9` decimals|
-            |last_price<br>`lp` |string|False<br>`None`|The last traded price of the instrument (also close price), expressed in `9` decimals|
-            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in base asset decimal units|
-            |mid_price<br>`mp1` |string|False<br>`None`|The mid price of the instrument, expressed in `9` decimals|
-            |best_bid_price<br>`bb` |string|False<br>`None`|The best bid price of the instrument, expressed in `9` decimals|
-            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
-            |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
-            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
+    -8<- "docs/schemas/ws_mini_ticker_feed_data_v1.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Feed Response**
         ``` { .json .copy }
         {
             "stream": "v1.mini.s",
@@ -815,6 +676,7 @@ STREAM: v1.mini.d
             }
         }
         ```
+        **Lite Feed Response**
         ``` { .json .copy }
         {
             "s": "v1.mini.s",
@@ -848,25 +710,11 @@ STREAM: v1.mini.d
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
-    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-        |result<br>`r` |object|False<br>`null`|The result for the request|
-        |error<br>`e` |Error|False<br>`null`|The error for the request|
-        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[Error](/../../schemas/error)"
-            An error response<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |code<br>`c` |integer|True|The error code for the request|
-            |message<br>`m` |string|True|The error message for the request|
+    -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure "Full Error Response"
+    !!! failure "Error"
+        **Full Error Response**
         ``` { .json .copy }
         {
             "jsonrpc": "2.0",
@@ -877,7 +725,7 @@ STREAM: v1.mini.d
             "id": 123
         }
         ```
-    !!! failure "Lite Error Response"
+        **Lite Error Response**
         ``` { .json .copy }
         {
             "j": "2.0",
@@ -888,7 +736,7 @@ STREAM: v1.mini.d
             "i": 123
         }
         ```
-    !!! failure "Legacy Error Response"
+        **Legacy Error Response**
         ``` { .json .copy }
         {
             "code":1002,
@@ -1270,60 +1118,16 @@ STREAM: v1.ticker.s
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSTickerFeedSelectorV1](/../../schemas/ws_ticker_feed_selector_v1)"
-        Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.<br>Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the ticker.</li><li>After the snapshot, the server will only send deltas of the ticker.</li><li>The server will send a delta if any of the fields in the ticker have changed.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
+    -8<- "docs/schemas/ws_ticker_feed_selector_v1.md"
     ??? info "JSONRPC Wrappers"
-        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
-            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
-            |params<br>`p` |object|True|The parameters for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |result<br>`r` |object|False<br>`null`|The result for the request|
-            |error<br>`e` |Error|False<br>`null`|The error for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            ??? info "[Error](/../../schemas/error)"
-                An error response<br>
-
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |code<br>`c` |integer|True|The error code for the request|
-                |message<br>`m` |string|True|The error message for the request|
-        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
-            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
-            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+        -8<- "docs/schemas/jsonrpc_request.md"
+        -8<- "docs/schemas/jsonrpc_response.md"
+        -8<- "docs/schemas/ws_subscribe_params.md"
+        -8<- "docs/schemas/ws_subscribe_result.md"
+        -8<- "docs/schemas/ws_unsubscribe_params.md"
+        -8<- "docs/schemas/ws_unsubscribe_result.md"
+        -8<- "docs/schemas/ws_subscribe_request_v1_legacy.md"
+        -8<- "docs/schemas/ws_subscribe_response_v1_legacy.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     ???+ question "Subscribe"
@@ -1402,45 +1206,11 @@ STREAM: v1.ticker.s
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSTickerFeedDataV1](/../../schemas/ws_ticker_feed_data_v1)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
-        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
-        |feed<br>`f` |Ticker|True|A ticker matching the request filter|
-        ??? info "[Ticker](/../../schemas/ticker)"
-            Derived data such as the below, will not be included by default:<br>  - 24 hour volume (`buyVolume + sellVolume`)<br>  - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>  - 24 hour average trade price (`volumeQ / volumeU`)<br>  - 24 hour average trade volume (`volume / trades`)<br>  - 24 hour percentage change (`24hStatChange / 24hStat`)<br>  - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br><br>To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>Ticker extensions are currently under design to offer you more convenience.<br>These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br><br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|False<br>`None`|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument, expressed in `9` decimals|
-            |index_price<br>`ip` |string|False<br>`None`|The index price of the instrument, expressed in `9` decimals|
-            |last_price<br>`lp` |string|False<br>`None`|The last traded price of the instrument (also close price), expressed in `9` decimals|
-            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in base asset decimal units|
-            |mid_price<br>`mp1` |string|False<br>`None`|The mid price of the instrument, expressed in `9` decimals|
-            |best_bid_price<br>`bb` |string|False<br>`None`|The best bid price of the instrument, expressed in `9` decimals|
-            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
-            |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
-            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
-            |funding_rate_8h_curr<br>`fr` |string|False<br>`None`|The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)|
-            |funding_rate_8h_avg<br>`fr1` |string|False<br>`None`|The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)|
-            |interest_rate<br>`ir` |string|False<br>`None`|The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)|
-            |forward_price<br>`fp` |string|False<br>`None`|[Options] The forward price of the option, expressed in `9` decimals|
-            |buy_volume_24h_b<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in base asset decimal units|
-            |sell_volume_24h_b<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in base asset decimal units|
-            |buy_volume_24h_q<br>`bv1` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units|
-            |sell_volume_24h_q<br>`sv1` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units|
-            |high_price<br>`hp` |string|False<br>`None`|The 24 hour highest traded price of the instrument, expressed in `9` decimals|
-            |low_price<br>`lp1` |string|False<br>`None`|The 24 hour lowest traded price of the instrument, expressed in `9` decimals|
-            |open_price<br>`op` |string|False<br>`None`|The 24 hour first traded price of the instrument, expressed in `9` decimals|
-            |open_interest<br>`oi` |string|False<br>`None`|The open interest in the instrument, expressed in base asset decimal units|
-            |long_short_ratio<br>`ls1` |string|False<br>`None`|The ratio of accounts that are net long vs net short on this instrument|
+    -8<- "docs/schemas/ws_ticker_feed_data_v1.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Feed Response**
         ``` { .json .copy }
         {
             "stream": "v1.ticker.s",
@@ -1474,6 +1244,7 @@ STREAM: v1.ticker.s
             }
         }
         ```
+        **Lite Feed Response**
         ``` { .json .copy }
         {
             "s": "v1.ticker.s",
@@ -1520,25 +1291,11 @@ STREAM: v1.ticker.s
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
-    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-        |result<br>`r` |object|False<br>`null`|The result for the request|
-        |error<br>`e` |Error|False<br>`null`|The error for the request|
-        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[Error](/../../schemas/error)"
-            An error response<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |code<br>`c` |integer|True|The error code for the request|
-            |message<br>`m` |string|True|The error message for the request|
+    -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure "Full Error Response"
+    !!! failure "Error"
+        **Full Error Response**
         ``` { .json .copy }
         {
             "jsonrpc": "2.0",
@@ -1549,7 +1306,7 @@ STREAM: v1.ticker.s
             "id": 123
         }
         ```
-    !!! failure "Lite Error Response"
+        **Lite Error Response**
         ``` { .json .copy }
         {
             "j": "2.0",
@@ -1560,7 +1317,7 @@ STREAM: v1.ticker.s
             "i": 123
         }
         ```
-    !!! failure "Legacy Error Response"
+        **Legacy Error Response**
         ``` { .json .copy }
         {
             "code":1002,
@@ -1942,60 +1699,16 @@ STREAM: v1.ticker.d
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSTickerFeedSelectorV1](/../../schemas/ws_ticker_feed_selector_v1)"
-        Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.<br>Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the ticker.</li><li>After the snapshot, the server will only send deltas of the ticker.</li><li>The server will send a delta if any of the fields in the ticker have changed.</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul><br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
+    -8<- "docs/schemas/ws_ticker_feed_selector_v1.md"
     ??? info "JSONRPC Wrappers"
-        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
-            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
-            |params<br>`p` |object|True|The parameters for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |result<br>`r` |object|False<br>`null`|The result for the request|
-            |error<br>`e` |Error|False<br>`null`|The error for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            ??? info "[Error](/../../schemas/error)"
-                An error response<br>
-
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |code<br>`c` |integer|True|The error code for the request|
-                |message<br>`m` |string|True|The error message for the request|
-        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
-            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
-            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+        -8<- "docs/schemas/jsonrpc_request.md"
+        -8<- "docs/schemas/jsonrpc_response.md"
+        -8<- "docs/schemas/ws_subscribe_params.md"
+        -8<- "docs/schemas/ws_subscribe_result.md"
+        -8<- "docs/schemas/ws_unsubscribe_params.md"
+        -8<- "docs/schemas/ws_unsubscribe_result.md"
+        -8<- "docs/schemas/ws_subscribe_request_v1_legacy.md"
+        -8<- "docs/schemas/ws_subscribe_response_v1_legacy.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     ???+ question "Subscribe"
@@ -2074,45 +1787,11 @@ STREAM: v1.ticker.d
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSTickerFeedDataV1](/../../schemas/ws_ticker_feed_data_v1)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
-        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
-        |feed<br>`f` |Ticker|True|A ticker matching the request filter|
-        ??? info "[Ticker](/../../schemas/ticker)"
-            Derived data such as the below, will not be included by default:<br>  - 24 hour volume (`buyVolume + sellVolume`)<br>  - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)<br>  - 24 hour average trade price (`volumeQ / volumeU`)<br>  - 24 hour average trade volume (`volume / trades`)<br>  - 24 hour percentage change (`24hStatChange / 24hStat`)<br>  - 48 hour statistics (`2 * 24hStat - 24hStatChange`)<br><br>To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.<br>Ticker extensions are currently under design to offer you more convenience.<br>These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.<br><br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |event_time<br>`et` |string|False<br>`None`|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|False<br>`None`|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument, expressed in `9` decimals|
-            |index_price<br>`ip` |string|False<br>`None`|The index price of the instrument, expressed in `9` decimals|
-            |last_price<br>`lp` |string|False<br>`None`|The last traded price of the instrument (also close price), expressed in `9` decimals|
-            |last_size<br>`ls` |string|False<br>`None`|The number of assets traded in the last trade, expressed in base asset decimal units|
-            |mid_price<br>`mp1` |string|False<br>`None`|The mid price of the instrument, expressed in `9` decimals|
-            |best_bid_price<br>`bb` |string|False<br>`None`|The best bid price of the instrument, expressed in `9` decimals|
-            |best_bid_size<br>`bb1` |string|False<br>`None`|The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units|
-            |best_ask_price<br>`ba` |string|False<br>`None`|The best ask price of the instrument, expressed in `9` decimals|
-            |best_ask_size<br>`ba1` |string|False<br>`None`|The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units|
-            |funding_rate_8h_curr<br>`fr` |string|False<br>`None`|The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)|
-            |funding_rate_8h_avg<br>`fr1` |string|False<br>`None`|The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)|
-            |interest_rate<br>`ir` |string|False<br>`None`|The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)|
-            |forward_price<br>`fp` |string|False<br>`None`|[Options] The forward price of the option, expressed in `9` decimals|
-            |buy_volume_24h_b<br>`bv` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in base asset decimal units|
-            |sell_volume_24h_b<br>`sv` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in base asset decimal units|
-            |buy_volume_24h_q<br>`bv1` |string|False<br>`None`|The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units|
-            |sell_volume_24h_q<br>`sv1` |string|False<br>`None`|The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units|
-            |high_price<br>`hp` |string|False<br>`None`|The 24 hour highest traded price of the instrument, expressed in `9` decimals|
-            |low_price<br>`lp1` |string|False<br>`None`|The 24 hour lowest traded price of the instrument, expressed in `9` decimals|
-            |open_price<br>`op` |string|False<br>`None`|The 24 hour first traded price of the instrument, expressed in `9` decimals|
-            |open_interest<br>`oi` |string|False<br>`None`|The open interest in the instrument, expressed in base asset decimal units|
-            |long_short_ratio<br>`ls1` |string|False<br>`None`|The ratio of accounts that are net long vs net short on this instrument|
+    -8<- "docs/schemas/ws_ticker_feed_data_v1.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Feed Response**
         ``` { .json .copy }
         {
             "stream": "v1.ticker.s",
@@ -2146,6 +1825,7 @@ STREAM: v1.ticker.d
             }
         }
         ```
+        **Lite Feed Response**
         ``` { .json .copy }
         {
             "s": "v1.ticker.s",
@@ -2192,25 +1872,11 @@ STREAM: v1.ticker.d
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
-    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-        |result<br>`r` |object|False<br>`null`|The result for the request|
-        |error<br>`e` |Error|False<br>`null`|The error for the request|
-        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[Error](/../../schemas/error)"
-            An error response<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |code<br>`c` |integer|True|The error code for the request|
-            |message<br>`m` |string|True|The error message for the request|
+    -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure "Full Error Response"
+    !!! failure "Error"
+        **Full Error Response**
         ``` { .json .copy }
         {
             "jsonrpc": "2.0",
@@ -2221,7 +1887,7 @@ STREAM: v1.ticker.d
             "id": 123
         }
         ```
-    !!! failure "Lite Error Response"
+        **Lite Error Response**
         ``` { .json .copy }
         {
             "j": "2.0",
@@ -2232,7 +1898,7 @@ STREAM: v1.ticker.d
             "i": 123
         }
         ```
-    !!! failure "Legacy Error Response"
+        **Legacy Error Response**
         ``` { .json .copy }
         {
             "code":1002,
@@ -2615,61 +2281,16 @@ STREAM: v1.book.s
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSOrderbookLevelsFeedSelectorV1](/../../schemas/ws_orderbook_levels_feed_selector_v1)"
-        Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.<br>Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul><br><br>Subscription Pattern:<ul><li>Delta - `instrument@rate`</li><li>Snapshot - `instrument@rate-depth`</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul><br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (50, 100, 500, 1000)<br>Snapshot (500, 1000)|
-        |depth<br>`d` |integer|False<br>`'0'`|Depth of the order book to be retrieved<br>Delta(0 - `unlimited`)<br>Snapshot(10, 50, 100, 500)|
+    -8<- "docs/schemas/ws_orderbook_levels_feed_selector_v1.md"
     ??? info "JSONRPC Wrappers"
-        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
-            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
-            |params<br>`p` |object|True|The parameters for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |result<br>`r` |object|False<br>`null`|The result for the request|
-            |error<br>`e` |Error|False<br>`null`|The error for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            ??? info "[Error](/../../schemas/error)"
-                An error response<br>
-
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |code<br>`c` |integer|True|The error code for the request|
-                |message<br>`m` |string|True|The error message for the request|
-        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
-            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
-            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+        -8<- "docs/schemas/jsonrpc_request.md"
+        -8<- "docs/schemas/jsonrpc_response.md"
+        -8<- "docs/schemas/ws_subscribe_params.md"
+        -8<- "docs/schemas/ws_subscribe_result.md"
+        -8<- "docs/schemas/ws_unsubscribe_params.md"
+        -8<- "docs/schemas/ws_unsubscribe_result.md"
+        -8<- "docs/schemas/ws_subscribe_request_v1_legacy.md"
+        -8<- "docs/schemas/ws_subscribe_response_v1_legacy.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     ???+ question "Subscribe"
@@ -2748,35 +2369,11 @@ STREAM: v1.book.s
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSOrderbookLevelsFeedDataV1](/../../schemas/ws_orderbook_levels_feed_data_v1)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
-        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
-        |feed<br>`f` |OrderbookLevels|True|An orderbook levels object matching the request filter|
-        ??? info "[OrderbookLevels](/../../schemas/orderbook_levels)"
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |bids<br>`b` |[OrderbookLevel]|True|The list of best bids up till query depth|
-            |asks<br>`a` |[OrderbookLevel]|True|The list of best asks up till query depth|
-            ??? info "[OrderbookLevel](/../../schemas/orderbook_level)"
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
-                |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
-                |num_orders<br>`no` |integer|True|The number of open orders at this level|
-            ??? info "[OrderbookLevel](/../../schemas/orderbook_level)"
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
-                |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
-                |num_orders<br>`no` |integer|True|The number of open orders at this level|
+    -8<- "docs/schemas/ws_orderbook_levels_feed_data_v1.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Feed Response**
         ``` { .json .copy }
         {
             "stream": "v1.book.s",
@@ -2798,6 +2395,7 @@ STREAM: v1.book.s
             }
         }
         ```
+        **Lite Feed Response**
         ``` { .json .copy }
         {
             "s": "v1.book.s",
@@ -2833,25 +2431,11 @@ STREAM: v1.book.s
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
         |3031|400|Depth is invalid|
-    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-        |result<br>`r` |object|False<br>`null`|The result for the request|
-        |error<br>`e` |Error|False<br>`null`|The error for the request|
-        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[Error](/../../schemas/error)"
-            An error response<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |code<br>`c` |integer|True|The error code for the request|
-            |message<br>`m` |string|True|The error message for the request|
+    -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure "Full Error Response"
+    !!! failure "Error"
+        **Full Error Response**
         ``` { .json .copy }
         {
             "jsonrpc": "2.0",
@@ -2862,7 +2446,7 @@ STREAM: v1.book.s
             "id": 123
         }
         ```
-    !!! failure "Lite Error Response"
+        **Lite Error Response**
         ``` { .json .copy }
         {
             "j": "2.0",
@@ -2873,7 +2457,7 @@ STREAM: v1.book.s
             "i": 123
         }
         ```
-    !!! failure "Legacy Error Response"
+        **Legacy Error Response**
         ``` { .json .copy }
         {
             "code":1002,
@@ -3255,61 +2839,16 @@ STREAM: v1.book.d
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSOrderbookLevelsFeedSelectorV1](/../../schemas/ws_orderbook_levels_feed_selector_v1)"
-        Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.<br>Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.<br><br>The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul><br><br>Subscription Pattern:<ul><li>Delta - `instrument@rate`</li><li>Snapshot - `instrument@rate-depth`</li></ul><br><br>Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul><br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (50, 100, 500, 1000)<br>Snapshot (500, 1000)|
-        |depth<br>`d` |integer|False<br>`'0'`|Depth of the order book to be retrieved<br>Delta(0 - `unlimited`)<br>Snapshot(10, 50, 100, 500)|
+    -8<- "docs/schemas/ws_orderbook_levels_feed_selector_v1.md"
     ??? info "JSONRPC Wrappers"
-        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
-            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
-            |params<br>`p` |object|True|The parameters for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |result<br>`r` |object|False<br>`null`|The result for the request|
-            |error<br>`e` |Error|False<br>`null`|The error for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            ??? info "[Error](/../../schemas/error)"
-                An error response<br>
-
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |code<br>`c` |integer|True|The error code for the request|
-                |message<br>`m` |string|True|The error message for the request|
-        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
-            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
-            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+        -8<- "docs/schemas/jsonrpc_request.md"
+        -8<- "docs/schemas/jsonrpc_response.md"
+        -8<- "docs/schemas/ws_subscribe_params.md"
+        -8<- "docs/schemas/ws_subscribe_result.md"
+        -8<- "docs/schemas/ws_unsubscribe_params.md"
+        -8<- "docs/schemas/ws_unsubscribe_result.md"
+        -8<- "docs/schemas/ws_subscribe_request_v1_legacy.md"
+        -8<- "docs/schemas/ws_subscribe_response_v1_legacy.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     ???+ question "Subscribe"
@@ -3388,35 +2927,11 @@ STREAM: v1.book.d
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSOrderbookLevelsFeedDataV1](/../../schemas/ws_orderbook_levels_feed_data_v1)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
-        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
-        |feed<br>`f` |OrderbookLevels|True|An orderbook levels object matching the request filter|
-        ??? info "[OrderbookLevels](/../../schemas/orderbook_levels)"
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |bids<br>`b` |[OrderbookLevel]|True|The list of best bids up till query depth|
-            |asks<br>`a` |[OrderbookLevel]|True|The list of best asks up till query depth|
-            ??? info "[OrderbookLevel](/../../schemas/orderbook_level)"
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
-                |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
-                |num_orders<br>`no` |integer|True|The number of open orders at this level|
-            ??? info "[OrderbookLevel](/../../schemas/orderbook_level)"
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
-                |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
-                |num_orders<br>`no` |integer|True|The number of open orders at this level|
+    -8<- "docs/schemas/ws_orderbook_levels_feed_data_v1.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Feed Response**
         ``` { .json .copy }
         {
             "stream": "v1.book.s",
@@ -3438,6 +2953,7 @@ STREAM: v1.book.d
             }
         }
         ```
+        **Lite Feed Response**
         ``` { .json .copy }
         {
             "s": "v1.book.s",
@@ -3472,25 +2988,11 @@ STREAM: v1.book.d
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
-    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-        |result<br>`r` |object|False<br>`null`|The result for the request|
-        |error<br>`e` |Error|False<br>`null`|The error for the request|
-        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[Error](/../../schemas/error)"
-            An error response<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |code<br>`c` |integer|True|The error code for the request|
-            |message<br>`m` |string|True|The error message for the request|
+    -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure "Full Error Response"
+    !!! failure "Error"
+        **Full Error Response**
         ``` { .json .copy }
         {
             "jsonrpc": "2.0",
@@ -3501,7 +3003,7 @@ STREAM: v1.book.d
             "id": 123
         }
         ```
-    !!! failure "Lite Error Response"
+        **Lite Error Response**
         ``` { .json .copy }
         {
             "j": "2.0",
@@ -3512,7 +3014,7 @@ STREAM: v1.book.d
             "i": 123
         }
         ```
-    !!! failure "Legacy Error Response"
+        **Legacy Error Response**
         ``` { .json .copy }
         {
             "code":1002,
@@ -3895,60 +3397,16 @@ STREAM: v1.trade
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSTradeFeedSelectorV1](/../../schemas/ws_trade_feed_selector_v1)"
-        Subscribes to a stream of Public Trades for an instrument.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |limit<br>`l` |integer|True|The limit to query for. Valid values are (50, 200, 500, 1000). Default is 50|
+    -8<- "docs/schemas/ws_trade_feed_selector_v1.md"
     ??? info "JSONRPC Wrappers"
-        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
-            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
-            |params<br>`p` |object|True|The parameters for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |result<br>`r` |object|False<br>`null`|The result for the request|
-            |error<br>`e` |Error|False<br>`null`|The error for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            ??? info "[Error](/../../schemas/error)"
-                An error response<br>
-
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |code<br>`c` |integer|True|The error code for the request|
-                |message<br>`m` |string|True|The error message for the request|
-        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
-            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
-            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+        -8<- "docs/schemas/jsonrpc_request.md"
+        -8<- "docs/schemas/jsonrpc_response.md"
+        -8<- "docs/schemas/ws_subscribe_params.md"
+        -8<- "docs/schemas/ws_subscribe_result.md"
+        -8<- "docs/schemas/ws_unsubscribe_params.md"
+        -8<- "docs/schemas/ws_unsubscribe_result.md"
+        -8<- "docs/schemas/ws_subscribe_request_v1_legacy.md"
+        -8<- "docs/schemas/ws_subscribe_response_v1_legacy.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     ???+ question "Subscribe"
@@ -4027,39 +3485,11 @@ STREAM: v1.trade
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSTradeFeedDataV1](/../../schemas/ws_trade_feed_data_v1)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
-        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
-        |feed<br>`f` |Trade|True|A public trade matching the request filter|
-        ??? info "[Trade](/../../schemas/trade)"
-            All private RFQs and Private AXEs will be filtered out from the responses<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
-            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |is_taker_buyer<br>`it` |boolean|True|If taker was the buyer on the trade|
-            |size<br>`s` |string|True|The number of assets being traded, expressed in base asset decimal units|
-            |price<br>`p` |string|True|The traded price, expressed in `9` decimals|
-            |mark_price<br>`mp` |string|True|The mark price of the instrument at point of trade, expressed in `9` decimals|
-            |index_price<br>`ip` |string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
-            |interest_rate<br>`ir` |string|True|The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)|
-            |forward_price<br>`fp` |string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
-            |trade_id<br>`ti` |string|True|A trade identifier, globally unique, and monotonically increasing (not by `1`).<br>All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.<br>`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.|
-            |venue<br>`v` |Venue|True|The venue where the trade occurred|
-            ??? info "[Venue](/../../schemas/venue)"
-                The list of Trading Venues that are supported on the GRVT exchange<br>
-
-                |Value| Description |
-                |-|-|
-                |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
-                |`RFQ` = 2|the trade is cleared on the RFQ venue|
+    -8<- "docs/schemas/ws_trade_feed_data_v1.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Feed Response**
         ``` { .json .copy }
         {
             "stream": "v1.trade",
@@ -4080,6 +3510,7 @@ STREAM: v1.trade
             }
         }
         ```
+        **Lite Feed Response**
         ``` { .json .copy }
         {
             "s": "v1.trade",
@@ -4113,25 +3544,11 @@ STREAM: v1.trade
         |3000|400|Instrument is invalid|
         |3011|400|Limit exceeds min or max value|
         |3013|400|Exact limit value is not supported|
-    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-        |result<br>`r` |object|False<br>`null`|The result for the request|
-        |error<br>`e` |Error|False<br>`null`|The error for the request|
-        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[Error](/../../schemas/error)"
-            An error response<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |code<br>`c` |integer|True|The error code for the request|
-            |message<br>`m` |string|True|The error message for the request|
+    -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure "Full Error Response"
+    !!! failure "Error"
+        **Full Error Response**
         ``` { .json .copy }
         {
             "jsonrpc": "2.0",
@@ -4142,7 +3559,7 @@ STREAM: v1.trade
             "id": 123
         }
         ```
-    !!! failure "Lite Error Response"
+        **Lite Error Response**
         ``` { .json .copy }
         {
             "j": "2.0",
@@ -4153,7 +3570,7 @@ STREAM: v1.trade
             "i": 123
         }
         ```
-    !!! failure "Legacy Error Response"
+        **Legacy Error Response**
         ``` { .json .copy }
         {
             "code":1002,
@@ -4536,89 +3953,16 @@ STREAM: v1.candle
 
 === "Feed Selector"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSCandlestickFeedSelectorV1](/../../schemas/ws_candlestick_feed_selector_v1)"
-        Subscribes to a stream of Kline/Candlestick updates for an instrument. A Kline is uniquely identified by its open time.<br>A new Kline is published every interval (if it exists). Upon subscription, the server will send the 5 most recent Kline for the requested interval.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |interval<br>`i1` |CandlestickInterval|True|The interval of each candlestick|
-        |type<br>`t` |CandlestickType|True|The type of candlestick data to retrieve|
-        ??? info "[CandlestickInterval](/../../schemas/candlestick_interval)"
-            |Value| Description |
-            |-|-|
-            |`CI_1_M` = 1|1 minute|
-            |`CI_3_M` = 2|3 minutes|
-            |`CI_5_M` = 3|5 minutes|
-            |`CI_15_M` = 4|15 minutes|
-            |`CI_30_M` = 5|30 minutes|
-            |`CI_1_H` = 6|1 hour|
-            |`CI_2_H` = 7|2 hour|
-            |`CI_4_H` = 8|4 hour|
-            |`CI_6_H` = 9|6 hour|
-            |`CI_8_H` = 10|8 hour|
-            |`CI_12_H` = 11|12 hour|
-            |`CI_1_D` = 12|1 day|
-            |`CI_3_D` = 13|3 days|
-            |`CI_5_D` = 14|5 days|
-            |`CI_1_W` = 15|1 week|
-            |`CI_2_W` = 16|2 weeks|
-            |`CI_3_W` = 17|3 weeks|
-            |`CI_4_W` = 18|4 weeks|
-        ??? info "[CandlestickType](/../../schemas/candlestick_type)"
-            |Value| Description |
-            |-|-|
-            |`TRADE` = 1|Tracks traded prices|
-            |`MARK` = 2|Tracks mark prices|
-            |`INDEX` = 3|Tracks index prices|
-            |`MID` = 4|Tracks book mid prices|
+    -8<- "docs/schemas/ws_candlestick_feed_selector_v1.md"
     ??? info "JSONRPC Wrappers"
-        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
-            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
-            |params<br>`p` |object|True|The parameters for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-            |result<br>`r` |object|False<br>`null`|The result for the request|
-            |error<br>`e` |Error|False<br>`null`|The error for the request|
-            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            ??? info "[Error](/../../schemas/error)"
-                An error response<br>
-
-                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-                |-|-|-|-|
-                |code<br>`c` |integer|True|The error code for the request|
-                |message<br>`m` |string|True|The error message for the request|
-        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
-            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
-            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+        -8<- "docs/schemas/jsonrpc_request.md"
+        -8<- "docs/schemas/jsonrpc_response.md"
+        -8<- "docs/schemas/ws_subscribe_params.md"
+        -8<- "docs/schemas/ws_subscribe_result.md"
+        -8<- "docs/schemas/ws_unsubscribe_params.md"
+        -8<- "docs/schemas/ws_unsubscribe_result.md"
+        -8<- "docs/schemas/ws_subscribe_request_v1_legacy.md"
+        -8<- "docs/schemas/ws_subscribe_response_v1_legacy.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     ???+ question "Subscribe"
@@ -4697,31 +4041,11 @@ STREAM: v1.candle
     </section>
 === "Feed Data"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "[WSCandlestickFeedDataV1](/../../schemas/ws_candlestick_feed_data_v1)"
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |stream<br>`s` |string|True|Stream name|
-        |selector<br>`s1` |string|True|Primary selector|
-        |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
-        |feed<br>`f` |Candlestick|True|A candlestick entry matching the request filters|
-        ??? info "[Candlestick](/../../schemas/candlestick)"
-            <br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |open_time<br>`ot` |string|True|Open time of kline bar in unix nanoseconds|
-            |close_time<br>`ct` |string|True|Close time of kline bar in unix nanosecond|
-            |open<br>`o` |string|True|The open price, expressed in underlying currency resolution units|
-            |close<br>`c` |string|True|The close price, expressed in underlying currency resolution units|
-            |high<br>`h` |string|True|The high price, expressed in underlying currency resolution units|
-            |low<br>`l` |string|True|The low price, expressed in underlying currency resolution units|
-            |volume_b<br>`vb` |string|True|The underlying volume transacted, expressed in base asset decimal units|
-            |volume_q<br>`vq` |string|True|The quote volume transacted, expressed in quote asset decimal units|
-            |trades<br>`t` |integer|True|The number of trades transacted|
-            |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
+    -8<- "docs/schemas/ws_candlestick_feed_data_v1.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
+        **Full Feed Response**
         ``` { .json .copy }
         {
             "stream": "v1.candle",
@@ -4741,6 +4065,7 @@ STREAM: v1.candle
             }
         }
         ```
+        **Lite Feed Response**
         ``` { .json .copy }
         {
             "s": "v1.candle",
@@ -4773,25 +4098,11 @@ STREAM: v1.candle
         |3000|400|Instrument is invalid|
         |3040|400|Candlestick interval is invalid|
         |3041|400|Candlestick type is invalid|
-    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
-        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
-
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
-        |result<br>`r` |object|False<br>`null`|The result for the request|
-        |error<br>`e` |Error|False<br>`null`|The error for the request|
-        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        ??? info "[Error](/../../schemas/error)"
-            An error response<br>
-
-            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-            |-|-|-|-|
-            |code<br>`c` |integer|True|The error code for the request|
-            |message<br>`m` |string|True|The error message for the request|
+    -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure "Full Error Response"
+    !!! failure "Error"
+        **Full Error Response**
         ``` { .json .copy }
         {
             "jsonrpc": "2.0",
@@ -4802,7 +4113,7 @@ STREAM: v1.candle
             "id": 123
         }
         ```
-    !!! failure "Lite Error Response"
+        **Lite Error Response**
         ``` { .json .copy }
         {
             "j": "2.0",
@@ -4813,7 +4124,7 @@ STREAM: v1.candle
             "i": 123
         }
         ```
-    !!! failure "Legacy Error Response"
+        **Legacy Error Response**
         ``` { .json .copy }
         {
             "code":1002,
