@@ -8,7 +8,7 @@
         |main_account_id<br>`ma` |string|True|The main account id|
         |underlying_multiplier<br>`um` |string|True|Underlying multiplier|
         |market_share_multiplier<br>`ms` |string|True|Market share multiplier|
-        |bid_fast_market_multiplier<br>`bf` |number|True|Fast market multiplier|
-        |ask_fast_market_multiplier<br>`af` |number|True|Fast market multiplier|
+        |bid_fast_market_multiplier<br>`bf` |integer|True|Fast market multiplier|
+        |ask_fast_market_multiplier<br>`af` |integer|True|Fast market multiplier|
         |liquidity_score<br>`ls` |string|True|Liquidity score|
         |calculate_at<br>`ca` |string|True|The time when the snapshot was calculated|

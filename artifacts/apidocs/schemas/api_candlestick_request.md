@@ -8,7 +8,7 @@
     |type<br>`t` |CandlestickType|True|The type of candlestick data to retrieve|
     |start_time<br>`st` |string|False<br>`0`|Start time of kline data in unix nanoseconds|
     |end_time<br>`et` |string|False<br>`now()`|End time of kline data in unix nanoseconds|
-    |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
+    |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
     |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
     ??? info "[CandlestickInterval](/../../schemas/candlestick_interval)"
         |Value| Description |

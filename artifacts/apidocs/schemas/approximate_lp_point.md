@@ -3,4 +3,4 @@
     |-|-|-|-|
     |main_account_id<br>`ma` |string|True|The main account id|
     |liquidity_score<br>`ls` |string|True|Liquidity score|
-    |rank<br>`r` |number|True|The rank of user in the LP leaderboard|
+    |rank<br>`r` |integer|True|The rank of user in the LP leaderboard|

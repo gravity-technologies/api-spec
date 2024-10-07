@@ -90,7 +90,7 @@ def write_stream(
 
     write_stream_feed_selector(ctx, md, stream)
     write_stream_feed_data(ctx, md, stream)
-    write_errors(ctx, md, stream.on_subscribe_errors)
+    write_stream_errors(ctx, md, stream.on_subscribe_errors)
     write_stream_rpc_try_it_out(ctx, md, gateway, stream)
     md.writeln('<hr class="solid">')
 
@@ -105,25 +105,53 @@ def write_stream_feed_selector(
     # Left Section
     write_left_section(md)
     write_struct_schema(ctx, md, ctx.struct_map[stream.feed_selector], True)
-    write_struct_schema(ctx, md, ctx.struct_map["WSRequestV1"], False)
-    write_struct_schema(ctx, md, ctx.struct_map["WSResponseV1"], False)
+    md.writeln('??? info "JSONRPC Wrappers"')
+    md.indent()
+    write_struct_schema(ctx, md, ctx.struct_map["JSONRPCRequest"], False)
+    write_struct_schema(ctx, md, ctx.struct_map["JSONRPCResponse"], False)
+    write_struct_schema(ctx, md, ctx.struct_map["WSSubscribeRequestV1Legacy"], False)
+    write_struct_schema(ctx, md, ctx.struct_map["WSSubscribeResponseV1Legacy"], False)
+    md.dedent()
     write_section_end(md)
 
     # Right Section
     selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
     write_right_section(md)
-    md.writeln('!!! question "Query"')
+
+    md.writeln('???+ question "Subscribe"')
     md.indent()
-    md.writeln("**JSON RPC Request**")
+    md.writeln("**Full Subscribe Request**")
     write_code_block(md, "json")
-    write_stream_feed_request(md, stream, selector, True)
+    write_stream_subscribe_request(ctx, md, stream, selector, True)
     md.writeln("```")
+    md.writeln("**Full Subscribe Response**")
     write_code_block(md, "json")
-    write_stream_feed_request(md, stream, selector, False)
+    write_stream_subscribe_response(ctx, md, stream, selector, True)
     md.writeln("```")
-    md.writeln("**JSON RPC Response**")
-    write_stream_feed_response(md, stream, selector)
     md.dedent()
+
+    md.writeln('??? question "Unsubscribe"')
+    md.indent()
+    md.writeln("**Full Unsubscribe Request**")
+    write_code_block(md, "json")
+    write_stream_unsubscribe_request(ctx, md, stream, selector, True)
+    md.writeln("```")
+    md.writeln("**Full Unsubscribe Response**")
+    write_code_block(md, "json")
+    write_stream_unsubscribe_response(ctx, md, stream, selector, True)
+    md.writeln("```")
+    md.dedent()
+
+    md.writeln('??? question "Legacy Subscribe"')
+    md.indent()
+    md.writeln("**Full Subscribe Request**")
+    write_code_block(md, "json")
+    write_stream_legacy_feed_request(md, stream, selector, True)
+    md.writeln("```")
+    md.writeln("**Full Subscribe Response**")
+    write_stream_legacy_feed_response(md, stream, selector)
+    md.dedent()
+
     write_section_end(md)
 
     # Footer
@@ -145,7 +173,82 @@ def get_selector(ctx: CodegenCtx, struct: Struct) -> str:
     return selector_str
 
 
-def write_stream_feed_request(
+def write_stream_subscribe_request(
+    ctx: CodegenCtx, md: MarkdownWriter, stream: Stream, selector: str, is_full: bool
+) -> None:
+    params = ctx.struct_map["WSSubscribeParams"]
+    params.fields[0].example = f'"{stream.channel}"'
+    params.fields[1].example = f'"{selector}"'
+    req = ctx.struct_map["JSONRPCRequest"]
+    req.fields[1].example = '"subscribe"'
+    write_struct_example_with_generics(
+        ctx,
+        md,
+        req,
+        True,
+        is_full,
+        params,
+    )
+
+
+def write_stream_unsubscribe_request(
+    ctx: CodegenCtx, md: MarkdownWriter, stream: Stream, selector: str, is_full: bool
+) -> None:
+    params = ctx.struct_map["WSUnsubscribeParams"]
+    params.fields[0].example = f'"{stream.channel}"'
+    params.fields[1].example = f'"{selector}"'
+    req = ctx.struct_map["JSONRPCRequest"]
+    req.fields[1].example = '"unsubscribe"'
+    write_struct_example_with_generics(
+        ctx,
+        md,
+        req,
+        True,
+        is_full,
+        params,
+    )
+
+
+def write_stream_subscribe_response(
+    ctx: CodegenCtx, md: MarkdownWriter, stream: Stream, selector: str, is_full: bool
+) -> None:
+    params = ctx.struct_map["WSSubscribeResult"]
+    params.fields[0].example = f'"{stream.channel}"'
+    params.fields[1].example = f'"{selector}"'
+    params.fields[2].example = "[]"
+    resp = ctx.struct_map["JSONRPCResponse"]
+    errField = resp.fields.pop(2)  # Remove Error
+    write_struct_example_with_generics(
+        ctx,
+        md,
+        resp,
+        True,
+        is_full,
+        params,
+    )
+    resp.fields.insert(2, errField)
+
+
+def write_stream_unsubscribe_response(
+    ctx: CodegenCtx, md: MarkdownWriter, stream: Stream, selector: str, is_full: bool
+) -> None:
+    params = ctx.struct_map["WSUnsubscribeResult"]
+    params.fields[0].example = f'"{stream.channel}"'
+    params.fields[1].example = f'"{selector}"'
+    resp = ctx.struct_map["JSONRPCResponse"]
+    errField = resp.fields.pop(2)  # Remove Error
+    write_struct_example_with_generics(
+        ctx,
+        md,
+        resp,
+        True,
+        is_full,
+        params,
+    )
+    resp.fields.insert(2, errField)
+
+
+def write_stream_legacy_feed_request(
     md: MarkdownWriter, stream: Stream, selector: str, is_full: bool
 ) -> None:
     md.writeln("{")
@@ -164,7 +267,9 @@ def write_stream_feed_request(
     md.writeln("}")
 
 
-def write_stream_feed_response(md: MarkdownWriter, stream: Stream, selector: str) -> None:
+def write_stream_legacy_feed_response(
+    md: MarkdownWriter, stream: Stream, selector: str
+) -> None:
     write_code_block(md, "json")
     md.writeln("{")
     md.indent()
@@ -217,39 +322,98 @@ def write_stream_rpc_try_it_out(
     if stream.auth_required:
         md.writeln('-8<- "sections/auth.md"')
 
-    # Main Section (Full)
-    write_left_section(md, "50%")
     for endpoint in gateway.endpoints:
-        md.writeln(f'!!! example "Try {endpoint.name.upper()} Full"')
+        # Environment Tab
+        md.writeln(f'=== "{endpoint.name.upper()}"')
         md.indent()
-        write_code_block(md, "bash")
-        md.writeln(f'wscat -c "wss://{endpoint.url}/ws" \\')
-        if stream.auth_required:
-            md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
-        md.writeln("-x '")
-        selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
-        write_stream_feed_request(md, stream, selector, True)
-        md.writeln("' -w 360")
-        md.writeln("```")
-        md.dedent()
-    write_section_end(md)
 
-    # Main Section (Lite)
-    write_right_section(md, "50%")
-    for endpoint in gateway.endpoints:
-        md.writeln(f'!!! example "Try {endpoint.name.upper()} Lite"')
-        md.indent()
-        write_code_block(md, "bash")
-        md.writeln(f'wscat -c "wss://{endpoint.url}/ws" \\')
-        if stream.auth_required:
-            md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
-        md.writeln("-x '")
-        selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
-        write_stream_feed_request(md, stream, selector, False)
-        md.writeln("' -w 360")
-        md.writeln("```")
+        for is_full in [True, False]:
+            full_or_lite = "Full" if is_full else "Lite"
+            url_suffix = "full" if is_full else "lite"
+            if is_full:
+                write_left_section(md, "50%")
+            else:
+                write_right_section(md, "50%")
+
+            # Subscribe
+            md.writeln(f'!!! example "Subscribe {full_or_lite}"')
+            md.indent()
+            write_code_block(md, "bash")
+            md.writeln(f'wscat -c "wss://{endpoint.url}/ws/{url_suffix}" \\')
+            if stream.auth_required:
+                md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
+            md.writeln("-x '")
+            selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
+            write_stream_subscribe_request(ctx, md, stream, selector, is_full)
+            md.writeln("' -w 360")
+            md.writeln("```")
+            md.dedent()
+
+            # Unsubscribe
+            md.writeln(f'!!! example "Unsubscribe {full_or_lite}"')
+            md.indent()
+            write_code_block(md, "bash")
+            md.writeln(f'wscat -c "wss://{endpoint.url}/ws/{url_suffix}" \\')
+            if stream.auth_required:
+                md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
+            md.writeln("-x '")
+            selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
+            write_stream_unsubscribe_request(ctx, md, stream, selector, is_full)
+            md.writeln("' -w 360")
+            md.writeln("```")
+            md.dedent()
+
+            # Legacy Subscribe
+            md.writeln(f'!!! example "Legacy Subscribe {full_or_lite}"')
+            md.indent()
+            write_code_block(md, "bash")
+            md.writeln(f'wscat -c "wss://{endpoint.url}/ws" \\')
+            if stream.auth_required:
+                md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
+            md.writeln("-x '")
+            selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
+            write_stream_legacy_feed_request(md, stream, selector, is_full)
+            md.writeln("' -w 360")
+            md.writeln("```")
+            md.dedent()
+
+            write_section_end(md)
+
         md.dedent()
-    write_section_end(md)
+
+    # # Main Section (Full)
+    # write_left_section(md, "50%")
+    # for endpoint in gateway.endpoints:
+    #     md.writeln(f'!!! example "Try {endpoint.name.upper()} Full"')
+    #     md.indent()
+    #     write_code_block(md, "bash")
+    #     md.writeln(f'wscat -c "wss://{endpoint.url}/ws" \\')
+    #     if stream.auth_required:
+    #         md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
+    #     md.writeln("-x '")
+    #     selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
+    #     write_stream_legacy_feed_request(md, stream, selector, True)
+    #     md.writeln("' -w 360")
+    #     md.writeln("```")
+    #     md.dedent()
+    # write_section_end(md)
+
+    # # Main Section (Lite)
+    # write_right_section(md, "50%")
+    # for endpoint in gateway.endpoints:
+    #     md.writeln(f'!!! example "Try {endpoint.name.upper()} Lite"')
+    #     md.indent()
+    #     write_code_block(md, "bash")
+    #     md.writeln(f'wscat -c "wss://{endpoint.url}/ws" \\')
+    #     if stream.auth_required:
+    #         md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
+    #     md.writeln("-x '")
+    #     selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
+    #     write_stream_legacy_feed_request(md, stream, selector, False)
+    #     md.writeln("' -w 360")
+    #     md.writeln("```")
+    #     md.dedent()
+    # write_section_end(md)
 
     # Footer
     md.dedent()
@@ -338,47 +502,102 @@ def write_rpc_try_it_out(
     if rpc.auth_required:
         md.writeln('-8<- "sections/auth.md"')
 
+    for endpoint in gateway.endpoints:
+        # Environment Tab
+        md.writeln(f'=== "{endpoint.name.upper()}"')
+        md.indent()
+
+        for is_full in [True, False]:
+            request_struct = ctx.struct_map[rpc.request]
+            full_or_lite = "Full" if is_full else "Lite"
+            url_suffix = "full" if is_full else "lite"
+            if is_full:
+                write_left_section(md, "50%")
+            else:
+                write_right_section(md, "50%")
+
+            # REST Request
+            md.writeln(f'!!! example "REST {full_or_lite}"')
+            md.indent()
+            write_code_block(md, "bash")
+            md.writeln(
+                f"curl --location 'https://{endpoint.url}/{url_suffix}/v{rpc.version}{rpc.route}' \\"
+            )
+            if rpc.auth_required:
+                md.writeln('--header "Cookie: $GRVT_COOKIE" \\')
+            md.write("--data '")
+            write_struct_example(ctx, md, request_struct, True, is_full)
+            md.writeln("'")
+            md.writeln("```")
+            md.dedent()
+
+            # WebSocket Request
+            md.writeln(f'!!! example "WebSocket {full_or_lite}"')
+            md.indent()
+            write_code_block(md, "bash")
+            md.writeln(f'wscat -c "wss://{endpoint.url}/ws/{url_suffix}" \\')
+            if rpc.auth_required:
+                md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
+            md.writeln("-x '")
+            req = ctx.struct_map["JSONRPCRequest"]
+            req.fields[1].example = f'"v{rpc.version}{rpc.route}"'
+            write_struct_example_with_generics(
+                ctx,
+                md,
+                req,
+                True,
+                is_full,
+                request_struct,
+            )
+            md.writeln("' -w 360")
+            md.writeln("```")
+            md.dedent()
+
+            write_section_end(md)
+
+        md.dedent()
+
     # Main Section (Full)
-    write_left_section(md, "50%")
-    for endpoint in gateway.endpoints:
-        md.writeln(f'!!! example "Try {endpoint.name.upper()} Full"')
-        md.indent()
-        write_code_block(md, "bash")
-        md.writeln(
-            f"curl --location 'https://{endpoint.url}/full/v{rpc.version}{rpc.route}' \\"
-        )
-        if rpc.auth_required:
-            md.writeln('--header "Cookie: $GRVT_COOKIE" \\')
+    # write_left_section(md, "50%")
+    # for endpoint in gateway.endpoints:
+    #     md.writeln(f'!!! example "Try {endpoint.name.upper()} Full"')
+    #     md.indent()
+    #     write_code_block(md, "bash")
+    #     md.writeln(
+    #         f"curl --location 'https://{endpoint.url}/full/v{rpc.version}{rpc.route}' \\"
+    #     )
+    #     if rpc.auth_required:
+    #         md.writeln('--header "Cookie: $GRVT_COOKIE" \\')
 
-        request_struct = ctx.struct_map[rpc.request]
-        md.write("--data '")
-        write_struct_example(ctx, md, request_struct, True)
-        md.writeln("'")
+    #     request_struct = ctx.struct_map[rpc.request]
+    #     md.write("--data '")
+    #     write_struct_example(ctx, md, request_struct, True)
+    #     md.writeln("'")
 
-        md.writeln("```")
-        md.dedent()
-    write_section_end(md)
+    #     md.writeln("```")
+    #     md.dedent()
+    # write_section_end(md)
 
-    # Main Section (Lite)
-    write_right_section(md, "50%")
-    for endpoint in gateway.endpoints:
-        md.writeln(f'!!! example "Try {endpoint.name.upper()} Lite"')
-        md.indent()
-        write_code_block(md, "bash")
-        md.writeln(
-            f"curl --location 'https://{endpoint.url}/lite/v{rpc.version}{rpc.route}' \\"
-        )
-        if rpc.auth_required:
-            md.writeln('--header "Cookie: $GRVT_COOKIE" \\')
+    # # Main Section (Lite)
+    # write_right_section(md, "50%")
+    # for endpoint in gateway.endpoints:
+    #     md.writeln(f'!!! example "Try {endpoint.name.upper()} Lite"')
+    #     md.indent()
+    #     write_code_block(md, "bash")
+    #     md.writeln(
+    #         f"curl --location 'https://{endpoint.url}/lite/v{rpc.version}{rpc.route}' \\"
+    #     )
+    #     if rpc.auth_required:
+    #         md.writeln('--header "Cookie: $GRVT_COOKIE" \\')
 
-        request_struct = ctx.struct_map[rpc.request]
-        md.write("--data '")
-        write_struct_example(ctx, md, request_struct, True, False)
-        md.writeln("'")
+    #     request_struct = ctx.struct_map[rpc.request]
+    #     md.write("--data '")
+    #     write_struct_example(ctx, md, request_struct, True, False)
+    #     md.writeln("'")
 
-        md.writeln("```")
-        md.dedent()
-    write_section_end(md)
+    #     md.writeln("```")
+    #     md.dedent()
+    # write_section_end(md)
 
     # Footer
     md.dedent()
@@ -396,6 +615,17 @@ def write_struct_example(
     is_root: bool,
     is_full: bool = True,
 ) -> None:
+    write_struct_example_with_generics(ctx, md, struct, is_root, is_full)
+
+
+def write_struct_example_with_generics(
+    ctx: CodegenCtx,
+    md: MarkdownWriter,
+    struct: Struct,
+    is_root: bool,
+    is_full: bool = True,
+    generic: Struct | None = None,
+) -> None:
     md.writeln("{")
     md.indent()
 
@@ -405,8 +635,12 @@ def write_struct_example(
         md.write(f'"{fn}": ')
         for _ in range(field.array_depth):
             md.write("[")
-        if field.json_type in ctx.struct_map:
-            write_struct_example(ctx, md, ctx.struct_map[field.json_type], False, is_full)
+        if field.json_type == "object":
+            write_struct_example_with_generics(ctx, md, generic, False, is_full, generic)
+        elif field.json_type in ctx.struct_map:
+            write_struct_example_with_generics(
+                ctx, md, ctx.struct_map[field.json_type], False, is_full, generic
+            )
         else:
             md.write(get_field_example(ctx, struct, field))
         for _ in range(field.array_depth):
@@ -474,6 +708,88 @@ def write_enum_schema(md: MarkdownWriter, enum: Enum, is_root: bool = False) -> 
     md.writeln("|-|-|")
     for value in enum.values:
         md.writeln(f"|`{value.name}` = {value.value}|{"<br>".join(value.comment)}|")
+    md.dedent()
+
+
+def write_stream_errors(ctx: CodegenCtx, md: MarkdownWriter, errors: list[Err]) -> None:
+    # Header
+    md.writeln('=== "Errors"')
+    md.indent()
+
+    # Left Section
+    write_left_section(md)
+    md.writeln('!!! info "Error Codes"')
+    md.indent()
+    md.writeln("|Code|HttpStatus| Description |")
+    md.writeln("|-|-|-|")
+    for error in errors:
+        md.writeln(f"|{error.code}|{error.status}|{error.message}|")
+    md.dedent()
+    write_struct_schema(ctx, md, ctx.struct_map["JSONRPCResponse"], False)
+    write_section_end(md)
+
+    # Right Section
+    write_right_section(md)
+
+    md.writeln('!!! failure "Full Error Response"')
+    md.indent()
+    write_code_block(md, "json")
+    resp = ctx.struct_map["JSONRPCResponse"]
+    resultField = resp.fields.pop(1)  # Remove Result
+    error = errors[0]
+    params = ctx.struct_map["Error"]
+    params.fields[0].example = f'"{error.code}"'
+    params.fields[1].example = f'"{error.message}"'
+    write_struct_example_with_generics(
+        ctx,
+        md,
+        resp,
+        True,
+        True,
+        params,
+    )
+    resp.fields.insert(1, resultField)
+    md.writeln("```")
+    md.dedent()
+
+    md.writeln('!!! failure "Lite Error Response"')
+    md.indent()
+    write_code_block(md, "json")
+    resp = ctx.struct_map["JSONRPCResponse"]
+    resultField = resp.fields.pop(1)  # Remove Result
+    error = errors[0]
+    params = ctx.struct_map["Error"]
+    params.fields[0].example = f'"{error.code}"'
+    params.fields[1].example = f'"{error.message}"'
+    write_struct_example_with_generics(
+        ctx,
+        md,
+        resp,
+        True,
+        False,
+        params,
+    )
+    resp.fields.insert(1, resultField)
+    md.writeln("```")
+    md.dedent()
+
+    md.writeln('!!! failure "Legacy Error Response"')
+    md.indent()
+    write_code_block(md, "json")
+    error = errors[0]
+    md.writeln("{")
+    md.indent()
+    md.writeln(f'"code":{error.code},')
+    md.writeln(f'"message":"{error.message}",')
+    md.writeln(f'"status":{error.status}')
+    md.dedent()
+    md.writeln("}")
+    md.writeln("```")
+    md.dedent()
+
+    write_section_end(md)
+
+    # Footer
     md.dedent()
 
 

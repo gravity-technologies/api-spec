@@ -16,5 +16,5 @@
         |low<br>`l` |string|True|The low price, expressed in underlying currency resolution units|
         |volume_b<br>`vb` |string|True|The underlying volume transacted, expressed in base asset decimal units|
         |volume_q<br>`vq` |string|True|The quote volume transacted, expressed in quote asset decimal units|
-        |trades<br>`t` |number|True|The number of trades transacted|
+        |trades<br>`t` |integer|True|The number of trades transacted|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|

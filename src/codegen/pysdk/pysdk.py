@@ -44,6 +44,8 @@ def semantic_and_json_to_python_type(semantic_type: str, json_type: str) -> str:
         "int": "int",
         "int8": "int",
         "uint8": "int",
+        "int16": "int",
+        "uint16": "int",
         "int32": "int",
         "uint32": "int",
         "int64": "int",

@@ -15,31 +15,108 @@ STREAM: v1.order
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
         |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.order",
+                "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.order",
+                "subs": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.order",
+                "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.order",
+                "unsubs": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -49,16 +126,7 @@ STREAM: v1.order
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -120,9 +188,9 @@ STREAM: v1.order
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
                 |r<br>`r` |string|True|Signature R|
                 |s<br>`s1` |string|True|Signature S|
-                |v<br>`v` |number|True|Signature V|
+                |v<br>`v` |integer|True|Signature V|
                 |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
-                |nonce<br>`n` |number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
+                |nonce<br>`n` |integer|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
             ??? info "[OrderMetadata](/../../schemas/order_metadata)"
                 Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
@@ -272,170 +340,445 @@ STREAM: v1.order
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3020|400|Sub account ID must be an uint64 integer|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1000",
+                "message": "You need to authenticate prior to using this functionality"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1000",
+                "m": "You need to authenticate prior to using this functionality"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
-        {
-            "code":1001,
-            "message":"You are not authorized to access this functionality",
-            "status":403
-        }
-        {
-            "code":1002,
-            "message":"Internal Server Error",
-            "status":500
-        }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3020,
-            "message":"Sub account ID must be an uint64 integer",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.order",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.order",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.order",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.order",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.order",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.order",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.order",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.order",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.order",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.order",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.order",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.order",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.order",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.order",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.order",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.order",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.order",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.order",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.order",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.order",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.order",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.order",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.order",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.order",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.order",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ### Order State
 ```
@@ -451,31 +794,108 @@ STREAM: v1.state
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
         |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.state",
+                "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.state",
+                "subs": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.state",
+                "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.state",
+                "unsubs": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -485,16 +905,7 @@ STREAM: v1.state
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -619,170 +1030,445 @@ STREAM: v1.state
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3020|400|Sub account ID must be an uint64 integer|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1000",
+                "message": "You need to authenticate prior to using this functionality"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1000",
+                "m": "You need to authenticate prior to using this functionality"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
-        {
-            "code":1001,
-            "message":"You are not authorized to access this functionality",
-            "status":403
-        }
-        {
-            "code":1002,
-            "message":"Internal Server Error",
-            "status":500
-        }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3020,
-            "message":"Sub account ID must be an uint64 integer",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.state",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.state",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.state",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.state",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.state",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.state",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.state",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.state",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.state",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.state",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.state",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.state",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.state",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.state",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.state",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.state",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.state",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.state",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.state",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.state",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.state",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.state",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.state",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.state",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.state",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ## Execution
 ### Fill
@@ -799,31 +1485,108 @@ STREAM: v1.fill
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The sub account ID to request for|
         |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.fill",
+                "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.fill",
+                "subs": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.fill",
+                "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.fill",
+                "unsubs": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -833,16 +1596,7 @@ STREAM: v1.fill
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -962,170 +1716,445 @@ STREAM: v1.fill
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3020|400|Sub account ID must be an uint64 integer|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1000",
+                "message": "You need to authenticate prior to using this functionality"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1000",
+                "m": "You need to authenticate prior to using this functionality"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
-        {
-            "code":1001,
-            "message":"You are not authorized to access this functionality",
-            "status":403
-        }
-        {
-            "code":1002,
-            "message":"Internal Server Error",
-            "status":500
-        }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3020,
-            "message":"Sub account ID must be an uint64 integer",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.fill",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.fill",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.fill",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.fill",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.fill",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.fill",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.fill",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.fill",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.fill",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.fill",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.fill",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.fill",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.fill",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.fill",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.fill",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.fill",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.fill",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.fill",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.fill",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.fill",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.fill",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.fill",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.fill",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.fill",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.fill",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ### Positions
 ```
@@ -1141,31 +2170,108 @@ STREAM: v1.position
         |-|-|-|-|
         |sub_account_id<br>`sa` |string|True|The subaccount ID to filter by|
         |instrument<br>`i` |string|False<br>`'all'`|The instrument filter to apply.|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.position",
+                "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.position",
+                "subs": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.position",
+                "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.position",
+                "unsubs": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -1175,16 +2281,7 @@ STREAM: v1.position
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -1282,170 +2379,445 @@ STREAM: v1.position
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3020|400|Sub account ID must be an uint64 integer|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1000",
+                "message": "You need to authenticate prior to using this functionality"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1000",
+                "m": "You need to authenticate prior to using this functionality"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1000,
             "message":"You need to authenticate prior to using this functionality",
             "status":401
         }
-        {
-            "code":1001,
-            "message":"You are not authorized to access this functionality",
-            "status":403
-        }
-        {
-            "code":1002,
-            "message":"Internal Server Error",
-            "status":500
-        }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3020,
-            "message":"Sub account ID must be an uint64 integer",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.position",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.position",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.position",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.position",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.position",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.position",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.position",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.position",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.position",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.position",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.position",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.position",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.position",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.position",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.position",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.position",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.position",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.position",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.position",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.position",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.position",
+                    "selectors": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.position",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.position",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.position",
+                    "s1": [""$GRVT_SUB_ACCOUNT_ID"-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.position",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ## Transfer
 ### Deposit
@@ -1461,31 +2833,108 @@ STREAM: v1.deposit
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |main_account_id<br>`ma` |string|True|The main account ID to request for|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.deposit",
+                "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.deposit",
+                "subs": [""$GRVT_MAIN_ACCOUNT_ID""],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.deposit",
+                "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.deposit",
+                "unsubs": [""$GRVT_MAIN_ACCOUNT_ID""]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -1495,16 +2944,7 @@ STREAM: v1.deposit
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.deposit",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -1583,150 +3023,445 @@ STREAM: v1.deposit
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1001",
+                "message": "You are not authorized to access this functionality"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1001",
+                "m": "You are not authorized to access this functionality"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1001,
             "message":"You are not authorized to access this functionality",
             "status":403
         }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.deposit",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.deposit",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.deposit",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.deposit",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.deposit",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.deposit",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.deposit",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.deposit",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.deposit",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.deposit",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.deposit",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.deposit",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.deposit",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.deposit",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.deposit",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.deposit",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.deposit",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.deposit",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.deposit",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.deposit",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.deposit",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.deposit",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.deposit",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.deposit",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.deposit",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.deposit",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.deposit",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.deposit",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.deposit",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.deposit",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.deposit",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.deposit",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ### Transfer
 ```
@@ -1742,31 +3477,108 @@ STREAM: v1.transfer
         |-|-|-|-|
         |main_account_id<br>`ma` |string|True|The main account ID to request for|
         |sub_account_id<br>`sa` |string|False<br>`'0'`|The sub account ID to request for|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.transfer",
+                "selectors": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.transfer",
+                "subs": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.transfer",
+                "selectors": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.transfer",
+                "unsubs": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -1776,16 +3588,7 @@ STREAM: v1.transfer
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.transfer",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -1834,9 +3637,9 @@ STREAM: v1.transfer
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
                 |r<br>`r` |string|True|Signature R|
                 |s<br>`s1` |string|True|Signature S|
-                |v<br>`v` |number|True|Signature V|
+                |v<br>`v` |integer|True|Signature V|
                 |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
-                |nonce<br>`n` |number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
+                |nonce<br>`n` |integer|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -1897,155 +3700,445 @@ STREAM: v1.transfer
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
         |3020|400|Sub account ID must be an uint64 integer|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1001",
+                "message": "You are not authorized to access this functionality"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1001",
+                "m": "You are not authorized to access this functionality"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1001,
             "message":"You are not authorized to access this functionality",
             "status":403
         }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3020,
-            "message":"Sub account ID must be an uint64 integer",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.transfer",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.transfer",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.transfer",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.transfer",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.transfer",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.transfer",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.transfer",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.transfer",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.transfer",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.transfer",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.transfer",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.transfer",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.transfer",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.transfer",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.transfer",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.transfer",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.transfer",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.transfer",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.transfer",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.transfer",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.transfer",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.transfer",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.transfer",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.transfer",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.transfer",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.transfer",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.transfer",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.transfer",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.transfer",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.transfer",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.transfer",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID"-"$GRVT_SUB_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.transfer",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ### Withdrawal
 ```
@@ -2060,31 +4153,108 @@ STREAM: v1.withdrawal
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |main_account_id<br>`ma` |string|True|The main account ID to request for|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.withdrawal",
+                "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.withdrawal",
+                "subs": [""$GRVT_MAIN_ACCOUNT_ID""],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.withdrawal",
+                "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.withdrawal",
+                "unsubs": [""$GRVT_MAIN_ACCOUNT_ID""]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -2094,16 +4264,7 @@ STREAM: v1.withdrawal
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.withdrawal",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -2150,9 +4311,9 @@ STREAM: v1.withdrawal
                 |signer<br>`s` |string|True|The address (public key) of the wallet signing the payload|
                 |r<br>`r` |string|True|Signature R|
                 |s<br>`s1` |string|True|Signature S|
-                |v<br>`v` |number|True|Signature V|
+                |v<br>`v` |integer|True|Signature V|
                 |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
-                |nonce<br>`n` |number|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
+                |nonce<br>`n` |integer|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -2208,148 +4369,443 @@ STREAM: v1.withdrawal
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1001",
+                "message": "You are not authorized to access this functionality"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1001",
+                "m": "You are not authorized to access this functionality"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1001,
             "message":"You are not authorized to access this functionality",
             "status":403
         }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
     -8<- "sections/auth.md"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.withdrawal",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.withdrawal",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.withdrawal",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.withdrawal",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.withdrawal",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.withdrawal",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.testnet.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.withdrawal",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://trades.grvt.io/ws" \
-        -H "Cookie: $GRVT_COOKIE" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.withdrawal",
-            "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.withdrawal",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.withdrawal",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.withdrawal",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.withdrawal",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.withdrawal",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.withdrawal",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.withdrawal",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.withdrawal",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.withdrawal",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.withdrawal",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.withdrawal",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.withdrawal",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.withdrawal",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.withdrawal",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.withdrawal",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.withdrawal",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.withdrawal",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.withdrawal",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.withdrawal",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.withdrawal",
+                    "selectors": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.withdrawal",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.withdrawal",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.withdrawal",
+                    "s1": [""$GRVT_MAIN_ACCOUNT_ID""]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.withdrawal",
+                "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
