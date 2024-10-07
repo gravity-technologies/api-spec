@@ -4,5 +4,5 @@
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-    |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (50, 100, 500, 1000)<br>Snapshot (500, 1000)|
-    |depth<br>`d` |number|False<br>`'0'`|Depth of the order book to be retrieved<br>Delta(0 - `unlimited`)<br>Snapshot(10, 50, 100, 500)|
+    |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (50, 100, 500, 1000)<br>Snapshot (500, 1000)|
+    |depth<br>`d` |integer|False<br>`'0'`|Depth of the order book to be retrieved<br>Delta(0 - `unlimited`)<br>Snapshot(10, 50, 100, 500)|

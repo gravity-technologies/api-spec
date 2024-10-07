@@ -4,4 +4,4 @@
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-    |depth<br>`d` |number|True|Depth of the order book to be retrieved (10, 50, 100, 500)|
+    |depth<br>`d` |integer|True|Depth of the order book to be retrieved (10, 50, 100, 500)|

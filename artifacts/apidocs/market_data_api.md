@@ -46,8 +46,8 @@ LITE ENDPOINT: lite/v1/instrument
             |kind<br>`k` |Kind|True|The kind of instrument|
             |venues<br>`v` |[Venue]|True|Venues that this instrument can be traded at|
             |settlement_period<br>`sp1` |InstrumentSettlementPeriod|True|The settlement period of the instrument|
-            |base_decimals<br>`bd` |number|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
-            |quote_decimals<br>`qd` |number|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
+            |base_decimals<br>`bd` |integer|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
+            |quote_decimals<br>`qd` |integer|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
             |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
             |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
             |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
@@ -147,74 +147,202 @@ LITE ENDPOINT: lite/v1/instrument
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/instrument' \
-        --data '{
-            "instrument": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/instrument' \
-        --data '{
-            "instrument": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/full/v1/instrument' \
-        --data '{
-            "instrument": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/full/v1/instrument' \
-        --data '{
-            "instrument": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/instrument' \
-        --data '{
-            "i": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/instrument' \
-        --data '{
-            "i": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/lite/v1/instrument' \
-        --data '{
-            "i": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/lite/v1/instrument' \
-        --data '{
-            "i": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/instrument' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/instrument",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/instrument' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/instrument",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/instrument' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/instrument",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/instrument' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/instrument",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/instrument' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/instrument",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/instrument' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/instrument",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/instrument' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/instrument",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/instrument' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/instrument",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ### Get All Instruments
 ```
@@ -260,8 +388,8 @@ LITE ENDPOINT: lite/v1/all_instruments
             |kind<br>`k` |Kind|True|The kind of instrument|
             |venues<br>`v` |[Venue]|True|Venues that this instrument can be traded at|
             |settlement_period<br>`sp1` |InstrumentSettlementPeriod|True|The settlement period of the instrument|
-            |base_decimals<br>`bd` |number|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
-            |quote_decimals<br>`qd` |number|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
+            |base_decimals<br>`bd` |integer|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
+            |quote_decimals<br>`qd` |integer|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
             |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
             |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
             |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
@@ -355,74 +483,202 @@ LITE ENDPOINT: lite/v1/all_instruments
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/all_instruments' \
-        --data '{
-            "is_active": true
-        }
-        '
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/all_instruments' \
-        --data '{
-            "is_active": true
-        }
-        '
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/full/v1/all_instruments' \
-        --data '{
-            "is_active": true
-        }
-        '
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/full/v1/all_instruments' \
-        --data '{
-            "is_active": true
-        }
-        '
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/all_instruments' \
-        --data '{
-            "ia": true
-        }
-        '
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/all_instruments' \
-        --data '{
-            "ia": true
-        }
-        '
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/lite/v1/all_instruments' \
-        --data '{
-            "ia": true
-        }
-        '
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/lite/v1/all_instruments' \
-        --data '{
-            "ia": true
-        }
-        '
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/all_instruments' \
+            --data '{
+                "is_active": true
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/all_instruments",
+                "params": {
+                    "is_active": true
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/all_instruments' \
+            --data '{
+                "ia": true
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/all_instruments",
+                "p": {
+                    "ia": true
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/all_instruments' \
+            --data '{
+                "is_active": true
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/all_instruments",
+                "params": {
+                    "is_active": true
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/all_instruments' \
+            --data '{
+                "ia": true
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/all_instruments",
+                "p": {
+                    "ia": true
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/all_instruments' \
+            --data '{
+                "is_active": true
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/all_instruments",
+                "params": {
+                    "is_active": true
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/all_instruments' \
+            --data '{
+                "ia": true
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/all_instruments",
+                "p": {
+                    "ia": true
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/all_instruments' \
+            --data '{
+                "is_active": true
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/all_instruments",
+                "params": {
+                    "is_active": true
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/all_instruments' \
+            --data '{
+                "ia": true
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/all_instruments",
+                "p": {
+                    "ia": true
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ### Get Filtered Instruments
 ```
@@ -441,7 +697,7 @@ LITE ENDPOINT: lite/v1/instruments
         |base<br>`b` |[Currency]|False<br>`all`|The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned|
         |quote<br>`q` |[Currency]|False<br>`all`|The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned|
         |is_active<br>`ia` |boolean|False<br>`false`|Request for active instruments only|
-        |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 100000|
+        |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 100000|
         ??? info "[Kind](/../../schemas/kind)"
             The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -509,8 +765,8 @@ LITE ENDPOINT: lite/v1/instruments
             |kind<br>`k` |Kind|True|The kind of instrument|
             |venues<br>`v` |[Venue]|True|Venues that this instrument can be traded at|
             |settlement_period<br>`sp1` |InstrumentSettlementPeriod|True|The settlement period of the instrument|
-            |base_decimals<br>`bd` |number|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
-            |quote_decimals<br>`qd` |number|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
+            |base_decimals<br>`bd` |integer|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
+            |quote_decimals<br>`qd` |integer|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
             |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
             |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
             |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
@@ -604,106 +860,266 @@ LITE ENDPOINT: lite/v1/instruments
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/instruments' \
-        --data '{
-            "kind": ["PERPETUAL"],
-            "base": ["BTC", "ETH"],
-            "quote": ["USDT", "USDC"],
-            "is_active": true,
-            "limit": 500
-        }
-        '
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/instruments' \
-        --data '{
-            "kind": ["PERPETUAL"],
-            "base": ["BTC", "ETH"],
-            "quote": ["USDT", "USDC"],
-            "is_active": true,
-            "limit": 500
-        }
-        '
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/full/v1/instruments' \
-        --data '{
-            "kind": ["PERPETUAL"],
-            "base": ["BTC", "ETH"],
-            "quote": ["USDT", "USDC"],
-            "is_active": true,
-            "limit": 500
-        }
-        '
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/full/v1/instruments' \
-        --data '{
-            "kind": ["PERPETUAL"],
-            "base": ["BTC", "ETH"],
-            "quote": ["USDT", "USDC"],
-            "is_active": true,
-            "limit": 500
-        }
-        '
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/instruments' \
-        --data '{
-            "k": ["PERPETUAL"],
-            "b": ["BTC", "ETH"],
-            "q": ["USDT", "USDC"],
-            "ia": true,
-            "l": 500
-        }
-        '
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/instruments' \
-        --data '{
-            "k": ["PERPETUAL"],
-            "b": ["BTC", "ETH"],
-            "q": ["USDT", "USDC"],
-            "ia": true,
-            "l": 500
-        }
-        '
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/lite/v1/instruments' \
-        --data '{
-            "k": ["PERPETUAL"],
-            "b": ["BTC", "ETH"],
-            "q": ["USDT", "USDC"],
-            "ia": true,
-            "l": 500
-        }
-        '
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/lite/v1/instruments' \
-        --data '{
-            "k": ["PERPETUAL"],
-            "b": ["BTC", "ETH"],
-            "q": ["USDT", "USDC"],
-            "ia": true,
-            "l": 500
-        }
-        '
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/instruments' \
+            --data '{
+                "kind": ["PERPETUAL"],
+                "base": ["BTC", "ETH"],
+                "quote": ["USDT", "USDC"],
+                "is_active": true,
+                "limit": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/instruments",
+                "params": {
+                    "kind": ["PERPETUAL"],
+                    "base": ["BTC", "ETH"],
+                    "quote": ["USDT", "USDC"],
+                    "is_active": true,
+                    "limit": 500
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/instruments' \
+            --data '{
+                "k": ["PERPETUAL"],
+                "b": ["BTC", "ETH"],
+                "q": ["USDT", "USDC"],
+                "ia": true,
+                "l": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/instruments",
+                "p": {
+                    "k": ["PERPETUAL"],
+                    "b": ["BTC", "ETH"],
+                    "q": ["USDT", "USDC"],
+                    "ia": true,
+                    "l": 500
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/instruments' \
+            --data '{
+                "kind": ["PERPETUAL"],
+                "base": ["BTC", "ETH"],
+                "quote": ["USDT", "USDC"],
+                "is_active": true,
+                "limit": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/instruments",
+                "params": {
+                    "kind": ["PERPETUAL"],
+                    "base": ["BTC", "ETH"],
+                    "quote": ["USDT", "USDC"],
+                    "is_active": true,
+                    "limit": 500
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/instruments' \
+            --data '{
+                "k": ["PERPETUAL"],
+                "b": ["BTC", "ETH"],
+                "q": ["USDT", "USDC"],
+                "ia": true,
+                "l": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/instruments",
+                "p": {
+                    "k": ["PERPETUAL"],
+                    "b": ["BTC", "ETH"],
+                    "q": ["USDT", "USDC"],
+                    "ia": true,
+                    "l": 500
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/instruments' \
+            --data '{
+                "kind": ["PERPETUAL"],
+                "base": ["BTC", "ETH"],
+                "quote": ["USDT", "USDC"],
+                "is_active": true,
+                "limit": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/instruments",
+                "params": {
+                    "kind": ["PERPETUAL"],
+                    "base": ["BTC", "ETH"],
+                    "quote": ["USDT", "USDC"],
+                    "is_active": true,
+                    "limit": 500
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/instruments' \
+            --data '{
+                "k": ["PERPETUAL"],
+                "b": ["BTC", "ETH"],
+                "q": ["USDT", "USDC"],
+                "ia": true,
+                "l": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/instruments",
+                "p": {
+                    "k": ["PERPETUAL"],
+                    "b": ["BTC", "ETH"],
+                    "q": ["USDT", "USDC"],
+                    "ia": true,
+                    "l": 500
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/instruments' \
+            --data '{
+                "kind": ["PERPETUAL"],
+                "base": ["BTC", "ETH"],
+                "quote": ["USDT", "USDC"],
+                "is_active": true,
+                "limit": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/instruments",
+                "params": {
+                    "kind": ["PERPETUAL"],
+                    "base": ["BTC", "ETH"],
+                    "quote": ["USDT", "USDC"],
+                    "is_active": true,
+                    "limit": 500
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/instruments' \
+            --data '{
+                "k": ["PERPETUAL"],
+                "b": ["BTC", "ETH"],
+                "q": ["USDT", "USDC"],
+                "ia": true,
+                "l": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/instruments",
+                "p": {
+                    "k": ["PERPETUAL"],
+                    "b": ["BTC", "ETH"],
+                    "q": ["USDT", "USDC"],
+                    "ia": true,
+                    "l": 500
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ## Ticker
 ### Mini Ticker
@@ -805,74 +1221,202 @@ LITE ENDPOINT: lite/v1/mini
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/mini' \
-        --data '{
-            "instrument": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/mini' \
-        --data '{
-            "instrument": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/full/v1/mini' \
-        --data '{
-            "instrument": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/full/v1/mini' \
-        --data '{
-            "instrument": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/mini' \
-        --data '{
-            "i": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/mini' \
-        --data '{
-            "i": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/lite/v1/mini' \
-        --data '{
-            "i": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/lite/v1/mini' \
-        --data '{
-            "i": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/mini' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/mini",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/mini' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/mini",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/mini' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/mini",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/mini' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/mini",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/mini' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/mini",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/mini' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/mini",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/mini' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/mini",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/mini' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/mini",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ### Ticker
 ```
@@ -1001,74 +1545,202 @@ LITE ENDPOINT: lite/v1/ticker
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/ticker' \
-        --data '{
-            "instrument": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/ticker' \
-        --data '{
-            "instrument": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/full/v1/ticker' \
-        --data '{
-            "instrument": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/full/v1/ticker' \
-        --data '{
-            "instrument": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/ticker' \
-        --data '{
-            "i": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/ticker' \
-        --data '{
-            "i": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/lite/v1/ticker' \
-        --data '{
-            "i": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/lite/v1/ticker' \
-        --data '{
-            "i": "BTC_USDT_Perp"
-        }
-        '
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/ticker' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/ticker",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/ticker' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/ticker",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/ticker' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/ticker",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/ticker' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/ticker",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/ticker' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/ticker",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/ticker' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/ticker",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/ticker' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/ticker",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/ticker' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/ticker",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ## Orderbook
 ### Orderbook Levels
@@ -1085,7 +1757,7 @@ LITE ENDPOINT: lite/v1/book
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |depth<br>`d` |number|True|Depth of the order book to be retrieved (10, 50, 100, 500)|
+        |depth<br>`d` |integer|True|Depth of the order book to be retrieved (10, 50, 100, 500)|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -1120,13 +1792,13 @@ LITE ENDPOINT: lite/v1/book
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
                 |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
-                |num_orders<br>`no` |number|True|The number of open orders at this level|
+                |num_orders<br>`no` |integer|True|The number of open orders at this level|
             ??? info "[OrderbookLevel](/../../schemas/orderbook_level)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
                 |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
-                |num_orders<br>`no` |number|True|The number of open orders at this level|
+                |num_orders<br>`no` |integer|True|The number of open orders at this level|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -1191,82 +1863,218 @@ LITE ENDPOINT: lite/v1/book
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/book' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "depth": 50
-        }
-        '
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/book' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "depth": 50
-        }
-        '
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/full/v1/book' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "depth": 50
-        }
-        '
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/full/v1/book' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "depth": 50
-        }
-        '
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/book' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "d": 50
-        }
-        '
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/book' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "d": 50
-        }
-        '
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/lite/v1/book' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "d": 50
-        }
-        '
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/lite/v1/book' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "d": 50
-        }
-        '
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/book' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "depth": 50
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/book",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "depth": 50
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/book' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "d": 50
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/book",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "d": 50
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/book' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "depth": 50
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/book",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "depth": 50
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/book' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "d": 50
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/book",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "d": 50
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/book' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "depth": 50
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/book",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "depth": 50
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/book' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "d": 50
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/book",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "d": 50
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/book' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "depth": 50
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/book",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "depth": 50
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/book' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "d": 50
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/book",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "d": 50
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ## Trade
 ### Trade
@@ -1283,7 +2091,7 @@ LITE ENDPOINT: lite/v1/trade
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |limit<br>`l` |number|True|The limit to query for. Defaults to 500; Max 1000|
+        |limit<br>`l` |integer|True|The limit to query for. Defaults to 500; Max 1000|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -1374,82 +2182,218 @@ LITE ENDPOINT: lite/v1/trade
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/trade' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "limit": 500
-        }
-        '
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trade' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "limit": 500
-        }
-        '
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/full/v1/trade' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "limit": 500
-        }
-        '
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/full/v1/trade' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "limit": 500
-        }
-        '
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/trade' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "l": 500
-        }
-        '
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/trade' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "l": 500
-        }
-        '
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/lite/v1/trade' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "l": 500
-        }
-        '
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/lite/v1/trade' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "l": 500
-        }
-        '
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/trade' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "limit": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/trade",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "limit": 500
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/trade' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "l": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/trade",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "l": 500
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trade' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "limit": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/trade",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "limit": 500
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/trade' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "l": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/trade",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "l": 500
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/trade' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "limit": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/trade",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "limit": 500
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/trade' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "l": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/trade",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "l": 500
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/trade' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "limit": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/trade",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "limit": 500
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/trade' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "l": 500
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/trade",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "l": 500
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ### Trade History
 ```
@@ -1467,7 +2411,7 @@ LITE ENDPOINT: lite/v1/trade_history
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |start_time<br>`st` |string|False<br>`0`|The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned|
         |end_time<br>`et` |string|False<br>`now()`|The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned|
-        |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
+        |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
         |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -1567,106 +2511,266 @@ LITE ENDPOINT: lite/v1/trade_history
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/trade_history' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trade_history' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/full/v1/trade_history' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/full/v1/trade_history' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/trade_history' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        '
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/trade_history' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        '
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/lite/v1/trade_history' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        '
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/lite/v1/trade_history' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        '
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/trade_history' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/trade_history",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/trade_history' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/trade_history",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trade_history' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/trade_history",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/trade_history' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/trade_history",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/trade_history' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/trade_history",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/trade_history' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/trade_history",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/trade_history' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/trade_history",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/trade_history' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/trade_history",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ## Candlestick
 ### Candlestick
@@ -1687,7 +2791,7 @@ LITE ENDPOINT: lite/v1/kline
         |type<br>`t` |CandlestickType|True|The type of candlestick data to retrieve|
         |start_time<br>`st` |string|False<br>`0`|Start time of kline data in unix nanoseconds|
         |end_time<br>`et` |string|False<br>`now()`|End time of kline data in unix nanoseconds|
-        |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
+        |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
         |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
         ??? info "[CandlestickInterval](/../../schemas/candlestick_interval)"
             |Value| Description |
@@ -1763,7 +2867,7 @@ LITE ENDPOINT: lite/v1/kline
             |low<br>`l` |string|True|The low price, expressed in underlying currency resolution units|
             |volume_b<br>`vb` |string|True|The underlying volume transacted, expressed in base asset decimal units|
             |volume_q<br>`vq` |string|True|The quote volume transacted, expressed in quote asset decimal units|
-            |trades<br>`t` |number|True|The number of trades transacted|
+            |trades<br>`t` |integer|True|The number of trades transacted|
             |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -1810,122 +2914,298 @@ LITE ENDPOINT: lite/v1/kline
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/kline' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "interval": "CI_1_M",
-            "type": "TRADE",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/kline' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "interval": "CI_1_M",
-            "type": "TRADE",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/full/v1/kline' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "interval": "CI_1_M",
-            "type": "TRADE",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/full/v1/kline' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "interval": "CI_1_M",
-            "type": "TRADE",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/kline' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "i1": "CI_1_M",
-            "t": "TRADE",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        '
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/kline' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "i1": "CI_1_M",
-            "t": "TRADE",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        '
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/lite/v1/kline' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "i1": "CI_1_M",
-            "t": "TRADE",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        '
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/lite/v1/kline' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "i1": "CI_1_M",
-            "t": "TRADE",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        '
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/kline' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "interval": "CI_1_M",
+                "type": "TRADE",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/kline",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "interval": "CI_1_M",
+                    "type": "TRADE",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/kline' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "i1": "CI_1_M",
+                "t": "TRADE",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/kline",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "i1": "CI_1_M",
+                    "t": "TRADE",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/kline' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "interval": "CI_1_M",
+                "type": "TRADE",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/kline",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "interval": "CI_1_M",
+                    "type": "TRADE",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/kline' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "i1": "CI_1_M",
+                "t": "TRADE",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/kline",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "i1": "CI_1_M",
+                    "t": "TRADE",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/kline' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "interval": "CI_1_M",
+                "type": "TRADE",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/kline",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "interval": "CI_1_M",
+                    "type": "TRADE",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/kline' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "i1": "CI_1_M",
+                "t": "TRADE",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/kline",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "i1": "CI_1_M",
+                    "t": "TRADE",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/kline' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "interval": "CI_1_M",
+                "type": "TRADE",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/kline",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "interval": "CI_1_M",
+                    "type": "TRADE",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/kline' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "i1": "CI_1_M",
+                "t": "TRADE",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/kline",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "i1": "CI_1_M",
+                    "t": "TRADE",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ## Settlement
 ### Funding Rate
@@ -1944,7 +3224,7 @@ LITE ENDPOINT: lite/v1/funding
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
         |start_time<br>`st` |string|False<br>`0`|Start time of funding rate in unix nanoseconds|
         |end_time<br>`et` |string|False<br>`now()`|End time of funding rate in unix nanoseconds|
-        |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
+        |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
         |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -1979,7 +3259,7 @@ LITE ENDPOINT: lite/v1/funding
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-            |funding_rate<br>`fr` |number|True|The funding rate of the instrument, expressed in centibeeps|
+            |funding_rate<br>`fr` |integer|True|The funding rate of the instrument, expressed in centibeeps|
             |funding_time<br>`ft` |string|True|The funding timestamp of the funding rate, expressed in unix nanoseconds|
             |mark_price<br>`mp` |string|True|The mark price of the instrument at funding timestamp, expressed in `9` decimals|
     </section>
@@ -2021,104 +3301,264 @@ LITE ENDPOINT: lite/v1/funding
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/funding' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/funding' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/full/v1/funding' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/full/v1/funding' \
-        --data '{
-            "instrument": "BTC_USDT_Perp",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        '
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/funding' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        '
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/funding' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        '
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.testnet.grvt.io/lite/v1/funding' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        '
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        curl --location 'https://market-data.grvt.io/lite/v1/funding' \
-        --data '{
-            "i": "BTC_USDT_Perp",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        '
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/funding' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/funding",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/funding' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/funding",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/funding' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/funding",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/funding' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/funding",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/funding' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/funding",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/funding' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/funding",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/funding' \
+            --data '{
+                "instrument": "BTC_USDT_Perp",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/funding",
+                "params": {
+                    "instrument": "BTC_USDT_Perp",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/funding' \
+            --data '{
+                "i": "BTC_USDT_Perp",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "WebSocket Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/funding",
+                "p": {
+                    "i": "BTC_USDT_Perp",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">

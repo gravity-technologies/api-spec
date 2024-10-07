@@ -14,32 +14,109 @@ STREAM: v1.mini.s
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+        |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.mini.s",
+                "selectors": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.mini.s",
+                "subs": ["BTC_USDT_Perp@500"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.mini.s",
+                "selectors": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.mini.s",
+                "unsubs": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -49,16 +126,7 @@ STREAM: v1.mini.s
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.mini.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -149,156 +217,420 @@ STREAM: v1.mini.s
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1002",
+                "message": "Internal Server Error"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1002",
+                "m": "Internal Server Error"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
-        {
-            "code":1004,
-            "message":"Data Not Found",
-            "status":404
-        }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3030,
-            "message":"Feed rate is invalid",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.mini.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.mini.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.mini.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.mini.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.mini.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.mini.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.mini.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.mini.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.mini.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.mini.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.mini.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.mini.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.mini.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.mini.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.mini.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.mini.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ### Mini Ticker Delta
 ```
@@ -313,32 +645,109 @@ STREAM: v1.mini.d
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+        |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)<br>Snapshot (200, 500, 1000, 5000)|
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.mini.d",
+                "selectors": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.mini.d",
+                "subs": ["BTC_USDT_Perp@500"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.mini.d",
+                "selectors": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.mini.d",
+                "unsubs": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -348,16 +757,7 @@ STREAM: v1.mini.d
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.mini.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -448,156 +848,420 @@ STREAM: v1.mini.d
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1002",
+                "message": "Internal Server Error"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1002",
+                "m": "Internal Server Error"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
-        {
-            "code":1004,
-            "message":"Data Not Found",
-            "status":404
-        }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3030,
-            "message":"Feed rate is invalid",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.mini.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.mini.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.mini.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.mini.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.mini.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.mini.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.mini.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.mini.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.mini.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.mini.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.mini.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.mini.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.mini.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.mini.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.mini.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.mini.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.mini.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.mini.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ### Ticker Snap
 ```
@@ -612,32 +1276,109 @@ STREAM: v1.ticker.s
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+        |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.ticker.s",
+                "selectors": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.ticker.s",
+                "subs": ["BTC_USDT_Perp@500"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.ticker.s",
+                "selectors": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.ticker.s",
+                "unsubs": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -647,16 +1388,7 @@ STREAM: v1.ticker.s
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.ticker.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -788,156 +1520,420 @@ STREAM: v1.ticker.s
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1002",
+                "message": "Internal Server Error"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1002",
+                "m": "Internal Server Error"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
-        {
-            "code":1004,
-            "message":"Data Not Found",
-            "status":404
-        }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3030,
-            "message":"Feed rate is invalid",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.s",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.ticker.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.ticker.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.ticker.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.ticker.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.ticker.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.ticker.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.ticker.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.ticker.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.ticker.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.ticker.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.ticker.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.ticker.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.ticker.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.ticker.s",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.ticker.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.ticker.s",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.s",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ### Ticker Delta
 ```
@@ -952,32 +1948,109 @@ STREAM: v1.ticker.d
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+        |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (100, 200, 500, 1000, 5000)<br>Snapshot (500, 1000, 5000)|
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.ticker.d",
+                "selectors": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.ticker.d",
+                "subs": ["BTC_USDT_Perp@500"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.ticker.d",
+                "selectors": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.ticker.d",
+                "unsubs": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -987,16 +2060,7 @@ STREAM: v1.ticker.d
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.ticker.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -1128,156 +2192,420 @@ STREAM: v1.ticker.d
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1002",
+                "message": "Internal Server Error"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1002",
+                "m": "Internal Server Error"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
-        {
-            "code":1004,
-            "message":"Data Not Found",
-            "status":404
-        }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3030,
-            "message":"Feed rate is invalid",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.ticker.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.ticker.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.ticker.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.ticker.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.ticker.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.ticker.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.ticker.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.ticker.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.ticker.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.ticker.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.ticker.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.ticker.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.ticker.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.ticker.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.ticker.d",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.ticker.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.ticker.d",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ticker.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ## Orderbook
 ### Orderbook Snap
@@ -1293,33 +2621,110 @@ STREAM: v1.book.s
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (50, 100, 500, 1000)<br>Snapshot (500, 1000)|
-        |depth<br>`d` |number|False<br>`'0'`|Depth of the order book to be retrieved<br>Delta(0 - `unlimited`)<br>Snapshot(10, 50, 100, 500)|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+        |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (50, 100, 500, 1000)<br>Snapshot (500, 1000)|
+        |depth<br>`d` |integer|False<br>`'0'`|Depth of the order book to be retrieved<br>Delta(0 - `unlimited`)<br>Snapshot(10, 50, 100, 500)|
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.book.s",
+                "selectors": ["BTC_USDT_Perp@500-50"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.book.s",
+                "subs": ["BTC_USDT_Perp@500-50"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.book.s",
+                "selectors": ["BTC_USDT_Perp@500-50"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.book.s",
+                "unsubs": ["BTC_USDT_Perp@500-50"]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -1329,16 +2734,7 @@ STREAM: v1.book.s
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-50"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -1371,13 +2767,13 @@ STREAM: v1.book.s
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
                 |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
-                |num_orders<br>`no` |number|True|The number of open orders at this level|
+                |num_orders<br>`no` |integer|True|The number of open orders at this level|
             ??? info "[OrderbookLevel](/../../schemas/orderbook_level)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
                 |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
-                |num_orders<br>`no` |number|True|The number of open orders at this level|
+                |num_orders<br>`no` |integer|True|The number of open orders at this level|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -1437,161 +2833,420 @@ STREAM: v1.book.s
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
         |3031|400|Depth is invalid|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1002",
+                "message": "Internal Server Error"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1002",
+                "m": "Internal Server Error"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
-        {
-            "code":1004,
-            "message":"Data Not Found",
-            "status":404
-        }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3030,
-            "message":"Feed rate is invalid",
-            "status":400
-        }
-        {
-            "code":3031,
-            "message":"Depth is invalid",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-50"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-50"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-50"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-50"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-50"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-50"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-50"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.s",
-            "feed":["BTC_USDT_Perp@500-50"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.book.s",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.book.s",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.s",
+                "feed":["BTC_USDT_Perp@500-50"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.book.s",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.book.s",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.s",
+                "feed":["BTC_USDT_Perp@500-50"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.book.s",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.book.s",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.s",
+                "feed":["BTC_USDT_Perp@500-50"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.book.s",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.book.s",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.s",
+                "feed":["BTC_USDT_Perp@500-50"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.book.s",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.book.s",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.s",
+                "feed":["BTC_USDT_Perp@500-50"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.book.s",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.book.s",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.s",
+                "feed":["BTC_USDT_Perp@500-50"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.book.s",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.book.s",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.s",
+                "feed":["BTC_USDT_Perp@500-50"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.book.s",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.book.s",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.s",
+                "feed":["BTC_USDT_Perp@500-50"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ### Orderbook Delta
 ```
@@ -1606,33 +3261,110 @@ STREAM: v1.book.d
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |rate<br>`r` |number|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (50, 100, 500, 1000)<br>Snapshot (500, 1000)|
-        |depth<br>`d` |number|False<br>`'0'`|Depth of the order book to be retrieved<br>Delta(0 - `unlimited`)<br>Snapshot(10, 50, 100, 500)|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+        |rate<br>`r` |integer|True|The minimal rate at which we publish feeds (in milliseconds)<br>Delta (50, 100, 500, 1000)<br>Snapshot (500, 1000)|
+        |depth<br>`d` |integer|False<br>`'0'`|Depth of the order book to be retrieved<br>Delta(0 - `unlimited`)<br>Snapshot(10, 50, 100, 500)|
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.book.d",
+                "selectors": ["BTC_USDT_Perp@500-50"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.book.d",
+                "subs": ["BTC_USDT_Perp@500-50"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.book.d",
+                "selectors": ["BTC_USDT_Perp@500-50"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.book.d",
+                "unsubs": ["BTC_USDT_Perp@500-50"]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -1642,16 +3374,7 @@ STREAM: v1.book.d
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -1684,13 +3407,13 @@ STREAM: v1.book.d
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
                 |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
-                |num_orders<br>`no` |number|True|The number of open orders at this level|
+                |num_orders<br>`no` |integer|True|The number of open orders at this level|
             ??? info "[OrderbookLevel](/../../schemas/orderbook_level)"
                 |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                 |-|-|-|-|
                 |price<br>`p` |string|True|The price of the level, expressed in `9` decimals|
                 |size<br>`s` |string|True|The number of assets offered, expressed in base asset decimal units|
-                |num_orders<br>`no` |number|True|The number of open orders at this level|
+                |num_orders<br>`no` |integer|True|The number of open orders at this level|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success
@@ -1749,156 +3472,420 @@ STREAM: v1.book.d
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1002",
+                "message": "Internal Server Error"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1002",
+                "m": "Internal Server Error"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
-        {
-            "code":1004,
-            "message":"Data Not Found",
-            "status":404
-        }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3030,
-            "message":"Feed rate is invalid",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.book.d",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.book.d",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.book.d",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.book.d",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.book.d",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.book.d",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.book.d",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.book.d",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.book.d",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.book.d",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.book.d",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.book.d",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.book.d",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.book.d",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.book.d",
+                    "selectors": ["BTC_USDT_Perp@500-50"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.book.d",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.book.d",
+                    "s1": ["BTC_USDT_Perp@500-50"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.book.d",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ## Trade
 ### Trade
@@ -1914,32 +3901,109 @@ STREAM: v1.trade
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-        |limit<br>`l` |number|True|The limit to query for. Defaults to 500; Max 1000|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+        |limit<br>`l` |integer|True|The limit to query for. Valid values are (50, 200, 500, 1000). Default is 50|
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.trade",
+                "selectors": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.trade",
+                "subs": ["BTC_USDT_Perp@500"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.trade",
+                "selectors": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.trade",
+                "unsubs": ["BTC_USDT_Perp@500"]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -1949,16 +4013,7 @@ STREAM: v1.trade
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.trade",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -2057,151 +4112,421 @@ STREAM: v1.trade
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3011|400|Limit exceeds min or max value|
+        |3013|400|Exact limit value is not supported|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1002",
+                "message": "Internal Server Error"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1002",
+                "m": "Internal Server Error"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3011,
-            "message":"Limit exceeds min or max value",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.trade",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.trade",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.trade",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.trade",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.trade",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.trade",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.trade",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.trade",
-            "feed":["BTC_USDT_Perp@500"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.trade",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.trade",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.trade",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.trade",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.trade",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.trade",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.trade",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.trade",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.trade",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.trade",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.trade",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.trade",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.trade",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.trade",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.trade",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.trade",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.trade",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.trade",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.trade",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.trade",
+                    "selectors": ["BTC_USDT_Perp@500"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.trade",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.trade",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.trade",
+                    "s1": ["BTC_USDT_Perp@500"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.trade",
+                "feed":["BTC_USDT_Perp@500"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">
 ## Candlestick
 ### Candlestick
@@ -2247,31 +4572,108 @@ STREAM: v1.candle
             |`MARK` = 2|Tracks mark prices|
             |`INDEX` = 3|Tracks index prices|
             |`MID` = 4|Tracks book mid prices|
-    ??? info "[WSRequestV1](/../../schemas/ws_request_v1)"
-        All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+    ??? info "JSONRPC Wrappers"
+        ??? info "[JSONRPCRequest](/../../schemas/jsonrpc_request)"
+            All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
-        |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
-        |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
-    ??? info "[WSResponseV1](/../../schemas/ws_response_v1)"
-        All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |method<br>`m` |string|True|The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
+            |params<br>`p` |object|True|The parameters for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+            All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
 
-        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
-        |-|-|-|-|
-        |request_id<br>`ri` |number|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
-        |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
-        |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
-        |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
-        |num_snapshots<br>`ns` |[number]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
-        |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+            |result<br>`r` |object|False<br>`null`|The result for the request|
+            |error<br>`e` |Error|False<br>`null`|The error for the request|
+            |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            ??? info "[Error](/../../schemas/error)"
+                An error response<br>
+
+                |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+                |-|-|-|-|
+                |code<br>`c` |integer|True|The error code for the request|
+                |message<br>`m` |string|True|The error message for the request|
+        ??? info "[WSSubscribeRequestV1Legacy](/../../schemas/ws_subscribe_request_v1_legacy)"
+            All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.<br>If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).<br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
+            |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
+            |is_full<br>`if` |boolean|False<br>`false`|Whether the request is for full data or lite data|
+        ??? info "[WSSubscribeResponseV1Legacy](/../../schemas/ws_subscribe_response_v1_legacy)"
+            All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul><br>When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+            |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
+            |subs<br>`s1` |[string]|True|The list of feeds subscribed to|
+            |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
+            |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
+            |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **JSON RPC Request**
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.candle",
+                "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.candle",
+                "subs": ["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.candle",
+                "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.candle",
+                "unsubs": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+            },
+            "id": 123
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -2281,16 +4683,7 @@ STREAM: v1.candle
             "is_full":true
         }
         ```
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "stream":"v1.candle",
-            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ```
-        **JSON RPC Response**
+        **Full Subscribe Response**
         ``` { .json .copy }
         {
             "request_id":1,
@@ -2324,7 +4717,7 @@ STREAM: v1.candle
             |low<br>`l` |string|True|The low price, expressed in underlying currency resolution units|
             |volume_b<br>`vb` |string|True|The underlying volume transacted, expressed in base asset decimal units|
             |volume_q<br>`vq` |string|True|The quote volume transacted, expressed in quote asset decimal units|
-            |trades<br>`t` |number|True|The number of trades transacted|
+            |trades<br>`t` |integer|True|The number of trades transacted|
             |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -2380,154 +4773,418 @@ STREAM: v1.candle
         |3000|400|Instrument is invalid|
         |3040|400|Candlestick interval is invalid|
         |3041|400|Candlestick type is invalid|
+    ??? info "[JSONRPCResponse](/../../schemas/jsonrpc_response)"
+        All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.<br>If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
+        |result<br>`r` |object|False<br>`null`|The result for the request|
+        |error<br>`e` |Error|False<br>`null`|The error for the request|
+        |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+        ??? info "[Error](/../../schemas/error)"
+            An error response<br>
+
+            |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+            |-|-|-|-|
+            |code<br>`c` |integer|True|The error code for the request|
+            |message<br>`m` |string|True|The error message for the request|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
+    !!! failure "Full Error Response"
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": "1002",
+                "message": "Internal Server Error"
+            },
+            "id": 123
+        }
+        ```
+    !!! failure "Lite Error Response"
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": "1002",
+                "m": "Internal Server Error"
+            },
+            "i": 123
+        }
+        ```
+    !!! failure "Legacy Error Response"
         ``` { .json .copy }
         {
             "code":1002,
             "message":"Internal Server Error",
             "status":500
         }
-        {
-            "code":1101,
-            "message":"Feed Format must be in the format of <primary>@<secondary>",
-            "status":400
-        }
-        {
-            "code":1102,
-            "message":"Wrong number of primary selectors",
-            "status":400
-        }
-        {
-            "code":1103,
-            "message":"Wrong number of secondary selectors",
-            "status":400
-        }
-        {
-            "code":3000,
-            "message":"Instrument is invalid",
-            "status":400
-        }
-        {
-            "code":3040,
-            "message":"Candlestick interval is invalid",
-            "status":400
-        }
-        {
-            "code":3041,
-            "message":"Candlestick type is invalid",
-            "status":400
-        }
         ```
     </section>
 === "Try it out"
-    <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-    !!! example "Try DEV Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.candle",
-            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.candle",
-            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.candle",
-            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Full"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.candle",
-            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
-            "method":"subscribe",
-            "is_full":true
-        }
-        ' -w 360
-        ```
-    </section>
-    <section markdown="1" style="float: right; width: 50%;">
-    !!! example "Try DEV Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.candle",
-            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try STG Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.candle",
-            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try TESTNET Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.testnet.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.candle",
-            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    !!! example "Try PROD Lite"
-        ``` { .bash .copy }
-        wscat -c "wss://market-data.grvt.io/ws" \
-        -x '
-        {
-            "request_id":1,
-            "stream":"v1.candle",
-            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
-            "method":"subscribe",
-            "is_full":false
-        }
-        ' -w 360
-        ```
-    </section>
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.candle",
+                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.candle",
+                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.candle",
+                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.candle",
+                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.candle",
+                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.candle",
+                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STG"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.candle",
+                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.candle",
+                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.candle",
+                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.candle",
+                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.candle",
+                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.candle",
+                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.candle",
+                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.candle",
+                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.candle",
+                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.candle",
+                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.candle",
+                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.candle",
+                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.candle",
+                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.candle",
+                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.candle",
+                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.candle",
+                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.candle",
+                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.candle",
+                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
 <hr class="solid">

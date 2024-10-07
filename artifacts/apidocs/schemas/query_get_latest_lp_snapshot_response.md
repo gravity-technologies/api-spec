@@ -9,7 +9,7 @@
         |lp_asset<br>`la` |string|True|The LP Asset|
         |underlying_multiplier<br>`um` |string|True|Underlying multiplier|
         |maker_trading_volume<br>`mt` |string|True|Maker trading volume|
-        |bid_fast_market_multiplier<br>`bf` |number|True|Fast market multiplier|
-        |ask_fast_market_multiplier<br>`af` |number|True|Fast market multiplier|
+        |bid_fast_market_multiplier<br>`bf` |integer|True|Fast market multiplier|
+        |ask_fast_market_multiplier<br>`af` |integer|True|Fast market multiplier|
         |liquidity_score<br>`ls` |string|True|Liquidity score|
         |calculate_at<br>`ca` |string|True|The time when the snapshot was calculated|

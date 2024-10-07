@@ -9,4 +9,4 @@
         |lp_asset<br>`la` |string|True|The LP Asset|
         |start_interval<br>`si` |string|True|Start time of the epoch - phase|
         |liquidity_score<br>`ls` |string|True|Liquidity score|
-        |rank<br>`r` |number|True|The rank of user in the LP leaderboard|
+        |rank<br>`r` |integer|True|The rank of user in the LP leaderboard|

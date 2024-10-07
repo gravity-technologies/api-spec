@@ -2,7 +2,7 @@
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |start_interval<br>`si` |string|True|Start time of the epoch - phase|
-    |limit<br>`l` |number|True|The number of accounts to return|
+    |limit<br>`l` |integer|True|The number of accounts to return|
     |kind<br>`k` |Kind|True|The kind filter to apply|
     |base<br>`b` |Currency|True|The base filter to apply|
     ??? info "[Kind](/../../schemas/kind)"

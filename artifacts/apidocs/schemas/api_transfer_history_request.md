@@ -6,7 +6,7 @@
     |currency<br>`c` |[Currency]|True|The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned|
     |start_time<br>`st` |string|False<br>`0`|The start time to query for in unix nanoseconds|
     |end_time<br>`et` |string|False<br>`now()`|The end time to query for in unix nanoseconds|
-    |limit<br>`l` |number|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
+    |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
     |cursor<br>`c1` |string|False<br>`''`|The cursor to indicate when to start the next query from|
     ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>

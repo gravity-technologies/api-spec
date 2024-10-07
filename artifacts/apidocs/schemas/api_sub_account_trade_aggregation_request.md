@@ -3,7 +3,7 @@
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |limit<br>`l` |number|True|Optional. The limit of the number of results to return|
+    |limit<br>`l` |integer|True|Optional. The limit of the number of results to return|
     |interval<br>`i` |SubAccountTradeInterval|True|The interval of each sub account trade|
     |sub_account_i_ds<br>`sa` |[string]|True|The list of sub account ids to query|
     |sub_account_id_greater_than<br>`sa1` |string|True|The sub account id to query greater than|

@@ -7,7 +7,7 @@
     |quote<br>`q` |Currency|True|The quote currency to select|
     |start_time<br>`st` |string|False<br>`0`|Start time of settlement price in unix nanoseconds|
     |end_time<br>`et` |string|False<br>`now()`|End time of settlement price in unix nanoseconds|
-    |limit<br>`l` |number|False<br>`30`|The limit to query for. Defaults to 500; Max 1000|
+    |limit<br>`l` |integer|False<br>`30`|The limit to query for. Defaults to 500; Max 1000|
     |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
     ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
