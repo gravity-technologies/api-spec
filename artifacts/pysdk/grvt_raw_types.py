@@ -7,6 +7,7 @@
 # ruff: noqa: E501
 from dataclasses import dataclass
 from enum import Enum
+from typing import Any
 
 
 class CandlestickInterval(Enum):
@@ -954,7 +955,7 @@ class JSONRPCRequest:
     # The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )
     method: str
     # The parameters for the request
-    params: any
+    params: Any
     """
     Optional Field which is used to match the response by the client.
     If not passed, this field will not be returned
@@ -980,7 +981,7 @@ class JSONRPCResponse:
     # The JSON RPC version to use for the request
     jsonrpc: str
     # The result for the request
-    result: any | None = None
+    result: Any | None = None
     # The error for the request
     error: Error | None = None
     """
