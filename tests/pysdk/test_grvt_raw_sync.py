@@ -1,9 +1,10 @@
 import os
 
-from artifacts.pysdk import types
-from artifacts.pysdk.grvt_api_base import GrvtApiConfig, GrvtError
-from artifacts.pysdk.grvt_api_sync import GrvtApiSync
-from artifacts.pysdk.grvt_env import GrvtEnv
+from artifacts.pysdk import grvt_raw_types
+from artifacts.pysdk.grvt_raw_async import GrvtApiConfig
+from artifacts.pysdk.grvt_raw_base import GrvtError
+from artifacts.pysdk.grvt_raw_env import GrvtEnv
+from artifacts.pysdk.grvt_raw_sync import GrvtRawSync
 
 
 def get_config() -> GrvtApiConfig:
@@ -19,8 +20,10 @@ def get_config() -> GrvtApiConfig:
 
 
 def test_get_all_instruments() -> None:
-    api = GrvtApiSync(config=get_config())
-    resp = api.get_all_instruments_v1(types.ApiGetAllInstrumentsRequest(is_active=True))
+    api = GrvtRawSync(config=get_config())
+    resp = api.get_all_instruments_v1(
+        grvt_raw_types.ApiGetAllInstrumentsRequest(is_active=True)
+    )
     if isinstance(resp, GrvtError):
         raise ValueError(f"Received error: {resp}")
     if resp.result is None:
@@ -30,25 +33,25 @@ def test_get_all_instruments() -> None:
 
 
 def test_open_orders() -> None:
-    api = GrvtApiSync(config=get_config())
+    api = GrvtRawSync(config=get_config())
 
     # Skip test if trading account id is not set
-    if api.config.trading_account_id is None:
-        return None
+    if api.config.trading_account_id is None or api.config.api_key is None:
+        return None  # Skip test if configs are not set
 
     resp = api.open_orders_v1(
-        types.ApiOpenOrdersRequest(
+        grvt_raw_types.ApiOpenOrdersRequest(
             # sub_account_id=233, Uncomment to test error path with invalid sub account id
             sub_account_id=str(api.config.trading_account_id),
-            kind=[types.Kind.PERPETUAL],
-            base=[types.Currency.BTC, types.Currency.ETH],
-            quote=[types.Currency.USDT],
+            kind=[grvt_raw_types.Kind.PERPETUAL],
+            base=[grvt_raw_types.Currency.BTC, grvt_raw_types.Currency.ETH],
+            quote=[grvt_raw_types.Currency.USDT],
         )
     )
     if isinstance(resp, GrvtError):
-        print(f"Received error: {resp}")  # noqa: T201
+        api.logger.error(f"Received error: {resp}")
         return None
     if resp.result is None:
         raise ValueError("Expected orders to be non-null")
     if len(resp.result) == 0:
-        print("Expected orders to be non-empty")  # noqa: T201
+        api.logger.info("Expected orders to be non-empty")

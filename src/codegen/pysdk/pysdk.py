@@ -58,6 +58,7 @@ def semantic_and_json_to_python_type(semantic_type: str, json_type: str) -> str:
         "uint128": "str",
         "uint256": "str",
         "address": "str",
+        "any": "Any",
     }
 
     if semantic_type in type_mapping:
@@ -124,16 +125,13 @@ def write_field(field: Field, f: TextIOWrapper) -> None:
 
 
 def write_rpc_api(spec_root: SpecRoot, f: TextIOWrapper, is_async: bool) -> None:
-    class_name = "GrvtApiAsync" if is_async else "GrvtApiSync"
-    base_class = "GrvtApiAsyncBase" if is_async else "GrvtApiSyncBase"
+    class_name = "GrvtRawAsync" if is_async else "GrvtRawSync"
+    base_class = "GrvtRawAsyncBase" if is_async else "GrvtRawSyncBase"
 
     f.write("from enum import Enum\n\n")
     f.write("from dacite import Config, from_dict\n\n")
-    f.write("from . import types\n")
-    if is_async:
-        f.write(f"from .grvt_api_base import {base_class}, GrvtApiConfig, GrvtError\n\n")
-    else:
-        f.write(f"from .grvt_api_base import GrvtApiConfig, {base_class}, GrvtError\n\n")
+    f.write("from . import grvt_raw_types as types\n")
+    f.write(f"from .grvt_raw_base import GrvtApiConfig, GrvtError, {base_class}\n\n")
     f.write('# mypy: disable-error-code="no-any-return"\n\n')
     f.write(f"class {class_name}({base_class}):\n")
     f.write("    def __init__(self, config: GrvtApiConfig):\n")
@@ -167,7 +165,7 @@ def write_rpc_api(spec_root: SpecRoot, f: TextIOWrapper, is_async: bool) -> None
 
 
 def generate(spec_root: SpecRoot) -> None:
-    with open("artifacts/pysdk/types.py", "w") as f:
+    with open("artifacts/pysdk/grvt_raw_types.py", "w") as f:
         f.write("# ruff: noqa: D200\n")
         f.write("# ruff: noqa: D204\n")
         f.write("# ruff: noqa: D205\n")
@@ -176,14 +174,16 @@ def generate(spec_root: SpecRoot) -> None:
         f.write("# ruff: noqa: D400\n")
         f.write("# ruff: noqa: E501\n")
         f.write("from dataclasses import dataclass\n")
-        f.write("from enum import Enum\n\n\n")
+        f.write("from enum import Enum\n")
+        f.write("from typing import Any\n\n\n")
+
         for enum in spec_root.enums:
             write_enum(enum, f)
         for struct in spec_root.structs:
             write_struct(struct, f)
 
-    with open("artifacts/pysdk/grvt_api_async.py", "w") as f:
+    with open("artifacts/pysdk/grvt_raw_async.py", "w") as f:
         write_rpc_api(spec_root, f, is_async=True)
 
-    with open("artifacts/pysdk/grvt_api_sync.py", "w") as f:
+    with open("artifacts/pysdk/grvt_raw_sync.py", "w") as f:
         write_rpc_api(spec_root, f, is_async=False)
