@@ -796,7 +796,11 @@ def write_errors(ctx: CodegenCtx, md: MarkdownWriter, errors: list[Err]) -> None
 
 def get_field_example(ctx: CodegenCtx, struct: Struct, field: Field) -> str:
     example_value = ""
-    if field.example:
+
+    # To allow environment variable injection in the example
+    if field.example and "$" in field.example:
+        example_value = field.example
+    elif field.example:
         example_value = field.example.replace("'", '"')
     elif field.json_type in ctx.enum_map:
         example_value = '"' + ctx.enum_map[field.json_type].values[0].name + '"'
@@ -805,7 +809,7 @@ def get_field_example(ctx: CodegenCtx, struct: Struct, field: Field) -> str:
         print(f"No example value for field: {struct.name}.{field.name}")  # noqa: T201
 
     # To allow environment variable injection in the example
-    if example_value.startswith('"$'):
+    if example_value.startswith("'$"):
         example_value = f"\"'{example_value[1:-1]}'\""
 
     # Handle lists
