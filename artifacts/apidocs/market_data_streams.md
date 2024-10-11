@@ -2859,7 +2859,7 @@ STREAM: v1.book.d
             "method": "subscribe",
             "params": {
                 "stream": "v1.book.d",
-                "selectors": ["BTC_USDT_Perp@500-50"]
+                "selectors": ["BTC_USDT_Perp@500"]
             },
             "id": 123
         }
@@ -2870,7 +2870,7 @@ STREAM: v1.book.d
             "jsonrpc": "2.0",
             "result": {
                 "stream": "v1.book.d",
-                "subs": ["BTC_USDT_Perp@500-50"],
+                "subs": ["BTC_USDT_Perp@500"],
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
@@ -2886,7 +2886,7 @@ STREAM: v1.book.d
             "method": "unsubscribe",
             "params": {
                 "stream": "v1.book.d",
-                "selectors": ["BTC_USDT_Perp@500-50"]
+                "selectors": ["BTC_USDT_Perp@500"]
             },
             "id": 123
         }
@@ -2897,7 +2897,7 @@ STREAM: v1.book.d
             "jsonrpc": "2.0",
             "result": {
                 "stream": "v1.book.d",
-                "unsubs": ["BTC_USDT_Perp@500-50"]
+                "unsubs": ["BTC_USDT_Perp@500"]
             },
             "id": 123
         }
@@ -2918,7 +2918,7 @@ STREAM: v1.book.d
         {
             "request_id":1,
             "stream":"v1.book.d",
-            "subs":["BTC_USDT_Perp@500-50"],
+            "subs":["BTC_USDT_Perp@500"],
             "unsubs":[],
             "num_snapshots":[1],
             "first_sequence_number":[2813]
@@ -3035,7 +3035,7 @@ STREAM: v1.book.d
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500-50"]
+                    "selectors": ["BTC_USDT_Perp@500"]
                 },
                 "id": 123
             }
@@ -3050,7 +3050,7 @@ STREAM: v1.book.d
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500-50"]
+                    "selectors": ["BTC_USDT_Perp@500"]
                 },
                 "id": 123
             }
@@ -3080,7 +3080,7 @@ STREAM: v1.book.d
                 "m": "subscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500-50"]
+                    "s1": ["BTC_USDT_Perp@500"]
                 },
                 "i": 123
             }
@@ -3095,7 +3095,7 @@ STREAM: v1.book.d
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500-50"]
+                    "s1": ["BTC_USDT_Perp@500"]
                 },
                 "i": 123
             }
@@ -3126,7 +3126,7 @@ STREAM: v1.book.d
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500-50"]
+                    "selectors": ["BTC_USDT_Perp@500"]
                 },
                 "id": 123
             }
@@ -3141,7 +3141,7 @@ STREAM: v1.book.d
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500-50"]
+                    "selectors": ["BTC_USDT_Perp@500"]
                 },
                 "id": 123
             }
@@ -3171,7 +3171,7 @@ STREAM: v1.book.d
                 "m": "subscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500-50"]
+                    "s1": ["BTC_USDT_Perp@500"]
                 },
                 "i": 123
             }
@@ -3186,7 +3186,7 @@ STREAM: v1.book.d
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500-50"]
+                    "s1": ["BTC_USDT_Perp@500"]
                 },
                 "i": 123
             }
@@ -3217,7 +3217,7 @@ STREAM: v1.book.d
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500-50"]
+                    "selectors": ["BTC_USDT_Perp@500"]
                 },
                 "id": 123
             }
@@ -3232,7 +3232,7 @@ STREAM: v1.book.d
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500-50"]
+                    "selectors": ["BTC_USDT_Perp@500"]
                 },
                 "id": 123
             }
@@ -3262,7 +3262,7 @@ STREAM: v1.book.d
                 "m": "subscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500-50"]
+                    "s1": ["BTC_USDT_Perp@500"]
                 },
                 "i": 123
             }
@@ -3277,7 +3277,7 @@ STREAM: v1.book.d
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500-50"]
+                    "s1": ["BTC_USDT_Perp@500"]
                 },
                 "i": 123
             }
@@ -3308,7 +3308,7 @@ STREAM: v1.book.d
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500-50"]
+                    "selectors": ["BTC_USDT_Perp@500"]
                 },
                 "id": 123
             }
@@ -3323,7 +3323,7 @@ STREAM: v1.book.d
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500-50"]
+                    "selectors": ["BTC_USDT_Perp@500"]
                 },
                 "id": 123
             }
@@ -3353,7 +3353,7 @@ STREAM: v1.book.d
                 "m": "subscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500-50"]
+                    "s1": ["BTC_USDT_Perp@500"]
                 },
                 "i": 123
             }
@@ -3368,7 +3368,7 @@ STREAM: v1.book.d
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500-50"]
+                    "s1": ["BTC_USDT_Perp@500"]
                 },
                 "i": 123
             }
