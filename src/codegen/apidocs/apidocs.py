@@ -7,11 +7,6 @@ from ..parse.parse import RPC, Enum, Err, Field, Gateway, SpecRoot, Stream, Stru
 from .codegen_context import CodegenCtx
 from .markdown_writer import MarkdownWriter
 
-# hacks to remove unused secondary selectors for a specific stream
-IGNORE_SECONDARY_SELECTORS = {
-    "StreamOrderbookDeltaV1": ["depth"],
-}
-
 
 def generate(spec_root: SpecRoot) -> None:
     ctx = CodegenCtx(spec_root)
@@ -125,11 +120,7 @@ def write_stream_feed_selector(
     write_section_end(md)
 
     # Right Section
-    selector = get_selector(
-        ctx,
-        ctx.struct_map[stream.feed_selector],
-        IGNORE_SECONDARY_SELECTORS.get(stream.name, []),
-    )
+    selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
     write_right_section(md)
 
     md.writeln('???+ question "Subscribe"')
@@ -172,9 +163,7 @@ def write_stream_feed_selector(
     md.dedent()
 
 
-def get_selector(
-    ctx: CodegenCtx, struct: Struct, ignore_secondary_list: list[str] = []
-) -> str:
+def get_selector(ctx: CodegenCtx, struct: Struct) -> str:
     selector_primary: list[str] = []
     selector_secondary: list[str] = []
     for i, field in enumerate(struct.fields):
@@ -182,8 +171,6 @@ def get_selector(
         if field.selector == "primary":
             selector_primary.append(example)
         elif field.selector == "secondary":
-            if field.name in ignore_secondary_list:
-                continue
             selector_secondary.append(example)
     selector_str = "-".join(selector_primary)
     if len(selector_secondary) > 0:
@@ -273,6 +260,11 @@ def write_stream_legacy_feed_request(
     md.indent()
     md.writeln('"request_id":1,')
     md.writeln(f'"stream":"{stream.channel}",')
+
+    # ugly hack I know...
+    if stream.channel == "v1.book.d":
+        selector = "BTC_USDT_Perp@500"
+
     md.writeln(f'"feed":["{selector}"],')
     md.writeln('"method":"subscribe",')
     md.writeln(f'"is_full":{str(is_full).lower()}')
@@ -358,11 +350,7 @@ def write_stream_rpc_try_it_out(
             if stream.auth_required:
                 md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
             md.writeln("-x '")
-            selector = get_selector(
-                ctx,
-                ctx.struct_map[stream.feed_selector],
-                IGNORE_SECONDARY_SELECTORS.get(stream.name, []),
-            )
+            selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
             write_stream_subscribe_request(ctx, md, stream, selector, is_full)
             md.writeln("' -w 360")
             md.writeln("```")
@@ -376,11 +364,7 @@ def write_stream_rpc_try_it_out(
             if stream.auth_required:
                 md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
             md.writeln("-x '")
-            selector = get_selector(
-                ctx,
-                ctx.struct_map[stream.feed_selector],
-                IGNORE_SECONDARY_SELECTORS.get(stream.name, []),
-            )
+            selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
             write_stream_unsubscribe_request(ctx, md, stream, selector, is_full)
             md.writeln("' -w 360")
             md.writeln("```")
@@ -394,11 +378,7 @@ def write_stream_rpc_try_it_out(
             if stream.auth_required:
                 md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
             md.writeln("-x '")
-            selector = get_selector(
-                ctx,
-                ctx.struct_map[stream.feed_selector],
-                IGNORE_SECONDARY_SELECTORS.get(stream.name, []),
-            )
+            selector = get_selector(ctx, ctx.struct_map[stream.feed_selector])
             write_stream_legacy_feed_request(md, stream, selector, is_full)
             md.writeln("' -w 360")
             md.writeln("```")

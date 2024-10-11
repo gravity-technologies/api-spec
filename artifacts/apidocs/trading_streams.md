@@ -330,11 +330,11 @@ STREAM: v1.order
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -350,7 +350,7 @@ STREAM: v1.order
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -366,7 +366,7 @@ STREAM: v1.order
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -382,7 +382,7 @@ STREAM: v1.order
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -398,7 +398,7 @@ STREAM: v1.order
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -414,7 +414,7 @@ STREAM: v1.order
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -907,11 +907,11 @@ STREAM: v1.state
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -927,7 +927,7 @@ STREAM: v1.state
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -943,7 +943,7 @@ STREAM: v1.state
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -959,7 +959,7 @@ STREAM: v1.state
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -975,7 +975,7 @@ STREAM: v1.state
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -991,7 +991,7 @@ STREAM: v1.state
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -1503,11 +1503,11 @@ STREAM: v1.fill
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -1523,7 +1523,7 @@ STREAM: v1.fill
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -1539,7 +1539,7 @@ STREAM: v1.fill
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -1555,7 +1555,7 @@ STREAM: v1.fill
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -1571,7 +1571,7 @@ STREAM: v1.fill
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -1587,7 +1587,7 @@ STREAM: v1.fill
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2088,11 +2088,11 @@ STREAM: v1.position
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2108,7 +2108,7 @@ STREAM: v1.position
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2124,7 +2124,7 @@ STREAM: v1.position
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2140,7 +2140,7 @@ STREAM: v1.position
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2156,7 +2156,7 @@ STREAM: v1.position
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2172,7 +2172,7 @@ STREAM: v1.position
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2652,11 +2652,11 @@ STREAM: v1.deposit
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2672,7 +2672,7 @@ STREAM: v1.deposit
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2688,7 +2688,7 @@ STREAM: v1.deposit
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2704,7 +2704,7 @@ STREAM: v1.deposit
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2720,7 +2720,7 @@ STREAM: v1.deposit
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2736,7 +2736,7 @@ STREAM: v1.deposit
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3236,11 +3236,11 @@ STREAM: v1.transfer
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3256,7 +3256,7 @@ STREAM: v1.transfer
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3272,7 +3272,7 @@ STREAM: v1.transfer
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3288,7 +3288,7 @@ STREAM: v1.transfer
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3304,7 +3304,7 @@ STREAM: v1.transfer
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3320,7 +3320,7 @@ STREAM: v1.transfer
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3815,11 +3815,11 @@ STREAM: v1.withdrawal
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3835,7 +3835,7 @@ STREAM: v1.withdrawal
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3851,7 +3851,7 @@ STREAM: v1.withdrawal
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3867,7 +3867,7 @@ STREAM: v1.withdrawal
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3883,7 +3883,7 @@ STREAM: v1.withdrawal
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3899,7 +3899,7 @@ STREAM: v1.withdrawal
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {

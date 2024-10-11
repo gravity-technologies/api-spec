@@ -413,11 +413,11 @@ LITE ENDPOINT: lite/v1/create_order
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/create_order' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/create_order' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "order": {
@@ -458,7 +458,7 @@ LITE ENDPOINT: lite/v1/create_order
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -507,7 +507,7 @@ LITE ENDPOINT: lite/v1/create_order
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/create_order' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/create_order' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "o": {
@@ -548,7 +548,7 @@ LITE ENDPOINT: lite/v1/create_order
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -1104,11 +1104,11 @@ LITE ENDPOINT: lite/v1/cancel_order
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cancel_order' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/cancel_order' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -1119,7 +1119,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -1138,7 +1138,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cancel_order' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/cancel_order' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -1149,7 +1149,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -1440,11 +1440,11 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cancel_all_orders' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/cancel_all_orders' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -1456,7 +1456,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -1476,7 +1476,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cancel_all_orders' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/cancel_all_orders' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -1488,7 +1488,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -1844,11 +1844,11 @@ LITE ENDPOINT: lite/v1/order
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/order' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/order' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -1859,7 +1859,7 @@ LITE ENDPOINT: lite/v1/order
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -1878,7 +1878,7 @@ LITE ENDPOINT: lite/v1/order
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/order' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/order' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -1889,7 +1889,7 @@ LITE ENDPOINT: lite/v1/order
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2240,11 +2240,11 @@ LITE ENDPOINT: lite/v1/open_orders
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/open_orders' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/open_orders' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -2256,7 +2256,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2276,7 +2276,7 @@ LITE ENDPOINT: lite/v1/open_orders
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/open_orders' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/open_orders' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -2288,7 +2288,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2674,11 +2674,11 @@ LITE ENDPOINT: lite/v1/order_history
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/order_history' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/order_history' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -2694,7 +2694,7 @@ LITE ENDPOINT: lite/v1/order_history
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -2718,7 +2718,7 @@ LITE ENDPOINT: lite/v1/order_history
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/order_history' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/order_history' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -2734,7 +2734,7 @@ LITE ENDPOINT: lite/v1/order_history
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3131,11 +3131,11 @@ LITE ENDPOINT: lite/v1/fill_history
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/fill_history' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/fill_history' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -3151,7 +3151,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3175,7 +3175,7 @@ LITE ENDPOINT: lite/v1/fill_history
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/fill_history' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/fill_history' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -3191,7 +3191,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3551,11 +3551,11 @@ LITE ENDPOINT: lite/v1/positions
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/positions' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/positions' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -3567,7 +3567,7 @@ LITE ENDPOINT: lite/v1/positions
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3587,7 +3587,7 @@ LITE ENDPOINT: lite/v1/positions
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/positions' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/positions' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -3599,7 +3599,7 @@ LITE ENDPOINT: lite/v1/positions
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3894,11 +3894,11 @@ LITE ENDPOINT: lite/v1/deposit
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/deposit' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/deposit' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3909,7 +3909,7 @@ LITE ENDPOINT: lite/v1/deposit
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -3928,7 +3928,7 @@ LITE ENDPOINT: lite/v1/deposit
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/deposit' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/deposit' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -3939,7 +3939,7 @@ LITE ENDPOINT: lite/v1/deposit
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -4248,11 +4248,11 @@ LITE ENDPOINT: lite/v1/deposit_history
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/deposit_history' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/deposit_history' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "currency": ["USDT", "USDC"],
@@ -4265,7 +4265,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -4286,7 +4286,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/deposit_history' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/deposit_history' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "c": ["USDT", "USDC"],
@@ -4299,7 +4299,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -4668,11 +4668,11 @@ LITE ENDPOINT: lite/v1/transfer
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/transfer' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/transfer' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -4694,7 +4694,7 @@ LITE ENDPOINT: lite/v1/transfer
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -4724,7 +4724,7 @@ LITE ENDPOINT: lite/v1/transfer
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/transfer' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/transfer' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -4746,7 +4746,7 @@ LITE ENDPOINT: lite/v1/transfer
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -5174,11 +5174,11 @@ LITE ENDPOINT: lite/v1/transfer_history
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/transfer_history' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/transfer_history' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "currency": ["USDT", "USDC"],
@@ -5191,7 +5191,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -5212,7 +5212,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/transfer_history' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/transfer_history' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "c": ["USDT", "USDC"],
@@ -5225,7 +5225,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -5582,11 +5582,11 @@ LITE ENDPOINT: lite/v1/withdrawal
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/withdrawal' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/withdrawal' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -5606,7 +5606,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -5634,7 +5634,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/withdrawal' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/withdrawal' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -5654,7 +5654,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -6060,11 +6060,11 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/withdrawal_history' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/withdrawal_history' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "currency": ["USDT", "USDC"],
@@ -6077,7 +6077,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -6098,7 +6098,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/withdrawal_history' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/withdrawal_history' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "c": ["USDT", "USDC"],
@@ -6111,7 +6111,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -6461,11 +6461,11 @@ LITE ENDPOINT: lite/v1/account_summary
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/account_summary' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
@@ -6474,7 +6474,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -6491,7 +6491,7 @@ LITE ENDPOINT: lite/v1/account_summary
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/account_summary' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'"
@@ -6500,7 +6500,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -6839,11 +6839,11 @@ LITE ENDPOINT: lite/v1/account_history
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/account_history' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/account_history' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -6856,7 +6856,7 @@ LITE ENDPOINT: lite/v1/account_history
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -6877,7 +6877,7 @@ LITE ENDPOINT: lite/v1/account_history
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/account_history' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/account_history' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -6890,7 +6890,7 @@ LITE ENDPOINT: lite/v1/account_history
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -7185,11 +7185,11 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/aggregated_account_summary' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/aggregated_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
             }
@@ -7197,7 +7197,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -7213,7 +7213,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/aggregated_account_summary' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/aggregated_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
             }
@@ -7221,7 +7221,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -7471,11 +7471,11 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/funding_account_summary' \
+            curl --location 'https://trades.stg.gravitymarkets.io/full/v1/funding_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
             }
@@ -7483,7 +7483,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {
@@ -7499,7 +7499,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/funding_account_summary' \
+            curl --location 'https://trades.stg.gravitymarkets.io/lite/v1/funding_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
             }
@@ -7507,7 +7507,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://trades.stg.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
             -x '
             {

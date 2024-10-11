@@ -282,11 +282,11 @@ STREAM: v1.mini.s
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -301,7 +301,7 @@ STREAM: v1.mini.s
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -316,7 +316,7 @@ STREAM: v1.mini.s
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -331,7 +331,7 @@ STREAM: v1.mini.s
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -346,7 +346,7 @@ STREAM: v1.mini.s
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -361,7 +361,7 @@ STREAM: v1.mini.s
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -837,11 +837,11 @@ STREAM: v1.mini.d
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -856,7 +856,7 @@ STREAM: v1.mini.d
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -871,7 +871,7 @@ STREAM: v1.mini.d
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -886,7 +886,7 @@ STREAM: v1.mini.d
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -901,7 +901,7 @@ STREAM: v1.mini.d
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -916,7 +916,7 @@ STREAM: v1.mini.d
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -1418,11 +1418,11 @@ STREAM: v1.ticker.s
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1437,7 +1437,7 @@ STREAM: v1.ticker.s
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1452,7 +1452,7 @@ STREAM: v1.ticker.s
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -1467,7 +1467,7 @@ STREAM: v1.ticker.s
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -1482,7 +1482,7 @@ STREAM: v1.ticker.s
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -1497,7 +1497,7 @@ STREAM: v1.ticker.s
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -1999,11 +1999,11 @@ STREAM: v1.ticker.d
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2018,7 +2018,7 @@ STREAM: v1.ticker.d
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2033,7 +2033,7 @@ STREAM: v1.ticker.d
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -2048,7 +2048,7 @@ STREAM: v1.ticker.d
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -2063,7 +2063,7 @@ STREAM: v1.ticker.d
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -2078,7 +2078,7 @@ STREAM: v1.ticker.d
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -2558,11 +2558,11 @@ STREAM: v1.book.s
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2577,7 +2577,7 @@ STREAM: v1.book.s
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2592,7 +2592,7 @@ STREAM: v1.book.s
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -2607,7 +2607,7 @@ STREAM: v1.book.s
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -2622,7 +2622,7 @@ STREAM: v1.book.s
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -2637,7 +2637,7 @@ STREAM: v1.book.s
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -2859,7 +2859,7 @@ STREAM: v1.book.d
             "method": "subscribe",
             "params": {
                 "stream": "v1.book.d",
-                "selectors": ["BTC_USDT_Perp@500"]
+                "selectors": ["BTC_USDT_Perp@500-50"]
             },
             "id": 123
         }
@@ -2870,7 +2870,7 @@ STREAM: v1.book.d
             "jsonrpc": "2.0",
             "result": {
                 "stream": "v1.book.d",
-                "subs": ["BTC_USDT_Perp@500"],
+                "subs": ["BTC_USDT_Perp@500-50"],
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
@@ -2886,7 +2886,7 @@ STREAM: v1.book.d
             "method": "unsubscribe",
             "params": {
                 "stream": "v1.book.d",
-                "selectors": ["BTC_USDT_Perp@500"]
+                "selectors": ["BTC_USDT_Perp@500-50"]
             },
             "id": 123
         }
@@ -2897,7 +2897,7 @@ STREAM: v1.book.d
             "jsonrpc": "2.0",
             "result": {
                 "stream": "v1.book.d",
-                "unsubs": ["BTC_USDT_Perp@500"]
+                "unsubs": ["BTC_USDT_Perp@500-50"]
             },
             "id": 123
         }
@@ -2918,7 +2918,7 @@ STREAM: v1.book.d
         {
             "request_id":1,
             "stream":"v1.book.d",
-            "subs":["BTC_USDT_Perp@500"],
+            "subs":["BTC_USDT_Perp@500-50"],
             "unsubs":[],
             "num_snapshots":[1],
             "first_sequence_number":[2813]
@@ -3035,7 +3035,7 @@ STREAM: v1.book.d
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500"]
+                    "selectors": ["BTC_USDT_Perp@500-50"]
                 },
                 "id": 123
             }
@@ -3050,7 +3050,7 @@ STREAM: v1.book.d
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500"]
+                    "selectors": ["BTC_USDT_Perp@500-50"]
                 },
                 "id": 123
             }
@@ -3080,7 +3080,7 @@ STREAM: v1.book.d
                 "m": "subscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500"]
+                    "s1": ["BTC_USDT_Perp@500-50"]
                 },
                 "i": 123
             }
@@ -3095,7 +3095,7 @@ STREAM: v1.book.d
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500"]
+                    "s1": ["BTC_USDT_Perp@500-50"]
                 },
                 "i": 123
             }
@@ -3115,18 +3115,18 @@ STREAM: v1.book.d
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500"]
+                    "selectors": ["BTC_USDT_Perp@500-50"]
                 },
                 "id": 123
             }
@@ -3134,14 +3134,14 @@ STREAM: v1.book.d
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500"]
+                    "selectors": ["BTC_USDT_Perp@500-50"]
                 },
                 "id": 123
             }
@@ -3149,7 +3149,7 @@ STREAM: v1.book.d
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -3164,14 +3164,14 @@ STREAM: v1.book.d
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
                 "m": "subscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500"]
+                    "s1": ["BTC_USDT_Perp@500-50"]
                 },
                 "i": 123
             }
@@ -3179,14 +3179,14 @@ STREAM: v1.book.d
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500"]
+                    "s1": ["BTC_USDT_Perp@500-50"]
                 },
                 "i": 123
             }
@@ -3194,7 +3194,7 @@ STREAM: v1.book.d
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -3217,7 +3217,7 @@ STREAM: v1.book.d
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500"]
+                    "selectors": ["BTC_USDT_Perp@500-50"]
                 },
                 "id": 123
             }
@@ -3232,7 +3232,7 @@ STREAM: v1.book.d
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500"]
+                    "selectors": ["BTC_USDT_Perp@500-50"]
                 },
                 "id": 123
             }
@@ -3262,7 +3262,7 @@ STREAM: v1.book.d
                 "m": "subscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500"]
+                    "s1": ["BTC_USDT_Perp@500-50"]
                 },
                 "i": 123
             }
@@ -3277,7 +3277,7 @@ STREAM: v1.book.d
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500"]
+                    "s1": ["BTC_USDT_Perp@500-50"]
                 },
                 "i": 123
             }
@@ -3308,7 +3308,7 @@ STREAM: v1.book.d
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500"]
+                    "selectors": ["BTC_USDT_Perp@500-50"]
                 },
                 "id": 123
             }
@@ -3323,7 +3323,7 @@ STREAM: v1.book.d
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.book.d",
-                    "selectors": ["BTC_USDT_Perp@500"]
+                    "selectors": ["BTC_USDT_Perp@500-50"]
                 },
                 "id": 123
             }
@@ -3353,7 +3353,7 @@ STREAM: v1.book.d
                 "m": "subscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500"]
+                    "s1": ["BTC_USDT_Perp@500-50"]
                 },
                 "i": 123
             }
@@ -3368,7 +3368,7 @@ STREAM: v1.book.d
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.book.d",
-                    "s1": ["BTC_USDT_Perp@500"]
+                    "s1": ["BTC_USDT_Perp@500-50"]
                 },
                 "i": 123
             }
@@ -3671,11 +3671,11 @@ STREAM: v1.trade
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3690,7 +3690,7 @@ STREAM: v1.trade
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3705,7 +3705,7 @@ STREAM: v1.trade
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -3720,7 +3720,7 @@ STREAM: v1.trade
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -3735,7 +3735,7 @@ STREAM: v1.trade
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -3750,7 +3750,7 @@ STREAM: v1.trade
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -4225,11 +4225,11 @@ STREAM: v1.candle
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4244,7 +4244,7 @@ STREAM: v1.candle
             ```
         !!! example "Unsubscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4259,7 +4259,7 @@ STREAM: v1.candle
             ```
         !!! example "Legacy Subscribe Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,
@@ -4274,7 +4274,7 @@ STREAM: v1.candle
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -4289,7 +4289,7 @@ STREAM: v1.candle
             ```
         !!! example "Unsubscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -4304,7 +4304,7 @@ STREAM: v1.candle
             ```
         !!! example "Legacy Subscribe Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws" \
             -x '
             {
                 "request_id":1,

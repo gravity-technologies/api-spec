@@ -152,11 +152,11 @@ LITE ENDPOINT: lite/v1/instrument
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/instrument' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/instrument' \
             --data '{
                 "instrument": "BTC_USDT_Perp"
             }
@@ -164,7 +164,7 @@ LITE ENDPOINT: lite/v1/instrument
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -180,7 +180,7 @@ LITE ENDPOINT: lite/v1/instrument
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/instrument' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/instrument' \
             --data '{
                 "i": "BTC_USDT_Perp"
             }
@@ -188,7 +188,7 @@ LITE ENDPOINT: lite/v1/instrument
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -449,11 +449,11 @@ LITE ENDPOINT: lite/v1/all_instruments
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/all_instruments' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/all_instruments' \
             --data '{
                 "is_active": true
             }
@@ -461,7 +461,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -477,7 +477,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/all_instruments' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/all_instruments' \
             --data '{
                 "ia": true
             }
@@ -485,7 +485,7 @@ LITE ENDPOINT: lite/v1/all_instruments
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -770,11 +770,11 @@ LITE ENDPOINT: lite/v1/instruments
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/instruments' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/instruments' \
             --data '{
                 "kind": ["PERPETUAL"],
                 "base": ["BTC", "ETH"],
@@ -786,7 +786,7 @@ LITE ENDPOINT: lite/v1/instruments
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -806,7 +806,7 @@ LITE ENDPOINT: lite/v1/instruments
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/instruments' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/instruments' \
             --data '{
                 "k": ["PERPETUAL"],
                 "b": ["BTC", "ETH"],
@@ -818,7 +818,7 @@ LITE ENDPOINT: lite/v1/instruments
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -1115,11 +1115,11 @@ LITE ENDPOINT: lite/v1/mini
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/mini' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/mini' \
             --data '{
                 "instrument": "BTC_USDT_Perp"
             }
@@ -1127,7 +1127,7 @@ LITE ENDPOINT: lite/v1/mini
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1143,7 +1143,7 @@ LITE ENDPOINT: lite/v1/mini
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/mini' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/mini' \
             --data '{
                 "i": "BTC_USDT_Perp"
             }
@@ -1151,7 +1151,7 @@ LITE ENDPOINT: lite/v1/mini
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -1437,11 +1437,11 @@ LITE ENDPOINT: lite/v1/ticker
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/ticker' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/ticker' \
             --data '{
                 "instrument": "BTC_USDT_Perp"
             }
@@ -1449,7 +1449,7 @@ LITE ENDPOINT: lite/v1/ticker
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1465,7 +1465,7 @@ LITE ENDPOINT: lite/v1/ticker
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/ticker' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/ticker' \
             --data '{
                 "i": "BTC_USDT_Perp"
             }
@@ -1473,7 +1473,7 @@ LITE ENDPOINT: lite/v1/ticker
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -1744,11 +1744,11 @@ LITE ENDPOINT: lite/v1/book
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/book' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/book' \
             --data '{
                 "instrument": "BTC_USDT_Perp",
                 "depth": 50
@@ -1757,7 +1757,7 @@ LITE ENDPOINT: lite/v1/book
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1774,7 +1774,7 @@ LITE ENDPOINT: lite/v1/book
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/book' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/book' \
             --data '{
                 "i": "BTC_USDT_Perp",
                 "d": 50
@@ -1783,7 +1783,7 @@ LITE ENDPOINT: lite/v1/book
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -2058,11 +2058,11 @@ LITE ENDPOINT: lite/v1/trade
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/trade' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trade' \
             --data '{
                 "instrument": "BTC_USDT_Perp",
                 "limit": 500
@@ -2071,7 +2071,7 @@ LITE ENDPOINT: lite/v1/trade
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2088,7 +2088,7 @@ LITE ENDPOINT: lite/v1/trade
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/trade' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/trade' \
             --data '{
                 "i": "BTC_USDT_Perp",
                 "l": 500
@@ -2097,7 +2097,7 @@ LITE ENDPOINT: lite/v1/trade
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -2391,11 +2391,11 @@ LITE ENDPOINT: lite/v1/trade_history
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/trade_history' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/trade_history' \
             --data '{
                 "instrument": "BTC_USDT_Perp",
                 "start_time": "1697788800000000000",
@@ -2407,7 +2407,7 @@ LITE ENDPOINT: lite/v1/trade_history
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2427,7 +2427,7 @@ LITE ENDPOINT: lite/v1/trade_history
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/trade_history' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/trade_history' \
             --data '{
                 "i": "BTC_USDT_Perp",
                 "st": "1697788800000000000",
@@ -2439,7 +2439,7 @@ LITE ENDPOINT: lite/v1/trade_history
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -2771,11 +2771,11 @@ LITE ENDPOINT: lite/v1/kline
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/kline' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/kline' \
             --data '{
                 "instrument": "BTC_USDT_Perp",
                 "interval": "CI_1_M",
@@ -2789,7 +2789,7 @@ LITE ENDPOINT: lite/v1/kline
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2811,7 +2811,7 @@ LITE ENDPOINT: lite/v1/kline
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/kline' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/kline' \
             --data '{
                 "i": "BTC_USDT_Perp",
                 "i1": "CI_1_M",
@@ -2825,7 +2825,7 @@ LITE ENDPOINT: lite/v1/kline
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",
@@ -3151,11 +3151,11 @@ LITE ENDPOINT: lite/v1/funding
             ' -w 360
             ```
         </section>
-    === "STAGING"
+    === "STG"
         <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
         !!! example "REST Full"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/funding' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/full/v1/funding' \
             --data '{
                 "instrument": "BTC_USDT_Perp",
                 "start_time": "1697788800000000000",
@@ -3167,7 +3167,7 @@ LITE ENDPOINT: lite/v1/funding
             ```
         !!! example "JSONRPC Full"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/full" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3187,7 +3187,7 @@ LITE ENDPOINT: lite/v1/funding
         <section markdown="1" style="float: right; width: 50%;">
         !!! example "REST Lite"
             ``` { .bash .copy }
-            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/funding' \
+            curl --location 'https://market-data.stg.gravitymarkets.io/lite/v1/funding' \
             --data '{
                 "i": "BTC_USDT_Perp",
                 "st": "1697788800000000000",
@@ -3199,7 +3199,7 @@ LITE ENDPOINT: lite/v1/funding
             ```
         !!! example "JSONRPC Lite"
             ``` { .bash .copy }
-            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            wscat -c "wss://market-data.stg.gravitymarkets.io/ws/lite" \
             -x '
             {
                 "j": "2.0",

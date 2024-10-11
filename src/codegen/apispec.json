@@ -8,8 +8,8 @@
           "url": "market-data.dev.gravitymarkets.io"
         },
         {
-          "name": "staging",
-          "url": "market-data.staging.gravitymarkets.io"
+          "name": "stg",
+          "url": "market-data.stg.gravitymarkets.io"
         },
         {
           "name": "testnet",
@@ -638,8 +638,8 @@
           "url": "trades.dev.gravitymarkets.io"
         },
         {
-          "name": "staging",
-          "url": "trades.staging.gravitymarkets.io"
+          "name": "stg",
+          "url": "trades.stg.gravitymarkets.io"
         },
         {
           "name": "testnet",
@@ -8303,98 +8303,6 @@
           "example": "'52'",
           "comment": [
             "The number of maker"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiGetLPConfigRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "kind",
-          "lite_name": "k",
-          "semantic_type": "Kind",
-          "json_type": "Kind",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'PERPETUAL'",
-          "comment": [
-            "The kind filter to apply"
-          ]
-        },
-        {
-          "name": "base",
-          "lite_name": "b",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC'",
-          "comment": [
-            "The base filter to apply"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiGetLPConfigResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "spread_score_multiplier",
-          "lite_name": "ss",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1000000000'",
-          "comment": [
-            "The spread score multiplier"
-          ]
-        },
-        {
-          "name": "depth_score_multiplier",
-          "lite_name": "ds",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1000000000'",
-          "comment": [
-            "The depth score multiplier"
-          ]
-        },
-        {
-          "name": "market_share_multiplier",
-          "lite_name": "ms",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1000000000'",
-          "comment": [
-            "The market share multiplier"
-          ]
-        },
-        {
-          "name": "is_lp_maker",
-          "lite_name": "il",
-          "semantic_type": "bool",
-          "json_type": "boolean",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "example": "true",
-          "comment": [
-            "Is LP maker"
           ]
         }
       ],
