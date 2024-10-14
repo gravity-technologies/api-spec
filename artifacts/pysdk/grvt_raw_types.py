@@ -1961,7 +1961,7 @@ class ApiFindTraderLeaderboardResponse:
 @dataclass
 class WSOrderFeedSelectorV1:
     """
-    Subscribes to a feed of order updates pertaining to orders made by your account.
+    TestSubscribes to a feed of order updates pertaining to orders made by your account.
     Each Order can be uniquely identified by its `order_id` or `client_order_id`.
     To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).
     Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`).
