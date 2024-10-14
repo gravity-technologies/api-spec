@@ -11273,6 +11273,13 @@
           "comment": [
             "the order has multiple legs, but multiple legs are not supported by this venue"
           ]
+        },
+        {
+          "name": "EXCEED_MAX_POSITION_SIZE",
+          "value": 26,
+          "comment": [
+            "the order would have caused the subaccount to exceed the max position size"
+          ]
         }
       ],
       "comment": []
