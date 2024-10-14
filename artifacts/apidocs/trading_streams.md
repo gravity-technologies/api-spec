@@ -726,7 +726,7 @@ STREAM: v1.state
         {
             "stream": "v1.state",
             "selector": "BTC_USDT_Perp",
-            "sequence_number": "872634876",
+            "sequence_number": "8726348733",
             "feed": {
                 "order_id": "10000101000203040506",
                 "client_order_id": "23042",
@@ -745,7 +745,7 @@ STREAM: v1.state
         {
             "s": "v1.state",
             "s1": "BTC_USDT_Perp",
-            "sn": "872634876",
+            "sn": "8726348733",
             "f": {
                 "oi": "10000101000203040506",
                 "co": "23042",

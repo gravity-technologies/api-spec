@@ -9191,7 +9191,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "example": "'872634876'",
+          "example": "'8726348733'",
           "comment": [
             "A running sequence number that determines global message order within the specific stream"
           ]
