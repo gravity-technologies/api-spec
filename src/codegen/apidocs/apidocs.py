@@ -16,6 +16,8 @@ IGNORE_SECONDARY_SELECTORS = {
 IGNORE_FIELD_PATHS = [
     ["ApiCreateOrderRequest", "Order", "state"],
     ["ApiCreateOrderRequest", "Order", "order_id"],
+    ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "state"],
+    ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "order_id"],
 ]
 
 

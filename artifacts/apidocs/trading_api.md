@@ -261,7 +261,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "method": "v1/create_order",
                 "params": {
                     "order": {
-                        "order_id": "0x1234567890abcdef",
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "is_market": false,
                         "time_in_force": "GOOD_TILL_TIME",
@@ -285,13 +284,6 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000"
                         },
-                        "state": {
-                            "status": "PENDING",
-                            "reject_reason": "CLIENT_CANCEL",
-                            "book_size": ["3.0", "6.0"],
-                            "traded_size": ["3.0", "6.0"],
-                            "update_time": "1697788800000000000"
-                        }
                     }
                 },
                 "id": 123
@@ -343,7 +335,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": "v1/create_order",
                 "p": {
                     "o": {
-                        "oi": "0x1234567890abcdef",
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "im": false,
                         "ti": "GOOD_TILL_TIME",
@@ -367,13 +358,6 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000"
                         },
-                        "s1": {
-                            "s": "PENDING",
-                            "rr": "CLIENT_CANCEL",
-                            "bs": ["3.0", "6.0"],
-                            "ts": ["3.0", "6.0"],
-                            "ut": "1697788800000000000"
-                        }
                     }
                 },
                 "i": 123
@@ -426,7 +410,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "method": "v1/create_order",
                 "params": {
                     "order": {
-                        "order_id": "0x1234567890abcdef",
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "is_market": false,
                         "time_in_force": "GOOD_TILL_TIME",
@@ -450,13 +433,6 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000"
                         },
-                        "state": {
-                            "status": "PENDING",
-                            "reject_reason": "CLIENT_CANCEL",
-                            "book_size": ["3.0", "6.0"],
-                            "traded_size": ["3.0", "6.0"],
-                            "update_time": "1697788800000000000"
-                        }
                     }
                 },
                 "id": 123
@@ -508,7 +484,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": "v1/create_order",
                 "p": {
                     "o": {
-                        "oi": "0x1234567890abcdef",
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "im": false,
                         "ti": "GOOD_TILL_TIME",
@@ -532,13 +507,6 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000"
                         },
-                        "s1": {
-                            "s": "PENDING",
-                            "rr": "CLIENT_CANCEL",
-                            "bs": ["3.0", "6.0"],
-                            "ts": ["3.0", "6.0"],
-                            "ut": "1697788800000000000"
-                        }
                     }
                 },
                 "i": 123
@@ -591,7 +559,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "method": "v1/create_order",
                 "params": {
                     "order": {
-                        "order_id": "0x1234567890abcdef",
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "is_market": false,
                         "time_in_force": "GOOD_TILL_TIME",
@@ -615,13 +582,6 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000"
                         },
-                        "state": {
-                            "status": "PENDING",
-                            "reject_reason": "CLIENT_CANCEL",
-                            "book_size": ["3.0", "6.0"],
-                            "traded_size": ["3.0", "6.0"],
-                            "update_time": "1697788800000000000"
-                        }
                     }
                 },
                 "id": 123
@@ -673,7 +633,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": "v1/create_order",
                 "p": {
                     "o": {
-                        "oi": "0x1234567890abcdef",
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "im": false,
                         "ti": "GOOD_TILL_TIME",
@@ -697,13 +656,6 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000"
                         },
-                        "s1": {
-                            "s": "PENDING",
-                            "rr": "CLIENT_CANCEL",
-                            "bs": ["3.0", "6.0"],
-                            "ts": ["3.0", "6.0"],
-                            "ut": "1697788800000000000"
-                        }
                     }
                 },
                 "i": 123
@@ -756,7 +708,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "method": "v1/create_order",
                 "params": {
                     "order": {
-                        "order_id": "0x1234567890abcdef",
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "is_market": false,
                         "time_in_force": "GOOD_TILL_TIME",
@@ -780,13 +731,6 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000"
                         },
-                        "state": {
-                            "status": "PENDING",
-                            "reject_reason": "CLIENT_CANCEL",
-                            "book_size": ["3.0", "6.0"],
-                            "traded_size": ["3.0", "6.0"],
-                            "update_time": "1697788800000000000"
-                        }
                     }
                 },
                 "id": 123
@@ -838,7 +782,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": "v1/create_order",
                 "p": {
                     "o": {
-                        "oi": "0x1234567890abcdef",
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "im": false,
                         "ti": "GOOD_TILL_TIME",
@@ -862,13 +805,6 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000"
                         },
-                        "s1": {
-                            "s": "PENDING",
-                            "rr": "CLIENT_CANCEL",
-                            "bs": ["3.0", "6.0"],
-                            "ts": ["3.0", "6.0"],
-                            "ut": "1697788800000000000"
-                        }
                     }
                 },
                 "i": 123
