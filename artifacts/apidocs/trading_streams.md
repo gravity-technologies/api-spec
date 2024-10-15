@@ -123,9 +123,9 @@ STREAM: v1.order
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -164,9 +164,9 @@ STREAM: v1.order
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 },
                 "m": {
                     "co": "23042",
@@ -205,7 +205,7 @@ STREAM: v1.order
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1000",
+                "code": 1000,
                 "message": "You need to authenticate prior to using this functionality"
             },
             "id": 123
@@ -216,7 +216,7 @@ STREAM: v1.order
         {
             "j": "2.0",
             "e": {
-                "c": "1000",
+                "c": 1000,
                 "m": "You need to authenticate prior to using this functionality"
             },
             "i": 123
@@ -782,7 +782,7 @@ STREAM: v1.state
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1000",
+                "code": 1000,
                 "message": "You need to authenticate prior to using this functionality"
             },
             "id": 123
@@ -793,7 +793,7 @@ STREAM: v1.state
         {
             "j": "2.0",
             "e": {
-                "c": "1000",
+                "c": 1000,
                 "m": "You need to authenticate prior to using this functionality"
             },
             "i": 123
@@ -1378,7 +1378,7 @@ STREAM: v1.fill
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1000",
+                "code": 1000,
                 "message": "You need to authenticate prior to using this functionality"
             },
             "id": 123
@@ -1389,7 +1389,7 @@ STREAM: v1.fill
         {
             "j": "2.0",
             "e": {
-                "c": "1000",
+                "c": 1000,
                 "m": "You need to authenticate prior to using this functionality"
             },
             "i": 123
@@ -1963,7 +1963,7 @@ STREAM: v1.position
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1000",
+                "code": 1000,
                 "message": "You need to authenticate prior to using this functionality"
             },
             "id": 123
@@ -1974,7 +1974,7 @@ STREAM: v1.position
         {
             "j": "2.0",
             "e": {
-                "c": "1000",
+                "c": 1000,
                 "m": "You need to authenticate prior to using this functionality"
             },
             "i": 123
@@ -2527,7 +2527,7 @@ STREAM: v1.deposit
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1001",
+                "code": 1001,
                 "message": "You are not authorized to access this functionality"
             },
             "id": 123
@@ -2538,7 +2538,7 @@ STREAM: v1.deposit
         {
             "j": "2.0",
             "e": {
-                "c": "1001",
+                "c": 1001,
                 "m": "You are not authorized to access this functionality"
             },
             "i": 123
@@ -3060,9 +3060,9 @@ STREAM: v1.transfer
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 }
             }
         }
@@ -3084,9 +3084,9 @@ STREAM: v1.transfer
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 }
             }
         }
@@ -3111,7 +3111,7 @@ STREAM: v1.transfer
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1001",
+                "code": 1001,
                 "message": "You are not authorized to access this functionality"
             },
             "id": 123
@@ -3122,7 +3122,7 @@ STREAM: v1.transfer
         {
             "j": "2.0",
             "e": {
-                "c": "1001",
+                "c": 1001,
                 "m": "You are not authorized to access this functionality"
             },
             "i": 123
@@ -3642,9 +3642,9 @@ STREAM: v1.withdrawal
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 }
             }
         }
@@ -3664,9 +3664,9 @@ STREAM: v1.withdrawal
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 }
             }
         }
@@ -3690,7 +3690,7 @@ STREAM: v1.withdrawal
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1001",
+                "code": 1001,
                 "message": "You are not authorized to access this functionality"
             },
             "id": 123
@@ -3701,7 +3701,7 @@ STREAM: v1.withdrawal
         {
             "j": "2.0",
             "e": {
-                "c": "1001",
+                "c": 1001,
                 "m": "You are not authorized to access this functionality"
             },
             "i": 123
