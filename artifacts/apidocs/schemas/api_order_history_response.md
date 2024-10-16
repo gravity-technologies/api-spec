@@ -99,3 +99,4 @@
                 |`NO_TRADE_PERMISSION` = 23|the signature used to sign the order has no trade permission|
                 |`UNSUPPORTED_TIME_IN_FORCE` = 24|the order payload does not contain a supported TimeInForce value|
                 |`MULTI_LEGGED_ORDER` = 25|the order has multiple legs, but multiple legs are not supported by this venue|
+                |`EXCEED_MAX_POSITION_SIZE` = 26|the order would have caused the subaccount to exceed the max position size|
