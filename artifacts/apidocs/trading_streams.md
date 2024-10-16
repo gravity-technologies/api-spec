@@ -134,8 +134,8 @@ STREAM: v1.order
                 "state": {
                     "status": "PENDING",
                     "reject_reason": "CLIENT_CANCEL",
-                    "book_size": ["3.0", "6.0"],
-                    "traded_size": ["3.0", "6.0"],
+                    "book_size": ["10.5"],
+                    "traded_size": ["1.5"],
                     "update_time": "1697788800000000000"
                 }
             }
@@ -175,8 +175,8 @@ STREAM: v1.order
                 "s1": {
                     "s": "PENDING",
                     "rr": "CLIENT_CANCEL",
-                    "bs": ["3.0", "6.0"],
-                    "ts": ["3.0", "6.0"],
+                    "bs": ["10.5"],
+                    "ts": ["1.5"],
                     "ut": "1697788800000000000"
                 }
             }
@@ -733,8 +733,8 @@ STREAM: v1.state
                 "order_state": {
                     "status": "PENDING",
                     "reject_reason": "CLIENT_CANCEL",
-                    "book_size": ["3.0", "6.0"],
-                    "traded_size": ["3.0", "6.0"],
+                    "book_size": ["10.5"],
+                    "traded_size": ["1.5"],
                     "update_time": "1697788800000000000"
                 }
             }
@@ -752,8 +752,8 @@ STREAM: v1.state
                 "os": {
                     "s": "PENDING",
                     "rr": "CLIENT_CANCEL",
-                    "bs": ["3.0", "6.0"],
-                    "ts": ["3.0", "6.0"],
+                    "bs": ["10.5"],
+                    "ts": ["1.5"],
                     "ut": "1697788800000000000"
                 }
             }

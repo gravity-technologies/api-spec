@@ -6165,7 +6165,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
-          "example": "['3.0', '6.0']",
+          "example": "['10.5']",
           "comment": [
             "The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs"
           ]
@@ -6178,7 +6178,7 @@
           "index": 3,
           "array_depth": 1,
           "optional": false,
-          "example": "['3.0', '6.0']",
+          "example": "['1.5']",
           "comment": [
             "The total number of assets traded. Sorted in same order as Order.Legs"
           ]
@@ -11272,6 +11272,13 @@
           "value": 25,
           "comment": [
             "the order has multiple legs, but multiple legs are not supported by this venue"
+          ]
+        },
+        {
+          "name": "EXCEED_MAX_POSITION_SIZE",
+          "value": 26,
+          "comment": [
+            "the order would have caused the subaccount to exceed the max position size"
           ]
         }
       ],
