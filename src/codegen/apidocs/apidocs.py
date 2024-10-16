@@ -12,6 +12,14 @@ IGNORE_SECONDARY_SELECTORS = {
     "StreamOrderbookDeltaV1": ["depth"],
 }
 
+# hacks to remove unused fields
+IGNORE_FIELD_PATHS = [
+    ["ApiCreateOrderRequest", "Order", "state"],
+    ["ApiCreateOrderRequest", "Order", "order_id"],
+    ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "state"],
+    ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "order_id"],
+]
+
 
 def generate(spec_root: SpecRoot) -> None:
     ctx = CodegenCtx(spec_root)
@@ -584,11 +592,16 @@ def write_struct_example_with_generics(
     is_root: bool,
     is_full: bool = True,
     generic: Struct | None = None,
+    field_path: list[str] = [],
 ) -> None:
     md.writeln("{")
     md.indent()
 
+    field_path = field_path + [struct.name]
+
     for i, field in enumerate(struct.fields):
+        if field_path + [field.name] in IGNORE_FIELD_PATHS:
+            continue
         fn = field.name if is_full else field.lite_name
         comma = "," if i < len(struct.fields) - 1 else ""
         md.write(f'"{fn}": ')
@@ -596,11 +609,17 @@ def write_struct_example_with_generics(
             md.write("[")
         if field.json_type == "object":
             write_struct_example_with_generics(
-                ctx, md, cast(Struct, generic), False, is_full, generic
+                ctx, md, cast(Struct, generic), False, is_full, generic, field_path
             )
         elif field.json_type in ctx.struct_map:
             write_struct_example_with_generics(
-                ctx, md, ctx.struct_map[field.json_type], False, is_full, generic
+                ctx,
+                md,
+                ctx.struct_map[field.json_type],
+                False,
+                is_full,
+                generic,
+                field_path,
             )
         else:
             md.write(get_field_example(ctx, struct, field))
@@ -820,6 +839,9 @@ def get_field_example(ctx: CodegenCtx, struct: Struct, field: Field) -> str:
     # To allow environment variable injection in the example
     if field.example and "$" in field.example:
         example_value = field.example
+    elif field.example and field.json_type == "integer":
+        example_value = field.example.replace("'", "")
+        example_value = example_value.replace('"', "")
     elif field.example:
         example_value = field.example.replace("'", '"')
     elif field.json_type in ctx.enum_map:

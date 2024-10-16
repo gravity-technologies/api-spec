@@ -1628,12 +1628,12 @@ LITE ENDPOINT: lite/v1/book
                 "bids": [{
                     "price": "65038.01",
                     "size": "3456.78",
-                    "num_orders": "123"
+                    "num_orders": 123
                 }],
                 "asks": [{
                     "price": "65038.01",
                     "size": "3456.78",
-                    "num_orders": "123"
+                    "num_orders": 123
                 }]
             }
         }
@@ -1647,12 +1647,12 @@ LITE ENDPOINT: lite/v1/book
                 "b": [{
                     "p": "65038.01",
                     "s": "3456.78",
-                    "no": "123"
+                    "no": 123
                 }],
                 "a": [{
                     "p": "65038.01",
                     "s": "3456.78",
-                    "no": "123"
+                    "no": 123
                 }]
             }
         }
@@ -3036,7 +3036,7 @@ LITE ENDPOINT: lite/v1/funding
         {
             "result": [{
                 "instrument": "BTC_USDT_Perp",
-                "funding_rate": "6.78",
+                "funding_rate": 6.78,
                 "funding_time": "1697788800000000000",
                 "mark_price": "65038.01"
             }],
@@ -3048,7 +3048,7 @@ LITE ENDPOINT: lite/v1/funding
         {
             "r": [{
                 "i": "BTC_USDT_Perp",
-                "fr": "6.78",
+                "fr": 6.78,
                 "ft": "1697788800000000000",
                 "mp": "65038.01"
             }],

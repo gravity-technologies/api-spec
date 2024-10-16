@@ -164,7 +164,7 @@ STREAM: v1.mini.s
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1002",
+                "code": 1002,
                 "message": "Internal Server Error"
             },
             "id": 123
@@ -175,7 +175,7 @@ STREAM: v1.mini.s
         {
             "j": "2.0",
             "e": {
-                "c": "1002",
+                "c": 1002,
                 "m": "Internal Server Error"
             },
             "i": 123
@@ -719,7 +719,7 @@ STREAM: v1.mini.d
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1002",
+                "code": 1002,
                 "message": "Internal Server Error"
             },
             "id": 123
@@ -730,7 +730,7 @@ STREAM: v1.mini.d
         {
             "j": "2.0",
             "e": {
-                "c": "1002",
+                "c": 1002,
                 "m": "Internal Server Error"
             },
             "i": 123
@@ -1300,7 +1300,7 @@ STREAM: v1.ticker.s
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1002",
+                "code": 1002,
                 "message": "Internal Server Error"
             },
             "id": 123
@@ -1311,7 +1311,7 @@ STREAM: v1.ticker.s
         {
             "j": "2.0",
             "e": {
-                "c": "1002",
+                "c": 1002,
                 "m": "Internal Server Error"
             },
             "i": 123
@@ -1881,7 +1881,7 @@ STREAM: v1.ticker.d
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1002",
+                "code": 1002,
                 "message": "Internal Server Error"
             },
             "id": 123
@@ -1892,7 +1892,7 @@ STREAM: v1.ticker.d
         {
             "j": "2.0",
             "e": {
-                "c": "1002",
+                "c": 1002,
                 "m": "Internal Server Error"
             },
             "i": 123
@@ -2385,12 +2385,12 @@ STREAM: v1.book.s
                 "bids": [{
                     "price": "65038.01",
                     "size": "3456.78",
-                    "num_orders": "123"
+                    "num_orders": 123
                 }],
                 "asks": [{
                     "price": "65038.01",
                     "size": "3456.78",
-                    "num_orders": "123"
+                    "num_orders": 123
                 }]
             }
         }
@@ -2407,12 +2407,12 @@ STREAM: v1.book.s
                 "b": [{
                     "p": "65038.01",
                     "s": "3456.78",
-                    "no": "123"
+                    "no": 123
                 }],
                 "a": [{
                     "p": "65038.01",
                     "s": "3456.78",
-                    "no": "123"
+                    "no": 123
                 }]
             }
         }
@@ -2440,7 +2440,7 @@ STREAM: v1.book.s
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1002",
+                "code": 1002,
                 "message": "Internal Server Error"
             },
             "id": 123
@@ -2451,7 +2451,7 @@ STREAM: v1.book.s
         {
             "j": "2.0",
             "e": {
-                "c": "1002",
+                "c": 1002,
                 "m": "Internal Server Error"
             },
             "i": 123
@@ -2943,12 +2943,12 @@ STREAM: v1.book.d
                 "bids": [{
                     "price": "65038.01",
                     "size": "3456.78",
-                    "num_orders": "123"
+                    "num_orders": 123
                 }],
                 "asks": [{
                     "price": "65038.01",
                     "size": "3456.78",
-                    "num_orders": "123"
+                    "num_orders": 123
                 }]
             }
         }
@@ -2965,12 +2965,12 @@ STREAM: v1.book.d
                 "b": [{
                     "p": "65038.01",
                     "s": "3456.78",
-                    "no": "123"
+                    "no": 123
                 }],
                 "a": [{
                     "p": "65038.01",
                     "s": "3456.78",
-                    "no": "123"
+                    "no": 123
                 }]
             }
         }
@@ -2997,7 +2997,7 @@ STREAM: v1.book.d
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1002",
+                "code": 1002,
                 "message": "Internal Server Error"
             },
             "id": 123
@@ -3008,7 +3008,7 @@ STREAM: v1.book.d
         {
             "j": "2.0",
             "e": {
-                "c": "1002",
+                "c": 1002,
                 "m": "Internal Server Error"
             },
             "i": 123
@@ -3553,7 +3553,7 @@ STREAM: v1.trade
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1002",
+                "code": 1002,
                 "message": "Internal Server Error"
             },
             "id": 123
@@ -3564,7 +3564,7 @@ STREAM: v1.trade
         {
             "j": "2.0",
             "e": {
-                "c": "1002",
+                "c": 1002,
                 "m": "Internal Server Error"
             },
             "i": 123
@@ -4107,7 +4107,7 @@ STREAM: v1.candle
         {
             "jsonrpc": "2.0",
             "error": {
-                "code": "1002",
+                "code": 1002,
                 "message": "Internal Server Error"
             },
             "id": 123
@@ -4118,7 +4118,7 @@ STREAM: v1.candle
         {
             "j": "2.0",
             "e": {
-                "c": "1002",
+                "c": 1002,
                 "m": "Internal Server Error"
             },
             "i": 123

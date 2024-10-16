@@ -18,7 +18,6 @@ LITE ENDPOINT: lite/v1/create_order
         ``` { .json .copy }
         {
             "order": {
-                "order_id": "0x1234567890abcdef",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "is_market": false,
                 "time_in_force": "GOOD_TILL_TIME",
@@ -34,21 +33,14 @@ LITE ENDPOINT: lite/v1/create_order
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 },
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000"
                 },
-                "state": {
-                    "status": "PENDING",
-                    "reject_reason": "CLIENT_CANCEL",
-                    "book_size": ["3.0", "6.0"],
-                    "traded_size": ["3.0", "6.0"],
-                    "update_time": "1697788800000000000"
-                }
             }
         }
         ```
@@ -56,7 +48,6 @@ LITE ENDPOINT: lite/v1/create_order
         ``` { .json .copy }
         {
             "o": {
-                "oi": "0x1234567890abcdef",
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "im": false,
                 "ti": "GOOD_TILL_TIME",
@@ -72,21 +63,14 @@ LITE ENDPOINT: lite/v1/create_order
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 },
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000"
                 },
-                "s1": {
-                    "s": "PENDING",
-                    "rr": "CLIENT_CANCEL",
-                    "bs": ["3.0", "6.0"],
-                    "ts": ["3.0", "6.0"],
-                    "ut": "1697788800000000000"
-                }
             }
         }
         ```
@@ -117,9 +101,9 @@ LITE ENDPOINT: lite/v1/create_order
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -155,9 +139,9 @@ LITE ENDPOINT: lite/v1/create_order
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 },
                 "m": {
                     "co": "23042",
@@ -240,7 +224,6 @@ LITE ENDPOINT: lite/v1/create_order
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "order": {
-                    "order_id": "0x1234567890abcdef",
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "is_market": false,
                     "time_in_force": "GOOD_TILL_TIME",
@@ -256,21 +239,14 @@ LITE ENDPOINT: lite/v1/create_order
                         "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": "1234567890"
+                        "nonce": 1234567890
                     },
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000"
                     },
-                    "state": {
-                        "status": "PENDING",
-                        "reject_reason": "CLIENT_CANCEL",
-                        "book_size": ["3.0", "6.0"],
-                        "traded_size": ["3.0", "6.0"],
-                        "update_time": "1697788800000000000"
-                    }
                 }
             }
             '
@@ -285,7 +261,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "method": "v1/create_order",
                 "params": {
                     "order": {
-                        "order_id": "0x1234567890abcdef",
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "is_market": false,
                         "time_in_force": "GOOD_TILL_TIME",
@@ -301,21 +276,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                             "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                             "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                            "v": "28",
+                            "v": 28,
                             "expiration": "1697788800000000000",
-                            "nonce": "1234567890"
+                            "nonce": 1234567890
                         },
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000"
                         },
-                        "state": {
-                            "status": "PENDING",
-                            "reject_reason": "CLIENT_CANCEL",
-                            "book_size": ["3.0", "6.0"],
-                            "traded_size": ["3.0", "6.0"],
-                            "update_time": "1697788800000000000"
-                        }
                     }
                 },
                 "id": 123
@@ -330,7 +298,6 @@ LITE ENDPOINT: lite/v1/create_order
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "o": {
-                    "oi": "0x1234567890abcdef",
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "im": false,
                     "ti": "GOOD_TILL_TIME",
@@ -346,21 +313,14 @@ LITE ENDPOINT: lite/v1/create_order
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "e": "1697788800000000000",
-                        "n": "1234567890"
+                        "n": 1234567890
                     },
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000"
                     },
-                    "s1": {
-                        "s": "PENDING",
-                        "rr": "CLIENT_CANCEL",
-                        "bs": ["3.0", "6.0"],
-                        "ts": ["3.0", "6.0"],
-                        "ut": "1697788800000000000"
-                    }
                 }
             }
             '
@@ -375,7 +335,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": "v1/create_order",
                 "p": {
                     "o": {
-                        "oi": "0x1234567890abcdef",
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "im": false,
                         "ti": "GOOD_TILL_TIME",
@@ -391,21 +350,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                             "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                             "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                            "v": "28",
+                            "v": 28,
                             "e": "1697788800000000000",
-                            "n": "1234567890"
+                            "n": 1234567890
                         },
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000"
                         },
-                        "s1": {
-                            "s": "PENDING",
-                            "rr": "CLIENT_CANCEL",
-                            "bs": ["3.0", "6.0"],
-                            "ts": ["3.0", "6.0"],
-                            "ut": "1697788800000000000"
-                        }
                     }
                 },
                 "i": 123
@@ -421,7 +373,6 @@ LITE ENDPOINT: lite/v1/create_order
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "order": {
-                    "order_id": "0x1234567890abcdef",
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "is_market": false,
                     "time_in_force": "GOOD_TILL_TIME",
@@ -437,21 +388,14 @@ LITE ENDPOINT: lite/v1/create_order
                         "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": "1234567890"
+                        "nonce": 1234567890
                     },
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000"
                     },
-                    "state": {
-                        "status": "PENDING",
-                        "reject_reason": "CLIENT_CANCEL",
-                        "book_size": ["3.0", "6.0"],
-                        "traded_size": ["3.0", "6.0"],
-                        "update_time": "1697788800000000000"
-                    }
                 }
             }
             '
@@ -466,7 +410,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "method": "v1/create_order",
                 "params": {
                     "order": {
-                        "order_id": "0x1234567890abcdef",
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "is_market": false,
                         "time_in_force": "GOOD_TILL_TIME",
@@ -482,21 +425,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                             "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                             "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                            "v": "28",
+                            "v": 28,
                             "expiration": "1697788800000000000",
-                            "nonce": "1234567890"
+                            "nonce": 1234567890
                         },
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000"
                         },
-                        "state": {
-                            "status": "PENDING",
-                            "reject_reason": "CLIENT_CANCEL",
-                            "book_size": ["3.0", "6.0"],
-                            "traded_size": ["3.0", "6.0"],
-                            "update_time": "1697788800000000000"
-                        }
                     }
                 },
                 "id": 123
@@ -511,7 +447,6 @@ LITE ENDPOINT: lite/v1/create_order
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "o": {
-                    "oi": "0x1234567890abcdef",
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "im": false,
                     "ti": "GOOD_TILL_TIME",
@@ -527,21 +462,14 @@ LITE ENDPOINT: lite/v1/create_order
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "e": "1697788800000000000",
-                        "n": "1234567890"
+                        "n": 1234567890
                     },
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000"
                     },
-                    "s1": {
-                        "s": "PENDING",
-                        "rr": "CLIENT_CANCEL",
-                        "bs": ["3.0", "6.0"],
-                        "ts": ["3.0", "6.0"],
-                        "ut": "1697788800000000000"
-                    }
                 }
             }
             '
@@ -556,7 +484,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": "v1/create_order",
                 "p": {
                     "o": {
-                        "oi": "0x1234567890abcdef",
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "im": false,
                         "ti": "GOOD_TILL_TIME",
@@ -572,21 +499,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                             "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                             "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                            "v": "28",
+                            "v": 28,
                             "e": "1697788800000000000",
-                            "n": "1234567890"
+                            "n": 1234567890
                         },
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000"
                         },
-                        "s1": {
-                            "s": "PENDING",
-                            "rr": "CLIENT_CANCEL",
-                            "bs": ["3.0", "6.0"],
-                            "ts": ["3.0", "6.0"],
-                            "ut": "1697788800000000000"
-                        }
                     }
                 },
                 "i": 123
@@ -602,7 +522,6 @@ LITE ENDPOINT: lite/v1/create_order
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "order": {
-                    "order_id": "0x1234567890abcdef",
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "is_market": false,
                     "time_in_force": "GOOD_TILL_TIME",
@@ -618,21 +537,14 @@ LITE ENDPOINT: lite/v1/create_order
                         "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": "1234567890"
+                        "nonce": 1234567890
                     },
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000"
                     },
-                    "state": {
-                        "status": "PENDING",
-                        "reject_reason": "CLIENT_CANCEL",
-                        "book_size": ["3.0", "6.0"],
-                        "traded_size": ["3.0", "6.0"],
-                        "update_time": "1697788800000000000"
-                    }
                 }
             }
             '
@@ -647,7 +559,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "method": "v1/create_order",
                 "params": {
                     "order": {
-                        "order_id": "0x1234567890abcdef",
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "is_market": false,
                         "time_in_force": "GOOD_TILL_TIME",
@@ -663,21 +574,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                             "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                             "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                            "v": "28",
+                            "v": 28,
                             "expiration": "1697788800000000000",
-                            "nonce": "1234567890"
+                            "nonce": 1234567890
                         },
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000"
                         },
-                        "state": {
-                            "status": "PENDING",
-                            "reject_reason": "CLIENT_CANCEL",
-                            "book_size": ["3.0", "6.0"],
-                            "traded_size": ["3.0", "6.0"],
-                            "update_time": "1697788800000000000"
-                        }
                     }
                 },
                 "id": 123
@@ -692,7 +596,6 @@ LITE ENDPOINT: lite/v1/create_order
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "o": {
-                    "oi": "0x1234567890abcdef",
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "im": false,
                     "ti": "GOOD_TILL_TIME",
@@ -708,21 +611,14 @@ LITE ENDPOINT: lite/v1/create_order
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "e": "1697788800000000000",
-                        "n": "1234567890"
+                        "n": 1234567890
                     },
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000"
                     },
-                    "s1": {
-                        "s": "PENDING",
-                        "rr": "CLIENT_CANCEL",
-                        "bs": ["3.0", "6.0"],
-                        "ts": ["3.0", "6.0"],
-                        "ut": "1697788800000000000"
-                    }
                 }
             }
             '
@@ -737,7 +633,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": "v1/create_order",
                 "p": {
                     "o": {
-                        "oi": "0x1234567890abcdef",
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "im": false,
                         "ti": "GOOD_TILL_TIME",
@@ -753,21 +648,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                             "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                             "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                            "v": "28",
+                            "v": 28,
                             "e": "1697788800000000000",
-                            "n": "1234567890"
+                            "n": 1234567890
                         },
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000"
                         },
-                        "s1": {
-                            "s": "PENDING",
-                            "rr": "CLIENT_CANCEL",
-                            "bs": ["3.0", "6.0"],
-                            "ts": ["3.0", "6.0"],
-                            "ut": "1697788800000000000"
-                        }
                     }
                 },
                 "i": 123
@@ -783,7 +671,6 @@ LITE ENDPOINT: lite/v1/create_order
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "order": {
-                    "order_id": "0x1234567890abcdef",
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "is_market": false,
                     "time_in_force": "GOOD_TILL_TIME",
@@ -799,21 +686,14 @@ LITE ENDPOINT: lite/v1/create_order
                         "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": "1234567890"
+                        "nonce": 1234567890
                     },
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000"
                     },
-                    "state": {
-                        "status": "PENDING",
-                        "reject_reason": "CLIENT_CANCEL",
-                        "book_size": ["3.0", "6.0"],
-                        "traded_size": ["3.0", "6.0"],
-                        "update_time": "1697788800000000000"
-                    }
                 }
             }
             '
@@ -828,7 +708,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "method": "v1/create_order",
                 "params": {
                     "order": {
-                        "order_id": "0x1234567890abcdef",
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "is_market": false,
                         "time_in_force": "GOOD_TILL_TIME",
@@ -844,21 +723,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                             "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                             "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                            "v": "28",
+                            "v": 28,
                             "expiration": "1697788800000000000",
-                            "nonce": "1234567890"
+                            "nonce": 1234567890
                         },
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000"
                         },
-                        "state": {
-                            "status": "PENDING",
-                            "reject_reason": "CLIENT_CANCEL",
-                            "book_size": ["3.0", "6.0"],
-                            "traded_size": ["3.0", "6.0"],
-                            "update_time": "1697788800000000000"
-                        }
                     }
                 },
                 "id": 123
@@ -873,7 +745,6 @@ LITE ENDPOINT: lite/v1/create_order
             --header "Cookie: $GRVT_COOKIE" \
             --data '{
                 "o": {
-                    "oi": "0x1234567890abcdef",
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "im": false,
                     "ti": "GOOD_TILL_TIME",
@@ -889,21 +760,14 @@ LITE ENDPOINT: lite/v1/create_order
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "e": "1697788800000000000",
-                        "n": "1234567890"
+                        "n": 1234567890
                     },
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000"
                     },
-                    "s1": {
-                        "s": "PENDING",
-                        "rr": "CLIENT_CANCEL",
-                        "bs": ["3.0", "6.0"],
-                        "ts": ["3.0", "6.0"],
-                        "ut": "1697788800000000000"
-                    }
                 }
             }
             '
@@ -918,7 +782,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": "v1/create_order",
                 "p": {
                     "o": {
-                        "oi": "0x1234567890abcdef",
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "im": false,
                         "ti": "GOOD_TILL_TIME",
@@ -934,21 +797,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                             "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                             "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                            "v": "28",
+                            "v": 28,
                             "e": "1697788800000000000",
-                            "n": "1234567890"
+                            "n": 1234567890
                         },
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000"
                         },
-                        "s1": {
-                            "s": "PENDING",
-                            "rr": "CLIENT_CANCEL",
-                            "bs": ["3.0", "6.0"],
-                            "ts": ["3.0", "6.0"],
-                            "ut": "1697788800000000000"
-                        }
                     }
                 },
                 "i": 123
@@ -1691,9 +1547,9 @@ LITE ENDPOINT: lite/v1/order
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -1729,9 +1585,9 @@ LITE ENDPOINT: lite/v1/order
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 },
                 "m": {
                     "co": "23042",
@@ -2085,9 +1941,9 @@ LITE ENDPOINT: lite/v1/open_orders
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -2123,9 +1979,9 @@ LITE ENDPOINT: lite/v1/open_orders
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 },
                 "m": {
                     "co": "23042",
@@ -2501,9 +2357,9 @@ LITE ENDPOINT: lite/v1/order_history
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -2540,9 +2396,9 @@ LITE ENDPOINT: lite/v1/order_history
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 },
                 "m": {
                     "co": "23042",
@@ -4481,9 +4337,9 @@ LITE ENDPOINT: lite/v1/transfer
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                "v": "28",
+                "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": "1234567890"
+                "nonce": 1234567890
             }
         }
         ```
@@ -4500,9 +4356,9 @@ LITE ENDPOINT: lite/v1/transfer
                 "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                "v": "28",
+                "v": 28,
                 "e": "1697788800000000000",
-                "n": "1234567890"
+                "n": 1234567890
             }
         }
         ```
@@ -4580,9 +4436,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 }
             }
             '
@@ -4606,9 +4462,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": "1234567890"
+                        "nonce": 1234567890
                     }
                 },
                 "id": 123
@@ -4632,9 +4488,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 }
             }
             '
@@ -4658,9 +4514,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "e": "1697788800000000000",
-                        "n": "1234567890"
+                        "n": 1234567890
                     }
                 },
                 "i": 123
@@ -4685,9 +4541,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 }
             }
             '
@@ -4711,9 +4567,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": "1234567890"
+                        "nonce": 1234567890
                     }
                 },
                 "id": 123
@@ -4737,9 +4593,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 }
             }
             '
@@ -4763,9 +4619,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "e": "1697788800000000000",
-                        "n": "1234567890"
+                        "n": 1234567890
                     }
                 },
                 "i": 123
@@ -4790,9 +4646,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 }
             }
             '
@@ -4816,9 +4672,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": "1234567890"
+                        "nonce": 1234567890
                     }
                 },
                 "id": 123
@@ -4842,9 +4698,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 }
             }
             '
@@ -4868,9 +4724,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "e": "1697788800000000000",
-                        "n": "1234567890"
+                        "n": 1234567890
                     }
                 },
                 "i": 123
@@ -4895,9 +4751,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 }
             }
             '
@@ -4921,9 +4777,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": "1234567890"
+                        "nonce": 1234567890
                     }
                 },
                 "id": 123
@@ -4947,9 +4803,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 }
             }
             '
@@ -4973,9 +4829,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "e": "1697788800000000000",
-                        "n": "1234567890"
+                        "n": 1234567890
                     }
                 },
                 "i": 123
@@ -5038,9 +4894,9 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 },
                 "event_time": "1697788800000000000"
             }],
@@ -5062,9 +4918,9 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 },
                 "et": "1697788800000000000"
             }],
@@ -5405,9 +5261,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                "v": "28",
+                "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": "1234567890"
+                "nonce": 1234567890
             }
         }
         ```
@@ -5422,9 +5278,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                 "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                "v": "28",
+                "v": 28,
                 "e": "1697788800000000000",
-                "n": "1234567890"
+                "n": 1234567890
             }
         }
         ```
@@ -5500,9 +5356,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 }
             }
             '
@@ -5524,9 +5380,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": "1234567890"
+                        "nonce": 1234567890
                     }
                 },
                 "id": 123
@@ -5548,9 +5404,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 }
             }
             '
@@ -5572,9 +5428,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "e": "1697788800000000000",
-                        "n": "1234567890"
+                        "n": 1234567890
                     }
                 },
                 "i": 123
@@ -5597,9 +5453,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 }
             }
             '
@@ -5621,9 +5477,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": "1234567890"
+                        "nonce": 1234567890
                     }
                 },
                 "id": 123
@@ -5645,9 +5501,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 }
             }
             '
@@ -5669,9 +5525,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "e": "1697788800000000000",
-                        "n": "1234567890"
+                        "n": 1234567890
                     }
                 },
                 "i": 123
@@ -5694,9 +5550,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 }
             }
             '
@@ -5718,9 +5574,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": "1234567890"
+                        "nonce": 1234567890
                     }
                 },
                 "id": 123
@@ -5742,9 +5598,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 }
             }
             '
@@ -5766,9 +5622,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "e": "1697788800000000000",
-                        "n": "1234567890"
+                        "n": 1234567890
                     }
                 },
                 "i": 123
@@ -5791,9 +5647,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 }
             }
             '
@@ -5815,9 +5671,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": "1234567890"
+                        "nonce": 1234567890
                     }
                 },
                 "id": 123
@@ -5839,9 +5695,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 }
             }
             '
@@ -5863,9 +5719,9 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                        "v": "28",
+                        "v": 28,
                         "e": "1697788800000000000",
-                        "n": "1234567890"
+                        "n": 1234567890
                     }
                 },
                 "i": 123
@@ -5926,9 +5782,9 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": "1234567890"
+                    "nonce": 1234567890
                 },
                 "event_time": "1697788800000000000"
             }],
@@ -5948,9 +5804,9 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
-                    "v": "28",
+                    "v": 28,
                     "e": "1697788800000000000",
-                    "n": "1234567890"
+                    "n": 1234567890
                 },
                 "et": "1697788800000000000"
             }],
