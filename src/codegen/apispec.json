@@ -4985,6 +4985,19 @@
             "Optional Field which is used to match the response by the client.",
             "If not passed, this field will not be returned"
           ]
+        },
+        {
+          "name": "method",
+          "lite_name": "m",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'subscribe'",
+          "comment": [
+            "The method used in the request for this response (eg: `subscribe` / `unsubscribe` / `v1/instrument` )"
+          ]
         }
       ],
       "comment": [
@@ -5892,6 +5905,97 @@
       "comment": []
     },
     {
+      "name": "WSUnsubscribeAllParams",
+      "is_root": true,
+      "fields": [],
+      "comment": [
+        "All V1 Websocket Unsubscription Request to unsubscribe from all active websocket streams."
+      ]
+    },
+    {
+      "name": "StreamReference",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.ticker.d'",
+          "comment": [
+            "The channel to subscribe to (eg: ticker.s / ticker.d)"
+          ]
+        },
+        {
+          "name": "selectors",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
+          "comment": [
+            "The list of selectors for the stream"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "WSUnsubscribeAllResult",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream_reference",
+          "lite_name": "sr",
+          "semantic_type": "StreamReference",
+          "json_type": "StreamReference",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of stream references unsubscribed from"
+          ]
+        }
+      ],
+      "comment": [
+        "Returns a list of all rooms the client has unsubscribed from."
+      ]
+    },
+    {
+      "name": "WSListStreamsParams",
+      "is_root": true,
+      "fields": [],
+      "comment": [
+        "List down all the streams this connection has connected to."
+      ]
+    },
+    {
+      "name": "WSListStreamsResult",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream_reference",
+          "lite_name": "sr",
+          "semantic_type": "StreamReference",
+          "json_type": "StreamReference",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of stream references  the connection is connected to"
+          ]
+        }
+      ],
+      "comment": [
+        "Returns a list of all rooms the client has subscribed to."
+      ]
+    },
+    {
       "name": "ApiGetAllInstrumentsRequest",
       "is_root": true,
       "fields": [
@@ -6194,6 +6298,19 @@
           "example": "'1697788800000000000'",
           "comment": [
             "Time at which the order was updated by GRVT, expressed in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "avg_fill_price",
+          "lite_name": "af",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['60000.4']",
+          "comment": [
+            "The average fill price of the order. Sorted in same order as Order.Legs"
           ]
         }
       ],
@@ -6973,6 +7090,71 @@
           "optional": false,
           "comment": [
             "The order object for the requested filter"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "InternalPreOrderMarginCheckRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub-account for which the order is being evaluated"
+          ]
+        },
+        {
+          "name": "open_order_legs",
+          "lite_name": "oo",
+          "semantic_type": "OrderLeg",
+          "json_type": "OrderLeg",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Open orders created by this sub-account"
+          ]
+        },
+        {
+          "name": "new_order_legs",
+          "lite_name": "no",
+          "semantic_type": "OrderLeg",
+          "json_type": "OrderLeg",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "New orders this sub-account is attempting to create"
+          ]
+        }
+      ],
+      "comment": [
+        "Pre-order margin check to determine if a new order can be created for a given sub-account"
+      ]
+    },
+    {
+      "name": "InternalPreOrderMarginCheckResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "True if the new order can be placed, false otherwise"
           ]
         }
       ],
@@ -11291,35 +11473,35 @@
           "name": "PENDING",
           "value": 1,
           "comment": [
-            "Order is waiting for Trigger Condition to be hit"
+            "Order has been sent to the matching engine and is pending a transition to open/filled/rejected."
           ]
         },
         {
           "name": "OPEN",
           "value": 2,
           "comment": [
-            "Order is actively matching on the orderbook, could be unfilled or partially filled"
+            "Order is actively matching on the matching engine, could be unfilled or partially filled."
           ]
         },
         {
           "name": "FILLED",
           "value": 3,
           "comment": [
-            "Order is fully filled and hence closed"
+            "Order is fully filled and hence closed. Taker Orders can transition directly from pending to filled, without going through open."
           ]
         },
         {
           "name": "REJECTED",
           "value": 4,
           "comment": [
-            "Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)"
+            "Order is rejected by matching engine since if fails a particular check (See OrderRejectReason). Once an order is open, it cannot be rejected."
           ]
         },
         {
           "name": "CANCELLED",
           "value": 5,
           "comment": [
-            "Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)"
+            "Order is cancelled by the user using one of the supported APIs (See OrderRejectReason). Before an order is open, it cannot be cancelled."
           ]
         }
       ],

@@ -162,15 +162,15 @@ class OrderRejectReason(Enum):
 
 
 class OrderStatus(Enum):
-    # Order is waiting for Trigger Condition to be hit
+    # Order has been sent to the matching engine and is pending a transition to open/filled/rejected.
     PENDING = "PENDING"
-    # Order is actively matching on the orderbook, could be unfilled or partially filled
+    # Order is actively matching on the matching engine, could be unfilled or partially filled.
     OPEN = "OPEN"
-    # Order is fully filled and hence closed
+    # Order is fully filled and hence closed. Taker Orders can transition directly from pending to filled, without going through open.
     FILLED = "FILLED"
-    # Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)
+    # Order is rejected by matching engine since if fails a particular check (See OrderRejectReason). Once an order is open, it cannot be rejected.
     REJECTED = "REJECTED"
-    # Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)
+    # Order is cancelled by the user using one of the supported APIs (See OrderRejectReason). Before an order is open, it cannot be cancelled.
     CANCELLED = "CANCELLED"
 
 
@@ -982,6 +982,8 @@ class JSONRPCResponse:
 
     # The JSON RPC version to use for the request
     jsonrpc: str
+    # The method used in the request for this response (eg: `subscribe` / `unsubscribe` / `v1/instrument` )
+    method: str
     # The result for the request
     result: Any | None = None
     # The error for the request
@@ -1251,6 +1253,36 @@ class WSCandlestickFeedDataV1:
 
 
 @dataclass
+class WSUnsubscribeAllParams:
+    pass
+
+
+@dataclass
+class StreamReference:
+    # The channel to subscribe to (eg: ticker.s / ticker.d)
+    stream: str
+    # The list of selectors for the stream
+    selectors: list[str]
+
+
+@dataclass
+class WSUnsubscribeAllResult:
+    # The list of stream references unsubscribed from
+    stream_reference: list[StreamReference]
+
+
+@dataclass
+class WSListStreamsParams:
+    pass
+
+
+@dataclass
+class WSListStreamsResult:
+    # The list of stream references  the connection is connected to
+    stream_reference: list[StreamReference]
+
+
+@dataclass
 class ApiGetAllInstrumentsRequest:
     # Fetch only active instruments
     is_active: bool | None = None
@@ -1334,6 +1366,8 @@ class OrderState:
     traded_size: list[str]
     # Time at which the order was updated by GRVT, expressed in unix nanoseconds
     update_time: str
+    # The average fill price of the order. Sorted in same order as Order.Legs
+    avg_fill_price: list[str]
 
 
 @dataclass
@@ -1540,6 +1574,22 @@ class ApiGetOrderRequest:
 class ApiGetOrderResponse:
     # The order object for the requested filter
     result: Order
+
+
+@dataclass
+class InternalPreOrderMarginCheckRequest:
+    # The sub-account for which the order is being evaluated
+    sub_account_id: str
+    # Open orders created by this sub-account
+    open_order_legs: list[OrderLeg]
+    # New orders this sub-account is attempting to create
+    new_order_legs: list[OrderLeg]
+
+
+@dataclass
+class InternalPreOrderMarginCheckResponse:
+    # True if the new order can be placed, false otherwise
+    result: bool
 
 
 @dataclass

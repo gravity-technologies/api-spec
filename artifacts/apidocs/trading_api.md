@@ -114,7 +114,8 @@ LITE ENDPOINT: lite/v1/create_order
                     "reject_reason": "CLIENT_CANCEL",
                     "book_size": ["10.5"],
                     "traded_size": ["1.5"],
-                    "update_time": "1697788800000000000"
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
                 }
             }
         }
@@ -152,7 +153,8 @@ LITE ENDPOINT: lite/v1/create_order
                     "rr": "CLIENT_CANCEL",
                     "bs": ["10.5"],
                     "ts": ["1.5"],
-                    "ut": "1697788800000000000"
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
                 }
             }
         }
@@ -1560,7 +1562,8 @@ LITE ENDPOINT: lite/v1/order
                     "reject_reason": "CLIENT_CANCEL",
                     "book_size": ["10.5"],
                     "traded_size": ["1.5"],
-                    "update_time": "1697788800000000000"
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
                 }
             }
         }
@@ -1598,7 +1601,8 @@ LITE ENDPOINT: lite/v1/order
                     "rr": "CLIENT_CANCEL",
                     "bs": ["10.5"],
                     "ts": ["1.5"],
-                    "ut": "1697788800000000000"
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
                 }
             }
         }
@@ -1954,7 +1958,8 @@ LITE ENDPOINT: lite/v1/open_orders
                     "reject_reason": "CLIENT_CANCEL",
                     "book_size": ["10.5"],
                     "traded_size": ["1.5"],
-                    "update_time": "1697788800000000000"
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
                 }
             }]
         }
@@ -1992,7 +1997,8 @@ LITE ENDPOINT: lite/v1/open_orders
                     "rr": "CLIENT_CANCEL",
                     "bs": ["10.5"],
                     "ts": ["1.5"],
-                    "ut": "1697788800000000000"
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
                 }
             }]
         }
@@ -2370,7 +2376,8 @@ LITE ENDPOINT: lite/v1/order_history
                     "reject_reason": "CLIENT_CANCEL",
                     "book_size": ["10.5"],
                     "traded_size": ["1.5"],
-                    "update_time": "1697788800000000000"
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
                 }
             }],
             "next": "Qw0918="
@@ -2409,7 +2416,8 @@ LITE ENDPOINT: lite/v1/order_history
                     "rr": "CLIENT_CANCEL",
                     "bs": ["10.5"],
                     "ts": ["1.5"],
-                    "ut": "1697788800000000000"
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
                 }
             }],
             "n": "Qw0918="
