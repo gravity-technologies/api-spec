@@ -658,7 +658,7 @@ STREAM: v1.mini.d
         **Full Feed Response**
         ``` { .json .copy }
         {
-            "stream": "v1.mini.s",
+            "stream": "v1.mini.d",
             "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
@@ -679,7 +679,7 @@ STREAM: v1.mini.d
         **Lite Feed Response**
         ``` { .json .copy }
         {
-            "s": "v1.mini.s",
+            "s": "v1.mini.d",
             "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
@@ -1794,7 +1794,7 @@ STREAM: v1.ticker.d
         **Full Feed Response**
         ``` { .json .copy }
         {
-            "stream": "v1.ticker.s",
+            "stream": "v1.ticker.d",
             "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
@@ -1828,7 +1828,7 @@ STREAM: v1.ticker.d
         **Lite Feed Response**
         ``` { .json .copy }
         {
-            "s": "v1.ticker.s",
+            "s": "v1.ticker.d",
             "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
@@ -2934,7 +2934,7 @@ STREAM: v1.book.d
         **Full Feed Response**
         ``` { .json .copy }
         {
-            "stream": "v1.book.s",
+            "stream": "v1.book.d",
             "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
@@ -2956,7 +2956,7 @@ STREAM: v1.book.d
         **Lite Feed Response**
         ``` { .json .copy }
         {
-            "s": "v1.book.s",
+            "s": "v1.book.d",
             "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
