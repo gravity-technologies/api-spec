@@ -804,6 +804,21 @@
               "code": 2070,
               "message": "Liquidation Order is not supported",
               "status": 400
+            },
+            {
+              "code": 2080,
+              "message": "Insufficient margin to create order",
+              "status": 400
+            },
+            {
+              "code": 2081,
+              "message": "Order Fill would result in exceeding maximum position size",
+              "status": 400
+            },
+            {
+              "code": 2082,
+              "message": "Pre-order check failed",
+              "status": 400
             }
           ]
         },
@@ -1016,6 +1031,37 @@
           "auth_required": true,
           "request": "ApiPositionsRequest",
           "response": "ApiPositionsResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Execution",
+          "name": "RPCFundingPaymentHistoryV1",
+          "version": 1,
+          "route": "/funding_payment_history",
+          "auth_required": true,
+          "request": "ApiFundingPaymentHistoryRequest",
+          "response": "ApiFundingPaymentHistoryResponse",
           "on_request_errors": [
             {
               "code": 1000,
@@ -2303,6 +2349,219 @@
       "comment": []
     },
     {
+      "name": "ApiFundingPaymentHistoryRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to request for"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "all",
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The perpetual instrument to filter for"
+          ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "now()",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "500",
+          "example": "500",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "''",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": [
+        "Query for all historical funding payments made by a single account.",
+        "",
+        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+      ]
+    },
+    {
+      "name": "FundingPayment",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID that made the funding payment"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The perpetual instrument being funded"
+          ]
+        },
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "Currency",
+          "json_type": "Currency",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency of the funding payment"
+          ]
+        },
+        {
+          "name": "amount",
+          "lite_name": "a",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'9.75'",
+          "comment": [
+            "The amount of the funding payment. Positive if paid, negative if received"
+          ]
+        },
+        {
+          "name": "tx_id",
+          "lite_name": "ti",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'209358'",
+          "comment": [
+            "The transaction ID of the funding payment.",
+            "Funding payments can be triggered by a trade, transfer, or liquidation.",
+            "The `tx_id` will match the corresponding `trade_id` or `tx_id`."
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiFundingPaymentHistoryResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "FundingPayment",
+          "json_type": "FundingPayment",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The funding payments matching the request asset"
+          ]
+        },
+        {
+          "name": "next",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiSubAccountSummaryRequest",
       "is_root": true,
       "fields": [
@@ -2849,6 +3108,44 @@
       "comment": [
         "The funding account summary, that reports the total equity and spot balances of a funding (main) account"
       ]
+    },
+    {
+      "name": "ApiListAggregatedAccountSummaryRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "main_account_ids",
+          "lite_name": "ma",
+          "semantic_type": "[]byte",
+          "json_type": "unknown",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of main account ID to request for"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiListAggregatedAccountSummaryResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "account_summaries",
+          "lite_name": "as",
+          "semantic_type": "ApiAggregatedAccountSummaryResponse",
+          "json_type": "ApiAggregatedAccountSummaryResponse",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of aggregated account summaries of requested main accounts"
+          ]
+        }
+      ],
+      "comment": []
     },
     {
       "name": "ApiOrderbookLevelsRequest",
@@ -4047,7 +4344,7 @@
           "optional": false,
           "example": "'0.01'",
           "comment": [
-            "The size of a single tick, expressed in quote asset decimal units"
+            "The size of a single tick, expressed in price decimal units"
           ]
         },
         {
@@ -4074,6 +4371,19 @@
           "example": "'1697788800000000000'",
           "comment": [
             "Creation time in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "max_position_size",
+          "lite_name": "mp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 15,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'100.0'",
+          "comment": [
+            "The maximum position size, expressed in base asset decimal units"
           ]
         }
       ],
@@ -4985,6 +5295,19 @@
             "Optional Field which is used to match the response by the client.",
             "If not passed, this field will not be returned"
           ]
+        },
+        {
+          "name": "method",
+          "lite_name": "m",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'subscribe'",
+          "comment": [
+            "The method used in the request for this response (eg: `subscribe` / `unsubscribe` / `v1/instrument` )"
+          ]
         }
       ],
       "comment": [
@@ -5892,6 +6215,97 @@
       "comment": []
     },
     {
+      "name": "WSUnsubscribeAllParams",
+      "is_root": true,
+      "fields": [],
+      "comment": [
+        "All V1 Websocket Unsubscription Request to unsubscribe from all active websocket streams."
+      ]
+    },
+    {
+      "name": "StreamReference",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.ticker.d'",
+          "comment": [
+            "The channel to subscribe to (eg: ticker.s / ticker.d)"
+          ]
+        },
+        {
+          "name": "selectors",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
+          "comment": [
+            "The list of selectors for the stream"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "WSUnsubscribeAllResult",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream_reference",
+          "lite_name": "sr",
+          "semantic_type": "StreamReference",
+          "json_type": "StreamReference",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of stream references unsubscribed from"
+          ]
+        }
+      ],
+      "comment": [
+        "Returns a list of all rooms the client has unsubscribed from."
+      ]
+    },
+    {
+      "name": "WSListStreamsParams",
+      "is_root": true,
+      "fields": [],
+      "comment": [
+        "List down all the streams this connection has connected to."
+      ]
+    },
+    {
+      "name": "WSListStreamsResult",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream_reference",
+          "lite_name": "sr",
+          "semantic_type": "StreamReference",
+          "json_type": "StreamReference",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of stream references  the connection is connected to"
+          ]
+        }
+      ],
+      "comment": [
+        "Returns a list of all rooms the client has subscribed to."
+      ]
+    },
+    {
       "name": "ApiGetAllInstrumentsRequest",
       "is_root": true,
       "fields": [
@@ -6194,6 +6608,19 @@
           "example": "'1697788800000000000'",
           "comment": [
             "Time at which the order was updated by GRVT, expressed in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "avg_fill_price",
+          "lite_name": "af",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['60000.4']",
+          "comment": [
+            "The average fill price of the order. Sorted in same order as Order.Legs"
           ]
         }
       ],
@@ -7508,6 +7935,64 @@
       "comment": []
     },
     {
+      "name": "ApiFindEcosystemEpochMetricResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "metric",
+          "lite_name": "m",
+          "semantic_type": "EcosystemMetric",
+          "json_type": "EcosystemMetric",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The epoch metric"
+          ]
+        },
+        {
+          "name": "rank",
+          "lite_name": "r",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'52'",
+          "comment": [
+            "The rank of the account in the ecosystem"
+          ]
+        },
+        {
+          "name": "total",
+          "lite_name": "t",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "52",
+          "comment": [
+            "The total number of accounts in the ecosystem"
+          ]
+        },
+        {
+          "name": "last_calculated_at",
+          "lite_name": "lc",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The time when the ecosystem points were last calculated"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "EcosystemLeaderboardUser",
       "is_root": true,
       "fields": [
@@ -7981,37 +8466,11 @@
           ]
         },
         {
-          "name": "lp_asset",
-          "lite_name": "la",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'10000'",
-          "comment": [
-            "The LP Asset"
-          ]
-        },
-        {
-          "name": "start_interval",
-          "lite_name": "si",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1726790400000000000'",
-          "comment": [
-            "Start time of the epoch - phase"
-          ]
-        },
-        {
           "name": "liquidity_score",
           "lite_name": "ls",
           "semantic_type": "uint256",
           "json_type": "string",
-          "index": 3,
+          "index": 1,
           "array_depth": 0,
           "optional": false,
           "example": "'10000101000203040506'",
@@ -8024,7 +8483,7 @@
           "lite_name": "r",
           "semantic_type": "uint32",
           "json_type": "integer",
-          "index": 4,
+          "index": 2,
           "array_depth": 0,
           "optional": false,
           "example": "'52'",
@@ -8111,7 +8570,8 @@
           "json_type": "Kind",
           "index": 0,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
+          "default": "0",
           "example": "'PERPETUAL'",
           "comment": [
             "The kind filter to apply"
@@ -8124,7 +8584,8 @@
           "json_type": "Currency",
           "index": 1,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
+          "default": "0",
           "example": "'BTC'",
           "comment": [
             "The base filter to apply"
@@ -8241,10 +8702,11 @@
           "json_type": "string",
           "index": 0,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
+          "default": "0",
           "example": "'1726790400000000000'",
           "comment": [
-            "Start time of the epoch - phase"
+            "Optional. Start time of the epoch - phase"
           ]
         },
         {
@@ -8254,10 +8716,11 @@
           "json_type": "Kind",
           "index": 1,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
+          "default": "0",
           "example": "'PERPETUAL'",
           "comment": [
-            "The kind filter to apply"
+            "Optional. The kind filter to apply"
           ]
         },
         {
@@ -8267,10 +8730,11 @@
           "json_type": "Currency",
           "index": 2,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
+          "default": "0",
           "example": "'BTC'",
           "comment": [
-            "The base filter to apply"
+            "Optional. The base filter to apply"
           ]
         }
       ],
@@ -8309,7 +8773,7 @@
       "comment": []
     },
     {
-      "name": "ApiGetLPConfigRequest",
+      "name": "ApiGetLPInfoRequest",
       "is_root": true,
       "fields": [
         {
@@ -8332,7 +8796,8 @@
           "json_type": "Currency",
           "index": 1,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
+          "default": "0",
           "example": "'BTC'",
           "comment": [
             "The base filter to apply"
@@ -8342,240 +8807,111 @@
       "comment": []
     },
     {
-      "name": "ApiGetLPConfigResponse",
+      "name": "ApiGetLPInfoResponse",
       "is_root": true,
       "fields": [
-        {
-          "name": "spread_score_multiplier",
-          "lite_name": "ss",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1000000000'",
-          "comment": [
-            "The spread score multiplier"
-          ]
-        },
-        {
-          "name": "depth_score_multiplier",
-          "lite_name": "ds",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1000000000'",
-          "comment": [
-            "The depth score multiplier"
-          ]
-        },
-        {
-          "name": "market_share_multiplier",
-          "lite_name": "ms",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1000000000'",
-          "comment": [
-            "The market share multiplier"
-          ]
-        },
         {
           "name": "is_lp_maker",
           "lite_name": "il",
           "semantic_type": "bool",
           "json_type": "boolean",
-          "index": 3,
+          "index": 0,
           "array_depth": 0,
           "optional": false,
           "example": "true",
           "comment": [
             "Is LP maker"
           ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiSubAccountTradeRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
         },
         {
-          "name": "interval",
-          "lite_name": "i1",
-          "semantic_type": "SubAccountTradeInterval",
-          "json_type": "SubAccountTradeInterval",
+          "name": "spread_score_value_multiplier",
+          "lite_name": "ss",
+          "semantic_type": "uint64",
+          "json_type": "string",
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "example": "'1000000000'",
           "comment": [
-            "The interval of each sub account trade"
+            "The spread score value multiplier"
           ]
         },
         {
-          "name": "sub_account_i_ds",
-          "lite_name": "sa",
+          "name": "depth_score_value_multiplier",
+          "lite_name": "ds",
           "semantic_type": "uint64",
           "json_type": "string",
           "index": 2,
-          "array_depth": 1,
+          "array_depth": 0,
           "optional": false,
-          "example": "['2376', '5821']",
+          "example": "'1000000000'",
           "comment": [
-            "The list of sub account ids to query"
+            "The depth score value multiplier"
           ]
         },
         {
-          "name": "start_interval",
-          "lite_name": "si",
-          "semantic_type": "timestamp",
+          "name": "market_share_value_multiplier",
+          "lite_name": "ms",
+          "semantic_type": "uint64",
           "json_type": "string",
           "index": 3,
           "array_depth": 0,
           "optional": false,
-          "example": "'1697788800000000000'",
+          "example": "'1000000000'",
           "comment": [
-            "Optional. The starting time in unix nanoseconds of a specific interval to query"
+            "The market share value multiplier"
           ]
         },
         {
-          "name": "start_time",
-          "lite_name": "st",
-          "semantic_type": "timestamp",
+          "name": "underlying_multiplier",
+          "lite_name": "um",
+          "semantic_type": "uint64",
           "json_type": "string",
           "index": 4,
           "array_depth": 0,
-          "optional": true,
-          "default": "0",
-          "example": "'1697788800000000000'",
+          "optional": false,
+          "example": "'52'",
           "comment": [
-            "Optional. Start time in unix nanoseconds"
+            "Underlying multiplier"
           ]
         },
         {
-          "name": "end_time",
-          "lite_name": "et",
-          "semantic_type": "timestamp",
+          "name": "market_share_multiplier",
+          "lite_name": "ms1",
+          "semantic_type": "uint64",
           "json_type": "string",
           "index": 5,
           "array_depth": 0,
-          "optional": true,
-          "default": "now()",
-          "example": "'1697788800000000000'",
-          "comment": [
-            "Optional. End time in unix nanoseconds"
-          ]
-        }
-      ],
-      "comment": [
-        "startTime are optional parameters. The semantics of these parameters are as follows:\u003cul\u003e"
-      ]
-    },
-    {
-      "name": "SubAccountTrade",
-      "is_root": false,
-      "fields": [
-        {
-          "name": "start_interval",
-          "lite_name": "si",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
           "optional": false,
-          "example": "'1697788800000000000'",
+          "example": "'1000000000'",
           "comment": [
-            "Start of calculation epoch"
+            "The market share multiplier, equal to the maker trading volume in the past 2 hours"
           ]
         },
         {
-          "name": "sub_account_id",
-          "lite_name": "sa",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 1,
+          "name": "ask_fast_market_multiplier",
+          "lite_name": "af",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 6,
           "array_depth": 0,
           "optional": false,
-          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "example": "'100'",
           "comment": [
-            "The sub account id"
+            "Ask fast market multiplier"
           ]
         },
         {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 2,
+          "name": "bid_fast_market_multiplier",
+          "lite_name": "bf",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 7,
           "array_depth": 0,
           "optional": false,
-          "example": "'BTC_USDT_Perp'",
+          "example": "'100'",
           "comment": [
-            "The instrument being represented"
-          ]
-        },
-        {
-          "name": "total_fee",
-          "lite_name": "tf",
-          "semantic_type": "int64",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'10000101000203040506'",
-          "comment": [
-            "Total fee paid"
-          ]
-        },
-        {
-          "name": "total_trade_volume",
-          "lite_name": "tt",
-          "semantic_type": "uint256",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'10000101000203040506'",
-          "comment": [
-            "Total volume traded"
-          ]
-        }
-      ],
-      "comment": [
-        ""
-      ]
-    },
-    {
-      "name": "ApiSubAccountTradeResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "SubAccountTrade",
-          "json_type": "SubAccountTrade",
-          "index": 0,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The sub account trade result set for given interval"
+            "Bid fast market multiplier"
           ]
         }
       ],
@@ -8690,6 +9026,32 @@
           "comment": [
             "The cursor to indicate when to start the next query from"
           ]
+        },
+        {
+          "name": "is_maker",
+          "lite_name": "im",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "Filter on the maker of the trade"
+          ]
+        },
+        {
+          "name": "is_taker",
+          "lite_name": "it",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "Filter on the taker of the trade"
+          ]
         }
       ],
       "comment": [
@@ -8737,6 +9099,19 @@
           "example": "'10000101000203040506'",
           "comment": [
             "Total volume traded"
+          ]
+        },
+        {
+          "name": "num_traded",
+          "lite_name": "nt",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "100",
+          "comment": [
+            "Number of trades"
           ]
         }
       ],
@@ -8817,12 +9192,12 @@
         {
           "name": "total_point",
           "lite_name": "tp",
-          "semantic_type": "uint64",
-          "json_type": "string",
+          "semantic_type": "float64",
+          "json_type": "number",
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "'10000101000203040506'",
+          "example": "'10000000.5'",
           "comment": [
             "Total trader point of this epoch/phase"
           ]
@@ -8921,12 +9296,12 @@
         {
           "name": "total_point",
           "lite_name": "tp",
-          "semantic_type": "uint64",
-          "json_type": "string",
+          "semantic_type": "float64",
+          "json_type": "number",
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "example": "'10000101000203040506'",
+          "example": "'10000000.5'",
           "comment": [
             "Total Trader point"
           ]
@@ -10220,21 +10595,21 @@
       "is_root": false,
       "fields": [
         {
-          "name": "tx_id",
-          "lite_name": "ti",
-          "semantic_type": "uint64",
+          "name": "l_1_hash",
+          "lite_name": "l1",
+          "semantic_type": "uint256",
           "json_type": "string",
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'1028403'",
+          "example": "'0x10000101000203040506'",
           "comment": [
-            "The transaction ID of the deposit"
+            "The L1 txHash of the deposit"
           ]
         },
         {
-          "name": "tx_hash",
-          "lite_name": "th",
+          "name": "l_2_hash",
+          "lite_name": "l2",
           "semantic_type": "uint256",
           "json_type": "string",
           "index": 1,
@@ -10242,7 +10617,7 @@
           "optional": false,
           "example": "'0x10000101000203040506'",
           "comment": [
-            "The txHash of the bridgemint event"
+            "The L2 txHash of the deposit"
           ]
         },
         {
@@ -10285,8 +10660,8 @@
           ]
         },
         {
-          "name": "event_time",
-          "lite_name": "et",
+          "name": "initiated_time",
+          "lite_name": "it",
           "semantic_type": "timestamp",
           "json_type": "string",
           "index": 5,
@@ -10294,7 +10669,33 @@
           "optional": false,
           "example": "'1697788800000000000'",
           "comment": [
-            "The timestamp of the deposit in unix nanoseconds"
+            "The timestamp when the deposit was initiated on L1 in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "confirmed_time",
+          "lite_name": "ct",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The timestamp when the deposit was confirmed on L2 in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "from_address",
+          "lite_name": "fa",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The address of the sender"
           ]
         }
       ],
@@ -11280,6 +11681,13 @@
           "comment": [
             "the order would have caused the subaccount to exceed the max position size"
           ]
+        },
+        {
+          "name": "EXCEED_MAX_SIGNATURE_EXPIRATION",
+          "value": 27,
+          "comment": [
+            "the signature supplied is more than 30 days in the future"
+          ]
         }
       ],
       "comment": []
@@ -11291,35 +11699,35 @@
           "name": "PENDING",
           "value": 1,
           "comment": [
-            "Order is waiting for Trigger Condition to be hit"
+            "Order has been sent to the matching engine and is pending a transition to open/filled/rejected."
           ]
         },
         {
           "name": "OPEN",
           "value": 2,
           "comment": [
-            "Order is actively matching on the orderbook, could be unfilled or partially filled"
+            "Order is actively matching on the matching engine, could be unfilled or partially filled."
           ]
         },
         {
           "name": "FILLED",
           "value": 3,
           "comment": [
-            "Order is fully filled and hence closed"
+            "Order is fully filled and hence closed. Taker Orders can transition directly from pending to filled, without going through open."
           ]
         },
         {
           "name": "REJECTED",
           "value": 4,
           "comment": [
-            "Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)"
+            "Order is rejected by matching engine since if fails a particular check (See OrderRejectReason). Once an order is open, it cannot be rejected."
           ]
         },
         {
           "name": "CANCELLED",
           "value": 5,
           "comment": [
-            "Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)"
+            "Order is cancelled by the user using one of the supported APIs (See OrderRejectReason). Before an order is open, it cannot be cancelled."
           ]
         }
       ],
