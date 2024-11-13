@@ -3,5 +3,5 @@
     |-|-|-|-|
     |account_id<br>`ai` |string|True|The off chain account id|
     |rank<br>`r` |integer|True|The rank of the account in the Trader|
-    |total_point<br>`tp` |string|True|Total Trader point|
+    |total_point<br>`tp` |number|True|Total Trader point|
     |twitter_username<br>`tu` |string|True|The twitter username of the account|

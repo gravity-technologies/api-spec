@@ -5,7 +5,7 @@
     |`CLIENT_CANCEL` = 1|client called a Cancel API|
     |`CLIENT_BULK_CANCEL` = 2|client called a Bulk Cancel API|
     |`CLIENT_SESSION_END` = 3|client called a Session Cancel API, or set the WebSocket connection to 'cancelOrdersOnTerminate'|
-    |`MARKET_CANCEL` = 4|the market order was cancelled after no/partial fill. Takes precedence over other TimeInForce cancel reasons|
+    |`MARKET_CANCEL` = 4|the market order was cancelled after no/partial fill. Lower precedence than other TimeInForce cancel reasons|
     |`IOC_CANCEL` = 5|the IOC order was cancelled after no/partial fill|
     |`AON_CANCEL` = 6|the AON order was cancelled as it could not be fully matched|
     |`FOK_CANCEL` = 7|the FOK order was cancelled as it could not be fully matched|
@@ -28,3 +28,5 @@
     |`UNSUPPORTED_TIME_IN_FORCE` = 24|the order payload does not contain a supported TimeInForce value|
     |`MULTI_LEGGED_ORDER` = 25|the order has multiple legs, but multiple legs are not supported by this venue|
     |`EXCEED_MAX_POSITION_SIZE` = 26|the order would have caused the subaccount to exceed the max position size|
+    |`EXCEED_MAX_SIGNATURE_EXPIRATION` = 27|the signature supplied is more than 30 days in the future|
+    |`MARKET_ORDER_WITH_LIMIT_PRICE` = 28|the market order has a limit price set|

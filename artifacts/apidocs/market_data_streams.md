@@ -44,7 +44,8 @@ STREAM: v1.mini.s
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -68,7 +69,8 @@ STREAM: v1.mini.s
                 "stream": "v1.mini.s",
                 "unsubs": ["BTC_USDT_Perp@500"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -167,7 +169,8 @@ STREAM: v1.mini.s
                 "code": 1002,
                 "message": "Internal Server Error"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -178,7 +181,8 @@ STREAM: v1.mini.s
                 "c": 1002,
                 "m": "Internal Server Error"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -599,7 +603,8 @@ STREAM: v1.mini.d
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -623,7 +628,8 @@ STREAM: v1.mini.d
                 "stream": "v1.mini.d",
                 "unsubs": ["BTC_USDT_Perp@500"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -722,7 +728,8 @@ STREAM: v1.mini.d
                 "code": 1002,
                 "message": "Internal Server Error"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -733,7 +740,8 @@ STREAM: v1.mini.d
                 "c": 1002,
                 "m": "Internal Server Error"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -1154,7 +1162,8 @@ STREAM: v1.ticker.s
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -1178,7 +1187,8 @@ STREAM: v1.ticker.s
                 "stream": "v1.ticker.s",
                 "unsubs": ["BTC_USDT_Perp@500"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -1303,7 +1313,8 @@ STREAM: v1.ticker.s
                 "code": 1002,
                 "message": "Internal Server Error"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -1314,7 +1325,8 @@ STREAM: v1.ticker.s
                 "c": 1002,
                 "m": "Internal Server Error"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -1735,7 +1747,8 @@ STREAM: v1.ticker.d
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -1759,7 +1772,8 @@ STREAM: v1.ticker.d
                 "stream": "v1.ticker.d",
                 "unsubs": ["BTC_USDT_Perp@500"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -1884,7 +1898,8 @@ STREAM: v1.ticker.d
                 "code": 1002,
                 "message": "Internal Server Error"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -1895,7 +1910,8 @@ STREAM: v1.ticker.d
                 "c": 1002,
                 "m": "Internal Server Error"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -2317,7 +2333,8 @@ STREAM: v1.book.s
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -2341,7 +2358,8 @@ STREAM: v1.book.s
                 "stream": "v1.book.s",
                 "unsubs": ["BTC_USDT_Perp@500-50"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -2443,7 +2461,8 @@ STREAM: v1.book.s
                 "code": 1002,
                 "message": "Internal Server Error"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -2454,7 +2473,8 @@ STREAM: v1.book.s
                 "c": 1002,
                 "m": "Internal Server Error"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -2875,7 +2895,8 @@ STREAM: v1.book.d
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -2899,7 +2920,8 @@ STREAM: v1.book.d
                 "stream": "v1.book.d",
                 "unsubs": ["BTC_USDT_Perp@500"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -3000,7 +3022,8 @@ STREAM: v1.book.d
                 "code": 1002,
                 "message": "Internal Server Error"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -3011,7 +3034,8 @@ STREAM: v1.book.d
                 "c": 1002,
                 "m": "Internal Server Error"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -3433,7 +3457,8 @@ STREAM: v1.trade
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -3457,7 +3482,8 @@ STREAM: v1.trade
                 "stream": "v1.trade",
                 "unsubs": ["BTC_USDT_Perp@500"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -3556,7 +3582,8 @@ STREAM: v1.trade
                 "code": 1002,
                 "message": "Internal Server Error"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -3567,7 +3594,8 @@ STREAM: v1.trade
                 "c": 1002,
                 "m": "Internal Server Error"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -3989,7 +4017,8 @@ STREAM: v1.candle
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -4013,7 +4042,8 @@ STREAM: v1.candle
                 "stream": "v1.candle",
                 "unsubs": ["BTC_USDT_Perp@CI_1_M-TRADE"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -4110,7 +4140,8 @@ STREAM: v1.candle
                 "code": 1002,
                 "message": "Internal Server Error"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -4121,7 +4152,8 @@ STREAM: v1.candle
                 "c": 1002,
                 "m": "Internal Server Error"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**

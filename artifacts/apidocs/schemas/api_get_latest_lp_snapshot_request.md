@@ -1,8 +1,8 @@
 !!! info "[ApiGetLatestLPSnapshotRequest](/../../schemas/api_get_latest_lp_snapshot_request)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |kind<br>`k` |Kind|True|The kind filter to apply|
-    |base<br>`b` |Currency|True|The base filter to apply|
+    |kind<br>`k` |Kind|False<br>`0`|The kind filter to apply|
+    |base<br>`b` |Currency|False<br>`0`|The base filter to apply|
     ??? info "[Kind](/../../schemas/kind)"
         The list of asset kinds that are supported on the GRVT exchange<br>
 

@@ -1,9 +1,8 @@
-!!! info "[ApiGetLPPointRequest](/../../schemas/api_get_lp_point_request)"
+!!! info "[ApiGetLPInfoRequest](/../../schemas/api_get_lp_info_request)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |start_interval<br>`si` |string|False<br>`0`|Optional. Start time of the epoch - phase|
-    |kind<br>`k` |Kind|False<br>`0`|Optional. The kind filter to apply|
-    |base<br>`b` |Currency|False<br>`0`|Optional. The base filter to apply|
+    |kind<br>`k` |Kind|True|The kind filter to apply|
+    |base<br>`b` |Currency|False<br>`0`|The base filter to apply|
     ??? info "[Kind](/../../schemas/kind)"
         The list of asset kinds that are supported on the GRVT exchange<br>
 

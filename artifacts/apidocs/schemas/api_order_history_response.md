@@ -62,14 +62,15 @@
             |book_size<br>`bs` |[string]|True|The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs|
             |traded_size<br>`ts` |[string]|True|The total number of assets traded. Sorted in same order as Order.Legs|
             |update_time<br>`ut` |string|True|Time at which the order was updated by GRVT, expressed in unix nanoseconds|
+            |avg_fill_price<br>`af` |[string]|True|The average fill price of the order. Sorted in same order as Order.Legs|
             ??? info "[OrderStatus](/../../schemas/order_status)"
                 |Value| Description |
                 |-|-|
-                |`PENDING` = 1|Order is waiting for Trigger Condition to be hit|
-                |`OPEN` = 2|Order is actively matching on the orderbook, could be unfilled or partially filled|
-                |`FILLED` = 3|Order is fully filled and hence closed|
-                |`REJECTED` = 4|Order is rejected by GRVT Backend since if fails a particular check (See OrderRejectReason)|
-                |`CANCELLED` = 5|Order is cancelled by the user using one of the supported APIs (See OrderRejectReason)|
+                |`PENDING` = 1|Order has been sent to the matching engine and is pending a transition to open/filled/rejected.|
+                |`OPEN` = 2|Order is actively matching on the matching engine, could be unfilled or partially filled.|
+                |`FILLED` = 3|Order is fully filled and hence closed. Taker Orders can transition directly from pending to filled, without going through open.|
+                |`REJECTED` = 4|Order is rejected by matching engine since if fails a particular check (See OrderRejectReason). Once an order is open, it cannot be rejected.|
+                |`CANCELLED` = 5|Order is cancelled by the user using one of the supported APIs (See OrderRejectReason). Before an order is open, it cannot be cancelled.|
             ??? info "[OrderRejectReason](/../../schemas/order_reject_reason)"
                 |Value| Description |
                 |-|-|
@@ -77,7 +78,7 @@
                 |`CLIENT_CANCEL` = 1|client called a Cancel API|
                 |`CLIENT_BULK_CANCEL` = 2|client called a Bulk Cancel API|
                 |`CLIENT_SESSION_END` = 3|client called a Session Cancel API, or set the WebSocket connection to 'cancelOrdersOnTerminate'|
-                |`MARKET_CANCEL` = 4|the market order was cancelled after no/partial fill. Takes precedence over other TimeInForce cancel reasons|
+                |`MARKET_CANCEL` = 4|the market order was cancelled after no/partial fill. Lower precedence than other TimeInForce cancel reasons|
                 |`IOC_CANCEL` = 5|the IOC order was cancelled after no/partial fill|
                 |`AON_CANCEL` = 6|the AON order was cancelled as it could not be fully matched|
                 |`FOK_CANCEL` = 7|the FOK order was cancelled as it could not be fully matched|
@@ -100,3 +101,5 @@
                 |`UNSUPPORTED_TIME_IN_FORCE` = 24|the order payload does not contain a supported TimeInForce value|
                 |`MULTI_LEGGED_ORDER` = 25|the order has multiple legs, but multiple legs are not supported by this venue|
                 |`EXCEED_MAX_POSITION_SIZE` = 26|the order would have caused the subaccount to exceed the max position size|
+                |`EXCEED_MAX_SIGNATURE_EXPIRATION` = 27|the signature supplied is more than 30 days in the future|
+                |`MARKET_ORDER_WITH_LIMIT_PRICE` = 28|the market order has a limit price set|

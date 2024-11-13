@@ -48,7 +48,8 @@ LITE ENDPOINT: lite/v1/instrument
                 "quote_decimals": 3,
                 "tick_size": "0.01",
                 "min_size": "0.01",
-                "create_time": "1697788800000000000"
+                "create_time": "1697788800000000000",
+                "max_position_size": "100.0"
             }
         }
         ```
@@ -67,7 +68,8 @@ LITE ENDPOINT: lite/v1/instrument
                 "qd": 3,
                 "ts": "0.01",
                 "ms": "0.01",
-                "ct": "1697788800000000000"
+                "ct": "1697788800000000000",
+                "mp": "100.0"
             }
         }
         ```
@@ -346,7 +348,8 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "quote_decimals": 3,
                 "tick_size": "0.01",
                 "min_size": "0.01",
-                "create_time": "1697788800000000000"
+                "create_time": "1697788800000000000",
+                "max_position_size": "100.0"
             }]
         }
         ```
@@ -365,7 +368,8 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "qd": 3,
                 "ts": "0.01",
                 "ms": "0.01",
-                "ct": "1697788800000000000"
+                "ct": "1697788800000000000",
+                "mp": "100.0"
             }]
         }
         ```
@@ -651,7 +655,8 @@ LITE ENDPOINT: lite/v1/instruments
                 "quote_decimals": 3,
                 "tick_size": "0.01",
                 "min_size": "0.01",
-                "create_time": "1697788800000000000"
+                "create_time": "1697788800000000000",
+                "max_position_size": "100.0"
             }]
         }
         ```
@@ -670,7 +675,8 @@ LITE ENDPOINT: lite/v1/instruments
                 "qd": 3,
                 "ts": "0.01",
                 "ms": "0.01",
-                "ct": "1697788800000000000"
+                "ct": "1697788800000000000",
+                "mp": "100.0"
             }]
         }
         ```
