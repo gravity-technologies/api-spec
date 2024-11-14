@@ -44,7 +44,8 @@ STREAM: v1.order
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -68,7 +69,8 @@ STREAM: v1.order
                 "stream": "v1.order",
                 "unsubs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -136,7 +138,8 @@ STREAM: v1.order
                     "reject_reason": "CLIENT_CANCEL",
                     "book_size": ["10.5"],
                     "traded_size": ["1.5"],
-                    "update_time": "1697788800000000000"
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
                 }
             }
         }
@@ -177,7 +180,8 @@ STREAM: v1.order
                     "rr": "CLIENT_CANCEL",
                     "bs": ["10.5"],
                     "ts": ["1.5"],
-                    "ut": "1697788800000000000"
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
                 }
             }
         }
@@ -208,7 +212,8 @@ STREAM: v1.order
                 "code": 1000,
                 "message": "You need to authenticate prior to using this functionality"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -219,7 +224,8 @@ STREAM: v1.order
                 "c": 1000,
                 "m": "You need to authenticate prior to using this functionality"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -665,7 +671,8 @@ STREAM: v1.state
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -689,7 +696,8 @@ STREAM: v1.state
                 "stream": "v1.state",
                 "unsubs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -735,7 +743,8 @@ STREAM: v1.state
                     "reject_reason": "CLIENT_CANCEL",
                     "book_size": ["10.5"],
                     "traded_size": ["1.5"],
-                    "update_time": "1697788800000000000"
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
                 }
             }
         }
@@ -754,7 +763,8 @@ STREAM: v1.state
                     "rr": "CLIENT_CANCEL",
                     "bs": ["10.5"],
                     "ts": ["1.5"],
-                    "ut": "1697788800000000000"
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
                 }
             }
         }
@@ -785,7 +795,8 @@ STREAM: v1.state
                 "code": 1000,
                 "message": "You need to authenticate prior to using this functionality"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -796,7 +807,8 @@ STREAM: v1.state
                 "c": 1000,
                 "m": "You need to authenticate prior to using this functionality"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -1243,7 +1255,8 @@ STREAM: v1.fill
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -1267,7 +1280,8 @@ STREAM: v1.fill
                 "stream": "v1.fill",
                 "unsubs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -1381,7 +1395,8 @@ STREAM: v1.fill
                 "code": 1000,
                 "message": "You need to authenticate prior to using this functionality"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -1392,7 +1407,8 @@ STREAM: v1.fill
                 "c": 1000,
                 "m": "You need to authenticate prior to using this functionality"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -1838,7 +1854,8 @@ STREAM: v1.position
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -1862,7 +1879,8 @@ STREAM: v1.position
                 "stream": "v1.position",
                 "unsubs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -1966,7 +1984,8 @@ STREAM: v1.position
                 "code": 1000,
                 "message": "You need to authenticate prior to using this functionality"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -1977,7 +1996,8 @@ STREAM: v1.position
                 "c": 1000,
                 "m": "You need to authenticate prior to using this functionality"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -2424,7 +2444,8 @@ STREAM: v1.deposit
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -2448,7 +2469,8 @@ STREAM: v1.deposit
                 "stream": "v1.deposit",
                 "unsubs": ["'$GRVT_MAIN_ACCOUNT_ID'"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -2530,7 +2552,8 @@ STREAM: v1.deposit
                 "code": 1001,
                 "message": "You are not authorized to access this functionality"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -2541,7 +2564,8 @@ STREAM: v1.deposit
                 "c": 1001,
                 "m": "You are not authorized to access this functionality"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -2987,7 +3011,8 @@ STREAM: v1.transfer
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -3011,7 +3036,8 @@ STREAM: v1.transfer
                 "stream": "v1.transfer",
                 "unsubs": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -3114,7 +3140,8 @@ STREAM: v1.transfer
                 "code": 1001,
                 "message": "You are not authorized to access this functionality"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -3125,7 +3152,8 @@ STREAM: v1.transfer
                 "c": 1001,
                 "m": "You are not authorized to access this functionality"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**
@@ -3571,7 +3599,8 @@ STREAM: v1.withdrawal
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Unsubscribe"
@@ -3595,7 +3624,8 @@ STREAM: v1.withdrawal
                 "stream": "v1.withdrawal",
                 "unsubs": ["'$GRVT_MAIN_ACCOUNT_ID'"]
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
     ??? question "Legacy Subscribe"
@@ -3693,7 +3723,8 @@ STREAM: v1.withdrawal
                 "code": 1001,
                 "message": "You are not authorized to access this functionality"
             },
-            "id": 123
+            "id": 123,
+            "method": "subscribe"
         }
         ```
         **Lite Error Response**
@@ -3704,7 +3735,8 @@ STREAM: v1.withdrawal
                 "c": 1001,
                 "m": "You are not authorized to access this functionality"
             },
-            "i": 123
+            "i": 123,
+            "m": "subscribe"
         }
         ```
         **Legacy Error Response**

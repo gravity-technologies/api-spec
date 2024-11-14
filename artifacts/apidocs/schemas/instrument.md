@@ -10,9 +10,10 @@
     |settlement_period<br>`sp1` |InstrumentSettlementPeriod|True|The settlement period of the instrument|
     |base_decimals<br>`bd` |integer|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
     |quote_decimals<br>`qd` |integer|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
-    |tick_size<br>`ts` |string|True|The size of a single tick, expressed in quote asset decimal units|
+    |tick_size<br>`ts` |string|True|The size of a single tick, expressed in price decimal units|
     |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
     |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
+    |max_position_size<br>`mp` |string|True|The maximum position size, expressed in base asset decimal units|
     ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 

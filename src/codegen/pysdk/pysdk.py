@@ -59,6 +59,7 @@ def semantic_and_json_to_python_type(semantic_type: str, json_type: str) -> str:
         "uint256": "str",
         "address": "str",
         "any": "Any",
+        "[]byte": "bytes",
     }
 
     if semantic_type in type_mapping:

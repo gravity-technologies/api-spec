@@ -114,7 +114,8 @@ LITE ENDPOINT: lite/v1/create_order
                     "reject_reason": "CLIENT_CANCEL",
                     "book_size": ["10.5"],
                     "traded_size": ["1.5"],
-                    "update_time": "1697788800000000000"
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
                 }
             }
         }
@@ -152,7 +153,8 @@ LITE ENDPOINT: lite/v1/create_order
                     "rr": "CLIENT_CANCEL",
                     "bs": ["10.5"],
                     "ts": ["1.5"],
-                    "ut": "1697788800000000000"
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
                 }
             }
         }
@@ -192,6 +194,10 @@ LITE ENDPOINT: lite/v1/create_order
         |2063|400|Order size smaller than min block size in block trade venue|
         |2064|400|Invalid limit price tick|
         |2070|400|Liquidation Order is not supported|
+        |2080|400|Insufficient margin to create order|
+        |2081|400|Order Fill would result in exceeding maximum position size|
+        |2082|400|Pre-order check failed|
+        |2090|429|Max open orders exceeded|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1560,7 +1566,8 @@ LITE ENDPOINT: lite/v1/order
                     "reject_reason": "CLIENT_CANCEL",
                     "book_size": ["10.5"],
                     "traded_size": ["1.5"],
-                    "update_time": "1697788800000000000"
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
                 }
             }
         }
@@ -1598,7 +1605,8 @@ LITE ENDPOINT: lite/v1/order
                     "rr": "CLIENT_CANCEL",
                     "bs": ["10.5"],
                     "ts": ["1.5"],
-                    "ut": "1697788800000000000"
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
                 }
             }
         }
@@ -1954,7 +1962,8 @@ LITE ENDPOINT: lite/v1/open_orders
                     "reject_reason": "CLIENT_CANCEL",
                     "book_size": ["10.5"],
                     "traded_size": ["1.5"],
-                    "update_time": "1697788800000000000"
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
                 }
             }]
         }
@@ -1992,7 +2001,8 @@ LITE ENDPOINT: lite/v1/open_orders
                     "rr": "CLIENT_CANCEL",
                     "bs": ["10.5"],
                     "ts": ["1.5"],
-                    "ut": "1697788800000000000"
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
                 }
             }]
         }
@@ -2370,7 +2380,8 @@ LITE ENDPOINT: lite/v1/order_history
                     "reject_reason": "CLIENT_CANCEL",
                     "book_size": ["10.5"],
                     "traded_size": ["1.5"],
-                    "update_time": "1697788800000000000"
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
                 }
             }],
             "next": "Qw0918="
@@ -2409,7 +2420,8 @@ LITE ENDPOINT: lite/v1/order_history
                     "rr": "CLIENT_CANCEL",
                     "bs": ["10.5"],
                     "ts": ["1.5"],
-                    "ut": "1697788800000000000"
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
                 }
             }],
             "n": "Qw0918="
@@ -3603,6 +3615,402 @@ LITE ENDPOINT: lite/v1/positions
             ```
         </section>
 <hr class="solid">
+### Funding Payment History
+```
+FULL ENDPOINT: full/v1/funding_payment_history
+LITE ENDPOINT: lite/v1/funding_payment_history
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_funding_payment_history_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "instrument": "BTC_USDT_Perp",
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "i": "BTC_USDT_Perp",
+            "st": "1697788800000000000",
+            "et": "1697788800000000000",
+            "l": 500,
+            "c": ""
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_funding_payment_history_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": [{
+                "event_time": "1697788800000000000",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "instrument": "BTC_USDT_Perp",
+                "currency": "USDT",
+                "amount": "9.75",
+                "tx_id": "209358"
+            }],
+            "next": "Qw0918="
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "et": "1697788800000000000",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "i": "BTC_USDT_Perp",
+                "c": "USDT",
+                "a": "9.75",
+                "ti": "209358"
+            }],
+            "n": "Qw0918="
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/funding_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "instrument": "BTC_USDT_Perp",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/funding_payment_history",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "instrument": "BTC_USDT_Perp",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/funding_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "i": "BTC_USDT_Perp",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/funding_payment_history",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "i": "BTC_USDT_Perp",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/funding_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "instrument": "BTC_USDT_Perp",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/funding_payment_history",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "instrument": "BTC_USDT_Perp",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/funding_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "i": "BTC_USDT_Perp",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/funding_payment_history",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "i": "BTC_USDT_Perp",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/funding_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "instrument": "BTC_USDT_Perp",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/funding_payment_history",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "instrument": "BTC_USDT_Perp",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/funding_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "i": "BTC_USDT_Perp",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/funding_payment_history",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "i": "BTC_USDT_Perp",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/funding_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "instrument": "BTC_USDT_Perp",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/funding_payment_history",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "instrument": "BTC_USDT_Perp",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/funding_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "i": "BTC_USDT_Perp",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/funding_payment_history",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "i": "BTC_USDT_Perp",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
 ## Transfer
 ### Deposit
 ```
@@ -3977,12 +4385,14 @@ LITE ENDPOINT: lite/v1/deposit_history
         ``` { .json .copy }
         {
             "result": [{
-                "tx_id": "1028403",
-                "tx_hash": "0x10000101000203040506",
+                "l_1_hash": "0x10000101000203040506",
+                "l_2_hash": "0x10000101000203040506",
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "currency": "USDT",
                 "num_tokens": "1500.0",
-                "event_time": "1697788800000000000"
+                "initiated_time": "1697788800000000000",
+                "confirmed_time": "1697788800000000000",
+                "from_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"
             }],
             "next": "Qw0918="
         }
@@ -3991,12 +4401,14 @@ LITE ENDPOINT: lite/v1/deposit_history
         ``` { .json .copy }
         {
             "r": [{
-                "ti": "1028403",
-                "th": "0x10000101000203040506",
+                "l1": "0x10000101000203040506",
+                "l2": "0x10000101000203040506",
                 "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "c": "USDT",
                 "nt": "1500.0",
-                "et": "1697788800000000000"
+                "it": "1697788800000000000",
+                "ct": "1697788800000000000",
+                "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"
             }],
             "n": "Qw0918="
         }
