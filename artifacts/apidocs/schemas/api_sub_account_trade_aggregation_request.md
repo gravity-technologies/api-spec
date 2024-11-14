@@ -11,6 +11,8 @@
     |start_time<br>`st` |string|False<br>`0`|Optional. Start time in unix nanoseconds|
     |end_time<br>`et` |string|False<br>`now()`|Optional. End time in unix nanoseconds|
     |cursor<br>`c` |string|False<br>``|The cursor to indicate when to start the next query from|
+    |is_maker<br>`im` |boolean|True|Filter on the maker of the trade|
+    |is_taker<br>`it` |boolean|True|Filter on the taker of the trade|
     ??? info "[SubAccountTradeInterval](/../../schemas/sub_account_trade_interval)"
         |Value| Description |
         |-|-|

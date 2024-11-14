@@ -11,3 +11,4 @@
         |sub_account_id<br>`sa` |string|True|The sub account id|
         |total_fee<br>`tf` |string|True|Total fee paid|
         |total_trade_volume<br>`tt` |string|True|Total volume traded|
+        |num_traded<br>`nt` |string|True|Number of trades|
