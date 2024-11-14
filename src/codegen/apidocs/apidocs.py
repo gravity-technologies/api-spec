@@ -1,4 +1,5 @@
 import re
+from copy import deepcopy
 from typing import cast
 
 import inflection
@@ -321,11 +322,13 @@ def write_stream_feed_data(ctx: CodegenCtx, md: MarkdownWriter, stream: Stream) 
     md.indent()
     md.writeln("**Full Feed Response**")
     write_code_block(md, "json")
-    write_struct_example(ctx, md, ctx.struct_map[stream.feed], True, True)
+    resp_struct = deepcopy(ctx.struct_map[stream.feed])
+    resp_struct.fields[0].example = f'"{stream.channel}"'  # put correct channel
+    write_struct_example(ctx, md, resp_struct, True, True)
     md.writeln("```")
     md.writeln("**Lite Feed Response**")
     write_code_block(md, "json")
-    write_struct_example(ctx, md, ctx.struct_map[stream.feed], True, False)
+    write_struct_example(ctx, md, resp_struct, True, False)
     md.writeln("```")
     md.dedent()
     write_section_end(md)
