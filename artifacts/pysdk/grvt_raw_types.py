@@ -1645,6 +1645,22 @@ class ApiGetOrderResponse:
 
 
 @dataclass
+class InternalPreOrderMarginCheckRequest:
+    # The sub-account for which the order is being evaluated
+    sub_account_id: str
+    # Open orders created by this sub-account
+    open_order_legs: list[OrderLeg]
+    # New orders this sub-account is attempting to create
+    new_order_legs: list[OrderLeg]
+
+
+@dataclass
+class InternalPreOrderMarginCheckResponse:
+    # True if the new order can be placed, false otherwise
+    result: bool
+
+
+@dataclass
 class ApiGetUserEcosystemPointRequest:
     # The off chain account id
     account_id: str
