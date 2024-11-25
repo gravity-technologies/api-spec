@@ -569,6 +569,14 @@ class ApiFundingAccountSummaryResponse:
 
 
 @dataclass
+class ApiSocializedLossStatusResponse:
+    # Whether the socialized loss is active
+    is_active: bool
+    # The socialized loss haircut ratio in centi-beeps
+    haircut_ratio: str
+
+
+@dataclass
 class ApiListAggregatedAccountSummaryRequest:
     # The list of main account ID to request for
     main_account_ids: list[bytes]
@@ -699,9 +707,9 @@ class Ticker:
     best_ask_price: str | None = None
     # The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units
     best_ask_size: str | None = None
-    # The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)
+    # The current funding rate of the instrument, expressed in percentage points
     funding_rate_8h_curr: str | None = None
-    # The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)
+    # The average funding rate of the instrument (over last 8h), expressed in percentage points
     funding_rate_8h_avg: str | None = None
     # The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)
     interest_rate: str | None = None
@@ -954,7 +962,7 @@ class ApiFundingRateRequest:
 class FundingRate:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
-    # The funding rate of the instrument, expressed in centibeeps
+    # The funding rate of the instrument, expressed in percentage points
     funding_rate: int
     # The funding timestamp of the funding rate, expressed in unix nanoseconds
     funding_time: str
