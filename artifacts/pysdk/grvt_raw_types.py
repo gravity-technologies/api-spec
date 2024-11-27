@@ -337,7 +337,7 @@ class Fill:
     fee_rate: str
     """
     A trade identifier, globally unique, and monotonically increasing (not by `1`).
-    All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.
+    All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.
     `trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.
     """
     trade_id: str
@@ -776,7 +776,7 @@ class Trade:
     forward_price: str
     """
     A trade identifier, globally unique, and monotonically increasing (not by `1`).
-    All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.
+    All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.
     `trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.
     """
     trade_id: str

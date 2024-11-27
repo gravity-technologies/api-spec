@@ -2850,7 +2850,7 @@ LITE ENDPOINT: lite/v1/fill_history
                 "realized_pnl": "2400.50",
                 "fee": "9.75",
                 "fee_rate": 0.0003,
-                "trade_id": "209358:2",
+                "trade_id": "209358-2",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
                 "client_order_id": "23042"
@@ -2876,7 +2876,7 @@ LITE ENDPOINT: lite/v1/fill_history
                 "rp": "2400.50",
                 "f": "9.75",
                 "fr": 0.0003,
-                "ti": "209358:2",
+                "ti": "209358-2",
                 "oi": "0x10000101000203040506",
                 "v": "ORDERBOOK",
                 "co": "23042"
