@@ -1242,6 +1242,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 4010,
+              "message": "This wallet is not supported. Please try another wallet.",
+              "status": 400
             }
           ]
         },
@@ -1367,6 +1372,27 @@
           "auth_required": true,
           "request": "EmptyRequest",
           "response": "ApiFundingAccountSummaryResponse",
+          "on_request_errors": [
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "SocializedLoss",
+          "name": "RPCSocializedLossStatusV1",
+          "version": 1,
+          "route": "/socialized_loss_status",
+          "auth_required": true,
+          "request": "EmptyRequest",
+          "response": "ApiSocializedLossStatusResponse",
           "on_request_errors": [
             {
               "code": 1002,
@@ -2264,10 +2290,10 @@
           "index": 14,
           "array_depth": 0,
           "optional": false,
-          "example": "'209358:2'",
+          "example": "'209358-2'",
           "comment": [
             "A trade identifier, globally unique, and monotonically increasing (not by `1`).",
-            "All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.",
+            "All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.",
             "`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`."
           ]
         },
@@ -3115,6 +3141,41 @@
       ]
     },
     {
+      "name": "ApiSocializedLossStatusResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "is_active",
+          "lite_name": "ia",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'false'",
+          "comment": [
+            "Whether the socialized loss is active"
+          ]
+        },
+        {
+          "name": "haircut_ratio",
+          "lite_name": "hr",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0'",
+          "comment": [
+            "The socialized loss haircut ratio in centi-beeps"
+          ]
+        }
+      ],
+      "comment": [
+        "The socialized loss status."
+      ]
+    },
+    {
       "name": "ApiListAggregatedAccountSummaryRequest",
       "is_root": true,
       "fields": [
@@ -3679,7 +3740,7 @@
           "optional": true,
           "example": "0.0003",
           "comment": [
-            "The current funding rate of the instrument, expressed in centibeeps (1/100th of a basis point)"
+            "The current funding rate of the instrument, expressed in percentage points"
           ]
         },
         {
@@ -3692,7 +3753,7 @@
           "optional": true,
           "example": "0.0003",
           "comment": [
-            "The average funding rate of the instrument (over last 8h), expressed in centibeeps (1/100th of a basis point)"
+            "The average funding rate of the instrument (over last 8h), expressed in percentage points"
           ]
         },
         {
@@ -4038,10 +4099,10 @@
           "index": 9,
           "array_depth": 0,
           "optional": false,
-          "example": "'209358:2'",
+          "example": "'209358-2'",
           "comment": [
             "A trade identifier, globally unique, and monotonically increasing (not by `1`).",
-            "All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.",
+            "All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.",
             "`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`."
           ]
         },
@@ -4894,7 +4955,7 @@
           "optional": false,
           "example": "'6.78'",
           "comment": [
-            "The funding rate of the instrument, expressed in centibeeps"
+            "The funding rate of the instrument, expressed in percentage points"
           ]
         },
         {

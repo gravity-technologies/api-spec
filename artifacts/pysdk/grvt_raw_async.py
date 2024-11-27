@@ -259,3 +259,13 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         return from_dict(
             types.ApiFundingAccountSummaryResponse, resp, Config(cast=[Enum])
         )
+
+    async def socialized_loss_status_v1(
+        self, req: types.EmptyRequest
+    ) -> types.ApiSocializedLossStatusResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/socialized_loss_status", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiSocializedLossStatusResponse, resp, Config(cast=[Enum]))

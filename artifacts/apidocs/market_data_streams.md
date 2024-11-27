@@ -3531,7 +3531,7 @@ STREAM: v1.trade
                 "index_price": "65038.01",
                 "interest_rate": 0.0003,
                 "forward_price": "65038.01",
-                "trade_id": "209358:2",
+                "trade_id": "209358-2",
                 "venue": "ORDERBOOK"
             }
         }
@@ -3552,7 +3552,7 @@ STREAM: v1.trade
                 "ip": "65038.01",
                 "ir": 0.0003,
                 "fp": "65038.01",
-                "ti": "209358:2",
+                "ti": "209358-2",
                 "v": "ORDERBOOK"
             }
         }

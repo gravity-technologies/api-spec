@@ -16,7 +16,7 @@
         |index_price<br>`ip` |string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
         |interest_rate<br>`ir` |string|True|The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)|
         |forward_price<br>`fp` |string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
-        |trade_id<br>`ti` |string|True|A trade identifier, globally unique, and monotonically increasing (not by `1`).<br>All trades sharing a single taker execution share the same first component (before `:`), and `event_time`.<br>`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.|
+        |trade_id<br>`ti` |string|True|A trade identifier, globally unique, and monotonically increasing (not by `1`).<br>All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.<br>`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.|
         |venue<br>`v` |Venue|True|The venue where the trade occurred|
         ??? info "[Venue](/../../schemas/venue)"
             The list of Trading Venues that are supported on the GRVT exchange<br>

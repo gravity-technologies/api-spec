@@ -2850,7 +2850,7 @@ LITE ENDPOINT: lite/v1/fill_history
                 "realized_pnl": "2400.50",
                 "fee": "9.75",
                 "fee_rate": 0.0003,
-                "trade_id": "209358:2",
+                "trade_id": "209358-2",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
                 "client_order_id": "23042"
@@ -2876,7 +2876,7 @@ LITE ENDPOINT: lite/v1/fill_history
                 "rp": "2400.50",
                 "f": "9.75",
                 "fr": 0.0003,
-                "ti": "209358:2",
+                "ti": "209358-2",
                 "oi": "0x10000101000203040506",
                 "v": "ORDERBOOK",
                 "co": "23042"
@@ -5729,6 +5729,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |4010|400|This wallet is not supported. Please try another wallet.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7879,6 +7880,279 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             {
                 "j": "2.0",
                 "m": "v1/funding_account_summary",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+## SocializedLoss
+### Socialized Loss Status
+```
+FULL ENDPOINT: full/v1/socialized_loss_status
+LITE ENDPOINT: lite/v1/socialized_loss_status
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/empty_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_socialized_loss_status_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "is_active": "false",
+            "haircut_ratio": "0"
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "ia": "false",
+            "hr": "0"
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1002,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/socialized_loss_status' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/socialized_loss_status",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/socialized_loss_status' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/socialized_loss_status",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/socialized_loss_status' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/socialized_loss_status",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/socialized_loss_status' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/socialized_loss_status",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/socialized_loss_status' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/socialized_loss_status",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/socialized_loss_status' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/socialized_loss_status",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/socialized_loss_status' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/socialized_loss_status",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/socialized_loss_status' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/socialized_loss_status",
                 "p": {
                 },
                 "i": 123

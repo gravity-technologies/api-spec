@@ -1957,7 +1957,7 @@ LITE ENDPOINT: lite/v1/trade
                 "index_price": "65038.01",
                 "interest_rate": 0.0003,
                 "forward_price": "65038.01",
-                "trade_id": "209358:2",
+                "trade_id": "209358-2",
                 "venue": "ORDERBOOK"
             }]
         }
@@ -1975,7 +1975,7 @@ LITE ENDPOINT: lite/v1/trade
                 "ip": "65038.01",
                 "ir": 0.0003,
                 "fp": "65038.01",
-                "ti": "209358:2",
+                "ti": "209358-2",
                 "v": "ORDERBOOK"
             }]
         }
@@ -2276,7 +2276,7 @@ LITE ENDPOINT: lite/v1/trade_history
                 "index_price": "65038.01",
                 "interest_rate": 0.0003,
                 "forward_price": "65038.01",
-                "trade_id": "209358:2",
+                "trade_id": "209358-2",
                 "venue": "ORDERBOOK"
             }],
             "next": "Qw0918="
@@ -2295,7 +2295,7 @@ LITE ENDPOINT: lite/v1/trade_history
                 "ip": "65038.01",
                 "ir": 0.0003,
                 "fp": "65038.01",
-                "ti": "209358:2",
+                "ti": "209358-2",
                 "v": "ORDERBOOK"
             }],
             "n": "Qw0918="
