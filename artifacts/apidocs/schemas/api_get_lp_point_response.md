@@ -1,9 +1,9 @@
 !!! info "[ApiGetLPPointResponse](/../../schemas/api_get_lp_point_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |point<br>`p` |ApproximateLPPoint|True|LP points of user|
+    |point<br>`p` |LPPoint|True|LP points of user|
     |maker_count<br>`mc` |integer|True|The number of maker|
-    ??? info "[ApproximateLPPoint](/../../schemas/approximate_lp_point)"
+    ??? info "[LPPoint](/../../schemas/lp_point)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |main_account_id<br>`ma` |string|True|The main account id|

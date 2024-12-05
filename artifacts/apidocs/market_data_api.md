@@ -82,6 +82,7 @@ LITE ENDPOINT: lite/v1/instrument
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1004|404|Data Not Found|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -381,6 +382,7 @@ LITE ENDPOINT: lite/v1/all_instruments
         |-|-|-|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -688,6 +690,7 @@ LITE ENDPOINT: lite/v1/instruments
         |-|-|-|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1049,6 +1052,7 @@ LITE ENDPOINT: lite/v1/mini
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1004|404|Data Not Found|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1371,6 +1375,7 @@ LITE ENDPOINT: lite/v1/ticker
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1004|404|Data Not Found|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1674,6 +1679,7 @@ LITE ENDPOINT: lite/v1/book
         |1004|404|Data Not Found|
         |3000|400|Instrument is invalid|
         |3031|400|Depth is invalid|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1988,6 +1994,7 @@ LITE ENDPOINT: lite/v1/trade
         |-|-|-|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2309,6 +2316,7 @@ LITE ENDPOINT: lite/v1/trade_history
         |-|-|-|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2681,6 +2689,7 @@ LITE ENDPOINT: lite/v1/kline
         |-|-|-|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -3042,7 +3051,7 @@ LITE ENDPOINT: lite/v1/funding
         {
             "result": [{
                 "instrument": "BTC_USDT_Perp",
-                "funding_rate": 6.78,
+                "funding_rate": 0.0003,
                 "funding_time": "1697788800000000000",
                 "mark_price": "65038.01"
             }],
@@ -3054,7 +3063,7 @@ LITE ENDPOINT: lite/v1/funding
         {
             "r": [{
                 "i": "BTC_USDT_Perp",
-                "fr": 6.78,
+                "fr": 0.0003,
                 "ft": "1697788800000000000",
                 "mp": "65038.01"
             }],
@@ -3069,6 +3078,7 @@ LITE ENDPOINT: lite/v1/funding
         |-|-|-|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure

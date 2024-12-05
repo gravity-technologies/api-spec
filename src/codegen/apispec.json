@@ -44,6 +44,11 @@
               "code": 1004,
               "message": "Data Not Found",
               "status": 404
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -65,6 +70,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -86,6 +96,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -112,6 +127,11 @@
               "code": 1004,
               "message": "Data Not Found",
               "status": 404
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -138,6 +158,11 @@
               "code": 1004,
               "message": "Data Not Found",
               "status": 404
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -174,6 +199,11 @@
               "code": 3031,
               "message": "Depth is invalid",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -195,6 +225,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -216,6 +251,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -237,6 +277,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -258,6 +303,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         }
@@ -691,6 +741,11 @@
               "status": 500
             },
             {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
               "code": 2000,
               "message": "Order signature is from an unauthorized signer",
               "status": 403
@@ -860,6 +915,11 @@
               "code": 3021,
               "message": "Either order ID or client order ID must be supplied",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -891,6 +951,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -932,6 +997,11 @@
               "code": 3021,
               "message": "Either order ID or client order ID must be supplied",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -963,6 +1033,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -994,6 +1069,47 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            }
+          ]
+        },
+        {
+          "namespace": "Order",
+          "name": "RPCPreOrderCheckV1",
+          "version": 1,
+          "route": "/pre_order_check",
+          "auth_required": true,
+          "request": "ApiPreOrderCheckRequest",
+          "response": "ApiPreOrderCheckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1025,6 +1141,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1056,6 +1177,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1087,37 +1213,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
-            }
-          ]
-        },
-        {
-          "namespace": "Transfer",
-          "name": "RPCDepositV1",
-          "version": 1,
-          "route": "/deposit",
-          "auth_required": true,
-          "request": "ApiDepositRequest",
-          "response": "AckResponse",
-          "on_request_errors": [
-            {
-              "code": 1000,
-              "message": "You need to authenticate prior to using this functionality",
-              "status": 401
             },
             {
-              "code": 1001,
-              "message": "You are not authorized to access this functionality",
-              "status": 403
-            },
-            {
-              "code": 1002,
-              "message": "Internal Server Error",
-              "status": 500
-            },
-            {
-              "code": 1003,
-              "message": "Request could not be processed due to malformed syntax",
-              "status": 400
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1149,6 +1249,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1180,6 +1285,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1211,6 +1321,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1247,6 +1362,11 @@
               "code": 4010,
               "message": "This wallet is not supported. Please try another wallet.",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1278,6 +1398,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1309,6 +1434,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1340,6 +1470,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1361,6 +1496,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1382,6 +1522,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         },
@@ -1403,6 +1548,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             }
           ]
         }
@@ -2343,6 +2493,19 @@
             "",
             "When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId"
           ]
+        },
+        {
+          "name": "signer",
+          "lite_name": "s1",
+          "semantic_type": "uint256",
+          "json_type": "string",
+          "index": 20,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The address (public key) of the wallet signing the payload"
+          ]
         }
       ],
       "comment": []
@@ -3160,12 +3323,12 @@
         {
           "name": "haircut_ratio",
           "lite_name": "hr",
-          "semantic_type": "uint64",
+          "semantic_type": "string",
           "json_type": "string",
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "'0'",
+          "example": "'0.34'",
           "comment": [
             "The socialized loss haircut ratio in centi-beeps"
           ]
@@ -4948,12 +5111,12 @@
         {
           "name": "funding_rate",
           "lite_name": "fr",
-          "semantic_type": "int32",
-          "json_type": "integer",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "'6.78'",
+          "example": "0.0003",
           "comment": [
             "The funding rate of the instrument, expressed in percentage points"
           ]
@@ -4974,7 +5137,7 @@
         {
           "name": "mark_price",
           "lite_name": "mp",
-          "semantic_type": "uint64",
+          "semantic_type": "string",
           "json_type": "string",
           "index": 3,
           "array_depth": 0,
@@ -7472,6 +7635,175 @@
       "comment": []
     },
     {
+      "name": "ApiPreOrderCheckRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID of orders to query"
+          ]
+        },
+        {
+          "name": "orders",
+          "lite_name": "o",
+          "semantic_type": "Order",
+          "json_type": "Order",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The order to do pre-order check"
+          ]
+        }
+      ],
+      "comment": [
+        "Get pre-order check information for a new order"
+      ]
+    },
+    {
+      "name": "AssetMaxQty",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "asset",
+          "lite_name": "a",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The asset associated with the max quantity"
+          ]
+        },
+        {
+          "name": "max_buy_qty",
+          "lite_name": "mb",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "100.0",
+          "comment": [
+            "The maximum buy quantity"
+          ]
+        },
+        {
+          "name": "max_sell_qty",
+          "lite_name": "ms",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "100.0",
+          "comment": [
+            "The maximum sell quantity"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "PreOrderCheckResult",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "max_qty",
+          "lite_name": "mq",
+          "semantic_type": "AssetMaxQty",
+          "json_type": "AssetMaxQty",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The maximum quantity for each leg"
+          ]
+        },
+        {
+          "name": "margin_required",
+          "lite_name": "mr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000.0",
+          "comment": [
+            "The margin required for the order (reported in `settle_currency`)"
+          ]
+        },
+        {
+          "name": "order_valid",
+          "lite_name": "ov",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "Whether the order is valid"
+          ]
+        },
+        {
+          "name": "reason",
+          "lite_name": "r",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "''",
+          "comment": [
+            "The reason the order is invalid, if any"
+          ]
+        },
+        {
+          "name": "settle_currency",
+          "lite_name": "sc",
+          "semantic_type": "Currency",
+          "json_type": "Currency",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The subAccount settle currency"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiPreOrderCheckResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "results",
+          "lite_name": "r",
+          "semantic_type": "PreOrderCheckResult",
+          "json_type": "PreOrderCheckResult",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Pre order check for each new order in the request"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiGetUserEcosystemPointRequest",
       "is_root": true,
       "fields": [
@@ -8565,16 +8897,16 @@
       "is_root": true,
       "fields": [
         {
-          "name": "main_account_id",
-          "lite_name": "ma",
-          "semantic_type": "uint256",
+          "name": "off_chain_account_id",
+          "lite_name": "oc",
+          "semantic_type": "string",
           "json_type": "string",
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'10000101000203040506'",
+          "example": "'ACC:123456'",
           "comment": [
-            "The main account id"
+            "The off chain account id"
           ]
         },
         {
@@ -8745,8 +9077,8 @@
         {
           "name": "points",
           "lite_name": "p",
-          "semantic_type": "LPPoint",
-          "json_type": "LPPoint",
+          "semantic_type": "ApproximateLPPoint",
+          "json_type": "ApproximateLPPoint",
           "index": 0,
           "array_depth": 1,
           "optional": false,
@@ -8813,8 +9145,8 @@
         {
           "name": "point",
           "lite_name": "p",
-          "semantic_type": "ApproximateLPPoint",
-          "json_type": "ApproximateLPPoint",
+          "semantic_type": "LPPoint",
+          "json_type": "LPPoint",
           "index": 0,
           "array_depth": 0,
           "optional": false,
@@ -10340,58 +10672,6 @@
       ],
       "comment": [
         "Subscribes to a feed of withdrawal updates."
-      ]
-    },
-    {
-      "name": "ApiDepositRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "to_account_id",
-          "lite_name": "ta",
-          "semantic_type": "address",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": [
-            "The main account to deposit into"
-          ]
-        },
-        {
-          "name": "currency",
-          "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'USDT'",
-          "comment": [
-            "The token currency to deposit"
-          ]
-        },
-        {
-          "name": "num_tokens",
-          "lite_name": "nt",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1500.0'",
-          "comment": [
-            "The number of tokens to deposit, quoted in token_currency decimals"
-          ]
-        }
-      ],
-      "comment": [
-        "GRVT runs on a ZKSync Hyperchain which settles directly onto Ethereum.",
-        "To Deposit funds from your L1 wallet into a GRVT SubAccount, you will be required to submit a deposit transaction directly to Ethereum.",
-        "GRVT's bridge verifier will scan Ethereum from time to time. Once it receives proof that your deposit has been confirmed on Ethereum, it will initiate the deposit process.",
-        "",
-        "This current payload is used for alpha testing only."
       ]
     },
     {
