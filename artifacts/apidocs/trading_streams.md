@@ -1337,7 +1337,8 @@ STREAM: v1.fill
                 "trade_id": "209358-2",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
-                "client_order_id": "23042"
+                "client_order_id": "23042",
+                "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"
             }
         }
         ```
@@ -1365,7 +1366,8 @@ STREAM: v1.fill
                 "ti": "209358-2",
                 "oi": "0x10000101000203040506",
                 "v": "ORDERBOOK",
-                "co": "23042"
+                "co": "23042",
+                "s1": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"
             }
         }
         ```

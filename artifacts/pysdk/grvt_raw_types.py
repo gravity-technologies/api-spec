@@ -357,6 +357,8 @@ class Fill:
     When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
     """
     client_order_id: str
+    # The address (public key) of the wallet signing the payload
+    signer: str
 
 
 @dataclass
@@ -963,7 +965,7 @@ class FundingRate:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
     # The funding rate of the instrument, expressed in percentage points
-    funding_rate: int
+    funding_rate: str
     # The funding timestamp of the funding rate, expressed in unix nanoseconds
     funding_time: str
     # The mark price of the instrument at funding timestamp, expressed in `9` decimals
@@ -1653,6 +1655,44 @@ class ApiGetOrderResponse:
 
 
 @dataclass
+class ApiPreOrderCheckRequest:
+    # The subaccount ID of orders to query
+    sub_account_id: str
+    # The order to do pre-order check
+    orders: list[Order]
+
+
+@dataclass
+class AssetMaxQty:
+    # The asset associated with the max quantity
+    asset: str
+    # The maximum buy quantity
+    max_buy_qty: str
+    # The maximum sell quantity
+    max_sell_qty: str
+
+
+@dataclass
+class PreOrderCheckResult:
+    # The maximum quantity for each leg
+    max_qty: list[AssetMaxQty]
+    # The margin required for the order (reported in `settle_currency`)
+    margin_required: str
+    # Whether the order is valid
+    order_valid: bool
+    # The reason the order is invalid, if any
+    reason: str
+    # The subAccount settle currency
+    settle_currency: Currency
+
+
+@dataclass
+class ApiPreOrderCheckResponse:
+    # Pre order check for each new order in the request
+    results: list[PreOrderCheckResult]
+
+
+@dataclass
 class ApiGetUserEcosystemPointRequest:
     # The off chain account id
     account_id: str
@@ -1874,8 +1914,8 @@ class LPPoint:
 
 @dataclass
 class ApproximateLPPoint:
-    # The main account id
-    main_account_id: str
+    # The off chain account id
+    off_chain_account_id: str
     # Liquidity score
     liquidity_score: str
     # The rank of user in the LP leaderboard
@@ -1917,7 +1957,7 @@ class ApiGetLPLeaderboardRequest:
 @dataclass
 class ApiGetLPLeaderboardResponse:
     # The list of LP points
-    points: list[LPPoint]
+    points: list[ApproximateLPPoint]
 
 
 @dataclass
@@ -1933,7 +1973,7 @@ class ApiGetLPPointRequest:
 @dataclass
 class ApiGetLPPointResponse:
     # LP points of user
-    point: ApproximateLPPoint
+    point: LPPoint
     # The number of maker
     maker_count: int
 
@@ -2285,24 +2325,6 @@ class WSWithdrawalFeedDataV1:
     sequence_number: str
     # The Withdrawal object
     feed: Withdrawal
-
-
-@dataclass
-class ApiDepositRequest:
-    """
-    GRVT runs on a ZKSync Hyperchain which settles directly onto Ethereum.
-    To Deposit funds from your L1 wallet into a GRVT SubAccount, you will be required to submit a deposit transaction directly to Ethereum.
-    GRVT's bridge verifier will scan Ethereum from time to time. Once it receives proof that your deposit has been confirmed on Ethereum, it will initiate the deposit process.
-
-    This current payload is used for alpha testing only.
-    """
-
-    # The main account to deposit into
-    to_account_id: str
-    # The token currency to deposit
-    currency: Currency
-    # The number of tokens to deposit, quoted in token_currency decimals
-    num_tokens: str
 
 
 @dataclass

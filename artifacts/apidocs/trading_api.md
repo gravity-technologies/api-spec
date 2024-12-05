@@ -171,6 +171,7 @@ LITE ENDPOINT: lite/v1/create_order
         |1003|400|Request could not be processed due to malformed syntax|
         |1004|404|Data Not Found|
         |1005|500|Unknown Error|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
         |2000|403|Order signature is from an unauthorized signer|
         |2001|403|Order signature has expired|
         |2002|403|Order signature does not match payload|
@@ -881,6 +882,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |3021|400|Either order ID or client order ID must be supplied|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1213,6 +1215,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1623,6 +1626,7 @@ LITE ENDPOINT: lite/v1/order
         |1003|400|Request could not be processed due to malformed syntax|
         |1004|404|Data Not Found|
         |3021|400|Either order ID or client order ID must be supplied|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2017,6 +2021,7 @@ LITE ENDPOINT: lite/v1/open_orders
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2437,6 +2442,7 @@ LITE ENDPOINT: lite/v1/order_history
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2786,6 +2792,929 @@ LITE ENDPOINT: lite/v1/order_history
             ```
         </section>
 <hr class="solid">
+### Pre Order Check
+```
+FULL ENDPOINT: full/v1/pre_order_check
+LITE ENDPOINT: lite/v1/pre_order_check
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_pre_order_check_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "orders": [{
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "is_market": false,
+                "time_in_force": "GOOD_TILL_TIME",
+                "post_only": false,
+                "reduce_only": false,
+                "legs": [{
+                    "instrument": "BTC_USDT_Perp",
+                    "size": "10.5",
+                    "limit_price": "65038.01",
+                    "is_buying_asset": true
+                }],
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890
+                },
+                "metadata": {
+                    "client_order_id": "23042",
+                    "create_time": "1697788800000000000"
+                },
+                "state": {
+                    "status": "PENDING",
+                    "reject_reason": "CLIENT_CANCEL",
+                    "book_size": ["10.5"],
+                    "traded_size": ["1.5"],
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
+                }
+            }]
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "o": [{
+                "oi": "0x1234567890abcdef",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "im": false,
+                "ti": "GOOD_TILL_TIME",
+                "po": false,
+                "ro": false,
+                "l": [{
+                    "i": "BTC_USDT_Perp",
+                    "s": "10.5",
+                    "lp": "65038.01",
+                    "ib": true
+                }],
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890
+                },
+                "m": {
+                    "co": "23042",
+                    "ct": "1697788800000000000"
+                },
+                "s1": {
+                    "s": "PENDING",
+                    "rr": "CLIENT_CANCEL",
+                    "bs": ["10.5"],
+                    "ts": ["1.5"],
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
+                }
+            }]
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_pre_order_check_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "results": [{
+                "max_qty": [{
+                    "asset": null,
+                    "max_buy_qty": 100.0,
+                    "max_sell_qty": 100.0
+                }],
+                "margin_required": 1000.0,
+                "order_valid": true,
+                "reason": "",
+                "settle_currency": "USDT"
+            }]
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "mq": [{
+                    "a": null,
+                    "mb": 100.0,
+                    "ms": 100.0
+                }],
+                "mr": 1000.0,
+                "ov": true,
+                "r": "",
+                "sc": "USDT"
+            }]
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/pre_order_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "orders": [{
+                    "order_id": "0x1234567890abcdef",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "is_market": false,
+                    "time_in_force": "GOOD_TILL_TIME",
+                    "post_only": false,
+                    "reduce_only": false,
+                    "legs": [{
+                        "instrument": "BTC_USDT_Perp",
+                        "size": "10.5",
+                        "limit_price": "65038.01",
+                        "is_buying_asset": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890
+                    },
+                    "metadata": {
+                        "client_order_id": "23042",
+                        "create_time": "1697788800000000000"
+                    },
+                    "state": {
+                        "status": "PENDING",
+                        "reject_reason": "CLIENT_CANCEL",
+                        "book_size": ["10.5"],
+                        "traded_size": ["1.5"],
+                        "update_time": "1697788800000000000",
+                        "avg_fill_price": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/pre_order_check",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "orders": [{
+                        "order_id": "0x1234567890abcdef",
+                        "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "is_market": false,
+                        "time_in_force": "GOOD_TILL_TIME",
+                        "post_only": false,
+                        "reduce_only": false,
+                        "legs": [{
+                            "instrument": "BTC_USDT_Perp",
+                            "size": "10.5",
+                            "limit_price": "65038.01",
+                            "is_buying_asset": true
+                        }],
+                        "signature": {
+                            "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "expiration": "1697788800000000000",
+                            "nonce": 1234567890
+                        },
+                        "metadata": {
+                            "client_order_id": "23042",
+                            "create_time": "1697788800000000000"
+                        },
+                        "state": {
+                            "status": "PENDING",
+                            "reject_reason": "CLIENT_CANCEL",
+                            "book_size": ["10.5"],
+                            "traded_size": ["1.5"],
+                            "update_time": "1697788800000000000",
+                            "avg_fill_price": ["60000.4"]
+                        }
+                    }]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/pre_order_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "o": [{
+                    "oi": "0x1234567890abcdef",
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "im": false,
+                    "ti": "GOOD_TILL_TIME",
+                    "po": false,
+                    "ro": false,
+                    "l": [{
+                        "i": "BTC_USDT_Perp",
+                        "s": "10.5",
+                        "lp": "65038.01",
+                        "ib": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890
+                    },
+                    "m": {
+                        "co": "23042",
+                        "ct": "1697788800000000000"
+                    },
+                    "s1": {
+                        "s": "PENDING",
+                        "rr": "CLIENT_CANCEL",
+                        "bs": ["10.5"],
+                        "ts": ["1.5"],
+                        "ut": "1697788800000000000",
+                        "af": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/pre_order_check",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "o": [{
+                        "oi": "0x1234567890abcdef",
+                        "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "im": false,
+                        "ti": "GOOD_TILL_TIME",
+                        "po": false,
+                        "ro": false,
+                        "l": [{
+                            "i": "BTC_USDT_Perp",
+                            "s": "10.5",
+                            "lp": "65038.01",
+                            "ib": true
+                        }],
+                        "s": {
+                            "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "e": "1697788800000000000",
+                            "n": 1234567890
+                        },
+                        "m": {
+                            "co": "23042",
+                            "ct": "1697788800000000000"
+                        },
+                        "s1": {
+                            "s": "PENDING",
+                            "rr": "CLIENT_CANCEL",
+                            "bs": ["10.5"],
+                            "ts": ["1.5"],
+                            "ut": "1697788800000000000",
+                            "af": ["60000.4"]
+                        }
+                    }]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/pre_order_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "orders": [{
+                    "order_id": "0x1234567890abcdef",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "is_market": false,
+                    "time_in_force": "GOOD_TILL_TIME",
+                    "post_only": false,
+                    "reduce_only": false,
+                    "legs": [{
+                        "instrument": "BTC_USDT_Perp",
+                        "size": "10.5",
+                        "limit_price": "65038.01",
+                        "is_buying_asset": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890
+                    },
+                    "metadata": {
+                        "client_order_id": "23042",
+                        "create_time": "1697788800000000000"
+                    },
+                    "state": {
+                        "status": "PENDING",
+                        "reject_reason": "CLIENT_CANCEL",
+                        "book_size": ["10.5"],
+                        "traded_size": ["1.5"],
+                        "update_time": "1697788800000000000",
+                        "avg_fill_price": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/pre_order_check",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "orders": [{
+                        "order_id": "0x1234567890abcdef",
+                        "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "is_market": false,
+                        "time_in_force": "GOOD_TILL_TIME",
+                        "post_only": false,
+                        "reduce_only": false,
+                        "legs": [{
+                            "instrument": "BTC_USDT_Perp",
+                            "size": "10.5",
+                            "limit_price": "65038.01",
+                            "is_buying_asset": true
+                        }],
+                        "signature": {
+                            "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "expiration": "1697788800000000000",
+                            "nonce": 1234567890
+                        },
+                        "metadata": {
+                            "client_order_id": "23042",
+                            "create_time": "1697788800000000000"
+                        },
+                        "state": {
+                            "status": "PENDING",
+                            "reject_reason": "CLIENT_CANCEL",
+                            "book_size": ["10.5"],
+                            "traded_size": ["1.5"],
+                            "update_time": "1697788800000000000",
+                            "avg_fill_price": ["60000.4"]
+                        }
+                    }]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/pre_order_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "o": [{
+                    "oi": "0x1234567890abcdef",
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "im": false,
+                    "ti": "GOOD_TILL_TIME",
+                    "po": false,
+                    "ro": false,
+                    "l": [{
+                        "i": "BTC_USDT_Perp",
+                        "s": "10.5",
+                        "lp": "65038.01",
+                        "ib": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890
+                    },
+                    "m": {
+                        "co": "23042",
+                        "ct": "1697788800000000000"
+                    },
+                    "s1": {
+                        "s": "PENDING",
+                        "rr": "CLIENT_CANCEL",
+                        "bs": ["10.5"],
+                        "ts": ["1.5"],
+                        "ut": "1697788800000000000",
+                        "af": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/pre_order_check",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "o": [{
+                        "oi": "0x1234567890abcdef",
+                        "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "im": false,
+                        "ti": "GOOD_TILL_TIME",
+                        "po": false,
+                        "ro": false,
+                        "l": [{
+                            "i": "BTC_USDT_Perp",
+                            "s": "10.5",
+                            "lp": "65038.01",
+                            "ib": true
+                        }],
+                        "s": {
+                            "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "e": "1697788800000000000",
+                            "n": 1234567890
+                        },
+                        "m": {
+                            "co": "23042",
+                            "ct": "1697788800000000000"
+                        },
+                        "s1": {
+                            "s": "PENDING",
+                            "rr": "CLIENT_CANCEL",
+                            "bs": ["10.5"],
+                            "ts": ["1.5"],
+                            "ut": "1697788800000000000",
+                            "af": ["60000.4"]
+                        }
+                    }]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/pre_order_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "orders": [{
+                    "order_id": "0x1234567890abcdef",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "is_market": false,
+                    "time_in_force": "GOOD_TILL_TIME",
+                    "post_only": false,
+                    "reduce_only": false,
+                    "legs": [{
+                        "instrument": "BTC_USDT_Perp",
+                        "size": "10.5",
+                        "limit_price": "65038.01",
+                        "is_buying_asset": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890
+                    },
+                    "metadata": {
+                        "client_order_id": "23042",
+                        "create_time": "1697788800000000000"
+                    },
+                    "state": {
+                        "status": "PENDING",
+                        "reject_reason": "CLIENT_CANCEL",
+                        "book_size": ["10.5"],
+                        "traded_size": ["1.5"],
+                        "update_time": "1697788800000000000",
+                        "avg_fill_price": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/pre_order_check",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "orders": [{
+                        "order_id": "0x1234567890abcdef",
+                        "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "is_market": false,
+                        "time_in_force": "GOOD_TILL_TIME",
+                        "post_only": false,
+                        "reduce_only": false,
+                        "legs": [{
+                            "instrument": "BTC_USDT_Perp",
+                            "size": "10.5",
+                            "limit_price": "65038.01",
+                            "is_buying_asset": true
+                        }],
+                        "signature": {
+                            "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "expiration": "1697788800000000000",
+                            "nonce": 1234567890
+                        },
+                        "metadata": {
+                            "client_order_id": "23042",
+                            "create_time": "1697788800000000000"
+                        },
+                        "state": {
+                            "status": "PENDING",
+                            "reject_reason": "CLIENT_CANCEL",
+                            "book_size": ["10.5"],
+                            "traded_size": ["1.5"],
+                            "update_time": "1697788800000000000",
+                            "avg_fill_price": ["60000.4"]
+                        }
+                    }]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/pre_order_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "o": [{
+                    "oi": "0x1234567890abcdef",
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "im": false,
+                    "ti": "GOOD_TILL_TIME",
+                    "po": false,
+                    "ro": false,
+                    "l": [{
+                        "i": "BTC_USDT_Perp",
+                        "s": "10.5",
+                        "lp": "65038.01",
+                        "ib": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890
+                    },
+                    "m": {
+                        "co": "23042",
+                        "ct": "1697788800000000000"
+                    },
+                    "s1": {
+                        "s": "PENDING",
+                        "rr": "CLIENT_CANCEL",
+                        "bs": ["10.5"],
+                        "ts": ["1.5"],
+                        "ut": "1697788800000000000",
+                        "af": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/pre_order_check",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "o": [{
+                        "oi": "0x1234567890abcdef",
+                        "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "im": false,
+                        "ti": "GOOD_TILL_TIME",
+                        "po": false,
+                        "ro": false,
+                        "l": [{
+                            "i": "BTC_USDT_Perp",
+                            "s": "10.5",
+                            "lp": "65038.01",
+                            "ib": true
+                        }],
+                        "s": {
+                            "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "e": "1697788800000000000",
+                            "n": 1234567890
+                        },
+                        "m": {
+                            "co": "23042",
+                            "ct": "1697788800000000000"
+                        },
+                        "s1": {
+                            "s": "PENDING",
+                            "rr": "CLIENT_CANCEL",
+                            "bs": ["10.5"],
+                            "ts": ["1.5"],
+                            "ut": "1697788800000000000",
+                            "af": ["60000.4"]
+                        }
+                    }]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/pre_order_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "orders": [{
+                    "order_id": "0x1234567890abcdef",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "is_market": false,
+                    "time_in_force": "GOOD_TILL_TIME",
+                    "post_only": false,
+                    "reduce_only": false,
+                    "legs": [{
+                        "instrument": "BTC_USDT_Perp",
+                        "size": "10.5",
+                        "limit_price": "65038.01",
+                        "is_buying_asset": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890
+                    },
+                    "metadata": {
+                        "client_order_id": "23042",
+                        "create_time": "1697788800000000000"
+                    },
+                    "state": {
+                        "status": "PENDING",
+                        "reject_reason": "CLIENT_CANCEL",
+                        "book_size": ["10.5"],
+                        "traded_size": ["1.5"],
+                        "update_time": "1697788800000000000",
+                        "avg_fill_price": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/pre_order_check",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "orders": [{
+                        "order_id": "0x1234567890abcdef",
+                        "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "is_market": false,
+                        "time_in_force": "GOOD_TILL_TIME",
+                        "post_only": false,
+                        "reduce_only": false,
+                        "legs": [{
+                            "instrument": "BTC_USDT_Perp",
+                            "size": "10.5",
+                            "limit_price": "65038.01",
+                            "is_buying_asset": true
+                        }],
+                        "signature": {
+                            "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "expiration": "1697788800000000000",
+                            "nonce": 1234567890
+                        },
+                        "metadata": {
+                            "client_order_id": "23042",
+                            "create_time": "1697788800000000000"
+                        },
+                        "state": {
+                            "status": "PENDING",
+                            "reject_reason": "CLIENT_CANCEL",
+                            "book_size": ["10.5"],
+                            "traded_size": ["1.5"],
+                            "update_time": "1697788800000000000",
+                            "avg_fill_price": ["60000.4"]
+                        }
+                    }]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/pre_order_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "o": [{
+                    "oi": "0x1234567890abcdef",
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "im": false,
+                    "ti": "GOOD_TILL_TIME",
+                    "po": false,
+                    "ro": false,
+                    "l": [{
+                        "i": "BTC_USDT_Perp",
+                        "s": "10.5",
+                        "lp": "65038.01",
+                        "ib": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890
+                    },
+                    "m": {
+                        "co": "23042",
+                        "ct": "1697788800000000000"
+                    },
+                    "s1": {
+                        "s": "PENDING",
+                        "rr": "CLIENT_CANCEL",
+                        "bs": ["10.5"],
+                        "ts": ["1.5"],
+                        "ut": "1697788800000000000",
+                        "af": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/pre_order_check",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "o": [{
+                        "oi": "0x1234567890abcdef",
+                        "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "im": false,
+                        "ti": "GOOD_TILL_TIME",
+                        "po": false,
+                        "ro": false,
+                        "l": [{
+                            "i": "BTC_USDT_Perp",
+                            "s": "10.5",
+                            "lp": "65038.01",
+                            "ib": true
+                        }],
+                        "s": {
+                            "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "e": "1697788800000000000",
+                            "n": 1234567890
+                        },
+                        "m": {
+                            "co": "23042",
+                            "ct": "1697788800000000000"
+                        },
+                        "s1": {
+                            "s": "PENDING",
+                            "rr": "CLIENT_CANCEL",
+                            "bs": ["10.5"],
+                            "ts": ["1.5"],
+                            "ut": "1697788800000000000",
+                            "af": ["60000.4"]
+                        }
+                    }]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
 ## Execution
 ### Fill History
 ```
@@ -2853,7 +3782,8 @@ LITE ENDPOINT: lite/v1/fill_history
                 "trade_id": "209358-2",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
-                "client_order_id": "23042"
+                "client_order_id": "23042",
+                "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"
             }],
             "next": "Qw0918="
         }
@@ -2879,7 +3809,8 @@ LITE ENDPOINT: lite/v1/fill_history
                 "ti": "209358-2",
                 "oi": "0x10000101000203040506",
                 "v": "ORDERBOOK",
-                "co": "23042"
+                "co": "23042",
+                "s1": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"
             }],
             "n": "Qw0918="
         }
@@ -2894,6 +3825,7 @@ LITE ENDPOINT: lite/v1/fill_history
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -3330,6 +4262,7 @@ LITE ENDPOINT: lite/v1/positions
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -3694,6 +4627,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -4012,336 +4946,6 @@ LITE ENDPOINT: lite/v1/funding_payment_history
         </section>
 <hr class="solid">
 ## Transfer
-### Deposit
-```
-FULL ENDPOINT: full/v1/deposit
-LITE ENDPOINT: lite/v1/deposit
-```
-
-=== "Request"
-    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    -8<- "docs/schemas/api_deposit_request.md"
-    </section>
-    <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **Full Request**
-        ``` { .json .copy }
-        {
-            "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "currency": "USDT",
-            "num_tokens": "1500.0"
-        }
-        ```
-        **Lite Request**
-        ``` { .json .copy }
-        {
-            "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-            "c": "USDT",
-            "nt": "1500.0"
-        }
-        ```
-    </section>
-=== "Response"
-    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    -8<- "docs/schemas/ack_response.md"
-    </section>
-    <section markdown="1" style="float: right; width: 30%;">
-    !!! success
-        **Full Response**
-        ``` { .json .copy }
-        {
-            "result": {
-                "ack": "true"
-            }
-        }
-        ```
-        **Lite Response**
-        ``` { .json .copy }
-        {
-            "r": {
-                "a": "true"
-            }
-        }
-        ```
-    </section>
-=== "Errors"
-    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "Error Codes"
-        |Code|HttpStatus| Description |
-        |-|-|-|
-        |1000|401|You need to authenticate prior to using this functionality|
-        |1001|403|You are not authorized to access this functionality|
-        |1002|500|Internal Server Error|
-        |1003|400|Request could not be processed due to malformed syntax|
-    </section>
-    <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
-        **Full Error Response**
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
-        }
-        ```
-        **Lite Error Response**
-        ``` { .json .copy }
-        {
-            "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
-        }
-        ```
-    </section>
-=== "Try it out"
-    -8<- "sections/auth_closed.md"
-    === "DEV"
-        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-        !!! example "REST Full"
-            ``` { .bash .copy }
-            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/deposit' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --data '{
-                "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "currency": "USDT",
-                "num_tokens": "1500.0"
-            }
-            '
-            ```
-        !!! example "JSONRPC Full"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -x '
-            {
-                "jsonrpc": "2.0",
-                "method": "v1/deposit",
-                "params": {
-                    "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                    "currency": "USDT",
-                    "num_tokens": "1500.0"
-                },
-                "id": 123
-            }
-            ' -w 360
-            ```
-        </section>
-        <section markdown="1" style="float: right; width: 50%;">
-        !!! example "REST Lite"
-            ``` { .bash .copy }
-            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/deposit' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --data '{
-                "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "c": "USDT",
-                "nt": "1500.0"
-            }
-            '
-            ```
-        !!! example "JSONRPC Lite"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -x '
-            {
-                "j": "2.0",
-                "m": "v1/deposit",
-                "p": {
-                    "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                    "c": "USDT",
-                    "nt": "1500.0"
-                },
-                "i": 123
-            }
-            ' -w 360
-            ```
-        </section>
-    === "STAGING"
-        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-        !!! example "REST Full"
-            ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/deposit' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --data '{
-                "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "currency": "USDT",
-                "num_tokens": "1500.0"
-            }
-            '
-            ```
-        !!! example "JSONRPC Full"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -x '
-            {
-                "jsonrpc": "2.0",
-                "method": "v1/deposit",
-                "params": {
-                    "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                    "currency": "USDT",
-                    "num_tokens": "1500.0"
-                },
-                "id": 123
-            }
-            ' -w 360
-            ```
-        </section>
-        <section markdown="1" style="float: right; width: 50%;">
-        !!! example "REST Lite"
-            ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/deposit' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --data '{
-                "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "c": "USDT",
-                "nt": "1500.0"
-            }
-            '
-            ```
-        !!! example "JSONRPC Lite"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -x '
-            {
-                "j": "2.0",
-                "m": "v1/deposit",
-                "p": {
-                    "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                    "c": "USDT",
-                    "nt": "1500.0"
-                },
-                "i": 123
-            }
-            ' -w 360
-            ```
-        </section>
-    === "TESTNET"
-        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-        !!! example "REST Full"
-            ``` { .bash .copy }
-            curl --location 'https://trades.testnet.grvt.io/full/v1/deposit' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --data '{
-                "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "currency": "USDT",
-                "num_tokens": "1500.0"
-            }
-            '
-            ```
-        !!! example "JSONRPC Full"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -x '
-            {
-                "jsonrpc": "2.0",
-                "method": "v1/deposit",
-                "params": {
-                    "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                    "currency": "USDT",
-                    "num_tokens": "1500.0"
-                },
-                "id": 123
-            }
-            ' -w 360
-            ```
-        </section>
-        <section markdown="1" style="float: right; width: 50%;">
-        !!! example "REST Lite"
-            ``` { .bash .copy }
-            curl --location 'https://trades.testnet.grvt.io/lite/v1/deposit' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --data '{
-                "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "c": "USDT",
-                "nt": "1500.0"
-            }
-            '
-            ```
-        !!! example "JSONRPC Lite"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -x '
-            {
-                "j": "2.0",
-                "m": "v1/deposit",
-                "p": {
-                    "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                    "c": "USDT",
-                    "nt": "1500.0"
-                },
-                "i": 123
-            }
-            ' -w 360
-            ```
-        </section>
-    === "PROD"
-        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-        !!! example "REST Full"
-            ``` { .bash .copy }
-            curl --location 'https://trades.grvt.io/full/v1/deposit' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --data '{
-                "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "currency": "USDT",
-                "num_tokens": "1500.0"
-            }
-            '
-            ```
-        !!! example "JSONRPC Full"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.grvt.io/ws/full" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -x '
-            {
-                "jsonrpc": "2.0",
-                "method": "v1/deposit",
-                "params": {
-                    "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                    "currency": "USDT",
-                    "num_tokens": "1500.0"
-                },
-                "id": 123
-            }
-            ' -w 360
-            ```
-        </section>
-        <section markdown="1" style="float: right; width: 50%;">
-        !!! example "REST Lite"
-            ``` { .bash .copy }
-            curl --location 'https://trades.grvt.io/lite/v1/deposit' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --data '{
-                "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "c": "USDT",
-                "nt": "1500.0"
-            }
-            '
-            ```
-        !!! example "JSONRPC Lite"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.grvt.io/ws/lite" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -x '
-            {
-                "j": "2.0",
-                "m": "v1/deposit",
-                "p": {
-                    "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                    "c": "USDT",
-                    "nt": "1500.0"
-                },
-                "i": 123
-            }
-            ' -w 360
-            ```
-        </section>
-<hr class="solid">
 ### Deposit History
 ```
 FULL ENDPOINT: full/v1/deposit_history
@@ -4423,6 +5027,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -4807,6 +5412,7 @@ LITE ENDPOINT: lite/v1/transfer
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -5349,6 +5955,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -5730,6 +6337,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |4010|400|This wallet is not supported. Please try another wallet.|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -6236,6 +6844,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -6653,6 +7262,7 @@ LITE ENDPOINT: lite/v1/account_summary
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7015,6 +7625,7 @@ LITE ENDPOINT: lite/v1/account_history
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7381,6 +7992,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         |-|-|-|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7667,6 +8279,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         |-|-|-|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7922,14 +8535,14 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
         ``` { .json .copy }
         {
             "is_active": "false",
-            "haircut_ratio": "0"
+            "haircut_ratio": "0.34"
         }
         ```
         **Lite Response**
         ``` { .json .copy }
         {
             "ia": "false",
-            "hr": "0"
+            "hr": "0.34"
         }
         ```
     </section>
@@ -7940,6 +8553,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
         |-|-|-|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
