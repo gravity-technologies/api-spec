@@ -731,7 +731,7 @@
               "status": 400
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             },
@@ -937,7 +937,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -978,7 +978,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1029,7 +1029,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1070,7 +1070,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1111,7 +1111,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1152,7 +1152,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1193,7 +1193,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1234,7 +1234,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1275,7 +1275,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1316,7 +1316,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1357,7 +1357,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1398,7 +1398,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1444,7 +1444,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1485,9 +1485,40 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "PreDepositCheck",
+          "name": "RPCPreDepositCheckV1",
+          "version": 1,
+          "route": "/pre_deposit_check",
+          "auth_required": true,
+          "request": "ApiPreDepositCheckRequest",
+          "response": "ApiPreDepositCheckResponse",
+          "on_request_errors": [
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "The currency you are requesting for is  not currently supported",
+              "status": 404
             }
           ]
         },
@@ -1526,7 +1557,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1567,7 +1598,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1598,7 +1629,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1629,7 +1660,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1660,7 +1691,7 @@
               "status": 429
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1717,7 +1748,7 @@
               "status": 400
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1772,7 +1803,7 @@
               "status": 400
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1827,7 +1858,7 @@
               "status": 400
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1882,7 +1913,7 @@
               "status": 400
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1917,7 +1948,7 @@
               "status": 400
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1957,7 +1988,7 @@
               "status": 400
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -1992,7 +2023,7 @@
               "status": 400
             },
             {
-              "code": 1007,
+              "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
             }
@@ -7949,6 +7980,60 @@
       "comment": []
     },
     {
+      "name": "ApiPreDepositCheckRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "Currency",
+          "json_type": "Currency",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency you hold the deposit in"
+          ]
+        },
+        {
+          "name": "bridge",
+          "lite_name": "b",
+          "semantic_type": "BridgeType",
+          "json_type": "BridgeType",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The bridge type to conduct checks for"
+          ]
+        }
+      ],
+      "comment": [
+        "UI only for bridge deposits through non native bridge. Currently only supports XY Finance bridge account."
+      ]
+    },
+    {
+      "name": "ApiPreDepositCheckResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "max_deposit_limit",
+          "lite_name": "md",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3945034.23'",
+          "comment": [
+            "Max Deposit Limit reported for the Bridge Account reported in the currency balance"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiGetUserEcosystemPointRequest",
       "is_root": true,
       "fields": [
@@ -11701,6 +11786,19 @@
     }
   ],
   "enums": [
+    {
+      "name": "BridgeType",
+      "values": [
+        {
+          "name": "XY",
+          "value": 1,
+          "comment": [
+            "XY Bridge type"
+          ]
+        }
+      ],
+      "comment": []
+    },
     {
       "name": "CandlestickInterval",
       "values": [
