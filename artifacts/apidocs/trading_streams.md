@@ -195,12 +195,12 @@ STREAM: v1.order
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1008|401|Your IP has not been whitelisted for access|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3020|400|Sub account ID must be an uint64 integer|
-        |1008|401|Your IP has not been whitelisted for access|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -779,12 +779,12 @@ STREAM: v1.state
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1008|401|Your IP has not been whitelisted for access|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3020|400|Sub account ID must be an uint64 integer|
-        |1008|401|Your IP has not been whitelisted for access|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -1382,12 +1382,12 @@ STREAM: v1.fill
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1008|401|Your IP has not been whitelisted for access|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3020|400|Sub account ID must be an uint64 integer|
-        |1008|401|Your IP has not been whitelisted for access|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -1972,12 +1972,12 @@ STREAM: v1.position
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1008|401|Your IP has not been whitelisted for access|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3020|400|Sub account ID must be an uint64 integer|
-        |1008|401|Your IP has not been whitelisted for access|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -2543,10 +2543,10 @@ STREAM: v1.deposit
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|403|You are not authorized to access this functionality|
+        |1008|401|Your IP has not been whitelisted for access|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
-        |1008|401|Your IP has not been whitelisted for access|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -3131,11 +3131,11 @@ STREAM: v1.transfer
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|403|You are not authorized to access this functionality|
+        |1008|401|Your IP has not been whitelisted for access|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
         |3020|400|Sub account ID must be an uint64 integer|
-        |1008|401|Your IP has not been whitelisted for access|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -3716,10 +3716,10 @@ STREAM: v1.withdrawal
         |Code|HttpStatus| Description |
         |-|-|-|
         |1001|403|You are not authorized to access this functionality|
+        |1008|401|Your IP has not been whitelisted for access|
         |1101|400|Feed Format must be in the format of <primary>@<secondary>|
         |1102|400|Wrong number of primary selectors|
         |1103|400|Wrong number of secondary selectors|
-        |1008|401|Your IP has not been whitelisted for access|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">

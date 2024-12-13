@@ -169,10 +169,10 @@ LITE ENDPOINT: lite/v1/create_order
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
-        |1008|401|Your IP has not been whitelisted for access|
         |1004|404|Data Not Found|
         |1005|500|Unknown Error|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
         |1400|403|Signer does not have trade permission|
         |2000|403|Order signature is from an unauthorized signer|
         |2001|403|Order signature has expired|
@@ -884,9 +884,9 @@ LITE ENDPOINT: lite/v1/cancel_order
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
-        |3021|400|Either order ID or client order ID must be supplied|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
+        |3021|400|Either order ID or client order ID must be supplied|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1629,10 +1629,10 @@ LITE ENDPOINT: lite/v1/order
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
-        |1004|404|Data Not Found|
-        |3021|400|Either order ID or client order ID must be supplied|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
+        |1004|404|Data Not Found|
+        |3021|400|Either order ID or client order ID must be supplied|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2026,9 +2026,9 @@ LITE ENDPOINT: lite/v1/open_orders
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
-        |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -6351,9 +6351,9 @@ LITE ENDPOINT: lite/v1/withdrawal
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
-        |4010|400|This wallet is not supported. Please try another wallet.|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
+        |4010|400|This wallet is not supported. Please try another wallet.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7219,6 +7219,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1007|404|The currency you are requesting for is  not currently supported|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
