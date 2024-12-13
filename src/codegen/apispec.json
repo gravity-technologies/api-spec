@@ -731,6 +731,11 @@
               "status": 400
             },
             {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
               "code": 1004,
               "message": "Data Not Found",
               "status": 404
@@ -744,6 +749,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1400,
+              "message": "Signer does not have trade permission",
+              "status": 403
             },
             {
               "code": 2000,
@@ -763,6 +773,11 @@
             {
               "code": 2003,
               "message": "Order sub account does not match logged in user",
+              "status": 403
+            },
+            {
+              "code": 2004,
+              "message": "Order signature is from an expired session key",
               "status": 403
             },
             {
@@ -920,6 +935,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -956,6 +976,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1002,6 +1027,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1038,6 +1068,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1074,6 +1109,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1110,6 +1150,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1146,6 +1191,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1182,6 +1232,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1218,6 +1273,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1254,6 +1314,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1290,6 +1355,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1326,6 +1396,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1367,6 +1442,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1403,6 +1483,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1439,6 +1524,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1475,6 +1565,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1501,6 +1596,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1527,6 +1627,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1553,6 +1658,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         }
@@ -1605,6 +1715,11 @@
               "code": 3020,
               "message": "Sub account ID must be an uint64 integer",
               "status": 400
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1655,6 +1770,11 @@
               "code": 3020,
               "message": "Sub account ID must be an uint64 integer",
               "status": 400
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1705,6 +1825,11 @@
               "code": 3020,
               "message": "Sub account ID must be an uint64 integer",
               "status": 400
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1755,6 +1880,11 @@
               "code": 3020,
               "message": "Sub account ID must be an uint64 integer",
               "status": 400
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1785,6 +1915,11 @@
               "code": 1103,
               "message": "Wrong number of secondary selectors",
               "status": 400
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1820,6 +1955,11 @@
               "code": 3020,
               "message": "Sub account ID must be an uint64 integer",
               "status": 400
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -1850,6 +1990,11 @@
               "code": 1103,
               "message": "Wrong number of secondary selectors",
               "status": 400
+            },
+            {
+              "code": 1007,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         }
@@ -8612,6 +8757,19 @@
           "comment": [
             "The referrer main account id"
           ]
+        },
+        {
+          "name": "is_business",
+          "lite_name": "ib",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "The account is a business account or not"
+          ]
         }
       ],
       "comment": [
@@ -9510,6 +9668,19 @@
           "example": "100",
           "comment": [
             "Number of trades"
+          ]
+        },
+        {
+          "name": "positive_fee",
+          "lite_name": "pf",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10000101000203040506'",
+          "comment": [
+            "Total positive fee paid by user"
           ]
         }
       ],

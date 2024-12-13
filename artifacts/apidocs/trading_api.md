@@ -169,13 +169,16 @@ LITE ENDPOINT: lite/v1/create_order
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1007|401|Your IP has not been whitelisted for access|
         |1004|404|Data Not Found|
         |1005|500|Unknown Error|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1400|403|Signer does not have trade permission|
         |2000|403|Order signature is from an unauthorized signer|
         |2001|403|Order signature has expired|
         |2002|403|Order signature does not match payload|
         |2003|403|Order sub account does not match logged in user|
+        |2004|403|Order signature is from an expired session key|
         |2010|400|Order ID should be empty when creating an order|
         |2011|400|Client Order ID should be supplied when creating an order|
         |2012|400|Client Order ID overlaps with existing active order|
@@ -883,6 +886,7 @@ LITE ENDPOINT: lite/v1/cancel_order
         |1003|400|Request could not be processed due to malformed syntax|
         |3021|400|Either order ID or client order ID must be supplied|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1216,6 +1220,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1627,6 +1632,7 @@ LITE ENDPOINT: lite/v1/order
         |1004|404|Data Not Found|
         |3021|400|Either order ID or client order ID must be supplied|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2022,6 +2028,7 @@ LITE ENDPOINT: lite/v1/open_orders
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2443,6 +2450,7 @@ LITE ENDPOINT: lite/v1/order_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2934,6 +2942,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -3826,6 +3835,7 @@ LITE ENDPOINT: lite/v1/fill_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -4263,6 +4273,7 @@ LITE ENDPOINT: lite/v1/positions
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -4628,6 +4639,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -5028,6 +5040,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -5413,6 +5426,7 @@ LITE ENDPOINT: lite/v1/transfer
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -5956,6 +5970,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -6338,6 +6353,7 @@ LITE ENDPOINT: lite/v1/withdrawal
         |1003|400|Request could not be processed due to malformed syntax|
         |4010|400|This wallet is not supported. Please try another wallet.|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -6845,6 +6861,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7263,6 +7280,7 @@ LITE ENDPOINT: lite/v1/account_summary
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7626,6 +7644,7 @@ LITE ENDPOINT: lite/v1/account_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7993,6 +8012,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -8280,6 +8300,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -8554,6 +8575,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure

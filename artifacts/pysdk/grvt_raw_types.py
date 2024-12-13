@@ -1856,6 +1856,8 @@ class FlatReferral:
     main_account_id: str
     # The referrer main account id
     referrer_main_account_id: str
+    # The account is a business account or not
+    is_business: bool
 
 
 @dataclass
@@ -2040,6 +2042,8 @@ class SubAccountTradeAggregation:
     total_trade_volume: str
     # Number of trades
     num_traded: str
+    # Total positive fee paid by user
+    positive_fee: str
 
 
 @dataclass
