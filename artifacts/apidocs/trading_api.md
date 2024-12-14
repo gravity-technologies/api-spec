@@ -172,10 +172,13 @@ LITE ENDPOINT: lite/v1/create_order
         |1004|404|Data Not Found|
         |1005|500|Unknown Error|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |1400|403|Signer does not have trade permission|
         |2000|403|Order signature is from an unauthorized signer|
         |2001|403|Order signature has expired|
         |2002|403|Order signature does not match payload|
         |2003|403|Order sub account does not match logged in user|
+        |2004|403|Order signature is from an expired session key|
         |2010|400|Order ID should be empty when creating an order|
         |2011|400|Client Order ID should be supplied when creating an order|
         |2012|400|Client Order ID overlaps with existing active order|
@@ -881,8 +884,9 @@ LITE ENDPOINT: lite/v1/cancel_order
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
-        |3021|400|Either order ID or client order ID must be supplied|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |3021|400|Either order ID or client order ID must be supplied|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1216,6 +1220,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -1624,9 +1629,10 @@ LITE ENDPOINT: lite/v1/order
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
         |1004|404|Data Not Found|
         |3021|400|Either order ID or client order ID must be supplied|
-        |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2020,8 +2026,9 @@ LITE ENDPOINT: lite/v1/open_orders
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
-        |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |1003|400|Request could not be processed due to malformed syntax|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2443,6 +2450,7 @@ LITE ENDPOINT: lite/v1/order_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2934,6 +2942,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -3826,6 +3835,7 @@ LITE ENDPOINT: lite/v1/fill_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -4263,6 +4273,7 @@ LITE ENDPOINT: lite/v1/positions
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -4628,6 +4639,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -5028,6 +5040,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -5413,6 +5426,7 @@ LITE ENDPOINT: lite/v1/transfer
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -5956,6 +5970,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -6336,8 +6351,9 @@ LITE ENDPOINT: lite/v1/withdrawal
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
-        |4010|400|This wallet is not supported. Please try another wallet.|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |4010|400|This wallet is not supported. Please try another wallet.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -6845,6 +6861,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7146,6 +7163,316 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ```
         </section>
 <hr class="solid">
+## PreDepositCheck
+### Pre Deposit Check
+```
+FULL ENDPOINT: full/v1/pre_deposit_check
+LITE ENDPOINT: lite/v1/pre_deposit_check
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_pre_deposit_check_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "currency": "USDT",
+            "bridge": "XY"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "c": "USDT",
+            "b": "XY"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_pre_deposit_check_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "max_deposit_limit": "3945034.23"
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "md": "3945034.23"
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1007|404|The currency you are requesting for is  not currently supported|
+        |1008|401|Your IP has not been whitelisted for access|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1002,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/pre_deposit_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "currency": "USDT",
+                "bridge": "XY"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/pre_deposit_check",
+                "params": {
+                    "currency": "USDT",
+                    "bridge": "XY"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/pre_deposit_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "c": "USDT",
+                "b": "XY"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/pre_deposit_check",
+                "p": {
+                    "c": "USDT",
+                    "b": "XY"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/pre_deposit_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "currency": "USDT",
+                "bridge": "XY"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/pre_deposit_check",
+                "params": {
+                    "currency": "USDT",
+                    "bridge": "XY"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/pre_deposit_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "c": "USDT",
+                "b": "XY"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/pre_deposit_check",
+                "p": {
+                    "c": "USDT",
+                    "b": "XY"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/pre_deposit_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "currency": "USDT",
+                "bridge": "XY"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/pre_deposit_check",
+                "params": {
+                    "currency": "USDT",
+                    "bridge": "XY"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/pre_deposit_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "c": "USDT",
+                "b": "XY"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/pre_deposit_check",
+                "p": {
+                    "c": "USDT",
+                    "b": "XY"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/pre_deposit_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "currency": "USDT",
+                "bridge": "XY"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/pre_deposit_check",
+                "params": {
+                    "currency": "USDT",
+                    "bridge": "XY"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/pre_deposit_check' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --data '{
+                "c": "USDT",
+                "b": "XY"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/pre_deposit_check",
+                "p": {
+                    "c": "USDT",
+                    "b": "XY"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
 ## Account
 ### Sub Account Summary
 ```
@@ -7263,6 +7590,7 @@ LITE ENDPOINT: lite/v1/account_summary
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7626,6 +7954,7 @@ LITE ENDPOINT: lite/v1/account_history
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7993,6 +8322,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -8280,6 +8610,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -8554,6 +8885,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure

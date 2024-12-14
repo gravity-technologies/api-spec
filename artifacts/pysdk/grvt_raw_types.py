@@ -10,6 +10,11 @@ from enum import Enum
 from typing import Any
 
 
+class BridgeType(Enum):
+    # XY Bridge type
+    XY = "XY"
+
+
 class CandlestickInterval(Enum):
     # 1 minute
     CI_1_M = "CI_1_M"
@@ -1693,6 +1698,20 @@ class ApiPreOrderCheckResponse:
 
 
 @dataclass
+class ApiPreDepositCheckRequest:
+    # The currency you hold the deposit in
+    currency: Currency
+    # The bridge type to conduct checks for
+    bridge: BridgeType
+
+
+@dataclass
+class ApiPreDepositCheckResponse:
+    # Max Deposit Limit reported for the Bridge Account reported in the currency balance
+    max_deposit_limit: str
+
+
+@dataclass
 class ApiGetUserEcosystemPointRequest:
     # The off chain account id
     account_id: str
@@ -1856,6 +1875,8 @@ class FlatReferral:
     main_account_id: str
     # The referrer main account id
     referrer_main_account_id: str
+    # The account is a business account or not
+    is_business: bool
 
 
 @dataclass
@@ -2040,6 +2061,8 @@ class SubAccountTradeAggregation:
     total_trade_volume: str
     # Number of trades
     num_traded: str
+    # Total positive fee paid by user
+    positive_fee: str
 
 
 @dataclass

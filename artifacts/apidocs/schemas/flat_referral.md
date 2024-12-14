@@ -9,3 +9,4 @@
     |account_create_time<br>`ac` |string|True|The account creation time|
     |main_account_id<br>`ma` |string|True|The main account id|
     |referrer_main_account_id<br>`rm` |string|True|The referrer main account id|
+    |is_business<br>`ib` |boolean|True|The account is a business account or not|
