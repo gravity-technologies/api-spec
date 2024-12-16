@@ -368,6 +368,7 @@ def write_stream_rpc_try_it_out(
             md.writeln(f'wscat -c "wss://{endpoint.url}/ws/{url_suffix}" \\')
             if stream.auth_required:
                 md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
+                md.writeln('-H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \\')
             md.writeln("-x '")
             selector = get_selector(
                 ctx,
@@ -386,6 +387,7 @@ def write_stream_rpc_try_it_out(
             md.writeln(f'wscat -c "wss://{endpoint.url}/ws/{url_suffix}" \\')
             if stream.auth_required:
                 md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
+                md.writeln('-H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \\')
             md.writeln("-x '")
             selector = get_selector(
                 ctx,
@@ -404,6 +406,7 @@ def write_stream_rpc_try_it_out(
             md.writeln(f'wscat -c "wss://{endpoint.url}/ws" \\')
             if stream.auth_required:
                 md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
+                md.writeln('-H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \\')
             md.writeln("-x '")
             selector = get_selector(
                 ctx,
@@ -537,6 +540,7 @@ def write_rpc_try_it_out(
             )
             if rpc.auth_required:
                 md.writeln('--header "Cookie: $GRVT_COOKIE" \\')
+                md.writeln('--header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \\')
             md.write("--data '")
             write_struct_example(ctx, md, request_struct, True, is_full)
             md.writeln("'")
@@ -550,6 +554,7 @@ def write_rpc_try_it_out(
             md.writeln(f'wscat -c "wss://{endpoint.url}/ws/{url_suffix}" \\')
             if rpc.auth_required:
                 md.writeln('-H "Cookie: $GRVT_COOKIE" \\')
+                md.writeln('-H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \\')
             md.writeln("-x '")
             req = ctx.struct_map["JSONRPCRequest"]
             req.fields[1].example = f'"v{rpc.version}{rpc.route}"'
