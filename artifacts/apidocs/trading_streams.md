@@ -246,6 +246,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -262,6 +263,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -278,6 +280,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -294,6 +297,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -310,6 +314,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -326,6 +331,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -343,6 +349,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -359,6 +366,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -375,6 +383,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -391,6 +400,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -407,6 +417,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -423,6 +434,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -440,6 +452,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -456,6 +469,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -472,6 +486,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -488,6 +503,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -504,6 +520,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -520,6 +537,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -537,6 +555,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -553,6 +572,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -569,6 +589,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -585,6 +606,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -601,6 +623,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -617,6 +640,7 @@ STREAM: v1.order
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -830,6 +854,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -846,6 +871,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -862,6 +888,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -878,6 +905,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -894,6 +922,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -910,6 +939,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -927,6 +957,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -943,6 +974,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -959,6 +991,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -975,6 +1008,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -991,6 +1025,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1007,6 +1042,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -1024,6 +1060,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1040,6 +1077,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1056,6 +1094,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -1072,6 +1111,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1088,6 +1128,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1104,6 +1145,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -1121,6 +1163,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1137,6 +1180,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1153,6 +1197,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -1169,6 +1214,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1185,6 +1231,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1201,6 +1248,7 @@ STREAM: v1.state
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -1433,6 +1481,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1449,6 +1498,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1465,6 +1515,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -1481,6 +1532,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1497,6 +1549,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1513,6 +1566,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -1530,6 +1584,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1546,6 +1601,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1562,6 +1618,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -1578,6 +1635,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1594,6 +1652,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1610,6 +1669,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -1627,6 +1687,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1643,6 +1704,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1659,6 +1721,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -1675,6 +1738,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1691,6 +1755,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1707,6 +1772,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -1724,6 +1790,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1740,6 +1807,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1756,6 +1824,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -1772,6 +1841,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1788,6 +1858,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1804,6 +1875,7 @@ STREAM: v1.fill
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2023,6 +2095,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2039,6 +2112,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2055,6 +2129,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2071,6 +2146,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2087,6 +2163,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2103,6 +2180,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2120,6 +2198,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2136,6 +2215,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2152,6 +2232,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2168,6 +2249,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2184,6 +2266,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2200,6 +2283,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2217,6 +2301,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2233,6 +2318,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2249,6 +2335,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2265,6 +2352,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2281,6 +2369,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2297,6 +2386,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2314,6 +2404,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2330,6 +2421,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2346,6 +2438,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2362,6 +2455,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2378,6 +2472,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2394,6 +2489,7 @@ STREAM: v1.position
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2592,6 +2688,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2608,6 +2705,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2624,6 +2722,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2640,6 +2739,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2656,6 +2756,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2672,6 +2773,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2689,6 +2791,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2705,6 +2808,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2721,6 +2825,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2737,6 +2842,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2753,6 +2859,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2769,6 +2876,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2786,6 +2894,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2802,6 +2911,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2818,6 +2928,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2834,6 +2945,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2850,6 +2962,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2866,6 +2979,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2883,6 +2997,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2899,6 +3014,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2915,6 +3031,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -2931,6 +3048,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2947,6 +3065,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2963,6 +3082,7 @@ STREAM: v1.deposit
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3181,6 +3301,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3197,6 +3318,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3213,6 +3335,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3229,6 +3352,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3245,6 +3369,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3261,6 +3386,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3278,6 +3404,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3294,6 +3421,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3310,6 +3438,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3326,6 +3455,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3342,6 +3472,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3358,6 +3489,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3375,6 +3507,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3391,6 +3524,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3407,6 +3541,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3423,6 +3558,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3439,6 +3575,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3455,6 +3592,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3472,6 +3610,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3488,6 +3627,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3504,6 +3644,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3520,6 +3661,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3536,6 +3678,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3552,6 +3695,7 @@ STREAM: v1.transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3765,6 +3909,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3781,6 +3926,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3797,6 +3943,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3813,6 +3960,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3829,6 +3977,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3845,6 +3994,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3862,6 +4012,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3878,6 +4029,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3894,6 +4046,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3910,6 +4063,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3926,6 +4080,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3942,6 +4097,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -3959,6 +4115,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3975,6 +4132,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3991,6 +4149,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -4007,6 +4166,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4023,6 +4183,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4039,6 +4200,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -4056,6 +4218,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4072,6 +4235,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4088,6 +4252,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,
@@ -4104,6 +4269,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4120,6 +4286,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4136,6 +4303,7 @@ STREAM: v1.withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "request_id":1,

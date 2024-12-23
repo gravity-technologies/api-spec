@@ -871,6 +871,11 @@
               "status": 400
             },
             {
+              "code": 2065,
+              "message": "Order size too granular",
+              "status": 400
+            },
+            {
               "code": 2070,
               "message": "Liquidation Order is not supported",
               "status": 400
@@ -8034,6 +8039,19 @@
           "comment": [
             "Max Deposit Limit reported for the Bridge Account reported in the currency balance"
           ]
+        },
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "Currency",
+          "json_type": "Currency",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency you hold the deposit in"
+          ]
         }
       ],
       "comment": []
@@ -8621,6 +8639,32 @@
           "comment": [
             "The time when the ecosystem points were last calculated"
           ]
+        },
+        {
+          "name": "total_direct_invite_count",
+          "lite_name": "td",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'52'",
+          "comment": [
+            "Direct invite count without relying on epochs"
+          ]
+        },
+        {
+          "name": "total_indirect_invite_count",
+          "lite_name": "ti",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'52'",
+          "comment": [
+            "Indirect invite count without relying on epochs"
+          ]
         }
       ],
       "comment": []
@@ -8880,6 +8924,61 @@
           "optional": false,
           "comment": [
             "The list of flat referrals"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiQueryFlatReferralStatRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "account_id",
+          "lite_name": "ai",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ACC_1234567890'",
+          "comment": [
+            "The off chain account id to get referral stats"
+          ]
+        }
+      ],
+      "comment": [
+        "Query flat referral stats"
+      ]
+    },
+    {
+      "name": "ApiQueryFlatReferralStatResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "direct_invite_count",
+          "lite_name": "di",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'52'",
+          "comment": [
+            "Direct invite count"
+          ]
+        },
+        {
+          "name": "indirect_invite_count",
+          "lite_name": "ii",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'52'",
+          "comment": [
+            "Indirect invite count"
           ]
         }
       ],
