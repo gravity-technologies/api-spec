@@ -197,6 +197,7 @@ LITE ENDPOINT: lite/v1/create_order
         |2062|400|Order size smaller than min size|
         |2063|400|Order size smaller than min block size in block trade venue|
         |2064|400|Invalid limit price tick|
+        |2065|400|Order size too granular|
         |2070|400|Liquidation Order is not supported|
         |2080|400|Insufficient margin to create order|
         |2081|400|Order Fill would result in exceeding maximum position size|
@@ -232,6 +233,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/create_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "order": {
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -265,6 +267,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -306,6 +309,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/create_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "o": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -339,6 +343,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -381,6 +386,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/create_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "order": {
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -414,6 +420,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -455,6 +462,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/create_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "o": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -488,6 +496,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -530,6 +539,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/create_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "order": {
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -563,6 +573,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -604,6 +615,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/create_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "o": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -637,6 +649,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -679,6 +692,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/create_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "order": {
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -712,6 +726,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -753,6 +768,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/create_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "o": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -786,6 +802,7 @@ LITE ENDPOINT: lite/v1/create_order
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -917,6 +934,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
@@ -928,6 +946,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -947,6 +966,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cancel_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
@@ -958,6 +978,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -978,6 +999,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cancel_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
@@ -989,6 +1011,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1008,6 +1031,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cancel_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
@@ -1019,6 +1043,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1039,6 +1064,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
@@ -1050,6 +1076,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1069,6 +1096,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/cancel_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
@@ -1080,6 +1108,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1100,6 +1129,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/cancel_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
@@ -1111,6 +1141,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1130,6 +1161,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/cancel_order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
@@ -1141,6 +1173,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1251,6 +1284,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_all_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -1263,6 +1297,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1283,6 +1318,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cancel_all_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -1295,6 +1331,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1316,6 +1353,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cancel_all_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -1328,6 +1366,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1348,6 +1387,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cancel_all_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -1360,6 +1400,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1381,6 +1422,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_all_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -1393,6 +1435,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1413,6 +1456,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/cancel_all_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -1425,6 +1469,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1446,6 +1491,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/cancel_all_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -1458,6 +1504,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1478,6 +1525,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/cancel_all_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -1490,6 +1538,7 @@ LITE ENDPOINT: lite/v1/cancel_all_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1663,6 +1712,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
@@ -1674,6 +1724,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1693,6 +1744,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
@@ -1704,6 +1756,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1724,6 +1777,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
@@ -1735,6 +1789,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1754,6 +1809,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
@@ -1765,6 +1821,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1785,6 +1842,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
@@ -1796,6 +1854,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1815,6 +1874,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
@@ -1826,6 +1886,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -1846,6 +1907,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
@@ -1857,6 +1919,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -1876,6 +1939,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/order' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
@@ -1887,6 +1951,7 @@ LITE ENDPOINT: lite/v1/order
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2059,6 +2124,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/open_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -2071,6 +2137,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2091,6 +2158,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/open_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -2103,6 +2171,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2124,6 +2193,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/open_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -2136,6 +2206,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2156,6 +2227,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/open_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -2168,6 +2240,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2189,6 +2262,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/open_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -2201,6 +2275,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2221,6 +2296,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/open_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -2233,6 +2309,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2254,6 +2331,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/open_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -2266,6 +2344,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2286,6 +2365,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/open_orders' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -2298,6 +2378,7 @@ LITE ENDPOINT: lite/v1/open_orders
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2481,6 +2562,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/order_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -2497,6 +2579,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2521,6 +2604,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/order_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -2537,6 +2621,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2562,6 +2647,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/order_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -2578,6 +2664,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2602,6 +2689,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/order_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -2618,6 +2706,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2643,6 +2732,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/order_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -2659,6 +2749,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2683,6 +2774,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/order_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -2699,6 +2791,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2724,6 +2817,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/order_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -2740,6 +2834,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -2764,6 +2859,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/order_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -2780,6 +2876,7 @@ LITE ENDPOINT: lite/v1/order_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -2973,6 +3070,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/pre_order_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "orders": [{
@@ -3016,6 +3114,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3067,6 +3166,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/pre_order_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "o": [{
@@ -3110,6 +3210,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3162,6 +3263,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/pre_order_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "orders": [{
@@ -3205,6 +3307,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3256,6 +3359,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/pre_order_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "o": [{
@@ -3299,6 +3403,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3351,6 +3456,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/pre_order_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "orders": [{
@@ -3394,6 +3500,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3445,6 +3552,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/pre_order_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "o": [{
@@ -3488,6 +3596,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3540,6 +3649,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/pre_order_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "orders": [{
@@ -3583,6 +3693,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3634,6 +3745,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/pre_order_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "o": [{
@@ -3677,6 +3789,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3866,6 +3979,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/fill_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -3882,6 +3996,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3906,6 +4021,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/fill_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -3922,6 +4038,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -3947,6 +4064,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/fill_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -3963,6 +4081,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -3987,6 +4106,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/fill_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -4003,6 +4123,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4028,6 +4149,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/fill_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -4044,6 +4166,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4068,6 +4191,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/fill_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -4084,6 +4208,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4109,6 +4234,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/fill_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -4125,6 +4251,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4149,6 +4276,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/fill_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -4165,6 +4293,7 @@ LITE ENDPOINT: lite/v1/fill_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4304,6 +4433,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/positions' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -4316,6 +4446,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4336,6 +4467,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/positions' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -4348,6 +4480,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4369,6 +4502,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/positions' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -4381,6 +4515,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4401,6 +4536,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/positions' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -4413,6 +4549,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4434,6 +4571,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/positions' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -4446,6 +4584,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4466,6 +4605,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/positions' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -4478,6 +4618,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4499,6 +4640,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/positions' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "kind": ["PERPETUAL"],
@@ -4511,6 +4653,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4531,6 +4674,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/positions' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "k": ["PERPETUAL"],
@@ -4543,6 +4687,7 @@ LITE ENDPOINT: lite/v1/positions
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4670,6 +4815,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/funding_payment_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
@@ -4684,6 +4830,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4706,6 +4853,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/funding_payment_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "i": "BTC_USDT_Perp",
@@ -4720,6 +4868,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4743,6 +4892,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/funding_payment_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
@@ -4757,6 +4907,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4779,6 +4930,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/funding_payment_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "i": "BTC_USDT_Perp",
@@ -4793,6 +4945,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4816,6 +4969,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/funding_payment_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
@@ -4830,6 +4984,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4852,6 +5007,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/funding_payment_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "i": "BTC_USDT_Perp",
@@ -4866,6 +5022,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -4889,6 +5046,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/funding_payment_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "instrument": "BTC_USDT_Perp",
@@ -4903,6 +5061,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -4925,6 +5084,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/funding_payment_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "i": "BTC_USDT_Perp",
@@ -4939,6 +5099,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -5071,6 +5232,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/deposit_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": ["USDT", "USDC"],
                 "start_time": "1697788800000000000",
@@ -5084,6 +5246,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -5105,6 +5268,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/deposit_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": ["USDT", "USDC"],
                 "st": "1697788800000000000",
@@ -5118,6 +5282,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -5140,6 +5305,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/deposit_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": ["USDT", "USDC"],
                 "start_time": "1697788800000000000",
@@ -5153,6 +5319,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -5174,6 +5341,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/deposit_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": ["USDT", "USDC"],
                 "st": "1697788800000000000",
@@ -5187,6 +5355,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -5209,6 +5378,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/deposit_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": ["USDT", "USDC"],
                 "start_time": "1697788800000000000",
@@ -5222,6 +5392,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -5243,6 +5414,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/deposit_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": ["USDT", "USDC"],
                 "st": "1697788800000000000",
@@ -5256,6 +5428,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -5278,6 +5451,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/deposit_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": ["USDT", "USDC"],
                 "start_time": "1697788800000000000",
@@ -5291,6 +5465,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -5312,6 +5487,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/deposit_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": ["USDT", "USDC"],
                 "st": "1697788800000000000",
@@ -5325,6 +5501,7 @@ LITE ENDPOINT: lite/v1/deposit_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -5457,6 +5634,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/transfer' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -5479,6 +5657,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -5509,6 +5688,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/transfer' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "fs": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -5531,6 +5711,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -5562,6 +5743,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/transfer' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -5584,6 +5766,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -5614,6 +5797,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/transfer' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "fs": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -5636,6 +5820,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -5667,6 +5852,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/transfer' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -5689,6 +5875,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -5719,6 +5906,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/transfer' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "fs": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -5741,6 +5929,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -5772,6 +5961,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/transfer' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -5794,6 +5984,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -5824,6 +6015,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/transfer' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "fs": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -5846,6 +6038,7 @@ LITE ENDPOINT: lite/v1/transfer
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -6001,6 +6194,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/transfer_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": ["USDT", "USDC"],
                 "start_time": "1697788800000000000",
@@ -6014,6 +6208,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -6035,6 +6230,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/transfer_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": ["USDT", "USDC"],
                 "st": "1697788800000000000",
@@ -6048,6 +6244,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -6070,6 +6267,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/transfer_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": ["USDT", "USDC"],
                 "start_time": "1697788800000000000",
@@ -6083,6 +6281,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -6104,6 +6303,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/transfer_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": ["USDT", "USDC"],
                 "st": "1697788800000000000",
@@ -6117,6 +6317,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -6139,6 +6340,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/transfer_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": ["USDT", "USDC"],
                 "start_time": "1697788800000000000",
@@ -6152,6 +6354,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -6173,6 +6376,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/transfer_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": ["USDT", "USDC"],
                 "st": "1697788800000000000",
@@ -6186,6 +6390,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -6208,6 +6413,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/transfer_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": ["USDT", "USDC"],
                 "start_time": "1697788800000000000",
@@ -6221,6 +6427,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -6242,6 +6449,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/transfer_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": ["USDT", "USDC"],
                 "st": "1697788800000000000",
@@ -6255,6 +6463,7 @@ LITE ENDPOINT: lite/v1/transfer_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -6384,6 +6593,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/withdrawal' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -6404,6 +6614,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -6432,6 +6643,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/withdrawal' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "te": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -6452,6 +6664,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -6481,6 +6694,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/withdrawal' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -6501,6 +6715,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -6529,6 +6744,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/withdrawal' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "te": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -6549,6 +6765,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -6578,6 +6795,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/withdrawal' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -6598,6 +6816,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -6626,6 +6845,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/withdrawal' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "te": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -6646,6 +6866,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -6675,6 +6896,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/withdrawal' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -6695,6 +6917,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -6723,6 +6946,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/withdrawal' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "te": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
@@ -6743,6 +6967,7 @@ LITE ENDPOINT: lite/v1/withdrawal
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -6892,6 +7117,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/withdrawal_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": ["USDT", "USDC"],
                 "start_time": "1697788800000000000",
@@ -6905,6 +7131,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -6926,6 +7153,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/withdrawal_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": ["USDT", "USDC"],
                 "st": "1697788800000000000",
@@ -6939,6 +7167,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -6961,6 +7190,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/withdrawal_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": ["USDT", "USDC"],
                 "start_time": "1697788800000000000",
@@ -6974,6 +7204,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -6995,6 +7226,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/withdrawal_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": ["USDT", "USDC"],
                 "st": "1697788800000000000",
@@ -7008,6 +7240,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -7030,6 +7263,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/withdrawal_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": ["USDT", "USDC"],
                 "start_time": "1697788800000000000",
@@ -7043,6 +7277,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -7064,6 +7299,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/withdrawal_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": ["USDT", "USDC"],
                 "st": "1697788800000000000",
@@ -7077,6 +7313,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -7099,6 +7336,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/withdrawal_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": ["USDT", "USDC"],
                 "start_time": "1697788800000000000",
@@ -7112,6 +7350,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -7133,6 +7372,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/withdrawal_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": ["USDT", "USDC"],
                 "st": "1697788800000000000",
@@ -7146,6 +7386,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -7200,13 +7441,15 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
         **Full Response**
         ``` { .json .copy }
         {
-            "max_deposit_limit": "3945034.23"
+            "max_deposit_limit": "3945034.23",
+            "currency": "USDT"
         }
         ```
         **Lite Response**
         ``` { .json .copy }
         {
-            "md": "3945034.23"
+            "md": "3945034.23",
+            "c": "USDT"
         }
         ```
     </section>
@@ -7250,6 +7493,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/pre_deposit_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": "USDT",
                 "bridge": "XY"
@@ -7260,6 +7504,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -7278,6 +7523,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/pre_deposit_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": "USDT",
                 "b": "XY"
@@ -7288,6 +7534,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -7307,6 +7554,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/pre_deposit_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": "USDT",
                 "bridge": "XY"
@@ -7317,6 +7565,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -7335,6 +7584,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/pre_deposit_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": "USDT",
                 "b": "XY"
@@ -7345,6 +7595,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -7364,6 +7615,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/pre_deposit_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": "USDT",
                 "bridge": "XY"
@@ -7374,6 +7626,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -7392,6 +7645,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/pre_deposit_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": "USDT",
                 "b": "XY"
@@ -7402,6 +7656,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -7421,6 +7676,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/pre_deposit_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "currency": "USDT",
                 "bridge": "XY"
@@ -7431,6 +7687,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -7449,6 +7706,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/pre_deposit_check' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "c": "USDT",
                 "b": "XY"
@@ -7459,6 +7717,7 @@ LITE ENDPOINT: lite/v1/pre_deposit_check
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -7621,6 +7880,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
             }
@@ -7630,6 +7890,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -7647,6 +7908,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'"
             }
@@ -7656,6 +7918,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -7674,6 +7937,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
             }
@@ -7683,6 +7947,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -7700,6 +7965,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'"
             }
@@ -7709,6 +7975,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -7727,6 +7994,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
             }
@@ -7736,6 +8004,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -7753,6 +8022,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'"
             }
@@ -7762,6 +8032,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -7780,6 +8051,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
             }
@@ -7789,6 +8061,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -7806,6 +8079,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'"
             }
@@ -7815,6 +8089,7 @@ LITE ENDPOINT: lite/v1/account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -7985,6 +8260,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/account_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "start_time": "1697788800000000000",
@@ -7998,6 +8274,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8019,6 +8296,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/account_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "st": "1697788800000000000",
@@ -8032,6 +8310,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8054,6 +8333,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/account_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "start_time": "1697788800000000000",
@@ -8067,6 +8347,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8088,6 +8369,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/account_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "st": "1697788800000000000",
@@ -8101,6 +8383,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8123,6 +8406,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/account_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "start_time": "1697788800000000000",
@@ -8136,6 +8420,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8157,6 +8442,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/account_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "st": "1697788800000000000",
@@ -8170,6 +8456,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8192,6 +8479,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/account_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "start_time": "1697788800000000000",
@@ -8205,6 +8493,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8226,6 +8515,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/account_history' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "st": "1697788800000000000",
@@ -8239,6 +8529,7 @@ LITE ENDPOINT: lite/v1/account_history
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8353,6 +8644,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/aggregated_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8361,6 +8653,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8377,6 +8670,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/aggregated_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8385,6 +8679,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8402,6 +8697,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/aggregated_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8410,6 +8706,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8426,6 +8723,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/aggregated_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8434,6 +8732,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8451,6 +8750,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/aggregated_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8459,6 +8759,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8475,6 +8776,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/aggregated_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8483,6 +8785,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8500,6 +8803,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/aggregated_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8508,6 +8812,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8524,6 +8829,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/aggregated_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8532,6 +8838,7 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8641,6 +8948,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/funding_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8649,6 +8957,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8665,6 +8974,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/funding_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8673,6 +8983,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8690,6 +9001,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/funding_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8698,6 +9010,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8714,6 +9027,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/funding_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8722,6 +9036,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8739,6 +9054,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/funding_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8747,6 +9063,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8763,6 +9080,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/funding_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8771,6 +9089,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8788,6 +9107,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/funding_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8796,6 +9116,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8812,6 +9133,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/funding_account_summary' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8820,6 +9142,7 @@ LITE ENDPOINT: lite/v1/funding_account_summary
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8916,6 +9239,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/full/v1/socialized_loss_status' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8924,6 +9248,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8940,6 +9265,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/socialized_loss_status' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8948,6 +9274,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -8965,6 +9292,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/full/v1/socialized_loss_status' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8973,6 +9301,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -8989,6 +9318,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/socialized_loss_status' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -8997,6 +9327,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -9014,6 +9345,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/full/v1/socialized_loss_status' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -9022,6 +9354,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -9038,6 +9371,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             curl --location 'https://trades.testnet.grvt.io/lite/v1/socialized_loss_status' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -9046,6 +9380,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",
@@ -9063,6 +9398,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/full/v1/socialized_loss_status' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -9071,6 +9407,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/full" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "jsonrpc": "2.0",
@@ -9087,6 +9424,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             curl --location 'https://trades.grvt.io/lite/v1/socialized_loss_status' \
             --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
             }
             '
@@ -9095,6 +9433,7 @@ LITE ENDPOINT: lite/v1/socialized_loss_status
             ``` { .bash .copy }
             wscat -c "wss://trades.grvt.io/ws/lite" \
             -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             -x '
             {
                 "j": "2.0",

@@ -1709,6 +1709,8 @@ class ApiPreDepositCheckRequest:
 class ApiPreDepositCheckResponse:
     # Max Deposit Limit reported for the Bridge Account reported in the currency balance
     max_deposit_limit: str
+    # The currency you hold the deposit in
+    currency: Currency
 
 
 @dataclass
@@ -1829,6 +1831,10 @@ class ApiFindEcosystemEpochMetricResponse:
     total: int
     # The time when the ecosystem points were last calculated
     last_calculated_at: str
+    # Direct invite count without relying on epochs
+    total_direct_invite_count: int
+    # Indirect invite count without relying on epochs
+    total_indirect_invite_count: int
 
 
 @dataclass
@@ -1883,6 +1889,20 @@ class FlatReferral:
 class ApiGetListFlatReferralResponse:
     # The list of flat referrals
     flat_referrals: list[FlatReferral]
+
+
+@dataclass
+class ApiQueryFlatReferralStatRequest:
+    # The off chain account id to get referral stats
+    account_id: str
+
+
+@dataclass
+class ApiQueryFlatReferralStatResponse:
+    # Direct invite count
+    direct_invite_count: int
+    # Indirect invite count
+    indirect_invite_count: int
 
 
 @dataclass
