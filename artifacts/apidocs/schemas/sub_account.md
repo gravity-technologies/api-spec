@@ -28,6 +28,15 @@
         |`USDT` = 3|the USDT token|
         |`ETH` = 4|the ETH token|
         |`BTC` = 5|the BTC token|
+        |`SOL` = 6|the SOL token|
+        |`ARB` = 7|the ARB token|
+        |`BNB` = 8|the BNB token|
+        |`ZK` = 9|the ZK token|
+        |`POL` = 10|the POL token|
+        |`OP` = 11|the OP token|
+        |`ATOM` = 12|the ATOM token|
+        |`KPEPE` = 13|the 1000PEPE token|
+        |`TON` = 14|the TON token|
     ??? info "[SpotBalance](/../../schemas/spot_balance)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
@@ -44,6 +53,15 @@
             |`USDT` = 3|the USDT token|
             |`ETH` = 4|the ETH token|
             |`BTC` = 5|the BTC token|
+            |`SOL` = 6|the SOL token|
+            |`ARB` = 7|the ARB token|
+            |`BNB` = 8|the BNB token|
+            |`ZK` = 9|the ZK token|
+            |`POL` = 10|the POL token|
+            |`OP` = 11|the OP token|
+            |`ATOM` = 12|the ATOM token|
+            |`KPEPE` = 13|the 1000PEPE token|
+            |`TON` = 14|the TON token|
     ??? info "[Positions](/../../schemas/positions)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
@@ -60,3 +78,4 @@
         |total_pnl<br>`tp` |string|True|The total PnL of the position, expressed in quote asset decimal units<br>`total_pnl = realized_pnl + unrealized_pnl`|
         |roi<br>`r` |string|True|The ROI of the position, expressed as a percentage<br>`roi = (total_pnl / (entry_price * abs(size))) * 100^`|
         |quote_index_price<br>`qi` |string|True|The index price of the quote currency. (reported in `USD`)|
+        |est_liquidation_price<br>`el` |string|True|The estimated liquidation price|

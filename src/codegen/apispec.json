@@ -1706,6 +1706,93 @@
               "status": 401
             }
           ]
+        },
+        {
+          "namespace": "InitialLeverage",
+          "name": "RPCGetAllInitialLeverageV1",
+          "version": 1,
+          "route": "/get_all_initial_leverage",
+          "auth_required": true,
+          "request": "ApiGetAllInitialLeverageRequest",
+          "response": "ApiGetAllInitialLeverageResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            }
+          ]
+        },
+        {
+          "namespace": "InitialLeverage",
+          "name": "RPCSetInitialLeverageV1",
+          "version": 1,
+          "route": "/set_initial_leverage",
+          "auth_required": true,
+          "request": "ApiSetIntialLeverageRequest",
+          "response": "ApiSetIntialLeverageResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 2100,
+              "message": "Invalid initial leverage",
+              "status": 400
+            }
+          ]
         }
       ],
       "streams": [
@@ -2286,6 +2373,19 @@
           "example": "'1.0000102'",
           "comment": [
             "The index price of the quote currency. (reported in `USD`)"
+          ]
+        },
+        {
+          "name": "est_liquidation_price",
+          "lite_name": "el",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 13,
+          "array_depth": 0,
+          "optional": false,
+          "example": "60000.25",
+          "comment": [
+            "The estimated liquidation price"
           ]
         }
       ],
@@ -3561,6 +3661,178 @@
         }
       ],
       "comment": []
+    },
+    {
+      "name": "ApiSetIntialLeverageRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to set the leverage for"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument to set the leverage for"
+          ]
+        },
+        {
+          "name": "leverage",
+          "lite_name": "l",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10'",
+          "comment": [
+            "The leverage to set for the sub account"
+          ]
+        }
+      ],
+      "comment": [
+        "The request to set the initial leverage of a sub account"
+      ]
+    },
+    {
+      "name": "ApiSetIntialLeverageResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "success",
+          "lite_name": "s",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'true'",
+          "comment": [
+            "Whether the leverage was set successfully"
+          ]
+        }
+      ],
+      "comment": [
+        "The response to set the initial leverage of a sub account"
+      ]
+    },
+    {
+      "name": "ApiGetAllInitialLeverageRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to get the leverage for"
+          ]
+        }
+      ],
+      "comment": [
+        "The request to get the initial leverage of a sub account"
+      ]
+    },
+    {
+      "name": "InitialLeverageResult",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument to get the leverage for"
+          ]
+        },
+        {
+          "name": "leverage",
+          "lite_name": "l",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10'",
+          "comment": [
+            "The initial leverage of the sub account"
+          ]
+        },
+        {
+          "name": "min_leverage",
+          "lite_name": "ml",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10'",
+          "comment": [
+            "The min leverage this sub account can set"
+          ]
+        },
+        {
+          "name": "max_leverage",
+          "lite_name": "ml1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'50'",
+          "comment": [
+            "The max leverage this sub account can set"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetAllInitialLeverageResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "results",
+          "lite_name": "r",
+          "semantic_type": "InitialLeverageResult",
+          "json_type": "InitialLeverageResult",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The initial leverage of the sub account"
+          ]
+        }
+      ],
+      "comment": [
+        "The response to get the initial leverage of a sub account"
+      ]
     },
     {
       "name": "ApiOrderbookLevelsRequest",
@@ -10672,6 +10944,30 @@
           "comment": [
             "The signature of the transfer"
           ]
+        },
+        {
+          "name": "transfer_type",
+          "lite_name": "tt",
+          "semantic_type": "TransferType",
+          "json_type": "TransferType",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The type of transfer"
+          ]
+        },
+        {
+          "name": "transfer_metadata",
+          "lite_name": "tm",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The metadata of the transfer"
+          ]
         }
       ],
       "comment": []
@@ -11205,6 +11501,30 @@
           "comment": [
             "The signature of the transfer"
           ]
+        },
+        {
+          "name": "transfer_type",
+          "lite_name": "tt",
+          "semantic_type": "TransferType",
+          "json_type": "TransferType",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The type of transfer"
+          ]
+        },
+        {
+          "name": "transfer_metadata",
+          "lite_name": "tm",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The metadata of the transfer"
+          ]
         }
       ],
       "comment": [
@@ -11639,6 +11959,30 @@
           "example": "'1697788800000000000'",
           "comment": [
             "The timestamp of the transfer in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "transfer_type",
+          "lite_name": "tt",
+          "semantic_type": "TransferType",
+          "json_type": "TransferType",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The type of transfer"
+          ]
+        },
+        {
+          "name": "transfer_metadata",
+          "lite_name": "tm",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The metadata of the transfer"
           ]
         }
       ],
@@ -12106,6 +12450,69 @@
           "comment": [
             "the BTC token"
           ]
+        },
+        {
+          "name": "SOL",
+          "value": 6,
+          "comment": [
+            "the SOL token"
+          ]
+        },
+        {
+          "name": "ARB",
+          "value": 7,
+          "comment": [
+            "the ARB token"
+          ]
+        },
+        {
+          "name": "BNB",
+          "value": 8,
+          "comment": [
+            "the BNB token"
+          ]
+        },
+        {
+          "name": "ZK",
+          "value": 9,
+          "comment": [
+            "the ZK token"
+          ]
+        },
+        {
+          "name": "POL",
+          "value": 10,
+          "comment": [
+            "the POL token"
+          ]
+        },
+        {
+          "name": "OP",
+          "value": 11,
+          "comment": [
+            "the OP token"
+          ]
+        },
+        {
+          "name": "ATOM",
+          "value": 12,
+          "comment": [
+            "the ATOM token"
+          ]
+        },
+        {
+          "name": "KPEPE",
+          "value": 13,
+          "comment": [
+            "the 1000PEPE token"
+          ]
+        },
+        {
+          "name": "TON",
+          "value": 14,
+          "comment": [
+            "the TON token"
+          ]
         }
       ],
       "comment": [
@@ -12518,6 +12925,33 @@
         "| Can Fill Till Time    | AON           | GTC              |",
         ""
       ]
+    },
+    {
+      "name": "TransferType",
+      "values": [
+        {
+          "name": "STANDARD",
+          "value": 1,
+          "comment": [
+            "Standard transfer that has nothing to do with bridging"
+          ]
+        },
+        {
+          "name": "FAST_ARB_DEPOSIT",
+          "value": 2,
+          "comment": [
+            "Fast Arb Deposit Metadata type"
+          ]
+        },
+        {
+          "name": "FAST_ARB_WITHDRAWAL",
+          "value": 3,
+          "comment": [
+            "Fast Arb Withdrawal Metadata type"
+          ]
+        }
+      ],
+      "comment": []
     },
     {
       "name": "Venue",
