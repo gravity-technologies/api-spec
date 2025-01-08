@@ -21,6 +21,12 @@ IGNORE_FIELD_PATHS = [
     ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "order_id"],
 ]
 
+IGNORE_RPCS = ["RPCGetAllInitialLeverageV1", "RPCSetInitialLeverageV1"]
+
+IGNORE_ENUM_VALUES = {
+    "Currency": ["SOL", "ARB", "BNB", "ZK", "POL", "OP", "ATOM", "KPEPE", "TON"],
+}
+
 
 def generate(spec_root: SpecRoot) -> None:
     ctx = CodegenCtx(spec_root)
@@ -61,6 +67,8 @@ def write_gateway_rpcs(ctx: CodegenCtx, gateway: Gateway, artifact_path: str) ->
 
         last_namespace = ""
         for rpc in gateway.rpcs:
+            if rpc.name in IGNORE_RPCS:
+                continue
             if rpc.namespace != last_namespace:
                 md.writeln(f"## {rpc.namespace}")
                 last_namespace = rpc.namespace
@@ -694,6 +702,13 @@ def write_enum_schema(md: MarkdownWriter, enum: Enum, is_root: bool = False) -> 
 
     # Comment
     write_comment(md, enum.comment)
+
+    if enum.name in IGNORE_ENUM_VALUES:
+        enum.values = [
+            value
+            for value in enum.values
+            if value.name not in IGNORE_ENUM_VALUES[enum.name]
+        ]
 
     # Value Table
     md.writeln("|Value| Description |")
