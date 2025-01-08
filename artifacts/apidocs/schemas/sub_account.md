@@ -60,3 +60,4 @@
         |total_pnl<br>`tp` |string|True|The total PnL of the position, expressed in quote asset decimal units<br>`total_pnl = realized_pnl + unrealized_pnl`|
         |roi<br>`r` |string|True|The ROI of the position, expressed as a percentage<br>`roi = (total_pnl / (entry_price * abs(size))) * 100^`|
         |quote_index_price<br>`qi` |string|True|The index price of the quote currency. (reported in `USD`)|
+        |est_liquidation_price<br>`el` |string|True|The estimated liquidation price|

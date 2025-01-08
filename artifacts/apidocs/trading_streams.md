@@ -2008,7 +2008,8 @@ STREAM: v1.position
                 "realized_pnl": "-35000.30",
                 "total_pnl": "100000.20",
                 "roi": "10.20",
-                "quote_index_price": "1.0000102"
+                "quote_index_price": "1.0000102",
+                "est_liquidation_price": 60000.25
             }
         }
         ```
@@ -2031,7 +2032,8 @@ STREAM: v1.position
                 "rp": "-35000.30",
                 "tp": "100000.20",
                 "r": "10.20",
-                "qi": "1.0000102"
+                "qi": "1.0000102",
+                "el": 60000.25
             }
         }
         ```
@@ -3216,7 +3218,9 @@ STREAM: v1.transfer
                     "v": 28,
                     "expiration": "1697788800000000000",
                     "nonce": 1234567890
-                }
+                },
+                "transfer_type": "STANDARD",
+                "transfer_metadata": null
             }
         }
         ```
@@ -3240,7 +3244,9 @@ STREAM: v1.transfer
                     "v": 28,
                     "e": "1697788800000000000",
                     "n": 1234567890
-                }
+                },
+                "tt": "STANDARD",
+                "tm": null
             }
         }
         ```
