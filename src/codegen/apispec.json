@@ -11522,6 +11522,7 @@
           "index": 8,
           "array_depth": 0,
           "optional": false,
+          "example": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
           "comment": [
             "The metadata of the transfer"
           ]
@@ -11532,7 +11533,12 @@
         "\u003cli\u003eBetween SubAccounts within your Main Account\u003c/li\u003e",
         "\u003cli\u003eBetween your MainAccount and your SubAccounts\u003c/li\u003e",
         "\u003cli\u003eTo other MainAccounts that you have previously allowlisted\u003c/li\u003e",
-        "\u003c/ul\u003e"
+        "\u003c/ul\u003e\u003ch1\u003eFast Withdrawal Funding Address\u003c/h1\u003e",
+        "\u003cp\u003eFor fast withdrawals, funds must be sent to the designated funding account address. Please ensure you use the correct address based on the environment:\u003c/p\u003e",
+        "\u003ch2\u003eProduction Environment Address:\u003c/h2\u003e",
+        "\u003cp\u003e\u003cem\u003e[To be updated, not ready yet]\u003c/em\u003e\u003c/p\u003e",
+        "\u003cp\u003eThis address should be specified as the \u003ccode\u003eto_account_id\u003c/code\u003e in your API requests for transferring funds using the transfer API. Ensure accurate input to avoid loss of funds or use the UI.\u003c/p\u003e",
+        ""
       ]
     },
     {

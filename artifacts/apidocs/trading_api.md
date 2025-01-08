@@ -5551,7 +5551,7 @@ LITE ENDPOINT: lite/v1/transfer
                 "nonce": 1234567890
             },
             "transfer_type": "STANDARD",
-            "transfer_metadata": null
+            "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
         }
         ```
         **Lite Request**
@@ -5572,7 +5572,7 @@ LITE ENDPOINT: lite/v1/transfer
                 "n": 1234567890
             },
             "tt": "STANDARD",
-            "tm": null
+            "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
         }
         ```
     </section>
@@ -5657,7 +5657,7 @@ LITE ENDPOINT: lite/v1/transfer
                     "nonce": 1234567890
                 },
                 "transfer_type": "STANDARD",
-                "transfer_metadata": null
+                "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
             }
             '
             ```
@@ -5686,7 +5686,7 @@ LITE ENDPOINT: lite/v1/transfer
                         "nonce": 1234567890
                     },
                     "transfer_type": "STANDARD",
-                    "transfer_metadata": null
+                    "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
                 },
                 "id": 123
             }
@@ -5715,7 +5715,7 @@ LITE ENDPOINT: lite/v1/transfer
                     "n": 1234567890
                 },
                 "tt": "STANDARD",
-                "tm": null
+                "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
             }
             '
             ```
@@ -5744,7 +5744,7 @@ LITE ENDPOINT: lite/v1/transfer
                         "n": 1234567890
                     },
                     "tt": "STANDARD",
-                    "tm": null
+                    "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
                 },
                 "i": 123
             }
@@ -5774,7 +5774,7 @@ LITE ENDPOINT: lite/v1/transfer
                     "nonce": 1234567890
                 },
                 "transfer_type": "STANDARD",
-                "transfer_metadata": null
+                "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
             }
             '
             ```
@@ -5803,7 +5803,7 @@ LITE ENDPOINT: lite/v1/transfer
                         "nonce": 1234567890
                     },
                     "transfer_type": "STANDARD",
-                    "transfer_metadata": null
+                    "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
                 },
                 "id": 123
             }
@@ -5832,7 +5832,7 @@ LITE ENDPOINT: lite/v1/transfer
                     "n": 1234567890
                 },
                 "tt": "STANDARD",
-                "tm": null
+                "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
             }
             '
             ```
@@ -5861,7 +5861,7 @@ LITE ENDPOINT: lite/v1/transfer
                         "n": 1234567890
                     },
                     "tt": "STANDARD",
-                    "tm": null
+                    "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
                 },
                 "i": 123
             }
@@ -5891,7 +5891,7 @@ LITE ENDPOINT: lite/v1/transfer
                     "nonce": 1234567890
                 },
                 "transfer_type": "STANDARD",
-                "transfer_metadata": null
+                "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
             }
             '
             ```
@@ -5920,7 +5920,7 @@ LITE ENDPOINT: lite/v1/transfer
                         "nonce": 1234567890
                     },
                     "transfer_type": "STANDARD",
-                    "transfer_metadata": null
+                    "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
                 },
                 "id": 123
             }
@@ -5949,7 +5949,7 @@ LITE ENDPOINT: lite/v1/transfer
                     "n": 1234567890
                 },
                 "tt": "STANDARD",
-                "tm": null
+                "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
             }
             '
             ```
@@ -5978,7 +5978,7 @@ LITE ENDPOINT: lite/v1/transfer
                         "n": 1234567890
                     },
                     "tt": "STANDARD",
-                    "tm": null
+                    "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
                 },
                 "i": 123
             }
@@ -6008,7 +6008,7 @@ LITE ENDPOINT: lite/v1/transfer
                     "nonce": 1234567890
                 },
                 "transfer_type": "STANDARD",
-                "transfer_metadata": null
+                "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
             }
             '
             ```
@@ -6037,7 +6037,7 @@ LITE ENDPOINT: lite/v1/transfer
                         "nonce": 1234567890
                     },
                     "transfer_type": "STANDARD",
-                    "transfer_metadata": null
+                    "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
                 },
                 "id": 123
             }
@@ -6066,7 +6066,7 @@ LITE ENDPOINT: lite/v1/transfer
                     "n": 1234567890
                 },
                 "tt": "STANDARD",
-                "tm": null
+                "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
             }
             '
             ```
@@ -6095,7 +6095,7 @@ LITE ENDPOINT: lite/v1/transfer
                         "n": 1234567890
                     },
                     "tt": "STANDARD",
-                    "tm": null
+                    "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
                 },
                 "i": 123
             }
