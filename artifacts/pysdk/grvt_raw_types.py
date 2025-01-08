@@ -2475,7 +2475,12 @@ class ApiTransferRequest:
     <li>Between SubAccounts within your Main Account</li>
     <li>Between your MainAccount and your SubAccounts</li>
     <li>To other MainAccounts that you have previously allowlisted</li>
-    </ul>
+    </ul><b>Fast Withdrawal Funding Address</b>
+    For fast withdrawals, funds must be sent to the designated funding account address. Please ensure you use the correct address based on the environment:
+    <b>Production Environment Address:</b>
+    <em>[To be updated, not ready yet]</em>
+    This address should be specified as the <code>to_account_id</code> in your API requests for transferring funds using the transfer API. Ensure accurate input to avoid loss of funds or use the UI.
+
     """
 
     # The main account to transfer from

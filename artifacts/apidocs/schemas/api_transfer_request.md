@@ -1,5 +1,5 @@
 !!! info "[ApiTransferRequest](/../../schemas/api_transfer_request)"
-    This API allows you to transfer funds in multiple different ways<ul><br><li>Between SubAccounts within your Main Account</li><br><li>Between your MainAccount and your SubAccounts</li><br><li>To other MainAccounts that you have previously allowlisted</li><br></ul><br>
+    This API allows you to transfer funds in multiple different ways<ul><br><li>Between SubAccounts within your Main Account</li><br><li>Between your MainAccount and your SubAccounts</li><br><li>To other MainAccounts that you have previously allowlisted</li><br></ul><b>Fast Withdrawal Funding Address</b><br>For fast withdrawals, funds must be sent to the designated funding account address. Please ensure you use the correct address based on the environment:<br><b>Production Environment Address:</b><br><em>[To be updated, not ready yet]</em><br>This address should be specified as the <code>to_account_id</code> in your API requests for transferring funds using the transfer API. Ensure accurate input to avoid loss of funds or use the UI.<br><br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
