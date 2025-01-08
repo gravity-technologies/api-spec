@@ -291,9 +291,9 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         )
 
     async def set_initial_leverage_v1(
-        self, req: types.ApiSetIntialLeverageRequest
-    ) -> types.ApiSetIntialLeverageResponse | GrvtError:
+        self, req: types.ApiSetInitialLeverageRequest
+    ) -> types.ApiSetInitialLeverageResponse | GrvtError:
         resp = await self._post(True, self.td_rpc + "/full/v1/set_initial_leverage", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(types.ApiSetIntialLeverageResponse, resp, Config(cast=[Enum]))
+        return from_dict(types.ApiSetInitialLeverageResponse, resp, Config(cast=[Enum]))

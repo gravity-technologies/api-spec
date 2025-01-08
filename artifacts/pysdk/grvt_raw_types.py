@@ -206,6 +206,8 @@ class SubAccountTradeInterval(Enum):
     SAT_1_MO = "SAT_1_MO"
     # 1 day
     SAT_1_D = "SAT_1_D"
+    # 1 hour
+    SAT_1_H = "SAT_1_H"
 
 
 class TimeInForce(Enum):
@@ -625,7 +627,7 @@ class ApiListAggregatedAccountSummaryResponse:
 
 
 @dataclass
-class ApiSetIntialLeverageRequest:
+class ApiSetInitialLeverageRequest:
     # The sub account ID to set the leverage for
     sub_account_id: str
     # The instrument to set the leverage for
@@ -635,7 +637,7 @@ class ApiSetIntialLeverageRequest:
 
 
 @dataclass
-class ApiSetIntialLeverageResponse:
+class ApiSetInitialLeverageResponse:
     # Whether the leverage was set successfully
     success: bool
 

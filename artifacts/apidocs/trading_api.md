@@ -9819,7 +9819,7 @@ LITE ENDPOINT: lite/v1/set_initial_leverage
 
 === "Request"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    -8<- "docs/schemas/api_set_intial_leverage_request.md"
+    -8<- "docs/schemas/api_set_initial_leverage_request.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! question "Query"
@@ -9842,7 +9842,7 @@ LITE ENDPOINT: lite/v1/set_initial_leverage
     </section>
 === "Response"
     <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    -8<- "docs/schemas/api_set_intial_leverage_response.md"
+    -8<- "docs/schemas/api_set_initial_leverage_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! success

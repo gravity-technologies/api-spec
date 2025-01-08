@@ -1754,8 +1754,8 @@
           "version": 1,
           "route": "/set_initial_leverage",
           "auth_required": true,
-          "request": "ApiSetIntialLeverageRequest",
-          "response": "ApiSetIntialLeverageResponse",
+          "request": "ApiSetInitialLeverageRequest",
+          "response": "ApiSetInitialLeverageResponse",
           "on_request_errors": [
             {
               "code": 1000,
@@ -3663,7 +3663,7 @@
       "comment": []
     },
     {
-      "name": "ApiSetIntialLeverageRequest",
+      "name": "ApiSetInitialLeverageRequest",
       "is_root": true,
       "fields": [
         {
@@ -3711,7 +3711,7 @@
       ]
     },
     {
-      "name": "ApiSetIntialLeverageResponse",
+      "name": "ApiSetInitialLeverageResponse",
       "is_root": true,
       "fields": [
         {
@@ -12881,6 +12881,13 @@
           "value": 2,
           "comment": [
             "1 day"
+          ]
+        },
+        {
+          "name": "SAT_1_H",
+          "value": 3,
+          "comment": [
+            "1 hour"
           ]
         }
       ],
