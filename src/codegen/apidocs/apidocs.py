@@ -21,10 +21,10 @@ IGNORE_FIELD_PATHS = [
     ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "order_id"],
 ]
 
-IGNORE_RPCS = ["RPCGetAllInitialLeverageV1", "RPCSetInitialLeverageV1"]
+IGNORE_RPCS: list[str] = []
 
-IGNORE_ENUM_VALUES = {
-    "Currency": ["SOL", "ARB", "BNB", "ZK", "POL", "OP", "ATOM", "KPEPE", "TON"],
+IGNORE_ENUM_VALUES: dict[str, list[str]] = {
+    # "Currency": ["SOL", "ARB", "BNB", "ZK", "POL", "OP", "ATOM", "KPEPE", "TON"],
 }
 
 

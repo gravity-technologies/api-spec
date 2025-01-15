@@ -24,6 +24,15 @@
         |`USDT` = 3|the USDT token|
         |`ETH` = 4|the ETH token|
         |`BTC` = 5|the BTC token|
+        |`SOL` = 6|the SOL token|
+        |`ARB` = 7|the ARB token|
+        |`BNB` = 8|the BNB token|
+        |`ZK` = 9|the ZK token|
+        |`POL` = 10|the POL token|
+        |`OP` = 11|the OP token|
+        |`ATOM` = 12|the ATOM token|
+        |`KPEPE` = 13|the 1000PEPE token|
+        |`TON` = 14|the TON token|
     ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -34,6 +43,15 @@
         |`USDT` = 3|the USDT token|
         |`ETH` = 4|the ETH token|
         |`BTC` = 5|the BTC token|
+        |`SOL` = 6|the SOL token|
+        |`ARB` = 7|the ARB token|
+        |`BNB` = 8|the BNB token|
+        |`ZK` = 9|the ZK token|
+        |`POL` = 10|the POL token|
+        |`OP` = 11|the OP token|
+        |`ATOM` = 12|the ATOM token|
+        |`KPEPE` = 13|the 1000PEPE token|
+        |`TON` = 14|the TON token|
     ??? info "[Kind](/../../schemas/kind)"
         The list of asset kinds that are supported on the GRVT exchange<br>
 
