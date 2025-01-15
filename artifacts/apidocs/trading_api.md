@@ -179,6 +179,9 @@ LITE ENDPOINT: lite/v1/create_order
         |2002|403|Order signature does not match payload|
         |2003|403|Order sub account does not match logged in user|
         |2004|403|Order signature is from an expired session key|
+        |2006|403|Order signature R/S must have exactly 64 characters long without 0x prefix|
+        |2005|403|Order signature V must be 27/28|
+        |2007|403|Order signature S must be in the lower half of the curve|
         |2010|400|Order ID should be empty when creating an order|
         |2011|400|Client Order ID should be supplied when creating an order|
         |2012|400|Client Order ID overlaps with existing active order|

@@ -2126,8 +2126,6 @@ class ApiSubAccountTradeAggregationRequest:
     interval: SubAccountTradeInterval
     # The list of sub account ids to query
     sub_account_i_ds: list[str]
-    # The sub account id to query greater than
-    sub_account_id_greater_than: str
     # Optional. The starting time in unix nanoseconds of a specific interval to query
     start_interval: str
     # Filter on the maker of the trade

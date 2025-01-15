@@ -781,6 +781,21 @@
               "status": 403
             },
             {
+              "code": 2006,
+              "message": "Order signature R/S must have exactly 64 characters long without 0x prefix",
+              "status": 403
+            },
+            {
+              "code": 2005,
+              "message": "Order signature V must be 27/28",
+              "status": 403
+            },
+            {
+              "code": 2007,
+              "message": "Order signature S must be in the lower half of the curve",
+              "status": 403
+            },
+            {
               "code": 2010,
               "message": "Order ID should be empty when creating an order",
               "status": 400
@@ -9977,24 +9992,11 @@
           ]
         },
         {
-          "name": "sub_account_id_greater_than",
-          "lite_name": "sa1",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'2376'",
-          "comment": [
-            "The sub account id to query greater than"
-          ]
-        },
-        {
           "name": "start_interval",
           "lite_name": "si",
           "semantic_type": "timestamp",
           "json_type": "string",
-          "index": 4,
+          "index": 3,
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
@@ -10007,7 +10009,7 @@
           "lite_name": "st",
           "semantic_type": "timestamp",
           "json_type": "string",
-          "index": 5,
+          "index": 4,
           "array_depth": 0,
           "optional": true,
           "default": "0",
@@ -10021,7 +10023,7 @@
           "lite_name": "et",
           "semantic_type": "timestamp",
           "json_type": "string",
-          "index": 6,
+          "index": 5,
           "array_depth": 0,
           "optional": true,
           "default": "now()",
@@ -10031,25 +10033,11 @@
           ]
         },
         {
-          "name": "cursor",
-          "lite_name": "c",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 7,
-          "array_depth": 0,
-          "optional": true,
-          "default": "",
-          "example": "''",
-          "comment": [
-            "The cursor to indicate when to start the next query from"
-          ]
-        },
-        {
           "name": "is_maker",
           "lite_name": "im",
           "semantic_type": "bool",
           "json_type": "boolean",
-          "index": 8,
+          "index": 6,
           "array_depth": 0,
           "optional": false,
           "example": "true",
@@ -10062,12 +10050,26 @@
           "lite_name": "it",
           "semantic_type": "bool",
           "json_type": "boolean",
-          "index": 9,
+          "index": 7,
           "array_depth": 0,
           "optional": false,
           "example": "true",
           "comment": [
             "Filter on the taker of the trade"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": true,
+          "default": "",
+          "example": "''",
+          "comment": [
+            "The cursor to indicate when to start the next query from"
           ]
         }
       ],
