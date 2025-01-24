@@ -1179,6 +1179,134 @@
           ]
         },
         {
+          "namespace": "Order",
+          "name": "RPCTriggerOrdersV1",
+          "version": 1,
+          "route": "/trigger_orders",
+          "auth_required": true,
+          "request": "ApiTriggerOrdersRequest",
+          "response": "ApiTriggerOrdersResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Order",
+          "name": "RPCCancelTriggerOrderV1",
+          "version": 1,
+          "route": "/cancel_trigger_order",
+          "auth_required": true,
+          "request": "ApiCancelOrderRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 3021,
+              "message": "Either order ID or client order ID must be supplied",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Order",
+          "name": "RPCCancelAllTriggerOrdersV1",
+          "version": 1,
+          "route": "/cancel_all_trigger_orders",
+          "auth_required": true,
+          "request": "ApiCancelAllOrdersRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            }
+          ]
+        },
+        {
           "namespace": "Execution",
           "name": "RPCFillHistoryV1",
           "version": 1,
@@ -7200,6 +7328,97 @@
       "comment": []
     },
     {
+      "name": "TPSLOrderTrigger",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "trigger_type",
+          "lite_name": "tt",
+          "semantic_type": "TriggerType",
+          "json_type": "TriggerType",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The type that triggers a take profit or stop loss order"
+          ]
+        },
+        {
+          "name": "trigger_point",
+          "lite_name": "tp",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The Trigger Price of the order, expressed in `9` decimals.If Trigger Type is percentage based, this will be interpreted as 0.01 bps, eg. 100 = 1bps"
+          ]
+        },
+        {
+          "name": "conditional_client_order_id",
+          "lite_name": "cc",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'23042'",
+          "comment": [
+            "Used for OCO orders. If this order is triggered, the conditionalClientOrderID will be cancelled"
+          ]
+        }
+      ],
+      "comment": [
+        "TPSL Order Trigger fields are used to support any type of trigger order such as TP/SL."
+      ]
+    },
+    {
+      "name": "TriggerOrderMetadata",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "trigger_order_type",
+          "lite_name": "to",
+          "semantic_type": "TriggerOrderType",
+          "json_type": "TriggerOrderType",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Type of the trigger order. eg: Take Profit, Stop Loss, etc"
+          ]
+        },
+        {
+          "name": "tpsl_order_trigger",
+          "lite_name": "to1",
+          "semantic_type": "TPSLOrderTrigger",
+          "json_type": "TPSLOrderTrigger",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "TODO:"
+          ]
+        },
+        {
+          "name": "is_activated",
+          "lite_name": "ia",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "If the trigger order has been activated"
+          ]
+        }
+      ],
+      "comment": [
+        "Trigger fields are used to support any type of trigger order such as TP/SL."
+      ]
+    },
+    {
       "name": "OrderMetadata",
       "is_root": false,
       "fields": [
@@ -7236,6 +7455,31 @@
           "example": "'1697788800000000000'",
           "comment": [
             "[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "trigger_order_metadata",
+          "lite_name": "to",
+          "semantic_type": "TriggerOrderMetadata",
+          "json_type": "TriggerOrderMetadata",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Trigger fields are used to support any type of trigger order such as TP/SL"
+          ]
+        },
+        {
+          "name": "broker",
+          "lite_name": "b",
+          "semantic_type": "BrokerTag",
+          "json_type": "BrokerTag",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "",
+          "comment": [
+            "Specifies the broker who brokered the order"
           ]
         }
       ],
@@ -8342,6 +8586,89 @@
         }
       ],
       "comment": []
+    },
+    {
+      "name": "ApiTriggerOrdersRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID to filter by"
+          ]
+        },
+        {
+          "name": "kind",
+          "lite_name": "k",
+          "semantic_type": "Kind",
+          "json_type": "Kind",
+          "index": 1,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['PERPETUAL']",
+          "comment": [
+            "The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "base",
+          "lite_name": "b",
+          "semantic_type": "Currency",
+          "json_type": "Currency",
+          "index": 2,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['BTC', 'ETH']",
+          "comment": [
+            "The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "quote",
+          "lite_name": "q",
+          "semantic_type": "Currency",
+          "json_type": "Currency",
+          "index": 3,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['USDT', 'USDC']",
+          "comment": [
+            "The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiTriggerOrdersResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "Order",
+          "json_type": "Order",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The Open Orders matching the request filter"
+          ]
+        }
+      ],
+      "comment": [
+        "Retrieves all pending trigger orders for the account."
+      ]
     },
     {
       "name": "ApiGetUserEcosystemPointRequest",
@@ -12256,6 +12583,35 @@
       "comment": []
     },
     {
+      "name": "BrokerTag",
+      "values": [
+        {
+          "name": "COIN_ROUTES",
+          "value": 1,
+          "comment": [
+            "CoinRoutes"
+          ]
+        },
+        {
+          "name": "ALERTATRON",
+          "value": 2,
+          "comment": [
+            "Alertatron"
+          ]
+        },
+        {
+          "name": "ORIGAMI",
+          "value": 3,
+          "comment": [
+            "Origami"
+          ]
+        }
+      ],
+      "comment": [
+        "BrokerTag is a tag for the broker that the order is sent from."
+      ]
+    },
+    {
       "name": "CandlestickInterval",
       "values": [
         {
@@ -12967,6 +13323,58 @@
         }
       ],
       "comment": []
+    },
+    {
+      "name": "TriggerOrderType",
+      "values": [
+        {
+          "name": "UNSPECIFIED",
+          "value": 0,
+          "comment": [
+            "not a trigger order"
+          ]
+        },
+        {
+          "name": "TAKE_PROFIT",
+          "value": 1,
+          "comment": [
+            "Take Profit Order. Requires a tpslOrderTrigger triggerType"
+          ]
+        },
+        {
+          "name": "STOP_LOSS",
+          "value": 2,
+          "comment": [
+            "Stop Loss Order. Requires a tpslOrderTrigger triggerType"
+          ]
+        }
+      ],
+      "comment": [
+        "Type of the trigger order. eg: Take Profit, Stop Loss, etc"
+      ]
+    },
+    {
+      "name": "TriggerType",
+      "values": [
+        {
+          "name": "UNSPECIFIED",
+          "value": 0,
+          "comment": [
+            "no trigger condition"
+          ]
+        },
+        {
+          "name": "INDEX",
+          "value": 1,
+          "comment": [
+            "INDEX - Order is activated when the index price reaches the trigger price"
+          ]
+        }
+      ],
+      "comment": [
+        "The type that triggers a take profit or stop loss order",
+        ""
+      ]
     },
     {
       "name": "Venue",

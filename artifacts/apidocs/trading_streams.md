@@ -131,7 +131,17 @@ STREAM: v1.order
                 },
                 "metadata": {
                     "client_order_id": "23042",
-                    "create_time": "1697788800000000000"
+                    "create_time": "1697788800000000000",
+                    "trigger_order_metadata": {
+                        "trigger_order_type": "UNSPECIFIED",
+                        "tpsl_order_trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "trigger_point": null,
+                            "conditional_client_order_id": "23042"
+                        },
+                        "is_activated": null
+                    },
+                    "broker": "COIN_ROUTES"
                 },
                 "state": {
                     "status": "PENDING",
@@ -173,7 +183,17 @@ STREAM: v1.order
                 },
                 "m": {
                     "co": "23042",
-                    "ct": "1697788800000000000"
+                    "ct": "1697788800000000000",
+                    "to": {
+                        "to": "UNSPECIFIED",
+                        "to1": {
+                            "tt": "UNSPECIFIED",
+                            "tp": null,
+                            "cc": "23042"
+                        },
+                        "ia": null
+                    },
+                    "b": "COIN_ROUTES"
                 },
                 "s1": {
                     "s": "PENDING",

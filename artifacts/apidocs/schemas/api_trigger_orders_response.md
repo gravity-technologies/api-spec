@@ -1,10 +1,9 @@
-!!! info "[ApiPreOrderCheckRequest](/../../schemas/api_pre_order_check_request)"
-    Get pre-order check information for a new order<br>
+!!! info "[ApiTriggerOrdersResponse](/../../schemas/api_trigger_orders_response)"
+    Retrieves all pending trigger orders for the account.<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |sub_account_id<br>`sa` |string|True|The subaccount ID of orders to query|
-    |orders<br>`o` |[Order]|True|The order to do pre-order check|
+    |result<br>`r` |[Order]|True|The Open Orders matching the request filter|
     ??? info "[Order](/../../schemas/order)"
         Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 

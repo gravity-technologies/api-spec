@@ -15,6 +15,15 @@ class BridgeType(Enum):
     XY = "XY"
 
 
+class BrokerTag(Enum):
+    # CoinRoutes
+    COIN_ROUTES = "COIN_ROUTES"
+    # Alertatron
+    ALERTATRON = "ALERTATRON"
+    # Origami
+    ORIGAMI = "ORIGAMI"
+
+
 class CandlestickInterval(Enum):
     # 1 minute
     CI_1_M = "CI_1_M"
@@ -236,6 +245,27 @@ class TransferType(Enum):
     FAST_ARB_DEPOSIT = "FAST_ARB_DEPOSIT"
     # Fast Arb Withdrawal Metadata type
     FAST_ARB_WITHDRAWAL = "FAST_ARB_WITHDRAWAL"
+
+
+class TriggerOrderType(Enum):
+    # not a trigger order
+    UNSPECIFIED = "UNSPECIFIED"
+    # Take Profit Order. Requires a tpslOrderTrigger triggerType
+    TAKE_PROFIT = "TAKE_PROFIT"
+    # Stop Loss Order. Requires a tpslOrderTrigger triggerType
+    STOP_LOSS = "STOP_LOSS"
+
+
+class TriggerType(Enum):
+    """
+    The type that triggers a take profit or stop loss order
+
+    """
+
+    # no trigger condition
+    UNSPECIFIED = "UNSPECIFIED"
+    # INDEX - Order is activated when the index price reaches the trigger price
+    INDEX = "INDEX"
 
 
 class Venue(Enum):
@@ -1486,6 +1516,26 @@ class Signature:
 
 
 @dataclass
+class TPSLOrderTrigger:
+    # The type that triggers a take profit or stop loss order
+    trigger_type: TriggerType
+    # The Trigger Price of the order, expressed in `9` decimals.If Trigger Type is percentage based, this will be interpreted as 0.01 bps, eg. 100 = 1bps
+    trigger_point: str
+    # Used for OCO orders. If this order is triggered, the conditionalClientOrderID will be cancelled
+    conditional_client_order_id: str
+
+
+@dataclass
+class TriggerOrderMetadata:
+    # Type of the trigger order. eg: Take Profit, Stop Loss, etc
+    trigger_order_type: TriggerOrderType
+    # TODO:
+    tpsl_order_trigger: TPSLOrderTrigger
+    # If the trigger order has been activated
+    is_activated: bool
+
+
+@dataclass
 class OrderMetadata:
     """
     Metadata fields are used to support Backend only operations. These operations are not trustless by nature.
@@ -1504,8 +1554,12 @@ class OrderMetadata:
     When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
     """
     client_order_id: str
+    # Trigger fields are used to support any type of trigger order such as TP/SL
+    trigger_order_metadata: TriggerOrderMetadata
     # [Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds
     create_time: str | None = None
+    # Specifies the broker who brokered the order
+    broker: BrokerTag | None = None
 
 
 @dataclass
@@ -1782,6 +1836,24 @@ class ApiPreDepositCheckResponse:
     max_deposit_limit: str
     # The currency you hold the deposit in
     currency: Currency
+
+
+@dataclass
+class ApiTriggerOrdersRequest:
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
+    kind: list[Kind] | None = None
+    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
+    base: list[Currency] | None = None
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    quote: list[Currency] | None = None
+
+
+@dataclass
+class ApiTriggerOrdersResponse:
+    # The Open Orders matching the request filter
+    result: list[Order]
 
 
 @dataclass
