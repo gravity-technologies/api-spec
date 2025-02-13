@@ -5,6 +5,7 @@
     |selector<br>`s1` |string|True|Primary selector|
     |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
     |feed<br>`f` |MiniTicker|True|A mini ticker matching the request filter|
+    |prev_sequence_number<br>`ps` |string|True|The previous sequence number that determines global message order within the specific stream|
     ??? info "[MiniTicker](/../../schemas/mini_ticker)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|

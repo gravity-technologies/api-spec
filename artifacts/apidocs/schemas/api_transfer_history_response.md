@@ -36,6 +36,30 @@
             |`ATOM` = 12|the ATOM token|
             |`KPEPE` = 13|the 1000PEPE token|
             |`TON` = 14|the TON token|
+            |`XRP` = 15|the XRP token|
+            |`XLM` = 16|the XLM token|
+            |`WLD` = 17|the WLD token|
+            |`WIF` = 18|the WIF token|
+            |`VIRTUAL` = 19|the VIRTUAL token|
+            |`TRUMP` = 20|the TRUMP token|
+            |`SUI` = 21|the SUI token|
+            |`KSHIB` = 22|the 1000SHIB token|
+            |`POPCAT` = 23|the POPCAT token|
+            |`PENGU` = 24|the PENGU token|
+            |`LINK` = 25|the LINK token|
+            |`KBONK` = 26|the 1000BONK token|
+            |`JUP` = 27|the JUP token|
+            |`FARTCOIN` = 28|the FARTCOIN token|
+            |`ENA` = 29|the ENA token|
+            |`DOGE` = 30|the DOGE token|
+            |`AIXBT` = 31|the AIXBT token|
+            |`AI_16_Z` = 32|the AI16Z token|
+            |`ADA` = 33|the ADA token|
+            |`AAVE` = 34|the AAVE token|
+            |`BERA` = 35|the BERA token|
+            |`VINE` = 36|the VINE token|
+            |`PENDLE` = 37|the PENDLE token|
+            |`UXLINK` = 38|the UXLINK token|
         ??? info "[Signature](/../../schemas/signature)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
