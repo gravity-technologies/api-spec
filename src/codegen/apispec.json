@@ -332,6 +332,11 @@
               "status": 404
             },
             {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
               "code": 1101,
               "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
               "status": 400
@@ -375,6 +380,11 @@
               "code": 1004,
               "message": "Data Not Found",
               "status": 404
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             },
             {
               "code": 1101,
@@ -422,6 +432,11 @@
               "status": 404
             },
             {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
               "code": 1101,
               "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
               "status": 400
@@ -467,6 +482,11 @@
               "status": 404
             },
             {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
               "code": 1101,
               "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
               "status": 400
@@ -510,6 +530,11 @@
               "code": 1004,
               "message": "Data Not Found",
               "status": 404
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             },
             {
               "code": 1101,
@@ -562,6 +587,11 @@
               "status": 404
             },
             {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
               "code": 1101,
               "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
               "status": 400
@@ -600,6 +630,11 @@
               "code": 1002,
               "message": "Internal Server Error",
               "status": 500
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             },
             {
               "code": 1101,
@@ -645,6 +680,11 @@
               "code": 1002,
               "message": "Internal Server Error",
               "status": 500
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
             },
             {
               "code": 1101,
@@ -754,6 +794,11 @@
               "code": 1400,
               "message": "Signer does not have trade permission",
               "status": 403
+            },
+            {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
             },
             {
               "code": 2000,
@@ -1175,6 +1220,237 @@
               "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "Position",
+          "name": "RPCDedustPositionV1",
+          "version": 1,
+          "route": "/dedust_position",
+          "auth_required": true,
+          "request": "ApiDedustPositionRequest",
+          "response": "ApiDedustPositionResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 1005,
+              "message": "Unknown Error",
+              "status": 500
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1400,
+              "message": "Signer does not have trade permission",
+              "status": 403
+            },
+            {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
+            },
+            {
+              "code": 2000,
+              "message": "Order signature is from an unauthorized signer",
+              "status": 403
+            },
+            {
+              "code": 2001,
+              "message": "Order signature has expired",
+              "status": 403
+            },
+            {
+              "code": 2002,
+              "message": "Order signature does not match payload",
+              "status": 403
+            },
+            {
+              "code": 2003,
+              "message": "Order sub account does not match logged in user",
+              "status": 403
+            },
+            {
+              "code": 2004,
+              "message": "Order signature is from an expired session key",
+              "status": 403
+            },
+            {
+              "code": 2010,
+              "message": "Order ID should be empty when creating an order",
+              "status": 400
+            },
+            {
+              "code": 2011,
+              "message": "Client Order ID should be supplied when creating an order",
+              "status": 400
+            },
+            {
+              "code": 2012,
+              "message": "Client Order ID overlaps with existing active order",
+              "status": 400
+            },
+            {
+              "code": 2030,
+              "message": "Orderbook Orders must have a TimeInForce of GTT/IOC/FOK",
+              "status": 400
+            },
+            {
+              "code": 2031,
+              "message": "RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK",
+              "status": 400
+            },
+            {
+              "code": 2032,
+              "message": "Post Only can only be set to true for GTT/AON orders",
+              "status": 400
+            },
+            {
+              "code": 2020,
+              "message": "Market Order must always be supplied without a limit price",
+              "status": 400
+            },
+            {
+              "code": 2021,
+              "message": "Limit Order must always be supplied with a limit price",
+              "status": 400
+            },
+            {
+              "code": 2040,
+              "message": "Order must contain at least one leg",
+              "status": 400
+            },
+            {
+              "code": 2041,
+              "message": "Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice",
+              "status": 400
+            },
+            {
+              "code": 2042,
+              "message": "Orderbook Orders must contain only one leg",
+              "status": 400
+            },
+            {
+              "code": 2050,
+              "message": "Order state must be empty upon creation",
+              "status": 400
+            },
+            {
+              "code": 2051,
+              "message": "Order execution metadata must be empty upon creation",
+              "status": 400
+            },
+            {
+              "code": 2060,
+              "message": "Order Legs contain one or more inactive derivative",
+              "status": 400
+            },
+            {
+              "code": 2061,
+              "message": "Unsupported Instrument Requested",
+              "status": 400
+            },
+            {
+              "code": 2063,
+              "message": "Order size smaller than min block size in block trade venue",
+              "status": 400
+            },
+            {
+              "code": 2064,
+              "message": "Invalid limit price tick",
+              "status": 400
+            },
+            {
+              "code": 2200,
+              "message": "Order size should exactly tally to the dust portion (i.e., smaller than minimum size) of a position",
+              "status": 400
+            },
+            {
+              "code": 2201,
+              "message": "Order level should match or beat mark price",
+              "status": 400
+            },
+            {
+              "code": 2202,
+              "message": "Cannot dedust position via a market order",
+              "status": 400
+            },
+            {
+              "code": 2203,
+              "message": "Cannot dedust position via a post-only order",
+              "status": 400
+            },
+            {
+              "code": 2204,
+              "message": "Can only dedust position via a fill-or-kill order",
+              "status": 400
+            },
+            {
+              "code": 2205,
+              "message": "Can only dedust position via a reduce-only order",
+              "status": 400
+            },
+            {
+              "code": 2206,
+              "message": "Attempting to trade the wrong buy/sell direction for dedusting position",
+              "status": 400
+            },
+            {
+              "code": 2070,
+              "message": "Liquidation Order is not supported",
+              "status": 400
+            },
+            {
+              "code": 2080,
+              "message": "Insufficient margin to create order",
+              "status": 400
+            },
+            {
+              "code": 2081,
+              "message": "Order Fill would result in exceeding maximum position size",
+              "status": 400
+            },
+            {
+              "code": 2082,
+              "message": "Pre-order check failed",
+              "status": 400
+            },
+            {
+              "code": 2090,
+              "message": "Max open orders exceeded",
+              "status": 429
             }
           ]
         },
@@ -2806,6 +3082,19 @@
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The address (public key) of the wallet signing the payload"
+          ]
+        },
+        {
+          "name": "broker",
+          "lite_name": "b",
+          "semantic_type": "BrokerTag",
+          "json_type": "BrokerTag",
+          "index": 21,
+          "array_depth": 0,
+          "optional": true,
+          "default": "",
+          "comment": [
+            "Specifies the broker who brokered the order"
           ]
         }
       ],
@@ -6046,6 +6335,20 @@
           "comment": [
             "The list of feeds to subscribe to"
           ]
+        },
+        {
+          "name": "use_global_sequence_number",
+          "lite_name": "ug",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "example": "true",
+          "comment": [
+            "Whether to use the global sequence number for the stream"
+          ]
         }
       ],
       "comment": [
@@ -6121,6 +6424,19 @@
           "comment": [
             "The first sequence number to expect for each subscribed feed. Returned in same order as `subs`"
           ]
+        },
+        {
+          "name": "latest_sequence_number",
+          "lite_name": "ls",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 1,
+          "optional": false,
+          "example": "872634875",
+          "comment": [
+            "The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`"
+          ]
         }
       ],
       "comment": [
@@ -6156,6 +6472,20 @@
           "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
           "comment": [
             "The list of feeds to unsubscribe from"
+          ]
+        },
+        {
+          "name": "use_global_sequence_number",
+          "lite_name": "ug",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "example": "true",
+          "comment": [
+            "Whether to use the global sequence number for the stream"
           ]
         }
       ],
@@ -6360,6 +6690,19 @@
           "comment": [
             "The first sequence number to expect for each subscribed feed. Returned in same order as `subs`"
           ]
+        },
+        {
+          "name": "latest_sequence_number",
+          "lite_name": "ls",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 1,
+          "optional": false,
+          "example": "872634875",
+          "comment": [
+            "The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`"
+          ]
         }
       ],
       "comment": [
@@ -6486,6 +6829,19 @@
           "comment": [
             "An orderbook levels object matching the request filter"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": []
@@ -6588,6 +6944,19 @@
           "comment": [
             "A mini ticker matching the request filter"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": []
@@ -6689,6 +7058,19 @@
           "optional": false,
           "comment": [
             "A ticker matching the request filter"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
           ]
         }
       ],
@@ -6804,6 +7186,19 @@
           "comment": [
             "A public trade matching the request filter"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": []
@@ -6911,6 +7306,19 @@
           "optional": false,
           "comment": [
             "A candlestick entry matching the request filters"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
           ]
         }
       ],
@@ -7200,6 +7608,85 @@
       "comment": []
     },
     {
+      "name": "TPSLOrderMetadata",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "trigger_by",
+          "lite_name": "tb",
+          "semantic_type": "TriggerBy",
+          "json_type": "TriggerBy",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order"
+          ]
+        },
+        {
+          "name": "trigger_price",
+          "lite_name": "tp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65038.10'",
+          "comment": [
+            "The Trigger Price of the order, expressed in `9` decimals."
+          ]
+        }
+      ],
+      "comment": [
+        "Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.",
+        "",
+        "### Fields:",
+        "- **triggerBy**: Defines the price type that activates the order (e.g., index price).",
+        "- **triggerPrice**: The price at which the order is triggered, expressed in `9` decimal precision.",
+        "",
+        ""
+      ]
+    },
+    {
+      "name": "TriggerOrderMetadata",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "trigger_type",
+          "lite_name": "tt",
+          "semantic_type": "TriggerType",
+          "json_type": "TriggerType",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Type of the trigger order. eg: Take Profit, Stop Loss, etc"
+          ]
+        },
+        {
+          "name": "tpsl",
+          "lite_name": "t",
+          "semantic_type": "TPSLOrderMetadata",
+          "json_type": "TPSLOrderMetadata",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.",
+            "",
+            ""
+          ]
+        }
+      ],
+      "comment": [
+        "Contains metadata related to trigger orders, such as Take Profit (TP) or Stop Loss (SL).",
+        "",
+        "Trigger orders are used to automatically execute an order when a predefined price condition is met, allowing traders to implement risk management strategies.",
+        "",
+        ""
+      ]
+    },
+    {
       "name": "OrderMetadata",
       "is_root": false,
       "fields": [
@@ -7236,6 +7723,31 @@
           "example": "'1697788800000000000'",
           "comment": [
             "[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "trigger",
+          "lite_name": "t",
+          "semantic_type": "TriggerOrderMetadata",
+          "json_type": "TriggerOrderMetadata",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Trigger fields are used to support any type of trigger order such as TP/SL"
+          ]
+        },
+        {
+          "name": "broker",
+          "lite_name": "b",
+          "semantic_type": "BrokerTag",
+          "json_type": "BrokerTag",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "",
+          "comment": [
+            "Specifies the broker who brokered the order"
           ]
         }
       ],
@@ -8344,6 +8856,46 @@
       "comment": []
     },
     {
+      "name": "ApiDedustPositionRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "order",
+          "lite_name": "o",
+          "semantic_type": "Order",
+          "json_type": "Order",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The order to create"
+          ]
+        }
+      ],
+      "comment": [
+        "Remove dust position (i.e., order quantity smaller than minimum required increment) on an account, by matching the specified order against GRVT directly. Limit price should always be better than mark price."
+      ]
+    },
+    {
+      "name": "ApiDedustPositionResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "Order",
+          "json_type": "Order",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The created order"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiGetUserEcosystemPointRequest",
       "is_root": true,
       "fields": [
@@ -8588,6 +9140,39 @@
           "example": "500",
           "comment": [
             "The number of accounts to return"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetVerifiedEcosystemLeaderboardRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "calculate_from",
+          "lite_name": "cf",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Start time of the epoch"
+          ]
+        },
+        {
+          "name": "completed_kyc_before",
+          "lite_name": "ck",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Completed KYC before this time"
           ]
         }
       ],
@@ -9035,6 +9620,517 @@
       "comment": []
     },
     {
+      "name": "QueryEpochBadgeRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "account_id",
+          "lite_name": "ai",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'all'",
+          "example": "'ACC_1234567890'",
+          "comment": [
+            "The off chain account id to get referral stats"
+          ]
+        },
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'all'",
+          "example": "'1'",
+          "comment": [
+            "The numerical epoch index"
+          ]
+        },
+        {
+          "name": "type",
+          "lite_name": "t",
+          "semantic_type": "RewardProgramType",
+          "json_type": "RewardProgramType",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'all'",
+          "example": "'trader'",
+          "comment": [
+            "The type of the reward program"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'500'",
+          "example": "'500'",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'all'",
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": [
+        "Query list of epoch badges"
+      ]
+    },
+    {
+      "name": "EpochBadge",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "account_id",
+          "lite_name": "ai",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ACC:10001'",
+          "comment": [
+            "The off chain account id"
+          ]
+        },
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_ACCOUNT_ID'",
+          "comment": [
+            "The account ID"
+          ]
+        },
+        {
+          "name": "type",
+          "lite_name": "t",
+          "semantic_type": "RewardProgramType",
+          "json_type": "RewardProgramType",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'trader'",
+          "comment": [
+            "The type of the reward program"
+          ]
+        },
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'2'",
+          "comment": [
+            "The epoch number"
+          ]
+        },
+        {
+          "name": "epoch_start_time",
+          "lite_name": "es",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1726790400000000000'",
+          "comment": [
+            "The start time of the epoch"
+          ]
+        },
+        {
+          "name": "epoch_end_time",
+          "lite_name": "ee",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1726790400000000000'",
+          "comment": [
+            "The end time of the epoch"
+          ]
+        },
+        {
+          "name": "badge",
+          "lite_name": "b",
+          "semantic_type": "EpochBadgeType",
+          "json_type": "EpochBadgeType",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'champion'",
+          "comment": [
+            "The type of the badge"
+          ]
+        },
+        {
+          "name": "distributed_badges",
+          "lite_name": "db",
+          "semantic_type": "EpochBadgeType",
+          "json_type": "EpochBadgeType",
+          "index": 7,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The distributed badges"
+          ]
+        },
+        {
+          "name": "total_point",
+          "lite_name": "tp",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10000101000203040506'",
+          "comment": [
+            "Total point"
+          ]
+        },
+        {
+          "name": "rank",
+          "lite_name": "r",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10000101000203040506'",
+          "comment": [
+            "Rank"
+          ]
+        },
+        {
+          "name": "claimed_at",
+          "lite_name": "ca",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1726790400000000000'",
+          "comment": [
+            "The time when the badge was claimed, or the epoch end time if the user has already completed the KYC process"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "QueryEpochBadgeResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "EpochBadge",
+          "json_type": "EpochBadge",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of epoch badges"
+          ]
+        },
+        {
+          "name": "next",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "QueryEpochBadgePointDistributionRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'all'",
+          "example": "'1'",
+          "comment": [
+            "The numerical epoch index"
+          ]
+        },
+        {
+          "name": "type",
+          "lite_name": "t",
+          "semantic_type": "RewardProgramType",
+          "json_type": "RewardProgramType",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'trader'",
+          "comment": [
+            "The type of the reward program"
+          ]
+        }
+      ],
+      "comment": [
+        "Query list of epoch badges"
+      ]
+    },
+    {
+      "name": "EpochBadgePointDistribution",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "badge",
+          "lite_name": "b",
+          "semantic_type": "EpochBadgeType",
+          "json_type": "EpochBadgeType",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The type of the badge"
+          ]
+        },
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The epoch number"
+          ]
+        },
+        {
+          "name": "type",
+          "lite_name": "t",
+          "semantic_type": "RewardProgramType",
+          "json_type": "RewardProgramType",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The type of the reward program"
+          ]
+        },
+        {
+          "name": "min_point",
+          "lite_name": "mp",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The minimum point to get the badge"
+          ]
+        },
+        {
+          "name": "max_point",
+          "lite_name": "mp1",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The maximum point to get the badge"
+          ]
+        },
+        {
+          "name": "min_rank",
+          "lite_name": "mr",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The minimum rank to get the badge"
+          ]
+        },
+        {
+          "name": "max_rank",
+          "lite_name": "mr1",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The maximum rank to get the badge"
+          ]
+        },
+        {
+          "name": "total_point",
+          "lite_name": "tp",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The total point to get the badge"
+          ]
+        },
+        {
+          "name": "count",
+          "lite_name": "c",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The number of users to get the badge"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "QueryEpochBadgePointDistributionResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "EpochBadgePointDistribution",
+          "json_type": "EpochBadgePointDistribution",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of epoch badges"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetListEpochBadgeResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "EpochBadge",
+          "json_type": "EpochBadge",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of epoch badges"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "GetClaimableEcosystemBadgeResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "badge",
+          "lite_name": "b",
+          "semantic_type": "EpochBadge",
+          "json_type": "EpochBadge",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The epoch badge"
+          ]
+        },
+        {
+          "name": "is_claimable",
+          "lite_name": "ic",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Whether the badge is claimable"
+          ]
+        },
+        {
+          "name": "claimable_until",
+          "lite_name": "cu",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The time when the badge is claimable"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ClaimEcosystemBadgeResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "badge",
+          "lite_name": "b",
+          "semantic_type": "EpochBadge",
+          "json_type": "EpochBadge",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The epoch badge"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiGetListFlatReferralRequest",
       "is_root": true,
       "fields": [
@@ -9190,6 +10286,45 @@
           "example": "true",
           "comment": [
             "The account is a business account or not"
+          ]
+        },
+        {
+          "name": "is_kyc_completed",
+          "lite_name": "ik",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "The account is KYC verified or not"
+          ]
+        },
+        {
+          "name": "kyc_completed_at",
+          "lite_name": "kc",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The KYC completed time"
+          ]
+        },
+        {
+          "name": "kyc_type",
+          "lite_name": "kt",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'individual'",
+          "comment": [
+            "The KYC type, can be 'individual' or 'business'"
           ]
         }
       ],
@@ -9650,16 +10785,17 @@
       "is_root": true,
       "fields": [
         {
-          "name": "start_interval",
-          "lite_name": "si",
-          "semantic_type": "timestamp",
-          "json_type": "string",
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "uint32",
+          "json_type": "integer",
           "index": 0,
           "array_depth": 0,
-          "optional": false,
-          "example": "'1726790400000000000'",
+          "optional": true,
+          "default": "0",
+          "example": "1",
           "comment": [
-            "Start time of the epoch - phase"
+            "The epoch to filter"
           ]
         },
         {
@@ -9728,17 +10864,17 @@
       "is_root": true,
       "fields": [
         {
-          "name": "start_interval",
-          "lite_name": "si",
-          "semantic_type": "timestamp",
-          "json_type": "string",
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "uint32",
+          "json_type": "integer",
           "index": 0,
           "array_depth": 0,
           "optional": true,
           "default": "0",
-          "example": "'1726790400000000000'",
+          "example": "1",
           "comment": [
-            "Optional. Start time of the epoch - phase"
+            "The epoch to filter"
           ]
         },
         {
@@ -9944,6 +11080,95 @@
           "example": "'100'",
           "comment": [
             "Bid fast market multiplier"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "RewardEpochInfo",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'2'",
+          "comment": [
+            "The epoch number"
+          ]
+        },
+        {
+          "name": "epoch_start_time",
+          "lite_name": "es",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1726790400000000000'",
+          "comment": [
+            "The start time of the epoch"
+          ]
+        },
+        {
+          "name": "epoch_end_time",
+          "lite_name": "ee",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1726790400000000000'",
+          "comment": [
+            "The end time of the epoch"
+          ]
+        },
+        {
+          "name": "status",
+          "lite_name": "s",
+          "semantic_type": "RewardEpochStatus",
+          "json_type": "RewardEpochStatus",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The status of the epoch"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetListRewardEpochResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "ecosystem_epochs",
+          "lite_name": "ee",
+          "semantic_type": "RewardEpochInfo",
+          "json_type": "RewardEpochInfo",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of epoch for ecosystem reward"
+          ]
+        },
+        {
+          "name": "trading_epochs",
+          "lite_name": "te",
+          "semantic_type": "RewardEpochInfo",
+          "json_type": "RewardEpochInfo",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of epoch for trader reward and lp reward"
           ]
         }
       ],
@@ -10468,6 +11693,19 @@
           "comment": [
             "The order object being created or updated"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": []
@@ -10613,6 +11851,19 @@
           "comment": [
             "The Order State Feed"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": []
@@ -10711,6 +11962,19 @@
           "comment": [
             "A Position being created or updated matching the request filter"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": []
@@ -10808,6 +12072,19 @@
           "optional": false,
           "comment": [
             "A private trade matching the request filter"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
           ]
         }
       ],
@@ -11028,6 +12305,19 @@
           "comment": [
             "The Transfer object"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": [
@@ -11170,6 +12460,19 @@
           "optional": false,
           "comment": [
             "The Deposit object"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
           ]
         }
       ],
@@ -11325,6 +12628,19 @@
           "optional": false,
           "comment": [
             "The Withdrawal object"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
           ]
         }
       ],
@@ -12256,6 +13572,35 @@
       "comment": []
     },
     {
+      "name": "BrokerTag",
+      "values": [
+        {
+          "name": "COIN_ROUTES",
+          "value": 1,
+          "comment": [
+            "CoinRoutes"
+          ]
+        },
+        {
+          "name": "ALERTATRON",
+          "value": 2,
+          "comment": [
+            "Alertatron"
+          ]
+        },
+        {
+          "name": "ORIGAMI",
+          "value": 3,
+          "comment": [
+            "Origami"
+          ]
+        }
+      ],
+      "comment": [
+        "BrokerTag is a tag for the broker that the order is sent from."
+      ]
+    },
+    {
       "name": "CandlestickInterval",
       "values": [
         {
@@ -12521,11 +13866,248 @@
           "comment": [
             "the TON token"
           ]
+        },
+        {
+          "name": "XRP",
+          "value": 15,
+          "comment": [
+            "the XRP token"
+          ]
+        },
+        {
+          "name": "XLM",
+          "value": 16,
+          "comment": [
+            "the XLM token"
+          ]
+        },
+        {
+          "name": "WLD",
+          "value": 17,
+          "comment": [
+            "the WLD token"
+          ]
+        },
+        {
+          "name": "WIF",
+          "value": 18,
+          "comment": [
+            "the WIF token"
+          ]
+        },
+        {
+          "name": "VIRTUAL",
+          "value": 19,
+          "comment": [
+            "the VIRTUAL token"
+          ]
+        },
+        {
+          "name": "TRUMP",
+          "value": 20,
+          "comment": [
+            "the TRUMP token"
+          ]
+        },
+        {
+          "name": "SUI",
+          "value": 21,
+          "comment": [
+            "the SUI token"
+          ]
+        },
+        {
+          "name": "KSHIB",
+          "value": 22,
+          "comment": [
+            "the 1000SHIB token"
+          ]
+        },
+        {
+          "name": "POPCAT",
+          "value": 23,
+          "comment": [
+            "the POPCAT token"
+          ]
+        },
+        {
+          "name": "PENGU",
+          "value": 24,
+          "comment": [
+            "the PENGU token"
+          ]
+        },
+        {
+          "name": "LINK",
+          "value": 25,
+          "comment": [
+            "the LINK token"
+          ]
+        },
+        {
+          "name": "KBONK",
+          "value": 26,
+          "comment": [
+            "the 1000BONK token"
+          ]
+        },
+        {
+          "name": "JUP",
+          "value": 27,
+          "comment": [
+            "the JUP token"
+          ]
+        },
+        {
+          "name": "FARTCOIN",
+          "value": 28,
+          "comment": [
+            "the FARTCOIN token"
+          ]
+        },
+        {
+          "name": "ENA",
+          "value": 29,
+          "comment": [
+            "the ENA token"
+          ]
+        },
+        {
+          "name": "DOGE",
+          "value": 30,
+          "comment": [
+            "the DOGE token"
+          ]
+        },
+        {
+          "name": "AIXBT",
+          "value": 31,
+          "comment": [
+            "the AIXBT token"
+          ]
+        },
+        {
+          "name": "AI_16_Z",
+          "value": 32,
+          "comment": [
+            "the AI16Z token"
+          ]
+        },
+        {
+          "name": "ADA",
+          "value": 33,
+          "comment": [
+            "the ADA token"
+          ]
+        },
+        {
+          "name": "AAVE",
+          "value": 34,
+          "comment": [
+            "the AAVE token"
+          ]
+        },
+        {
+          "name": "BERA",
+          "value": 35,
+          "comment": [
+            "the BERA token"
+          ]
+        },
+        {
+          "name": "VINE",
+          "value": 36,
+          "comment": [
+            "the VINE token"
+          ]
+        },
+        {
+          "name": "PENDLE",
+          "value": 37,
+          "comment": [
+            "the PENDLE token"
+          ]
+        },
+        {
+          "name": "UXLINK",
+          "value": 38,
+          "comment": [
+            "the UXLINK token"
+          ]
         }
       ],
       "comment": [
         "The list of Currencies that are supported on the GRVT exchange"
       ]
+    },
+    {
+      "name": "EpochBadgeType",
+      "values": [
+        {
+          "name": "CHAMPION",
+          "value": 1,
+          "comment": [
+            "Champion"
+          ]
+        },
+        {
+          "name": "LEGEND",
+          "value": 2,
+          "comment": [
+            "Legend"
+          ]
+        },
+        {
+          "name": "VETERAN",
+          "value": 3,
+          "comment": [
+            "Veteran"
+          ]
+        },
+        {
+          "name": "ELITE",
+          "value": 4,
+          "comment": [
+            "Elite"
+          ]
+        },
+        {
+          "name": "MASTER",
+          "value": 5,
+          "comment": [
+            "Master"
+          ]
+        },
+        {
+          "name": "EXPERT",
+          "value": 6,
+          "comment": [
+            "Expert"
+          ]
+        },
+        {
+          "name": "CHALLENGER",
+          "value": 7,
+          "comment": [
+            "Challenger"
+          ]
+        },
+        {
+          "name": "APPRENTICE",
+          "value": 8,
+          "comment": [
+            "Apprentice"
+          ]
+        },
+        {
+          "name": "ROOKIE",
+          "value": 9,
+          "comment": [
+            "Rookie"
+          ]
+        }
+      ],
+      "comment": []
     },
     {
       "name": "InstrumentSettlementPeriod",
@@ -12875,6 +14457,54 @@
       "comment": []
     },
     {
+      "name": "RewardEpochStatus",
+      "values": [
+        {
+          "name": "PAST",
+          "value": 1,
+          "comment": [
+            "Past"
+          ]
+        },
+        {
+          "name": "CURRENT",
+          "value": 2,
+          "comment": [
+            "Current"
+          ]
+        },
+        {
+          "name": "FUTURE",
+          "value": 3,
+          "comment": [
+            "Future"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "RewardProgramType",
+      "values": [
+        {
+          "name": "ECOSYSTEM",
+          "value": 1,
+          "comment": []
+        },
+        {
+          "name": "TRADER",
+          "value": 2,
+          "comment": []
+        },
+        {
+          "name": "LP",
+          "value": 3,
+          "comment": []
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "SubAccountTradeInterval",
       "values": [
         {
@@ -12967,6 +14597,65 @@
         }
       ],
       "comment": []
+    },
+    {
+      "name": "TriggerBy",
+      "values": [
+        {
+          "name": "UNSPECIFIED",
+          "value": 0,
+          "comment": [
+            "no trigger condition"
+          ]
+        },
+        {
+          "name": "INDEX",
+          "value": 1,
+          "comment": [
+            "INDEX - Order is activated when the index price reaches the trigger price"
+          ]
+        }
+      ],
+      "comment": [
+        "Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order.",
+        "",
+        "Trigger orders are executed when the selected price type reaches the specified trigger price.Different price types ensure flexibility in executing strategies based on market conditions.",
+        "",
+        ""
+      ]
+    },
+    {
+      "name": "TriggerType",
+      "values": [
+        {
+          "name": "UNSPECIFIED",
+          "value": 0,
+          "comment": [
+            "Not a trigger order. The order executes normally without any trigger conditions."
+          ]
+        },
+        {
+          "name": "TAKE_PROFIT",
+          "value": 1,
+          "comment": [
+            "Take Profit Order - Executes when the price reaches a specified level to secure profits."
+          ]
+        },
+        {
+          "name": "STOP_LOSS",
+          "value": 2,
+          "comment": [
+            "Stop Loss Order - Executes when the price reaches a specified level to limit losses."
+          ]
+        }
+      ],
+      "comment": [
+        "Defines the type of trigger order used in trading, such as Take Profit or Stop Loss.",
+        "",
+        "Trigger orders allow execution based on pre-defined price conditions rather than immediate market conditions.",
+        "",
+        ""
+      ]
     },
     {
       "name": "Venue",

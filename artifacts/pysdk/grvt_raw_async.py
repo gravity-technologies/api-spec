@@ -152,6 +152,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiPreOrderCheckResponse, resp, Config(cast=[Enum]))
 
+    async def dedust_position_v1(
+        self, req: types.ApiDedustPositionRequest
+    ) -> types.ApiDedustPositionResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/dedust_position", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiDedustPositionResponse, resp, Config(cast=[Enum]))
+
     async def fill_history_v1(
         self, req: types.ApiFillHistoryRequest
     ) -> types.ApiFillHistoryResponse | GrvtError:

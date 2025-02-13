@@ -5,6 +5,7 @@
     |selector<br>`s1` |string|True|Primary selector|
     |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
     |feed<br>`f` |Positions|True|A Position being created or updated matching the request filter|
+    |prev_sequence_number<br>`ps` |string|True|The previous sequence number that determines global message order within the specific stream|
     ??? info "[Positions](/../../schemas/positions)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|

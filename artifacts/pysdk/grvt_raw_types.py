@@ -15,6 +15,15 @@ class BridgeType(Enum):
     XY = "XY"
 
 
+class BrokerTag(Enum):
+    # CoinRoutes
+    COIN_ROUTES = "COIN_ROUTES"
+    # Alertatron
+    ALERTATRON = "ALERTATRON"
+    # Origami
+    ORIGAMI = "ORIGAMI"
+
+
 class CandlestickInterval(Enum):
     # 1 minute
     CI_1_M = "CI_1_M"
@@ -94,6 +103,75 @@ class Currency(Enum):
     KPEPE = "KPEPE"
     # the TON token
     TON = "TON"
+    # the XRP token
+    XRP = "XRP"
+    # the XLM token
+    XLM = "XLM"
+    # the WLD token
+    WLD = "WLD"
+    # the WIF token
+    WIF = "WIF"
+    # the VIRTUAL token
+    VIRTUAL = "VIRTUAL"
+    # the TRUMP token
+    TRUMP = "TRUMP"
+    # the SUI token
+    SUI = "SUI"
+    # the 1000SHIB token
+    KSHIB = "KSHIB"
+    # the POPCAT token
+    POPCAT = "POPCAT"
+    # the PENGU token
+    PENGU = "PENGU"
+    # the LINK token
+    LINK = "LINK"
+    # the 1000BONK token
+    KBONK = "KBONK"
+    # the JUP token
+    JUP = "JUP"
+    # the FARTCOIN token
+    FARTCOIN = "FARTCOIN"
+    # the ENA token
+    ENA = "ENA"
+    # the DOGE token
+    DOGE = "DOGE"
+    # the AIXBT token
+    AIXBT = "AIXBT"
+    # the AI16Z token
+    AI_16_Z = "AI_16_Z"
+    # the ADA token
+    ADA = "ADA"
+    # the AAVE token
+    AAVE = "AAVE"
+    # the BERA token
+    BERA = "BERA"
+    # the VINE token
+    VINE = "VINE"
+    # the PENDLE token
+    PENDLE = "PENDLE"
+    # the UXLINK token
+    UXLINK = "UXLINK"
+
+
+class EpochBadgeType(Enum):
+    # Champion
+    CHAMPION = "CHAMPION"
+    # Legend
+    LEGEND = "LEGEND"
+    # Veteran
+    VETERAN = "VETERAN"
+    # Elite
+    ELITE = "ELITE"
+    # Master
+    MASTER = "MASTER"
+    # Expert
+    EXPERT = "EXPERT"
+    # Challenger
+    CHALLENGER = "CHALLENGER"
+    # Apprentice
+    APPRENTICE = "APPRENTICE"
+    # Rookie
+    ROOKIE = "ROOKIE"
 
 
 class InstrumentSettlementPeriod(Enum):
@@ -201,6 +279,21 @@ class OrderStatus(Enum):
     CANCELLED = "CANCELLED"
 
 
+class RewardEpochStatus(Enum):
+    # Past
+    PAST = "PAST"
+    # Current
+    CURRENT = "CURRENT"
+    # Future
+    FUTURE = "FUTURE"
+
+
+class RewardProgramType(Enum):
+    ECOSYSTEM = "ECOSYSTEM"
+    TRADER = "TRADER"
+    LP = "LP"
+
+
 class SubAccountTradeInterval(Enum):
     # 1 month
     SAT_1_MO = "SAT_1_MO"
@@ -236,6 +329,38 @@ class TransferType(Enum):
     FAST_ARB_DEPOSIT = "FAST_ARB_DEPOSIT"
     # Fast Arb Withdrawal Metadata type
     FAST_ARB_WITHDRAWAL = "FAST_ARB_WITHDRAWAL"
+
+
+class TriggerBy(Enum):
+    """
+    Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order.
+
+    Trigger orders are executed when the selected price type reaches the specified trigger price.Different price types ensure flexibility in executing strategies based on market conditions.
+
+
+    """
+
+    # no trigger condition
+    UNSPECIFIED = "UNSPECIFIED"
+    # INDEX - Order is activated when the index price reaches the trigger price
+    INDEX = "INDEX"
+
+
+class TriggerType(Enum):
+    """
+    Defines the type of trigger order used in trading, such as Take Profit or Stop Loss.
+
+    Trigger orders allow execution based on pre-defined price conditions rather than immediate market conditions.
+
+
+    """
+
+    # Not a trigger order. The order executes normally without any trigger conditions.
+    UNSPECIFIED = "UNSPECIFIED"
+    # Take Profit Order - Executes when the price reaches a specified level to secure profits.
+    TAKE_PROFIT = "TAKE_PROFIT"
+    # Stop Loss Order - Executes when the price reaches a specified level to limit losses.
+    STOP_LOSS = "STOP_LOSS"
 
 
 class Venue(Enum):
@@ -395,6 +520,8 @@ class Fill:
     client_order_id: str
     # The address (public key) of the wallet signing the payload
     signer: str
+    # Specifies the broker who brokered the order
+    broker: BrokerTag | None = None
 
 
 @dataclass
@@ -1160,6 +1287,8 @@ class WSSubscribeParams:
     stream: str
     # The list of feeds to subscribe to
     selectors: list[str]
+    # Whether to use the global sequence number for the stream
+    use_global_sequence_number: bool | None = None
 
 
 @dataclass
@@ -1179,6 +1308,8 @@ class WSSubscribeResult:
     num_snapshots: list[int]
     # The first sequence number to expect for each subscribed feed. Returned in same order as `subs`
     first_sequence_number: list[str]
+    # The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`
+    latest_sequence_number: list[str]
 
 
 @dataclass
@@ -1187,6 +1318,8 @@ class WSUnsubscribeParams:
     stream: str
     # The list of feeds to unsubscribe from
     selectors: list[str]
+    # Whether to use the global sequence number for the stream
+    use_global_sequence_number: bool | None = None
 
 
 @dataclass
@@ -1239,6 +1372,8 @@ class WSSubscribeResponseV1Legacy:
     num_snapshots: list[int]
     # The first sequence number to expect for each subscribed feed. Returned in same order as `subs`
     first_sequence_number: list[str]
+    # The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`
+    latest_sequence_number: list[str]
     """
     Optional Field which is used to match the response by the client.
     If not passed, this field will not be returned
@@ -1285,6 +1420,8 @@ class WSOrderbookLevelsFeedDataV1:
     sequence_number: str
     # An orderbook levels object matching the request filter
     feed: OrderbookLevels
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
@@ -1318,6 +1455,8 @@ class WSMiniTickerFeedDataV1:
     sequence_number: str
     # A mini ticker matching the request filter
     feed: MiniTicker
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
@@ -1351,6 +1490,8 @@ class WSTickerFeedDataV1:
     sequence_number: str
     # A ticker matching the request filter
     feed: Ticker
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
@@ -1377,6 +1518,8 @@ class WSTradeFeedDataV1:
     sequence_number: str
     # A public trade matching the request filter
     feed: Trade
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
@@ -1404,6 +1547,8 @@ class WSCandlestickFeedDataV1:
     sequence_number: str
     # A candlestick entry matching the request filters
     feed: Candlestick
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
@@ -1486,6 +1631,44 @@ class Signature:
 
 
 @dataclass
+class TPSLOrderMetadata:
+    """
+    Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.
+
+    ### Fields:
+    - **triggerBy**: Defines the price type that activates the order (e.g., index price).
+    - **triggerPrice**: The price at which the order is triggered, expressed in `9` decimal precision.
+
+
+    """
+
+    # Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order
+    trigger_by: TriggerBy
+    # The Trigger Price of the order, expressed in `9` decimals.
+    trigger_price: str
+
+
+@dataclass
+class TriggerOrderMetadata:
+    """
+    Contains metadata related to trigger orders, such as Take Profit (TP) or Stop Loss (SL).
+
+    Trigger orders are used to automatically execute an order when a predefined price condition is met, allowing traders to implement risk management strategies.
+
+
+    """
+
+    # Type of the trigger order. eg: Take Profit, Stop Loss, etc
+    trigger_type: TriggerType
+    """
+    Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.
+
+
+    """
+    tpsl: TPSLOrderMetadata
+
+
+@dataclass
 class OrderMetadata:
     """
     Metadata fields are used to support Backend only operations. These operations are not trustless by nature.
@@ -1504,8 +1687,12 @@ class OrderMetadata:
     When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
     """
     client_order_id: str
+    # Trigger fields are used to support any type of trigger order such as TP/SL
+    trigger: TriggerOrderMetadata
     # [Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds
     create_time: str | None = None
+    # Specifies the broker who brokered the order
+    broker: BrokerTag | None = None
 
 
 @dataclass
@@ -1785,6 +1972,18 @@ class ApiPreDepositCheckResponse:
 
 
 @dataclass
+class ApiDedustPositionRequest:
+    # The order to create
+    order: Order
+
+
+@dataclass
+class ApiDedustPositionResponse:
+    # The created order
+    result: Order
+
+
+@dataclass
 class ApiGetUserEcosystemPointRequest:
     # The off chain account id
     account_id: str
@@ -1832,6 +2031,14 @@ class ApiGetEcosystemLeaderboardRequest:
     calculate_from: str
     # The number of accounts to return
     limit: int
+
+
+@dataclass
+class ApiGetVerifiedEcosystemLeaderboardRequest:
+    # Start time of the epoch
+    calculate_from: str
+    # Completed KYC before this time
+    completed_kyc_before: str
 
 
 @dataclass
@@ -1927,6 +2134,112 @@ class ApiFindEcosystemLeaderboardResponse:
 
 
 @dataclass
+class QueryEpochBadgeRequest:
+    # The off chain account id to get referral stats
+    account_id: str | None = None
+    # The numerical epoch index
+    epoch: int | None = None
+    # The type of the reward program
+    type: RewardProgramType | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+
+
+@dataclass
+class EpochBadge:
+    # The off chain account id
+    account_id: str
+    # The account ID
+    main_account_id: str
+    # The type of the reward program
+    type: RewardProgramType
+    # The epoch number
+    epoch: int
+    # The start time of the epoch
+    epoch_start_time: str
+    # The end time of the epoch
+    epoch_end_time: str
+    # The type of the badge
+    badge: EpochBadgeType
+    # The distributed badges
+    distributed_badges: list[EpochBadgeType]
+    # Total point
+    total_point: str
+    # Rank
+    rank: int
+    # The time when the badge was claimed, or the epoch end time if the user has already completed the KYC process
+    claimed_at: str
+
+
+@dataclass
+class QueryEpochBadgeResponse:
+    # The list of epoch badges
+    result: list[EpochBadge]
+    # The cursor to indicate when to start the query from
+    next: str
+
+
+@dataclass
+class QueryEpochBadgePointDistributionRequest:
+    # The type of the reward program
+    type: RewardProgramType
+    # The numerical epoch index
+    epoch: int | None = None
+
+
+@dataclass
+class EpochBadgePointDistribution:
+    # The type of the badge
+    badge: EpochBadgeType
+    # The epoch number
+    epoch: int
+    # The type of the reward program
+    type: RewardProgramType
+    # The minimum point to get the badge
+    min_point: str
+    # The maximum point to get the badge
+    max_point: str
+    # The minimum rank to get the badge
+    min_rank: int
+    # The maximum rank to get the badge
+    max_rank: int
+    # The total point to get the badge
+    total_point: str
+    # The number of users to get the badge
+    count: int
+
+
+@dataclass
+class QueryEpochBadgePointDistributionResponse:
+    # The list of epoch badges
+    result: list[EpochBadgePointDistribution]
+
+
+@dataclass
+class ApiGetListEpochBadgeResponse:
+    # The list of epoch badges
+    result: list[EpochBadge]
+
+
+@dataclass
+class GetClaimableEcosystemBadgeResponse:
+    # The epoch badge
+    badge: EpochBadge
+    # Whether the badge is claimable
+    is_claimable: bool
+    # The time when the badge is claimable
+    claimable_until: str
+
+
+@dataclass
+class ClaimEcosystemBadgeResponse:
+    # The epoch badge
+    badge: EpochBadge
+
+
+@dataclass
 class ApiGetListFlatReferralRequest:
     # The off chain referrer account id to get all flat referrals
     referral_id: str
@@ -1954,6 +2267,12 @@ class FlatReferral:
     referrer_main_account_id: str
     # The account is a business account or not
     is_business: bool
+    # The account is KYC verified or not
+    is_kyc_completed: bool
+    # The KYC completed time
+    kyc_completed_at: str
+    # The KYC type, can be 'individual' or 'business'
+    kyc_type: str
 
 
 @dataclass
@@ -2056,14 +2375,14 @@ class ApiGetLatestLPSnapshotResponse:
 
 @dataclass
 class ApiGetLPLeaderboardRequest:
-    # Start time of the epoch - phase
-    start_interval: str
     # The number of accounts to return
     limit: int
     # The kind filter to apply
     kind: Kind
     # The base filter to apply
     base: Currency
+    # The epoch to filter
+    epoch: int | None = None
 
 
 @dataclass
@@ -2074,8 +2393,8 @@ class ApiGetLPLeaderboardResponse:
 
 @dataclass
 class ApiGetLPPointRequest:
-    # Optional. Start time of the epoch - phase
-    start_interval: str | None = None
+    # The epoch to filter
+    epoch: int | None = None
     # Optional. The kind filter to apply
     kind: Kind | None = None
     # Optional. The base filter to apply
@@ -2116,6 +2435,26 @@ class ApiGetLPInfoResponse:
     ask_fast_market_multiplier: int
     # Bid fast market multiplier
     bid_fast_market_multiplier: int
+
+
+@dataclass
+class RewardEpochInfo:
+    # The epoch number
+    epoch: int
+    # The start time of the epoch
+    epoch_start_time: str
+    # The end time of the epoch
+    epoch_end_time: str
+    # The status of the epoch
+    status: RewardEpochStatus
+
+
+@dataclass
+class ApiGetListRewardEpochResponse:
+    # The list of epoch for ecosystem reward
+    ecosystem_epochs: list[RewardEpochInfo]
+    # The list of epoch for trader reward and lp reward
+    trading_epochs: list[RewardEpochInfo]
 
 
 @dataclass
@@ -2231,6 +2570,8 @@ class WSOrderFeedDataV1:
     sequence_number: str
     # The order object being created or updated
     feed: Order
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
@@ -2269,6 +2610,8 @@ class WSOrderStateFeedDataV1:
     sequence_number: str
     # The Order State Feed
     feed: OrderStateFeed
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
@@ -2295,6 +2638,8 @@ class WSPositionsFeedDataV1:
     sequence_number: str
     # A Position being created or updated matching the request filter
     feed: Positions
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
@@ -2321,6 +2666,8 @@ class WSFillFeedDataV1:
     sequence_number: str
     # A private trade matching the request filter
     feed: Fill
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
@@ -2369,6 +2716,8 @@ class WSTransferFeedDataV1:
     sequence_number: str
     # The Transfer object
     feed: Transfer
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
@@ -2404,6 +2753,8 @@ class WSDepositFeedDataV1:
     sequence_number: str
     # The Deposit object
     feed: Deposit
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
@@ -2441,6 +2792,8 @@ class WSWithdrawalFeedDataV1:
     sequence_number: str
     # The Withdrawal object
     feed: Withdrawal
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
