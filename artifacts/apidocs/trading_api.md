@@ -40,14 +40,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
-                    "trigger": {
-                        "trigger_type": "UNSPECIFIED",
-                        "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
-                            "trigger_price": "65038.10"
-                        }
-                    },
-                    "broker": "COIN_ROUTES"
                 },
             }
         }
@@ -78,14 +70,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
-                    "t": {
-                        "tt": "UNSPECIFIED",
-                        "t": {
-                            "tb": "UNSPECIFIED",
-                            "tp": "65038.10"
-                        }
-                    },
-                    "b": "COIN_ROUTES"
                 },
             }
         }
@@ -124,14 +108,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
-                    "trigger": {
-                        "trigger_type": "UNSPECIFIED",
-                        "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
-                            "trigger_price": "65038.10"
-                        }
-                    },
-                    "broker": "COIN_ROUTES"
                 },
                 "state": {
                     "status": "PENDING",
@@ -171,14 +147,6 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
-                    "t": {
-                        "tt": "UNSPECIFIED",
-                        "t": {
-                            "tb": "UNSPECIFIED",
-                            "tp": "65038.10"
-                        }
-                    },
-                    "b": "COIN_ROUTES"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -298,14 +266,6 @@ LITE ENDPOINT: lite/v1/create_order
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
-                        "trigger": {
-                            "trigger_type": "UNSPECIFIED",
-                            "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
-                                "trigger_price": "65038.10"
-                            }
-                        },
-                        "broker": "COIN_ROUTES"
                     },
                 }
             }
@@ -344,14 +304,6 @@ LITE ENDPOINT: lite/v1/create_order
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
-                            "trigger": {
-                                "trigger_type": "UNSPECIFIED",
-                                "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
-                                    "trigger_price": "65038.10"
-                                }
-                            },
-                            "broker": "COIN_ROUTES"
                         },
                     }
                 },
@@ -390,14 +342,6 @@ LITE ENDPOINT: lite/v1/create_order
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
-                        "t": {
-                            "tt": "UNSPECIFIED",
-                            "t": {
-                                "tb": "UNSPECIFIED",
-                                "tp": "65038.10"
-                            }
-                        },
-                        "b": "COIN_ROUTES"
                     },
                 }
             }
@@ -436,14 +380,6 @@ LITE ENDPOINT: lite/v1/create_order
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
-                            "t": {
-                                "tt": "UNSPECIFIED",
-                                "t": {
-                                    "tb": "UNSPECIFIED",
-                                    "tp": "65038.10"
-                                }
-                            },
-                            "b": "COIN_ROUTES"
                         },
                     }
                 },
@@ -483,14 +419,6 @@ LITE ENDPOINT: lite/v1/create_order
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
-                        "trigger": {
-                            "trigger_type": "UNSPECIFIED",
-                            "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
-                                "trigger_price": "65038.10"
-                            }
-                        },
-                        "broker": "COIN_ROUTES"
                     },
                 }
             }
@@ -529,14 +457,6 @@ LITE ENDPOINT: lite/v1/create_order
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
-                            "trigger": {
-                                "trigger_type": "UNSPECIFIED",
-                                "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
-                                    "trigger_price": "65038.10"
-                                }
-                            },
-                            "broker": "COIN_ROUTES"
                         },
                     }
                 },
@@ -575,14 +495,6 @@ LITE ENDPOINT: lite/v1/create_order
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
-                        "t": {
-                            "tt": "UNSPECIFIED",
-                            "t": {
-                                "tb": "UNSPECIFIED",
-                                "tp": "65038.10"
-                            }
-                        },
-                        "b": "COIN_ROUTES"
                     },
                 }
             }
@@ -621,14 +533,6 @@ LITE ENDPOINT: lite/v1/create_order
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
-                            "t": {
-                                "tt": "UNSPECIFIED",
-                                "t": {
-                                    "tb": "UNSPECIFIED",
-                                    "tp": "65038.10"
-                                }
-                            },
-                            "b": "COIN_ROUTES"
                         },
                     }
                 },
@@ -668,14 +572,6 @@ LITE ENDPOINT: lite/v1/create_order
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
-                        "trigger": {
-                            "trigger_type": "UNSPECIFIED",
-                            "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
-                                "trigger_price": "65038.10"
-                            }
-                        },
-                        "broker": "COIN_ROUTES"
                     },
                 }
             }
@@ -714,14 +610,6 @@ LITE ENDPOINT: lite/v1/create_order
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
-                            "trigger": {
-                                "trigger_type": "UNSPECIFIED",
-                                "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
-                                    "trigger_price": "65038.10"
-                                }
-                            },
-                            "broker": "COIN_ROUTES"
                         },
                     }
                 },
@@ -760,14 +648,6 @@ LITE ENDPOINT: lite/v1/create_order
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
-                        "t": {
-                            "tt": "UNSPECIFIED",
-                            "t": {
-                                "tb": "UNSPECIFIED",
-                                "tp": "65038.10"
-                            }
-                        },
-                        "b": "COIN_ROUTES"
                     },
                 }
             }
@@ -806,14 +686,6 @@ LITE ENDPOINT: lite/v1/create_order
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
-                            "t": {
-                                "tt": "UNSPECIFIED",
-                                "t": {
-                                    "tb": "UNSPECIFIED",
-                                    "tp": "65038.10"
-                                }
-                            },
-                            "b": "COIN_ROUTES"
                         },
                     }
                 },
@@ -853,14 +725,6 @@ LITE ENDPOINT: lite/v1/create_order
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
-                        "trigger": {
-                            "trigger_type": "UNSPECIFIED",
-                            "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
-                                "trigger_price": "65038.10"
-                            }
-                        },
-                        "broker": "COIN_ROUTES"
                     },
                 }
             }
@@ -899,14 +763,6 @@ LITE ENDPOINT: lite/v1/create_order
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
-                            "trigger": {
-                                "trigger_type": "UNSPECIFIED",
-                                "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
-                                    "trigger_price": "65038.10"
-                                }
-                            },
-                            "broker": "COIN_ROUTES"
                         },
                     }
                 },
@@ -945,14 +801,6 @@ LITE ENDPOINT: lite/v1/create_order
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
-                        "t": {
-                            "tt": "UNSPECIFIED",
-                            "t": {
-                                "tb": "UNSPECIFIED",
-                                "tp": "65038.10"
-                            }
-                        },
-                        "b": "COIN_ROUTES"
                     },
                 }
             }
@@ -991,14 +839,6 @@ LITE ENDPOINT: lite/v1/create_order
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
-                            "t": {
-                                "tt": "UNSPECIFIED",
-                                "t": {
-                                    "tb": "UNSPECIFIED",
-                                    "tp": "65038.10"
-                                }
-                            },
-                            "b": "COIN_ROUTES"
                         },
                     }
                 },
@@ -1805,14 +1645,6 @@ LITE ENDPOINT: lite/v1/order
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
-                    "trigger": {
-                        "trigger_type": "UNSPECIFIED",
-                        "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
-                            "trigger_price": "65038.10"
-                        }
-                    },
-                    "broker": "COIN_ROUTES"
                 },
                 "state": {
                     "status": "PENDING",
@@ -1852,14 +1684,6 @@ LITE ENDPOINT: lite/v1/order
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
-                    "t": {
-                        "tt": "UNSPECIFIED",
-                        "t": {
-                            "tb": "UNSPECIFIED",
-                            "tp": "65038.10"
-                        }
-                    },
-                    "b": "COIN_ROUTES"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2235,14 +2059,6 @@ LITE ENDPOINT: lite/v1/open_orders
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
-                    "trigger": {
-                        "trigger_type": "UNSPECIFIED",
-                        "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
-                            "trigger_price": "65038.10"
-                        }
-                    },
-                    "broker": "COIN_ROUTES"
                 },
                 "state": {
                     "status": "PENDING",
@@ -2282,14 +2098,6 @@ LITE ENDPOINT: lite/v1/open_orders
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
-                    "t": {
-                        "tt": "UNSPECIFIED",
-                        "t": {
-                            "tb": "UNSPECIFIED",
-                            "tp": "65038.10"
-                        }
-                    },
-                    "b": "COIN_ROUTES"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2687,14 +2495,6 @@ LITE ENDPOINT: lite/v1/order_history
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
-                    "trigger": {
-                        "trigger_type": "UNSPECIFIED",
-                        "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
-                            "trigger_price": "65038.10"
-                        }
-                    },
-                    "broker": "COIN_ROUTES"
                 },
                 "state": {
                     "status": "PENDING",
@@ -2735,14 +2535,6 @@ LITE ENDPOINT: lite/v1/order_history
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
-                    "t": {
-                        "tt": "UNSPECIFIED",
-                        "t": {
-                            "tb": "UNSPECIFIED",
-                            "tp": "65038.10"
-                        }
-                    },
-                    "b": "COIN_ROUTES"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3173,14 +2965,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
-                    "trigger": {
-                        "trigger_type": "UNSPECIFIED",
-                        "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
-                            "trigger_price": "65038.10"
-                        }
-                    },
-                    "broker": "COIN_ROUTES"
                 },
                 "state": {
                     "status": "PENDING",
@@ -3221,14 +3005,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
-                    "t": {
-                        "tt": "UNSPECIFIED",
-                        "t": {
-                            "tb": "UNSPECIFIED",
-                            "tp": "65038.10"
-                        }
-                    },
-                    "b": "COIN_ROUTES"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3349,14 +3125,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
-                        "trigger": {
-                            "trigger_type": "UNSPECIFIED",
-                            "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
-                                "trigger_price": "65038.10"
-                            }
-                        },
-                        "broker": "COIN_ROUTES"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3405,14 +3173,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
-                            "trigger": {
-                                "trigger_type": "UNSPECIFIED",
-                                "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
-                                    "trigger_price": "65038.10"
-                                }
-                            },
-                            "broker": "COIN_ROUTES"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3461,14 +3221,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
-                        "t": {
-                            "tt": "UNSPECIFIED",
-                            "t": {
-                                "tb": "UNSPECIFIED",
-                                "tp": "65038.10"
-                            }
-                        },
-                        "b": "COIN_ROUTES"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3517,14 +3269,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
-                            "t": {
-                                "tt": "UNSPECIFIED",
-                                "t": {
-                                    "tb": "UNSPECIFIED",
-                                    "tp": "65038.10"
-                                }
-                            },
-                            "b": "COIN_ROUTES"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -3574,14 +3318,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
-                        "trigger": {
-                            "trigger_type": "UNSPECIFIED",
-                            "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
-                                "trigger_price": "65038.10"
-                            }
-                        },
-                        "broker": "COIN_ROUTES"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3630,14 +3366,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
-                            "trigger": {
-                                "trigger_type": "UNSPECIFIED",
-                                "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
-                                    "trigger_price": "65038.10"
-                                }
-                            },
-                            "broker": "COIN_ROUTES"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3686,14 +3414,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
-                        "t": {
-                            "tt": "UNSPECIFIED",
-                            "t": {
-                                "tb": "UNSPECIFIED",
-                                "tp": "65038.10"
-                            }
-                        },
-                        "b": "COIN_ROUTES"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3742,14 +3462,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
-                            "t": {
-                                "tt": "UNSPECIFIED",
-                                "t": {
-                                    "tb": "UNSPECIFIED",
-                                    "tp": "65038.10"
-                                }
-                            },
-                            "b": "COIN_ROUTES"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -3799,14 +3511,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
-                        "trigger": {
-                            "trigger_type": "UNSPECIFIED",
-                            "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
-                                "trigger_price": "65038.10"
-                            }
-                        },
-                        "broker": "COIN_ROUTES"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3855,14 +3559,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
-                            "trigger": {
-                                "trigger_type": "UNSPECIFIED",
-                                "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
-                                    "trigger_price": "65038.10"
-                                }
-                            },
-                            "broker": "COIN_ROUTES"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3911,14 +3607,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
-                        "t": {
-                            "tt": "UNSPECIFIED",
-                            "t": {
-                                "tb": "UNSPECIFIED",
-                                "tp": "65038.10"
-                            }
-                        },
-                        "b": "COIN_ROUTES"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3967,14 +3655,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
-                            "t": {
-                                "tt": "UNSPECIFIED",
-                                "t": {
-                                    "tb": "UNSPECIFIED",
-                                    "tp": "65038.10"
-                                }
-                            },
-                            "b": "COIN_ROUTES"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -4024,14 +3704,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
-                        "trigger": {
-                            "trigger_type": "UNSPECIFIED",
-                            "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
-                                "trigger_price": "65038.10"
-                            }
-                        },
-                        "broker": "COIN_ROUTES"
                     },
                     "state": {
                         "status": "PENDING",
@@ -4080,14 +3752,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
-                            "trigger": {
-                                "trigger_type": "UNSPECIFIED",
-                                "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
-                                    "trigger_price": "65038.10"
-                                }
-                            },
-                            "broker": "COIN_ROUTES"
                         },
                         "state": {
                             "status": "PENDING",
@@ -4136,14 +3800,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
-                        "t": {
-                            "tt": "UNSPECIFIED",
-                            "t": {
-                                "tb": "UNSPECIFIED",
-                                "tp": "65038.10"
-                            }
-                        },
-                        "b": "COIN_ROUTES"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -4192,14 +3848,6 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
-                            "t": {
-                                "tt": "UNSPECIFIED",
-                                "t": {
-                                    "tb": "UNSPECIFIED",
-                                    "tp": "65038.10"
-                                }
-                            },
-                            "b": "COIN_ROUTES"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -5019,7 +4667,6 @@ LITE ENDPOINT: lite/v1/fill_history
                 "venue": "ORDERBOOK",
                 "client_order_id": "23042",
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "broker": "COIN_ROUTES"
             }],
             "next": "Qw0918="
         }
@@ -5047,7 +4694,6 @@ LITE ENDPOINT: lite/v1/fill_history
                 "v": "ORDERBOOK",
                 "co": "23042",
                 "s1": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "b": "COIN_ROUTES"
             }],
             "n": "Qw0918="
         }

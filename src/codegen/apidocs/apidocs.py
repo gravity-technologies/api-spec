@@ -17,8 +17,22 @@ IGNORE_SECONDARY_SELECTORS = {
 IGNORE_FIELD_PATHS = [
     ["ApiCreateOrderRequest", "Order", "state"],
     ["ApiCreateOrderRequest", "Order", "order_id"],
+    ["ApiDedustPositionRequest"],
+    ["ApiDedustPositionResponse"],
+    ["TriggerOrderMetadata"],
+    ["TriggerType"],
+    ["TriggerBy"],
+    ["BrokerTag"],
     ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "state"],
     ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "order_id"],
+]
+
+# skip these fields for all structs, at all levels of nesting
+IGNORE_FIELDS_ANY_PATH = [
+    "prev_sequence_number",
+    "use_global_sequence_number",
+    "trigger",
+    "broker",
 ]
 
 IGNORE_RPCS: list[str] = ["RPCDedustPositionV1"]
@@ -636,7 +650,10 @@ def write_struct_example_with_generics(
     field_path = field_path + [struct.name]
 
     for i, field in enumerate(struct.fields):
-        if field_path + [field.name] in IGNORE_FIELD_PATHS:
+        if (
+            field.name in IGNORE_FIELDS_ANY_PATH
+            or field_path + [field.name] in IGNORE_FIELD_PATHS
+        ):
             continue
         fn = field.name if is_full else field.lite_name
         comma = "," if i < len(struct.fields) - 1 else ""

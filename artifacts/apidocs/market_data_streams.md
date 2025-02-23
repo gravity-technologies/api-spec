@@ -29,7 +29,6 @@ STREAM: v1.mini.s
             "params": {
                 "stream": "v1.mini.s",
                 "selectors": ["BTC_USDT_Perp@500"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -59,7 +58,6 @@ STREAM: v1.mini.s
             "params": {
                 "stream": "v1.mini.s",
                 "selectors": ["BTC_USDT_Perp@500"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -124,7 +122,6 @@ STREAM: v1.mini.s
                 "best_ask_price": "65038.01",
                 "best_ask_size": "123456.78"
             },
-            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -146,7 +143,6 @@ STREAM: v1.mini.s
                 "ba": "65038.01",
                 "ba1": "123456.78"
             },
-            "ps": "872634875"
         }
         ```
     </section>
@@ -212,7 +208,6 @@ STREAM: v1.mini.s
                 "params": {
                     "stream": "v1.mini.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -228,7 +223,6 @@ STREAM: v1.mini.s
                 "params": {
                     "stream": "v1.mini.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -259,7 +253,6 @@ STREAM: v1.mini.s
                 "p": {
                     "s": "v1.mini.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -275,7 +268,6 @@ STREAM: v1.mini.s
                 "p": {
                     "s": "v1.mini.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -307,7 +299,6 @@ STREAM: v1.mini.s
                 "params": {
                     "stream": "v1.mini.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -323,7 +314,6 @@ STREAM: v1.mini.s
                 "params": {
                     "stream": "v1.mini.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -354,7 +344,6 @@ STREAM: v1.mini.s
                 "p": {
                     "s": "v1.mini.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -370,7 +359,6 @@ STREAM: v1.mini.s
                 "p": {
                     "s": "v1.mini.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -402,7 +390,6 @@ STREAM: v1.mini.s
                 "params": {
                     "stream": "v1.mini.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -418,7 +405,6 @@ STREAM: v1.mini.s
                 "params": {
                     "stream": "v1.mini.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -449,7 +435,6 @@ STREAM: v1.mini.s
                 "p": {
                     "s": "v1.mini.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -465,7 +450,6 @@ STREAM: v1.mini.s
                 "p": {
                     "s": "v1.mini.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -497,7 +481,6 @@ STREAM: v1.mini.s
                 "params": {
                     "stream": "v1.mini.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -513,7 +496,6 @@ STREAM: v1.mini.s
                 "params": {
                     "stream": "v1.mini.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -544,7 +526,6 @@ STREAM: v1.mini.s
                 "p": {
                     "s": "v1.mini.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -560,7 +541,6 @@ STREAM: v1.mini.s
                 "p": {
                     "s": "v1.mini.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -609,7 +589,6 @@ STREAM: v1.mini.d
             "params": {
                 "stream": "v1.mini.d",
                 "selectors": ["BTC_USDT_Perp@500"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -639,7 +618,6 @@ STREAM: v1.mini.d
             "params": {
                 "stream": "v1.mini.d",
                 "selectors": ["BTC_USDT_Perp@500"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -704,7 +682,6 @@ STREAM: v1.mini.d
                 "best_ask_price": "65038.01",
                 "best_ask_size": "123456.78"
             },
-            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -726,7 +703,6 @@ STREAM: v1.mini.d
                 "ba": "65038.01",
                 "ba1": "123456.78"
             },
-            "ps": "872634875"
         }
         ```
     </section>
@@ -792,7 +768,6 @@ STREAM: v1.mini.d
                 "params": {
                     "stream": "v1.mini.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -808,7 +783,6 @@ STREAM: v1.mini.d
                 "params": {
                     "stream": "v1.mini.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -839,7 +813,6 @@ STREAM: v1.mini.d
                 "p": {
                     "s": "v1.mini.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -855,7 +828,6 @@ STREAM: v1.mini.d
                 "p": {
                     "s": "v1.mini.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -887,7 +859,6 @@ STREAM: v1.mini.d
                 "params": {
                     "stream": "v1.mini.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -903,7 +874,6 @@ STREAM: v1.mini.d
                 "params": {
                     "stream": "v1.mini.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -934,7 +904,6 @@ STREAM: v1.mini.d
                 "p": {
                     "s": "v1.mini.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -950,7 +919,6 @@ STREAM: v1.mini.d
                 "p": {
                     "s": "v1.mini.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -982,7 +950,6 @@ STREAM: v1.mini.d
                 "params": {
                     "stream": "v1.mini.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -998,7 +965,6 @@ STREAM: v1.mini.d
                 "params": {
                     "stream": "v1.mini.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1029,7 +995,6 @@ STREAM: v1.mini.d
                 "p": {
                     "s": "v1.mini.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -1045,7 +1010,6 @@ STREAM: v1.mini.d
                 "p": {
                     "s": "v1.mini.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -1077,7 +1041,6 @@ STREAM: v1.mini.d
                 "params": {
                     "stream": "v1.mini.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1093,7 +1056,6 @@ STREAM: v1.mini.d
                 "params": {
                     "stream": "v1.mini.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1124,7 +1086,6 @@ STREAM: v1.mini.d
                 "p": {
                     "s": "v1.mini.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -1140,7 +1101,6 @@ STREAM: v1.mini.d
                 "p": {
                     "s": "v1.mini.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -1189,7 +1149,6 @@ STREAM: v1.ticker.s
             "params": {
                 "stream": "v1.ticker.s",
                 "selectors": ["BTC_USDT_Perp@500"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -1219,7 +1178,6 @@ STREAM: v1.ticker.s
             "params": {
                 "stream": "v1.ticker.s",
                 "selectors": ["BTC_USDT_Perp@500"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -1297,7 +1255,6 @@ STREAM: v1.ticker.s
                 "open_interest": "123456.78",
                 "long_short_ratio": "0.5"
             },
-            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -1332,7 +1289,6 @@ STREAM: v1.ticker.s
                 "oi": "123456.78",
                 "ls1": "0.5"
             },
-            "ps": "872634875"
         }
         ```
     </section>
@@ -1398,7 +1354,6 @@ STREAM: v1.ticker.s
                 "params": {
                     "stream": "v1.ticker.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1414,7 +1369,6 @@ STREAM: v1.ticker.s
                 "params": {
                     "stream": "v1.ticker.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1445,7 +1399,6 @@ STREAM: v1.ticker.s
                 "p": {
                     "s": "v1.ticker.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -1461,7 +1414,6 @@ STREAM: v1.ticker.s
                 "p": {
                     "s": "v1.ticker.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -1493,7 +1445,6 @@ STREAM: v1.ticker.s
                 "params": {
                     "stream": "v1.ticker.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1509,7 +1460,6 @@ STREAM: v1.ticker.s
                 "params": {
                     "stream": "v1.ticker.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1540,7 +1490,6 @@ STREAM: v1.ticker.s
                 "p": {
                     "s": "v1.ticker.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -1556,7 +1505,6 @@ STREAM: v1.ticker.s
                 "p": {
                     "s": "v1.ticker.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -1588,7 +1536,6 @@ STREAM: v1.ticker.s
                 "params": {
                     "stream": "v1.ticker.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1604,7 +1551,6 @@ STREAM: v1.ticker.s
                 "params": {
                     "stream": "v1.ticker.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1635,7 +1581,6 @@ STREAM: v1.ticker.s
                 "p": {
                     "s": "v1.ticker.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -1651,7 +1596,6 @@ STREAM: v1.ticker.s
                 "p": {
                     "s": "v1.ticker.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -1683,7 +1627,6 @@ STREAM: v1.ticker.s
                 "params": {
                     "stream": "v1.ticker.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1699,7 +1642,6 @@ STREAM: v1.ticker.s
                 "params": {
                     "stream": "v1.ticker.s",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1730,7 +1672,6 @@ STREAM: v1.ticker.s
                 "p": {
                     "s": "v1.ticker.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -1746,7 +1687,6 @@ STREAM: v1.ticker.s
                 "p": {
                     "s": "v1.ticker.s",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -1795,7 +1735,6 @@ STREAM: v1.ticker.d
             "params": {
                 "stream": "v1.ticker.d",
                 "selectors": ["BTC_USDT_Perp@500"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -1825,7 +1764,6 @@ STREAM: v1.ticker.d
             "params": {
                 "stream": "v1.ticker.d",
                 "selectors": ["BTC_USDT_Perp@500"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -1903,7 +1841,6 @@ STREAM: v1.ticker.d
                 "open_interest": "123456.78",
                 "long_short_ratio": "0.5"
             },
-            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -1938,7 +1875,6 @@ STREAM: v1.ticker.d
                 "oi": "123456.78",
                 "ls1": "0.5"
             },
-            "ps": "872634875"
         }
         ```
     </section>
@@ -2004,7 +1940,6 @@ STREAM: v1.ticker.d
                 "params": {
                     "stream": "v1.ticker.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2020,7 +1955,6 @@ STREAM: v1.ticker.d
                 "params": {
                     "stream": "v1.ticker.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2051,7 +1985,6 @@ STREAM: v1.ticker.d
                 "p": {
                     "s": "v1.ticker.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2067,7 +2000,6 @@ STREAM: v1.ticker.d
                 "p": {
                     "s": "v1.ticker.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2099,7 +2031,6 @@ STREAM: v1.ticker.d
                 "params": {
                     "stream": "v1.ticker.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2115,7 +2046,6 @@ STREAM: v1.ticker.d
                 "params": {
                     "stream": "v1.ticker.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2146,7 +2076,6 @@ STREAM: v1.ticker.d
                 "p": {
                     "s": "v1.ticker.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2162,7 +2091,6 @@ STREAM: v1.ticker.d
                 "p": {
                     "s": "v1.ticker.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2194,7 +2122,6 @@ STREAM: v1.ticker.d
                 "params": {
                     "stream": "v1.ticker.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2210,7 +2137,6 @@ STREAM: v1.ticker.d
                 "params": {
                     "stream": "v1.ticker.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2241,7 +2167,6 @@ STREAM: v1.ticker.d
                 "p": {
                     "s": "v1.ticker.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2257,7 +2182,6 @@ STREAM: v1.ticker.d
                 "p": {
                     "s": "v1.ticker.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2289,7 +2213,6 @@ STREAM: v1.ticker.d
                 "params": {
                     "stream": "v1.ticker.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2305,7 +2228,6 @@ STREAM: v1.ticker.d
                 "params": {
                     "stream": "v1.ticker.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2336,7 +2258,6 @@ STREAM: v1.ticker.d
                 "p": {
                     "s": "v1.ticker.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2352,7 +2273,6 @@ STREAM: v1.ticker.d
                 "p": {
                     "s": "v1.ticker.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2402,7 +2322,6 @@ STREAM: v1.book.s
             "params": {
                 "stream": "v1.book.s",
                 "selectors": ["BTC_USDT_Perp@500-50"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -2432,7 +2351,6 @@ STREAM: v1.book.s
             "params": {
                 "stream": "v1.book.s",
                 "selectors": ["BTC_USDT_Perp@500-50"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -2498,7 +2416,6 @@ STREAM: v1.book.s
                     "num_orders": 123
                 }]
             },
-            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -2521,7 +2438,6 @@ STREAM: v1.book.s
                     "no": 123
                 }]
             },
-            "ps": "872634875"
         }
         ```
     </section>
@@ -2588,7 +2504,6 @@ STREAM: v1.book.s
                 "params": {
                     "stream": "v1.book.s",
                     "selectors": ["BTC_USDT_Perp@500-50"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2604,7 +2519,6 @@ STREAM: v1.book.s
                 "params": {
                     "stream": "v1.book.s",
                     "selectors": ["BTC_USDT_Perp@500-50"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2635,7 +2549,6 @@ STREAM: v1.book.s
                 "p": {
                     "s": "v1.book.s",
                     "s1": ["BTC_USDT_Perp@500-50"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2651,7 +2564,6 @@ STREAM: v1.book.s
                 "p": {
                     "s": "v1.book.s",
                     "s1": ["BTC_USDT_Perp@500-50"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2683,7 +2595,6 @@ STREAM: v1.book.s
                 "params": {
                     "stream": "v1.book.s",
                     "selectors": ["BTC_USDT_Perp@500-50"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2699,7 +2610,6 @@ STREAM: v1.book.s
                 "params": {
                     "stream": "v1.book.s",
                     "selectors": ["BTC_USDT_Perp@500-50"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2730,7 +2640,6 @@ STREAM: v1.book.s
                 "p": {
                     "s": "v1.book.s",
                     "s1": ["BTC_USDT_Perp@500-50"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2746,7 +2655,6 @@ STREAM: v1.book.s
                 "p": {
                     "s": "v1.book.s",
                     "s1": ["BTC_USDT_Perp@500-50"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2778,7 +2686,6 @@ STREAM: v1.book.s
                 "params": {
                     "stream": "v1.book.s",
                     "selectors": ["BTC_USDT_Perp@500-50"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2794,7 +2701,6 @@ STREAM: v1.book.s
                 "params": {
                     "stream": "v1.book.s",
                     "selectors": ["BTC_USDT_Perp@500-50"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2825,7 +2731,6 @@ STREAM: v1.book.s
                 "p": {
                     "s": "v1.book.s",
                     "s1": ["BTC_USDT_Perp@500-50"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2841,7 +2746,6 @@ STREAM: v1.book.s
                 "p": {
                     "s": "v1.book.s",
                     "s1": ["BTC_USDT_Perp@500-50"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2873,7 +2777,6 @@ STREAM: v1.book.s
                 "params": {
                     "stream": "v1.book.s",
                     "selectors": ["BTC_USDT_Perp@500-50"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2889,7 +2792,6 @@ STREAM: v1.book.s
                 "params": {
                     "stream": "v1.book.s",
                     "selectors": ["BTC_USDT_Perp@500-50"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2920,7 +2822,6 @@ STREAM: v1.book.s
                 "p": {
                     "s": "v1.book.s",
                     "s1": ["BTC_USDT_Perp@500-50"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2936,7 +2837,6 @@ STREAM: v1.book.s
                 "p": {
                     "s": "v1.book.s",
                     "s1": ["BTC_USDT_Perp@500-50"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -2985,7 +2885,6 @@ STREAM: v1.book.d
             "params": {
                 "stream": "v1.book.d",
                 "selectors": ["BTC_USDT_Perp@500"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -3015,7 +2914,6 @@ STREAM: v1.book.d
             "params": {
                 "stream": "v1.book.d",
                 "selectors": ["BTC_USDT_Perp@500"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -3081,7 +2979,6 @@ STREAM: v1.book.d
                     "num_orders": 123
                 }]
             },
-            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -3104,7 +3001,6 @@ STREAM: v1.book.d
                     "no": 123
                 }]
             },
-            "ps": "872634875"
         }
         ```
     </section>
@@ -3170,7 +3066,6 @@ STREAM: v1.book.d
                 "params": {
                     "stream": "v1.book.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3186,7 +3081,6 @@ STREAM: v1.book.d
                 "params": {
                     "stream": "v1.book.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3217,7 +3111,6 @@ STREAM: v1.book.d
                 "p": {
                     "s": "v1.book.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -3233,7 +3126,6 @@ STREAM: v1.book.d
                 "p": {
                     "s": "v1.book.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -3265,7 +3157,6 @@ STREAM: v1.book.d
                 "params": {
                     "stream": "v1.book.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3281,7 +3172,6 @@ STREAM: v1.book.d
                 "params": {
                     "stream": "v1.book.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3312,7 +3202,6 @@ STREAM: v1.book.d
                 "p": {
                     "s": "v1.book.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -3328,7 +3217,6 @@ STREAM: v1.book.d
                 "p": {
                     "s": "v1.book.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -3360,7 +3248,6 @@ STREAM: v1.book.d
                 "params": {
                     "stream": "v1.book.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3376,7 +3263,6 @@ STREAM: v1.book.d
                 "params": {
                     "stream": "v1.book.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3407,7 +3293,6 @@ STREAM: v1.book.d
                 "p": {
                     "s": "v1.book.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -3423,7 +3308,6 @@ STREAM: v1.book.d
                 "p": {
                     "s": "v1.book.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -3455,7 +3339,6 @@ STREAM: v1.book.d
                 "params": {
                     "stream": "v1.book.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3471,7 +3354,6 @@ STREAM: v1.book.d
                 "params": {
                     "stream": "v1.book.d",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3502,7 +3384,6 @@ STREAM: v1.book.d
                 "p": {
                     "s": "v1.book.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -3518,7 +3399,6 @@ STREAM: v1.book.d
                 "p": {
                     "s": "v1.book.d",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -3568,7 +3448,6 @@ STREAM: v1.trade
             "params": {
                 "stream": "v1.trade",
                 "selectors": ["BTC_USDT_Perp@500"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -3598,7 +3477,6 @@ STREAM: v1.trade
             "params": {
                 "stream": "v1.trade",
                 "selectors": ["BTC_USDT_Perp@500"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -3663,7 +3541,6 @@ STREAM: v1.trade
                 "trade_id": "209358-2",
                 "venue": "ORDERBOOK"
             },
-            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -3685,7 +3562,6 @@ STREAM: v1.trade
                 "ti": "209358-2",
                 "v": "ORDERBOOK"
             },
-            "ps": "872634875"
         }
         ```
     </section>
@@ -3751,7 +3627,6 @@ STREAM: v1.trade
                 "params": {
                     "stream": "v1.trade",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3767,7 +3642,6 @@ STREAM: v1.trade
                 "params": {
                     "stream": "v1.trade",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3798,7 +3672,6 @@ STREAM: v1.trade
                 "p": {
                     "s": "v1.trade",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -3814,7 +3687,6 @@ STREAM: v1.trade
                 "p": {
                     "s": "v1.trade",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -3846,7 +3718,6 @@ STREAM: v1.trade
                 "params": {
                     "stream": "v1.trade",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3862,7 +3733,6 @@ STREAM: v1.trade
                 "params": {
                     "stream": "v1.trade",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3893,7 +3763,6 @@ STREAM: v1.trade
                 "p": {
                     "s": "v1.trade",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -3909,7 +3778,6 @@ STREAM: v1.trade
                 "p": {
                     "s": "v1.trade",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -3941,7 +3809,6 @@ STREAM: v1.trade
                 "params": {
                     "stream": "v1.trade",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3957,7 +3824,6 @@ STREAM: v1.trade
                 "params": {
                     "stream": "v1.trade",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3988,7 +3854,6 @@ STREAM: v1.trade
                 "p": {
                     "s": "v1.trade",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -4004,7 +3869,6 @@ STREAM: v1.trade
                 "p": {
                     "s": "v1.trade",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -4036,7 +3900,6 @@ STREAM: v1.trade
                 "params": {
                     "stream": "v1.trade",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4052,7 +3915,6 @@ STREAM: v1.trade
                 "params": {
                     "stream": "v1.trade",
                     "selectors": ["BTC_USDT_Perp@500"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4083,7 +3945,6 @@ STREAM: v1.trade
                 "p": {
                     "s": "v1.trade",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -4099,7 +3960,6 @@ STREAM: v1.trade
                 "p": {
                     "s": "v1.trade",
                     "s1": ["BTC_USDT_Perp@500"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -4149,7 +4009,6 @@ STREAM: v1.candle
             "params": {
                 "stream": "v1.candle",
                 "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -4179,7 +4038,6 @@ STREAM: v1.candle
             "params": {
                 "stream": "v1.candle",
                 "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -4243,7 +4101,6 @@ STREAM: v1.candle
                 "trades": 123456,
                 "instrument": "BTC_USDT_Perp"
             },
-            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -4264,7 +4121,6 @@ STREAM: v1.candle
                 "t": 123456,
                 "i": "BTC_USDT_Perp"
             },
-            "ps": "872634875"
         }
         ```
     </section>
@@ -4330,7 +4186,6 @@ STREAM: v1.candle
                 "params": {
                     "stream": "v1.candle",
                     "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4346,7 +4201,6 @@ STREAM: v1.candle
                 "params": {
                     "stream": "v1.candle",
                     "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4377,7 +4231,6 @@ STREAM: v1.candle
                 "p": {
                     "s": "v1.candle",
                     "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -4393,7 +4246,6 @@ STREAM: v1.candle
                 "p": {
                     "s": "v1.candle",
                     "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -4425,7 +4277,6 @@ STREAM: v1.candle
                 "params": {
                     "stream": "v1.candle",
                     "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4441,7 +4292,6 @@ STREAM: v1.candle
                 "params": {
                     "stream": "v1.candle",
                     "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4472,7 +4322,6 @@ STREAM: v1.candle
                 "p": {
                     "s": "v1.candle",
                     "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -4488,7 +4337,6 @@ STREAM: v1.candle
                 "p": {
                     "s": "v1.candle",
                     "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -4520,7 +4368,6 @@ STREAM: v1.candle
                 "params": {
                     "stream": "v1.candle",
                     "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4536,7 +4383,6 @@ STREAM: v1.candle
                 "params": {
                     "stream": "v1.candle",
                     "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4567,7 +4413,6 @@ STREAM: v1.candle
                 "p": {
                     "s": "v1.candle",
                     "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -4583,7 +4428,6 @@ STREAM: v1.candle
                 "p": {
                     "s": "v1.candle",
                     "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -4615,7 +4459,6 @@ STREAM: v1.candle
                 "params": {
                     "stream": "v1.candle",
                     "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4631,7 +4474,6 @@ STREAM: v1.candle
                 "params": {
                     "stream": "v1.candle",
                     "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4662,7 +4504,6 @@ STREAM: v1.candle
                 "p": {
                     "s": "v1.candle",
                     "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "ug": true
                 },
                 "i": 123
             }
@@ -4678,7 +4519,6 @@ STREAM: v1.candle
                 "p": {
                     "s": "v1.candle",
                     "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"],
-                    "ug": true
                 },
                 "i": 123
             }
