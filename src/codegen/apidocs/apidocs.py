@@ -658,6 +658,11 @@ def write_struct_example_with_generics(
             or field_path + [field.name] in IGNORE_FIELD_PATHS
         ):
             fields_skipped += 1
+    for i, field in enumerate(struct.fields):
+        if (
+            field.name in IGNORE_FIELDS_ANY_PATH
+            or field_path + [field.name] in IGNORE_FIELD_PATHS
+        ):
             continue
         fn = field.name if is_full else field.lite_name
         comma = "," if i < len(struct.fields) - fields_skipped - 1 else ""
