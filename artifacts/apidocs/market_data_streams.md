@@ -43,7 +43,6 @@ STREAM: v1.mini.s
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -603,7 +602,6 @@ STREAM: v1.mini.d
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -1163,7 +1161,6 @@ STREAM: v1.ticker.s
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -1749,7 +1746,6 @@ STREAM: v1.ticker.d
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -2336,7 +2332,6 @@ STREAM: v1.book.s
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -2899,7 +2894,6 @@ STREAM: v1.book.d
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -3462,7 +3456,6 @@ STREAM: v1.trade
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -4023,7 +4016,6 @@ STREAM: v1.candle
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"

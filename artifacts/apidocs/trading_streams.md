@@ -43,7 +43,6 @@ STREAM: v1.order
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -696,7 +695,6 @@ STREAM: v1.state
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -1305,7 +1303,6 @@ STREAM: v1.cancel
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -1907,7 +1904,6 @@ STREAM: v1.fill
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -2534,7 +2530,6 @@ STREAM: v1.position
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -3152,7 +3147,6 @@ STREAM: v1.deposit
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -3745,7 +3739,6 @@ STREAM: v1.transfer
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -4367,7 +4360,6 @@ STREAM: v1.withdrawal
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876],
-                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"

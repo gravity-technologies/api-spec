@@ -40,7 +40,7 @@ LITE ENDPOINT: lite/v1/create_order
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
-                },
+                }
             }
         }
         ```
@@ -70,7 +70,7 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
-                },
+                }
             }
         }
         ```
@@ -266,7 +266,7 @@ LITE ENDPOINT: lite/v1/create_order
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
-                    },
+                    }
                 }
             }
             '
@@ -304,7 +304,7 @@ LITE ENDPOINT: lite/v1/create_order
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
-                        },
+                        }
                     }
                 },
                 "id": 123
@@ -342,7 +342,7 @@ LITE ENDPOINT: lite/v1/create_order
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
-                    },
+                    }
                 }
             }
             '
@@ -380,7 +380,7 @@ LITE ENDPOINT: lite/v1/create_order
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
-                        },
+                        }
                     }
                 },
                 "i": 123
@@ -419,7 +419,7 @@ LITE ENDPOINT: lite/v1/create_order
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
-                    },
+                    }
                 }
             }
             '
@@ -457,7 +457,7 @@ LITE ENDPOINT: lite/v1/create_order
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
-                        },
+                        }
                     }
                 },
                 "id": 123
@@ -495,7 +495,7 @@ LITE ENDPOINT: lite/v1/create_order
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
-                    },
+                    }
                 }
             }
             '
@@ -533,7 +533,7 @@ LITE ENDPOINT: lite/v1/create_order
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
-                        },
+                        }
                     }
                 },
                 "i": 123
@@ -572,7 +572,7 @@ LITE ENDPOINT: lite/v1/create_order
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
-                    },
+                    }
                 }
             }
             '
@@ -610,7 +610,7 @@ LITE ENDPOINT: lite/v1/create_order
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
-                        },
+                        }
                     }
                 },
                 "id": 123
@@ -648,7 +648,7 @@ LITE ENDPOINT: lite/v1/create_order
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
-                    },
+                    }
                 }
             }
             '
@@ -686,7 +686,7 @@ LITE ENDPOINT: lite/v1/create_order
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
-                        },
+                        }
                     }
                 },
                 "i": 123
@@ -725,7 +725,7 @@ LITE ENDPOINT: lite/v1/create_order
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
-                    },
+                    }
                 }
             }
             '
@@ -763,7 +763,7 @@ LITE ENDPOINT: lite/v1/create_order
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
-                        },
+                        }
                     }
                 },
                 "id": 123
@@ -801,7 +801,7 @@ LITE ENDPOINT: lite/v1/create_order
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
-                    },
+                    }
                 }
             }
             '
@@ -839,7 +839,7 @@ LITE ENDPOINT: lite/v1/create_order
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
-                        },
+                        }
                     }
                 },
                 "i": 123
