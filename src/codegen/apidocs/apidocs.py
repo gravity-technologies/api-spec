@@ -18,14 +18,17 @@ IGNORE_SECONDARY_SELECTORS = {
 IGNORE_FIELD_PATHS = [
     ["ApiCreateOrderRequest", "Order", "state"],
     ["ApiCreateOrderRequest", "Order", "order_id"],
-    ["ApiDedustPositionRequest"],
-    ["ApiDedustPositionResponse"],
-    ["TriggerOrderMetadata"],
-    ["TriggerType"],
-    ["TriggerBy"],
-    ["BrokerTag"],
     ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "state"],
     ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "order_id"],
+]
+
+IGNORE_STRUCTS = [
+    "ApiDedustPositionRequest",
+    "ApiDedustPositionResponse",
+    "TriggerOrderMetadata",
+    "TriggerType",
+    "TriggerBy",
+    "BrokerTag",
 ]
 
 # skip these fields for all structs, at all levels of nesting
@@ -704,6 +707,8 @@ def import_struct_schema(md: MarkdownWriter, struct: Struct) -> None:
 def write_struct_schema(
     ctx: CodegenCtx, md: MarkdownWriter, struct: Struct, is_root: bool
 ) -> None:
+    if struct.name in IGNORE_STRUCTS:
+        return
     # Header
     path = "/../../schemas/" + inflection.underscore(struct.name).lower()
     if is_root:
