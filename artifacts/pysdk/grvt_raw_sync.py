@@ -174,6 +174,14 @@ class GrvtRawSync(GrvtRawSyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiDedustPositionResponse, resp, Config(cast=[Enum]))
 
+    def cancel_on_disconnect_v1(
+        self, req: types.ApiCancelOnDisconnectRequest
+    ) -> types.AckResponse | GrvtError:
+        resp = self._post(True, self.td_rpc + "/full/v1/cancel_on_disconnect", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
+
     def fill_history_v1(
         self, req: types.ApiFillHistoryRequest
     ) -> types.ApiFillHistoryResponse | GrvtError:
@@ -307,11 +315,3 @@ class GrvtRawSync(GrvtRawSyncBase):
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiSetInitialLeverageResponse, resp, Config(cast=[Enum]))
-
-    def cancel_on_disconnect_v1(
-        self, req: types.ApiCancelOnDisconnectRequest
-    ) -> types.AckResponse | GrvtError:
-        resp = self._post(True, self.td_rpc + "/full/v1/cancel_on_disconnect", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
