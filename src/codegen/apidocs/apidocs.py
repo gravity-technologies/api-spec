@@ -38,7 +38,11 @@ IGNORE_FIELDS_ANY_PATH = [
     "broker",
 ]
 
-IGNORE_RPCS: list[str] = ["RPCDedustPositionV1"]
+IGNORE_RPCS: list[str] = [
+    "RPCDedustPositionV1",
+    "RPCCancelTriggerOrderV1",
+    "RPCCancelAllTriggerOrdersV1",
+]
 
 IGNORE_ENUM_VALUES: dict[str, list[str]] = {
     "Currency": [
@@ -654,21 +658,21 @@ def write_struct_example_with_generics(
 
     field_path = field_path + [struct.name]
 
-    fields_skipped = 0
-    for i, field in enumerate(struct.fields):
-        if (
-            field.name in IGNORE_FIELDS_ANY_PATH
-            or field_path + [field.name] in IGNORE_FIELD_PATHS
-        ):
-            fields_skipped += 1
     for i, field in enumerate(struct.fields):
         if (
             field.name in IGNORE_FIELDS_ANY_PATH
             or field_path + [field.name] in IGNORE_FIELD_PATHS
         ):
             continue
+        fields_after = 0
+        for j in range(i + 1, len(struct.fields)):
+            if not (
+                struct.fields[j].name in IGNORE_FIELDS_ANY_PATH
+                or field_path + [struct.fields[j].name] in IGNORE_FIELD_PATHS
+            ):
+                fields_after += 1
         fn = field.name if is_full else field.lite_name
-        comma = "," if i < len(struct.fields) - fields_skipped - 1 else ""
+        comma = "," if fields_after > 0 else ""
         md.write(f'"{fn}": ')
         for _ in range(field.array_depth):
             md.write("[")
