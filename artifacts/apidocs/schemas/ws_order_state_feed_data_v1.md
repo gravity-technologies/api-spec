@@ -5,6 +5,7 @@
     |selector<br>`s1` |string|True|Primary selector|
     |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
     |feed<br>`f` |OrderStateFeed|True|The Order State Feed|
+    |prev_sequence_number<br>`ps` |string|True|The previous sequence number that determines global message order within the specific stream|
     ??? info "[OrderStateFeed](/../../schemas/order_state_feed)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
@@ -60,3 +61,4 @@
                 |`EXCEED_MAX_POSITION_SIZE` = 26|the order would have caused the subaccount to exceed the max position size|
                 |`EXCEED_MAX_SIGNATURE_EXPIRATION` = 27|the signature supplied is more than 30 days in the future|
                 |`MARKET_ORDER_WITH_LIMIT_PRICE` = 28|the market order has a limit price set|
+                |`CLIENT_CANCEL_ON_DISCONNECT_TRIGGERED` = 29|client cancel on disconnect triggered|
