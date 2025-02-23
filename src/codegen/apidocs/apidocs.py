@@ -64,6 +64,7 @@ IGNORE_ENUM_VALUES: dict[str, list[str]] = {
         "PENDLE",
         "UXLINK",
     ],
+    "BrokerTag": ["*"],
 }
 
 
@@ -755,6 +756,11 @@ def write_enum_schema(md: MarkdownWriter, enum: Enum, is_root: bool = False) -> 
     write_comment(md, enum.comment)
 
     if enum.name in IGNORE_ENUM_VALUES:
+        if (
+            len(IGNORE_ENUM_VALUES[enum.name]) == 1
+            and IGNORE_ENUM_VALUES[enum.name][0] == "*"
+        ):
+            return
         enum.values = [
             value
             for value in enum.values
