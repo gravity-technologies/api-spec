@@ -5,7 +5,6 @@
     |selector<br>`s1` |string|True|Primary selector|
     |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
     |feed<br>`f` |OrderbookLevels|True|An orderbook levels object matching the request filter|
-    |prev_sequence_number<br>`ps` |string|True|The previous sequence number that determines global message order within the specific stream|
     ??? info "[OrderbookLevels](/../../schemas/orderbook_levels)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|

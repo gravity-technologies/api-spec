@@ -5,7 +5,6 @@
     |selector<br>`s1` |string|True|Primary selector|
     |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
     |feed<br>`f` |CancelStatusFeed|True|Data relating to the status of the cancellation attempt|
-    |prev_sequence_number<br>`ps` |string|True|The previous sequence number that determines global message order within the specific stream|
     ??? info "[CancelStatusFeed](/../../schemas/cancel_status_feed)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|

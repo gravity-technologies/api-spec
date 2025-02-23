@@ -5,4 +5,3 @@
     |-|-|-|-|
     |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
     |selectors<br>`s1` |[string]|True|The list of feeds to subscribe to|
-    |use_global_sequence_number<br>`ug` |boolean|False<br>`false`|Whether to use the global sequence number for the stream|

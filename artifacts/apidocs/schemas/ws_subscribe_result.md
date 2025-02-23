@@ -8,4 +8,3 @@
     |unsubs<br>`u` |[string]|True|The list of feeds unsubscribed from|
     |num_snapshots<br>`ns` |[integer]|True|The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`|
     |first_sequence_number<br>`fs` |[string]|True|The first sequence number to expect for each subscribed feed. Returned in same order as `subs`|
-    |latest_sequence_number<br>`ls` |[string]|True|The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`|
