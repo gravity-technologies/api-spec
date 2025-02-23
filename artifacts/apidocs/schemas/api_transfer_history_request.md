@@ -8,6 +8,7 @@
     |end_time<br>`et` |string|False<br>`now()`|The end time to query for in unix nanoseconds|
     |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
     |cursor<br>`c1` |string|False<br>`''`|The cursor to indicate when to start the next query from|
+    |tx_id<br>`ti` |string|False<br>`0`|The transaction ID to query for|
     ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -27,3 +28,8 @@
         |`ATOM` = 12|the ATOM token|
         |`KPEPE` = 13|the 1000PEPE token|
         |`TON` = 14|the TON token|
+        |`XRP` = 15|the XRP token|
+        |`TRUMP` = 20|the TRUMP token|
+        |`SUI` = 21|the SUI token|
+        |`FARTCOIN` = 28|the FARTCOIN token|
+        |`BERA` = 35|the BERA token|

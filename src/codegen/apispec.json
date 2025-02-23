@@ -756,6 +756,11 @@
               "status": 403
             },
             {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
+            },
+            {
               "code": 2000,
               "message": "Order signature is from an unauthorized signer",
               "status": 403
@@ -911,9 +916,29 @@
               "status": 400
             },
             {
+              "code": 2083,
+              "message": "Order Fill would result in exceeding maximum position size under current configurable leverage tier",
+              "status": 400
+            },
+            {
               "code": 2090,
               "message": "Max open orders exceeded",
               "status": 429
+            },
+            {
+              "code": 2110,
+              "message": "Invalid trigger by",
+              "status": 400
+            },
+            {
+              "code": 2111,
+              "message": "Unsupported trigger by",
+              "status": 400
+            },
+            {
+              "code": 2112,
+              "message": "Invalid trigger order",
+              "status": 400
             }
           ]
         },
@@ -955,6 +980,16 @@
               "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
+            },
+            {
+              "code": 2300,
+              "message": "Order cancel time-to-live settings currently disabled.",
+              "status": 400
+            },
+            {
+              "code": 2301,
+              "message": "Order cancel time-to-live exceeds maximum allowed value.",
+              "status": 400
             },
             {
               "code": 3021,
@@ -1179,6 +1214,324 @@
           ]
         },
         {
+          "namespace": "Order",
+          "name": "RPCCancelTriggerOrderV1",
+          "version": 1,
+          "route": "/cancel_trigger_order",
+          "auth_required": true,
+          "request": "ApiCancelOrderRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 3021,
+              "message": "Either order ID or client order ID must be supplied",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Order",
+          "name": "RPCCancelAllTriggerOrdersV1",
+          "version": 1,
+          "route": "/cancel_all_trigger_orders",
+          "auth_required": true,
+          "request": "ApiCancelAllOrdersRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "Position",
+          "name": "RPCDedustPositionV1",
+          "version": 1,
+          "route": "/dedust_position",
+          "auth_required": true,
+          "request": "ApiDedustPositionRequest",
+          "response": "ApiDedustPositionResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 1005,
+              "message": "Unknown Error",
+              "status": 500
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1400,
+              "message": "Signer does not have trade permission",
+              "status": 403
+            },
+            {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
+            },
+            {
+              "code": 2000,
+              "message": "Order signature is from an unauthorized signer",
+              "status": 403
+            },
+            {
+              "code": 2001,
+              "message": "Order signature has expired",
+              "status": 403
+            },
+            {
+              "code": 2002,
+              "message": "Order signature does not match payload",
+              "status": 403
+            },
+            {
+              "code": 2003,
+              "message": "Order sub account does not match logged in user",
+              "status": 403
+            },
+            {
+              "code": 2004,
+              "message": "Order signature is from an expired session key",
+              "status": 403
+            },
+            {
+              "code": 2010,
+              "message": "Order ID should be empty when creating an order",
+              "status": 400
+            },
+            {
+              "code": 2011,
+              "message": "Client Order ID should be supplied when creating an order",
+              "status": 400
+            },
+            {
+              "code": 2012,
+              "message": "Client Order ID overlaps with existing active order",
+              "status": 400
+            },
+            {
+              "code": 2030,
+              "message": "Orderbook Orders must have a TimeInForce of GTT/IOC/FOK",
+              "status": 400
+            },
+            {
+              "code": 2031,
+              "message": "RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK",
+              "status": 400
+            },
+            {
+              "code": 2032,
+              "message": "Post Only can only be set to true for GTT/AON orders",
+              "status": 400
+            },
+            {
+              "code": 2020,
+              "message": "Market Order must always be supplied without a limit price",
+              "status": 400
+            },
+            {
+              "code": 2021,
+              "message": "Limit Order must always be supplied with a limit price",
+              "status": 400
+            },
+            {
+              "code": 2040,
+              "message": "Order must contain at least one leg",
+              "status": 400
+            },
+            {
+              "code": 2041,
+              "message": "Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice",
+              "status": 400
+            },
+            {
+              "code": 2042,
+              "message": "Orderbook Orders must contain only one leg",
+              "status": 400
+            },
+            {
+              "code": 2050,
+              "message": "Order state must be empty upon creation",
+              "status": 400
+            },
+            {
+              "code": 2051,
+              "message": "Order execution metadata must be empty upon creation",
+              "status": 400
+            },
+            {
+              "code": 2060,
+              "message": "Order Legs contain one or more inactive derivative",
+              "status": 400
+            },
+            {
+              "code": 2061,
+              "message": "Unsupported Instrument Requested",
+              "status": 400
+            },
+            {
+              "code": 2063,
+              "message": "Order size smaller than min block size in block trade venue",
+              "status": 400
+            },
+            {
+              "code": 2064,
+              "message": "Invalid limit price tick",
+              "status": 400
+            },
+            {
+              "code": 2200,
+              "message": "Order size should exactly tally to the dust portion (i.e., smaller than minimum size) of a position",
+              "status": 400
+            },
+            {
+              "code": 2201,
+              "message": "Order level should match or beat mark price",
+              "status": 400
+            },
+            {
+              "code": 2202,
+              "message": "Cannot dedust position via a market order",
+              "status": 400
+            },
+            {
+              "code": 2203,
+              "message": "Cannot dedust position via a post-only order",
+              "status": 400
+            },
+            {
+              "code": 2204,
+              "message": "Can only dedust position via a fill-or-kill order",
+              "status": 400
+            },
+            {
+              "code": 2205,
+              "message": "Can only dedust position via a reduce-only order",
+              "status": 400
+            },
+            {
+              "code": 2206,
+              "message": "Attempting to trade the wrong buy/sell direction for dedusting position",
+              "status": 400
+            },
+            {
+              "code": 2070,
+              "message": "Liquidation Order is not supported",
+              "status": 400
+            },
+            {
+              "code": 2080,
+              "message": "Insufficient margin to create order",
+              "status": 400
+            },
+            {
+              "code": 2081,
+              "message": "Order Fill would result in exceeding maximum position size",
+              "status": 400
+            },
+            {
+              "code": 2082,
+              "message": "Pre-order check failed",
+              "status": 400
+            },
+            {
+              "code": 2090,
+              "message": "Max open orders exceeded",
+              "status": 429
+            }
+          ]
+        },
+        {
           "namespace": "Execution",
           "name": "RPCFillHistoryV1",
           "version": 1,
@@ -1380,6 +1733,36 @@
               "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
+            },
+            {
+              "code": 5000,
+              "message": "Transfer Metadata does not match the expected structure.",
+              "status": 400
+            },
+            {
+              "code": 5001,
+              "message": "Transfer Provider does not match the expected provider.",
+              "status": 400
+            },
+            {
+              "code": 5002,
+              "message": "Direction of the transfer does not match the expected direction.",
+              "status": 400
+            },
+            {
+              "code": 5003,
+              "message": "Endpoint account ID is invalid.",
+              "status": 400
+            },
+            {
+              "code": 5004,
+              "message": "Funding account does not exist in our system.",
+              "status": 400
+            },
+            {
+              "code": 5005,
+              "message": "Invalid ChainID for the transfer request.",
+              "status": 400
             }
           ]
         },
@@ -1808,6 +2191,52 @@
               "status": 400
             }
           ]
+        },
+        {
+          "namespace": "Order",
+          "name": "RPCCancelOnDisconnectV1",
+          "version": 1,
+          "route": "/cancel_on_disconnect",
+          "auth_required": true,
+          "request": "ApiCancelOnDisconnectRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 6000,
+              "message": "Countdown time is bigger than 300s supported",
+              "status": 400
+            }
+          ]
         }
       ],
       "streams": [
@@ -1873,6 +2302,61 @@
           "auth_required": true,
           "feed_selector": "WSOrderStateFeedSelectorV1",
           "feed": "WSOrderStateFeedDataV1",
+          "on_subscribe_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1101,
+              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "status": 400
+            },
+            {
+              "code": 1102,
+              "message": "Wrong number of primary selectors",
+              "status": 400
+            },
+            {
+              "code": 1103,
+              "message": "Wrong number of secondary selectors",
+              "status": 400
+            },
+            {
+              "code": 3000,
+              "message": "Instrument is invalid",
+              "status": 400
+            },
+            {
+              "code": 3020,
+              "message": "Sub account ID must be an uint64 integer",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Order",
+          "name": "StreamCancelStatusV1",
+          "channel": "v1.cancel",
+          "auth_required": true,
+          "feed_selector": "WSCancelFeedSelectorV1",
+          "feed": "WSCancelFeedDataV1",
           "on_subscribe_errors": [
             {
               "code": 1000,
@@ -2806,6 +3290,19 @@
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The address (public key) of the wallet signing the payload"
+          ]
+        },
+        {
+          "name": "broker",
+          "lite_name": "b",
+          "semantic_type": "BrokerTag",
+          "json_type": "BrokerTag",
+          "index": 21,
+          "array_depth": 0,
+          "optional": true,
+          "default": "",
+          "comment": [
+            "Specifies the broker who brokered the order"
           ]
         }
       ],
@@ -6046,6 +6543,20 @@
           "comment": [
             "The list of feeds to subscribe to"
           ]
+        },
+        {
+          "name": "use_global_sequence_number",
+          "lite_name": "ug",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "example": "true",
+          "comment": [
+            "Whether to use the global sequence number for the stream"
+          ]
         }
       ],
       "comment": [
@@ -6121,6 +6632,19 @@
           "comment": [
             "The first sequence number to expect for each subscribed feed. Returned in same order as `subs`"
           ]
+        },
+        {
+          "name": "latest_sequence_number",
+          "lite_name": "ls",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 1,
+          "optional": false,
+          "example": "872634875",
+          "comment": [
+            "The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`"
+          ]
         }
       ],
       "comment": [
@@ -6156,6 +6680,20 @@
           "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
           "comment": [
             "The list of feeds to unsubscribe from"
+          ]
+        },
+        {
+          "name": "use_global_sequence_number",
+          "lite_name": "ug",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "example": "true",
+          "comment": [
+            "Whether to use the global sequence number for the stream"
           ]
         }
       ],
@@ -6360,6 +6898,19 @@
           "comment": [
             "The first sequence number to expect for each subscribed feed. Returned in same order as `subs`"
           ]
+        },
+        {
+          "name": "latest_sequence_number",
+          "lite_name": "ls",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 1,
+          "optional": false,
+          "example": "872634875",
+          "comment": [
+            "The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`"
+          ]
         }
       ],
       "comment": [
@@ -6486,6 +7037,19 @@
           "comment": [
             "An orderbook levels object matching the request filter"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": []
@@ -6588,6 +7152,19 @@
           "comment": [
             "A mini ticker matching the request filter"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": []
@@ -6689,6 +7266,19 @@
           "optional": false,
           "comment": [
             "A ticker matching the request filter"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
           ]
         }
       ],
@@ -6804,6 +7394,19 @@
           "comment": [
             "A public trade matching the request filter"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": []
@@ -6911,6 +7514,19 @@
           "optional": false,
           "comment": [
             "A candlestick entry matching the request filters"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
           ]
         }
       ],
@@ -7200,6 +7816,85 @@
       "comment": []
     },
     {
+      "name": "TPSLOrderMetadata",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "trigger_by",
+          "lite_name": "tb",
+          "semantic_type": "TriggerBy",
+          "json_type": "TriggerBy",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order"
+          ]
+        },
+        {
+          "name": "trigger_price",
+          "lite_name": "tp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65038.10'",
+          "comment": [
+            "The Trigger Price of the order, expressed in `9` decimals."
+          ]
+        }
+      ],
+      "comment": [
+        "Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.",
+        "",
+        "### Fields:",
+        "- **triggerBy**: Defines the price type that activates the order (e.g., index price).",
+        "- **triggerPrice**: The price at which the order is triggered, expressed in `9` decimal precision.",
+        "",
+        ""
+      ]
+    },
+    {
+      "name": "TriggerOrderMetadata",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "trigger_type",
+          "lite_name": "tt",
+          "semantic_type": "TriggerType",
+          "json_type": "TriggerType",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Type of the trigger order. eg: Take Profit, Stop Loss, etc"
+          ]
+        },
+        {
+          "name": "tpsl",
+          "lite_name": "t",
+          "semantic_type": "TPSLOrderMetadata",
+          "json_type": "TPSLOrderMetadata",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.",
+            "",
+            ""
+          ]
+        }
+      ],
+      "comment": [
+        "Contains metadata related to trigger orders, such as Take Profit (TP) or Stop Loss (SL).",
+        "",
+        "Trigger orders are used to automatically execute an order when a predefined price condition is met, allowing traders to implement risk management strategies.",
+        "",
+        ""
+      ]
+    },
+    {
       "name": "OrderMetadata",
       "is_root": false,
       "fields": [
@@ -7236,6 +7931,31 @@
           "example": "'1697788800000000000'",
           "comment": [
             "[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "trigger",
+          "lite_name": "t",
+          "semantic_type": "TriggerOrderMetadata",
+          "json_type": "TriggerOrderMetadata",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Trigger fields are used to support any type of trigger order such as TP/SL"
+          ]
+        },
+        {
+          "name": "broker",
+          "lite_name": "b",
+          "semantic_type": "BrokerTag",
+          "json_type": "BrokerTag",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "",
+          "comment": [
+            "Specifies the broker who brokered the order"
           ]
         }
       ],
@@ -7573,6 +8293,26 @@
           "example": "'23042'",
           "comment": [
             "Cancel the order with this `client_order_id`"
+          ]
+        },
+        {
+          "name": "time_to_live_ms",
+          "lite_name": "tt",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "500",
+          "example": "`500`",
+          "comment": [
+            "Specifies the time-to-live (in milliseconds) for this cancellation.",
+            "During this period, any order creation with a matching `client_order_id` will also be cancelled.",
+            "This mechanism helps mitigate time-of-flight issues where cancellations might arrive before the corresponding orders.",
+            "Hence, cancellation by `order_id` ignores this field as the exchange can only assign `order_id`s to already-processed order creations.",
+            "The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `670` -\u003e `600`, `30` -\u003e `0`) and capped at 5 seconds (i.e., `5000`).",
+            "Value of `0` or omission disables the TTL mechanism, so only orders already existing in matcher state at request time will be searched.",
+            ""
           ]
         }
       ],
@@ -8344,6 +9084,98 @@
       "comment": []
     },
     {
+      "name": "ApiDedustPositionRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "order",
+          "lite_name": "o",
+          "semantic_type": "Order",
+          "json_type": "Order",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The order to create"
+          ]
+        }
+      ],
+      "comment": [
+        "Remove dust position (i.e., order quantity smaller than minimum required increment) on an account, by matching the specified order against GRVT directly. Limit price should always be better than mark price."
+      ]
+    },
+    {
+      "name": "ApiDedustPositionResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "Order",
+          "json_type": "Order",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The created order"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiCancelOnDisconnectRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID cancelling the orders for"
+          ]
+        },
+        {
+          "name": "countdown_time",
+          "lite_name": "ct",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "1000",
+          "example": "300",
+          "comment": [
+            "Countdown time in milliseconds (ex. 120000 for 120s).",
+            "",
+            "0 to disable the timer.",
+            "",
+            "Does not accept negative values.",
+            "",
+            "Minimum acceptable value is 1,000.",
+            "",
+            "Maximum acceptable value is 300,000"
+          ]
+        }
+      ],
+      "comment": [
+        "Auto-Cancel All Open Orders when the countdown time hits zero.",
+        "",
+        "Market Maker inputs a countdown time parameter in milliseconds (e.g. 120000 for 120s) rounded down to the smallest second follows the following logic:",
+        "  - Market Maker initially entered a value between 0 -\u003e 1000, which is rounded to 0: will result in termination of their COD",
+        "  - Market Maker initially entered a value between 1001 -\u003e 300_000, which is rounded to the nearest second: will result in refresh of their COD",
+        "  - Market Maker initially entered a value bigger than 300_000, which will result in error (upper bound)",
+        "Market Maker will send a heartbeat message by calling the endpoint at specific intervals (ex. every 30 seconds) to the server to refresh the count down.",
+        "",
+        "If the server does not receive a heartbeat message within the countdown time, it will cancel all open orders for the specified Sub Account ID."
+      ]
+    },
+    {
       "name": "ApiGetUserEcosystemPointRequest",
       "is_root": true,
       "fields": [
@@ -8588,6 +9420,39 @@
           "example": "500",
           "comment": [
             "The number of accounts to return"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetVerifiedEcosystemLeaderboardRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "calculate_from",
+          "lite_name": "cf",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Start time of the epoch"
+          ]
+        },
+        {
+          "name": "completed_kyc_before",
+          "lite_name": "ck",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Completed KYC before this time"
           ]
         }
       ],
@@ -9035,6 +9900,517 @@
       "comment": []
     },
     {
+      "name": "QueryEpochBadgeRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "account_id",
+          "lite_name": "ai",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'all'",
+          "example": "'ACC_1234567890'",
+          "comment": [
+            "The off chain account id to get referral stats"
+          ]
+        },
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'all'",
+          "example": "'1'",
+          "comment": [
+            "The numerical epoch index"
+          ]
+        },
+        {
+          "name": "type",
+          "lite_name": "t",
+          "semantic_type": "RewardProgramType",
+          "json_type": "RewardProgramType",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'all'",
+          "example": "'trader'",
+          "comment": [
+            "The type of the reward program"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'500'",
+          "example": "'500'",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'all'",
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": [
+        "Query list of epoch badges"
+      ]
+    },
+    {
+      "name": "EpochBadge",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "account_id",
+          "lite_name": "ai",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ACC:10001'",
+          "comment": [
+            "The off chain account id"
+          ]
+        },
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_ACCOUNT_ID'",
+          "comment": [
+            "The account ID"
+          ]
+        },
+        {
+          "name": "type",
+          "lite_name": "t",
+          "semantic_type": "RewardProgramType",
+          "json_type": "RewardProgramType",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'trader'",
+          "comment": [
+            "The type of the reward program"
+          ]
+        },
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'2'",
+          "comment": [
+            "The epoch number"
+          ]
+        },
+        {
+          "name": "epoch_start_time",
+          "lite_name": "es",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1726790400000000000'",
+          "comment": [
+            "The start time of the epoch"
+          ]
+        },
+        {
+          "name": "epoch_end_time",
+          "lite_name": "ee",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1726790400000000000'",
+          "comment": [
+            "The end time of the epoch"
+          ]
+        },
+        {
+          "name": "badge",
+          "lite_name": "b",
+          "semantic_type": "EpochBadgeType",
+          "json_type": "EpochBadgeType",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'champion'",
+          "comment": [
+            "The type of the badge"
+          ]
+        },
+        {
+          "name": "distributed_badges",
+          "lite_name": "db",
+          "semantic_type": "EpochBadgeType",
+          "json_type": "EpochBadgeType",
+          "index": 7,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The distributed badges"
+          ]
+        },
+        {
+          "name": "total_point",
+          "lite_name": "tp",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10000101000203040506'",
+          "comment": [
+            "Total point"
+          ]
+        },
+        {
+          "name": "rank",
+          "lite_name": "r",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10000101000203040506'",
+          "comment": [
+            "Rank"
+          ]
+        },
+        {
+          "name": "claimed_at",
+          "lite_name": "ca",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1726790400000000000'",
+          "comment": [
+            "The time when the badge was claimed, or the epoch end time if the user has already completed the KYC process"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "QueryEpochBadgeResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "EpochBadge",
+          "json_type": "EpochBadge",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of epoch badges"
+          ]
+        },
+        {
+          "name": "next",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "QueryEpochBadgePointDistributionRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'all'",
+          "example": "'1'",
+          "comment": [
+            "The numerical epoch index"
+          ]
+        },
+        {
+          "name": "type",
+          "lite_name": "t",
+          "semantic_type": "RewardProgramType",
+          "json_type": "RewardProgramType",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'trader'",
+          "comment": [
+            "The type of the reward program"
+          ]
+        }
+      ],
+      "comment": [
+        "Query list of epoch badges"
+      ]
+    },
+    {
+      "name": "EpochBadgePointDistribution",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "badge",
+          "lite_name": "b",
+          "semantic_type": "EpochBadgeType",
+          "json_type": "EpochBadgeType",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The type of the badge"
+          ]
+        },
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The epoch number"
+          ]
+        },
+        {
+          "name": "type",
+          "lite_name": "t",
+          "semantic_type": "RewardProgramType",
+          "json_type": "RewardProgramType",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The type of the reward program"
+          ]
+        },
+        {
+          "name": "min_point",
+          "lite_name": "mp",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The minimum point to get the badge"
+          ]
+        },
+        {
+          "name": "max_point",
+          "lite_name": "mp1",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The maximum point to get the badge"
+          ]
+        },
+        {
+          "name": "min_rank",
+          "lite_name": "mr",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The minimum rank to get the badge"
+          ]
+        },
+        {
+          "name": "max_rank",
+          "lite_name": "mr1",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The maximum rank to get the badge"
+          ]
+        },
+        {
+          "name": "total_point",
+          "lite_name": "tp",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The total point to get the badge"
+          ]
+        },
+        {
+          "name": "count",
+          "lite_name": "c",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The number of users to get the badge"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "QueryEpochBadgePointDistributionResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "EpochBadgePointDistribution",
+          "json_type": "EpochBadgePointDistribution",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of epoch badges"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetListEpochBadgeResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "EpochBadge",
+          "json_type": "EpochBadge",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of epoch badges"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "GetClaimableEcosystemBadgeResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "badge",
+          "lite_name": "b",
+          "semantic_type": "EpochBadge",
+          "json_type": "EpochBadge",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The epoch badge"
+          ]
+        },
+        {
+          "name": "is_claimable",
+          "lite_name": "ic",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Whether the badge is claimable"
+          ]
+        },
+        {
+          "name": "claimable_until",
+          "lite_name": "cu",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The time when the badge is claimable"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ClaimEcosystemBadgeResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "badge",
+          "lite_name": "b",
+          "semantic_type": "EpochBadge",
+          "json_type": "EpochBadge",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The epoch badge"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiGetListFlatReferralRequest",
       "is_root": true,
       "fields": [
@@ -9190,6 +10566,45 @@
           "example": "true",
           "comment": [
             "The account is a business account or not"
+          ]
+        },
+        {
+          "name": "is_kyc_completed",
+          "lite_name": "ik",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "The account is KYC verified or not"
+          ]
+        },
+        {
+          "name": "kyc_completed_at",
+          "lite_name": "kc",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The KYC completed time"
+          ]
+        },
+        {
+          "name": "kyc_type",
+          "lite_name": "kt",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'individual'",
+          "comment": [
+            "The KYC type, can be 'individual' or 'business'"
           ]
         }
       ],
@@ -9650,16 +11065,17 @@
       "is_root": true,
       "fields": [
         {
-          "name": "start_interval",
-          "lite_name": "si",
-          "semantic_type": "timestamp",
-          "json_type": "string",
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "uint32",
+          "json_type": "integer",
           "index": 0,
           "array_depth": 0,
-          "optional": false,
-          "example": "'1726790400000000000'",
+          "optional": true,
+          "default": "0",
+          "example": "1",
           "comment": [
-            "Start time of the epoch - phase"
+            "The epoch to filter"
           ]
         },
         {
@@ -9728,17 +11144,17 @@
       "is_root": true,
       "fields": [
         {
-          "name": "start_interval",
-          "lite_name": "si",
-          "semantic_type": "timestamp",
-          "json_type": "string",
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "uint32",
+          "json_type": "integer",
           "index": 0,
           "array_depth": 0,
           "optional": true,
           "default": "0",
-          "example": "'1726790400000000000'",
+          "example": "1",
           "comment": [
-            "Optional. Start time of the epoch - phase"
+            "The epoch to filter"
           ]
         },
         {
@@ -9944,6 +11360,95 @@
           "example": "'100'",
           "comment": [
             "Bid fast market multiplier"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "RewardEpochInfo",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'2'",
+          "comment": [
+            "The epoch number"
+          ]
+        },
+        {
+          "name": "epoch_start_time",
+          "lite_name": "es",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1726790400000000000'",
+          "comment": [
+            "The start time of the epoch"
+          ]
+        },
+        {
+          "name": "epoch_end_time",
+          "lite_name": "ee",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1726790400000000000'",
+          "comment": [
+            "The end time of the epoch"
+          ]
+        },
+        {
+          "name": "status",
+          "lite_name": "s",
+          "semantic_type": "RewardEpochStatus",
+          "json_type": "RewardEpochStatus",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The status of the epoch"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetListRewardEpochResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "ecosystem_epochs",
+          "lite_name": "ee",
+          "semantic_type": "RewardEpochInfo",
+          "json_type": "RewardEpochInfo",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of epoch for ecosystem reward"
+          ]
+        },
+        {
+          "name": "trading_epochs",
+          "lite_name": "te",
+          "semantic_type": "RewardEpochInfo",
+          "json_type": "RewardEpochInfo",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of epoch for trader reward and lp reward"
           ]
         }
       ],
@@ -10468,6 +11973,19 @@
           "comment": [
             "The order object being created or updated"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": []
@@ -10613,6 +12131,19 @@
           "comment": [
             "The Order State Feed"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": []
@@ -10710,6 +12241,19 @@
           "optional": false,
           "comment": [
             "A Position being created or updated matching the request filter"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
           ]
         }
       ],
@@ -10809,6 +12353,19 @@
           "comment": [
             "A private trade matching the request filter"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": []
@@ -10854,15 +12411,28 @@
       ]
     },
     {
-      "name": "Transfer",
-      "is_root": false,
+      "name": "TransferHistory",
+      "is_root": true,
       "fields": [
+        {
+          "name": "tx_id",
+          "lite_name": "ti",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1028403'",
+          "comment": [
+            "The transaction ID of the transfer"
+          ]
+        },
         {
           "name": "from_account_id",
           "lite_name": "fa",
           "semantic_type": "address",
           "json_type": "string",
-          "index": 0,
+          "index": 1,
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
@@ -10875,7 +12445,7 @@
           "lite_name": "fs",
           "semantic_type": "uint64",
           "json_type": "string",
-          "index": 1,
+          "index": 2,
           "array_depth": 0,
           "optional": false,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -10888,7 +12458,7 @@
           "lite_name": "ta",
           "semantic_type": "address",
           "json_type": "string",
-          "index": 2,
+          "index": 3,
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
@@ -10901,7 +12471,7 @@
           "lite_name": "ts",
           "semantic_type": "uint64",
           "json_type": "string",
-          "index": 3,
+          "index": 4,
           "array_depth": 0,
           "optional": false,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
@@ -10914,7 +12484,7 @@
           "lite_name": "c",
           "semantic_type": "Currency",
           "json_type": "Currency",
-          "index": 4,
+          "index": 5,
           "array_depth": 0,
           "optional": false,
           "example": "'USDT'",
@@ -10927,10 +12497,10 @@
           "lite_name": "nt",
           "semantic_type": "string",
           "json_type": "string",
-          "index": 5,
+          "index": 6,
           "array_depth": 0,
           "optional": false,
-          "example": "'10.50'",
+          "example": "'1500.0'",
           "comment": [
             "The number of tokens to transfer"
           ]
@@ -10940,7 +12510,7 @@
           "lite_name": "s",
           "semantic_type": "Signature",
           "json_type": "Signature",
-          "index": 6,
+          "index": 7,
           "array_depth": 0,
           "optional": false,
           "comment": [
@@ -10948,11 +12518,24 @@
           ]
         },
         {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The timestamp of the transfer in unix nanoseconds"
+          ]
+        },
+        {
           "name": "transfer_type",
           "lite_name": "tt",
           "semantic_type": "TransferType",
           "json_type": "TransferType",
-          "index": 7,
+          "index": 9,
           "array_depth": 0,
           "optional": false,
           "comment": [
@@ -10964,7 +12547,7 @@
           "lite_name": "tm",
           "semantic_type": "string",
           "json_type": "string",
-          "index": 8,
+          "index": 10,
           "array_depth": 0,
           "optional": false,
           "comment": [
@@ -11020,13 +12603,26 @@
         {
           "name": "feed",
           "lite_name": "f",
-          "semantic_type": "Transfer",
-          "json_type": "Transfer",
+          "semantic_type": "TransferHistory",
+          "json_type": "TransferHistory",
           "index": 3,
           "array_depth": 0,
           "optional": false,
           "comment": [
-            "The Transfer object"
+            "The transfer history matching the requested filters"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
           ]
         }
       ],
@@ -11170,6 +12766,19 @@
           "optional": false,
           "comment": [
             "The Deposit object"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
           ]
         }
       ],
@@ -11326,10 +12935,206 @@
           "comment": [
             "The Withdrawal object"
           ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
         }
       ],
       "comment": [
         "Subscribes to a feed of withdrawal updates."
+      ]
+    },
+    {
+      "name": "CancelStatusFeed",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID that requested the cancellation"
+          ]
+        },
+        {
+          "name": "client_order_id",
+          "lite_name": "co",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'23042'",
+          "comment": [
+            "A unique identifier for the active order within a subaccount, specified by the client"
+          ]
+        },
+        {
+          "name": "order_id",
+          "lite_name": "oi",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10000101000203040506'",
+          "comment": [
+            "A unique 128-bit identifier for the order, deterministically generated within the GRVT backend"
+          ]
+        },
+        {
+          "name": "reason",
+          "lite_name": "r",
+          "semantic_type": "OrderRejectReason",
+          "json_type": "OrderRejectReason",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The user-provided reason for cancelling the order"
+          ]
+        },
+        {
+          "name": "update_time",
+          "lite_name": "ut",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "[Filled by GRVT Backend] Time at which the cancellation status was updated by GRVT in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "cancel_status",
+          "lite_name": "cs",
+          "semantic_type": "CancelStatus",
+          "json_type": "CancelStatus",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Status of the cancellation attempt"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "WSCancelFeedDataV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.cancel'",
+          "comment": [
+            "Stream name"
+          ]
+        },
+        {
+          "name": "selector",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "Primary selector"
+          ]
+        },
+        {
+          "name": "sequence_number",
+          "lite_name": "sn",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634876'",
+          "comment": [
+            "A running sequence number that determines global message order within the specific stream"
+          ]
+        },
+        {
+          "name": "feed",
+          "lite_name": "f",
+          "semantic_type": "CancelStatusFeed",
+          "json_type": "CancelStatusFeed",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Data relating to the status of the cancellation attempt"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "WSCancelFeedSelectorV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID to filter by"
+          ],
+          "selector": "primary"
+        }
+      ],
+      "comment": [
+        "Subscribes to a feed of time-to-live expiry events for order cancellations requested by a given subaccount.",
+        "**This stream presently only provides expiry updates for cancel-order requests set with a valid TTL value**.",
+        "Successful order cancellations will reflect as updates published to the (order-state stream)[https://api-docs.grvt.io/trading_streams/#order-state].",
+        "_A future release will expand the functionality of this stream to provide more general status updates on order cancellation requests._",
+        "Each Order can be uniquely identified by its `client_order_id`.",
+        ""
       ]
     },
     {
@@ -11840,6 +13645,20 @@
           "comment": [
             "The cursor to indicate when to start the next query from"
           ]
+        },
+        {
+          "name": "tx_id",
+          "lite_name": "ti",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1028403'",
+          "comment": [
+            "The transaction ID to query for"
+          ]
         }
       ],
       "comment": [
@@ -11848,153 +13667,6 @@
         "",
         "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
       ]
-    },
-    {
-      "name": "TransferHistory",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "tx_id",
-          "lite_name": "ti",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1028403'",
-          "comment": [
-            "The transaction ID of the transfer"
-          ]
-        },
-        {
-          "name": "from_account_id",
-          "lite_name": "fa",
-          "semantic_type": "address",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": [
-            "The account to transfer from"
-          ]
-        },
-        {
-          "name": "from_sub_account_id",
-          "lite_name": "fs",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'$GRVT_SUB_ACCOUNT_ID'",
-          "comment": [
-            "The subaccount to transfer from (0 if transferring from main account)"
-          ]
-        },
-        {
-          "name": "to_account_id",
-          "lite_name": "ta",
-          "semantic_type": "address",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": [
-            "The account to deposit into"
-          ]
-        },
-        {
-          "name": "to_sub_account_id",
-          "lite_name": "ts",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'$GRVT_SUB_ACCOUNT_ID'",
-          "comment": [
-            "The subaccount to transfer to (0 if transferring to main account)"
-          ]
-        },
-        {
-          "name": "currency",
-          "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
-          "index": 5,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'USDT'",
-          "comment": [
-            "The token currency to transfer"
-          ]
-        },
-        {
-          "name": "num_tokens",
-          "lite_name": "nt",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 6,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1500.0'",
-          "comment": [
-            "The number of tokens to transfer"
-          ]
-        },
-        {
-          "name": "signature",
-          "lite_name": "s",
-          "semantic_type": "Signature",
-          "json_type": "Signature",
-          "index": 7,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The signature of the transfer"
-          ]
-        },
-        {
-          "name": "event_time",
-          "lite_name": "et",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 8,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1697788800000000000'",
-          "comment": [
-            "The timestamp of the transfer in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "transfer_type",
-          "lite_name": "tt",
-          "semantic_type": "TransferType",
-          "json_type": "TransferType",
-          "index": 9,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The type of transfer"
-          ]
-        },
-        {
-          "name": "transfer_metadata",
-          "lite_name": "tm",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 10,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The metadata of the transfer"
-          ]
-        }
-      ],
-      "comment": []
     },
     {
       "name": "ApiTransferHistoryResponse",
@@ -12250,6 +13922,48 @@
           "value": 1,
           "comment": [
             "XY Bridge type"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "BrokerTag",
+      "values": [
+        {
+          "name": "COIN_ROUTES",
+          "value": 1,
+          "comment": [
+            "CoinRoutes"
+          ]
+        },
+        {
+          "name": "ALERTATRON",
+          "value": 2,
+          "comment": [
+            "Alertatron"
+          ]
+        },
+        {
+          "name": "ORIGAMI",
+          "value": 3,
+          "comment": [
+            "Origami"
+          ]
+        }
+      ],
+      "comment": [
+        "BrokerTag is a tag for the broker that the order is sent from."
+      ]
+    },
+    {
+      "name": "CancelStatus",
+      "values": [
+        {
+          "name": "EXPIRED",
+          "value": 1,
+          "comment": [
+            "Cancellation has expired because corresponding order had not arrived within the defined time-to-live window."
           ]
         }
       ],
@@ -12521,11 +14235,269 @@
           "comment": [
             "the TON token"
           ]
+        },
+        {
+          "name": "XRP",
+          "value": 15,
+          "comment": [
+            "the XRP token"
+          ]
+        },
+        {
+          "name": "XLM",
+          "value": 16,
+          "comment": [
+            "the XLM token"
+          ]
+        },
+        {
+          "name": "WLD",
+          "value": 17,
+          "comment": [
+            "the WLD token"
+          ]
+        },
+        {
+          "name": "WIF",
+          "value": 18,
+          "comment": [
+            "the WIF token"
+          ]
+        },
+        {
+          "name": "VIRTUAL",
+          "value": 19,
+          "comment": [
+            "the VIRTUAL token"
+          ]
+        },
+        {
+          "name": "TRUMP",
+          "value": 20,
+          "comment": [
+            "the TRUMP token"
+          ]
+        },
+        {
+          "name": "SUI",
+          "value": 21,
+          "comment": [
+            "the SUI token"
+          ]
+        },
+        {
+          "name": "KSHIB",
+          "value": 22,
+          "comment": [
+            "the 1000SHIB token"
+          ]
+        },
+        {
+          "name": "POPCAT",
+          "value": 23,
+          "comment": [
+            "the POPCAT token"
+          ]
+        },
+        {
+          "name": "PENGU",
+          "value": 24,
+          "comment": [
+            "the PENGU token"
+          ]
+        },
+        {
+          "name": "LINK",
+          "value": 25,
+          "comment": [
+            "the LINK token"
+          ]
+        },
+        {
+          "name": "KBONK",
+          "value": 26,
+          "comment": [
+            "the 1000BONK token"
+          ]
+        },
+        {
+          "name": "JUP",
+          "value": 27,
+          "comment": [
+            "the JUP token"
+          ]
+        },
+        {
+          "name": "FARTCOIN",
+          "value": 28,
+          "comment": [
+            "the FARTCOIN token"
+          ]
+        },
+        {
+          "name": "ENA",
+          "value": 29,
+          "comment": [
+            "the ENA token"
+          ]
+        },
+        {
+          "name": "DOGE",
+          "value": 30,
+          "comment": [
+            "the DOGE token"
+          ]
+        },
+        {
+          "name": "AIXBT",
+          "value": 31,
+          "comment": [
+            "the AIXBT token"
+          ]
+        },
+        {
+          "name": "AI_16_Z",
+          "value": 32,
+          "comment": [
+            "the AI16Z token"
+          ]
+        },
+        {
+          "name": "ADA",
+          "value": 33,
+          "comment": [
+            "the ADA token"
+          ]
+        },
+        {
+          "name": "AAVE",
+          "value": 34,
+          "comment": [
+            "the AAVE token"
+          ]
+        },
+        {
+          "name": "BERA",
+          "value": 35,
+          "comment": [
+            "the BERA token"
+          ]
+        },
+        {
+          "name": "VINE",
+          "value": 36,
+          "comment": [
+            "the VINE token"
+          ]
+        },
+        {
+          "name": "PENDLE",
+          "value": 37,
+          "comment": [
+            "the PENDLE token"
+          ]
+        },
+        {
+          "name": "UXLINK",
+          "value": 38,
+          "comment": [
+            "the UXLINK token"
+          ]
         }
       ],
       "comment": [
         "The list of Currencies that are supported on the GRVT exchange"
       ]
+    },
+    {
+      "name": "EpochBadgeType",
+      "values": [
+        {
+          "name": "CHAMPION",
+          "value": 1,
+          "comment": [
+            "Champion"
+          ]
+        },
+        {
+          "name": "LEGEND",
+          "value": 2,
+          "comment": [
+            "Legend"
+          ]
+        },
+        {
+          "name": "VETERAN",
+          "value": 3,
+          "comment": [
+            "Veteran"
+          ]
+        },
+        {
+          "name": "ELITE",
+          "value": 4,
+          "comment": [
+            "Elite"
+          ]
+        },
+        {
+          "name": "MASTER",
+          "value": 5,
+          "comment": [
+            "Master"
+          ]
+        },
+        {
+          "name": "EXPERT",
+          "value": 6,
+          "comment": [
+            "Expert"
+          ]
+        },
+        {
+          "name": "WARRIOR",
+          "value": 7,
+          "comment": [
+            "Warrior"
+          ]
+        },
+        {
+          "name": "SERGEANT",
+          "value": 8,
+          "comment": [
+            "Sergeant"
+          ]
+        },
+        {
+          "name": "RANGER",
+          "value": 9,
+          "comment": [
+            "Ranger"
+          ]
+        },
+        {
+          "name": "CHALLENGER",
+          "value": 10,
+          "comment": [
+            "Challenger"
+          ]
+        },
+        {
+          "name": "APPRENTICE",
+          "value": 11,
+          "comment": [
+            "Apprentice"
+          ]
+        },
+        {
+          "name": "ROOKIE",
+          "value": 12,
+          "comment": [
+            "Rookie"
+          ]
+        }
+      ],
+      "comment": []
     },
     {
       "name": "InstrumentSettlementPeriod",
@@ -12829,6 +14801,13 @@
           "comment": [
             "the market order has a limit price set"
           ]
+        },
+        {
+          "name": "CLIENT_CANCEL_ON_DISCONNECT_TRIGGERED",
+          "value": 29,
+          "comment": [
+            "client cancel on disconnect triggered"
+          ]
         }
       ],
       "comment": []
@@ -12870,6 +14849,54 @@
           "comment": [
             "Order is cancelled by the user using one of the supported APIs (See OrderRejectReason). Before an order is open, it cannot be cancelled."
           ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "RewardEpochStatus",
+      "values": [
+        {
+          "name": "PAST",
+          "value": 1,
+          "comment": [
+            "Past"
+          ]
+        },
+        {
+          "name": "CURRENT",
+          "value": 2,
+          "comment": [
+            "Current"
+          ]
+        },
+        {
+          "name": "FUTURE",
+          "value": 3,
+          "comment": [
+            "Future"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "RewardProgramType",
+      "values": [
+        {
+          "name": "ECOSYSTEM",
+          "value": 1,
+          "comment": []
+        },
+        {
+          "name": "TRADER",
+          "value": 2,
+          "comment": []
+        },
+        {
+          "name": "LP",
+          "value": 3,
+          "comment": []
         }
       ],
       "comment": []
@@ -12967,6 +14994,72 @@
         }
       ],
       "comment": []
+    },
+    {
+      "name": "TriggerBy",
+      "values": [
+        {
+          "name": "UNSPECIFIED",
+          "value": 0,
+          "comment": [
+            "no trigger condition"
+          ]
+        },
+        {
+          "name": "INDEX",
+          "value": 1,
+          "comment": [
+            "INDEX - Order is activated when the index price reaches the trigger price"
+          ]
+        },
+        {
+          "name": "LAST",
+          "value": 2,
+          "comment": [
+            "LAST - Order is activated when the last trade price reaches the trigger price"
+          ]
+        }
+      ],
+      "comment": [
+        "Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order.",
+        "",
+        "Trigger orders are executed when the selected price type reaches the specified trigger price.Different price types ensure flexibility in executing strategies based on market conditions.",
+        "",
+        ""
+      ]
+    },
+    {
+      "name": "TriggerType",
+      "values": [
+        {
+          "name": "UNSPECIFIED",
+          "value": 0,
+          "comment": [
+            "Not a trigger order. The order executes normally without any trigger conditions."
+          ]
+        },
+        {
+          "name": "TAKE_PROFIT",
+          "value": 1,
+          "comment": [
+            "Take Profit Order - Executes when the price reaches a specified level to secure profits."
+          ]
+        },
+        {
+          "name": "STOP_LOSS",
+          "value": 2,
+          "comment": [
+            "Stop Loss Order - Executes when the price reaches a specified level to limit losses."
+          ]
+        }
+      ],
+      "comment": [
+        "Defines the type of trigger order used in trading, such as Take Profit or Stop Loss.",
+        "",
+        "Trigger orders allow execution based on pre-defined price conditions rather than immediate market conditions.",
+        "",
+        ""
+      ]
     },
     {
       "name": "Venue",

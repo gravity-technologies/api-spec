@@ -36,11 +36,11 @@ LITE ENDPOINT: lite/v1/create_order
                     "v": 28,
                     "expiration": "1697788800000000000",
                     "nonce": 1234567890
-                },
+                }
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000"
-                },
+                }
             }
         }
         ```
@@ -66,11 +66,11 @@ LITE ENDPOINT: lite/v1/create_order
                     "v": 28,
                     "e": "1697788800000000000",
                     "n": 1234567890
-                },
+                }
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000"
-                },
+                }
             }
         }
         ```
@@ -174,6 +174,7 @@ LITE ENDPOINT: lite/v1/create_order
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
         |1400|403|Signer does not have trade permission|
+        |1009|503|We are temporarily deactivating this API endpoint, please try again later|
         |2000|403|Order signature is from an unauthorized signer|
         |2001|403|Order signature has expired|
         |2002|403|Order signature does not match payload|
@@ -205,7 +206,11 @@ LITE ENDPOINT: lite/v1/create_order
         |2080|400|Insufficient margin to create order|
         |2081|400|Order Fill would result in exceeding maximum position size|
         |2082|400|Pre-order check failed|
+        |2083|400|Order Fill would result in exceeding maximum position size under current configurable leverage tier|
         |2090|429|Max open orders exceeded|
+        |2110|400|Invalid trigger by|
+        |2111|400|Unsupported trigger by|
+        |2112|400|Invalid trigger order|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -257,11 +262,11 @@ LITE ENDPOINT: lite/v1/create_order
                         "v": 28,
                         "expiration": "1697788800000000000",
                         "nonce": 1234567890
-                    },
+                    }
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000"
-                    },
+                    }
                 }
             }
             '
@@ -295,11 +300,11 @@ LITE ENDPOINT: lite/v1/create_order
                             "v": 28,
                             "expiration": "1697788800000000000",
                             "nonce": 1234567890
-                        },
+                        }
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000"
-                        },
+                        }
                     }
                 },
                 "id": 123
@@ -333,11 +338,11 @@ LITE ENDPOINT: lite/v1/create_order
                         "v": 28,
                         "e": "1697788800000000000",
                         "n": 1234567890
-                    },
+                    }
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000"
-                    },
+                    }
                 }
             }
             '
@@ -371,11 +376,11 @@ LITE ENDPOINT: lite/v1/create_order
                             "v": 28,
                             "e": "1697788800000000000",
                             "n": 1234567890
-                        },
+                        }
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000"
-                        },
+                        }
                     }
                 },
                 "i": 123
@@ -410,11 +415,11 @@ LITE ENDPOINT: lite/v1/create_order
                         "v": 28,
                         "expiration": "1697788800000000000",
                         "nonce": 1234567890
-                    },
+                    }
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000"
-                    },
+                    }
                 }
             }
             '
@@ -448,11 +453,11 @@ LITE ENDPOINT: lite/v1/create_order
                             "v": 28,
                             "expiration": "1697788800000000000",
                             "nonce": 1234567890
-                        },
+                        }
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000"
-                        },
+                        }
                     }
                 },
                 "id": 123
@@ -486,11 +491,11 @@ LITE ENDPOINT: lite/v1/create_order
                         "v": 28,
                         "e": "1697788800000000000",
                         "n": 1234567890
-                    },
+                    }
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000"
-                    },
+                    }
                 }
             }
             '
@@ -524,11 +529,11 @@ LITE ENDPOINT: lite/v1/create_order
                             "v": 28,
                             "e": "1697788800000000000",
                             "n": 1234567890
-                        },
+                        }
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000"
-                        },
+                        }
                     }
                 },
                 "i": 123
@@ -563,11 +568,11 @@ LITE ENDPOINT: lite/v1/create_order
                         "v": 28,
                         "expiration": "1697788800000000000",
                         "nonce": 1234567890
-                    },
+                    }
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000"
-                    },
+                    }
                 }
             }
             '
@@ -601,11 +606,11 @@ LITE ENDPOINT: lite/v1/create_order
                             "v": 28,
                             "expiration": "1697788800000000000",
                             "nonce": 1234567890
-                        },
+                        }
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000"
-                        },
+                        }
                     }
                 },
                 "id": 123
@@ -639,11 +644,11 @@ LITE ENDPOINT: lite/v1/create_order
                         "v": 28,
                         "e": "1697788800000000000",
                         "n": 1234567890
-                    },
+                    }
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000"
-                    },
+                    }
                 }
             }
             '
@@ -677,11 +682,11 @@ LITE ENDPOINT: lite/v1/create_order
                             "v": 28,
                             "e": "1697788800000000000",
                             "n": 1234567890
-                        },
+                        }
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000"
-                        },
+                        }
                     }
                 },
                 "i": 123
@@ -716,11 +721,11 @@ LITE ENDPOINT: lite/v1/create_order
                         "v": 28,
                         "expiration": "1697788800000000000",
                         "nonce": 1234567890
-                    },
+                    }
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000"
-                    },
+                    }
                 }
             }
             '
@@ -754,11 +759,11 @@ LITE ENDPOINT: lite/v1/create_order
                             "v": 28,
                             "expiration": "1697788800000000000",
                             "nonce": 1234567890
-                        },
+                        }
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000"
-                        },
+                        }
                     }
                 },
                 "id": 123
@@ -792,11 +797,11 @@ LITE ENDPOINT: lite/v1/create_order
                         "v": 28,
                         "e": "1697788800000000000",
                         "n": 1234567890
-                    },
+                    }
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000"
-                    },
+                    }
                 }
             }
             '
@@ -830,11 +835,11 @@ LITE ENDPOINT: lite/v1/create_order
                             "v": 28,
                             "e": "1697788800000000000",
                             "n": 1234567890
-                        },
+                        }
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000"
-                        },
+                        }
                     }
                 },
                 "i": 123
@@ -860,7 +865,8 @@ LITE ENDPOINT: lite/v1/cancel_order
         {
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
-            "client_order_id": "23042"
+            "client_order_id": "23042",
+            "time_to_live_ms": `500`
         }
         ```
         **Lite Request**
@@ -868,7 +874,8 @@ LITE ENDPOINT: lite/v1/cancel_order
         {
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "oi": "0x1028403",
-            "co": "23042"
+            "co": "23042",
+            "tt": `500`
         }
         ```
     </section>
@@ -906,6 +913,8 @@ LITE ENDPOINT: lite/v1/cancel_order
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
+        |2300|400|Order cancel time-to-live settings currently disabled.|
+        |2301|400|Order cancel time-to-live exceeds maximum allowed value.|
         |3021|400|Either order ID or client order ID must be supplied|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -941,7 +950,8 @@ LITE ENDPOINT: lite/v1/cancel_order
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
-                "client_order_id": "23042"
+                "client_order_id": "23042",
+                "time_to_live_ms": `500`
             }
             '
             ```
@@ -957,7 +967,8 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "params": {
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "order_id": "0x1028403",
-                    "client_order_id": "23042"
+                    "client_order_id": "23042",
+                    "time_to_live_ms": `500`
                 },
                 "id": 123
             }
@@ -973,7 +984,8 @@ LITE ENDPOINT: lite/v1/cancel_order
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
-                "co": "23042"
+                "co": "23042",
+                "tt": `500`
             }
             '
             ```
@@ -989,7 +1001,8 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "p": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "oi": "0x1028403",
-                    "co": "23042"
+                    "co": "23042",
+                    "tt": `500`
                 },
                 "i": 123
             }
@@ -1006,7 +1019,8 @@ LITE ENDPOINT: lite/v1/cancel_order
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
-                "client_order_id": "23042"
+                "client_order_id": "23042",
+                "time_to_live_ms": `500`
             }
             '
             ```
@@ -1022,7 +1036,8 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "params": {
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "order_id": "0x1028403",
-                    "client_order_id": "23042"
+                    "client_order_id": "23042",
+                    "time_to_live_ms": `500`
                 },
                 "id": 123
             }
@@ -1038,7 +1053,8 @@ LITE ENDPOINT: lite/v1/cancel_order
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
-                "co": "23042"
+                "co": "23042",
+                "tt": `500`
             }
             '
             ```
@@ -1054,7 +1070,8 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "p": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "oi": "0x1028403",
-                    "co": "23042"
+                    "co": "23042",
+                    "tt": `500`
                 },
                 "i": 123
             }
@@ -1071,7 +1088,8 @@ LITE ENDPOINT: lite/v1/cancel_order
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
-                "client_order_id": "23042"
+                "client_order_id": "23042",
+                "time_to_live_ms": `500`
             }
             '
             ```
@@ -1087,7 +1105,8 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "params": {
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "order_id": "0x1028403",
-                    "client_order_id": "23042"
+                    "client_order_id": "23042",
+                    "time_to_live_ms": `500`
                 },
                 "id": 123
             }
@@ -1103,7 +1122,8 @@ LITE ENDPOINT: lite/v1/cancel_order
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
-                "co": "23042"
+                "co": "23042",
+                "tt": `500`
             }
             '
             ```
@@ -1119,7 +1139,8 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "p": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "oi": "0x1028403",
-                    "co": "23042"
+                    "co": "23042",
+                    "tt": `500`
                 },
                 "i": 123
             }
@@ -1136,7 +1157,8 @@ LITE ENDPOINT: lite/v1/cancel_order
             --data '{
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
-                "client_order_id": "23042"
+                "client_order_id": "23042",
+                "time_to_live_ms": `500`
             }
             '
             ```
@@ -1152,7 +1174,8 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "params": {
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "order_id": "0x1028403",
-                    "client_order_id": "23042"
+                    "client_order_id": "23042",
+                    "time_to_live_ms": `500`
                 },
                 "id": 123
             }
@@ -1168,7 +1191,8 @@ LITE ENDPOINT: lite/v1/cancel_order
             --data '{
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
-                "co": "23042"
+                "co": "23042",
+                "tt": `500`
             }
             '
             ```
@@ -1184,7 +1208,8 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "p": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "oi": "0x1028403",
-                    "co": "23042"
+                    "co": "23042",
+                    "tt": `500`
                 },
                 "i": 123
             }
@@ -3840,6 +3865,739 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ```
         </section>
 <hr class="solid">
+### Cancel Trigger Order
+```
+FULL ENDPOINT: full/v1/cancel_trigger_order
+LITE ENDPOINT: lite/v1/cancel_trigger_order
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_cancel_order_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "order_id": "0x1028403",
+            "client_order_id": "23042",
+            "time_to_live_ms": `500`
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "oi": "0x1028403",
+            "co": "23042",
+            "tt": `500`
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/ack_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": {
+                "ack": "true"
+            }
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "a": "true"
+            }
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |3021|400|Either order ID or client order ID must be supplied|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_trigger_order' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "order_id": "0x1028403",
+                "client_order_id": "23042",
+                "time_to_live_ms": `500`
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_trigger_order",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "order_id": "0x1028403",
+                    "client_order_id": "23042",
+                    "time_to_live_ms": `500`
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cancel_trigger_order' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "oi": "0x1028403",
+                "co": "23042",
+                "tt": `500`
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_trigger_order",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "oi": "0x1028403",
+                    "co": "23042",
+                    "tt": `500`
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cancel_trigger_order' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "order_id": "0x1028403",
+                "client_order_id": "23042",
+                "time_to_live_ms": `500`
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_trigger_order",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "order_id": "0x1028403",
+                    "client_order_id": "23042",
+                    "time_to_live_ms": `500`
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cancel_trigger_order' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "oi": "0x1028403",
+                "co": "23042",
+                "tt": `500`
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_trigger_order",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "oi": "0x1028403",
+                    "co": "23042",
+                    "tt": `500`
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_trigger_order' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "order_id": "0x1028403",
+                "client_order_id": "23042",
+                "time_to_live_ms": `500`
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_trigger_order",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "order_id": "0x1028403",
+                    "client_order_id": "23042",
+                    "time_to_live_ms": `500`
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/cancel_trigger_order' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "oi": "0x1028403",
+                "co": "23042",
+                "tt": `500`
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_trigger_order",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "oi": "0x1028403",
+                    "co": "23042",
+                    "tt": `500`
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/cancel_trigger_order' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "order_id": "0x1028403",
+                "client_order_id": "23042",
+                "time_to_live_ms": `500`
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_trigger_order",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "order_id": "0x1028403",
+                    "client_order_id": "23042",
+                    "time_to_live_ms": `500`
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/cancel_trigger_order' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "oi": "0x1028403",
+                "co": "23042",
+                "tt": `500`
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_trigger_order",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "oi": "0x1028403",
+                    "co": "23042",
+                    "tt": `500`
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Cancel All Trigger Orders
+```
+FULL ENDPOINT: full/v1/cancel_all_trigger_orders
+LITE ENDPOINT: lite/v1/cancel_all_trigger_orders
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_cancel_all_orders_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "kind": ["PERPETUAL"],
+            "base": ["BTC", "ETH"],
+            "quote": ["USDT", "USDC"]
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "k": ["PERPETUAL"],
+            "b": ["BTC", "ETH"],
+            "q": ["USDT", "USDC"]
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/ack_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": {
+                "ack": "true"
+            }
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "a": "true"
+            }
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_all_trigger_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "kind": ["PERPETUAL"],
+                "base": ["BTC", "ETH"],
+                "quote": ["USDT", "USDC"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_all_trigger_orders",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "kind": ["PERPETUAL"],
+                    "base": ["BTC", "ETH"],
+                    "quote": ["USDT", "USDC"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cancel_all_trigger_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "k": ["PERPETUAL"],
+                "b": ["BTC", "ETH"],
+                "q": ["USDT", "USDC"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_all_trigger_orders",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "k": ["PERPETUAL"],
+                    "b": ["BTC", "ETH"],
+                    "q": ["USDT", "USDC"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cancel_all_trigger_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "kind": ["PERPETUAL"],
+                "base": ["BTC", "ETH"],
+                "quote": ["USDT", "USDC"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_all_trigger_orders",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "kind": ["PERPETUAL"],
+                    "base": ["BTC", "ETH"],
+                    "quote": ["USDT", "USDC"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cancel_all_trigger_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "k": ["PERPETUAL"],
+                "b": ["BTC", "ETH"],
+                "q": ["USDT", "USDC"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_all_trigger_orders",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "k": ["PERPETUAL"],
+                    "b": ["BTC", "ETH"],
+                    "q": ["USDT", "USDC"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_all_trigger_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "kind": ["PERPETUAL"],
+                "base": ["BTC", "ETH"],
+                "quote": ["USDT", "USDC"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_all_trigger_orders",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "kind": ["PERPETUAL"],
+                    "base": ["BTC", "ETH"],
+                    "quote": ["USDT", "USDC"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/cancel_all_trigger_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "k": ["PERPETUAL"],
+                "b": ["BTC", "ETH"],
+                "q": ["USDT", "USDC"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_all_trigger_orders",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "k": ["PERPETUAL"],
+                    "b": ["BTC", "ETH"],
+                    "q": ["USDT", "USDC"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/cancel_all_trigger_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "kind": ["PERPETUAL"],
+                "base": ["BTC", "ETH"],
+                "quote": ["USDT", "USDC"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_all_trigger_orders",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "kind": ["PERPETUAL"],
+                    "base": ["BTC", "ETH"],
+                    "quote": ["USDT", "USDC"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/cancel_all_trigger_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "k": ["PERPETUAL"],
+                "b": ["BTC", "ETH"],
+                "q": ["USDT", "USDC"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_all_trigger_orders",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "k": ["PERPETUAL"],
+                    "b": ["BTC", "ETH"],
+                    "q": ["USDT", "USDC"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
 ## Execution
 ### Fill History
 ```
@@ -5613,6 +6371,12 @@ LITE ENDPOINT: lite/v1/transfer
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
+        |5000|400|Transfer Metadata does not match the expected structure.|
+        |5001|400|Transfer Provider does not match the expected provider.|
+        |5002|400|Direction of the transfer does not match the expected direction.|
+        |5003|400|Endpoint account ID is invalid.|
+        |5004|400|Funding account does not exist in our system.|
+        |5005|400|Invalid ChainID for the transfer request.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -6125,7 +6889,8 @@ LITE ENDPOINT: lite/v1/transfer_history
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
-            "cursor": ""
+            "cursor": "",
+            "tx_id": "1028403"
         }
         ```
         **Lite Request**
@@ -6135,7 +6900,8 @@ LITE ENDPOINT: lite/v1/transfer_history
             "st": "1697788800000000000",
             "et": "1697788800000000000",
             "l": 500,
-            "c1": ""
+            "c1": "",
+            "ti": "1028403"
         }
         ```
     </section>
@@ -6245,7 +7011,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "tx_id": "1028403"
             }
             '
             ```
@@ -6263,7 +7030,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "tx_id": "1028403"
                 },
                 "id": 123
             }
@@ -6281,7 +7049,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ti": "1028403"
             }
             '
             ```
@@ -6299,7 +7068,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ti": "1028403"
                 },
                 "i": 123
             }
@@ -6318,7 +7088,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "tx_id": "1028403"
             }
             '
             ```
@@ -6336,7 +7107,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "tx_id": "1028403"
                 },
                 "id": 123
             }
@@ -6354,7 +7126,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ti": "1028403"
             }
             '
             ```
@@ -6372,7 +7145,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ti": "1028403"
                 },
                 "i": 123
             }
@@ -6391,7 +7165,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "tx_id": "1028403"
             }
             '
             ```
@@ -6409,7 +7184,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "tx_id": "1028403"
                 },
                 "id": 123
             }
@@ -6427,7 +7203,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ti": "1028403"
             }
             '
             ```
@@ -6445,7 +7222,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ti": "1028403"
                 },
                 "i": 123
             }
@@ -6464,7 +7242,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "tx_id": "1028403"
             }
             '
             ```
@@ -6482,7 +7261,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "tx_id": "1028403"
                 },
                 "id": 123
             }
@@ -6500,7 +7280,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ti": "1028403"
             }
             '
             ```
@@ -6518,7 +7299,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ti": "1028403"
                 },
                 "i": 123
             }
@@ -10152,6 +10934,338 @@ LITE ENDPOINT: lite/v1/set_initial_leverage
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "i": "BTC_USDT_Perp",
                     "l": "10"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+## Order
+### Cancel On Disconnect
+```
+FULL ENDPOINT: full/v1/cancel_on_disconnect
+LITE ENDPOINT: lite/v1/cancel_on_disconnect
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_cancel_on_disconnect_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "countdown_time": 300
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "ct": 300
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/ack_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": {
+                "ack": "true"
+            }
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "a": "true"
+            }
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |6000|400|Countdown time is bigger than 300s supported|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "countdown_time": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_on_disconnect",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "countdown_time": 300
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "ct": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_on_disconnect",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "ct": 300
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "countdown_time": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_on_disconnect",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "countdown_time": 300
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "ct": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_on_disconnect",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "ct": 300
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "countdown_time": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_on_disconnect",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "countdown_time": 300
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "ct": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_on_disconnect",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "ct": 300
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "countdown_time": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_on_disconnect",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "countdown_time": 300
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "ct": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_on_disconnect",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "ct": 300
                 },
                 "i": 123
             }

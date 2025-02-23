@@ -1,3 +1,4 @@
+from dataclasses import fields
 import re
 from copy import deepcopy
 from typing import cast
@@ -21,10 +22,48 @@ IGNORE_FIELD_PATHS = [
     ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "order_id"],
 ]
 
-IGNORE_RPCS: list[str] = []
+IGNORE_STRUCTS = [
+    "ApiDedustPositionRequest",
+    "ApiDedustPositionResponse",
+    "TriggerOrderMetadata",
+    "TriggerBy",
+]
+
+# skip these fields for all structs, at all levels of nesting
+IGNORE_FIELDS_ANY_PATH = [
+    "prev_sequence_number",
+    "latest_sequence_number",
+    "use_global_sequence_number",
+    "trigger",
+    "broker",
+]
+
+IGNORE_RPCS: list[str] = ["RPCDedustPositionV1"]
 
 IGNORE_ENUM_VALUES: dict[str, list[str]] = {
-    # "Currency": ["SOL", "ARB", "BNB", "ZK", "POL", "OP", "ATOM", "KPEPE", "TON"],
+    "Currency": [
+        "XLM",
+        "WLD",
+        "WIF",
+        "VIRTUAL",
+        "KSHIB",
+        "POPCAT",
+        "PENGU",
+        "LINK",
+        "KBONK",
+        "JUP",
+        "ENA",
+        "DOGE",
+        "AIXBT",
+        "AI_16_Z",
+        "ADA",
+        "AAVE",
+        "VINE",
+        "PENDLE",
+        "UXLINK",
+    ],
+    "BrokerTag": ["*"],
+    "TriggerType": ["*"],
 }
 
 
@@ -615,11 +654,21 @@ def write_struct_example_with_generics(
 
     field_path = field_path + [struct.name]
 
+    fields_skipped = 0
     for i, field in enumerate(struct.fields):
-        if field_path + [field.name] in IGNORE_FIELD_PATHS:
+        if (
+            field.name in IGNORE_FIELDS_ANY_PATH
+            or field_path + [field.name] in IGNORE_FIELD_PATHS
+        ):
+            fields_skipped += 1
+    for i, field in enumerate(struct.fields):
+        if (
+            field.name in IGNORE_FIELDS_ANY_PATH
+            or field_path + [field.name] in IGNORE_FIELD_PATHS
+        ):
             continue
         fn = field.name if is_full else field.lite_name
-        comma = "," if i < len(struct.fields) - 1 else ""
+        comma = "," if i < len(struct.fields) - fields_skipped - 1 else ""
         md.write(f'"{fn}": ')
         for _ in range(field.array_depth):
             md.write("[")
@@ -658,6 +707,8 @@ def import_struct_schema(md: MarkdownWriter, struct: Struct) -> None:
 def write_struct_schema(
     ctx: CodegenCtx, md: MarkdownWriter, struct: Struct, is_root: bool
 ) -> None:
+    if struct.name in IGNORE_STRUCTS or struct.name in IGNORE_FIELDS_ANY_PATH:
+        return
     # Header
     path = "/../../schemas/" + inflection.underscore(struct.name).lower()
     if is_root:
@@ -704,6 +755,11 @@ def write_enum_schema(md: MarkdownWriter, enum: Enum, is_root: bool = False) -> 
     write_comment(md, enum.comment)
 
     if enum.name in IGNORE_ENUM_VALUES:
+        if (
+            len(IGNORE_ENUM_VALUES[enum.name]) == 1
+            and IGNORE_ENUM_VALUES[enum.name][0] == "*"
+        ):
+            return
         enum.values = [
             value
             for value in enum.values

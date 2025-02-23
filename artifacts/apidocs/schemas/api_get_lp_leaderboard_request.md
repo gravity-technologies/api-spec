@@ -1,7 +1,7 @@
 !!! info "[ApiGetLPLeaderboardRequest](/../../schemas/api_get_lp_leaderboard_request)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |start_interval<br>`si` |string|True|Start time of the epoch - phase|
+    |epoch<br>`e` |integer|False<br>`0`|The epoch to filter|
     |limit<br>`l` |integer|True|The number of accounts to return|
     |kind<br>`k` |Kind|True|The kind filter to apply|
     |base<br>`b` |Currency|True|The base filter to apply|
@@ -33,3 +33,8 @@
         |`ATOM` = 12|the ATOM token|
         |`KPEPE` = 13|the 1000PEPE token|
         |`TON` = 14|the TON token|
+        |`XRP` = 15|the XRP token|
+        |`TRUMP` = 20|the TRUMP token|
+        |`SUI` = 21|the SUI token|
+        |`FARTCOIN` = 28|the FARTCOIN token|
+        |`BERA` = 35|the BERA token|

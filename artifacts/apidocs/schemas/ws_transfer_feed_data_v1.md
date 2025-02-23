@@ -6,10 +6,12 @@
     |stream<br>`s` |string|True|The websocket channel to which the response is sent|
     |selector<br>`s1` |string|True|Primary selector|
     |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
-    |feed<br>`f` |Transfer|True|The Transfer object|
-    ??? info "[Transfer](/../../schemas/transfer)"
+    |feed<br>`f` |TransferHistory|True|The transfer history matching the requested filters|
+    |prev_sequence_number<br>`ps` |string|True|The previous sequence number that determines global message order within the specific stream|
+    ??? info "[TransferHistory](/../../schemas/transfer_history)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
+        |tx_id<br>`ti` |string|True|The transaction ID of the transfer|
         |from_account_id<br>`fa` |string|True|The account to transfer from|
         |from_sub_account_id<br>`fs` |string|True|The subaccount to transfer from (0 if transferring from main account)|
         |to_account_id<br>`ta` |string|True|The account to deposit into|
@@ -17,6 +19,7 @@
         |currency<br>`c` |Currency|True|The token currency to transfer|
         |num_tokens<br>`nt` |string|True|The number of tokens to transfer|
         |signature<br>`s` |Signature|True|The signature of the transfer|
+        |event_time<br>`et` |string|True|The timestamp of the transfer in unix nanoseconds|
         |transfer_type<br>`tt` |TransferType|True|The type of transfer|
         |transfer_metadata<br>`tm` |string|True|The metadata of the transfer|
         ??? info "[Currency](/../../schemas/currency)"
@@ -38,6 +41,11 @@
             |`ATOM` = 12|the ATOM token|
             |`KPEPE` = 13|the 1000PEPE token|
             |`TON` = 14|the TON token|
+            |`XRP` = 15|the XRP token|
+            |`TRUMP` = 20|the TRUMP token|
+            |`SUI` = 21|the SUI token|
+            |`FARTCOIN` = 28|the FARTCOIN token|
+            |`BERA` = 35|the BERA token|
         ??? info "[Signature](/../../schemas/signature)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
