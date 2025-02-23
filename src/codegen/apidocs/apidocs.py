@@ -26,9 +26,7 @@ IGNORE_STRUCTS = [
     "ApiDedustPositionRequest",
     "ApiDedustPositionResponse",
     "TriggerOrderMetadata",
-    "TriggerType",
     "TriggerBy",
-    "BrokerTag",
 ]
 
 # skip these fields for all structs, at all levels of nesting
@@ -65,6 +63,7 @@ IGNORE_ENUM_VALUES: dict[str, list[str]] = {
         "UXLINK",
     ],
     "BrokerTag": ["*"],
+    "TriggerType": ["*"],
 }
 
 
