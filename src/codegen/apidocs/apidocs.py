@@ -21,10 +21,30 @@ IGNORE_FIELD_PATHS = [
     ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "order_id"],
 ]
 
-IGNORE_RPCS: list[str] = []
+IGNORE_RPCS: list[str] = ["RPCDedustPositionV1"]
 
 IGNORE_ENUM_VALUES: dict[str, list[str]] = {
-    # "Currency": ["SOL", "ARB", "BNB", "ZK", "POL", "OP", "ATOM", "KPEPE", "TON"],
+    "Currency": [
+        "XLM",
+        "WLD",
+        "WIF",
+        "VIRTUAL",
+        "KSHIB",
+        "POPCAT",
+        "PENGU",
+        "LINK",
+        "KBONK",
+        "JUP",
+        "ENA",
+        "DOGE",
+        "AIXBT",
+        "AI_16_Z",
+        "ADA",
+        "AAVE",
+        "VINE",
+        "PENDLE",
+        "UXLINK",
+    ],
 }
 
 
