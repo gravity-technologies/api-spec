@@ -2890,7 +2890,7 @@ class WSCancelFeedSelectorV1:
     """
     Subscribes to a feed of time-to-live expiry events for order cancellations requested by a given subaccount.
     **This stream presently only provides expiry updates for cancel-order requests set with a valid TTL value**.
-    Successful order cancellations will reflect as updates published to the (order-state stream)[https://api-docs.grvt.io/trading_streams/#order-state].
+    Successful order cancellations will reflect as updates published to the [order-state stream](https://api-docs.grvt.io/trading_streams/#order-state).
     _A future release will expand the functionality of this stream to provide more general status updates on order cancellation requests._
     Each Order can be uniquely identified by its `client_order_id`.
 
