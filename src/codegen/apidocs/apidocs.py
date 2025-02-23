@@ -707,7 +707,7 @@ def import_struct_schema(md: MarkdownWriter, struct: Struct) -> None:
 def write_struct_schema(
     ctx: CodegenCtx, md: MarkdownWriter, struct: Struct, is_root: bool
 ) -> None:
-    if struct.name in IGNORE_STRUCTS or IGNORE_FIELDS_ANY_PATH:
+    if struct.name in IGNORE_STRUCTS or struct.name in IGNORE_FIELDS_ANY_PATH:
         return
     # Header
     path = "/../../schemas/" + inflection.underscore(struct.name).lower()
