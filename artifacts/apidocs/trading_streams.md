@@ -28,7 +28,8 @@ STREAM: v1.order
             "method": "subscribe",
             "params": {
                 "stream": "v1.order",
-                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -42,7 +43,8 @@ STREAM: v1.order
                 "subs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
                 "unsubs": [],
                 "num_snapshots": [10],
-                "first_sequence_number": [872634876]
+                "first_sequence_number": [872634876],
+                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -56,7 +58,8 @@ STREAM: v1.order
             "method": "unsubscribe",
             "params": {
                 "stream": "v1.order",
-                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -131,7 +134,15 @@ STREAM: v1.order
                 },
                 "metadata": {
                     "client_order_id": "23042",
-                    "create_time": "1697788800000000000"
+                    "create_time": "1697788800000000000",
+                    "trigger": {
+                        "trigger_type": "UNSPECIFIED",
+                        "tpsl": {
+                            "trigger_by": "UNSPECIFIED",
+                            "trigger_price": "65038.10"
+                        }
+                    },
+                    "broker": "COIN_ROUTES"
                 },
                 "state": {
                     "status": "PENDING",
@@ -141,7 +152,8 @@ STREAM: v1.order
                     "update_time": "1697788800000000000",
                     "avg_fill_price": ["60000.4"]
                 }
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -173,7 +185,15 @@ STREAM: v1.order
                 },
                 "m": {
                     "co": "23042",
-                    "ct": "1697788800000000000"
+                    "ct": "1697788800000000000",
+                    "t": {
+                        "tt": "UNSPECIFIED",
+                        "t": {
+                            "tb": "UNSPECIFIED",
+                            "tp": "65038.10"
+                        }
+                    },
+                    "b": "COIN_ROUTES"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -183,7 +203,8 @@ STREAM: v1.order
                     "ut": "1697788800000000000",
                     "af": ["60000.4"]
                 }
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -253,7 +274,8 @@ STREAM: v1.order
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.order",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -270,7 +292,8 @@ STREAM: v1.order
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.order",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -304,7 +327,8 @@ STREAM: v1.order
                 "m": "subscribe",
                 "p": {
                     "s": "v1.order",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -321,7 +345,8 @@ STREAM: v1.order
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.order",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -356,7 +381,8 @@ STREAM: v1.order
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.order",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -373,7 +399,8 @@ STREAM: v1.order
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.order",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -407,7 +434,8 @@ STREAM: v1.order
                 "m": "subscribe",
                 "p": {
                     "s": "v1.order",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -424,7 +452,8 @@ STREAM: v1.order
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.order",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -459,7 +488,8 @@ STREAM: v1.order
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.order",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -476,7 +506,8 @@ STREAM: v1.order
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.order",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -510,7 +541,8 @@ STREAM: v1.order
                 "m": "subscribe",
                 "p": {
                     "s": "v1.order",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -527,7 +559,8 @@ STREAM: v1.order
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.order",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -562,7 +595,8 @@ STREAM: v1.order
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.order",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -579,7 +613,8 @@ STREAM: v1.order
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.order",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -613,7 +648,8 @@ STREAM: v1.order
                 "m": "subscribe",
                 "p": {
                     "s": "v1.order",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -630,7 +666,8 @@ STREAM: v1.order
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.order",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -680,7 +717,8 @@ STREAM: v1.state
             "method": "subscribe",
             "params": {
                 "stream": "v1.state",
-                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -694,7 +732,8 @@ STREAM: v1.state
                 "subs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
                 "unsubs": [],
                 "num_snapshots": [10],
-                "first_sequence_number": [872634876]
+                "first_sequence_number": [872634876],
+                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -708,7 +747,8 @@ STREAM: v1.state
             "method": "unsubscribe",
             "params": {
                 "stream": "v1.state",
-                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -771,7 +811,8 @@ STREAM: v1.state
                     "update_time": "1697788800000000000",
                     "avg_fill_price": ["60000.4"]
                 }
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -791,7 +832,8 @@ STREAM: v1.state
                     "ut": "1697788800000000000",
                     "af": ["60000.4"]
                 }
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -861,7 +903,8 @@ STREAM: v1.state
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.state",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -878,7 +921,8 @@ STREAM: v1.state
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.state",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -912,7 +956,8 @@ STREAM: v1.state
                 "m": "subscribe",
                 "p": {
                     "s": "v1.state",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -929,7 +974,8 @@ STREAM: v1.state
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.state",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -964,7 +1010,8 @@ STREAM: v1.state
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.state",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -981,7 +1028,8 @@ STREAM: v1.state
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.state",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1015,7 +1063,8 @@ STREAM: v1.state
                 "m": "subscribe",
                 "p": {
                     "s": "v1.state",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1032,7 +1081,8 @@ STREAM: v1.state
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.state",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1067,7 +1117,8 @@ STREAM: v1.state
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.state",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1084,7 +1135,8 @@ STREAM: v1.state
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.state",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1118,7 +1170,8 @@ STREAM: v1.state
                 "m": "subscribe",
                 "p": {
                     "s": "v1.state",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1135,7 +1188,8 @@ STREAM: v1.state
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.state",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1170,7 +1224,8 @@ STREAM: v1.state
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.state",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1187,7 +1242,8 @@ STREAM: v1.state
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.state",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1221,7 +1277,8 @@ STREAM: v1.state
                 "m": "subscribe",
                 "p": {
                     "s": "v1.state",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1238,7 +1295,8 @@ STREAM: v1.state
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.state",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1254,6 +1312,627 @@ STREAM: v1.state
                 "request_id":1,
                 "stream":"v1.state",
                 "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Cancel Status
+```
+STREAM: v1.cancel
+```
+
+=== "Feed Selector"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/ws_cancel_feed_selector_v1.md"
+    ??? info "JSONRPC Wrappers"
+        -8<- "docs/schemas/jsonrpc_request.md"
+        -8<- "docs/schemas/jsonrpc_response.md"
+        -8<- "docs/schemas/ws_subscribe_params.md"
+        -8<- "docs/schemas/ws_subscribe_result.md"
+        -8<- "docs/schemas/ws_unsubscribe_params.md"
+        -8<- "docs/schemas/ws_unsubscribe_result.md"
+        -8<- "docs/schemas/ws_subscribe_request_v1_legacy.md"
+        -8<- "docs/schemas/ws_subscribe_response_v1_legacy.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.cancel",
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                "use_global_sequence_number": true
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.cancel",
+                "subs": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876],
+                "latest_sequence_number": [872634875]
+            },
+            "id": 123,
+            "method": "subscribe"
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.cancel",
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                "use_global_sequence_number": true
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.cancel",
+                "unsubs": ["'$GRVT_SUB_ACCOUNT_ID'"]
+            },
+            "id": 123,
+            "method": "subscribe"
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "stream":"v1.cancel",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "stream":"v1.cancel",
+            "subs":["'$GRVT_SUB_ACCOUNT_ID'"],
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
+        }
+        ```
+    </section>
+=== "Feed Data"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/ws_cancel_feed_data_v1.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Feed Response**
+        ``` { .json .copy }
+        {
+            "stream": "v1.cancel",
+            "selector": "'$GRVT_SUB_ACCOUNT_ID'",
+            "sequence_number": "872634876",
+            "feed": {
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "client_order_id": "23042",
+                "order_id": "10000101000203040506",
+                "reason": "UNSPECIFIED",
+                "update_time": "1697788800000000000",
+                "cancel_status": "EXPIRED"
+            },
+            "prev_sequence_number": "872634875"
+        }
+        ```
+        **Lite Feed Response**
+        ``` { .json .copy }
+        {
+            "s": "v1.cancel",
+            "s1": "'$GRVT_SUB_ACCOUNT_ID'",
+            "sn": "872634876",
+            "f": {
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "co": "23042",
+                "oi": "10000101000203040506",
+                "r": "UNSPECIFIED",
+                "ut": "1697788800000000000",
+                "cs": "EXPIRED"
+            },
+            "ps": "872634875"
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1008|401|Your IP has not been whitelisted for access|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3020|400|Sub account ID must be an uint64 integer|
+    -8<- "docs/schemas/jsonrpc_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure "Error"
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": 1000,
+                "message": "You need to authenticate prior to using this functionality"
+            },
+            "id": 123,
+            "method": "subscribe"
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": 1000,
+                "m": "You need to authenticate prior to using this functionality"
+            },
+            "i": 123,
+            "m": "subscribe"
+        }
+        ```
+        **Legacy Error Response**
+        ``` { .json .copy }
+        {
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.cancel",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.cancel",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.cancel",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.cancel",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.cancel",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.cancel",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.cancel",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.cancel",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.cancel",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.cancel",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.cancel",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.cancel",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.cancel",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.cancel",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.cancel",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.cancel",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.cancel",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.cancel",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.cancel",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.cancel",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.cancel",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.cancel",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.cancel",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.cancel",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'"],
                 "method":"subscribe",
                 "is_full":false
             }
@@ -1289,7 +1968,8 @@ STREAM: v1.fill
             "method": "subscribe",
             "params": {
                 "stream": "v1.fill",
-                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -1303,7 +1983,8 @@ STREAM: v1.fill
                 "subs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
                 "unsubs": [],
                 "num_snapshots": [10],
-                "first_sequence_number": [872634876]
+                "first_sequence_number": [872634876],
+                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -1317,7 +1998,8 @@ STREAM: v1.fill
             "method": "unsubscribe",
             "params": {
                 "stream": "v1.fill",
-                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -1388,8 +2070,10 @@ STREAM: v1.fill
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
                 "client_order_id": "23042",
-                "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"
-            }
+                "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "broker": "COIN_ROUTES"
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -1417,8 +2101,10 @@ STREAM: v1.fill
                 "oi": "0x10000101000203040506",
                 "v": "ORDERBOOK",
                 "co": "23042",
-                "s1": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"
-            }
+                "s1": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "b": "COIN_ROUTES"
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -1488,7 +2174,8 @@ STREAM: v1.fill
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.fill",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1505,7 +2192,8 @@ STREAM: v1.fill
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.fill",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1539,7 +2227,8 @@ STREAM: v1.fill
                 "m": "subscribe",
                 "p": {
                     "s": "v1.fill",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1556,7 +2245,8 @@ STREAM: v1.fill
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.fill",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1591,7 +2281,8 @@ STREAM: v1.fill
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.fill",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1608,7 +2299,8 @@ STREAM: v1.fill
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.fill",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1642,7 +2334,8 @@ STREAM: v1.fill
                 "m": "subscribe",
                 "p": {
                     "s": "v1.fill",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1659,7 +2352,8 @@ STREAM: v1.fill
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.fill",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1694,7 +2388,8 @@ STREAM: v1.fill
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.fill",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1711,7 +2406,8 @@ STREAM: v1.fill
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.fill",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1745,7 +2441,8 @@ STREAM: v1.fill
                 "m": "subscribe",
                 "p": {
                     "s": "v1.fill",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1762,7 +2459,8 @@ STREAM: v1.fill
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.fill",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1797,7 +2495,8 @@ STREAM: v1.fill
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.fill",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1814,7 +2513,8 @@ STREAM: v1.fill
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.fill",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -1848,7 +2548,8 @@ STREAM: v1.fill
                 "m": "subscribe",
                 "p": {
                     "s": "v1.fill",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1865,7 +2566,8 @@ STREAM: v1.fill
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.fill",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -1915,7 +2617,8 @@ STREAM: v1.position
             "method": "subscribe",
             "params": {
                 "stream": "v1.position",
-                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -1929,7 +2632,8 @@ STREAM: v1.position
                 "subs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
                 "unsubs": [],
                 "num_snapshots": [10],
-                "first_sequence_number": [872634876]
+                "first_sequence_number": [872634876],
+                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -1943,7 +2647,8 @@ STREAM: v1.position
             "method": "unsubscribe",
             "params": {
                 "stream": "v1.position",
-                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -2010,7 +2715,8 @@ STREAM: v1.position
                 "roi": "10.20",
                 "quote_index_price": "1.0000102",
                 "est_liquidation_price": 60000.25
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -2034,7 +2740,8 @@ STREAM: v1.position
                 "r": "10.20",
                 "qi": "1.0000102",
                 "el": 60000.25
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -2104,7 +2811,8 @@ STREAM: v1.position
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.position",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2121,7 +2829,8 @@ STREAM: v1.position
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.position",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2155,7 +2864,8 @@ STREAM: v1.position
                 "m": "subscribe",
                 "p": {
                     "s": "v1.position",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2172,7 +2882,8 @@ STREAM: v1.position
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.position",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2207,7 +2918,8 @@ STREAM: v1.position
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.position",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2224,7 +2936,8 @@ STREAM: v1.position
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.position",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2258,7 +2971,8 @@ STREAM: v1.position
                 "m": "subscribe",
                 "p": {
                     "s": "v1.position",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2275,7 +2989,8 @@ STREAM: v1.position
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.position",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2310,7 +3025,8 @@ STREAM: v1.position
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.position",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2327,7 +3043,8 @@ STREAM: v1.position
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.position",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2361,7 +3078,8 @@ STREAM: v1.position
                 "m": "subscribe",
                 "p": {
                     "s": "v1.position",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2378,7 +3096,8 @@ STREAM: v1.position
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.position",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2413,7 +3132,8 @@ STREAM: v1.position
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.position",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2430,7 +3150,8 @@ STREAM: v1.position
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.position",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2464,7 +3185,8 @@ STREAM: v1.position
                 "m": "subscribe",
                 "p": {
                     "s": "v1.position",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2481,7 +3203,8 @@ STREAM: v1.position
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.position",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2532,7 +3255,8 @@ STREAM: v1.deposit
             "method": "subscribe",
             "params": {
                 "stream": "v1.deposit",
-                "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -2546,7 +3270,8 @@ STREAM: v1.deposit
                 "subs": ["'$GRVT_MAIN_ACCOUNT_ID'"],
                 "unsubs": [],
                 "num_snapshots": [10],
-                "first_sequence_number": [872634876]
+                "first_sequence_number": [872634876],
+                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -2560,7 +3285,8 @@ STREAM: v1.deposit
             "method": "unsubscribe",
             "params": {
                 "stream": "v1.deposit",
-                "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -2617,7 +3343,8 @@ STREAM: v1.deposit
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "currency": "USDT",
                 "num_tokens": "10.50"
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -2631,7 +3358,8 @@ STREAM: v1.deposit
                 "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "c": "USDT",
                 "nt": "10.50"
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -2697,7 +3425,8 @@ STREAM: v1.deposit
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.deposit",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2714,7 +3443,8 @@ STREAM: v1.deposit
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.deposit",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2748,7 +3478,8 @@ STREAM: v1.deposit
                 "m": "subscribe",
                 "p": {
                     "s": "v1.deposit",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2765,7 +3496,8 @@ STREAM: v1.deposit
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.deposit",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2800,7 +3532,8 @@ STREAM: v1.deposit
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.deposit",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2817,7 +3550,8 @@ STREAM: v1.deposit
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.deposit",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2851,7 +3585,8 @@ STREAM: v1.deposit
                 "m": "subscribe",
                 "p": {
                     "s": "v1.deposit",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2868,7 +3603,8 @@ STREAM: v1.deposit
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.deposit",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2903,7 +3639,8 @@ STREAM: v1.deposit
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.deposit",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2920,7 +3657,8 @@ STREAM: v1.deposit
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.deposit",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -2954,7 +3692,8 @@ STREAM: v1.deposit
                 "m": "subscribe",
                 "p": {
                     "s": "v1.deposit",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -2971,7 +3710,8 @@ STREAM: v1.deposit
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.deposit",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -3006,7 +3746,8 @@ STREAM: v1.deposit
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.deposit",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3023,7 +3764,8 @@ STREAM: v1.deposit
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.deposit",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3057,7 +3799,8 @@ STREAM: v1.deposit
                 "m": "subscribe",
                 "p": {
                     "s": "v1.deposit",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -3074,7 +3817,8 @@ STREAM: v1.deposit
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.deposit",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -3124,7 +3868,8 @@ STREAM: v1.transfer
             "method": "subscribe",
             "params": {
                 "stream": "v1.transfer",
-                "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -3138,7 +3883,8 @@ STREAM: v1.transfer
                 "subs": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
                 "unsubs": [],
                 "num_snapshots": [10],
-                "first_sequence_number": [872634876]
+                "first_sequence_number": [872634876],
+                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -3152,7 +3898,8 @@ STREAM: v1.transfer
             "method": "unsubscribe",
             "params": {
                 "stream": "v1.transfer",
-                "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -3205,12 +3952,13 @@ STREAM: v1.transfer
             "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
+                "tx_id": "1028403",
                 "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "currency": "USDT",
-                "num_tokens": "10.50",
+                "num_tokens": "1500.0",
                 "signature": {
                     "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -3219,9 +3967,11 @@ STREAM: v1.transfer
                     "expiration": "1697788800000000000",
                     "nonce": 1234567890
                 },
+                "event_time": "1697788800000000000",
                 "transfer_type": "STANDARD",
                 "transfer_metadata": null
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -3231,12 +3981,13 @@ STREAM: v1.transfer
             "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
+                "ti": "1028403",
                 "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "fs": "'$GRVT_SUB_ACCOUNT_ID'",
                 "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "ts": "'$GRVT_SUB_ACCOUNT_ID'",
                 "c": "USDT",
-                "nt": "10.50",
+                "nt": "1500.0",
                 "s": {
                     "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -3245,9 +3996,11 @@ STREAM: v1.transfer
                     "e": "1697788800000000000",
                     "n": 1234567890
                 },
+                "et": "1697788800000000000",
                 "tt": "STANDARD",
                 "tm": null
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -3314,7 +4067,8 @@ STREAM: v1.transfer
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.transfer",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3331,7 +4085,8 @@ STREAM: v1.transfer
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.transfer",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3365,7 +4120,8 @@ STREAM: v1.transfer
                 "m": "subscribe",
                 "p": {
                     "s": "v1.transfer",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -3382,7 +4138,8 @@ STREAM: v1.transfer
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.transfer",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -3417,7 +4174,8 @@ STREAM: v1.transfer
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.transfer",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3434,7 +4192,8 @@ STREAM: v1.transfer
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.transfer",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3468,7 +4227,8 @@ STREAM: v1.transfer
                 "m": "subscribe",
                 "p": {
                     "s": "v1.transfer",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -3485,7 +4245,8 @@ STREAM: v1.transfer
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.transfer",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -3520,7 +4281,8 @@ STREAM: v1.transfer
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.transfer",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3537,7 +4299,8 @@ STREAM: v1.transfer
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.transfer",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3571,7 +4334,8 @@ STREAM: v1.transfer
                 "m": "subscribe",
                 "p": {
                     "s": "v1.transfer",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -3588,7 +4352,8 @@ STREAM: v1.transfer
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.transfer",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -3623,7 +4388,8 @@ STREAM: v1.transfer
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.transfer",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3640,7 +4406,8 @@ STREAM: v1.transfer
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.transfer",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3674,7 +4441,8 @@ STREAM: v1.transfer
                 "m": "subscribe",
                 "p": {
                     "s": "v1.transfer",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -3691,7 +4459,8 @@ STREAM: v1.transfer
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.transfer",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'-'$GRVT_SUB_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -3741,7 +4510,8 @@ STREAM: v1.withdrawal
             "method": "subscribe",
             "params": {
                 "stream": "v1.withdrawal",
-                "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -3755,7 +4525,8 @@ STREAM: v1.withdrawal
                 "subs": ["'$GRVT_MAIN_ACCOUNT_ID'"],
                 "unsubs": [],
                 "num_snapshots": [10],
-                "first_sequence_number": [872634876]
+                "first_sequence_number": [872634876],
+                "latest_sequence_number": [872634875]
             },
             "id": 123,
             "method": "subscribe"
@@ -3769,7 +4540,8 @@ STREAM: v1.withdrawal
             "method": "unsubscribe",
             "params": {
                 "stream": "v1.withdrawal",
-                "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "use_global_sequence_number": true
             },
             "id": 123
         }
@@ -3834,7 +4606,8 @@ STREAM: v1.withdrawal
                     "expiration": "1697788800000000000",
                     "nonce": 1234567890
                 }
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -3856,7 +4629,8 @@ STREAM: v1.withdrawal
                     "e": "1697788800000000000",
                     "n": 1234567890
                 }
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -3922,7 +4696,8 @@ STREAM: v1.withdrawal
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.withdrawal",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3939,7 +4714,8 @@ STREAM: v1.withdrawal
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.withdrawal",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -3973,7 +4749,8 @@ STREAM: v1.withdrawal
                 "m": "subscribe",
                 "p": {
                     "s": "v1.withdrawal",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -3990,7 +4767,8 @@ STREAM: v1.withdrawal
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.withdrawal",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -4025,7 +4803,8 @@ STREAM: v1.withdrawal
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.withdrawal",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4042,7 +4821,8 @@ STREAM: v1.withdrawal
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.withdrawal",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4076,7 +4856,8 @@ STREAM: v1.withdrawal
                 "m": "subscribe",
                 "p": {
                     "s": "v1.withdrawal",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -4093,7 +4874,8 @@ STREAM: v1.withdrawal
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.withdrawal",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -4128,7 +4910,8 @@ STREAM: v1.withdrawal
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.withdrawal",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4145,7 +4928,8 @@ STREAM: v1.withdrawal
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.withdrawal",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4179,7 +4963,8 @@ STREAM: v1.withdrawal
                 "m": "subscribe",
                 "p": {
                     "s": "v1.withdrawal",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -4196,7 +4981,8 @@ STREAM: v1.withdrawal
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.withdrawal",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -4231,7 +5017,8 @@ STREAM: v1.withdrawal
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.withdrawal",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4248,7 +5035,8 @@ STREAM: v1.withdrawal
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.withdrawal",
-                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "selectors": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "use_global_sequence_number": true
                 },
                 "id": 123
             }
@@ -4282,7 +5070,8 @@ STREAM: v1.withdrawal
                 "m": "subscribe",
                 "p": {
                     "s": "v1.withdrawal",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
@@ -4299,7 +5088,8 @@ STREAM: v1.withdrawal
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.withdrawal",
-                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"]
+                    "s1": ["'$GRVT_MAIN_ACCOUNT_ID'"],
+                    "ug": true
                 },
                 "i": 123
             }
