@@ -866,7 +866,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
             "order_id": "0x1028403",
             "client_order_id": "23042",
-            "time_to_live_ms": `500`
+            "time_to_live_ms": "500"
         }
         ```
         **Lite Request**
@@ -875,7 +875,7 @@ LITE ENDPOINT: lite/v1/cancel_order
             "sa": "'$GRVT_SUB_ACCOUNT_ID'",
             "oi": "0x1028403",
             "co": "23042",
-            "tt": `500`
+            "tt": "500"
         }
         ```
     </section>
@@ -951,7 +951,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
                 "client_order_id": "23042",
-                "time_to_live_ms": `500`
+                "time_to_live_ms": "500"
             }
             '
             ```
@@ -968,7 +968,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "order_id": "0x1028403",
                     "client_order_id": "23042",
-                    "time_to_live_ms": `500`
+                    "time_to_live_ms": "500"
                 },
                 "id": 123
             }
@@ -985,7 +985,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
                 "co": "23042",
-                "tt": `500`
+                "tt": "500"
             }
             '
             ```
@@ -1002,7 +1002,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "oi": "0x1028403",
                     "co": "23042",
-                    "tt": `500`
+                    "tt": "500"
                 },
                 "i": 123
             }
@@ -1020,7 +1020,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
                 "client_order_id": "23042",
-                "time_to_live_ms": `500`
+                "time_to_live_ms": "500"
             }
             '
             ```
@@ -1037,7 +1037,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "order_id": "0x1028403",
                     "client_order_id": "23042",
-                    "time_to_live_ms": `500`
+                    "time_to_live_ms": "500"
                 },
                 "id": 123
             }
@@ -1054,7 +1054,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
                 "co": "23042",
-                "tt": `500`
+                "tt": "500"
             }
             '
             ```
@@ -1071,7 +1071,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "oi": "0x1028403",
                     "co": "23042",
-                    "tt": `500`
+                    "tt": "500"
                 },
                 "i": 123
             }
@@ -1089,7 +1089,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
                 "client_order_id": "23042",
-                "time_to_live_ms": `500`
+                "time_to_live_ms": "500"
             }
             '
             ```
@@ -1106,7 +1106,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "order_id": "0x1028403",
                     "client_order_id": "23042",
-                    "time_to_live_ms": `500`
+                    "time_to_live_ms": "500"
                 },
                 "id": 123
             }
@@ -1123,7 +1123,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
                 "co": "23042",
-                "tt": `500`
+                "tt": "500"
             }
             '
             ```
@@ -1140,7 +1140,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "oi": "0x1028403",
                     "co": "23042",
-                    "tt": `500`
+                    "tt": "500"
                 },
                 "i": 123
             }
@@ -1158,7 +1158,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "order_id": "0x1028403",
                 "client_order_id": "23042",
-                "time_to_live_ms": `500`
+                "time_to_live_ms": "500"
             }
             '
             ```
@@ -1175,7 +1175,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "order_id": "0x1028403",
                     "client_order_id": "23042",
-                    "time_to_live_ms": `500`
+                    "time_to_live_ms": "500"
                 },
                 "id": 123
             }
@@ -1192,7 +1192,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "oi": "0x1028403",
                 "co": "23042",
-                "tt": `500`
+                "tt": "500"
             }
             '
             ```
@@ -1209,7 +1209,7 @@ LITE ENDPOINT: lite/v1/cancel_order
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "oi": "0x1028403",
                     "co": "23042",
-                    "tt": `500`
+                    "tt": "500"
                 },
                 "i": 123
             }
