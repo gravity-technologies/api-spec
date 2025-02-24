@@ -1807,11 +1807,11 @@ class ApiCancelOrderRequest:
     client_order_id: str | None = None
     """
     Specifies the time-to-live (in milliseconds) for this cancellation.
-    During this period, any order creation with a matching `client_order_id` will also be cancelled.
+    During this period, any order creation with a matching `client_order_id` will be cancelled and not be added to the GRVT matching engine.
     This mechanism helps mitigate time-of-flight issues where cancellations might arrive before the corresponding orders.
     Hence, cancellation by `order_id` ignores this field as the exchange can only assign `order_id`s to already-processed order creations.
     The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `'670'` -> `'600'`, `'30'` -> `'0'`) and capped at 5 seconds (i.e., `'5000'`).
-    Value of `'0'` or omission disables the TTL mechanism, so only orders already existing in matcher state at request time will be searched.
+    Value of `'0'` or omission disables the TTL mechanism, so only orders already existing in matching engine state at request time will be searched.
     If the caller requests multiple successive cancellations for a given order, such that the time-to-live windows overlap, only the first request will be considered.
 
     """
