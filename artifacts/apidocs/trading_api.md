@@ -3865,6 +3865,337 @@ LITE ENDPOINT: lite/v1/pre_order_check
             ```
         </section>
 <hr class="solid">
+### Cancel On Disconnect
+```
+FULL ENDPOINT: full/v1/cancel_on_disconnect
+LITE ENDPOINT: lite/v1/cancel_on_disconnect
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_cancel_on_disconnect_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "countdown_time": 300
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "ct": 300
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/ack_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": {
+                "ack": "true"
+            }
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "a": "true"
+            }
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |6000|400|Countdown time is bigger than 300s supported|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "countdown_time": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_on_disconnect",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "countdown_time": 300
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "ct": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_on_disconnect",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "ct": 300
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "countdown_time": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_on_disconnect",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "countdown_time": 300
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "ct": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_on_disconnect",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "ct": 300
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "countdown_time": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_on_disconnect",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "countdown_time": 300
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "ct": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_on_disconnect",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "ct": 300
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "countdown_time": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cancel_on_disconnect",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "countdown_time": 300
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/cancel_on_disconnect' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "ct": 300
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cancel_on_disconnect",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "ct": 300
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
 ## Execution
 ### Fill History
 ```
@@ -10201,338 +10532,6 @@ LITE ENDPOINT: lite/v1/set_initial_leverage
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "i": "BTC_USDT_Perp",
                     "l": "10"
-                },
-                "i": 123
-            }
-            ' -w 360
-            ```
-        </section>
-<hr class="solid">
-## Order
-### Cancel On Disconnect
-```
-FULL ENDPOINT: full/v1/cancel_on_disconnect
-LITE ENDPOINT: lite/v1/cancel_on_disconnect
-```
-
-=== "Request"
-    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    -8<- "docs/schemas/api_cancel_on_disconnect_request.md"
-    </section>
-    <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **Full Request**
-        ``` { .json .copy }
-        {
-            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-            "countdown_time": 300
-        }
-        ```
-        **Lite Request**
-        ``` { .json .copy }
-        {
-            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-            "ct": 300
-        }
-        ```
-    </section>
-=== "Response"
-    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    -8<- "docs/schemas/ack_response.md"
-    </section>
-    <section markdown="1" style="float: right; width: 30%;">
-    !!! success
-        **Full Response**
-        ``` { .json .copy }
-        {
-            "result": {
-                "ack": "true"
-            }
-        }
-        ```
-        **Lite Response**
-        ``` { .json .copy }
-        {
-            "r": {
-                "a": "true"
-            }
-        }
-        ```
-    </section>
-=== "Errors"
-    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "Error Codes"
-        |Code|HttpStatus| Description |
-        |-|-|-|
-        |1000|401|You need to authenticate prior to using this functionality|
-        |1001|403|You are not authorized to access this functionality|
-        |1002|500|Internal Server Error|
-        |1003|400|Request could not be processed due to malformed syntax|
-        |1006|429|You have surpassed the allocated rate limit for your tier|
-        |1008|401|Your IP has not been whitelisted for access|
-        |6000|400|Countdown time is bigger than 300s supported|
-    </section>
-    <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
-        **Full Error Response**
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
-        }
-        ```
-        **Lite Error Response**
-        ``` { .json .copy }
-        {
-            "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
-        }
-        ```
-    </section>
-=== "Try it out"
-    -8<- "sections/auth_closed.md"
-    === "DEV"
-        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-        !!! example "REST Full"
-            ``` { .bash .copy }
-            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cancel_on_disconnect' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                "countdown_time": 300
-            }
-            '
-            ```
-        !!! example "JSONRPC Full"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "jsonrpc": "2.0",
-                "method": "v1/cancel_on_disconnect",
-                "params": {
-                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "countdown_time": 300
-                },
-                "id": 123
-            }
-            ' -w 360
-            ```
-        </section>
-        <section markdown="1" style="float: right; width: 50%;">
-        !!! example "REST Lite"
-            ``` { .bash .copy }
-            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cancel_on_disconnect' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                "ct": 300
-            }
-            '
-            ```
-        !!! example "JSONRPC Lite"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "j": "2.0",
-                "m": "v1/cancel_on_disconnect",
-                "p": {
-                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "ct": 300
-                },
-                "i": 123
-            }
-            ' -w 360
-            ```
-        </section>
-    === "STAGING"
-        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-        !!! example "REST Full"
-            ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cancel_on_disconnect' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                "countdown_time": 300
-            }
-            '
-            ```
-        !!! example "JSONRPC Full"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "jsonrpc": "2.0",
-                "method": "v1/cancel_on_disconnect",
-                "params": {
-                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "countdown_time": 300
-                },
-                "id": 123
-            }
-            ' -w 360
-            ```
-        </section>
-        <section markdown="1" style="float: right; width: 50%;">
-        !!! example "REST Lite"
-            ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cancel_on_disconnect' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                "ct": 300
-            }
-            '
-            ```
-        !!! example "JSONRPC Lite"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "j": "2.0",
-                "m": "v1/cancel_on_disconnect",
-                "p": {
-                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "ct": 300
-                },
-                "i": 123
-            }
-            ' -w 360
-            ```
-        </section>
-    === "TESTNET"
-        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-        !!! example "REST Full"
-            ``` { .bash .copy }
-            curl --location 'https://trades.testnet.grvt.io/full/v1/cancel_on_disconnect' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                "countdown_time": 300
-            }
-            '
-            ```
-        !!! example "JSONRPC Full"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "jsonrpc": "2.0",
-                "method": "v1/cancel_on_disconnect",
-                "params": {
-                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "countdown_time": 300
-                },
-                "id": 123
-            }
-            ' -w 360
-            ```
-        </section>
-        <section markdown="1" style="float: right; width: 50%;">
-        !!! example "REST Lite"
-            ``` { .bash .copy }
-            curl --location 'https://trades.testnet.grvt.io/lite/v1/cancel_on_disconnect' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                "ct": 300
-            }
-            '
-            ```
-        !!! example "JSONRPC Lite"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "j": "2.0",
-                "m": "v1/cancel_on_disconnect",
-                "p": {
-                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "ct": 300
-                },
-                "i": 123
-            }
-            ' -w 360
-            ```
-        </section>
-    === "PROD"
-        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-        !!! example "REST Full"
-            ``` { .bash .copy }
-            curl --location 'https://trades.grvt.io/full/v1/cancel_on_disconnect' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                "countdown_time": 300
-            }
-            '
-            ```
-        !!! example "JSONRPC Full"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.grvt.io/ws/full" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "jsonrpc": "2.0",
-                "method": "v1/cancel_on_disconnect",
-                "params": {
-                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "countdown_time": 300
-                },
-                "id": 123
-            }
-            ' -w 360
-            ```
-        </section>
-        <section markdown="1" style="float: right; width: 50%;">
-        !!! example "REST Lite"
-            ``` { .bash .copy }
-            curl --location 'https://trades.grvt.io/lite/v1/cancel_on_disconnect' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                "ct": 300
-            }
-            '
-            ```
-        !!! example "JSONRPC Lite"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.grvt.io/ws/lite" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "j": "2.0",
-                "m": "v1/cancel_on_disconnect",
-                "p": {
-                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "ct": 300
                 },
                 "i": 123
             }

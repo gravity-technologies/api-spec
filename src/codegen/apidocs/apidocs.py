@@ -27,6 +27,8 @@ IGNORE_STRUCTS = [
     "ApiDedustPositionResponse",
     "TriggerOrderMetadata",
     "TriggerBy",
+    "TriggerType",
+    "TPSLOrderMetadata" "BrokerTag",
 ]
 
 # skip these fields for all structs, at all levels of nesting
@@ -728,6 +730,8 @@ def write_struct_schema(
     md.writeln("|Name<br>`Lite`|Type|Required<br>`Default`| Description |")
     md.writeln("|-|-|-|-|")
     for field in struct.fields:
+        if field.name in IGNORE_FIELDS_ANY_PATH:
+            continue
         json_type = field.json_type
         for _ in range(field.array_depth):
             json_type = f"[{json_type}]"
@@ -740,6 +744,16 @@ def write_struct_schema(
     # Field Import Table
     for field in struct.fields:
         if field.json_type in ctx.enum_map:
+            if (
+                (
+                    field.json_type in IGNORE_ENUM_VALUES
+                    and len(IGNORE_ENUM_VALUES[field.json_type]) == 1
+                    and IGNORE_ENUM_VALUES[field.json_type][0] == "*"
+                )
+                or field.json_type in IGNORE_FIELDS_ANY_PATH
+                or field.json_type in IGNORE_STRUCTS
+            ):
+                continue
             write_enum_schema(md, ctx.enum_map[field.json_type])
         elif field.json_type in ctx.struct_map:
             write_struct_schema(ctx, md, ctx.struct_map[field.json_type], False)

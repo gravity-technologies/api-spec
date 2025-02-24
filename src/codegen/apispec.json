@@ -1532,6 +1532,52 @@
           ]
         },
         {
+          "namespace": "Order",
+          "name": "RPCCancelOnDisconnectV1",
+          "version": 1,
+          "route": "/cancel_on_disconnect",
+          "auth_required": true,
+          "request": "ApiCancelOnDisconnectRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 6000,
+              "message": "Countdown time is bigger than 300s supported",
+              "status": 400
+            }
+          ]
+        },
+        {
           "namespace": "Execution",
           "name": "RPCFillHistoryV1",
           "version": 1,
@@ -2188,52 +2234,6 @@
             {
               "code": 2100,
               "message": "Invalid initial leverage",
-              "status": 400
-            }
-          ]
-        },
-        {
-          "namespace": "Order",
-          "name": "RPCCancelOnDisconnectV1",
-          "version": 1,
-          "route": "/cancel_on_disconnect",
-          "auth_required": true,
-          "request": "ApiCancelOnDisconnectRequest",
-          "response": "AckResponse",
-          "on_request_errors": [
-            {
-              "code": 1000,
-              "message": "You need to authenticate prior to using this functionality",
-              "status": 401
-            },
-            {
-              "code": 1001,
-              "message": "You are not authorized to access this functionality",
-              "status": 403
-            },
-            {
-              "code": 1002,
-              "message": "Internal Server Error",
-              "status": 500
-            },
-            {
-              "code": 1003,
-              "message": "Request could not be processed due to malformed syntax",
-              "status": 400
-            },
-            {
-              "code": 1006,
-              "message": "You have surpassed the allocated rate limit for your tier",
-              "status": 429
-            },
-            {
-              "code": 1008,
-              "message": "Your IP has not been whitelisted for access",
-              "status": 401
-            },
-            {
-              "code": 6000,
-              "message": "Countdown time is bigger than 300s supported",
               "status": 400
             }
           ]
@@ -13131,7 +13131,7 @@
       "comment": [
         "Subscribes to a feed of time-to-live expiry events for order cancellations requested by a given subaccount.",
         "**This stream presently only provides expiry updates for cancel-order requests set with a valid TTL value**.",
-        "Successful order cancellations will reflect as updates published to the (order-state stream)[https://api-docs.grvt.io/trading_streams/#order-state].",
+        "Successful order cancellations will reflect as updates published to the [order-state stream](https://api-docs.grvt.io/trading_streams/#order-state).",
         "_A future release will expand the functionality of this stream to provide more general status updates on order cancellation requests._",
         "Each Order can be uniquely identified by its `client_order_id`.",
         ""
