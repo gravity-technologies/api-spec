@@ -37,7 +37,6 @@ IGNORE_FIELDS_ANY_PATH = [
     "latest_sequence_number",
     "use_global_sequence_number",
     "trigger",
-    "broker",
 ]
 
 IGNORE_RPCS: list[str] = [
