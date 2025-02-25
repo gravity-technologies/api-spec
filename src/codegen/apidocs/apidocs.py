@@ -28,7 +28,7 @@ IGNORE_STRUCTS = [
     "TriggerOrderMetadata",
     "TriggerBy",
     "TriggerType",
-    "TPSLOrderMetadata" "BrokerTag",
+    "TPSLOrderMetadata",
 ]
 
 # skip these fields for all structs, at all levels of nesting
@@ -37,7 +37,6 @@ IGNORE_FIELDS_ANY_PATH = [
     "latest_sequence_number",
     "use_global_sequence_number",
     "trigger",
-    "broker",
 ]
 
 IGNORE_RPCS: list[str] = [
@@ -68,7 +67,6 @@ IGNORE_ENUM_VALUES: dict[str, list[str]] = {
         "PENDLE",
         "UXLINK",
     ],
-    "BrokerTag": ["*"],
     "TriggerType": ["*"],
 }
 
