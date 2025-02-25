@@ -28,7 +28,7 @@ IGNORE_STRUCTS = [
     "TriggerOrderMetadata",
     "TriggerBy",
     "TriggerType",
-    "TPSLOrderMetadata" "BrokerTag",
+    "TPSLOrderMetadata",
 ]
 
 # skip these fields for all structs, at all levels of nesting
