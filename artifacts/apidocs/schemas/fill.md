@@ -28,3 +28,11 @@
         |-|-|
         |`ORDERBOOK` = 1|the trade is cleared on the orderbook venue|
         |`RFQ` = 2|the trade is cleared on the RFQ venue|
+    ??? info "[BrokerTag](/../../schemas/broker_tag)"
+        BrokerTag is a tag for the broker that the order is sent from.<br>
+
+        |Value| Description |
+        |-|-|
+        |`COIN_ROUTES` = 1|CoinRoutes|
+        |`ALERTATRON` = 2|Alertatron|
+        |`ORIGAMI` = 3|Origami|

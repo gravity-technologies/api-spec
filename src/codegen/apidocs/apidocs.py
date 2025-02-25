@@ -67,7 +67,6 @@ IGNORE_ENUM_VALUES: dict[str, list[str]] = {
         "PENDLE",
         "UXLINK",
     ],
-    "BrokerTag": ["*"],
     "TriggerType": ["*"],
 }
 
