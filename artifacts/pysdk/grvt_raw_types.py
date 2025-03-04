@@ -27,6 +27,8 @@ class BrokerTag(Enum):
 class CancelStatus(Enum):
     # Cancellation has expired because corresponding order had not arrived within the defined time-to-live window.
     EXPIRED = "EXPIRED"
+    # This cancellation request was dropped because its TTL window overlaps with another cancellation request for the same order.
+    DROPPED_DUPLICATE = "DROPPED_DUPLICATE"
 
 
 class CandlestickInterval(Enum):
@@ -277,6 +279,8 @@ class OrderRejectReason(Enum):
     MARKET_ORDER_WITH_LIMIT_PRICE = "MARKET_ORDER_WITH_LIMIT_PRICE"
     # client cancel on disconnect triggered
     CLIENT_CANCEL_ON_DISCONNECT_TRIGGERED = "CLIENT_CANCEL_ON_DISCONNECT_TRIGGERED"
+    # the OCO counter part order was triggered
+    OCO_COUNTER_PART_TRIGGERED = "OCO_COUNTER_PART_TRIGGERED"
 
 
 class OrderStatus(Enum):
@@ -2010,6 +2014,30 @@ class ApiDedustPositionResponse:
 
 
 @dataclass
+class ApiCreateBulkOrdersRequest:
+    """
+    Create multiple orders simultaneously for this trading account.
+
+    This endpoint supports the following order scenarios:
+    - One-Cancels-Other (OCO) orders combining TP/SL
+    - One-Sends-Other (OSO) orders
+
+    Usage:
+    - For OCO (TP/SL pair): Send exactly 2 orders in the same request - one Take Profit and one Stop Loss order
+    - For OSO: Send exactly one main order and one contingent order (TP and/or SL)
+    """
+
+    # The orders to create
+    orders: list[Order]
+
+
+@dataclass
+class ApiCreateBulkOrdersResponse:
+    # The created orders in same order as requested
+    result: list[Order]
+
+
+@dataclass
 class ApiCancelOnDisconnectRequest:
     """
     Auto-Cancel All Open Orders when the countdown time hits zero.
@@ -2037,6 +2065,45 @@ class ApiCancelOnDisconnectRequest:
     Maximum acceptable value is 300,000
     """
     countdown_time: str | None = None
+
+
+@dataclass
+class ApiGetOrderGroupRequest:
+    """
+    Retrieves the grouping of non-cancelled, non-filled client orders for a given subaccount when the grouping exist.
+
+    helping to identify TP/SL pairs or other order relationships within the account.
+    """
+
+    # The subaccount ID for which the order groups should be retrieved.
+    sub_account_id: str
+
+
+@dataclass
+class ClientOrderIDsByGroup:
+    """
+    Grouping for the client order id and their associated groups.
+
+    This is used to define TP/SL pairs or other order groupings after loading the list of Open Orders.
+    """
+
+    # The group this order belongs to. It can be used to define TP/SL pairs or other order groupings
+    group_id: str
+    # List of client order IDs in the group
+    client_order_id: list[str]
+    # The sub account ID that these orders belong to
+    sub_account_id: str
+
+
+@dataclass
+class ApiGetOrderGroupResponse:
+    """
+    A list of client orders grouped by their associated order group.
+    Each entry in the list contains a `groupID` and the corresponding `clientOrderID`s
+    that belong to that group.
+    """
+
+    result: list[ClientOrderIDsByGroup]
 
 
 @dataclass
@@ -2073,6 +2140,8 @@ class EcosystemPoint:
     calculate_to: str
     # The rank of the account in the ecosystem
     rank: int
+    # The epoch number of the ecosystem point
+    epoch: int
 
 
 @dataclass
@@ -2187,6 +2256,42 @@ class EcosystemLeaderboardUser:
 class ApiFindEcosystemLeaderboardResponse:
     # The list of ecosystem leaderboard users
     users: list[EcosystemLeaderboardUser]
+
+
+@dataclass
+class QueryFindEpochRequest:
+    # The time to query the epoch
+    time: str | None = None
+    # The epoch number
+    epoch: int | None = None
+
+
+@dataclass
+class Epoch:
+    # The epoch number
+    epoch: int
+    # The start time of the epoch
+    start_time: str
+    # The end time of the epoch
+    end_time: str
+
+
+@dataclass
+class QueryFindEpochResponse:
+    # The epoch
+    epoch: Epoch
+
+
+@dataclass
+class QueryGetListEpochRequest:
+    # The limit to query for
+    limit: int | None = None
+
+
+@dataclass
+class QueryGetListEpochResponse:
+    # The list of epochs
+    result: list[Epoch]
 
 
 @dataclass
@@ -2527,6 +2632,8 @@ class ApiSubAccountTradeAggregationRequest:
     is_maker: bool
     # Filter on the taker of the trade
     is_taker: bool
+    # Whether to group trades by signer per sub account
+    group_by_signer: bool
     # Optional. Start time in unix nanoseconds
     start_time: str | None = None
     # Optional. End time in unix nanoseconds
@@ -2547,6 +2654,8 @@ class SubAccountTradeAggregation:
     num_traded: str
     # Total positive fee paid by user
     positive_fee: str
+    # The signer of the trade
+    signer: str
 
 
 @dataclass
@@ -2899,6 +3008,31 @@ class WSCancelFeedSelectorV1:
 
     # The subaccount ID to filter by
     sub_account_id: str
+
+
+@dataclass
+class WSOrderGroupFeedSelectorV1:
+    """
+    Subscribes to a feed of order group to get updated when a new group is created for the subAccount specified.
+
+    """
+
+    # The subaccount ID to filter by
+    sub_account_id: str
+
+
+@dataclass
+class WSOrderGroupFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    # A running sequence number that determines global message order within the specific stream
+    sequence_number: str
+    # The order object being created or updated
+    feed: ClientOrderIDsByGroup
+    # The previous sequence number that determines global message order within the specific stream
+    prev_sequence_number: str
 
 
 @dataclass
