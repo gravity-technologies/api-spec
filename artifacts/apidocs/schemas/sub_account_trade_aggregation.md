@@ -8,3 +8,4 @@
     |total_trade_volume<br>`tt` |string|True|Total volume traded|
     |num_traded<br>`nt` |string|True|Number of trades|
     |positive_fee<br>`pf` |string|True|Total positive fee paid by user|
+    |signer<br>`s` |string|True|The signer of the trade|

@@ -25,10 +25,6 @@ IGNORE_FIELD_PATHS = [
 IGNORE_STRUCTS = [
     "ApiDedustPositionRequest",
     "ApiDedustPositionResponse",
-    "TriggerOrderMetadata",
-    "TriggerBy",
-    "TriggerType",
-    "TPSLOrderMetadata",
 ]
 
 # skip these fields for all structs, at all levels of nesting
@@ -36,13 +32,10 @@ IGNORE_FIELDS_ANY_PATH = [
     "prev_sequence_number",
     "latest_sequence_number",
     "use_global_sequence_number",
-    "trigger",
 ]
 
 IGNORE_RPCS: list[str] = [
     "RPCDedustPositionV1",
-    "RPCCancelTriggerOrderV1",
-    "RPCCancelAllTriggerOrdersV1",
 ]
 
 IGNORE_ENUM_VALUES: dict[str, list[str]] = {
@@ -67,7 +60,6 @@ IGNORE_ENUM_VALUES: dict[str, list[str]] = {
         "PENDLE",
         "UXLINK",
     ],
-    "TriggerType": ["*"],
 }
 
 

@@ -40,6 +40,13 @@ LITE ENDPOINT: lite/v1/create_order
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
+                    "trigger": {
+                        "trigger_type": "UNSPECIFIED",
+                        "tpsl": {
+                            "trigger_by": "UNSPECIFIED",
+                            "trigger_price": "65038.10"
+                        }
+                    },
                     "broker": "COIN_ROUTES"
                 }
             }
@@ -71,6 +78,13 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
+                    "t": {
+                        "tt": "UNSPECIFIED",
+                        "t": {
+                            "tb": "UNSPECIFIED",
+                            "tp": "65038.10"
+                        }
+                    },
                     "b": "COIN_ROUTES"
                 }
             }
@@ -110,6 +124,13 @@ LITE ENDPOINT: lite/v1/create_order
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
+                    "trigger": {
+                        "trigger_type": "UNSPECIFIED",
+                        "tpsl": {
+                            "trigger_by": "UNSPECIFIED",
+                            "trigger_price": "65038.10"
+                        }
+                    },
                     "broker": "COIN_ROUTES"
                 },
                 "state": {
@@ -150,6 +171,13 @@ LITE ENDPOINT: lite/v1/create_order
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
+                    "t": {
+                        "tt": "UNSPECIFIED",
+                        "t": {
+                            "tb": "UNSPECIFIED",
+                            "tp": "65038.10"
+                        }
+                    },
                     "b": "COIN_ROUTES"
                 },
                 "s1": {
@@ -270,6 +298,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "tpsl": {
+                                "trigger_by": "UNSPECIFIED",
+                                "trigger_price": "65038.10"
+                            }
+                        },
                         "broker": "COIN_ROUTES"
                     }
                 }
@@ -309,6 +344,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "UNSPECIFIED",
+                                "tpsl": {
+                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_price": "65038.10"
+                                }
+                            },
                             "broker": "COIN_ROUTES"
                         }
                     }
@@ -348,6 +390,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "UNSPECIFIED",
+                            "t": {
+                                "tb": "UNSPECIFIED",
+                                "tp": "65038.10"
+                            }
+                        },
                         "b": "COIN_ROUTES"
                     }
                 }
@@ -387,6 +436,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "UNSPECIFIED",
+                                "t": {
+                                    "tb": "UNSPECIFIED",
+                                    "tp": "65038.10"
+                                }
+                            },
                             "b": "COIN_ROUTES"
                         }
                     }
@@ -427,6 +483,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "tpsl": {
+                                "trigger_by": "UNSPECIFIED",
+                                "trigger_price": "65038.10"
+                            }
+                        },
                         "broker": "COIN_ROUTES"
                     }
                 }
@@ -466,6 +529,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "UNSPECIFIED",
+                                "tpsl": {
+                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_price": "65038.10"
+                                }
+                            },
                             "broker": "COIN_ROUTES"
                         }
                     }
@@ -505,6 +575,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "UNSPECIFIED",
+                            "t": {
+                                "tb": "UNSPECIFIED",
+                                "tp": "65038.10"
+                            }
+                        },
                         "b": "COIN_ROUTES"
                     }
                 }
@@ -544,6 +621,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "UNSPECIFIED",
+                                "t": {
+                                    "tb": "UNSPECIFIED",
+                                    "tp": "65038.10"
+                                }
+                            },
                             "b": "COIN_ROUTES"
                         }
                     }
@@ -584,6 +668,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "tpsl": {
+                                "trigger_by": "UNSPECIFIED",
+                                "trigger_price": "65038.10"
+                            }
+                        },
                         "broker": "COIN_ROUTES"
                     }
                 }
@@ -623,6 +714,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "UNSPECIFIED",
+                                "tpsl": {
+                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_price": "65038.10"
+                                }
+                            },
                             "broker": "COIN_ROUTES"
                         }
                     }
@@ -662,6 +760,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "UNSPECIFIED",
+                            "t": {
+                                "tb": "UNSPECIFIED",
+                                "tp": "65038.10"
+                            }
+                        },
                         "b": "COIN_ROUTES"
                     }
                 }
@@ -701,6 +806,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "UNSPECIFIED",
+                                "t": {
+                                    "tb": "UNSPECIFIED",
+                                    "tp": "65038.10"
+                                }
+                            },
                             "b": "COIN_ROUTES"
                         }
                     }
@@ -741,6 +853,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "tpsl": {
+                                "trigger_by": "UNSPECIFIED",
+                                "trigger_price": "65038.10"
+                            }
+                        },
                         "broker": "COIN_ROUTES"
                     }
                 }
@@ -780,6 +899,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "UNSPECIFIED",
+                                "tpsl": {
+                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_price": "65038.10"
+                                }
+                            },
                             "broker": "COIN_ROUTES"
                         }
                     }
@@ -819,6 +945,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "UNSPECIFIED",
+                            "t": {
+                                "tb": "UNSPECIFIED",
+                                "tp": "65038.10"
+                            }
+                        },
                         "b": "COIN_ROUTES"
                     }
                 }
@@ -858,6 +991,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "UNSPECIFIED",
+                                "t": {
+                                    "tb": "UNSPECIFIED",
+                                    "tp": "65038.10"
+                                }
+                            },
                             "b": "COIN_ROUTES"
                         }
                     }
@@ -1665,6 +1805,13 @@ LITE ENDPOINT: lite/v1/order
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
+                    "trigger": {
+                        "trigger_type": "UNSPECIFIED",
+                        "tpsl": {
+                            "trigger_by": "UNSPECIFIED",
+                            "trigger_price": "65038.10"
+                        }
+                    },
                     "broker": "COIN_ROUTES"
                 },
                 "state": {
@@ -1705,6 +1852,13 @@ LITE ENDPOINT: lite/v1/order
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
+                    "t": {
+                        "tt": "UNSPECIFIED",
+                        "t": {
+                            "tb": "UNSPECIFIED",
+                            "tp": "65038.10"
+                        }
+                    },
                     "b": "COIN_ROUTES"
                 },
                 "s1": {
@@ -2081,6 +2235,13 @@ LITE ENDPOINT: lite/v1/open_orders
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
+                    "trigger": {
+                        "trigger_type": "UNSPECIFIED",
+                        "tpsl": {
+                            "trigger_by": "UNSPECIFIED",
+                            "trigger_price": "65038.10"
+                        }
+                    },
                     "broker": "COIN_ROUTES"
                 },
                 "state": {
@@ -2121,6 +2282,13 @@ LITE ENDPOINT: lite/v1/open_orders
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
+                    "t": {
+                        "tt": "UNSPECIFIED",
+                        "t": {
+                            "tb": "UNSPECIFIED",
+                            "tp": "65038.10"
+                        }
+                    },
                     "b": "COIN_ROUTES"
                 },
                 "s1": {
@@ -2519,6 +2687,13 @@ LITE ENDPOINT: lite/v1/order_history
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
+                    "trigger": {
+                        "trigger_type": "UNSPECIFIED",
+                        "tpsl": {
+                            "trigger_by": "UNSPECIFIED",
+                            "trigger_price": "65038.10"
+                        }
+                    },
                     "broker": "COIN_ROUTES"
                 },
                 "state": {
@@ -2560,6 +2735,13 @@ LITE ENDPOINT: lite/v1/order_history
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
+                    "t": {
+                        "tt": "UNSPECIFIED",
+                        "t": {
+                            "tb": "UNSPECIFIED",
+                            "tp": "65038.10"
+                        }
+                    },
                     "b": "COIN_ROUTES"
                 },
                 "s1": {
@@ -2991,6 +3173,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                 "metadata": {
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
+                    "trigger": {
+                        "trigger_type": "UNSPECIFIED",
+                        "tpsl": {
+                            "trigger_by": "UNSPECIFIED",
+                            "trigger_price": "65038.10"
+                        }
+                    },
                     "broker": "COIN_ROUTES"
                 },
                 "state": {
@@ -3032,6 +3221,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                 "m": {
                     "co": "23042",
                     "ct": "1697788800000000000",
+                    "t": {
+                        "tt": "UNSPECIFIED",
+                        "t": {
+                            "tb": "UNSPECIFIED",
+                            "tp": "65038.10"
+                        }
+                    },
                     "b": "COIN_ROUTES"
                 },
                 "s1": {
@@ -3153,6 +3349,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "tpsl": {
+                                "trigger_by": "UNSPECIFIED",
+                                "trigger_price": "65038.10"
+                            }
+                        },
                         "broker": "COIN_ROUTES"
                     },
                     "state": {
@@ -3202,6 +3405,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "UNSPECIFIED",
+                                "tpsl": {
+                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_price": "65038.10"
+                                }
+                            },
                             "broker": "COIN_ROUTES"
                         },
                         "state": {
@@ -3251,6 +3461,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "UNSPECIFIED",
+                            "t": {
+                                "tb": "UNSPECIFIED",
+                                "tp": "65038.10"
+                            }
+                        },
                         "b": "COIN_ROUTES"
                     },
                     "s1": {
@@ -3300,6 +3517,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "UNSPECIFIED",
+                                "t": {
+                                    "tb": "UNSPECIFIED",
+                                    "tp": "65038.10"
+                                }
+                            },
                             "b": "COIN_ROUTES"
                         },
                         "s1": {
@@ -3350,6 +3574,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "tpsl": {
+                                "trigger_by": "UNSPECIFIED",
+                                "trigger_price": "65038.10"
+                            }
+                        },
                         "broker": "COIN_ROUTES"
                     },
                     "state": {
@@ -3399,6 +3630,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "UNSPECIFIED",
+                                "tpsl": {
+                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_price": "65038.10"
+                                }
+                            },
                             "broker": "COIN_ROUTES"
                         },
                         "state": {
@@ -3448,6 +3686,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "UNSPECIFIED",
+                            "t": {
+                                "tb": "UNSPECIFIED",
+                                "tp": "65038.10"
+                            }
+                        },
                         "b": "COIN_ROUTES"
                     },
                     "s1": {
@@ -3497,6 +3742,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "UNSPECIFIED",
+                                "t": {
+                                    "tb": "UNSPECIFIED",
+                                    "tp": "65038.10"
+                                }
+                            },
                             "b": "COIN_ROUTES"
                         },
                         "s1": {
@@ -3547,6 +3799,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "tpsl": {
+                                "trigger_by": "UNSPECIFIED",
+                                "trigger_price": "65038.10"
+                            }
+                        },
                         "broker": "COIN_ROUTES"
                     },
                     "state": {
@@ -3596,6 +3855,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "UNSPECIFIED",
+                                "tpsl": {
+                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_price": "65038.10"
+                                }
+                            },
                             "broker": "COIN_ROUTES"
                         },
                         "state": {
@@ -3645,6 +3911,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "UNSPECIFIED",
+                            "t": {
+                                "tb": "UNSPECIFIED",
+                                "tp": "65038.10"
+                            }
+                        },
                         "b": "COIN_ROUTES"
                     },
                     "s1": {
@@ -3694,6 +3967,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "UNSPECIFIED",
+                                "t": {
+                                    "tb": "UNSPECIFIED",
+                                    "tp": "65038.10"
+                                }
+                            },
                             "b": "COIN_ROUTES"
                         },
                         "s1": {
@@ -3744,6 +4024,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "metadata": {
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "tpsl": {
+                                "trigger_by": "UNSPECIFIED",
+                                "trigger_price": "65038.10"
+                            }
+                        },
                         "broker": "COIN_ROUTES"
                     },
                     "state": {
@@ -3793,6 +4080,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "metadata": {
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "UNSPECIFIED",
+                                "tpsl": {
+                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_price": "65038.10"
+                                }
+                            },
                             "broker": "COIN_ROUTES"
                         },
                         "state": {
@@ -3842,6 +4136,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "m": {
                         "co": "23042",
                         "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "UNSPECIFIED",
+                            "t": {
+                                "tb": "UNSPECIFIED",
+                                "tp": "65038.10"
+                            }
+                        },
                         "b": "COIN_ROUTES"
                     },
                     "s1": {
@@ -3891,6 +4192,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "m": {
                             "co": "23042",
                             "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "UNSPECIFIED",
+                                "t": {
+                                    "tb": "UNSPECIFIED",
+                                    "tp": "65038.10"
+                                }
+                            },
                             "b": "COIN_ROUTES"
                         },
                         "s1": {
@@ -4233,6 +4541,1497 @@ LITE ENDPOINT: lite/v1/cancel_on_disconnect
                 "p": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "ct": 300
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Create Bulk Orders
+```
+FULL ENDPOINT: full/v1/create_bulk_orders
+LITE ENDPOINT: lite/v1/create_bulk_orders
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_create_bulk_orders_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "orders": [{
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "is_market": false,
+                "time_in_force": "GOOD_TILL_TIME",
+                "post_only": false,
+                "reduce_only": false,
+                "legs": [{
+                    "instrument": "BTC_USDT_Perp",
+                    "size": "10.5",
+                    "limit_price": "65038.01",
+                    "is_buying_asset": true
+                }],
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890
+                },
+                "metadata": {
+                    "client_order_id": "23042",
+                    "create_time": "1697788800000000000",
+                    "trigger": {
+                        "trigger_type": "UNSPECIFIED",
+                        "tpsl": {
+                            "trigger_by": "UNSPECIFIED",
+                            "trigger_price": "65038.10"
+                        }
+                    },
+                    "broker": "COIN_ROUTES"
+                },
+                "state": {
+                    "status": "PENDING",
+                    "reject_reason": "CLIENT_CANCEL",
+                    "book_size": ["10.5"],
+                    "traded_size": ["1.5"],
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
+                }
+            }]
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "o": [{
+                "oi": "0x1234567890abcdef",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "im": false,
+                "ti": "GOOD_TILL_TIME",
+                "po": false,
+                "ro": false,
+                "l": [{
+                    "i": "BTC_USDT_Perp",
+                    "s": "10.5",
+                    "lp": "65038.01",
+                    "ib": true
+                }],
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890
+                },
+                "m": {
+                    "co": "23042",
+                    "ct": "1697788800000000000",
+                    "t": {
+                        "tt": "UNSPECIFIED",
+                        "t": {
+                            "tb": "UNSPECIFIED",
+                            "tp": "65038.10"
+                        }
+                    },
+                    "b": "COIN_ROUTES"
+                },
+                "s1": {
+                    "s": "PENDING",
+                    "rr": "CLIENT_CANCEL",
+                    "bs": ["10.5"],
+                    "ts": ["1.5"],
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
+                }
+            }]
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_create_bulk_orders_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": [{
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "is_market": false,
+                "time_in_force": "GOOD_TILL_TIME",
+                "post_only": false,
+                "reduce_only": false,
+                "legs": [{
+                    "instrument": "BTC_USDT_Perp",
+                    "size": "10.5",
+                    "limit_price": "65038.01",
+                    "is_buying_asset": true
+                }],
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890
+                },
+                "metadata": {
+                    "client_order_id": "23042",
+                    "create_time": "1697788800000000000",
+                    "trigger": {
+                        "trigger_type": "UNSPECIFIED",
+                        "tpsl": {
+                            "trigger_by": "UNSPECIFIED",
+                            "trigger_price": "65038.10"
+                        }
+                    },
+                    "broker": "COIN_ROUTES"
+                },
+                "state": {
+                    "status": "PENDING",
+                    "reject_reason": "CLIENT_CANCEL",
+                    "book_size": ["10.5"],
+                    "traded_size": ["1.5"],
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
+                }
+            }]
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "oi": "0x1234567890abcdef",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "im": false,
+                "ti": "GOOD_TILL_TIME",
+                "po": false,
+                "ro": false,
+                "l": [{
+                    "i": "BTC_USDT_Perp",
+                    "s": "10.5",
+                    "lp": "65038.01",
+                    "ib": true
+                }],
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890
+                },
+                "m": {
+                    "co": "23042",
+                    "ct": "1697788800000000000",
+                    "t": {
+                        "tt": "UNSPECIFIED",
+                        "t": {
+                            "tb": "UNSPECIFIED",
+                            "tp": "65038.10"
+                        }
+                    },
+                    "b": "COIN_ROUTES"
+                },
+                "s1": {
+                    "s": "PENDING",
+                    "rr": "CLIENT_CANCEL",
+                    "bs": ["10.5"],
+                    "ts": ["1.5"],
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
+                }
+            }]
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1004|404|Data Not Found|
+        |1005|500|Unknown Error|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |1400|403|Signer does not have trade permission|
+        |1009|503|We are temporarily deactivating this API endpoint, please try again later|
+        |2000|403|Order signature is from an unauthorized signer|
+        |2001|403|Order signature has expired|
+        |2002|403|Order signature does not match payload|
+        |2003|403|Order sub account does not match logged in user|
+        |2004|403|Order signature is from an expired session key|
+        |2006|403|Order signature R/S must have exactly 64 characters long without 0x prefix|
+        |2005|403|Order signature V must be 27/28|
+        |2007|403|Order signature S must be in the lower half of the curve|
+        |2010|400|Order ID should be empty when creating an order|
+        |2011|400|Client Order ID should be supplied when creating an order|
+        |2012|400|Client Order ID overlaps with existing active order|
+        |2030|400|Orderbook Orders must have a TimeInForce of GTT/IOC/FOK|
+        |2031|400|RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK|
+        |2032|400|Post Only can only be set to true for GTT/AON orders|
+        |2020|400|Market Order must always be supplied without a limit price|
+        |2021|400|Limit Order must always be supplied with a limit price|
+        |2040|400|Order must contain at least one leg|
+        |2041|400|Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice|
+        |2042|400|Orderbook Orders must contain only one leg|
+        |2050|400|Order state must be empty upon creation|
+        |2051|400|Order execution metadata must be empty upon creation|
+        |2060|400|Order Legs contain one or more inactive derivative|
+        |2061|400|Unsupported Instrument Requested|
+        |2062|400|Order size smaller than min size|
+        |2063|400|Order size smaller than min block size in block trade venue|
+        |2064|400|Invalid limit price tick|
+        |2065|400|Order size too granular|
+        |2070|400|Liquidation Order is not supported|
+        |2080|400|Insufficient margin to create order|
+        |2081|400|Order Fill would result in exceeding maximum position size|
+        |2082|400|Pre-order check failed|
+        |2083|400|Order Fill would result in exceeding maximum position size under current configurable leverage tier|
+        |2090|429|Max open orders exceeded|
+        |2110|400|Invalid trigger by|
+        |2111|400|Unsupported trigger by|
+        |2112|400|Invalid trigger order|
+        |2220|400|No orders provided|
+        |2221|400|Invalid number of orders|
+        |2222|400|Order is not a TPSL order|
+        |2223|400|Unsupported bulk order type|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/create_bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "orders": [{
+                    "order_id": "0x1234567890abcdef",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "is_market": false,
+                    "time_in_force": "GOOD_TILL_TIME",
+                    "post_only": false,
+                    "reduce_only": false,
+                    "legs": [{
+                        "instrument": "BTC_USDT_Perp",
+                        "size": "10.5",
+                        "limit_price": "65038.01",
+                        "is_buying_asset": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890
+                    },
+                    "metadata": {
+                        "client_order_id": "23042",
+                        "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "tpsl": {
+                                "trigger_by": "UNSPECIFIED",
+                                "trigger_price": "65038.10"
+                            }
+                        },
+                        "broker": "COIN_ROUTES"
+                    },
+                    "state": {
+                        "status": "PENDING",
+                        "reject_reason": "CLIENT_CANCEL",
+                        "book_size": ["10.5"],
+                        "traded_size": ["1.5"],
+                        "update_time": "1697788800000000000",
+                        "avg_fill_price": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/create_bulk_orders",
+                "params": {
+                    "orders": [{
+                        "order_id": "0x1234567890abcdef",
+                        "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "is_market": false,
+                        "time_in_force": "GOOD_TILL_TIME",
+                        "post_only": false,
+                        "reduce_only": false,
+                        "legs": [{
+                            "instrument": "BTC_USDT_Perp",
+                            "size": "10.5",
+                            "limit_price": "65038.01",
+                            "is_buying_asset": true
+                        }],
+                        "signature": {
+                            "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "expiration": "1697788800000000000",
+                            "nonce": 1234567890
+                        },
+                        "metadata": {
+                            "client_order_id": "23042",
+                            "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "UNSPECIFIED",
+                                "tpsl": {
+                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_price": "65038.10"
+                                }
+                            },
+                            "broker": "COIN_ROUTES"
+                        },
+                        "state": {
+                            "status": "PENDING",
+                            "reject_reason": "CLIENT_CANCEL",
+                            "book_size": ["10.5"],
+                            "traded_size": ["1.5"],
+                            "update_time": "1697788800000000000",
+                            "avg_fill_price": ["60000.4"]
+                        }
+                    }]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/create_bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "o": [{
+                    "oi": "0x1234567890abcdef",
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "im": false,
+                    "ti": "GOOD_TILL_TIME",
+                    "po": false,
+                    "ro": false,
+                    "l": [{
+                        "i": "BTC_USDT_Perp",
+                        "s": "10.5",
+                        "lp": "65038.01",
+                        "ib": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890
+                    },
+                    "m": {
+                        "co": "23042",
+                        "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "UNSPECIFIED",
+                            "t": {
+                                "tb": "UNSPECIFIED",
+                                "tp": "65038.10"
+                            }
+                        },
+                        "b": "COIN_ROUTES"
+                    },
+                    "s1": {
+                        "s": "PENDING",
+                        "rr": "CLIENT_CANCEL",
+                        "bs": ["10.5"],
+                        "ts": ["1.5"],
+                        "ut": "1697788800000000000",
+                        "af": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/create_bulk_orders",
+                "p": {
+                    "o": [{
+                        "oi": "0x1234567890abcdef",
+                        "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "im": false,
+                        "ti": "GOOD_TILL_TIME",
+                        "po": false,
+                        "ro": false,
+                        "l": [{
+                            "i": "BTC_USDT_Perp",
+                            "s": "10.5",
+                            "lp": "65038.01",
+                            "ib": true
+                        }],
+                        "s": {
+                            "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "e": "1697788800000000000",
+                            "n": 1234567890
+                        },
+                        "m": {
+                            "co": "23042",
+                            "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "UNSPECIFIED",
+                                "t": {
+                                    "tb": "UNSPECIFIED",
+                                    "tp": "65038.10"
+                                }
+                            },
+                            "b": "COIN_ROUTES"
+                        },
+                        "s1": {
+                            "s": "PENDING",
+                            "rr": "CLIENT_CANCEL",
+                            "bs": ["10.5"],
+                            "ts": ["1.5"],
+                            "ut": "1697788800000000000",
+                            "af": ["60000.4"]
+                        }
+                    }]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/create_bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "orders": [{
+                    "order_id": "0x1234567890abcdef",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "is_market": false,
+                    "time_in_force": "GOOD_TILL_TIME",
+                    "post_only": false,
+                    "reduce_only": false,
+                    "legs": [{
+                        "instrument": "BTC_USDT_Perp",
+                        "size": "10.5",
+                        "limit_price": "65038.01",
+                        "is_buying_asset": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890
+                    },
+                    "metadata": {
+                        "client_order_id": "23042",
+                        "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "tpsl": {
+                                "trigger_by": "UNSPECIFIED",
+                                "trigger_price": "65038.10"
+                            }
+                        },
+                        "broker": "COIN_ROUTES"
+                    },
+                    "state": {
+                        "status": "PENDING",
+                        "reject_reason": "CLIENT_CANCEL",
+                        "book_size": ["10.5"],
+                        "traded_size": ["1.5"],
+                        "update_time": "1697788800000000000",
+                        "avg_fill_price": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/create_bulk_orders",
+                "params": {
+                    "orders": [{
+                        "order_id": "0x1234567890abcdef",
+                        "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "is_market": false,
+                        "time_in_force": "GOOD_TILL_TIME",
+                        "post_only": false,
+                        "reduce_only": false,
+                        "legs": [{
+                            "instrument": "BTC_USDT_Perp",
+                            "size": "10.5",
+                            "limit_price": "65038.01",
+                            "is_buying_asset": true
+                        }],
+                        "signature": {
+                            "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "expiration": "1697788800000000000",
+                            "nonce": 1234567890
+                        },
+                        "metadata": {
+                            "client_order_id": "23042",
+                            "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "UNSPECIFIED",
+                                "tpsl": {
+                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_price": "65038.10"
+                                }
+                            },
+                            "broker": "COIN_ROUTES"
+                        },
+                        "state": {
+                            "status": "PENDING",
+                            "reject_reason": "CLIENT_CANCEL",
+                            "book_size": ["10.5"],
+                            "traded_size": ["1.5"],
+                            "update_time": "1697788800000000000",
+                            "avg_fill_price": ["60000.4"]
+                        }
+                    }]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/create_bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "o": [{
+                    "oi": "0x1234567890abcdef",
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "im": false,
+                    "ti": "GOOD_TILL_TIME",
+                    "po": false,
+                    "ro": false,
+                    "l": [{
+                        "i": "BTC_USDT_Perp",
+                        "s": "10.5",
+                        "lp": "65038.01",
+                        "ib": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890
+                    },
+                    "m": {
+                        "co": "23042",
+                        "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "UNSPECIFIED",
+                            "t": {
+                                "tb": "UNSPECIFIED",
+                                "tp": "65038.10"
+                            }
+                        },
+                        "b": "COIN_ROUTES"
+                    },
+                    "s1": {
+                        "s": "PENDING",
+                        "rr": "CLIENT_CANCEL",
+                        "bs": ["10.5"],
+                        "ts": ["1.5"],
+                        "ut": "1697788800000000000",
+                        "af": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/create_bulk_orders",
+                "p": {
+                    "o": [{
+                        "oi": "0x1234567890abcdef",
+                        "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "im": false,
+                        "ti": "GOOD_TILL_TIME",
+                        "po": false,
+                        "ro": false,
+                        "l": [{
+                            "i": "BTC_USDT_Perp",
+                            "s": "10.5",
+                            "lp": "65038.01",
+                            "ib": true
+                        }],
+                        "s": {
+                            "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "e": "1697788800000000000",
+                            "n": 1234567890
+                        },
+                        "m": {
+                            "co": "23042",
+                            "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "UNSPECIFIED",
+                                "t": {
+                                    "tb": "UNSPECIFIED",
+                                    "tp": "65038.10"
+                                }
+                            },
+                            "b": "COIN_ROUTES"
+                        },
+                        "s1": {
+                            "s": "PENDING",
+                            "rr": "CLIENT_CANCEL",
+                            "bs": ["10.5"],
+                            "ts": ["1.5"],
+                            "ut": "1697788800000000000",
+                            "af": ["60000.4"]
+                        }
+                    }]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/create_bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "orders": [{
+                    "order_id": "0x1234567890abcdef",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "is_market": false,
+                    "time_in_force": "GOOD_TILL_TIME",
+                    "post_only": false,
+                    "reduce_only": false,
+                    "legs": [{
+                        "instrument": "BTC_USDT_Perp",
+                        "size": "10.5",
+                        "limit_price": "65038.01",
+                        "is_buying_asset": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890
+                    },
+                    "metadata": {
+                        "client_order_id": "23042",
+                        "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "tpsl": {
+                                "trigger_by": "UNSPECIFIED",
+                                "trigger_price": "65038.10"
+                            }
+                        },
+                        "broker": "COIN_ROUTES"
+                    },
+                    "state": {
+                        "status": "PENDING",
+                        "reject_reason": "CLIENT_CANCEL",
+                        "book_size": ["10.5"],
+                        "traded_size": ["1.5"],
+                        "update_time": "1697788800000000000",
+                        "avg_fill_price": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/create_bulk_orders",
+                "params": {
+                    "orders": [{
+                        "order_id": "0x1234567890abcdef",
+                        "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "is_market": false,
+                        "time_in_force": "GOOD_TILL_TIME",
+                        "post_only": false,
+                        "reduce_only": false,
+                        "legs": [{
+                            "instrument": "BTC_USDT_Perp",
+                            "size": "10.5",
+                            "limit_price": "65038.01",
+                            "is_buying_asset": true
+                        }],
+                        "signature": {
+                            "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "expiration": "1697788800000000000",
+                            "nonce": 1234567890
+                        },
+                        "metadata": {
+                            "client_order_id": "23042",
+                            "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "UNSPECIFIED",
+                                "tpsl": {
+                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_price": "65038.10"
+                                }
+                            },
+                            "broker": "COIN_ROUTES"
+                        },
+                        "state": {
+                            "status": "PENDING",
+                            "reject_reason": "CLIENT_CANCEL",
+                            "book_size": ["10.5"],
+                            "traded_size": ["1.5"],
+                            "update_time": "1697788800000000000",
+                            "avg_fill_price": ["60000.4"]
+                        }
+                    }]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/create_bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "o": [{
+                    "oi": "0x1234567890abcdef",
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "im": false,
+                    "ti": "GOOD_TILL_TIME",
+                    "po": false,
+                    "ro": false,
+                    "l": [{
+                        "i": "BTC_USDT_Perp",
+                        "s": "10.5",
+                        "lp": "65038.01",
+                        "ib": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890
+                    },
+                    "m": {
+                        "co": "23042",
+                        "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "UNSPECIFIED",
+                            "t": {
+                                "tb": "UNSPECIFIED",
+                                "tp": "65038.10"
+                            }
+                        },
+                        "b": "COIN_ROUTES"
+                    },
+                    "s1": {
+                        "s": "PENDING",
+                        "rr": "CLIENT_CANCEL",
+                        "bs": ["10.5"],
+                        "ts": ["1.5"],
+                        "ut": "1697788800000000000",
+                        "af": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/create_bulk_orders",
+                "p": {
+                    "o": [{
+                        "oi": "0x1234567890abcdef",
+                        "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "im": false,
+                        "ti": "GOOD_TILL_TIME",
+                        "po": false,
+                        "ro": false,
+                        "l": [{
+                            "i": "BTC_USDT_Perp",
+                            "s": "10.5",
+                            "lp": "65038.01",
+                            "ib": true
+                        }],
+                        "s": {
+                            "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "e": "1697788800000000000",
+                            "n": 1234567890
+                        },
+                        "m": {
+                            "co": "23042",
+                            "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "UNSPECIFIED",
+                                "t": {
+                                    "tb": "UNSPECIFIED",
+                                    "tp": "65038.10"
+                                }
+                            },
+                            "b": "COIN_ROUTES"
+                        },
+                        "s1": {
+                            "s": "PENDING",
+                            "rr": "CLIENT_CANCEL",
+                            "bs": ["10.5"],
+                            "ts": ["1.5"],
+                            "ut": "1697788800000000000",
+                            "af": ["60000.4"]
+                        }
+                    }]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/create_bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "orders": [{
+                    "order_id": "0x1234567890abcdef",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "is_market": false,
+                    "time_in_force": "GOOD_TILL_TIME",
+                    "post_only": false,
+                    "reduce_only": false,
+                    "legs": [{
+                        "instrument": "BTC_USDT_Perp",
+                        "size": "10.5",
+                        "limit_price": "65038.01",
+                        "is_buying_asset": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890
+                    },
+                    "metadata": {
+                        "client_order_id": "23042",
+                        "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "UNSPECIFIED",
+                            "tpsl": {
+                                "trigger_by": "UNSPECIFIED",
+                                "trigger_price": "65038.10"
+                            }
+                        },
+                        "broker": "COIN_ROUTES"
+                    },
+                    "state": {
+                        "status": "PENDING",
+                        "reject_reason": "CLIENT_CANCEL",
+                        "book_size": ["10.5"],
+                        "traded_size": ["1.5"],
+                        "update_time": "1697788800000000000",
+                        "avg_fill_price": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/create_bulk_orders",
+                "params": {
+                    "orders": [{
+                        "order_id": "0x1234567890abcdef",
+                        "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "is_market": false,
+                        "time_in_force": "GOOD_TILL_TIME",
+                        "post_only": false,
+                        "reduce_only": false,
+                        "legs": [{
+                            "instrument": "BTC_USDT_Perp",
+                            "size": "10.5",
+                            "limit_price": "65038.01",
+                            "is_buying_asset": true
+                        }],
+                        "signature": {
+                            "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "expiration": "1697788800000000000",
+                            "nonce": 1234567890
+                        },
+                        "metadata": {
+                            "client_order_id": "23042",
+                            "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "UNSPECIFIED",
+                                "tpsl": {
+                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_price": "65038.10"
+                                }
+                            },
+                            "broker": "COIN_ROUTES"
+                        },
+                        "state": {
+                            "status": "PENDING",
+                            "reject_reason": "CLIENT_CANCEL",
+                            "book_size": ["10.5"],
+                            "traded_size": ["1.5"],
+                            "update_time": "1697788800000000000",
+                            "avg_fill_price": ["60000.4"]
+                        }
+                    }]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/create_bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "o": [{
+                    "oi": "0x1234567890abcdef",
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "im": false,
+                    "ti": "GOOD_TILL_TIME",
+                    "po": false,
+                    "ro": false,
+                    "l": [{
+                        "i": "BTC_USDT_Perp",
+                        "s": "10.5",
+                        "lp": "65038.01",
+                        "ib": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890
+                    },
+                    "m": {
+                        "co": "23042",
+                        "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "UNSPECIFIED",
+                            "t": {
+                                "tb": "UNSPECIFIED",
+                                "tp": "65038.10"
+                            }
+                        },
+                        "b": "COIN_ROUTES"
+                    },
+                    "s1": {
+                        "s": "PENDING",
+                        "rr": "CLIENT_CANCEL",
+                        "bs": ["10.5"],
+                        "ts": ["1.5"],
+                        "ut": "1697788800000000000",
+                        "af": ["60000.4"]
+                    }
+                }]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/create_bulk_orders",
+                "p": {
+                    "o": [{
+                        "oi": "0x1234567890abcdef",
+                        "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "im": false,
+                        "ti": "GOOD_TILL_TIME",
+                        "po": false,
+                        "ro": false,
+                        "l": [{
+                            "i": "BTC_USDT_Perp",
+                            "s": "10.5",
+                            "lp": "65038.01",
+                            "ib": true
+                        }],
+                        "s": {
+                            "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "e": "1697788800000000000",
+                            "n": 1234567890
+                        },
+                        "m": {
+                            "co": "23042",
+                            "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "UNSPECIFIED",
+                                "t": {
+                                    "tb": "UNSPECIFIED",
+                                    "tp": "65038.10"
+                                }
+                            },
+                            "b": "COIN_ROUTES"
+                        },
+                        "s1": {
+                            "s": "PENDING",
+                            "rr": "CLIENT_CANCEL",
+                            "bs": ["10.5"],
+                            "ts": ["1.5"],
+                            "ut": "1697788800000000000",
+                            "af": ["60000.4"]
+                        }
+                    }]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Get Order Group
+```
+FULL ENDPOINT: full/v1/order_group
+LITE ENDPOINT: lite/v1/order_group
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_get_order_group_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_get_order_group_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": [{
+                "group_id": "0x10000101000203040506",
+                "client_order_id": ["[23042, 54232]"],
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            }]
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "gi": "0x10000101000203040506",
+                "co": ["[23042, 54232]"],
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            }]
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |1004|404|Data Not Found|
+        |3020|400|Sub account ID must be an uint64 integer|
+        |3021|400|Either order ID or client order ID must be supplied|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/order_group' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/order_group",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/order_group' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/order_group",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/order_group' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/order_group",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/order_group' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/order_group",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/order_group' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/order_group",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/order_group' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/order_group",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/order_group' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/order_group",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/order_group' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/order_group",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'"
                 },
                 "i": 123
             }

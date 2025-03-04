@@ -150,22 +150,6 @@ class GrvtRawSync(GrvtRawSyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiPreOrderCheckResponse, resp, Config(cast=[Enum]))
 
-    def cancel_trigger_order_v1(
-        self, req: types.ApiCancelOrderRequest
-    ) -> types.AckResponse | GrvtError:
-        resp = self._post(True, self.td_rpc + "/full/v1/cancel_trigger_order", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
-
-    def cancel_all_trigger_orders_v1(
-        self, req: types.ApiCancelAllOrdersRequest
-    ) -> types.AckResponse | GrvtError:
-        resp = self._post(True, self.td_rpc + "/full/v1/cancel_all_trigger_orders", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
-
     def dedust_position_v1(
         self, req: types.ApiDedustPositionRequest
     ) -> types.ApiDedustPositionResponse | GrvtError:
@@ -181,6 +165,22 @@ class GrvtRawSync(GrvtRawSyncBase):
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
+
+    def create_bulk_orders_v1(
+        self, req: types.ApiCreateBulkOrdersRequest
+    ) -> types.ApiCreateBulkOrdersResponse | GrvtError:
+        resp = self._post(True, self.td_rpc + "/full/v1/create_bulk_orders", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiCreateBulkOrdersResponse, resp, Config(cast=[Enum]))
+
+    def get_order_group_v1(
+        self, req: types.ApiGetOrderGroupRequest
+    ) -> types.ApiGetOrderGroupResponse | GrvtError:
+        resp = self._post(True, self.td_rpc + "/full/v1/order_group", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiGetOrderGroupResponse, resp, Config(cast=[Enum]))
 
     def fill_history_v1(
         self, req: types.ApiFillHistoryRequest
