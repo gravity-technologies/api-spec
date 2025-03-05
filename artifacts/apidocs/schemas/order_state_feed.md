@@ -54,3 +54,4 @@
             |`EXCEED_MAX_SIGNATURE_EXPIRATION` = 27|the signature supplied is more than 30 days in the future|
             |`MARKET_ORDER_WITH_LIMIT_PRICE` = 28|the market order has a limit price set|
             |`CLIENT_CANCEL_ON_DISCONNECT_TRIGGERED` = 29|client cancel on disconnect triggered|
+            |`OCO_COUNTER_PART_TRIGGERED` = 30|the OCO counter part order was triggered|

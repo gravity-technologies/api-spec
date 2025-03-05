@@ -1214,93 +1214,6 @@
           ]
         },
         {
-          "namespace": "Order",
-          "name": "RPCCancelTriggerOrderV1",
-          "version": 1,
-          "route": "/cancel_trigger_order",
-          "auth_required": true,
-          "request": "ApiCancelOrderRequest",
-          "response": "AckResponse",
-          "on_request_errors": [
-            {
-              "code": 1000,
-              "message": "You need to authenticate prior to using this functionality",
-              "status": 401
-            },
-            {
-              "code": 1001,
-              "message": "You are not authorized to access this functionality",
-              "status": 403
-            },
-            {
-              "code": 1002,
-              "message": "Internal Server Error",
-              "status": 500
-            },
-            {
-              "code": 1003,
-              "message": "Request could not be processed due to malformed syntax",
-              "status": 400
-            },
-            {
-              "code": 1006,
-              "message": "You have surpassed the allocated rate limit for your tier",
-              "status": 429
-            },
-            {
-              "code": 1008,
-              "message": "Your IP has not been whitelisted for access",
-              "status": 401
-            },
-            {
-              "code": 3021,
-              "message": "Either order ID or client order ID must be supplied",
-              "status": 400
-            }
-          ]
-        },
-        {
-          "namespace": "Order",
-          "name": "RPCCancelAllTriggerOrdersV1",
-          "version": 1,
-          "route": "/cancel_all_trigger_orders",
-          "auth_required": true,
-          "request": "ApiCancelAllOrdersRequest",
-          "response": "AckResponse",
-          "on_request_errors": [
-            {
-              "code": 1000,
-              "message": "You need to authenticate prior to using this functionality",
-              "status": 401
-            },
-            {
-              "code": 1001,
-              "message": "You are not authorized to access this functionality",
-              "status": 403
-            },
-            {
-              "code": 1002,
-              "message": "Internal Server Error",
-              "status": 500
-            },
-            {
-              "code": 1003,
-              "message": "Request could not be processed due to malformed syntax",
-              "status": 400
-            },
-            {
-              "code": 1006,
-              "message": "You have surpassed the allocated rate limit for your tier",
-              "status": 429
-            },
-            {
-              "code": 1008,
-              "message": "Your IP has not been whitelisted for access",
-              "status": 401
-            }
-          ]
-        },
-        {
           "namespace": "Position",
           "name": "RPCDedustPositionV1",
           "version": 1,
@@ -1573,6 +1486,323 @@
             {
               "code": 6000,
               "message": "Countdown time is bigger than 300s supported",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Order",
+          "name": "RPCCreateBulkOrdersV1",
+          "version": 1,
+          "route": "/create_bulk_orders",
+          "auth_required": true,
+          "request": "ApiCreateBulkOrdersRequest",
+          "response": "ApiCreateBulkOrdersResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 1005,
+              "message": "Unknown Error",
+              "status": 500
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1400,
+              "message": "Signer does not have trade permission",
+              "status": 403
+            },
+            {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
+            },
+            {
+              "code": 2000,
+              "message": "Order signature is from an unauthorized signer",
+              "status": 403
+            },
+            {
+              "code": 2001,
+              "message": "Order signature has expired",
+              "status": 403
+            },
+            {
+              "code": 2002,
+              "message": "Order signature does not match payload",
+              "status": 403
+            },
+            {
+              "code": 2003,
+              "message": "Order sub account does not match logged in user",
+              "status": 403
+            },
+            {
+              "code": 2004,
+              "message": "Order signature is from an expired session key",
+              "status": 403
+            },
+            {
+              "code": 2006,
+              "message": "Order signature R/S must have exactly 64 characters long without 0x prefix",
+              "status": 403
+            },
+            {
+              "code": 2005,
+              "message": "Order signature V must be 27/28",
+              "status": 403
+            },
+            {
+              "code": 2007,
+              "message": "Order signature S must be in the lower half of the curve",
+              "status": 403
+            },
+            {
+              "code": 2010,
+              "message": "Order ID should be empty when creating an order",
+              "status": 400
+            },
+            {
+              "code": 2011,
+              "message": "Client Order ID should be supplied when creating an order",
+              "status": 400
+            },
+            {
+              "code": 2012,
+              "message": "Client Order ID overlaps with existing active order",
+              "status": 400
+            },
+            {
+              "code": 2030,
+              "message": "Orderbook Orders must have a TimeInForce of GTT/IOC/FOK",
+              "status": 400
+            },
+            {
+              "code": 2031,
+              "message": "RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK",
+              "status": 400
+            },
+            {
+              "code": 2032,
+              "message": "Post Only can only be set to true for GTT/AON orders",
+              "status": 400
+            },
+            {
+              "code": 2020,
+              "message": "Market Order must always be supplied without a limit price",
+              "status": 400
+            },
+            {
+              "code": 2021,
+              "message": "Limit Order must always be supplied with a limit price",
+              "status": 400
+            },
+            {
+              "code": 2040,
+              "message": "Order must contain at least one leg",
+              "status": 400
+            },
+            {
+              "code": 2041,
+              "message": "Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice",
+              "status": 400
+            },
+            {
+              "code": 2042,
+              "message": "Orderbook Orders must contain only one leg",
+              "status": 400
+            },
+            {
+              "code": 2050,
+              "message": "Order state must be empty upon creation",
+              "status": 400
+            },
+            {
+              "code": 2051,
+              "message": "Order execution metadata must be empty upon creation",
+              "status": 400
+            },
+            {
+              "code": 2060,
+              "message": "Order Legs contain one or more inactive derivative",
+              "status": 400
+            },
+            {
+              "code": 2061,
+              "message": "Unsupported Instrument Requested",
+              "status": 400
+            },
+            {
+              "code": 2062,
+              "message": "Order size smaller than min size",
+              "status": 400
+            },
+            {
+              "code": 2063,
+              "message": "Order size smaller than min block size in block trade venue",
+              "status": 400
+            },
+            {
+              "code": 2064,
+              "message": "Invalid limit price tick",
+              "status": 400
+            },
+            {
+              "code": 2065,
+              "message": "Order size too granular",
+              "status": 400
+            },
+            {
+              "code": 2070,
+              "message": "Liquidation Order is not supported",
+              "status": 400
+            },
+            {
+              "code": 2080,
+              "message": "Insufficient margin to create order",
+              "status": 400
+            },
+            {
+              "code": 2081,
+              "message": "Order Fill would result in exceeding maximum position size",
+              "status": 400
+            },
+            {
+              "code": 2082,
+              "message": "Pre-order check failed",
+              "status": 400
+            },
+            {
+              "code": 2083,
+              "message": "Order Fill would result in exceeding maximum position size under current configurable leverage tier",
+              "status": 400
+            },
+            {
+              "code": 2090,
+              "message": "Max open orders exceeded",
+              "status": 429
+            },
+            {
+              "code": 2110,
+              "message": "Invalid trigger by",
+              "status": 400
+            },
+            {
+              "code": 2111,
+              "message": "Unsupported trigger by",
+              "status": 400
+            },
+            {
+              "code": 2112,
+              "message": "Invalid trigger order",
+              "status": 400
+            },
+            {
+              "code": 2220,
+              "message": "No orders provided",
+              "status": 400
+            },
+            {
+              "code": 2221,
+              "message": "Invalid number of orders",
+              "status": 400
+            },
+            {
+              "code": 2222,
+              "message": "Order is not a TPSL order",
+              "status": 400
+            },
+            {
+              "code": 2223,
+              "message": "Unsupported bulk order type",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Order",
+          "name": "RPCGetOrderGroupV1",
+          "version": 1,
+          "route": "/order_group",
+          "auth_required": true,
+          "request": "ApiGetOrderGroupRequest",
+          "response": "ApiGetOrderGroupResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 3020,
+              "message": "Sub account ID must be an uint64 integer",
+              "status": 400
+            },
+            {
+              "code": 3021,
+              "message": "Either order ID or client order ID must be supplied",
               "status": 400
             }
           ]
@@ -2386,6 +2616,66 @@
             {
               "code": 1102,
               "message": "Wrong number of primary selectors",
+              "status": 400
+            },
+            {
+              "code": 1103,
+              "message": "Wrong number of secondary selectors",
+              "status": 400
+            },
+            {
+              "code": 3000,
+              "message": "Instrument is invalid",
+              "status": 400
+            },
+            {
+              "code": 3020,
+              "message": "Sub account ID must be an uint64 integer",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Order",
+          "name": "StreamOrderGroupV1",
+          "channel": "v1.group",
+          "auth_required": true,
+          "feed_selector": "WSOrderGroupFeedSelectorV1",
+          "feed": "WSOrderGroupFeedDataV1",
+          "on_subscribe_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1101,
+              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "status": 400
+            },
+            {
+              "code": 1102,
+              "message": "Wrong number of primary selectors",
+              "status": 400
+            },
+            {
+              "code": 1103,
+              "message": "Wrong number of secondary selectors",
               "status": 400
             },
             {
@@ -8303,7 +8593,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
-          "default": "'0'",
+          "default": "'100'",
           "example": "'500'",
           "comment": [
             "Specifies the time-to-live (in milliseconds) for this cancellation.",
@@ -8311,7 +8601,7 @@
             "This mechanism helps mitigate time-of-flight issues where cancellations might arrive before the corresponding orders.",
             "Hence, cancellation by `order_id` ignores this field as the exchange can only assign `order_id`s to already-processed order creations.",
             "The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `'670'` -\u003e `'600'`, `'30'` -\u003e `'0'`) and capped at 5 seconds (i.e., `'5000'`).",
-            "Value of `'0'` or omission disables the TTL mechanism, so only orders already existing in matching engine state at request time will be searched.",
+            "Value of `'0'` or omission results in the default time-to-live value being applied.",
             "If the caller requests multiple successive cancellations for a given order, such that the time-to-live windows overlap, only the first request will be considered.",
             ""
           ]
@@ -9125,6 +9415,54 @@
       "comment": []
     },
     {
+      "name": "ApiCreateBulkOrdersRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "orders",
+          "lite_name": "o",
+          "semantic_type": "Order",
+          "json_type": "Order",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The orders to create"
+          ]
+        }
+      ],
+      "comment": [
+        "Create multiple orders simultaneously for this trading account.",
+        "",
+        "This endpoint supports the following order scenarios:",
+        "- One-Cancels-Other (OCO) orders combining TP/SL",
+        "- One-Sends-Other (OSO) orders",
+        "",
+        "Usage:",
+        "- For OCO (TP/SL pair): Send exactly 2 orders in the same request - one Take Profit and one Stop Loss order",
+        "- For OSO: Send exactly one main order and one contingent order (TP and/or SL)"
+      ]
+    },
+    {
+      "name": "ApiCreateBulkOrdersResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "Order",
+          "json_type": "Order",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The created orders in same order as requested"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiCancelOnDisconnectRequest",
       "is_root": true,
       "fields": [
@@ -9175,6 +9513,101 @@
         "",
         "If the server does not receive a heartbeat message within the countdown time, it will cancel all open orders for the specified Sub Account ID."
       ]
+    },
+    {
+      "name": "ApiGetOrderGroupRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID for which the order groups should be retrieved."
+          ]
+        }
+      ],
+      "comment": [
+        "Retrieves the grouping of non-cancelled, non-filled client orders for a given subaccount when the grouping exist.",
+        "",
+        "helping to identify TP/SL pairs or other order relationships within the account."
+      ]
+    },
+    {
+      "name": "ClientOrderIDsByGroup",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "group_id",
+          "lite_name": "gi",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0x10000101000203040506'",
+          "comment": [
+            "The group this order belongs to. It can be used to define TP/SL pairs or other order groupings"
+          ]
+        },
+        {
+          "name": "client_order_id",
+          "lite_name": "co",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "example": "'[23042, 54232]'",
+          "comment": [
+            "List of client order IDs in the group"
+          ]
+        },
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID that these orders belong to"
+          ]
+        }
+      ],
+      "comment": [
+        "Grouping for the client order id and their associated groups.",
+        "",
+        "This is used to define TP/SL pairs or other order groupings after loading the list of Open Orders."
+      ]
+    },
+    {
+      "name": "ApiGetOrderGroupResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "ClientOrderIDsByGroup",
+          "json_type": "ClientOrderIDsByGroup",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "A list of client orders grouped by their associated order group.",
+            "Each entry in the list contains a `groupID` and the corresponding `clientOrderID`s",
+            "that belong to that group."
+          ]
+        }
+      ],
+      "comment": []
     },
     {
       "name": "ApiGetUserEcosystemPointRequest",
@@ -9367,6 +9800,19 @@
           "example": "'52'",
           "comment": [
             "The rank of the account in the ecosystem"
+          ]
+        },
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 11,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1'",
+          "comment": [
+            "The epoch number of the ecosystem point"
           ]
         }
       ],
@@ -9895,6 +10341,145 @@
           "optional": false,
           "comment": [
             "The list of ecosystem leaderboard users"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "QueryFindEpochRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "time",
+          "lite_name": "t",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "1714329600000000000",
+          "comment": [
+            "The time to query the epoch"
+          ]
+        },
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "1",
+          "comment": [
+            "The epoch number"
+          ]
+        }
+      ],
+      "comment": [
+        "Query epoch by time or epoch number"
+      ]
+    },
+    {
+      "name": "Epoch",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The epoch number"
+          ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The start time of the epoch"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The end time of the epoch"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "QueryFindEpochResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "epoch",
+          "lite_name": "e",
+          "semantic_type": "Epoch",
+          "json_type": "Epoch",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The epoch"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "QueryGetListEpochRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "100",
+          "comment": [
+            "The limit to query for"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "QueryGetListEpochResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "Epoch",
+          "json_type": "Epoch",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of epochs"
           ]
         }
       ],
@@ -11068,7 +11653,7 @@
         {
           "name": "epoch",
           "lite_name": "e",
-          "semantic_type": "uint32",
+          "semantic_type": "int32",
           "json_type": "integer",
           "index": 0,
           "array_depth": 0,
@@ -11147,7 +11732,7 @@
         {
           "name": "epoch",
           "lite_name": "e",
-          "semantic_type": "uint32",
+          "semantic_type": "int32",
           "json_type": "integer",
           "index": 0,
           "array_depth": 0,
@@ -11577,6 +12162,19 @@
           "comment": [
             "The cursor to indicate when to start the next query from"
           ]
+        },
+        {
+          "name": "group_by_signer",
+          "lite_name": "gb",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "Whether to group trades by signer per sub account"
+          ]
         }
       ],
       "comment": [
@@ -11650,6 +12248,18 @@
           "example": "'10000101000203040506'",
           "comment": [
             "Total positive fee paid by user"
+          ]
+        },
+        {
+          "name": "signer",
+          "lite_name": "s",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The signer of the trade"
           ]
         }
       ],
@@ -13139,6 +13749,101 @@
       ]
     },
     {
+      "name": "WSOrderGroupFeedSelectorV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID to filter by"
+          ],
+          "selector": "primary"
+        }
+      ],
+      "comment": [
+        "Subscribes to a feed of order group to get updated when a new group is created for the subAccount specified.",
+        ""
+      ]
+    },
+    {
+      "name": "WSOrderGroupFeedDataV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.group'",
+          "comment": [
+            "Stream name"
+          ]
+        },
+        {
+          "name": "selector",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "Primary selector"
+          ]
+        },
+        {
+          "name": "sequence_number",
+          "lite_name": "sn",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634876'",
+          "comment": [
+            "A running sequence number that determines global message order within the specific stream"
+          ]
+        },
+        {
+          "name": "feed",
+          "lite_name": "f",
+          "semantic_type": "ClientOrderIDsByGroup",
+          "json_type": "ClientOrderIDsByGroup",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The order object being created or updated"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines global message order within the specific stream"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiWithdrawalRequest",
       "is_root": true,
       "fields": [
@@ -13966,6 +14671,13 @@
           "comment": [
             "Cancellation has expired because corresponding order had not arrived within the defined time-to-live window."
           ]
+        },
+        {
+          "name": "DROPPED_DUPLICATE",
+          "value": 2,
+          "comment": [
+            "This cancellation request was dropped because its TTL window overlaps with another cancellation request for the same order."
+          ]
         }
       ],
       "comment": []
@@ -14404,6 +15116,13 @@
           "comment": [
             "the UXLINK token"
           ]
+        },
+        {
+          "name": "KAITO",
+          "value": 39,
+          "comment": [
+            "the KAITO token"
+          ]
         }
       ],
       "comment": [
@@ -14808,6 +15527,13 @@
           "value": 29,
           "comment": [
             "client cancel on disconnect triggered"
+          ]
+        },
+        {
+          "name": "OCO_COUNTER_PART_TRIGGERED",
+          "value": 30,
+          "comment": [
+            "the OCO counter part order was triggered"
           ]
         }
       ],
