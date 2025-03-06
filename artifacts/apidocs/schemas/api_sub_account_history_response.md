@@ -47,7 +47,6 @@
             |`SUI` = 21|the SUI token|
             |`FARTCOIN` = 28|the FARTCOIN token|
             |`BERA` = 35|the BERA token|
-            |`KAITO` = 39|the KAITO token|
         ??? info "[SpotBalance](/../../schemas/spot_balance)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
@@ -78,7 +77,6 @@
                 |`SUI` = 21|the SUI token|
                 |`FARTCOIN` = 28|the FARTCOIN token|
                 |`BERA` = 35|the BERA token|
-                |`KAITO` = 39|the KAITO token|
         ??? info "[Positions](/../../schemas/positions)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|

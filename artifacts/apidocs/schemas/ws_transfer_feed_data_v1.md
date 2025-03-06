@@ -45,7 +45,6 @@
             |`SUI` = 21|the SUI token|
             |`FARTCOIN` = 28|the FARTCOIN token|
             |`BERA` = 35|the BERA token|
-            |`KAITO` = 39|the KAITO token|
         ??? info "[Signature](/../../schemas/signature)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
