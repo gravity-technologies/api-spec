@@ -18,3 +18,5 @@
         |calculate_from<br>`cf` |string|True|Start time of the epoch - phase|
         |calculate_to<br>`ct` |string|True|End time of the epoch - phase|
         |rank<br>`r` |integer|True|The rank of the account in the ecosystem|
+        |epoch<br>`e` |integer|True|The epoch number of the ecosystem point|
+        |brokered_trading_volume<br>`bt` |string|True|Brokered trading volume|

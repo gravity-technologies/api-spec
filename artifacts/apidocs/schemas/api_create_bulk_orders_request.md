@@ -1,10 +1,9 @@
-!!! info "[ApiPreOrderCheckRequest](/../../schemas/api_pre_order_check_request)"
-    Get pre-order check information for a new order<br>
+!!! info "[ApiCreateBulkOrdersRequest](/../../schemas/api_create_bulk_orders_request)"
+    Create multiple orders simultaneously for this trading account.<br><br>This endpoint supports the following order scenarios:<br>- One-Cancels-Other (OCO) orders combining TP/SL<br>- One-Sends-Other (OSO) orders<br><br>Usage:<br>- For OCO (TP/SL pair): Send exactly 2 orders in the same request - one Take Profit and one Stop Loss order<br>- For OSO: Send exactly one main order and one contingent order (TP and/or SL)<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |sub_account_id<br>`sa` |string|True|The subaccount ID of orders to query|
-    |orders<br>`o` |[Order]|True|The order to do pre-order check|
+    |orders<br>`o` |[Order]|True|The orders to create|
     ??? info "[Order](/../../schemas/order)"
         Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 

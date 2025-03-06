@@ -12,6 +12,7 @@
     |is_maker<br>`im` |boolean|True|Filter on the maker of the trade|
     |is_taker<br>`it` |boolean|True|Filter on the taker of the trade|
     |cursor<br>`c` |string|False<br>``|The cursor to indicate when to start the next query from|
+    |group_by_signer<br>`gb` |boolean|True|Whether to group trades by signer per sub account|
     ??? info "[SubAccountTradeInterval](/../../schemas/sub_account_trade_interval)"
         |Value| Description |
         |-|-|
