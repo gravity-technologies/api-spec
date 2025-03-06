@@ -8593,7 +8593,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
-          "default": "'0'",
+          "default": "100",
           "example": "'500'",
           "comment": [
             "Specifies the time-to-live (in milliseconds) for this cancellation.",
@@ -8601,7 +8601,7 @@
             "This mechanism helps mitigate time-of-flight issues where cancellations might arrive before the corresponding orders.",
             "Hence, cancellation by `order_id` ignores this field as the exchange can only assign `order_id`s to already-processed order creations.",
             "The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `'670'` -\u003e `'600'`, `'30'` -\u003e `'0'`) and capped at 5 seconds (i.e., `'5000'`).",
-            "Value of `'0'` or omission disables the TTL mechanism, so only orders already existing in matching engine state at request time will be searched.",
+            "Value of `'0'` or omission results in the default time-to-live value being applied.",
             "If the caller requests multiple successive cancellations for a given order, such that the time-to-live windows overlap, only the first request will be considered.",
             ""
           ]
@@ -9813,6 +9813,19 @@
           "example": "'1'",
           "comment": [
             "The epoch number of the ecosystem point"
+          ]
+        },
+        {
+          "name": "brokered_trading_volume",
+          "lite_name": "bt",
+          "semantic_type": "uint256",
+          "json_type": "string",
+          "index": 12,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10000101000203040506'",
+          "comment": [
+            "Brokered trading volume"
           ]
         }
       ],
@@ -15115,6 +15128,13 @@
           "value": 38,
           "comment": [
             "the UXLINK token"
+          ]
+        },
+        {
+          "name": "KAITO",
+          "value": 39,
+          "comment": [
+            "the KAITO token"
           ]
         }
       ],
