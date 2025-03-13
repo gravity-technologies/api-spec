@@ -139,7 +139,7 @@ STREAM: v1.order
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "COIN_ROUTES"
+                    "broker": "UNSPECIFIED"
                 },
                 "state": {
                     "status": "PENDING",
@@ -189,7 +189,7 @@ STREAM: v1.order
                             "tp": "65038.10"
                         }
                     },
-                    "b": "COIN_ROUTES"
+                    "b": "UNSPECIFIED"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2600,7 +2600,7 @@ STREAM: v1.fill
                 "venue": "ORDERBOOK",
                 "client_order_id": "23042",
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "broker": "COIN_ROUTES"
+                "broker": "UNSPECIFIED"
             }
         }
         ```
@@ -2630,7 +2630,7 @@ STREAM: v1.fill
                 "v": "ORDERBOOK",
                 "co": "23042",
                 "s1": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "b": "COIN_ROUTES"
+                "b": "UNSPECIFIED"
             }
         }
         ```
