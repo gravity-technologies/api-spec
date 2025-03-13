@@ -47,7 +47,7 @@ LITE ENDPOINT: lite/v1/create_order
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "COIN_ROUTES"
+                    "broker": "UNSPECIFIED"
                 }
             }
         }
@@ -85,7 +85,7 @@ LITE ENDPOINT: lite/v1/create_order
                             "tp": "65038.10"
                         }
                     },
-                    "b": "COIN_ROUTES"
+                    "b": "UNSPECIFIED"
                 }
             }
         }
@@ -131,7 +131,7 @@ LITE ENDPOINT: lite/v1/create_order
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "COIN_ROUTES"
+                    "broker": "UNSPECIFIED"
                 },
                 "state": {
                     "status": "PENDING",
@@ -178,7 +178,7 @@ LITE ENDPOINT: lite/v1/create_order
                             "tp": "65038.10"
                         }
                     },
-                    "b": "COIN_ROUTES"
+                    "b": "UNSPECIFIED"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -243,6 +243,9 @@ LITE ENDPOINT: lite/v1/create_order
         |2110|400|Invalid trigger by|
         |2111|400|Unsupported trigger by|
         |2112|400|Invalid trigger order|
+        |3004|500|Instrument does not have a valid maintenance margin configuration|
+        |3005|500|Instrument's underlying currency does not have a valid balance decimal configuration|
+        |3006|500|Instrument's quote currency does not have a valid balance decimal configuration|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -305,7 +308,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "COIN_ROUTES"
+                        "broker": "UNSPECIFIED"
                     }
                 }
             }
@@ -351,7 +354,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "COIN_ROUTES"
+                            "broker": "UNSPECIFIED"
                         }
                     }
                 },
@@ -397,7 +400,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "COIN_ROUTES"
+                        "b": "UNSPECIFIED"
                     }
                 }
             }
@@ -443,7 +446,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "COIN_ROUTES"
+                            "b": "UNSPECIFIED"
                         }
                     }
                 },
@@ -490,7 +493,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "COIN_ROUTES"
+                        "broker": "UNSPECIFIED"
                     }
                 }
             }
@@ -536,7 +539,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "COIN_ROUTES"
+                            "broker": "UNSPECIFIED"
                         }
                     }
                 },
@@ -582,7 +585,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "COIN_ROUTES"
+                        "b": "UNSPECIFIED"
                     }
                 }
             }
@@ -628,7 +631,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "COIN_ROUTES"
+                            "b": "UNSPECIFIED"
                         }
                     }
                 },
@@ -675,7 +678,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "COIN_ROUTES"
+                        "broker": "UNSPECIFIED"
                     }
                 }
             }
@@ -721,7 +724,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "COIN_ROUTES"
+                            "broker": "UNSPECIFIED"
                         }
                     }
                 },
@@ -767,7 +770,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "COIN_ROUTES"
+                        "b": "UNSPECIFIED"
                     }
                 }
             }
@@ -813,7 +816,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "COIN_ROUTES"
+                            "b": "UNSPECIFIED"
                         }
                     }
                 },
@@ -860,7 +863,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "COIN_ROUTES"
+                        "broker": "UNSPECIFIED"
                     }
                 }
             }
@@ -906,7 +909,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "COIN_ROUTES"
+                            "broker": "UNSPECIFIED"
                         }
                     }
                 },
@@ -952,7 +955,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "COIN_ROUTES"
+                        "b": "UNSPECIFIED"
                     }
                 }
             }
@@ -998,7 +1001,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "COIN_ROUTES"
+                            "b": "UNSPECIFIED"
                         }
                     }
                 },
@@ -1812,7 +1815,7 @@ LITE ENDPOINT: lite/v1/order
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "COIN_ROUTES"
+                    "broker": "UNSPECIFIED"
                 },
                 "state": {
                     "status": "PENDING",
@@ -1859,7 +1862,7 @@ LITE ENDPOINT: lite/v1/order
                             "tp": "65038.10"
                         }
                     },
-                    "b": "COIN_ROUTES"
+                    "b": "UNSPECIFIED"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2242,7 +2245,7 @@ LITE ENDPOINT: lite/v1/open_orders
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "COIN_ROUTES"
+                    "broker": "UNSPECIFIED"
                 },
                 "state": {
                     "status": "PENDING",
@@ -2289,7 +2292,7 @@ LITE ENDPOINT: lite/v1/open_orders
                             "tp": "65038.10"
                         }
                     },
-                    "b": "COIN_ROUTES"
+                    "b": "UNSPECIFIED"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2694,7 +2697,7 @@ LITE ENDPOINT: lite/v1/order_history
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "COIN_ROUTES"
+                    "broker": "UNSPECIFIED"
                 },
                 "state": {
                     "status": "PENDING",
@@ -2742,7 +2745,7 @@ LITE ENDPOINT: lite/v1/order_history
                             "tp": "65038.10"
                         }
                     },
-                    "b": "COIN_ROUTES"
+                    "b": "UNSPECIFIED"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3180,7 +3183,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "COIN_ROUTES"
+                    "broker": "UNSPECIFIED"
                 },
                 "state": {
                     "status": "PENDING",
@@ -3228,7 +3231,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "tp": "65038.10"
                         }
                     },
-                    "b": "COIN_ROUTES"
+                    "b": "UNSPECIFIED"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3292,6 +3295,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
+        |3004|500|Instrument does not have a valid maintenance margin configuration|
+        |3005|500|Instrument's underlying currency does not have a valid balance decimal configuration|
+        |3006|500|Instrument's quote currency does not have a valid balance decimal configuration|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -3356,7 +3362,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "COIN_ROUTES"
+                        "broker": "UNSPECIFIED"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3412,7 +3418,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "COIN_ROUTES"
+                            "broker": "UNSPECIFIED"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3468,7 +3474,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "COIN_ROUTES"
+                        "b": "UNSPECIFIED"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3524,7 +3530,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "COIN_ROUTES"
+                            "b": "UNSPECIFIED"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -3581,7 +3587,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "COIN_ROUTES"
+                        "broker": "UNSPECIFIED"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3637,7 +3643,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "COIN_ROUTES"
+                            "broker": "UNSPECIFIED"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3693,7 +3699,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "COIN_ROUTES"
+                        "b": "UNSPECIFIED"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3749,7 +3755,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "COIN_ROUTES"
+                            "b": "UNSPECIFIED"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -3806,7 +3812,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "COIN_ROUTES"
+                        "broker": "UNSPECIFIED"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3862,7 +3868,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "COIN_ROUTES"
+                            "broker": "UNSPECIFIED"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3918,7 +3924,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "COIN_ROUTES"
+                        "b": "UNSPECIFIED"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3974,7 +3980,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "COIN_ROUTES"
+                            "b": "UNSPECIFIED"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -4031,7 +4037,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "COIN_ROUTES"
+                        "broker": "UNSPECIFIED"
                     },
                     "state": {
                         "status": "PENDING",
@@ -4087,7 +4093,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "COIN_ROUTES"
+                            "broker": "UNSPECIFIED"
                         },
                         "state": {
                             "status": "PENDING",
@@ -4143,7 +4149,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "COIN_ROUTES"
+                        "b": "UNSPECIFIED"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -4199,7 +4205,7 @@ LITE ENDPOINT: lite/v1/pre_order_check
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "COIN_ROUTES"
+                            "b": "UNSPECIFIED"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -4594,7 +4600,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "COIN_ROUTES"
+                    "broker": "UNSPECIFIED"
                 },
                 "state": {
                     "status": "PENDING",
@@ -4641,7 +4647,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "tp": "65038.10"
                         }
                     },
-                    "b": "COIN_ROUTES"
+                    "b": "UNSPECIFIED"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -4695,7 +4701,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "COIN_ROUTES"
+                    "broker": "UNSPECIFIED"
                 },
                 "state": {
                     "status": "PENDING",
@@ -4742,7 +4748,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "tp": "65038.10"
                         }
                     },
-                    "b": "COIN_ROUTES"
+                    "b": "UNSPECIFIED"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -4807,6 +4813,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
         |2110|400|Invalid trigger by|
         |2111|400|Unsupported trigger by|
         |2112|400|Invalid trigger order|
+        |3004|500|Instrument does not have a valid maintenance margin configuration|
+        |3005|500|Instrument's underlying currency does not have a valid balance decimal configuration|
+        |3006|500|Instrument's quote currency does not have a valid balance decimal configuration|
         |2220|400|No orders provided|
         |2221|400|Invalid number of orders|
         |2222|400|Order is not a TPSL order|
@@ -4874,7 +4883,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "COIN_ROUTES"
+                        "broker": "UNSPECIFIED"
                     },
                     "state": {
                         "status": "PENDING",
@@ -4929,7 +4938,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "COIN_ROUTES"
+                            "broker": "UNSPECIFIED"
                         },
                         "state": {
                             "status": "PENDING",
@@ -4984,7 +4993,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "COIN_ROUTES"
+                        "b": "UNSPECIFIED"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -5039,7 +5048,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "COIN_ROUTES"
+                            "b": "UNSPECIFIED"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -5095,7 +5104,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "COIN_ROUTES"
+                        "broker": "UNSPECIFIED"
                     },
                     "state": {
                         "status": "PENDING",
@@ -5150,7 +5159,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "COIN_ROUTES"
+                            "broker": "UNSPECIFIED"
                         },
                         "state": {
                             "status": "PENDING",
@@ -5205,7 +5214,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "COIN_ROUTES"
+                        "b": "UNSPECIFIED"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -5260,7 +5269,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "COIN_ROUTES"
+                            "b": "UNSPECIFIED"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -5316,7 +5325,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "COIN_ROUTES"
+                        "broker": "UNSPECIFIED"
                     },
                     "state": {
                         "status": "PENDING",
@@ -5371,7 +5380,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "COIN_ROUTES"
+                            "broker": "UNSPECIFIED"
                         },
                         "state": {
                             "status": "PENDING",
@@ -5426,7 +5435,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "COIN_ROUTES"
+                        "b": "UNSPECIFIED"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -5481,7 +5490,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "COIN_ROUTES"
+                            "b": "UNSPECIFIED"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -5537,7 +5546,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "COIN_ROUTES"
+                        "broker": "UNSPECIFIED"
                     },
                     "state": {
                         "status": "PENDING",
@@ -5592,7 +5601,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "COIN_ROUTES"
+                            "broker": "UNSPECIFIED"
                         },
                         "state": {
                             "status": "PENDING",
@@ -5647,7 +5656,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "COIN_ROUTES"
+                        "b": "UNSPECIFIED"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -5702,7 +5711,7 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "COIN_ROUTES"
+                            "b": "UNSPECIFIED"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -6108,7 +6117,7 @@ LITE ENDPOINT: lite/v1/fill_history
                 "venue": "ORDERBOOK",
                 "client_order_id": "23042",
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "broker": "COIN_ROUTES"
+                "broker": "UNSPECIFIED"
             }],
             "next": "Qw0918="
         }
@@ -6136,7 +6145,7 @@ LITE ENDPOINT: lite/v1/fill_history
                 "v": "ORDERBOOK",
                 "co": "23042",
                 "s1": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
-                "b": "COIN_ROUTES"
+                "b": "UNSPECIFIED"
             }],
             "n": "Qw0918="
         }

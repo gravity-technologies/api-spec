@@ -939,6 +939,21 @@
               "code": 2112,
               "message": "Invalid trigger order",
               "status": 400
+            },
+            {
+              "code": 3004,
+              "message": "Instrument does not have a valid maintenance margin configuration",
+              "status": 500
+            },
+            {
+              "code": 3005,
+              "message": "Instrument's underlying currency does not have a valid balance decimal configuration",
+              "status": 500
+            },
+            {
+              "code": 3006,
+              "message": "Instrument's quote currency does not have a valid balance decimal configuration",
+              "status": 500
             }
           ]
         },
@@ -1210,6 +1225,21 @@
               "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
+            },
+            {
+              "code": 3004,
+              "message": "Instrument does not have a valid maintenance margin configuration",
+              "status": 500
+            },
+            {
+              "code": 3005,
+              "message": "Instrument's underlying currency does not have a valid balance decimal configuration",
+              "status": 500
+            },
+            {
+              "code": 3006,
+              "message": "Instrument's quote currency does not have a valid balance decimal configuration",
+              "status": 500
             }
           ]
         },
@@ -1728,6 +1758,21 @@
               "code": 2112,
               "message": "Invalid trigger order",
               "status": 400
+            },
+            {
+              "code": 3004,
+              "message": "Instrument does not have a valid maintenance margin configuration",
+              "status": 500
+            },
+            {
+              "code": 3005,
+              "message": "Instrument's underlying currency does not have a valid balance decimal configuration",
+              "status": 500
+            },
+            {
+              "code": 3006,
+              "message": "Instrument's quote currency does not have a valid balance decimal configuration",
+              "status": 500
             },
             {
               "code": 2220,
@@ -14650,6 +14695,11 @@
       "name": "BrokerTag",
       "values": [
         {
+          "name": "UNSPECIFIED",
+          "value": 0,
+          "comment": []
+        },
+        {
           "name": "COIN_ROUTES",
           "value": 1,
           "comment": [
@@ -15135,6 +15185,13 @@
           "value": 39,
           "comment": [
             "the KAITO token"
+          ]
+        },
+        {
+          "name": "IP",
+          "value": 40,
+          "comment": [
+            "the IP token"
           ]
         }
       ],

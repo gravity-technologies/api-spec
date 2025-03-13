@@ -16,6 +16,7 @@ class BridgeType(Enum):
 
 
 class BrokerTag(Enum):
+    UNSPECIFIED = "UNSPECIFIED"
     # CoinRoutes
     COIN_ROUTES = "COIN_ROUTES"
     # Alertatron
@@ -160,6 +161,8 @@ class Currency(Enum):
     UXLINK = "UXLINK"
     # the KAITO token
     KAITO = "KAITO"
+    # the IP token
+    IP = "IP"
 
 
 class EpochBadgeType(Enum):

@@ -60,6 +60,7 @@ IGNORE_ENUM_VALUES: dict[str, list[str]] = {
         "PENDLE",
         "UXLINK",
         "KAITO",
+        "IP",
     ],
 }
 
