@@ -1,5 +1,5 @@
 !!! info "[WSUnsubscribeParams](/../../schemas/ws_unsubscribe_params)"
-    All V1 Websocket Unsubscription Requests are housed in this wrapper. You may specify a stream, and a list of feeds to unsubscribe from.<br>
+    All V1 Websocket Unsubscription Requests are housed in this wrapper. You may specify a stream, a list of feeds and whether those feeds use global sequence numbers to unsubscribe from.<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|

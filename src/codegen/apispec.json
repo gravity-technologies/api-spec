@@ -702,6 +702,47 @@
       ],
       "rpcs": [
         {
+          "namespace": "Admin",
+          "name": "RPCDropClientWS",
+          "version": 1,
+          "route": "/drop_client_ws",
+          "auth_required": true,
+          "request": "ApiDropClientWsRequest",
+          "response": "ApiDropClientWsResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            }
+          ]
+        },
+        {
           "namespace": "Order",
           "name": "RPCCreateOrderV1",
           "version": 1,
@@ -6895,8 +6936,12 @@
         }
       ],
       "comment": [
-        "All V1 Websocket Subscription Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.",
-        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
+        "All V1 Websocket Subscription Requests are housed in this wrapper. You may specify a stream and a list of feeds to subscribe to.",
+        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.",
+        "Sequence numbers can be either gateway-specific or global:",
+        "- **Gateway Unique Sequence Number**: Increments by one per stream, resets to 0 on gateway restart.",
+        "- **Global Unique Sequence Number**: A cluster-wide unique number assigned to each cluster payload, does not reset on gateway restarts, and can be used to track and identify message order across streams using `sequence_number` and `prev_sequence_number` in the feed response.",
+        "Set `useGlobalSequenceNumber = true` if you need a persistent, unique identifier across all streams or ordering across multiple feeds."
       ]
     },
     {
@@ -7033,7 +7078,7 @@
         }
       ],
       "comment": [
-        "All V1 Websocket Unsubscription Requests are housed in this wrapper. You may specify a stream, and a list of feeds to unsubscribe from."
+        "All V1 Websocket Unsubscription Requests are housed in this wrapper. You may specify a stream, a list of feeds and whether those feeds use global sequence numbers to unsubscribe from."
       ]
     },
     {
@@ -7358,7 +7403,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -7383,7 +7433,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -7473,7 +7523,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -7498,7 +7553,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -7588,7 +7643,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -7613,7 +7673,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -7715,7 +7775,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -7740,7 +7805,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -7836,7 +7901,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -7861,7 +7931,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -9872,6 +9942,45 @@
           "comment": [
             "Brokered trading volume"
           ]
+        },
+        {
+          "name": "brokered_trading_point",
+          "lite_name": "bt1",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 13,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000'",
+          "comment": [
+            "Brokered trading point"
+          ]
+        },
+        {
+          "name": "referee_kyc_point",
+          "lite_name": "rk",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 14,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000'",
+          "comment": [
+            "Referee KYC point"
+          ]
+        },
+        {
+          "name": "referrer_kyc_point",
+          "lite_name": "rk1",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 15,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000'",
+          "comment": [
+            "Referrer KYC point"
+          ]
         }
       ],
       "comment": [
@@ -11249,6 +11358,19 @@
           "example": "'individual'",
           "comment": [
             "The KYC type, can be 'individual' or 'business'"
+          ]
+        },
+        {
+          "name": "kyc_first_completed_at",
+          "lite_name": "kf",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The first KYC completed time"
           ]
         }
       ],
@@ -12628,7 +12750,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -12653,7 +12780,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -12786,7 +12913,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -12811,7 +12943,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -12897,7 +13029,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -12922,7 +13059,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -13008,7 +13145,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -13033,7 +13175,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -13266,7 +13408,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -13291,7 +13438,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -13422,7 +13569,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -13447,7 +13599,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -13590,7 +13742,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -13615,7 +13772,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -13747,7 +13904,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -13772,7 +13934,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -13870,7 +14032,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -13895,8 +14062,42 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiDropClientWsRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiDropClientWsResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "num_dropped",
+          "lite_name": "nd",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
         }
       ],
       "comment": []

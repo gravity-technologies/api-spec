@@ -94,6 +94,14 @@ class GrvtRawSync(GrvtRawSyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiFundingRateResponse, resp, Config(cast=[Enum]))
 
+    def drop_client_ws(
+        self, req: types.ApiDropClientWsRequest
+    ) -> types.ApiDropClientWsResponse | GrvtError:
+        resp = self._post(True, self.td_rpc + "/full/v1/drop_client_ws", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiDropClientWsResponse, resp, Config(cast=[Enum]))
+
     def create_order_v1(
         self, req: types.ApiCreateOrderRequest
     ) -> types.ApiCreateOrderResponse | GrvtError:

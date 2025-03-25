@@ -20,3 +20,6 @@
         |rank<br>`r` |integer|True|The rank of the account in the ecosystem|
         |epoch<br>`e` |integer|True|The epoch number of the ecosystem point|
         |brokered_trading_volume<br>`bt` |string|True|Brokered trading volume|
+        |brokered_trading_point<br>`bt1` |string|True|Brokered trading point|
+        |referee_kyc_point<br>`rk` |string|True|Referee KYC point|
+        |referrer_kyc_point<br>`rk1` |string|True|Referrer KYC point|
