@@ -44,8 +44,15 @@
             |`XRP` = 15|the XRP token|
             |`TRUMP` = 20|the TRUMP token|
             |`SUI` = 21|the SUI token|
+            |`LINK` = 25|the LINK token|
+            |`JUP` = 27|the JUP token|
             |`FARTCOIN` = 28|the FARTCOIN token|
+            |`ENA` = 29|the ENA token|
+            |`DOGE` = 30|the DOGE token|
+            |`ADA` = 33|the ADA token|
+            |`AAVE` = 34|the AAVE token|
             |`BERA` = 35|the BERA token|
+            |`IP` = 40|the IP token|
         ??? info "[SpotBalance](/../../schemas/spot_balance)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
@@ -74,8 +81,15 @@
                 |`XRP` = 15|the XRP token|
                 |`TRUMP` = 20|the TRUMP token|
                 |`SUI` = 21|the SUI token|
+                |`LINK` = 25|the LINK token|
+                |`JUP` = 27|the JUP token|
                 |`FARTCOIN` = 28|the FARTCOIN token|
+                |`ENA` = 29|the ENA token|
+                |`DOGE` = 30|the DOGE token|
+                |`ADA` = 33|the ADA token|
+                |`AAVE` = 34|the AAVE token|
                 |`BERA` = 35|the BERA token|
+                |`IP` = 40|the IP token|
         ??? info "[Positions](/../../schemas/positions)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|

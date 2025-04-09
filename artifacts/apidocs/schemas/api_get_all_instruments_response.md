@@ -40,8 +40,15 @@
             |`XRP` = 15|the XRP token|
             |`TRUMP` = 20|the TRUMP token|
             |`SUI` = 21|the SUI token|
+            |`LINK` = 25|the LINK token|
+            |`JUP` = 27|the JUP token|
             |`FARTCOIN` = 28|the FARTCOIN token|
+            |`ENA` = 29|the ENA token|
+            |`DOGE` = 30|the DOGE token|
+            |`ADA` = 33|the ADA token|
+            |`AAVE` = 34|the AAVE token|
             |`BERA` = 35|the BERA token|
+            |`IP` = 40|the IP token|
         ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 
@@ -64,8 +71,15 @@
             |`XRP` = 15|the XRP token|
             |`TRUMP` = 20|the TRUMP token|
             |`SUI` = 21|the SUI token|
+            |`LINK` = 25|the LINK token|
+            |`JUP` = 27|the JUP token|
             |`FARTCOIN` = 28|the FARTCOIN token|
+            |`ENA` = 29|the ENA token|
+            |`DOGE` = 30|the DOGE token|
+            |`ADA` = 33|the ADA token|
+            |`AAVE` = 34|the AAVE token|
             |`BERA` = 35|the BERA token|
+            |`IP` = 40|the IP token|
         ??? info "[Kind](/../../schemas/kind)"
             The list of asset kinds that are supported on the GRVT exchange<br>
 

@@ -7,6 +7,7 @@
     |selector<br>`s1` |string|True|Primary selector|
     |sequence_number<br>`sn` |string|True|A sequence number used to determine message order within a stream.<br>- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.<br>- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.<br>  - A single cluster payload can be multiplexed into multiple stream payloads.<br>  - To distinguish each stream payload, a `dedupCounter` is included.<br>  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.|
     |feed<br>`f` |Deposit|True|The Deposit object|
+    |prev_sequence_number<br>`ps` |string|True|The previous sequence number that determines the message order|
     ??? info "[Deposit](/../../schemas/deposit)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
@@ -36,5 +37,12 @@
             |`XRP` = 15|the XRP token|
             |`TRUMP` = 20|the TRUMP token|
             |`SUI` = 21|the SUI token|
+            |`LINK` = 25|the LINK token|
+            |`JUP` = 27|the JUP token|
             |`FARTCOIN` = 28|the FARTCOIN token|
+            |`ENA` = 29|the ENA token|
+            |`DOGE` = 30|the DOGE token|
+            |`ADA` = 33|the ADA token|
+            |`AAVE` = 34|the AAVE token|
             |`BERA` = 35|the BERA token|
+            |`IP` = 40|the IP token|
