@@ -41,13 +41,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 }
             }
         }
@@ -79,13 +79,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 }
             }
         }
@@ -125,13 +125,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -172,13 +172,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -302,13 +302,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     }
                 }
             }
@@ -348,13 +348,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         }
                     }
                 },
@@ -394,13 +394,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     }
                 }
             }
@@ -440,13 +440,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         }
                     }
                 },
@@ -487,13 +487,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     }
                 }
             }
@@ -533,13 +533,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         }
                     }
                 },
@@ -579,13 +579,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     }
                 }
             }
@@ -625,13 +625,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         }
                     }
                 },
@@ -672,13 +672,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     }
                 }
             }
@@ -718,13 +718,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         }
                     }
                 },
@@ -764,13 +764,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     }
                 }
             }
@@ -810,13 +810,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         }
                     }
                 },
@@ -857,13 +857,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     }
                 }
             }
@@ -903,13 +903,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         }
                     }
                 },
@@ -949,13 +949,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     }
                 }
             }
@@ -995,13 +995,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         }
                     }
                 },
@@ -1809,13 +1809,13 @@ LITE ENDPOINT: lite/v1/order
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -1856,13 +1856,13 @@ LITE ENDPOINT: lite/v1/order
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2239,13 +2239,13 @@ LITE ENDPOINT: lite/v1/open_orders
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -2286,13 +2286,13 @@ LITE ENDPOINT: lite/v1/open_orders
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2691,13 +2691,13 @@ LITE ENDPOINT: lite/v1/order_history
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -2739,13 +2739,13 @@ LITE ENDPOINT: lite/v1/order_history
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3177,13 +3177,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -3225,13 +3225,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3356,13 +3356,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3412,13 +3412,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3468,13 +3468,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3524,13 +3524,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -3581,13 +3581,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3637,13 +3637,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3693,13 +3693,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3749,13 +3749,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -3806,13 +3806,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3862,13 +3862,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3918,13 +3918,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3974,13 +3974,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -4031,13 +4031,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -4087,13 +4087,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -4143,13 +4143,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -4199,13 +4199,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -4594,13 +4594,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -4641,13 +4641,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -4695,13 +4695,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -4742,13 +4742,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -4877,13 +4877,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -4932,13 +4932,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -4987,13 +4987,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -5042,13 +5042,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -5098,13 +5098,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -5153,13 +5153,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -5208,13 +5208,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -5263,13 +5263,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -5319,13 +5319,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -5374,13 +5374,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -5429,13 +5429,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -5484,13 +5484,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -5540,13 +5540,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -5595,13 +5595,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -5650,13 +5650,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -5705,13 +5705,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -7353,7 +7353,8 @@ LITE ENDPOINT: lite/v1/deposit_history
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
-            "cursor": ""
+            "cursor": "",
+            "main_account_id": null
         }
         ```
         **Lite Request**
@@ -7363,7 +7364,8 @@ LITE ENDPOINT: lite/v1/deposit_history
             "st": "1697788800000000000",
             "et": "1697788800000000000",
             "l": 500,
-            "c1": ""
+            "c1": "",
+            "ma": null
         }
         ```
     </section>
@@ -7453,7 +7455,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -7471,7 +7474,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -7489,7 +7493,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -7507,7 +7512,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -7526,7 +7532,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -7544,7 +7551,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -7562,7 +7570,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -7580,7 +7589,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -7599,7 +7609,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -7617,7 +7628,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -7635,7 +7647,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -7653,7 +7666,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -7672,7 +7686,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -7690,7 +7705,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -7708,7 +7724,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -7726,7 +7743,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -8342,7 +8360,8 @@ LITE ENDPOINT: lite/v1/transfer_history
             "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": "",
-            "tx_id": "1028403"
+            "tx_id": "1028403",
+            "main_account_id": null
         }
         ```
         **Lite Request**
@@ -8353,7 +8372,8 @@ LITE ENDPOINT: lite/v1/transfer_history
             "et": "1697788800000000000",
             "l": 500,
             "c1": "",
-            "ti": "1028403"
+            "ti": "1028403",
+            "ma": null
         }
         ```
     </section>
@@ -8464,7 +8484,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "end_time": "1697788800000000000",
                 "limit": 500,
                 "cursor": "",
-                "tx_id": "1028403"
+                "tx_id": "1028403",
+                "main_account_id": null
             }
             '
             ```
@@ -8483,7 +8504,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "end_time": "1697788800000000000",
                     "limit": 500,
                     "cursor": "",
-                    "tx_id": "1028403"
+                    "tx_id": "1028403",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -8502,7 +8524,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "et": "1697788800000000000",
                 "l": 500,
                 "c1": "",
-                "ti": "1028403"
+                "ti": "1028403",
+                "ma": null
             }
             '
             ```
@@ -8521,7 +8544,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "et": "1697788800000000000",
                     "l": 500,
                     "c1": "",
-                    "ti": "1028403"
+                    "ti": "1028403",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -8541,7 +8565,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "end_time": "1697788800000000000",
                 "limit": 500,
                 "cursor": "",
-                "tx_id": "1028403"
+                "tx_id": "1028403",
+                "main_account_id": null
             }
             '
             ```
@@ -8560,7 +8585,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "end_time": "1697788800000000000",
                     "limit": 500,
                     "cursor": "",
-                    "tx_id": "1028403"
+                    "tx_id": "1028403",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -8579,7 +8605,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "et": "1697788800000000000",
                 "l": 500,
                 "c1": "",
-                "ti": "1028403"
+                "ti": "1028403",
+                "ma": null
             }
             '
             ```
@@ -8598,7 +8625,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "et": "1697788800000000000",
                     "l": 500,
                     "c1": "",
-                    "ti": "1028403"
+                    "ti": "1028403",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -8618,7 +8646,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "end_time": "1697788800000000000",
                 "limit": 500,
                 "cursor": "",
-                "tx_id": "1028403"
+                "tx_id": "1028403",
+                "main_account_id": null
             }
             '
             ```
@@ -8637,7 +8666,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "end_time": "1697788800000000000",
                     "limit": 500,
                     "cursor": "",
-                    "tx_id": "1028403"
+                    "tx_id": "1028403",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -8656,7 +8686,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "et": "1697788800000000000",
                 "l": 500,
                 "c1": "",
-                "ti": "1028403"
+                "ti": "1028403",
+                "ma": null
             }
             '
             ```
@@ -8675,7 +8706,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "et": "1697788800000000000",
                     "l": 500,
                     "c1": "",
-                    "ti": "1028403"
+                    "ti": "1028403",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -8695,7 +8727,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "end_time": "1697788800000000000",
                 "limit": 500,
                 "cursor": "",
-                "tx_id": "1028403"
+                "tx_id": "1028403",
+                "main_account_id": null
             }
             '
             ```
@@ -8714,7 +8747,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "end_time": "1697788800000000000",
                     "limit": 500,
                     "cursor": "",
-                    "tx_id": "1028403"
+                    "tx_id": "1028403",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -8733,7 +8767,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "et": "1697788800000000000",
                 "l": 500,
                 "c1": "",
-                "ti": "1028403"
+                "ti": "1028403",
+                "ma": null
             }
             '
             ```
@@ -8752,7 +8787,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "et": "1697788800000000000",
                     "l": 500,
                     "c1": "",
-                    "ti": "1028403"
+                    "ti": "1028403",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -9290,7 +9326,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
-            "cursor": ""
+            "cursor": "",
+            "main_account_id": null
         }
         ```
         **Lite Request**
@@ -9300,7 +9337,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             "st": "1697788800000000000",
             "et": "1697788800000000000",
             "l": 500,
-            "c1": ""
+            "c1": "",
+            "ma": null
         }
         ```
     </section>
@@ -9402,7 +9440,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -9420,7 +9459,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -9438,7 +9478,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -9456,7 +9497,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -9475,7 +9517,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -9493,7 +9536,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -9511,7 +9555,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -9529,7 +9574,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -9548,7 +9594,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -9566,7 +9613,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -9584,7 +9632,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -9602,7 +9651,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -9621,7 +9671,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -9639,7 +9690,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -9657,7 +9709,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -9675,7 +9728,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }

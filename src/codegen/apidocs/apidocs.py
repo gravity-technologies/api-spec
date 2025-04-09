@@ -36,6 +36,9 @@ IGNORE_FIELDS_ANY_PATH = [
 
 IGNORE_RPCS: list[str] = [
     "RPCDedustPositionV1",
+    "RPCDropClientWS",
+    "RPCGetMarginTiersV1",
+    "RPCQueryTradingPerformanceV1",
 ]
 
 IGNORE_ENUM_VALUES: dict[str, list[str]] = {
@@ -47,20 +50,13 @@ IGNORE_ENUM_VALUES: dict[str, list[str]] = {
         "KSHIB",
         "POPCAT",
         "PENGU",
-        "LINK",
         "KBONK",
-        "JUP",
-        "ENA",
-        "DOGE",
         "AIXBT",
         "AI_16_Z",
-        "ADA",
-        "AAVE",
         "VINE",
         "PENDLE",
         "UXLINK",
         "KAITO",
-        "IP",
     ],
 }
 

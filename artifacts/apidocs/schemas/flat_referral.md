@@ -13,3 +13,4 @@
     |is_kyc_completed<br>`ik` |boolean|True|The account is KYC verified or not|
     |kyc_completed_at<br>`kc` |string|True|The KYC completed time|
     |kyc_type<br>`kt` |string|True|The KYC type, can be 'individual' or 'business'|
+    |kyc_first_completed_at<br>`kf` |string|True|The first KYC completed time|

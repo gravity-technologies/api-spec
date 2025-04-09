@@ -1,19 +1,18 @@
-!!! info "[ApiDepositHistoryResponse](/../../schemas/api_deposit_history_response)"
+!!! info "[SnapFundingAccountSummary](/../../schemas/snap_funding_account_summary)"
+    The funding account summary, that reports the total equity and spot balances of a funding (main) account<br>
+
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |result<br>`r` |[DepositHistory]|True|The deposit history matching the request account|
-    |next<br>`n` |string|False<br>`''`|The cursor to indicate when to start the next query from|
-    ??? info "[DepositHistory](/../../schemas/deposit_history)"
+    |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
+    |main_account_id<br>`ma` |string|True|The main account ID of the account to which the summary belongs|
+    |total_equity<br>`te` |string|True|Total equity of the main account, denominated in USD|
+    |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this main account, and their balances|
+    ??? info "[SpotBalance](/../../schemas/spot_balance)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |l_1_hash<br>`l1` |string|True|The L1 txHash of the deposit|
-        |l_2_hash<br>`l2` |string|True|The L2 txHash of the deposit|
-        |to_account_id<br>`ta` |string|True|The account to deposit into|
-        |currency<br>`c` |Currency|True|The token currency to deposit|
-        |num_tokens<br>`nt` |string|True|The number of tokens to deposit|
-        |initiated_time<br>`it` |string|True|The timestamp when the deposit was initiated on L1 in unix nanoseconds|
-        |confirmed_time<br>`ct` |string|True|The timestamp when the deposit was confirmed on L2 in unix nanoseconds|
-        |from_address<br>`fa` |string|True|The address of the sender|
+        |currency<br>`c` |Currency|True|The currency you hold a spot balance in|
+        |balance<br>`b` |string|True|This currency's balance in this trading account.|
+        |index_price<br>`ip` |string|True|The index price of this currency. (reported in `USD`)|
         ??? info "[Currency](/../../schemas/currency)"
             The list of Currencies that are supported on the GRVT exchange<br>
 

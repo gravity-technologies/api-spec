@@ -3,7 +3,7 @@
     |-|-|-|-|
     |stream<br>`s` |string|True|Stream name|
     |selector<br>`s1` |string|True|Primary selector|
-    |sequence_number<br>`sn` |string|True|A running sequence number that determines global message order within the specific stream|
+    |sequence_number<br>`sn` |string|True|A sequence number used to determine message order within a stream.<br>- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.<br>- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.<br>  - A single cluster payload can be multiplexed into multiple stream payloads.<br>  - To distinguish each stream payload, a `dedupCounter` is included.<br>  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.|
     |feed<br>`f` |CancelStatusFeed|True|Data relating to the status of the cancellation attempt|
     ??? info "[CancelStatusFeed](/../../schemas/cancel_status_feed)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |

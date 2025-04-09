@@ -323,6 +323,8 @@ class SubAccountTradeInterval(Enum):
     SAT_1_D = "SAT_1_D"
     # 1 hour
     SAT_1_H = "SAT_1_H"
+    # 4 hour
+    SAT_4_H = "SAT_4_H"
 
 
 class TimeInForce(Enum):
@@ -1303,8 +1305,12 @@ class JSONRPCResponse:
 @dataclass
 class WSSubscribeParams:
     """
-    All V1 Websocket Subscription Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.
+    All V1 Websocket Subscription Requests are housed in this wrapper. You may specify a stream and a list of feeds to subscribe to.
     When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
+    Sequence numbers can be either gateway-specific or global:
+    - **Gateway Unique Sequence Number**: Increments by one per stream, resets to 0 on gateway restart.
+    - **Global Unique Sequence Number**: A cluster-wide unique number assigned to each cluster payload, does not reset on gateway restarts, and can be used to track and identify message order across streams using `sequence_number` and `prev_sequence_number` in the feed response.
+    Set `useGlobalSequenceNumber = true` if you need a persistent, unique identifier across all streams or ordering across multiple feeds.
     """
 
     # The channel to subscribe to (eg: ticker.s / ticker.d)
@@ -1440,11 +1446,18 @@ class WSOrderbookLevelsFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # An orderbook levels object matching the request filter
     feed: OrderbookLevels
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -1475,11 +1488,18 @@ class WSMiniTickerFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # A mini ticker matching the request filter
     feed: MiniTicker
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -1510,11 +1530,18 @@ class WSTickerFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # A ticker matching the request filter
     feed: Ticker
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -1538,11 +1565,18 @@ class WSTradeFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # A public trade matching the request filter
     feed: Trade
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -1567,11 +1601,18 @@ class WSCandlestickFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # A candlestick entry matching the request filters
     feed: Candlestick
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -1615,6 +1656,34 @@ class ApiGetAllInstrumentsRequest:
 class ApiGetAllInstrumentsResponse:
     # List of instruments
     result: list[Instrument]
+
+
+@dataclass
+class SnapFundingAccountSummary:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The main account ID of the account to which the summary belongs
+    main_account_id: str
+    # Total equity of the main account, denominated in USD
+    total_equity: str
+    # The list of spot assets owned by this main account, and their balances
+    spot_balances: list[SpotBalance]
+
+
+@dataclass
+class ApiQueryTradingPerformanceRequest:
+    # The asset to filter by
+    asset: bytes
+    # Optional: The subaccount ID to filter by
+    sub_account_id: str | None = None
+
+
+@dataclass
+class ApiQueryTradingPerformanceResponse:
+    # Trading volume in USDT
+    trading_volume: str
+    # Realized PnL in USDT
+    realized_pnl: str
 
 
 @dataclass
@@ -1711,10 +1780,10 @@ class OrderMetadata:
     When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
     """
     client_order_id: str
-    # Trigger fields are used to support any type of trigger order such as TP/SL
-    trigger: TriggerOrderMetadata
     # [Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds
     create_time: str | None = None
+    # Trigger fields are used to support any type of trigger order such as TP/SL
+    trigger: TriggerOrderMetadata | None = None
     # Specifies the broker who brokered the order
     broker: BrokerTag | None = None
 
@@ -2149,6 +2218,12 @@ class EcosystemPoint:
     epoch: int
     # Brokered trading volume
     brokered_trading_volume: str
+    # Brokered trading point
+    brokered_trading_point: str
+    # Referee KYC point
+    referee_kyc_point: str
+    # Referrer KYC point
+    referrer_kyc_point: str
 
 
 @dataclass
@@ -2441,6 +2516,8 @@ class FlatReferral:
     kyc_completed_at: str
     # The KYC type, can be 'individual' or 'business'
     kyc_type: str
+    # The first KYC completed time
+    kyc_first_completed_at: str
 
 
 @dataclass
@@ -2663,6 +2740,8 @@ class SubAccountTradeAggregation:
     positive_fee: str
     # The signer of the trade
     signer: str
+    # Realized PnL
+    realized_pnl: str
 
 
 @dataclass
@@ -2738,11 +2817,18 @@ class WSOrderFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # The order object being created or updated
     feed: Order
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -2778,11 +2864,18 @@ class WSOrderStateFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # The Order State Feed
     feed: OrderStateFeed
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -2806,11 +2899,18 @@ class WSPositionsFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # A Position being created or updated matching the request filter
     feed: Positions
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -2834,11 +2934,18 @@ class WSFillFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # A private trade matching the request filter
     feed: Fill
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -2888,11 +2995,18 @@ class WSTransferFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # The transfer history matching the requested filters
     feed: TransferHistory
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -2925,11 +3039,18 @@ class WSDepositFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # The Deposit object
     feed: Deposit
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -2964,11 +3085,18 @@ class WSWithdrawalFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # The Withdrawal object
     feed: Withdrawal
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -2994,11 +3122,18 @@ class WSCancelFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # Data relating to the status of the cancellation attempt
     feed: CancelStatusFeed
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
 
 
@@ -3034,12 +3169,46 @@ class WSOrderGroupFeedDataV1:
     stream: str
     # Primary selector
     selector: str
-    # A running sequence number that determines global message order within the specific stream
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
     sequence_number: str
     # The order object being created or updated
     feed: ClientOrderIDsByGroup
-    # The previous sequence number that determines global message order within the specific stream
+    # The previous sequence number that determines the message order
     prev_sequence_number: str
+
+
+@dataclass
+class ApiDropClientWsRequest:
+    main_account_id: str
+
+
+@dataclass
+class ApiDropClientWsResponse:
+    num_dropped: int
+
+
+@dataclass
+class MarginTierResponse:
+    lower_bound: str
+    rate: str
+
+
+@dataclass
+class AssetMarginTierResponse:
+    asset: str
+    tiers: list[MarginTierResponse]
+
+
+@dataclass
+class ApiGetMarginTiersResponse:
+    results: list[AssetMarginTierResponse]
 
 
 @dataclass
@@ -3119,6 +3288,8 @@ class ApiDepositHistoryRequest:
     limit: int | None = None
     # The cursor to indicate when to start the next query from
     cursor: str | None = None
+    # Main account ID being queried. By default, applies the requestor's main account ID.
+    main_account_id: str | None = None
 
 
 @dataclass
@@ -3170,6 +3341,8 @@ class ApiTransferHistoryRequest:
     cursor: str | None = None
     # The transaction ID to query for
     tx_id: str | None = None
+    # Main account ID being queried. By default, applies the requestor's main account ID.
+    main_account_id: str | None = None
 
 
 @dataclass
@@ -3199,6 +3372,8 @@ class ApiWithdrawalHistoryRequest:
     limit: int | None = None
     # The cursor to indicate when to start the next query from
     cursor: str | None = None
+    # Main account ID being queried. By default, applies the requestor's main account ID.
+    main_account_id: str | None = None
 
 
 @dataclass
