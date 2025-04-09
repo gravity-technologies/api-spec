@@ -136,9 +136,9 @@ STREAM: v1.order
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": TAKE_PROFIT,
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": LAST,
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
@@ -187,9 +187,9 @@ STREAM: v1.order
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": TAKE_PROFIT,
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": LAST,
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },

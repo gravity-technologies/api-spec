@@ -41,9 +41,9 @@ LITE ENDPOINT: lite/v1/create_order
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": TAKE_PROFIT,
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": LAST,
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
@@ -79,9 +79,9 @@ LITE ENDPOINT: lite/v1/create_order
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": TAKE_PROFIT,
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": LAST,
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
@@ -125,9 +125,9 @@ LITE ENDPOINT: lite/v1/create_order
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": TAKE_PROFIT,
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": LAST,
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
@@ -172,9 +172,9 @@ LITE ENDPOINT: lite/v1/create_order
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": TAKE_PROFIT,
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": LAST,
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
@@ -302,9 +302,9 @@ LITE ENDPOINT: lite/v1/create_order
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": TAKE_PROFIT,
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": LAST,
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
@@ -348,9 +348,9 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": TAKE_PROFIT,
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": LAST,
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
@@ -394,9 +394,9 @@ LITE ENDPOINT: lite/v1/create_order
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": TAKE_PROFIT,
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": LAST,
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
@@ -440,9 +440,9 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": TAKE_PROFIT,
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": LAST,
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
@@ -487,9 +487,9 @@ LITE ENDPOINT: lite/v1/create_order
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": TAKE_PROFIT,
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": LAST,
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
@@ -533,9 +533,9 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": TAKE_PROFIT,
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": LAST,
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
@@ -579,9 +579,9 @@ LITE ENDPOINT: lite/v1/create_order
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": TAKE_PROFIT,
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": LAST,
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
@@ -625,9 +625,9 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": TAKE_PROFIT,
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": LAST,
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
@@ -672,9 +672,9 @@ LITE ENDPOINT: lite/v1/create_order
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": TAKE_PROFIT,
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": LAST,
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
@@ -718,9 +718,9 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": TAKE_PROFIT,
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": LAST,
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
@@ -764,9 +764,9 @@ LITE ENDPOINT: lite/v1/create_order
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": TAKE_PROFIT,
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": LAST,
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
@@ -810,9 +810,9 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": TAKE_PROFIT,
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": LAST,
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
@@ -857,9 +857,9 @@ LITE ENDPOINT: lite/v1/create_order
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": TAKE_PROFIT,
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": LAST,
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
@@ -903,9 +903,9 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": TAKE_PROFIT,
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": LAST,
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
@@ -949,9 +949,9 @@ LITE ENDPOINT: lite/v1/create_order
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": TAKE_PROFIT,
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": LAST,
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
@@ -995,9 +995,9 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": TAKE_PROFIT,
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": LAST,
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
@@ -1809,9 +1809,9 @@ LITE ENDPOINT: lite/v1/order
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": TAKE_PROFIT,
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": LAST,
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
@@ -1856,9 +1856,9 @@ LITE ENDPOINT: lite/v1/order
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": TAKE_PROFIT,
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": LAST,
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
@@ -2239,9 +2239,9 @@ LITE ENDPOINT: lite/v1/open_orders
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": TAKE_PROFIT,
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": LAST,
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
@@ -2286,9 +2286,9 @@ LITE ENDPOINT: lite/v1/open_orders
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": TAKE_PROFIT,
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": LAST,
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
@@ -2691,9 +2691,9 @@ LITE ENDPOINT: lite/v1/order_history
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": TAKE_PROFIT,
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": LAST,
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
@@ -2739,9 +2739,9 @@ LITE ENDPOINT: lite/v1/order_history
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": TAKE_PROFIT,
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": LAST,
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
@@ -3177,9 +3177,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": TAKE_PROFIT,
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": LAST,
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
@@ -3225,9 +3225,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": TAKE_PROFIT,
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": LAST,
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
@@ -3356,9 +3356,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": TAKE_PROFIT,
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": LAST,
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
@@ -3412,9 +3412,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": TAKE_PROFIT,
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": LAST,
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
@@ -3468,9 +3468,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": TAKE_PROFIT,
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": LAST,
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
@@ -3524,9 +3524,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": TAKE_PROFIT,
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": LAST,
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
@@ -3581,9 +3581,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": TAKE_PROFIT,
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": LAST,
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
@@ -3637,9 +3637,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": TAKE_PROFIT,
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": LAST,
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
@@ -3693,9 +3693,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": TAKE_PROFIT,
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": LAST,
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
@@ -3749,9 +3749,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": TAKE_PROFIT,
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": LAST,
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
@@ -3806,9 +3806,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": TAKE_PROFIT,
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": LAST,
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
@@ -3862,9 +3862,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": TAKE_PROFIT,
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": LAST,
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
@@ -3918,9 +3918,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": TAKE_PROFIT,
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": LAST,
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
@@ -3974,9 +3974,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": TAKE_PROFIT,
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": LAST,
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
@@ -4031,9 +4031,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": TAKE_PROFIT,
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": LAST,
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
@@ -4087,9 +4087,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": TAKE_PROFIT,
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": LAST,
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
@@ -4143,9 +4143,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": TAKE_PROFIT,
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": LAST,
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
@@ -4199,9 +4199,9 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": TAKE_PROFIT,
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": LAST,
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
@@ -4594,9 +4594,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": TAKE_PROFIT,
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": LAST,
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
@@ -4641,9 +4641,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": TAKE_PROFIT,
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": LAST,
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
@@ -4695,9 +4695,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": TAKE_PROFIT,
+                        "trigger_type": "TAKE_PROFIT",
                         "tpsl": {
-                            "trigger_by": LAST,
+                            "trigger_by": "LAST",
                             "trigger_price": "65038.10"
                         }
                     },
@@ -4742,9 +4742,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": TAKE_PROFIT,
+                        "tt": "TAKE_PROFIT",
                         "t": {
-                            "tb": LAST,
+                            "tb": "LAST",
                             "tp": "65038.10"
                         }
                     },
@@ -4877,9 +4877,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": TAKE_PROFIT,
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": LAST,
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
@@ -4932,9 +4932,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": TAKE_PROFIT,
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": LAST,
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
@@ -4987,9 +4987,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": TAKE_PROFIT,
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": LAST,
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
@@ -5042,9 +5042,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": TAKE_PROFIT,
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": LAST,
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
@@ -5098,9 +5098,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": TAKE_PROFIT,
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": LAST,
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
@@ -5153,9 +5153,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": TAKE_PROFIT,
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": LAST,
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
@@ -5208,9 +5208,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": TAKE_PROFIT,
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": LAST,
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
@@ -5263,9 +5263,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": TAKE_PROFIT,
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": LAST,
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
@@ -5319,9 +5319,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": TAKE_PROFIT,
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": LAST,
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
@@ -5374,9 +5374,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": TAKE_PROFIT,
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": LAST,
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
@@ -5429,9 +5429,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": TAKE_PROFIT,
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": LAST,
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
@@ -5484,9 +5484,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": TAKE_PROFIT,
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": LAST,
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
@@ -5540,9 +5540,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": TAKE_PROFIT,
+                            "trigger_type": "TAKE_PROFIT",
                             "tpsl": {
-                                "trigger_by": LAST,
+                                "trigger_by": "LAST",
                                 "trigger_price": "65038.10"
                             }
                         },
@@ -5595,9 +5595,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": TAKE_PROFIT,
+                                "trigger_type": "TAKE_PROFIT",
                                 "tpsl": {
-                                    "trigger_by": LAST,
+                                    "trigger_by": "LAST",
                                     "trigger_price": "65038.10"
                                 }
                             },
@@ -5650,9 +5650,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": TAKE_PROFIT,
+                            "tt": "TAKE_PROFIT",
                             "t": {
-                                "tb": LAST,
+                                "tb": "LAST",
                                 "tp": "65038.10"
                             }
                         },
@@ -5705,9 +5705,9 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": TAKE_PROFIT,
+                                "tt": "TAKE_PROFIT",
                                 "t": {
-                                    "tb": LAST,
+                                    "tb": "LAST",
                                     "tp": "65038.10"
                                 }
                             },
