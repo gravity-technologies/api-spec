@@ -8,6 +8,7 @@
     |end_time<br>`et` |string|False<br>`now()`|The end time to query for in unix nanoseconds|
     |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
     |cursor<br>`c1` |string|False<br>`''`|The cursor to indicate when to start the next query from|
+    |main_account_id<br>`ma` |string|False<br>``|Main account ID being queried. By default, applies the requestor's main account ID.|
     ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 

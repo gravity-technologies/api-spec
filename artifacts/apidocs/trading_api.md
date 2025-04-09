@@ -1,6 +1,315 @@
 # Trading APIs
 All requests should be made using the `POST` HTTP method.
 
+## Admin
+### Drop Client
+```
+FULL ENDPOINT: full/v1/drop_client_ws
+LITE ENDPOINT: lite/v1/drop_client_ws
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_drop_client_ws_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "main_account_id": null
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "ma": null
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_drop_client_ws_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "num_dropped": null
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "nd": null
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/drop_client_ws' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "main_account_id": null
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/drop_client_ws",
+                "params": {
+                    "main_account_id": null
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/drop_client_ws' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "ma": null
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/drop_client_ws",
+                "p": {
+                    "ma": null
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/drop_client_ws' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "main_account_id": null
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/drop_client_ws",
+                "params": {
+                    "main_account_id": null
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/drop_client_ws' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "ma": null
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/drop_client_ws",
+                "p": {
+                    "ma": null
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/drop_client_ws' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "main_account_id": null
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/drop_client_ws",
+                "params": {
+                    "main_account_id": null
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/drop_client_ws' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "ma": null
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/drop_client_ws",
+                "p": {
+                    "ma": null
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/drop_client_ws' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "main_account_id": null
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/drop_client_ws",
+                "params": {
+                    "main_account_id": null
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/drop_client_ws' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "ma": null
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/drop_client_ws",
+                "p": {
+                    "ma": null
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
 ## Order
 ### Create Order
 ```
@@ -41,13 +350,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": TAKE_PROFIT,
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": LAST,
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 }
             }
         }
@@ -79,13 +388,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": TAKE_PROFIT,
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": LAST,
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 }
             }
         }
@@ -125,13 +434,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": TAKE_PROFIT,
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": LAST,
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -172,13 +481,13 @@ LITE ENDPOINT: lite/v1/create_order
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": TAKE_PROFIT,
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": LAST,
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -302,13 +611,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": TAKE_PROFIT,
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": LAST,
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     }
                 }
             }
@@ -348,13 +657,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": TAKE_PROFIT,
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": LAST,
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         }
                     }
                 },
@@ -394,13 +703,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": TAKE_PROFIT,
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": LAST,
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     }
                 }
             }
@@ -440,13 +749,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": TAKE_PROFIT,
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": LAST,
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         }
                     }
                 },
@@ -487,13 +796,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": TAKE_PROFIT,
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": LAST,
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     }
                 }
             }
@@ -533,13 +842,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": TAKE_PROFIT,
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": LAST,
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         }
                     }
                 },
@@ -579,13 +888,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": TAKE_PROFIT,
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": LAST,
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     }
                 }
             }
@@ -625,13 +934,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": TAKE_PROFIT,
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": LAST,
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         }
                     }
                 },
@@ -672,13 +981,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": TAKE_PROFIT,
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": LAST,
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     }
                 }
             }
@@ -718,13 +1027,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": TAKE_PROFIT,
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": LAST,
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         }
                     }
                 },
@@ -764,13 +1073,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": TAKE_PROFIT,
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": LAST,
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     }
                 }
             }
@@ -810,13 +1119,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": TAKE_PROFIT,
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": LAST,
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         }
                     }
                 },
@@ -857,13 +1166,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": TAKE_PROFIT,
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": LAST,
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     }
                 }
             }
@@ -903,13 +1212,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": TAKE_PROFIT,
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": LAST,
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         }
                     }
                 },
@@ -949,13 +1258,13 @@ LITE ENDPOINT: lite/v1/create_order
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": TAKE_PROFIT,
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": LAST,
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     }
                 }
             }
@@ -995,13 +1304,13 @@ LITE ENDPOINT: lite/v1/create_order
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": TAKE_PROFIT,
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": LAST,
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         }
                     }
                 },
@@ -1809,13 +2118,13 @@ LITE ENDPOINT: lite/v1/order
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": TAKE_PROFIT,
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": LAST,
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -1856,13 +2165,13 @@ LITE ENDPOINT: lite/v1/order
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": TAKE_PROFIT,
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": LAST,
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2239,13 +2548,13 @@ LITE ENDPOINT: lite/v1/open_orders
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": TAKE_PROFIT,
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": LAST,
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -2286,13 +2595,13 @@ LITE ENDPOINT: lite/v1/open_orders
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": TAKE_PROFIT,
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": LAST,
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2691,13 +3000,13 @@ LITE ENDPOINT: lite/v1/order_history
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": TAKE_PROFIT,
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": LAST,
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -2739,13 +3048,13 @@ LITE ENDPOINT: lite/v1/order_history
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": TAKE_PROFIT,
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": LAST,
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3177,13 +3486,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": TAKE_PROFIT,
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": LAST,
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -3225,13 +3534,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": TAKE_PROFIT,
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": LAST,
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3356,13 +3665,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": TAKE_PROFIT,
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": LAST,
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3412,13 +3721,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": TAKE_PROFIT,
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": LAST,
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3468,13 +3777,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": TAKE_PROFIT,
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": LAST,
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3524,13 +3833,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": TAKE_PROFIT,
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": LAST,
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -3581,13 +3890,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": TAKE_PROFIT,
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": LAST,
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3637,13 +3946,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": TAKE_PROFIT,
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": LAST,
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3693,13 +4002,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": TAKE_PROFIT,
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": LAST,
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3749,13 +4058,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": TAKE_PROFIT,
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": LAST,
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -3806,13 +4115,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": TAKE_PROFIT,
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": LAST,
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3862,13 +4171,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": TAKE_PROFIT,
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": LAST,
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3918,13 +4227,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": TAKE_PROFIT,
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": LAST,
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3974,13 +4283,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": TAKE_PROFIT,
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": LAST,
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -4031,13 +4340,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": TAKE_PROFIT,
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": LAST,
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -4087,13 +4396,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": TAKE_PROFIT,
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": LAST,
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -4143,13 +4452,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": TAKE_PROFIT,
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": LAST,
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -4199,13 +4508,13 @@ LITE ENDPOINT: lite/v1/pre_order_check
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": TAKE_PROFIT,
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": LAST,
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -4594,13 +4903,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": TAKE_PROFIT,
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": LAST,
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -4641,13 +4950,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": TAKE_PROFIT,
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": LAST,
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -4695,13 +5004,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": TAKE_PROFIT,
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": LAST,
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -4742,13 +5051,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": TAKE_PROFIT,
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": LAST,
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -4877,13 +5186,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": TAKE_PROFIT,
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": LAST,
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -4932,13 +5241,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": TAKE_PROFIT,
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": LAST,
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -4987,13 +5296,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": TAKE_PROFIT,
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": LAST,
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -5042,13 +5351,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": TAKE_PROFIT,
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": LAST,
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -5098,13 +5407,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": TAKE_PROFIT,
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": LAST,
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -5153,13 +5462,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": TAKE_PROFIT,
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": LAST,
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -5208,13 +5517,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": TAKE_PROFIT,
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": LAST,
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -5263,13 +5572,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": TAKE_PROFIT,
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": LAST,
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -5319,13 +5628,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": TAKE_PROFIT,
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": LAST,
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -5374,13 +5683,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": TAKE_PROFIT,
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": LAST,
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -5429,13 +5738,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": TAKE_PROFIT,
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": LAST,
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -5484,13 +5793,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": TAKE_PROFIT,
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": LAST,
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -5540,13 +5849,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "client_order_id": "23042",
                         "create_time": "1697788800000000000",
                         "trigger": {
-                            "trigger_type": "UNSPECIFIED",
+                            "trigger_type": TAKE_PROFIT,
                             "tpsl": {
-                                "trigger_by": "UNSPECIFIED",
+                                "trigger_by": LAST,
                                 "trigger_price": "65038.10"
                             }
                         },
-                        "broker": "UNSPECIFIED"
+                        "broker": "BROKER_CODE"
                     },
                     "state": {
                         "status": "PENDING",
@@ -5595,13 +5904,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "client_order_id": "23042",
                             "create_time": "1697788800000000000",
                             "trigger": {
-                                "trigger_type": "UNSPECIFIED",
+                                "trigger_type": TAKE_PROFIT,
                                 "tpsl": {
-                                    "trigger_by": "UNSPECIFIED",
+                                    "trigger_by": LAST,
                                     "trigger_price": "65038.10"
                                 }
                             },
-                            "broker": "UNSPECIFIED"
+                            "broker": "BROKER_CODE"
                         },
                         "state": {
                             "status": "PENDING",
@@ -5650,13 +5959,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                         "co": "23042",
                         "ct": "1697788800000000000",
                         "t": {
-                            "tt": "UNSPECIFIED",
+                            "tt": TAKE_PROFIT,
                             "t": {
-                                "tb": "UNSPECIFIED",
+                                "tb": LAST,
                                 "tp": "65038.10"
                             }
                         },
-                        "b": "UNSPECIFIED"
+                        "b": "BROKER_CODE"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -5705,13 +6014,13 @@ LITE ENDPOINT: lite/v1/create_bulk_orders
                             "co": "23042",
                             "ct": "1697788800000000000",
                             "t": {
-                                "tt": "UNSPECIFIED",
+                                "tt": TAKE_PROFIT,
                                 "t": {
-                                    "tb": "UNSPECIFIED",
+                                    "tb": LAST,
                                     "tp": "65038.10"
                                 }
                             },
-                            "b": "UNSPECIFIED"
+                            "b": "BROKER_CODE"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -7353,7 +7662,8 @@ LITE ENDPOINT: lite/v1/deposit_history
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
-            "cursor": ""
+            "cursor": "",
+            "main_account_id": null
         }
         ```
         **Lite Request**
@@ -7363,7 +7673,8 @@ LITE ENDPOINT: lite/v1/deposit_history
             "st": "1697788800000000000",
             "et": "1697788800000000000",
             "l": 500,
-            "c1": ""
+            "c1": "",
+            "ma": null
         }
         ```
     </section>
@@ -7453,7 +7764,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -7471,7 +7783,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -7489,7 +7802,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -7507,7 +7821,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -7526,7 +7841,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -7544,7 +7860,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -7562,7 +7879,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -7580,7 +7898,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -7599,7 +7918,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -7617,7 +7937,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -7635,7 +7956,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -7653,7 +7975,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -7672,7 +7995,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -7690,7 +8014,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -7708,7 +8033,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -7726,7 +8052,8 @@ LITE ENDPOINT: lite/v1/deposit_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -8342,7 +8669,8 @@ LITE ENDPOINT: lite/v1/transfer_history
             "end_time": "1697788800000000000",
             "limit": 500,
             "cursor": "",
-            "tx_id": "1028403"
+            "tx_id": "1028403",
+            "main_account_id": null
         }
         ```
         **Lite Request**
@@ -8353,7 +8681,8 @@ LITE ENDPOINT: lite/v1/transfer_history
             "et": "1697788800000000000",
             "l": 500,
             "c1": "",
-            "ti": "1028403"
+            "ti": "1028403",
+            "ma": null
         }
         ```
     </section>
@@ -8464,7 +8793,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "end_time": "1697788800000000000",
                 "limit": 500,
                 "cursor": "",
-                "tx_id": "1028403"
+                "tx_id": "1028403",
+                "main_account_id": null
             }
             '
             ```
@@ -8483,7 +8813,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "end_time": "1697788800000000000",
                     "limit": 500,
                     "cursor": "",
-                    "tx_id": "1028403"
+                    "tx_id": "1028403",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -8502,7 +8833,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "et": "1697788800000000000",
                 "l": 500,
                 "c1": "",
-                "ti": "1028403"
+                "ti": "1028403",
+                "ma": null
             }
             '
             ```
@@ -8521,7 +8853,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "et": "1697788800000000000",
                     "l": 500,
                     "c1": "",
-                    "ti": "1028403"
+                    "ti": "1028403",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -8541,7 +8874,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "end_time": "1697788800000000000",
                 "limit": 500,
                 "cursor": "",
-                "tx_id": "1028403"
+                "tx_id": "1028403",
+                "main_account_id": null
             }
             '
             ```
@@ -8560,7 +8894,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "end_time": "1697788800000000000",
                     "limit": 500,
                     "cursor": "",
-                    "tx_id": "1028403"
+                    "tx_id": "1028403",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -8579,7 +8914,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "et": "1697788800000000000",
                 "l": 500,
                 "c1": "",
-                "ti": "1028403"
+                "ti": "1028403",
+                "ma": null
             }
             '
             ```
@@ -8598,7 +8934,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "et": "1697788800000000000",
                     "l": 500,
                     "c1": "",
-                    "ti": "1028403"
+                    "ti": "1028403",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -8618,7 +8955,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "end_time": "1697788800000000000",
                 "limit": 500,
                 "cursor": "",
-                "tx_id": "1028403"
+                "tx_id": "1028403",
+                "main_account_id": null
             }
             '
             ```
@@ -8637,7 +8975,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "end_time": "1697788800000000000",
                     "limit": 500,
                     "cursor": "",
-                    "tx_id": "1028403"
+                    "tx_id": "1028403",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -8656,7 +8995,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "et": "1697788800000000000",
                 "l": 500,
                 "c1": "",
-                "ti": "1028403"
+                "ti": "1028403",
+                "ma": null
             }
             '
             ```
@@ -8675,7 +9015,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "et": "1697788800000000000",
                     "l": 500,
                     "c1": "",
-                    "ti": "1028403"
+                    "ti": "1028403",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -8695,7 +9036,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "end_time": "1697788800000000000",
                 "limit": 500,
                 "cursor": "",
-                "tx_id": "1028403"
+                "tx_id": "1028403",
+                "main_account_id": null
             }
             '
             ```
@@ -8714,7 +9056,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "end_time": "1697788800000000000",
                     "limit": 500,
                     "cursor": "",
-                    "tx_id": "1028403"
+                    "tx_id": "1028403",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -8733,7 +9076,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "et": "1697788800000000000",
                 "l": 500,
                 "c1": "",
-                "ti": "1028403"
+                "ti": "1028403",
+                "ma": null
             }
             '
             ```
@@ -8752,7 +9096,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "et": "1697788800000000000",
                     "l": 500,
                     "c1": "",
-                    "ti": "1028403"
+                    "ti": "1028403",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -9290,7 +9635,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
-            "cursor": ""
+            "cursor": "",
+            "main_account_id": null
         }
         ```
         **Lite Request**
@@ -9300,7 +9646,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
             "st": "1697788800000000000",
             "et": "1697788800000000000",
             "l": 500,
-            "c1": ""
+            "c1": "",
+            "ma": null
         }
         ```
     </section>
@@ -9402,7 +9749,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -9420,7 +9768,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -9438,7 +9787,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -9456,7 +9806,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -9475,7 +9826,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -9493,7 +9845,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -9511,7 +9864,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -9529,7 +9883,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -9548,7 +9903,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -9566,7 +9922,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -9584,7 +9941,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -9602,7 +9960,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -9621,7 +9980,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "main_account_id": null
             }
             '
             ```
@@ -9639,7 +9999,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "main_account_id": null
                 },
                 "id": 123
             }
@@ -9657,7 +10018,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c1": ""
+                "c1": "",
+                "ma": null
             }
             '
             ```
@@ -9675,7 +10037,8 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c1": ""
+                    "c1": "",
+                    "ma": null
                 },
                 "i": 123
             }
@@ -12386,6 +12749,636 @@ LITE ENDPOINT: lite/v1/set_initial_leverage
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "i": "BTC_USDT_Perp",
                     "l": "10"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+## Margin
+### Get Margin Tiers
+```
+FULL ENDPOINT: full/v1/get_margin_tiers
+LITE ENDPOINT: lite/v1/get_margin_tiers
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/empty_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_get_margin_tiers_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "results": [{
+                "asset": null,
+                "tiers": [{
+                    "lower_bound": null,
+                    "rate": null
+                }]
+            }]
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "a": null,
+                "t": [{
+                    "lb": null,
+                    "r": null
+                }]
+            }]
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1002,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/get_margin_tiers' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/get_margin_tiers",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/get_margin_tiers' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/get_margin_tiers",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/get_margin_tiers' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/get_margin_tiers",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/get_margin_tiers' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/get_margin_tiers",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/get_margin_tiers' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/get_margin_tiers",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/get_margin_tiers' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/get_margin_tiers",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/get_margin_tiers' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/get_margin_tiers",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/get_margin_tiers' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/get_margin_tiers",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+## Order
+### Query Trading Performance
+```
+FULL ENDPOINT: full/v1/trading_performance
+LITE ENDPOINT: lite/v1/trading_performance
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_query_trading_performance_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "asset": "BTC_USDT_Perp"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "a": "BTC_USDT_Perp"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_query_trading_performance_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "trading_volume": "3456.78",
+            "realized_pnl": "9.75"
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "tv": "3456.78",
+            "rp": "9.75"
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/trading_performance' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "asset": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/trading_performance",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "asset": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/trading_performance' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "a": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/trading_performance",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "a": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/trading_performance' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "asset": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/trading_performance",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "asset": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/trading_performance' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "a": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/trading_performance",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "a": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/trading_performance' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "asset": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/trading_performance",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "asset": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/trading_performance' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "a": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/trading_performance",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "a": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/trading_performance' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "asset": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/trading_performance",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "asset": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/trading_performance' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "a": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/trading_performance",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "a": "BTC_USDT_Perp"
                 },
                 "i": 123
             }

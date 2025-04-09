@@ -702,6 +702,47 @@
       ],
       "rpcs": [
         {
+          "namespace": "Admin",
+          "name": "RPCDropClientWS",
+          "version": 1,
+          "route": "/drop_client_ws",
+          "auth_required": true,
+          "request": "ApiDropClientWsRequest",
+          "response": "ApiDropClientWsResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            }
+          ]
+        },
+        {
           "namespace": "Order",
           "name": "RPCCreateOrderV1",
           "version": 1,
@@ -2510,6 +2551,78 @@
               "code": 2100,
               "message": "Invalid initial leverage",
               "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Margin",
+          "name": "RPCGetMarginTiersV1",
+          "version": 1,
+          "route": "/get_margin_tiers",
+          "auth_required": true,
+          "request": "EmptyRequest",
+          "response": "ApiGetMarginTiersResponse",
+          "on_request_errors": [
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "Order",
+          "name": "RPCQueryTradingPerformanceV1",
+          "version": 1,
+          "route": "/trading_performance",
+          "auth_required": true,
+          "request": "ApiQueryTradingPerformanceRequest",
+          "response": "ApiQueryTradingPerformanceResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         }
@@ -6895,8 +7008,12 @@
         }
       ],
       "comment": [
-        "All V1 Websocket Subscription Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.",
-        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
+        "All V1 Websocket Subscription Requests are housed in this wrapper. You may specify a stream and a list of feeds to subscribe to.",
+        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.",
+        "Sequence numbers can be either gateway-specific or global:",
+        "- **Gateway Unique Sequence Number**: Increments by one per stream, resets to 0 on gateway restart.",
+        "- **Global Unique Sequence Number**: A cluster-wide unique number assigned to each cluster payload, does not reset on gateway restarts, and can be used to track and identify message order across streams using `sequence_number` and `prev_sequence_number` in the feed response.",
+        "Set `useGlobalSequenceNumber = true` if you need a persistent, unique identifier across all streams or ordering across multiple feeds."
       ]
     },
     {
@@ -7033,7 +7150,7 @@
         }
       ],
       "comment": [
-        "All V1 Websocket Unsubscription Requests are housed in this wrapper. You may specify a stream, and a list of feeds to unsubscribe from."
+        "All V1 Websocket Unsubscription Requests are housed in this wrapper. You may specify a stream, a list of feeds and whether those feeds use global sequence numbers to unsubscribe from."
       ]
     },
     {
@@ -7358,7 +7475,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -7383,7 +7505,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -7473,7 +7595,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -7498,7 +7625,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -7588,7 +7715,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -7613,7 +7745,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -7715,7 +7847,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -7740,7 +7877,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -7836,7 +7973,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -7861,7 +8003,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -7999,6 +8141,137 @@
         }
       ],
       "comment": []
+    },
+    {
+      "name": "SnapFundingAccountSummary",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The main account ID of the account to which the summary belongs"
+          ]
+        },
+        {
+          "name": "total_equity",
+          "lite_name": "te",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3945034.23'",
+          "comment": [
+            "Total equity of the main account, denominated in USD"
+          ]
+        },
+        {
+          "name": "spot_balances",
+          "lite_name": "sb",
+          "semantic_type": "SpotBalance",
+          "json_type": "SpotBalance",
+          "index": 3,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of spot assets owned by this main account, and their balances"
+          ]
+        }
+      ],
+      "comment": [
+        "The funding account summary, that reports the total equity and spot balances of a funding (main) account"
+      ]
+    },
+    {
+      "name": "ApiQueryTradingPerformanceRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "default": "all",
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "Optional: The subaccount ID to filter by"
+          ]
+        },
+        {
+          "name": "asset",
+          "lite_name": "a",
+          "semantic_type": "[]byte",
+          "json_type": "unknown",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The asset to filter by"
+          ]
+        }
+      ],
+      "comment": [
+        "Request to retrieve the trading volume"
+      ]
+    },
+    {
+      "name": "ApiQueryTradingPerformanceResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "trading_volume",
+          "lite_name": "tv",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3456.78'",
+          "comment": [
+            "Trading volume in USDT"
+          ]
+        },
+        {
+          "name": "realized_pnl",
+          "lite_name": "rp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'9.75'",
+          "comment": [
+            "Realized PnL in USDT"
+          ]
+        }
+      ],
+      "comment": [
+        "Response to retrieve the trading volume"
+      ]
     },
     {
       "name": "OrderLeg",
@@ -8162,6 +8435,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "example": "LAST",
           "comment": [
             "Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order"
           ]
@@ -8202,6 +8476,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "example": "TAKE_PROFIT",
           "comment": [
             "Type of the trigger order. eg: Take Profit, Stop Loss, etc"
           ]
@@ -8275,7 +8550,8 @@
           "json_type": "TriggerOrderMetadata",
           "index": 2,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
+          "default": "",
           "comment": [
             "Trigger fields are used to support any type of trigger order such as TP/SL"
           ]
@@ -8289,6 +8565,7 @@
           "array_depth": 0,
           "optional": true,
           "default": "",
+          "example": "'BROKER_CODE'",
           "comment": [
             "Specifies the broker who brokered the order"
           ]
@@ -9872,6 +10149,45 @@
           "comment": [
             "Brokered trading volume"
           ]
+        },
+        {
+          "name": "brokered_trading_point",
+          "lite_name": "bt1",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 13,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000'",
+          "comment": [
+            "Brokered trading point"
+          ]
+        },
+        {
+          "name": "referee_kyc_point",
+          "lite_name": "rk",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 14,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000'",
+          "comment": [
+            "Referee KYC point"
+          ]
+        },
+        {
+          "name": "referrer_kyc_point",
+          "lite_name": "rk1",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 15,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000'",
+          "comment": [
+            "Referrer KYC point"
+          ]
         }
       ],
       "comment": [
@@ -11250,6 +11566,19 @@
           "comment": [
             "The KYC type, can be 'individual' or 'business'"
           ]
+        },
+        {
+          "name": "kyc_first_completed_at",
+          "lite_name": "kf",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The first KYC completed time"
+          ]
         }
       ],
       "comment": [
@@ -12319,6 +12648,19 @@
           "comment": [
             "The signer of the trade"
           ]
+        },
+        {
+          "name": "realized_pnl",
+          "lite_name": "rp",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10000101000203040506'",
+          "comment": [
+            "Realized PnL"
+          ]
         }
       ],
       "comment": [
@@ -12628,7 +12970,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -12653,7 +13000,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -12786,7 +13133,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -12811,7 +13163,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -12897,7 +13249,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -12922,7 +13279,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -13008,7 +13365,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -13033,7 +13395,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -13266,7 +13628,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -13291,7 +13658,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -13422,7 +13789,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -13447,7 +13819,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -13590,7 +13962,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -13615,7 +13992,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -13747,7 +14124,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -13772,7 +14154,7 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
         }
       ],
@@ -13870,7 +14252,12 @@
           "optional": false,
           "example": "'872634876'",
           "comment": [
-            "A running sequence number that determines global message order within the specific stream"
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
           ]
         },
         {
@@ -13895,8 +14282,113 @@
           "optional": false,
           "example": "'872634875'",
           "comment": [
-            "The previous sequence number that determines global message order within the specific stream"
+            "The previous sequence number that determines the message order"
           ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiDropClientWsRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiDropClientWsResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "num_dropped",
+          "lite_name": "nd",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "MarginTierResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "lower_bound",
+          "lite_name": "lb",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        },
+        {
+          "name": "rate",
+          "lite_name": "r",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "AssetMarginTierResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "asset",
+          "lite_name": "a",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        },
+        {
+          "name": "tiers",
+          "lite_name": "t",
+          "semantic_type": "MarginTierResponse",
+          "json_type": "MarginTierResponse",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": []
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetMarginTiersResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "results",
+          "lite_name": "r",
+          "semantic_type": "AssetMarginTierResponse",
+          "json_type": "AssetMarginTierResponse",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": []
         }
       ],
       "comment": []
@@ -14184,6 +14676,20 @@
           "comment": [
             "The cursor to indicate when to start the next query from"
           ]
+        },
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "default": "",
+          "example": "",
+          "comment": [
+            "Main account ID being queried. By default, applies the requestor's main account ID."
+          ]
         }
       ],
       "comment": [
@@ -14423,6 +14929,20 @@
           "comment": [
             "The transaction ID to query for"
           ]
+        },
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "default": "",
+          "example": "",
+          "comment": [
+            "Main account ID being queried. By default, applies the requestor's main account ID."
+          ]
         }
       ],
       "comment": [
@@ -14536,6 +15056,20 @@
           "example": "''",
           "comment": [
             "The cursor to indicate when to start the next query from"
+          ]
+        },
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "default": "",
+          "example": "",
+          "comment": [
+            "Main account ID being queried. By default, applies the requestor's main account ID."
           ]
         }
       ],
@@ -15720,6 +16254,13 @@
           "value": 3,
           "comment": [
             "1 hour"
+          ]
+        },
+        {
+          "name": "SAT_4_H",
+          "value": 4,
+          "comment": [
+            "4 hour"
           ]
         }
       ],

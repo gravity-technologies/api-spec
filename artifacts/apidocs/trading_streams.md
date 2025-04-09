@@ -133,13 +133,13 @@ STREAM: v1.order
                     "client_order_id": "23042",
                     "create_time": "1697788800000000000",
                     "trigger": {
-                        "trigger_type": "UNSPECIFIED",
+                        "trigger_type": TAKE_PROFIT,
                         "tpsl": {
-                            "trigger_by": "UNSPECIFIED",
+                            "trigger_by": LAST,
                             "trigger_price": "65038.10"
                         }
                     },
-                    "broker": "UNSPECIFIED"
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -183,13 +183,13 @@ STREAM: v1.order
                     "co": "23042",
                     "ct": "1697788800000000000",
                     "t": {
-                        "tt": "UNSPECIFIED",
+                        "tt": TAKE_PROFIT,
                         "t": {
-                            "tb": "UNSPECIFIED",
+                            "tb": LAST,
                             "tp": "65038.10"
                         }
                     },
-                    "b": "UNSPECIFIED"
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",

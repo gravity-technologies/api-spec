@@ -9,6 +9,7 @@
     |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
     |cursor<br>`c1` |string|False<br>`''`|The cursor to indicate when to start the next query from|
     |tx_id<br>`ti` |string|False<br>`0`|The transaction ID to query for|
+    |main_account_id<br>`ma` |string|False<br>``|Main account ID being queried. By default, applies the requestor's main account ID.|
     ??? info "[Currency](/../../schemas/currency)"
         The list of Currencies that are supported on the GRVT exchange<br>
 
