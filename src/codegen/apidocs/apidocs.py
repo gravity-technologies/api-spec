@@ -28,7 +28,11 @@ IGNORE_STRUCTS = [
 ]
 
 # skip these fields for all structs, at all levels of nesting
-IGNORE_FIELDS_ANY_PATH = []
+IGNORE_FIELDS_ANY_PATH = [
+    "prev_sequence_number",
+    "latest_sequence_number",
+    "use_global_sequence_number",
+]
 
 IGNORE_RPCS: list[str] = [
     "RPCDedustPositionV1",
