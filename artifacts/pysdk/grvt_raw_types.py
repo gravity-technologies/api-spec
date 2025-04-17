@@ -458,6 +458,8 @@ class Positions:
     quote_index_price: str
     # The estimated liquidation price
     est_liquidation_price: str
+    # The current leverage value for this position
+    leverage: str
 
 
 @dataclass
@@ -1662,6 +1664,8 @@ class ApiGetAllInstrumentsResponse:
 class SnapFundingAccountSummary:
     # Time at which the event was emitted in unix nanoseconds
     event_time: str
+    # The start of the interval in unix nanoseconds
+    start_interval: str
     # The main account ID of the account to which the summary belongs
     main_account_id: str
     # Total equity of the main account, denominated in USD
@@ -1847,7 +1851,7 @@ class Order:
     is_market: bool | None = None
     """
     If True, Order must be a maker order. It has to fill the orderbook instead of match it.
-    If False, Order can be either a maker or taker order.
+    If False, Order can be either a maker or taker order. <b>In this case, order creation is currently subject to a speedbump of 25ms to ensure orders are matched against updated orderbook quotes.</b>
 
     |               | Must Fill All | Can Fill Partial |
     | -             | -             | -                |
@@ -2882,7 +2886,8 @@ class WSOrderStateFeedDataV1:
 @dataclass
 class WSPositionsFeedSelectorV1:
     """
-    Subscribes to a feed of position updates. This happens when a trade is executed.
+    Subscribes to a feed of position updates.
+    Updates get published when a trade is executed, and when leverage configurations are changed for instruments with ongoing positions.
     To subscribe to all positions, specify an empty `instrument` (eg. `2345123`).
     Otherwise, specify the `instrument` to only receive positions for that instrument (eg. `2345123-BTC_USDT_Perp`).
     """
@@ -3209,6 +3214,108 @@ class AssetMarginTierResponse:
 @dataclass
 class ApiGetMarginTiersResponse:
     results: list[AssetMarginTierResponse]
+
+
+@dataclass
+class SessionInformation:
+    # country code of user based on IP address
+    country_code: str
+    # unique identity of the session generated from client
+    client_session_id: str
+    # screen size
+    device_screen_size: str
+    # OS of user's device
+    device_os: str
+    # OS version of user's device
+    device_os_version: str
+
+
+@dataclass
+class UserVaultCategoryEventPayLoad:
+    # category ID of event
+    category_id: str
+    # vault ID
+    vault_id: str
+    # action of event. search/filter/invest...
+    action: str
+    # number of bumps in this event. default 1
+    num_bumps: str
+
+
+@dataclass
+class ApiUserCategoryAffinityScoreRequest:
+    # The off chain account id
+    account_id: str
+    # The start time of query. Can leave empty to query from the beginning
+    start_time: str
+    # The end time of query. Can leave empty to query until now
+    end_time: str
+
+
+@dataclass
+class UserCategoryAffinityScore:
+    # The off chain account id
+    account_id: str
+    # target category
+    category_id: str
+    # affinity score
+    affinity_score: float
+
+
+@dataclass
+class ApiUserCategoryAffinityScoreResponse:
+    # The list of categoryAffinities score
+    result: list[UserCategoryAffinityScore]
+
+
+@dataclass
+class ApiCategoryAffinityScoreRequest:
+    # The start time of query. Can leave empty to query from the beginning
+    start_time: str
+    # The end time of query. Can leave empty to query until now
+    end_time: str
+
+
+@dataclass
+class ApiCategoryAffinityScoreResponse:
+    # The list of categoryAffinities score
+    result: list[UserCategoryAffinityScore]
+
+
+@dataclass
+class UserTrackingEvent:
+    # uuid for event
+    event_id: str
+    # version of tracking
+    tracking_version: int
+    # timestamp of event
+    event_time: str
+    # event type
+    event_type: str
+    # event sub type
+    event_sub_type: str
+    # unique identity of the session generated from client
+    client_session_id: str
+    # OS of user's device
+    device_os: str
+    # OS version of user's device
+    device_os_version: str
+    # sub account id
+    sub_account_id: str
+    # trading session key
+    trading_address: str
+    # screen size
+    screen_size: str
+    # event data
+    event_data: str
+    # user id
+    user_id: str
+    # account id
+    account_id: str
+    # auth session hash of the authenticated session on backend
+    auth_session_hash: str
+    # country code of user based on IP address
+    country_code: str
 
 
 @dataclass

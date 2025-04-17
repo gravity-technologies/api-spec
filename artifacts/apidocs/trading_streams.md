@@ -3222,7 +3222,8 @@ STREAM: v1.position
                 "total_pnl": "100000.20",
                 "roi": "10.20",
                 "quote_index_price": "1.0000102",
-                "est_liquidation_price": 60000.25
+                "est_liquidation_price": 60000.25,
+                "leverage": "10"
             }
         }
         ```
@@ -3246,7 +3247,8 @@ STREAM: v1.position
                 "tp": "100000.20",
                 "r": "10.20",
                 "qi": "1.0000102",
-                "el": 60000.25
+                "el": 60000.25,
+                "l": "10"
             }
         }
         ```

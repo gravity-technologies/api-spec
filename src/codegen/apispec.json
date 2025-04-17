@@ -3334,6 +3334,19 @@
           "comment": [
             "The estimated liquidation price"
           ]
+        },
+        {
+          "name": "leverage",
+          "lite_name": "l",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 14,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10'",
+          "comment": [
+            "The current leverage value for this position"
+          ]
         }
       ],
       "comment": []
@@ -8160,11 +8173,24 @@
           ]
         },
         {
+          "name": "start_interval",
+          "lite_name": "si",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The start of the interval in unix nanoseconds"
+          ]
+        },
+        {
           "name": "main_account_id",
           "lite_name": "ma",
           "semantic_type": "address",
           "json_type": "string",
-          "index": 1,
+          "index": 2,
           "array_depth": 0,
           "optional": false,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
@@ -8177,7 +8203,7 @@
           "lite_name": "te",
           "semantic_type": "string",
           "json_type": "string",
-          "index": 2,
+          "index": 3,
           "array_depth": 0,
           "optional": false,
           "example": "'3945034.23'",
@@ -8190,7 +8216,7 @@
           "lite_name": "sb",
           "semantic_type": "SpotBalance",
           "json_type": "SpotBalance",
-          "index": 3,
+          "index": 4,
           "array_depth": 1,
           "optional": false,
           "comment": [
@@ -8737,7 +8763,7 @@
           "example": "false",
           "comment": [
             "If True, Order must be a maker order. It has to fill the orderbook instead of match it.",
-            "If False, Order can be either a maker or taker order.",
+            "If False, Order can be either a maker or taker order. \u003cb\u003eIn this case, order creation is currently subject to a speedbump of 25ms to ensure orders are matched against updated orderbook quotes.\u003c/b\u003e",
             "",
             "|               | Must Fill All | Can Fill Partial |",
             "| -             | -             | -                |",
@@ -13204,7 +13230,8 @@
         }
       ],
       "comment": [
-        "Subscribes to a feed of position updates. This happens when a trade is executed.",
+        "Subscribes to a feed of position updates.",
+        "Updates get published when a trade is executed, and when leverage configurations are changed for instruments with ongoing positions.",
         "To subscribe to all positions, specify an empty `instrument` (eg. `2345123`).",
         "Otherwise, specify the `instrument` to only receive positions for that instrument (eg. `2345123-BTC_USDT_Perp`)."
       ]
@@ -14392,6 +14419,493 @@
         }
       ],
       "comment": []
+    },
+    {
+      "name": "SessionInformation",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "country_code",
+          "lite_name": "cc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "country code of user based on IP address"
+          ]
+        },
+        {
+          "name": "client_session_id",
+          "lite_name": "cs",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "unique identity of the session generated from client"
+          ]
+        },
+        {
+          "name": "device_screen_size",
+          "lite_name": "ds",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "screen size"
+          ]
+        },
+        {
+          "name": "device_os",
+          "lite_name": "do",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "OS of user's device"
+          ]
+        },
+        {
+          "name": "device_os_version",
+          "lite_name": "do1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "OS version of user's device"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "UserVaultCategoryEventPayLoad",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "category_id",
+          "lite_name": "ci",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "category ID of event"
+          ]
+        },
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "vault ID"
+          ]
+        },
+        {
+          "name": "action",
+          "lite_name": "a",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "action of event. search/filter/invest..."
+          ]
+        },
+        {
+          "name": "num_bumps",
+          "lite_name": "nb",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "number of bumps in this event. default 1"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiUserCategoryAffinityScoreRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "account_id",
+          "lite_name": "ai",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ACC_1234567890'",
+          "comment": [
+            "The off chain account id"
+          ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The start time of query. Can leave empty to query from the beginning"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The end time of query. Can leave empty to query until now"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "UserCategoryAffinityScore",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "account_id",
+          "lite_name": "ai",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ACC_1234567890'",
+          "comment": [
+            "The off chain account id"
+          ]
+        },
+        {
+          "name": "category_id",
+          "lite_name": "ci",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "target category"
+          ]
+        },
+        {
+          "name": "affinity_score",
+          "lite_name": "as",
+          "semantic_type": "float64",
+          "json_type": "number",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "affinity score"
+          ]
+        }
+      ],
+      "comment": [
+        ""
+      ]
+    },
+    {
+      "name": "ApiUserCategoryAffinityScoreResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "UserCategoryAffinityScore",
+          "json_type": "UserCategoryAffinityScore",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of categoryAffinities score"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiCategoryAffinityScoreRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The start time of query. Can leave empty to query from the beginning"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The end time of query. Can leave empty to query until now"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiCategoryAffinityScoreResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "UserCategoryAffinityScore",
+          "json_type": "UserCategoryAffinityScore",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of categoryAffinities score"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "UserTrackingEvent",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "event_id",
+          "lite_name": "ei",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "uuid for event"
+          ]
+        },
+        {
+          "name": "tracking_version",
+          "lite_name": "tv",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "version of tracking"
+          ]
+        },
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "timestamp of event"
+          ]
+        },
+        {
+          "name": "event_type",
+          "lite_name": "et1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "event type"
+          ]
+        },
+        {
+          "name": "event_sub_type",
+          "lite_name": "es",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "event sub type"
+          ]
+        },
+        {
+          "name": "client_session_id",
+          "lite_name": "cs",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "unique identity of the session generated from client"
+          ]
+        },
+        {
+          "name": "device_os",
+          "lite_name": "do",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "OS of user's device"
+          ]
+        },
+        {
+          "name": "device_os_version",
+          "lite_name": "do1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "OS version of user's device"
+          ]
+        },
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "sub account id"
+          ]
+        },
+        {
+          "name": "trading_address",
+          "lite_name": "ta",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "trading session key"
+          ]
+        },
+        {
+          "name": "screen_size",
+          "lite_name": "ss",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "screen size"
+          ]
+        },
+        {
+          "name": "event_data",
+          "lite_name": "ed",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 11,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "event data"
+          ]
+        },
+        {
+          "name": "user_id",
+          "lite_name": "ui",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 12,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "user id"
+          ]
+        },
+        {
+          "name": "account_id",
+          "lite_name": "ai",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 13,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "account id"
+          ]
+        },
+        {
+          "name": "auth_session_hash",
+          "lite_name": "as",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 14,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "auth session hash of the authenticated session on backend"
+          ]
+        },
+        {
+          "name": "country_code",
+          "lite_name": "cc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 15,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "country code of user based on IP address"
+          ]
+        }
+      ],
+      "comment": [
+        "event of user"
+      ]
     },
     {
       "name": "ApiWithdrawalRequest",

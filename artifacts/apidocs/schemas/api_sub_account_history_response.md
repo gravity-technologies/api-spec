@@ -108,3 +108,4 @@
             |roi<br>`r` |string|True|The ROI of the position, expressed as a percentage<br>`roi = (total_pnl / (entry_price * abs(size))) * 100^`|
             |quote_index_price<br>`qi` |string|True|The index price of the quote currency. (reported in `USD`)|
             |est_liquidation_price<br>`el` |string|True|The estimated liquidation price|
+            |leverage<br>`l` |string|True|The current leverage value for this position|
