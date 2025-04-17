@@ -4,6 +4,7 @@
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |event_time<br>`et` |string|True|Time at which the event was emitted in unix nanoseconds|
+    |start_interval<br>`si` |string|True|The start of the interval in unix nanoseconds|
     |main_account_id<br>`ma` |string|True|The main account ID of the account to which the summary belongs|
     |total_equity<br>`te` |string|True|Total equity of the main account, denominated in USD|
     |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this main account, and their balances|

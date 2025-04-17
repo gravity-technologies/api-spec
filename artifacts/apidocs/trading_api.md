@@ -6581,7 +6581,8 @@ LITE ENDPOINT: lite/v1/positions
                 "total_pnl": "100000.20",
                 "roi": "10.20",
                 "quote_index_price": "1.0000102",
-                "est_liquidation_price": 60000.25
+                "est_liquidation_price": 60000.25,
+                "leverage": "10"
             }]
         }
         ```
@@ -6602,7 +6603,8 @@ LITE ENDPOINT: lite/v1/positions
                 "tp": "100000.20",
                 "r": "10.20",
                 "qi": "1.0000102",
-                "el": 60000.25
+                "el": 60000.25,
+                "l": "10"
             }]
         }
         ```
@@ -10129,7 +10131,8 @@ LITE ENDPOINT: lite/v1/account_summary
                     "total_pnl": "100000.20",
                     "roi": "10.20",
                     "quote_index_price": "1.0000102",
-                    "est_liquidation_price": 60000.25
+                    "est_liquidation_price": 60000.25,
+                    "leverage": "10"
                 }],
                 "settle_index_price": "1.0000102"
             }
@@ -10167,7 +10170,8 @@ LITE ENDPOINT: lite/v1/account_summary
                     "tp": "100000.20",
                     "r": "10.20",
                     "qi": "1.0000102",
-                    "el": 60000.25
+                    "el": 60000.25,
+                    "l": "10"
                 }],
                 "si": "1.0000102"
             }
@@ -10509,7 +10513,8 @@ LITE ENDPOINT: lite/v1/account_history
                     "total_pnl": "100000.20",
                     "roi": "10.20",
                     "quote_index_price": "1.0000102",
-                    "est_liquidation_price": 60000.25
+                    "est_liquidation_price": 60000.25,
+                    "leverage": "10"
                 }],
                 "settle_index_price": "1.0000102"
             }],
@@ -10548,7 +10553,8 @@ LITE ENDPOINT: lite/v1/account_history
                     "tp": "100000.20",
                     "r": "10.20",
                     "qi": "1.0000102",
-                    "el": 60000.25
+                    "el": 60000.25,
+                    "l": "10"
                 }],
                 "si": "1.0000102"
             }],
