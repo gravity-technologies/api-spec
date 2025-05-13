@@ -31,6 +31,7 @@
             |`ALL_OR_NONE` = 2|AON - Either fill the whole order or none of it (Block Trades Only)|
             |`IMMEDIATE_OR_CANCEL` = 3|IOC - Fill the order as much as possible, when hitting the orderbook. Then cancel it|
             |`FILL_OR_KILL` = 4|FOK - Both AoN and IoC. Either fill the full order when hitting the orderbook, or cancel it|
+            |`RETAIL_PRICE_IMPROVEMENT` = 5|RPI - A GTT + PostOnly maker order, that can only be taken by non-algorithmic UI users.|
         ??? info "[OrderLeg](/../../schemas/order_leg)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
@@ -78,6 +79,7 @@
                     |-|-|-|-|
                     |trigger_by<br>`tb` |TriggerBy|True|Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order|
                     |trigger_price<br>`tp` |string|True|The Trigger Price of the order, expressed in `9` decimals.|
+                    |close_position<br>`cp` |boolean|True|If True, the order will close the position when the trigger price is reached|
                     ??? info "[TriggerBy](/../../schemas/trigger_by)"
                         Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order.<br><br>Trigger orders are executed when the selected price type reaches the specified trigger price.Different price types ensure flexibility in executing strategies based on market conditions.<br><br><br>
 
@@ -146,3 +148,5 @@
                 |`MARKET_ORDER_WITH_LIMIT_PRICE` = 28|the market order has a limit price set|
                 |`CLIENT_CANCEL_ON_DISCONNECT_TRIGGERED` = 29|client cancel on disconnect triggered|
                 |`OCO_COUNTER_PART_TRIGGERED` = 30|the OCO counter part order was triggered|
+                |`REDUCE_ONLY_LIMIT` = 31|the remaining order size was cancelled because it exceeded current position size|
+                |`CLIENT_REPLACE` = 32|the order was replaced by a client replace request|

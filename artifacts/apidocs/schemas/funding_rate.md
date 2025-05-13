@@ -5,3 +5,4 @@
     |funding_rate<br>`fr` |string|True|The funding rate of the instrument, expressed in percentage points|
     |funding_time<br>`ft` |string|True|The funding timestamp of the funding rate, expressed in unix nanoseconds|
     |mark_price<br>`mp` |string|True|The mark price of the instrument at funding timestamp, expressed in `9` decimals|
+    |funding_rate_8_h_avg<br>`fr1` |string|True|The 8h average funding rate of the instrument, expressed in percentage points|
