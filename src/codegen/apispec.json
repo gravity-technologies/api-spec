@@ -3652,6 +3652,53 @@
       ]
     },
     {
+      "name": "FundingAccountSummary",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The main account ID of the account to which the summary belongs"
+          ]
+        },
+        {
+          "name": "total_equity",
+          "lite_name": "te",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3945034.23'",
+          "comment": [
+            "Total equity of the main account, denominated in USD"
+          ]
+        },
+        {
+          "name": "spot_balances",
+          "lite_name": "sb",
+          "semantic_type": "SpotBalance",
+          "json_type": "SpotBalance",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of spot assets owned by this main account, and their balances"
+          ]
+        }
+      ],
+      "comment": [
+        "The funding account summary, that reports the total equity and spot balances of a funding (main) account"
+      ]
+    },
+    {
       "name": "ApiFundingAccountSummaryResponse",
       "is_root": true,
       "fields": [
@@ -8712,6 +8759,153 @@
       ]
     },
     {
+      "name": "TransferHistory",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "tx_id",
+          "lite_name": "ti",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1028403'",
+          "comment": [
+            "The transaction ID of the transfer"
+          ]
+        },
+        {
+          "name": "from_account_id",
+          "lite_name": "fa",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The account to transfer from"
+          ]
+        },
+        {
+          "name": "from_sub_account_id",
+          "lite_name": "fs",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount to transfer from (0 if transferring from main account)"
+          ]
+        },
+        {
+          "name": "to_account_id",
+          "lite_name": "ta",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The account to deposit into"
+          ]
+        },
+        {
+          "name": "to_sub_account_id",
+          "lite_name": "ts",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount to transfer to (0 if transferring to main account)"
+          ]
+        },
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "Currency",
+          "json_type": "Currency",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The token currency to transfer"
+          ]
+        },
+        {
+          "name": "num_tokens",
+          "lite_name": "nt",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1500.0'",
+          "comment": [
+            "The number of tokens to transfer"
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The signature of the transfer"
+          ]
+        },
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The timestamp of the transfer in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "transfer_type",
+          "lite_name": "tt",
+          "semantic_type": "TransferType",
+          "json_type": "TransferType",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The type of transfer"
+          ]
+        },
+        {
+          "name": "transfer_metadata",
+          "lite_name": "tm",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The metadata of the transfer"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "WSTransferFeedDataV1",
       "is_root": true,
       "fields": [
@@ -10051,6 +10245,103 @@
         "",
         "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
       ]
+    },
+    {
+      "name": "WithdrawalHistory",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "tx_id",
+          "lite_name": "ti",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1028403'",
+          "comment": [
+            "The transaction ID of the withdrawal"
+          ]
+        },
+        {
+          "name": "from_account_id",
+          "lite_name": "fa",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The subaccount to withdraw from"
+          ]
+        },
+        {
+          "name": "to_eth_address",
+          "lite_name": "te",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The ethereum address to withdraw to"
+          ]
+        },
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "Currency",
+          "json_type": "Currency",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The token currency to withdraw"
+          ]
+        },
+        {
+          "name": "num_tokens",
+          "lite_name": "nt",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1500.0'",
+          "comment": [
+            "The number of tokens to withdraw"
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The signature of the withdrawal"
+          ]
+        },
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The timestamp of the withdrawal in unix nanoseconds"
+          ]
+        }
+      ],
+      "comment": []
     },
     {
       "name": "ApiWithdrawalHistoryResponse",

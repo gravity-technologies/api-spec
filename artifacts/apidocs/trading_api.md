@@ -5844,14 +5844,52 @@ LITE ENDPOINT: lite/v1/transfer_history
         **Full Response**
         ``` { .json .copy }
         {
-            "result": [null],
+            "result": [{
+                "tx_id": "1028403",
+                "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "from_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "to_sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "currency": "USDT",
+                "num_tokens": "1500.0",
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890
+                },
+                "event_time": "1697788800000000000",
+                "transfer_type": "STANDARD",
+                "transfer_metadata": null
+            }],
             "next": "Qw0918="
         }
         ```
         **Lite Response**
         ``` { .json .copy }
         {
-            "r": [null],
+            "r": [{
+                "ti": "1028403",
+                "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "fs": "'$GRVT_SUB_ACCOUNT_ID'",
+                "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "ts": "'$GRVT_SUB_ACCOUNT_ID'",
+                "c": "USDT",
+                "nt": "1500.0",
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890
+                },
+                "et": "1697788800000000000",
+                "tt": "STANDARD",
+                "tm": null
+            }],
             "n": "Qw0918="
         }
         ```
@@ -6771,14 +6809,44 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         **Full Response**
         ``` { .json .copy }
         {
-            "result": [null],
+            "result": [{
+                "tx_id": "1028403",
+                "from_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "to_eth_address": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "currency": "USDT",
+                "num_tokens": "1500.0",
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890
+                },
+                "event_time": "1697788800000000000"
+            }],
             "next": "Qw0918="
         }
         ```
         **Lite Response**
         ``` { .json .copy }
         {
-            "r": [null],
+            "r": [{
+                "ti": "1028403",
+                "fa": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "te": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "c": "USDT",
+                "nt": "1500.0",
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890
+                },
+                "et": "1697788800000000000"
+            }],
             "n": "Qw0918="
         }
         ```
@@ -8287,13 +8355,29 @@ LITE ENDPOINT: lite/v1/funding_account_summary
         **Full Response**
         ``` { .json .copy }
         {
-            "result": null
+            "result": {
+                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "total_equity": "3945034.23",
+                "spot_balances": [{
+                    "currency": "USDT",
+                    "balance": "123456.78",
+                    "index_price": "1.0000102"
+                }]
+            }
         }
         ```
         **Lite Response**
         ``` { .json .copy }
         {
-            "r": null
+            "r": {
+                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "te": "3945034.23",
+                "sb": [{
+                    "c": "USDT",
+                    "b": "123456.78",
+                    "ip": "1.0000102"
+                }]
+            }
         }
         ```
     </section>
