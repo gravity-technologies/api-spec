@@ -1964,7 +1964,8 @@ LITE ENDPOINT: lite/v1/trade
                 "interest_rate": 0.0003,
                 "forward_price": "65038.01",
                 "trade_id": "209358-2",
-                "venue": "ORDERBOOK"
+                "venue": "ORDERBOOK",
+                "is_rpi": false
             }]
         }
         ```
@@ -1982,7 +1983,8 @@ LITE ENDPOINT: lite/v1/trade
                 "ir": 0.0003,
                 "fp": "65038.01",
                 "ti": "209358-2",
-                "v": "ORDERBOOK"
+                "v": "ORDERBOOK",
+                "ir1": false
             }]
         }
         ```
@@ -2284,7 +2286,8 @@ LITE ENDPOINT: lite/v1/trade_history
                 "interest_rate": 0.0003,
                 "forward_price": "65038.01",
                 "trade_id": "209358-2",
-                "venue": "ORDERBOOK"
+                "venue": "ORDERBOOK",
+                "is_rpi": false
             }],
             "next": "Qw0918="
         }
@@ -2303,7 +2306,8 @@ LITE ENDPOINT: lite/v1/trade_history
                 "ir": 0.0003,
                 "fp": "65038.01",
                 "ti": "209358-2",
-                "v": "ORDERBOOK"
+                "v": "ORDERBOOK",
+                "ir1": false
             }],
             "n": "Qw0918="
         }
@@ -3053,7 +3057,8 @@ LITE ENDPOINT: lite/v1/funding
                 "instrument": "BTC_USDT_Perp",
                 "funding_rate": 0.0003,
                 "funding_time": "1697788800000000000",
-                "mark_price": "65038.01"
+                "mark_price": "65038.01",
+                "funding_rate_8_h_avg": 0.0003
             }],
             "next": "Qw0918="
         }
@@ -3065,7 +3070,8 @@ LITE ENDPOINT: lite/v1/funding
                 "i": "BTC_USDT_Perp",
                 "fr": 0.0003,
                 "ft": "1697788800000000000",
-                "mp": "65038.01"
+                "mp": "65038.01",
+                "fr1": 0.0003
             }],
             "n": "Qw0918="
         }
