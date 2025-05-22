@@ -279,3 +279,45 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiSetInitialLeverageResponse, resp, Config(cast=[Enum]))
+
+    async def vault_burn_tokens_v1(
+        self, req: types.ApiVaultBurnTokensRequest
+    ) -> types.AckResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/vault_burn_tokens", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
+
+    async def vault_invest_v1(
+        self, req: types.ApiVaultInvestRequest
+    ) -> types.AckResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/vault_invest", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
+
+    async def vault_investor_summary_v1(
+        self, req: types.ApiVaultInvestorSummaryRequest
+    ) -> types.ApiVaultInvestorSummaryResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/vault_investor_summary", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiVaultInvestorSummaryResponse, resp, Config(cast=[Enum]))
+
+    async def vault_redeem_v1(
+        self, req: types.ApiVaultRedeemRequest
+    ) -> types.AckResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/vault_redeem", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
+
+    async def vault_redeem_cancel_v1(
+        self, req: types.ApiVaultRedeemCancelRequest
+    ) -> types.AckResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/vault_redeem_cancel", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))

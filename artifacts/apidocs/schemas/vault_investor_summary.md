@@ -1,0 +1,19 @@
+!!! info "[VaultInvestorSummary](/../../schemas/vault_investor_summary)"
+    Vault investor summary information.<br><br>This struct contains the summary of investments in a vault.<br>
+
+    |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+    |-|-|-|-|
+    |sub_account_id<br>`sa` |string|True|The unique identifier of the vault sub account.|
+    |num_lp_tokens<br>`nl` |string|True|The number of Vault LP tokens held by the investor.|
+    |avg_entry_price<br>`ae` |string|True|The average entry price of the vault LP tokens.|
+    |current_price<br>`cp` |string|True|The current price of the vault LP tokens.|
+    |total_equity<br>`te` |string|True|The current valuation of all held vault LP tokens.|
+    |all_time_realized_pnl<br>`at` |string|True|The all-time realized PnL that the investor has received from the vault.|
+    |pending_redemption<br>`pr` |VaultRedemption|False<br>`None`|The singleton pending redemption (omitted if none).|
+    ??? info "[VaultRedemption](/../../schemas/vault_redemption)"
+        Vault redemption information.<br><br>This struct contains information about a pending redemption from a vault.<br>
+
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |num_lp_tokens<br>`nl` |string|True|The number of LP Tokens requested for redemption.|
+        |request_valuation<br>`rv` |string|True|The valuation of the redemption request.|
