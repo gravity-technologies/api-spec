@@ -145,3 +145,7 @@
             |`OCO_COUNTER_PART_TRIGGERED` = 30|the OCO counter part order was triggered|
             |`REDUCE_ONLY_LIMIT` = 31|the remaining order size was cancelled because it exceeded current position size|
             |`CLIENT_REPLACE` = 32|the order was replaced by a client replace request|
+            |`DERISK_MUST_BE_IOC` = 33|the derisk order must be an IOC order|
+            |`DERISK_MUST_BE_REDUCE_ONLY` = 34|the derisk order must be a reduce-only order|
+            |`DERISK_NOT_SUPPORTED` = 35|derisk is not supported|
+            |`INVALID_ORDER_TYPE` = 36|the order type is invalid|

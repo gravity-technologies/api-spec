@@ -13,6 +13,10 @@
     |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this sub account, and their balances|
     |positions<br>`p` |[Positions]|True|The list of positions owned by this sub account|
     |settle_index_price<br>`si` |string|True|The index price of the settle currency. (reported in `USD`)|
+    |is_vault<br>`iv` |boolean|False<br>`None`|Whether this sub account is a vault|
+    |vault_im_additions<br>`vi` |string|False<br>`None`|Total amount of IM (reported in `settle_currency`) deducted from the vault due to redemptions nearing the end of their redemption period|
+    |derisk_margin<br>`dm` |string|True|The derisk margin of this sub account|
+    |derisk_to_maintenance_margin_ratio<br>`dt` |string|True|The derisk margin to maintenance margin ratio of this sub account|
     ??? info "[MarginType](/../../schemas/margin_type)"
         |Value| Description |
         |-|-|
