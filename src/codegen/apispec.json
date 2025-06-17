@@ -702,6 +702,52 @@
       ],
       "rpcs": [
         {
+          "namespace": "Admin",
+          "name": "RPCTriggerVaultRedemptionV1",
+          "version": 1,
+          "route": "/internal_trigger_vault_redemption",
+          "auth_required": true,
+          "request": "ApiVaultRedeemCancelRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 7000,
+              "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            }
+          ]
+        },
+        {
           "namespace": "Order",
           "name": "RPCCreateOrderV1",
           "version": 1,

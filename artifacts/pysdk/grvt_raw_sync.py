@@ -94,6 +94,16 @@ class GrvtRawSync(GrvtRawSyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiFundingRateResponse, resp, Config(cast=[Enum]))
 
+    def trigger_vault_redemption_v1(
+        self, req: types.ApiVaultRedeemCancelRequest
+    ) -> types.AckResponse | GrvtError:
+        resp = self._post(
+            True, self.td_rpc + "/full/v1/internal_trigger_vault_redemption", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
+
     def create_order_v1(
         self, req: types.ApiCreateOrderRequest
     ) -> types.ApiCreateOrderResponse | GrvtError:
