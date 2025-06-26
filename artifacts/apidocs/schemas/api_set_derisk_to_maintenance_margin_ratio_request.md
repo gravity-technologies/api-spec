@@ -1,13 +1,11 @@
-!!! info "[WithdrawalHistory](/../../schemas/withdrawal_history)"
+!!! info "[ApiSetDeriskToMaintenanceMarginRatioRequest](/../../schemas/api_set_derisk_to_maintenance_margin_ratio_request)"
+    The request to set the derisk margin to maintenance margin ratio of a sub account<br>
+
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |tx_id<br>`ti` |string|True|The transaction ID of the withdrawal|
-    |from_account_id<br>`fa` |string|True|The subaccount to withdraw from|
-    |to_eth_address<br>`te` |string|True|The ethereum address to withdraw to|
-    |currency<br>`c` |string|True|The token currency to withdraw|
-    |num_tokens<br>`nt` |string|True|The number of tokens to withdraw|
-    |signature<br>`s` |Signature|True|The signature of the withdrawal|
-    |event_time<br>`et` |string|True|The timestamp of the withdrawal in unix nanoseconds|
+    |sub_account_id<br>`sa` |string|True|The sub account ID to set the leverage for|
+    |ratio<br>`r` |string|True|The derisk margin to maintenance margin ratio of this sub account|
+    |signature<br>`s` |Signature|True|The signature of this operation|
     ??? info "[Signature](/../../schemas/signature)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|

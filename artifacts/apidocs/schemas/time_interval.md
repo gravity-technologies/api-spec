@@ -7,3 +7,4 @@
     |`INTERVAL_7_D` = 2|7 days|
     |`INTERVAL_30_D` = 3|30 days|
     |`INTERVAL_90_D` = 4|90 days|
+    |`INTERVAL_LIFETIME` = 5|Lifetime|
