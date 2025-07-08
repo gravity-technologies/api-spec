@@ -2752,6 +2752,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID to request for"
@@ -2765,6 +2766,7 @@
           "index": 1,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['PERPETUAL']",
           "comment": [
@@ -2779,6 +2781,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['BTC', 'ETH']",
           "comment": [
@@ -2793,6 +2796,7 @@
           "index": 3,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['USDT', 'USDC']",
           "comment": [
@@ -2816,6 +2820,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Time at which the event was emitted in unix nanoseconds"
@@ -2829,6 +2834,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID that participated in the trade"
@@ -2842,6 +2848,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The instrument being represented"
@@ -2855,6 +2862,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'2635000.50'",
           "comment": [
             "The size of the position, expressed in base asset decimal units. Negative for short positions"
@@ -2868,6 +2876,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'2635000.50'",
           "comment": [
             "The notional value of the position, negative for short assets, expressed in quote asset decimal units"
@@ -2881,6 +2890,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The entry price of the position, expressed in `9` decimals",
@@ -2896,6 +2906,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The exit price of the position, expressed in `9` decimals",
@@ -2911,6 +2922,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The mark price of the position, expressed in `9` decimals"
@@ -2924,6 +2936,7 @@
           "index": 8,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'135000.50'",
           "comment": [
             "The unrealized PnL of the position, expressed in quote asset decimal units",
@@ -2938,6 +2951,7 @@
           "index": 9,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'-35000.30'",
           "comment": [
             "The realized PnL of the position, expressed in quote asset decimal units",
@@ -2952,6 +2966,7 @@
           "index": 10,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'100000.20'",
           "comment": [
             "The total PnL of the position, expressed in quote asset decimal units",
@@ -2966,6 +2981,7 @@
           "index": 11,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'10.20'",
           "comment": [
             "The ROI of the position, expressed as a percentage",
@@ -2980,6 +2996,7 @@
           "index": 12,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1.0000102'",
           "comment": [
             "The index price of the quote currency. (reported in `USD`)"
@@ -2993,6 +3010,7 @@
           "index": 13,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "60000.25",
           "comment": [
             "The estimated liquidation price"
@@ -3006,6 +3024,7 @@
           "index": 14,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'10'",
           "comment": [
             "The current leverage value for this position"
@@ -3026,6 +3045,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The positions matching the request filter"
           ]
@@ -3045,6 +3065,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID to request for"
@@ -3058,6 +3079,7 @@
           "index": 1,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['PERPETUAL']",
           "comment": [
@@ -3072,6 +3094,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['BTC', 'ETH']",
           "comment": [
@@ -3086,6 +3109,7 @@
           "index": 3,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['USDT', 'USDC']",
           "comment": [
@@ -3100,6 +3124,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1697788800000000000'",
           "comment": [
@@ -3114,6 +3139,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "now()",
           "example": "'1697788800000000000'",
           "comment": [
@@ -3128,6 +3154,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "500",
           "example": "500",
           "comment": [
@@ -3142,6 +3169,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "''",
           "comment": [
@@ -3167,6 +3195,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Time at which the event was emitted in unix nanoseconds"
@@ -3180,6 +3209,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID that participated in the trade"
@@ -3193,6 +3223,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The instrument being represented"
@@ -3206,6 +3237,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "true",
           "comment": [
             "The side that the subaccount took on the trade"
@@ -3219,6 +3251,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "true",
           "comment": [
             "The role that the subaccount took on the trade"
@@ -3232,6 +3265,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0.30'",
           "comment": [
             "The number of assets being traded, expressed in base asset decimal units"
@@ -3245,6 +3279,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The traded price, expressed in `9` decimals"
@@ -3258,6 +3293,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The mark price of the instrument at point of trade, expressed in `9` decimals"
@@ -3271,6 +3307,7 @@
           "index": 8,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The index price of the instrument at point of trade, expressed in `9` decimals"
@@ -3284,6 +3321,7 @@
           "index": 9,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "0.0003",
           "comment": [
             "The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)"
@@ -3297,6 +3335,7 @@
           "index": 10,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "[Options] The forward price of the option at point of trade, expressed in `9` decimals"
@@ -3310,6 +3349,7 @@
           "index": 11,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'2400.50'",
           "comment": [
             "The realized PnL of the trade, expressed in quote asset decimal units (0 if increasing position size)"
@@ -3323,6 +3363,7 @@
           "index": 12,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'9.75'",
           "comment": [
             "The fees paid on the trade, expressed in quote asset decimal unit (negative if maker rebate applied)"
@@ -3336,6 +3377,7 @@
           "index": 13,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "0.0003",
           "comment": [
             "The fee rate paid on the trade"
@@ -3349,6 +3391,7 @@
           "index": 14,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'209358-2'",
           "comment": [
             "A trade identifier, globally unique, and monotonically increasing (not by `1`).",
@@ -3364,6 +3407,7 @@
           "index": 15,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0x10000101000203040506'",
           "comment": [
             "An order identifier"
@@ -3377,9 +3421,25 @@
           "index": 16,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'ORDERBOOK'",
           "comment": [
             "The venue where the trade occurred"
+          ]
+        },
+        {
+          "name": "is_liquidation",
+          "lite_name": "il",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 17,
+          "array_depth": 0,
+          "optional": false,
+          "included_in_external_docs": false,
+          "example": "false",
+          "comment": [
+            "[Interal-Only; not documented in public API spec]",
+            "If the trade was a liquidation"
           ]
         },
         {
@@ -3390,6 +3450,7 @@
           "index": 18,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'23042'",
           "comment": [
             "A unique identifier for the active order within a subaccount, specified by the client",
@@ -3404,6 +3465,21 @@
           ]
         },
         {
+          "name": "trade_index",
+          "lite_name": "ti1",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 19,
+          "array_depth": 0,
+          "optional": false,
+          "included_in_external_docs": false,
+          "example": "'2'",
+          "comment": [
+            "[Interal-Only; not documented in public API spec]",
+            "A trade index"
+          ]
+        },
+        {
           "name": "signer",
           "lite_name": "s1",
           "semantic_type": "uint256",
@@ -3411,6 +3487,7 @@
           "index": 20,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The address (public key) of the wallet signing the payload"
@@ -3424,6 +3501,7 @@
           "index": 21,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "",
           "comment": [
             "Specifies the broker who brokered the order"
@@ -3437,9 +3515,26 @@
           "index": 22,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "false",
           "comment": [
             "If the trade is a RPI trade"
+          ]
+        },
+        {
+          "name": "source",
+          "lite_name": "s2",
+          "semantic_type": "Source",
+          "json_type": "Source",
+          "index": 23,
+          "array_depth": 0,
+          "optional": true,
+          "included_in_external_docs": false,
+          "default": "",
+          "example": "'WEB'",
+          "comment": [
+            "[Interal-Only; not documented in public API spec]",
+            "Specifies the source of the viewing party of the trade"
           ]
         }
       ],
@@ -3457,6 +3552,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The private trades matching the request asset"
           ]
@@ -3469,6 +3565,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'Qw0918='",
           "comment": [
             "The cursor to indicate when to start the query from"
@@ -3489,6 +3586,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID to request for"
@@ -3502,6 +3600,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "'BTC_USDT_Perp'",
           "comment": [
@@ -3516,6 +3615,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1697788800000000000'",
           "comment": [
@@ -3530,6 +3630,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "now()",
           "example": "'1697788800000000000'",
           "comment": [
@@ -3544,6 +3645,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "500",
           "example": "500",
           "comment": [
@@ -3558,6 +3660,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "''",
           "comment": [
@@ -3583,6 +3686,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Time at which the event was emitted in unix nanoseconds"
@@ -3596,6 +3700,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID that made the funding payment"
@@ -3609,6 +3714,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The perpetual instrument being funded"
@@ -3622,6 +3728,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The currency of the funding payment"
@@ -3635,6 +3742,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'9.75'",
           "comment": [
             "The amount of the funding payment. Positive if paid, negative if received"
@@ -3648,6 +3756,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'209358'",
           "comment": [
             "The transaction ID of the funding payment.",
@@ -3670,6 +3779,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The funding payments matching the request asset"
           ]
@@ -3682,6 +3792,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'Qw0918='",
           "comment": [
             "The cursor to indicate when to start the query from"
@@ -3702,6 +3813,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
@@ -3722,6 +3834,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The currency you hold a spot balance in"
@@ -3735,6 +3848,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "This currency's balance in this trading account."
@@ -3748,6 +3862,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1.0000102'",
           "comment": [
             "The index price of this currency. (reported in `USD`)"
@@ -3768,6 +3883,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Time at which the event was emitted in unix nanoseconds"
@@ -3781,6 +3897,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID this entry refers to"
@@ -3794,6 +3911,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'SIMPLE_CROSS_MARGIN'",
           "comment": [
             "The type of margin algorithm this subaccount uses"
@@ -3807,6 +3925,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The settlement, margin, and reporting currency of this account.",
@@ -3824,6 +3943,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The total unrealized PnL of all positions owned by this subaccount, denominated in quote currency decimal units.",
@@ -3838,6 +3958,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The notional value of your account if all positions are closed, excluding trading fees (reported in `settle_currency`).",
@@ -3852,6 +3973,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The `total_equity` required to open positions in the account (reported in `settle_currency`).",
@@ -3866,6 +3988,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The `total_equity` required to avoid liquidation of positions in the account (reported in `settle_currency`).",
@@ -3880,6 +4003,7 @@
           "index": 8,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The notional value available to transfer out of the trading account into the funding account (reported in `settle_currency`).",
@@ -3894,6 +4018,7 @@
           "index": 9,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The list of spot assets owned by this sub account, and their balances"
           ]
@@ -3906,6 +4031,7 @@
           "index": 10,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The list of positions owned by this sub account"
           ]
@@ -3918,6 +4044,7 @@
           "index": 11,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1.0000102'",
           "comment": [
             "The index price of the settle currency. (reported in `USD`)"
@@ -3931,6 +4058,7 @@
           "index": 12,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "comment": [
             "Whether this sub account is a vault"
           ]
@@ -3943,6 +4071,7 @@
           "index": 13,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "Total amount of IM (reported in `settle_currency`) deducted from the vault due to redemptions nearing the end of their redemption period"
@@ -3956,6 +4085,7 @@
           "index": 14,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'185185.77'",
           "comment": [
             "The derisk margin of this sub account"
@@ -3969,6 +4099,7 @@
           "index": 15,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1.5'",
           "comment": [
             "The derisk margin to maintenance margin ratio of this sub account"
@@ -3989,6 +4120,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The sub account matching the request sub account"
           ]
@@ -4010,6 +4142,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID to request for"
@@ -4023,6 +4156,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1697788800000000000'",
           "comment": [
@@ -4037,6 +4171,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "now()",
           "example": "'1697788800000000000'",
           "comment": [
@@ -4051,6 +4186,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "500",
           "example": "500",
           "comment": [
@@ -4065,6 +4201,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "''",
           "comment": [
@@ -4093,6 +4230,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The sub account history matching the request sub account"
           ]
@@ -4105,6 +4243,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'Qw0918='",
           "comment": [
             "The cursor to indicate when to start the next query from"
@@ -4125,6 +4264,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The main account ID of the account to which the summary belongs"
@@ -4138,6 +4278,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'3945034.23'",
           "comment": [
             "Total equity of the main (+ sub) account, denominated in USD"
@@ -4151,6 +4292,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The list of spot assets owned by this main (+ sub) account, and their balances"
           ]
@@ -4170,6 +4312,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The aggregated account summary"
           ]
@@ -4191,6 +4334,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The main account ID of the account to which the summary belongs"
@@ -4204,6 +4348,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'3945034.23'",
           "comment": [
             "Total equity of the main account, denominated in USD"
@@ -4217,6 +4362,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The list of spot assets owned by this main account, and their balances"
           ]
@@ -4238,6 +4384,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The funding account summary"
           ]
@@ -4259,6 +4406,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID to set the leverage for"
@@ -4272,6 +4420,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The instrument to set the leverage for"
@@ -4285,6 +4434,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'10'",
           "comment": [
             "The leverage to set for the sub account"
@@ -4307,6 +4457,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'true'",
           "comment": [
             "Whether the leverage was set successfully"
@@ -4329,6 +4480,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID to get the leverage for"
@@ -4351,6 +4503,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The instrument to get the leverage for"
@@ -4364,6 +4517,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'10'",
           "comment": [
             "The initial leverage of the sub account"
@@ -4377,6 +4531,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'10'",
           "comment": [
             "The min leverage this sub account can set"
@@ -4390,6 +4545,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'50'",
           "comment": [
             "The max leverage this sub account can set"
@@ -4410,6 +4566,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The initial leverage of the sub account"
           ]
@@ -4431,6 +4588,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The address (public key) of the wallet signing the payload"
@@ -4444,6 +4602,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8'",
           "comment": [
             "Signature R"
@@ -4457,6 +4616,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d'",
           "comment": [
             "Signature S"
@@ -4470,6 +4630,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'28'",
           "comment": [
             "Signature V"
@@ -4483,6 +4644,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days"
@@ -4496,6 +4658,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1234567890'",
           "comment": [
             "Users can randomly generate this value, used as a signature deconflicting key.",
@@ -4519,6 +4682,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID to set the leverage for"
@@ -4532,6 +4696,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1.5'",
           "comment": [
             "The derisk margin to maintenance margin ratio of this sub account"
@@ -4545,6 +4710,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The signature of this operation"
           ]
@@ -4566,6 +4732,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'true'",
           "comment": [
             "Whether the derisk margin to maintenance margin ratio was set successfully"
@@ -4588,6 +4755,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'2.0'",
           "comment": [
             "The JSON RPC version to use for the request"
@@ -4601,6 +4769,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'subscribe'",
           "comment": [
             "The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )"
@@ -4614,6 +4783,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The parameters for the request"
           ]
@@ -4626,6 +4796,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "123",
           "comment": [
@@ -4652,6 +4823,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "123",
           "comment": [
             "The error code for the request"
@@ -4665,6 +4837,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'An error occurred'",
           "comment": [
             "The error message for the request"
@@ -4687,6 +4860,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'2.0'",
           "comment": [
             "The JSON RPC version to use for the request"
@@ -4700,6 +4874,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "null",
           "comment": [
             "The result for the request"
@@ -4713,6 +4888,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "null",
           "comment": [
             "The error for the request"
@@ -4726,6 +4902,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "123",
           "comment": [
@@ -4741,6 +4918,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'subscribe'",
           "comment": [
             "The method used in the request for this response (eg: `subscribe` / `unsubscribe` / `v1/instrument` )"
@@ -4764,6 +4942,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.ticker.d'",
           "comment": [
             "The channel to subscribe to (eg: ticker.s / ticker.d)"
@@ -4777,6 +4956,7 @@
           "index": 1,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
           "comment": [
             "The list of feeds to subscribe to"
@@ -4790,6 +4970,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "false",
           "example": "true",
           "comment": [
@@ -4818,6 +4999,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.ticker.d'",
           "comment": [
             "The channel to subscribe to (eg: ticker.s / ticker.d)"
@@ -4831,6 +5013,7 @@
           "index": 1,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
           "comment": [
             "The list of feeds subscribed to"
@@ -4844,6 +5027,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
           "comment": [
             "The list of feeds unsubscribed from"
@@ -4857,6 +5041,7 @@
           "index": 3,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "10",
           "comment": [
             "The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`"
@@ -4870,6 +5055,7 @@
           "index": 4,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "872634876",
           "comment": [
             "The first sequence number to expect for each subscribed feed. Returned in same order as `subs`"
@@ -4883,6 +5069,7 @@
           "index": 5,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "872634875",
           "comment": [
             "The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`"
@@ -4906,6 +5093,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.ticker.d'",
           "comment": [
             "The channel to unsubscribe from (eg: ticker.s / ticker.d)"
@@ -4919,6 +5107,7 @@
           "index": 1,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
           "comment": [
             "The list of feeds to unsubscribe from"
@@ -4932,6 +5121,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "false",
           "example": "true",
           "comment": [
@@ -4955,6 +5145,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.ticker.d'",
           "comment": [
             "The channel to subscribe to (eg: ticker.s / ticker.d)"
@@ -4968,6 +5159,7 @@
           "index": 1,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
           "comment": [
             "The list of feeds unsubscribed from"
@@ -4990,6 +5182,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "123",
           "comment": [
@@ -5005,6 +5198,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.ticker.d'",
           "comment": [
             "The channel to subscribe to (eg: ticker.s / ticker.d)"
@@ -5018,6 +5212,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
           "comment": [
             "The list of feeds to subscribe to"
@@ -5031,6 +5226,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'subscribe'",
           "comment": [
             "The method to use for the request (eg: subscribe / unsubscribe)"
@@ -5044,6 +5240,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "false",
           "example": "true",
           "comment": [
@@ -5069,6 +5266,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "123",
           "comment": [
@@ -5084,6 +5282,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.ticker.d'",
           "comment": [
             "The channel to subscribe to (eg: ticker.s / ticker.d)"
@@ -5097,6 +5296,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
           "comment": [
             "The list of feeds subscribed to"
@@ -5110,6 +5310,7 @@
           "index": 3,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
           "comment": [
             "The list of feeds unsubscribed from"
@@ -5123,6 +5324,7 @@
           "index": 4,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "10",
           "comment": [
             "The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`"
@@ -5136,6 +5338,7 @@
           "index": 5,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "872634876",
           "comment": [
             "The first sequence number to expect for each subscribed feed. Returned in same order as `subs`"
@@ -5149,6 +5352,7 @@
           "index": 6,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "872634875",
           "comment": [
             "The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`"
@@ -5174,6 +5378,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -5188,6 +5393,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "500",
           "comment": [
             "The minimal rate at which we publish feeds (in milliseconds)",
@@ -5204,6 +5410,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "'0'",
           "example": "50",
           "comment": [
@@ -5237,6 +5444,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The price of the level, expressed in `9` decimals"
@@ -5250,6 +5458,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'3456.78'",
           "comment": [
             "The number of assets offered, expressed in base asset decimal units"
@@ -5263,6 +5472,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123'",
           "comment": [
             "The number of open orders at this level"
@@ -5283,6 +5493,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Time at which the event was emitted in unix nanoseconds"
@@ -5296,6 +5507,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -5309,6 +5521,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The list of best bids up till query depth"
           ]
@@ -5321,6 +5534,7 @@
           "index": 3,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The list of best asks up till query depth"
           ]
@@ -5340,6 +5554,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.book.s'",
           "comment": [
             "Stream name"
@@ -5353,6 +5568,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "Primary selector"
@@ -5366,6 +5582,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -5384,6 +5601,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "An orderbook levels object matching the request filter"
           ]
@@ -5396,6 +5614,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -5416,6 +5635,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -5430,6 +5650,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "500",
           "comment": [
             "The minimal rate at which we publish feeds (in milliseconds)",
@@ -5460,6 +5681,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Time at which the event was emitted in unix nanoseconds"
@@ -5473,6 +5695,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -5486,6 +5709,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The mark price of the instrument, expressed in `9` decimals"
@@ -5499,6 +5723,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The index price of the instrument, expressed in `9` decimals"
@@ -5512,6 +5737,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The last traded price of the instrument (also close price), expressed in `9` decimals"
@@ -5525,6 +5751,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The number of assets traded in the last trade, expressed in base asset decimal units"
@@ -5538,6 +5765,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The mid price of the instrument, expressed in `9` decimals"
@@ -5551,6 +5779,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The best bid price of the instrument, expressed in `9` decimals"
@@ -5564,6 +5793,7 @@
           "index": 8,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units"
@@ -5577,6 +5807,7 @@
           "index": 9,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The best ask price of the instrument, expressed in `9` decimals"
@@ -5590,6 +5821,7 @@
           "index": 10,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units"
@@ -5610,6 +5842,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.mini.s'",
           "comment": [
             "Stream name"
@@ -5623,6 +5856,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "Primary selector"
@@ -5636,6 +5870,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -5654,6 +5889,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "A mini ticker matching the request filter"
           ]
@@ -5666,6 +5902,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -5686,6 +5923,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -5700,6 +5938,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "500",
           "comment": [
             "The minimal rate at which we publish feeds (in milliseconds)",
@@ -5730,6 +5969,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Time at which the event was emitted in unix nanoseconds"
@@ -5743,6 +5983,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -5756,6 +5997,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The mark price of the instrument, expressed in `9` decimals"
@@ -5769,6 +6011,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The index price of the instrument, expressed in `9` decimals"
@@ -5782,6 +6025,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The last traded price of the instrument (also close price), expressed in `9` decimals"
@@ -5795,6 +6039,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The number of assets traded in the last trade, expressed in base asset decimal units"
@@ -5808,6 +6053,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The mid price of the instrument, expressed in `9` decimals"
@@ -5821,6 +6067,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The best bid price of the instrument, expressed in `9` decimals"
@@ -5834,6 +6081,7 @@
           "index": 8,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units"
@@ -5847,6 +6095,7 @@
           "index": 9,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The best ask price of the instrument, expressed in `9` decimals"
@@ -5860,6 +6109,7 @@
           "index": 10,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units"
@@ -5873,6 +6123,7 @@
           "index": 11,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "0.0003",
           "comment": [
             "The current funding rate of the instrument, expressed in percentage points"
@@ -5886,6 +6137,7 @@
           "index": 12,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "0.0003",
           "comment": [
             "The average funding rate of the instrument (over last 8h), expressed in percentage points"
@@ -5899,6 +6151,7 @@
           "index": 13,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "0.0003",
           "comment": [
             "The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)"
@@ -5912,6 +6165,7 @@
           "index": 14,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "[Options] The forward price of the option, expressed in `9` decimals"
@@ -5925,6 +6179,7 @@
           "index": 15,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The 24 hour taker buy volume of the instrument, expressed in base asset decimal units"
@@ -5938,6 +6193,7 @@
           "index": 16,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The 24 hour taker sell volume of the instrument, expressed in base asset decimal units"
@@ -5951,6 +6207,7 @@
           "index": 17,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units"
@@ -5964,6 +6221,7 @@
           "index": 18,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units"
@@ -5977,6 +6235,7 @@
           "index": 19,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The 24 hour highest traded price of the instrument, expressed in `9` decimals"
@@ -5990,6 +6249,7 @@
           "index": 20,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The 24 hour lowest traded price of the instrument, expressed in `9` decimals"
@@ -6003,6 +6263,7 @@
           "index": 21,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The 24 hour first traded price of the instrument, expressed in `9` decimals"
@@ -6016,6 +6277,7 @@
           "index": 22,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The open interest in the instrument, expressed in base asset decimal units"
@@ -6029,6 +6291,7 @@
           "index": 23,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "example": "'0.5'",
           "comment": [
             "The ratio of accounts that are net long vs net short on this instrument"
@@ -6062,6 +6325,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.ticker.s'",
           "comment": [
             "Stream name"
@@ -6075,6 +6339,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "Primary selector"
@@ -6088,6 +6353,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -6106,6 +6372,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "A ticker matching the request filter"
           ]
@@ -6118,6 +6385,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -6138,6 +6406,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -6152,6 +6421,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "500",
           "comment": [
             "The limit to query for. Valid values are (50, 200, 500, 1000). Default is 50"
@@ -6175,6 +6445,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Time at which the event was emitted in unix nanoseconds"
@@ -6188,6 +6459,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -6201,6 +6473,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "true",
           "comment": [
             "If taker was the buyer on the trade"
@@ -6214,6 +6487,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The number of assets being traded, expressed in base asset decimal units"
@@ -6227,6 +6501,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The traded price, expressed in `9` decimals"
@@ -6240,6 +6515,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The mark price of the instrument at point of trade, expressed in `9` decimals"
@@ -6253,6 +6529,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The index price of the instrument at point of trade, expressed in `9` decimals"
@@ -6266,6 +6543,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "0.0003",
           "comment": [
             "The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)"
@@ -6279,6 +6557,7 @@
           "index": 8,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "[Options] The forward price of the option at point of trade, expressed in `9` decimals"
@@ -6292,6 +6571,7 @@
           "index": 9,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'209358-2'",
           "comment": [
             "A trade identifier, globally unique, and monotonically increasing (not by `1`).",
@@ -6307,8 +6587,39 @@
           "index": 10,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The venue where the trade occurred"
+          ]
+        },
+        {
+          "name": "is_liquidation",
+          "lite_name": "il",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 11,
+          "array_depth": 0,
+          "optional": false,
+          "included_in_external_docs": false,
+          "example": "false",
+          "comment": [
+            "[Interal-Only; not documented in public API spec]",
+            "If the trade was a liquidation"
+          ]
+        },
+        {
+          "name": "trade_index",
+          "lite_name": "ti1",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 12,
+          "array_depth": 0,
+          "optional": false,
+          "included_in_external_docs": false,
+          "example": "'2'",
+          "comment": [
+            "[Interal-Only; not documented in public API spec]",
+            "A trade index"
           ]
         },
         {
@@ -6319,6 +6630,7 @@
           "index": 13,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "false",
           "comment": [
             "If the trade is a RPI trade"
@@ -6341,6 +6653,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.trade'",
           "comment": [
             "Stream name"
@@ -6354,6 +6667,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "Primary selector"
@@ -6367,6 +6681,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -6385,6 +6700,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "A public trade matching the request filter"
           ]
@@ -6397,6 +6713,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -6417,6 +6734,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -6431,6 +6749,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The interval of each candlestick"
           ],
@@ -6444,6 +6763,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The type of candlestick data to retrieve"
           ],
@@ -6467,6 +6787,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Open time of kline bar in unix nanoseconds"
@@ -6480,6 +6801,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Close time of kline bar in unix nanosecond"
@@ -6493,6 +6815,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The open price, expressed in underlying currency resolution units"
@@ -6506,6 +6829,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The close price, expressed in underlying currency resolution units"
@@ -6519,6 +6843,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The high price, expressed in underlying currency resolution units"
@@ -6532,6 +6857,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The low price, expressed in underlying currency resolution units"
@@ -6545,6 +6871,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The underlying volume transacted, expressed in base asset decimal units"
@@ -6558,6 +6885,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'123456.78'",
           "comment": [
             "The quote volume transacted, expressed in quote asset decimal units"
@@ -6571,6 +6899,7 @@
           "index": 8,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "123456",
           "comment": [
             "The number of trades transacted"
@@ -6584,6 +6913,7 @@
           "index": 9,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -6606,6 +6936,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.candle'",
           "comment": [
             "Stream name"
@@ -6619,6 +6950,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "Primary selector"
@@ -6632,6 +6964,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -6650,6 +6983,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "A candlestick entry matching the request filters"
           ]
@@ -6662,6 +6996,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -6690,6 +7025,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.ticker.d'",
           "comment": [
             "The channel to subscribe to (eg: ticker.s / ticker.d)"
@@ -6703,6 +7039,7 @@
           "index": 1,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
           "comment": [
             "The list of selectors for the stream"
@@ -6723,6 +7060,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The list of stream references unsubscribed from"
           ]
@@ -6752,6 +7090,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The list of stream references  the connection is connected to"
           ]
@@ -6773,6 +7112,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -6786,6 +7126,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "50",
           "comment": [
             "Depth of the order book to be retrieved (10, 50, 100, 500)"
@@ -6808,6 +7149,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The orderbook levels objects matching the request asset"
           ]
@@ -6827,6 +7169,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -6849,6 +7192,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The mini ticker matching the request asset"
           ]
@@ -6868,6 +7212,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -6890,6 +7235,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The mini ticker matching the request asset"
           ]
@@ -6909,6 +7255,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -6922,6 +7269,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "500",
           "comment": [
             "The limit to query for. Defaults to 500; Max 1000"
@@ -6945,6 +7293,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The public trades matching the request asset"
           ]
@@ -6964,6 +7313,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -6977,6 +7327,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1697788800000000000'",
           "comment": [
@@ -6991,6 +7342,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "now()",
           "example": "'1697788800000000000'",
           "comment": [
@@ -7005,6 +7357,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "500",
           "example": "500",
           "comment": [
@@ -7019,6 +7372,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "''",
           "comment": [
@@ -7046,6 +7400,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The public trades matching the request asset"
           ]
@@ -7058,6 +7413,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "'Qw0918='",
           "comment": [
@@ -7079,6 +7435,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -7101,6 +7458,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -7114,6 +7472,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0x030501'",
           "comment": [
             "The asset ID used for instrument signing."
@@ -7127,6 +7486,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC'",
           "comment": [
             "The base currency"
@@ -7140,6 +7500,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The quote currency"
@@ -7153,9 +7514,42 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'PERPETUAL'",
           "comment": [
             "The kind of instrument"
+          ]
+        },
+        {
+          "name": "expiry",
+          "lite_name": "e",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "included_in_external_docs": false,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "[Interal-Only; not documented in public API spec]",
+            "The expiry time of the instrument in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "strike_price",
+          "lite_name": "sp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "included_in_external_docs": false,
+          "default": "0",
+          "example": "'65038.01'",
+          "comment": [
+            "[Interal-Only; not documented in public API spec]",
+            "The strike price of the instrument, expressed in `9` decimals"
           ]
         },
         {
@@ -7166,6 +7560,7 @@
           "index": 7,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['ORDERBOOK']",
           "comment": [
             "Venues that this instrument can be traded at"
@@ -7179,6 +7574,7 @@
           "index": 8,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'PERPETUAL'",
           "comment": [
             "The settlement period of the instrument"
@@ -7192,6 +7588,7 @@
           "index": 9,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "3",
           "comment": [
             "The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)"
@@ -7205,6 +7602,7 @@
           "index": 10,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "3",
           "comment": [
             "The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)"
@@ -7218,6 +7616,7 @@
           "index": 11,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0.01'",
           "comment": [
             "The size of a single tick, expressed in price decimal units"
@@ -7231,9 +7630,25 @@
           "index": 12,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0.01'",
           "comment": [
             "The minimum contract size, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "min_block_trade_size",
+          "lite_name": "mb",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 13,
+          "array_depth": 0,
+          "optional": false,
+          "included_in_external_docs": false,
+          "example": "'5.0'",
+          "comment": [
+            "[Interal-Only; not documented in public API spec]",
+            "The minimum block trade size, expressed in base asset decimal units"
           ]
         },
         {
@@ -7244,6 +7659,7 @@
           "index": 14,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Creation time in unix nanoseconds"
@@ -7257,6 +7673,7 @@
           "index": 15,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'100.0'",
           "comment": [
             "The maximum position size, expressed in base asset decimal units"
@@ -7277,6 +7694,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The instrument matching the request asset"
           ]
@@ -7296,6 +7714,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['PERPETUAL']",
           "comment": [
@@ -7310,6 +7729,7 @@
           "index": 1,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['BTC', 'ETH']",
           "comment": [
@@ -7324,6 +7744,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['USDT', 'USDC']",
           "comment": [
@@ -7338,6 +7759,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "false",
           "example": "true",
           "comment": [
@@ -7352,6 +7774,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "500",
           "example": "500",
           "comment": [
@@ -7375,6 +7798,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The instruments matching the request filter"
           ]
@@ -7394,6 +7818,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -7407,6 +7832,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The interval of each candlestick"
           ]
@@ -7419,6 +7845,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The type of candlestick data to retrieve"
           ]
@@ -7431,6 +7858,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1697788800000000000'",
           "comment": [
@@ -7445,6 +7873,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "now()",
           "example": "'1697788800000000000'",
           "comment": [
@@ -7459,6 +7888,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "500",
           "example": "500",
           "comment": [
@@ -7473,6 +7903,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "''",
           "comment": [
@@ -7498,6 +7929,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The candlestick result set for given interval"
           ]
@@ -7510,6 +7942,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "'Qw0918='",
           "comment": [
@@ -7531,6 +7964,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -7544,6 +7978,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1697788800000000000'",
           "comment": [
@@ -7558,6 +7993,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "now()",
           "example": "'1697788800000000000'",
           "comment": [
@@ -7572,6 +8008,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "500",
           "example": "500",
           "comment": [
@@ -7586,6 +8023,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "''",
           "comment": [
@@ -7611,6 +8049,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
@@ -7624,6 +8063,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "0.0003",
           "comment": [
             "The funding rate of the instrument, expressed in percentage points"
@@ -7637,6 +8077,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "The funding timestamp of the funding rate, expressed in unix nanoseconds"
@@ -7650,6 +8091,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.01'",
           "comment": [
             "The mark price of the instrument at funding timestamp, expressed in `9` decimals"
@@ -7663,6 +8105,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "0.0003",
           "comment": [
             "The 8h average funding rate of the instrument, expressed in percentage points"
@@ -7683,6 +8126,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The funding rate result set for given interval"
           ]
@@ -7695,6 +8139,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "'Qw0918='",
           "comment": [
@@ -7716,6 +8161,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "false",
           "example": "true",
           "comment": [
@@ -7739,6 +8185,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "List of instruments"
           ]
@@ -7758,6 +8205,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The instrument to trade in this leg"
@@ -7771,6 +8219,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'10.5'",
           "comment": [
             "The total number of assets to trade in this leg, expressed in base asset decimal units."
@@ -7784,6 +8233,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'65038.01'",
           "comment": [
@@ -7800,6 +8250,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "true",
           "comment": [
             "Specifies if the order leg is a buy or sell"
@@ -7820,6 +8271,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'LAST'",
           "comment": [
             "Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order"
@@ -7833,6 +8285,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'65038.10'",
           "comment": [
             "The Trigger Price of the order, expressed in `9` decimals."
@@ -7846,6 +8299,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "false",
           "comment": [
             "If True, the order will close the position when the trigger price is reached"
@@ -7874,6 +8328,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'TAKE_PROFIT'",
           "comment": [
             "Type of the trigger order. eg: Take Profit, Stop Loss, etc"
@@ -7887,6 +8342,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.",
             "",
@@ -7914,6 +8370,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'23042'",
           "comment": [
             "A unique identifier for the active order within a subaccount, specified by the client",
@@ -7935,6 +8392,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1697788800000000000'",
           "comment": [
@@ -7949,6 +8407,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "",
           "comment": [
             "Trigger fields are used to support any type of trigger order such as TP/SL"
@@ -7962,10 +8421,27 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "",
           "example": "'BROKER_CODE'",
           "comment": [
             "Specifies the broker who brokered the order"
+          ]
+        },
+        {
+          "name": "source",
+          "lite_name": "s",
+          "semantic_type": "Source",
+          "json_type": "Source",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "included_in_external_docs": false,
+          "default": "",
+          "example": "'WEB'",
+          "comment": [
+            "[Interal-Only; not documented in public API spec]",
+            "Specifies the source of the order"
           ]
         },
         {
@@ -7976,6 +8452,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "false",
           "comment": [
             "Specifies if the order is an ECN order"
@@ -7999,6 +8476,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The status of the order"
           ]
@@ -8011,6 +8489,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'CLIENT_CANCEL'",
           "comment": [
             "The reason for rejection or cancellation"
@@ -8024,6 +8503,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['10.5']",
           "comment": [
             "The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs"
@@ -8037,6 +8517,7 @@
           "index": 3,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['1.5']",
           "comment": [
             "The total number of assets traded. Sorted in same order as Order.Legs"
@@ -8050,6 +8531,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "Time at which the order was updated by GRVT, expressed in unix nanoseconds"
@@ -8063,6 +8545,7 @@
           "index": 5,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['60000.4']",
           "comment": [
             "The average fill price of the order. Sorted in same order as Order.Legs"
@@ -8083,6 +8566,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'0x1234567890abcdef'",
           "comment": [
@@ -8097,6 +8581,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount initiating the order"
@@ -8110,6 +8595,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "false",
           "example": "false",
           "comment": [
@@ -8126,6 +8612,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "Four supported types of orders: GTT, IOC, AON, FOK:\u003cul\u003e",
             "\u003cli\u003ePARTIAL EXECUTION = GTT / IOC - allows partial size execution on each leg\u003c/li\u003e",
@@ -8144,6 +8631,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "false",
           "example": "false",
           "comment": [
@@ -8166,6 +8654,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "false",
           "example": "false",
           "comment": [
@@ -8180,6 +8669,7 @@
           "index": 6,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The legs present in this order",
             "The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice"
@@ -8193,6 +8683,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The signature approving this order"
           ]
@@ -8205,6 +8696,7 @@
           "index": 8,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "Order Metadata, ignored by the smart contract, and unsigned by the client"
           ]
@@ -8217,9 +8709,42 @@
           "index": 9,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "comment": [
             "[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client"
+          ]
+        },
+        {
+          "name": "is_liquidation",
+          "lite_name": "il",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "included_in_external_docs": false,
+          "comment": [
+            "[Interal-Only; not documented in public API spec]",
+            "If the order is a liquidation order.",
+            "Liquidation Orders can be signed by the insurance fund, however, SubAccount must be provably under MM.",
+            "Trade.FeeCharged will mean liquidation fee. Sent to insurance fund instead of fee collection fund."
+          ]
+        },
+        {
+          "name": "is_derisk",
+          "lite_name": "id",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 11,
+          "array_depth": 0,
+          "optional": false,
+          "included_in_external_docs": false,
+          "comment": [
+            "[Interal-Only; not documented in public API spec]",
+            "If the order is a derisk order.",
+            "Derisk orders are signed by the insurance fund, and are always reduce only IOC orders.",
+            "Trade.FeeCharged will mean derisk fee. Sent to insurance fund instead of fee collection fund."
           ]
         }
       ],
@@ -8245,6 +8770,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The order to create"
           ]
@@ -8266,6 +8792,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The created order"
           ]
@@ -8285,6 +8812,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID cancelling the order"
@@ -8298,6 +8826,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'0x1028403'",
           "comment": [
@@ -8312,6 +8841,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'23042'",
           "comment": [
@@ -8326,6 +8856,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "100",
           "example": "'500'",
           "comment": [
@@ -8356,6 +8887,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID cancelling all orders"
@@ -8369,6 +8901,7 @@
           "index": 1,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['PERPETUAL']",
           "comment": [
@@ -8383,6 +8916,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['BTC', 'ETH']",
           "comment": [
@@ -8397,6 +8931,7 @@
           "index": 3,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['USDT', 'USDC']",
           "comment": [
@@ -8420,6 +8955,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
@@ -8433,6 +8969,7 @@
           "index": 1,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['PERPETUAL']",
           "comment": [
@@ -8447,6 +8984,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['BTC', 'ETH']",
           "comment": [
@@ -8461,6 +8999,7 @@
           "index": 3,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['USDT', 'USDC']",
           "comment": [
@@ -8482,6 +9021,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The Open Orders matching the request filter"
           ]
@@ -8503,6 +9043,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
@@ -8516,6 +9057,7 @@
           "index": 1,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['PERPETUAL']",
           "comment": [
@@ -8530,6 +9072,7 @@
           "index": 2,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['BTC', 'ETH']",
           "comment": [
@@ -8544,6 +9087,7 @@
           "index": 3,
           "array_depth": 1,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "all",
           "example": "['USDT', 'USDC']",
           "comment": [
@@ -8558,6 +9102,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1697788800000000000'",
           "comment": [
@@ -8572,6 +9117,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "now()",
           "example": "'1697788800000000000'",
           "comment": [
@@ -8586,6 +9132,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "500",
           "example": "500",
           "comment": [
@@ -8600,6 +9147,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "''",
           "comment": [
@@ -8625,6 +9173,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The Open Orders matching the request filter"
           ]
@@ -8637,6 +9186,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'Qw0918='",
           "comment": [
             "The cursor to indicate when to start the query from"
@@ -8665,6 +9215,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'true'",
           "comment": [
             "Gravity has acknowledged that the request has been successfully received and it will process it in the backend"
@@ -8685,6 +9236,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The Ack Object"
           ]
@@ -8706,6 +9258,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
@@ -8719,6 +9272,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'0x1028403'",
           "comment": [
@@ -8733,6 +9287,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'23042'",
           "comment": [
@@ -8756,6 +9311,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The order object for the requested filter"
           ]
@@ -8775,6 +9331,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID cancelling the orders for"
@@ -8788,6 +9345,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "1000",
           "example": "300",
           "comment": [
@@ -8827,6 +9385,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
@@ -8841,6 +9400,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "'all'",
           "example": "'BTC_USDT_Perp'",
           "comment": [
@@ -8868,6 +9428,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.order'",
           "comment": [
             "Stream name"
@@ -8881,6 +9442,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "Primary selector"
@@ -8894,6 +9456,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -8912,6 +9475,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The order object being created or updated"
           ]
@@ -8924,6 +9488,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -8944,6 +9509,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
@@ -8958,6 +9524,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "'all'",
           "example": "'BTC_USDT_Perp'",
           "comment": [
@@ -8986,6 +9553,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'10000101000203040506'",
           "comment": [
             "A unique 128-bit identifier for the order, deterministically generated within the GRVT backend"
@@ -8999,6 +9567,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'23042'",
           "comment": [
             "A unique identifier for the active order within a subaccount, specified by the client"
@@ -9012,6 +9581,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The order state object being created or updated"
           ]
@@ -9031,6 +9601,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.state'",
           "comment": [
             "Stream name"
@@ -9044,6 +9615,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "Primary selector"
@@ -9057,6 +9629,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -9075,6 +9648,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The Order State Feed"
           ]
@@ -9087,6 +9661,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -9107,6 +9682,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
@@ -9121,6 +9697,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "'all'",
           "example": "'BTC_USDT_Perp'",
           "comment": [
@@ -9148,6 +9725,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.position'",
           "comment": [
             "Stream name"
@@ -9161,6 +9739,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "Primary selector"
@@ -9174,6 +9753,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -9192,6 +9772,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "A Position being created or updated matching the request filter"
           ]
@@ -9204,6 +9785,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -9224,6 +9806,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The sub account ID to request for"
@@ -9238,6 +9821,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "'all'",
           "example": "'BTC_USDT_Perp'",
           "comment": [
@@ -9264,6 +9848,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.fill'",
           "comment": [
             "The websocket channel to which the response is sent"
@@ -9277,6 +9862,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "Primary selector"
@@ -9290,6 +9876,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -9308,6 +9895,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "A private trade matching the request filter"
           ]
@@ -9320,6 +9908,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -9340,6 +9929,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_MAIN_ACCOUNT_ID'",
           "comment": [
             "The main account ID to request for"
@@ -9354,6 +9944,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "'0'",
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
@@ -9380,6 +9971,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1028403'",
           "comment": [
             "The transaction ID of the transfer"
@@ -9393,6 +9985,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The account to transfer from"
@@ -9406,6 +9999,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount to transfer from (0 if transferring from main account)"
@@ -9419,6 +10013,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The account to deposit into"
@@ -9432,6 +10027,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount to transfer to (0 if transferring to main account)"
@@ -9445,6 +10041,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The token currency to transfer"
@@ -9458,6 +10055,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1500.0'",
           "comment": [
             "The number of tokens to transfer"
@@ -9471,6 +10069,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The signature of the transfer"
           ]
@@ -9483,6 +10082,7 @@
           "index": 8,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "The timestamp of the transfer in unix nanoseconds"
@@ -9496,6 +10096,7 @@
           "index": 9,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The type of transfer"
           ]
@@ -9508,6 +10109,7 @@
           "index": 10,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The metadata of the transfer"
           ]
@@ -9527,6 +10129,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.transfer'",
           "comment": [
             "The websocket channel to which the response is sent"
@@ -9540,6 +10143,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "Primary selector"
@@ -9553,6 +10157,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -9571,6 +10176,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The transfer history matching the requested filters"
           ]
@@ -9583,6 +10189,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -9605,6 +10212,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_MAIN_ACCOUNT_ID'",
           "comment": [
             "The main account ID to request for"
@@ -9629,6 +10237,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0x1234567890123456789012345678901234567890123456789012345678901234'",
           "comment": [
             "The hash of the bridgemint event producing the deposit"
@@ -9642,6 +10251,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The account to deposit into"
@@ -9655,6 +10265,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The token currency to deposit"
@@ -9668,6 +10279,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'10.50'",
           "comment": [
             "The number of tokens to deposit"
@@ -9688,6 +10300,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.deposit'",
           "comment": [
             "The websocket channel to which the response is sent"
@@ -9701,6 +10314,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "Primary selector"
@@ -9714,6 +10328,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -9732,6 +10347,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The Deposit object"
           ]
@@ -9744,6 +10360,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -9766,6 +10383,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_MAIN_ACCOUNT_ID'",
           "comment": [
             "The main account ID to request for"
@@ -9790,6 +10408,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The subaccount to withdraw from"
@@ -9803,6 +10422,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The ethereum address to withdraw to"
@@ -9816,6 +10436,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The token currency to withdraw"
@@ -9829,6 +10450,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'10.50'",
           "comment": [
             "The number of tokens to withdraw"
@@ -9842,6 +10464,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The signature of the withdrawal"
           ]
@@ -9861,6 +10484,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.withdrawal'",
           "comment": [
             "The websocket channel to which the response is sent"
@@ -9874,6 +10498,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "Primary selector"
@@ -9887,6 +10512,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -9905,6 +10531,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The Withdrawal object"
           ]
@@ -9917,6 +10544,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -9939,6 +10567,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID that requested the cancellation"
@@ -9952,6 +10581,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'23042'",
           "comment": [
             "A unique identifier for the active order within a subaccount, specified by the client"
@@ -9965,6 +10595,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'10000101000203040506'",
           "comment": [
             "A unique 128-bit identifier for the order, deterministically generated within the GRVT backend"
@@ -9978,6 +10609,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The user-provided reason for cancelling the order"
           ]
@@ -9990,6 +10622,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1697788800000000000'",
           "comment": [
@@ -10004,6 +10637,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "Status of the cancellation attempt"
           ]
@@ -10023,6 +10657,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'v1.cancel'",
           "comment": [
             "Stream name"
@@ -10036,6 +10671,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "Primary selector"
@@ -10049,6 +10685,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634876'",
           "comment": [
             "A sequence number used to determine message order within a stream.",
@@ -10067,6 +10704,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "Data relating to the status of the cancellation attempt"
           ]
@@ -10079,6 +10717,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'872634875'",
           "comment": [
             "The previous sequence number that determines the message order"
@@ -10099,6 +10738,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount ID to filter by"
@@ -10127,6 +10767,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The main account to withdraw from"
@@ -10140,6 +10781,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The Ethereum wallet to withdraw into"
@@ -10153,6 +10795,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The token currency to withdraw"
@@ -10166,6 +10809,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1500.0'",
           "comment": [
             "The number of tokens to withdraw, quoted in tokenCurrency decimal units"
@@ -10179,6 +10823,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The signature of the withdrawal"
           ]
@@ -10205,6 +10850,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The main account to transfer from"
@@ -10218,6 +10864,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount to transfer from (0 if transferring from main account)"
@@ -10231,6 +10878,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The main account to deposit into"
@@ -10244,6 +10892,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The subaccount to transfer to (0 if transferring to main account)"
@@ -10257,6 +10906,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The token currency to transfer"
@@ -10270,6 +10920,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1500.0'",
           "comment": [
             "The number of tokens to transfer, quoted in tokenCurrency decimal units"
@@ -10283,6 +10934,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The signature of the transfer"
           ]
@@ -10295,6 +10947,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The type of transfer"
           ]
@@ -10307,6 +10960,7 @@
           "index": 8,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
           "comment": [
             "The metadata of the transfer"
@@ -10338,6 +10992,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'true'",
           "comment": [
             "Gravity has acknowledged that the transfer has been successfully processed. If true, a `tx_id` will be returned. If false, an error will be returned."
@@ -10351,6 +11006,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1028403'",
           "comment": [
             "The transaction ID of the transfer. This is only returned if the transfer is successful."
@@ -10371,6 +11027,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The Transfer response object"
           ]
@@ -10392,6 +11049,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['USDT', 'USDC']",
           "comment": [
             "The token currency to query for, if nil or empty, return all deposits. Otherwise, only entries matching the filter will be returned"
@@ -10405,6 +11063,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1697788800000000000'",
           "comment": [
@@ -10419,6 +11078,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "now()",
           "example": "'1697788800000000000'",
           "comment": [
@@ -10433,6 +11093,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "500",
           "example": "500",
           "comment": [
@@ -10447,6 +11108,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "''",
           "comment": [
@@ -10461,6 +11123,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "",
           "example": "",
           "comment": [
@@ -10487,6 +11150,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0x10000101000203040506'",
           "comment": [
             "The L1 txHash of the deposit"
@@ -10500,6 +11164,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0x10000101000203040506'",
           "comment": [
             "The L2 txHash of the deposit"
@@ -10513,6 +11178,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The account to deposit into"
@@ -10526,6 +11192,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The token currency to deposit"
@@ -10539,6 +11206,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1500.0'",
           "comment": [
             "The number of tokens to deposit"
@@ -10552,6 +11220,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "The timestamp when the deposit was initiated on L1 in unix nanoseconds"
@@ -10565,6 +11234,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "The timestamp when the deposit was confirmed on L2 in unix nanoseconds"
@@ -10578,6 +11248,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The address of the sender"
@@ -10598,6 +11269,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The deposit history matching the request account"
           ]
@@ -10610,6 +11282,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "'Qw0918='",
           "comment": [
@@ -10631,6 +11304,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['USDT', 'USDC']",
           "comment": [
             "The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned"
@@ -10644,6 +11318,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1697788800000000000'",
           "comment": [
@@ -10658,6 +11333,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "now()",
           "example": "'1697788800000000000'",
           "comment": [
@@ -10672,6 +11348,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "500",
           "example": "500",
           "comment": [
@@ -10686,6 +11363,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "''",
           "comment": [
@@ -10700,6 +11378,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1028403'",
           "comment": [
@@ -10714,6 +11393,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "",
           "example": "",
           "comment": [
@@ -10740,6 +11420,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The transfer history matching the request account"
           ]
@@ -10752,6 +11433,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "'Qw0918='",
           "comment": [
@@ -10773,6 +11455,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "['USDT', 'USDC']",
           "comment": [
             "The token currency to query for, if nil or empty, return all withdrawals. Otherwise, only entries matching the filter will be returned"
@@ -10786,6 +11469,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "0",
           "example": "'1697788800000000000'",
           "comment": [
@@ -10800,6 +11484,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "now()",
           "example": "'1697788800000000000'",
           "comment": [
@@ -10814,6 +11499,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "500",
           "example": "500",
           "comment": [
@@ -10828,6 +11514,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "''",
           "comment": [
@@ -10842,6 +11529,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "",
           "example": "",
           "comment": [
@@ -10868,6 +11556,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1028403'",
           "comment": [
             "The transaction ID of the withdrawal"
@@ -10881,6 +11570,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The subaccount to withdraw from"
@@ -10894,6 +11584,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The ethereum address to withdraw to"
@@ -10907,6 +11598,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The token currency to withdraw"
@@ -10920,6 +11612,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1500.0'",
           "comment": [
             "The number of tokens to withdraw"
@@ -10933,6 +11626,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The signature of the withdrawal"
           ]
@@ -10945,6 +11639,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "The timestamp of the withdrawal in unix nanoseconds"
@@ -10965,6 +11660,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The withdrawals history matching the request account"
           ]
@@ -10977,6 +11673,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "default": "''",
           "example": "'Qw0918='",
           "comment": [
@@ -10998,6 +11695,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The address of the main account initiating the investment."
@@ -11011,6 +11709,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'3477045127917224'",
           "comment": [
             "The unique identifier of the vault to invest in."
@@ -11024,6 +11723,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The currency used for the investment (e.g., USDT, DAI)."
@@ -11037,6 +11737,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1000000",
           "comment": [
             "The number of tokens to invest, in base units (e.g., 6 decimals for USDT)."
@@ -11050,6 +11751,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The digital signature from the investing account.",
             "This signature must be generated by the main account ID and is used to verify the authenticity of the request.",
@@ -11075,6 +11777,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The address of the main account initiating the redemption."
@@ -11088,6 +11791,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'3477045127917224'",
           "comment": [
             "The unique identifier of the vault to redeem from."
@@ -11101,6 +11805,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The currency used for the redemption (e.g., USDT, DAI)."
@@ -11114,6 +11819,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1000000",
           "comment": [
             "The number of tokens to redeem, in base units (e.g., 6 decimals for USDT)."
@@ -11127,6 +11833,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The digital signature from the investing account.",
             "This signature must be generated by the main account ID and is used to verify the authenticity of the request.",
@@ -11152,6 +11859,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The address of the main account initiating the cancellation."
@@ -11165,6 +11873,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'3477045127917224'",
           "comment": [
             "The unique identifier of the vault to cancel the redemption from."
@@ -11189,6 +11898,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The address of the vault manager making the request."
@@ -11202,6 +11912,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'3477045127917224'",
           "comment": [
             "The unique identifier of the vault to fetch the redemption queue for."
@@ -11234,6 +11945,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "[Filled by GRVT Backend] Time at which the redemption request was received by GRVT in unix nanoseconds"
@@ -11247,6 +11959,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The currency to redeem in"
@@ -11260,6 +11973,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1000000",
           "comment": [
             "The number of LP tokens to redeem"
@@ -11273,6 +11987,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1727788800000000000",
           "comment": [
             "[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed."
@@ -11295,6 +12010,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minmimum redemption period."
           ]
@@ -11307,6 +12023,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "Number of LP Tokens pending redemption (at least held in queue for minimum redemption period)."
           ]
@@ -11319,6 +12036,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "Number of LP Tokens due for urgent redemption (\u003e= 90% of maximum redemption period)."
           ]
@@ -11331,6 +12049,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "Amount available for automated redemption request servicing, expressed in terms of the vault's quote currency."
           ]
@@ -11343,6 +12062,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "This vault's quote currency."
@@ -11371,6 +12091,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The address of the main account initiating the request."
@@ -11384,6 +12105,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'3477045127917224'",
           "comment": [
             "The unique identifier of the vault to fetch the summary for."
@@ -11408,6 +12130,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1000000",
           "comment": [
             "The number of LP Tokens requested for redemption."
@@ -11421,6 +12144,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1000000",
           "comment": [
             "The valuation of the redemption request."
@@ -11434,6 +12158,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'1697788800000000000'",
           "comment": [
             "[Filled by GRVT Backend] Time at which the redemption request was received by GRVT in unix nanoseconds"
@@ -11447,6 +12172,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1727788800000000000",
           "comment": [
             "[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed."
@@ -11471,6 +12197,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'$GRVT_SUB_ACCOUNT_ID'",
           "comment": [
             "The unique identifier of the vault sub account."
@@ -11484,6 +12211,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1000000",
           "comment": [
             "The number of Vault LP tokens held by the investor."
@@ -11497,6 +12225,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1000000",
           "comment": [
             "The average entry price of the vault LP tokens."
@@ -11510,6 +12239,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1000000",
           "comment": [
             "The current price of the vault LP tokens."
@@ -11523,6 +12253,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1000000",
           "comment": [
             "The current valuation of all held vault LP tokens."
@@ -11536,6 +12267,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1000000",
           "comment": [
             "The all-time realized PnL that the investor has received from the vault."
@@ -11549,6 +12281,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": true,
+          "included_in_external_docs": true,
           "comment": [
             "The singleton pending redemption (omitted if none)."
           ]
@@ -11572,6 +12305,7 @@
           "index": 0,
           "array_depth": 1,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The summary of investments in the vault."
           ]
@@ -11595,6 +12329,7 @@
           "index": 0,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
             "The address of the main account initiating the burn."
@@ -11608,6 +12343,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'3477045127917224'",
           "comment": [
             "The unique identifier of the vault to burn tokens from."
@@ -11621,6 +12357,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "'USDT'",
           "comment": [
             "The currency used for the burn (e.g., USDT, DAI)."
@@ -11634,6 +12371,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "example": "1000000",
           "comment": [
             "The number of tokens to burn, in base units (e.g., 6 decimals for USDT)."
@@ -11647,6 +12385,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "included_in_external_docs": true,
           "comment": [
             "The digital signature from the investing account.",
             "This signature must be generated by the main account ID and is used to verify the authenticity of the request.",

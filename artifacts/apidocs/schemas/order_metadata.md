@@ -7,6 +7,7 @@
     |create_time<br>`ct` |string|False<br>`0`|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
     |trigger<br>`t` |TriggerOrderMetadata|False<br>``|Trigger fields are used to support any type of trigger order such as TP/SL|
     |broker<br>`b` |BrokerTag|False<br>``|Specifies the broker who brokered the order|
+    |source<br>`s` |Source|False<br>``|[Interal-Only; not documented in public API spec]<br>Specifies the source of the order|
     |is_ecn<br>`ie` |boolean|False<br>`false`|Specifies if the order is an ECN order|
     ??? info "[TriggerOrderMetadata](/../../schemas/trigger_order_metadata)"
         Contains metadata related to trigger orders, such as Take Profit (TP) or Stop Loss (SL).<br><br>Trigger orders are used to automatically execute an order when a predefined price condition is met, allowing traders to implement risk management strategies.<br><br><br>
@@ -50,3 +51,12 @@
         |`COIN_ROUTES` = 1|CoinRoutes|
         |`ALERTATRON` = 2|Alertatron|
         |`ORIGAMI` = 3|Origami|
+    ??? info "[Source](/../../schemas/source)"
+        Defines the source of the order or trade, such as a UI, API, or a bot.<br>This is used to track the source of the order, and is not signed by the client<br>
+
+        |Value| Description |
+        |-|-|
+        |`WEB` = 1|The order/trade was created by a web client|
+        |`MOBILE` = 2|The order/trade was created by a mobile client|
+        |`API` = 3|The order/trade was created by an API client|
+        |`LIQUIDATOR` = 4|The order/trade was created by the liquidator service|

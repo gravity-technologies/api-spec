@@ -3533,6 +3533,8 @@ STREAM: v1.trade
                 "forward_price": "65038.01",
                 "trade_id": "209358-2",
                 "venue": "ORDERBOOK",
+                "is_liquidation": false,
+                "trade_index": 2,
                 "is_rpi": false
             }
         }
@@ -3555,6 +3557,8 @@ STREAM: v1.trade
                 "fp": "65038.01",
                 "ti": "209358-2",
                 "v": "ORDERBOOK",
+                "il": false,
+                "ti1": 2,
                 "ir1": false
             }
         }

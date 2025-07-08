@@ -10,12 +10,15 @@
         |base<br>`b` |string|True|The base currency|
         |quote<br>`q` |string|True|The quote currency|
         |kind<br>`k` |Kind|True|The kind of instrument|
+        |expiry<br>`e` |string|False<br>`0`|[Interal-Only; not documented in public API spec]<br>The expiry time of the instrument in unix nanoseconds|
+        |strike_price<br>`sp` |string|False<br>`0`|[Interal-Only; not documented in public API spec]<br>The strike price of the instrument, expressed in `9` decimals|
         |venues<br>`v` |[Venue]|True|Venues that this instrument can be traded at|
         |settlement_period<br>`sp1` |InstrumentSettlementPeriod|True|The settlement period of the instrument|
         |base_decimals<br>`bd` |integer|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
         |quote_decimals<br>`qd` |integer|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
         |tick_size<br>`ts` |string|True|The size of a single tick, expressed in price decimal units|
         |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
+        |min_block_trade_size<br>`mb` |string|True|[Interal-Only; not documented in public API spec]<br>The minimum block trade size, expressed in base asset decimal units|
         |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
         |max_position_size<br>`mp` |string|True|The maximum position size, expressed in base asset decimal units|
         ??? info "[Kind](/../../schemas/kind)"

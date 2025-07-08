@@ -42,12 +42,15 @@ LITE ENDPOINT: lite/v1/instrument
                 "base": "BTC",
                 "quote": "USDT",
                 "kind": "PERPETUAL",
+                "expiry": "1697788800000000000",
+                "strike_price": "65038.01",
                 "venues": ["ORDERBOOK"],
                 "settlement_period": "PERPETUAL",
                 "base_decimals": 3,
                 "quote_decimals": 3,
                 "tick_size": "0.01",
                 "min_size": "0.01",
+                "min_block_trade_size": "5.0",
                 "create_time": "1697788800000000000",
                 "max_position_size": "100.0"
             }
@@ -62,12 +65,15 @@ LITE ENDPOINT: lite/v1/instrument
                 "b": "BTC",
                 "q": "USDT",
                 "k": "PERPETUAL",
+                "e": "1697788800000000000",
+                "sp": "65038.01",
                 "v": ["ORDERBOOK"],
                 "sp1": "PERPETUAL",
                 "bd": 3,
                 "qd": 3,
                 "ts": "0.01",
                 "ms": "0.01",
+                "mb": "5.0",
                 "ct": "1697788800000000000",
                 "mp": "100.0"
             }
@@ -343,12 +349,15 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "base": "BTC",
                 "quote": "USDT",
                 "kind": "PERPETUAL",
+                "expiry": "1697788800000000000",
+                "strike_price": "65038.01",
                 "venues": ["ORDERBOOK"],
                 "settlement_period": "PERPETUAL",
                 "base_decimals": 3,
                 "quote_decimals": 3,
                 "tick_size": "0.01",
                 "min_size": "0.01",
+                "min_block_trade_size": "5.0",
                 "create_time": "1697788800000000000",
                 "max_position_size": "100.0"
             }]
@@ -363,12 +372,15 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "b": "BTC",
                 "q": "USDT",
                 "k": "PERPETUAL",
+                "e": "1697788800000000000",
+                "sp": "65038.01",
                 "v": ["ORDERBOOK"],
                 "sp1": "PERPETUAL",
                 "bd": 3,
                 "qd": 3,
                 "ts": "0.01",
                 "ms": "0.01",
+                "mb": "5.0",
                 "ct": "1697788800000000000",
                 "mp": "100.0"
             }]
@@ -651,12 +663,15 @@ LITE ENDPOINT: lite/v1/instruments
                 "base": "BTC",
                 "quote": "USDT",
                 "kind": "PERPETUAL",
+                "expiry": "1697788800000000000",
+                "strike_price": "65038.01",
                 "venues": ["ORDERBOOK"],
                 "settlement_period": "PERPETUAL",
                 "base_decimals": 3,
                 "quote_decimals": 3,
                 "tick_size": "0.01",
                 "min_size": "0.01",
+                "min_block_trade_size": "5.0",
                 "create_time": "1697788800000000000",
                 "max_position_size": "100.0"
             }]
@@ -671,12 +686,15 @@ LITE ENDPOINT: lite/v1/instruments
                 "b": "BTC",
                 "q": "USDT",
                 "k": "PERPETUAL",
+                "e": "1697788800000000000",
+                "sp": "65038.01",
                 "v": ["ORDERBOOK"],
                 "sp1": "PERPETUAL",
                 "bd": 3,
                 "qd": 3,
                 "ts": "0.01",
                 "ms": "0.01",
+                "mb": "5.0",
                 "ct": "1697788800000000000",
                 "mp": "100.0"
             }]
@@ -1965,6 +1983,8 @@ LITE ENDPOINT: lite/v1/trade
                 "forward_price": "65038.01",
                 "trade_id": "209358-2",
                 "venue": "ORDERBOOK",
+                "is_liquidation": false,
+                "trade_index": 2,
                 "is_rpi": false
             }]
         }
@@ -1984,6 +2004,8 @@ LITE ENDPOINT: lite/v1/trade
                 "fp": "65038.01",
                 "ti": "209358-2",
                 "v": "ORDERBOOK",
+                "il": false,
+                "ti1": 2,
                 "ir1": false
             }]
         }
@@ -2287,6 +2309,8 @@ LITE ENDPOINT: lite/v1/trade_history
                 "forward_price": "65038.01",
                 "trade_id": "209358-2",
                 "venue": "ORDERBOOK",
+                "is_liquidation": false,
+                "trade_index": 2,
                 "is_rpi": false
             }],
             "next": "Qw0918="
@@ -2307,6 +2331,8 @@ LITE ENDPOINT: lite/v1/trade_history
                 "fp": "65038.01",
                 "ti": "209358-2",
                 "v": "ORDERBOOK",
+                "il": false,
+                "ti1": 2,
                 "ir1": false
             }],
             "n": "Qw0918="

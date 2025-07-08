@@ -49,8 +49,11 @@ LITE ENDPOINT: lite/v1/create_order
                         }
                     },
                     "broker": "BROKER_CODE",
+                    "source": "WEB",
                     "is_ecn": null
-                }
+                },
+                "is_liquidation": null,
+                "is_derisk": null
             }
         }
         ```
@@ -89,8 +92,11 @@ LITE ENDPOINT: lite/v1/create_order
                         }
                     },
                     "b": "BROKER_CODE",
+                    "s": "WEB",
                     "ie": null
-                }
+                },
+                "il": null,
+                "id": null
             }
         }
         ```
@@ -137,6 +143,7 @@ LITE ENDPOINT: lite/v1/create_order
                         }
                     },
                     "broker": "BROKER_CODE",
+                    "source": "WEB",
                     "is_ecn": null
                 },
                 "state": {
@@ -146,7 +153,9 @@ LITE ENDPOINT: lite/v1/create_order
                     "traded_size": ["1.5"],
                     "update_time": "1697788800000000000",
                     "avg_fill_price": ["60000.4"]
-                }
+                },
+                "is_liquidation": null,
+                "is_derisk": null
             }
         }
         ```
@@ -186,6 +195,7 @@ LITE ENDPOINT: lite/v1/create_order
                         }
                     },
                     "b": "BROKER_CODE",
+                    "s": "WEB",
                     "ie": null
                 },
                 "s1": {
@@ -195,7 +205,9 @@ LITE ENDPOINT: lite/v1/create_order
                     "ts": ["1.5"],
                     "ut": "1697788800000000000",
                     "af": ["60000.4"]
-                }
+                },
+                "il": null,
+                "id": null
             }
         }
         ```
@@ -324,8 +336,11 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "broker": "BROKER_CODE",
+                        "source": "WEB",
                         "is_ecn": null
-                    }
+                    },
+                    "is_liquidation": null,
+                    "is_derisk": null
                 }
             }
             '
@@ -372,8 +387,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "broker": "BROKER_CODE",
+                            "source": "WEB",
                             "is_ecn": null
-                        }
+                        },
+                        "is_liquidation": null,
+                        "is_derisk": null
                     }
                 },
                 "id": 123
@@ -420,8 +438,11 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "b": "BROKER_CODE",
+                        "s": "WEB",
                         "ie": null
-                    }
+                    },
+                    "il": null,
+                    "id": null
                 }
             }
             '
@@ -468,8 +489,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "b": "BROKER_CODE",
+                            "s": "WEB",
                             "ie": null
-                        }
+                        },
+                        "il": null,
+                        "id": null
                     }
                 },
                 "i": 123
@@ -517,8 +541,11 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "broker": "BROKER_CODE",
+                        "source": "WEB",
                         "is_ecn": null
-                    }
+                    },
+                    "is_liquidation": null,
+                    "is_derisk": null
                 }
             }
             '
@@ -565,8 +592,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "broker": "BROKER_CODE",
+                            "source": "WEB",
                             "is_ecn": null
-                        }
+                        },
+                        "is_liquidation": null,
+                        "is_derisk": null
                     }
                 },
                 "id": 123
@@ -613,8 +643,11 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "b": "BROKER_CODE",
+                        "s": "WEB",
                         "ie": null
-                    }
+                    },
+                    "il": null,
+                    "id": null
                 }
             }
             '
@@ -661,8 +694,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "b": "BROKER_CODE",
+                            "s": "WEB",
                             "ie": null
-                        }
+                        },
+                        "il": null,
+                        "id": null
                     }
                 },
                 "i": 123
@@ -710,8 +746,11 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "broker": "BROKER_CODE",
+                        "source": "WEB",
                         "is_ecn": null
-                    }
+                    },
+                    "is_liquidation": null,
+                    "is_derisk": null
                 }
             }
             '
@@ -758,8 +797,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "broker": "BROKER_CODE",
+                            "source": "WEB",
                             "is_ecn": null
-                        }
+                        },
+                        "is_liquidation": null,
+                        "is_derisk": null
                     }
                 },
                 "id": 123
@@ -806,8 +848,11 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "b": "BROKER_CODE",
+                        "s": "WEB",
                         "ie": null
-                    }
+                    },
+                    "il": null,
+                    "id": null
                 }
             }
             '
@@ -854,8 +899,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "b": "BROKER_CODE",
+                            "s": "WEB",
                             "ie": null
-                        }
+                        },
+                        "il": null,
+                        "id": null
                     }
                 },
                 "i": 123
@@ -903,8 +951,11 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "broker": "BROKER_CODE",
+                        "source": "WEB",
                         "is_ecn": null
-                    }
+                    },
+                    "is_liquidation": null,
+                    "is_derisk": null
                 }
             }
             '
@@ -951,8 +1002,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "broker": "BROKER_CODE",
+                            "source": "WEB",
                             "is_ecn": null
-                        }
+                        },
+                        "is_liquidation": null,
+                        "is_derisk": null
                     }
                 },
                 "id": 123
@@ -999,8 +1053,11 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "b": "BROKER_CODE",
+                        "s": "WEB",
                         "ie": null
-                    }
+                    },
+                    "il": null,
+                    "id": null
                 }
             }
             '
@@ -1047,8 +1104,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "b": "BROKER_CODE",
+                            "s": "WEB",
                             "ie": null
-                        }
+                        },
+                        "il": null,
+                        "id": null
                     }
                 },
                 "i": 123
@@ -1863,6 +1923,7 @@ LITE ENDPOINT: lite/v1/order
                         }
                     },
                     "broker": "BROKER_CODE",
+                    "source": "WEB",
                     "is_ecn": null
                 },
                 "state": {
@@ -1872,7 +1933,9 @@ LITE ENDPOINT: lite/v1/order
                     "traded_size": ["1.5"],
                     "update_time": "1697788800000000000",
                     "avg_fill_price": ["60000.4"]
-                }
+                },
+                "is_liquidation": null,
+                "is_derisk": null
             }
         }
         ```
@@ -1912,6 +1975,7 @@ LITE ENDPOINT: lite/v1/order
                         }
                     },
                     "b": "BROKER_CODE",
+                    "s": "WEB",
                     "ie": null
                 },
                 "s1": {
@@ -1921,7 +1985,9 @@ LITE ENDPOINT: lite/v1/order
                     "ts": ["1.5"],
                     "ut": "1697788800000000000",
                     "af": ["60000.4"]
-                }
+                },
+                "il": null,
+                "id": null
             }
         }
         ```
@@ -2297,6 +2363,7 @@ LITE ENDPOINT: lite/v1/open_orders
                         }
                     },
                     "broker": "BROKER_CODE",
+                    "source": "WEB",
                     "is_ecn": null
                 },
                 "state": {
@@ -2306,7 +2373,9 @@ LITE ENDPOINT: lite/v1/open_orders
                     "traded_size": ["1.5"],
                     "update_time": "1697788800000000000",
                     "avg_fill_price": ["60000.4"]
-                }
+                },
+                "is_liquidation": null,
+                "is_derisk": null
             }]
         }
         ```
@@ -2346,6 +2415,7 @@ LITE ENDPOINT: lite/v1/open_orders
                         }
                     },
                     "b": "BROKER_CODE",
+                    "s": "WEB",
                     "ie": null
                 },
                 "s1": {
@@ -2355,7 +2425,9 @@ LITE ENDPOINT: lite/v1/open_orders
                     "ts": ["1.5"],
                     "ut": "1697788800000000000",
                     "af": ["60000.4"]
-                }
+                },
+                "il": null,
+                "id": null
             }]
         }
         ```
@@ -2753,6 +2825,7 @@ LITE ENDPOINT: lite/v1/order_history
                         }
                     },
                     "broker": "BROKER_CODE",
+                    "source": "WEB",
                     "is_ecn": null
                 },
                 "state": {
@@ -2762,7 +2835,9 @@ LITE ENDPOINT: lite/v1/order_history
                     "traded_size": ["1.5"],
                     "update_time": "1697788800000000000",
                     "avg_fill_price": ["60000.4"]
-                }
+                },
+                "is_liquidation": null,
+                "is_derisk": null
             }],
             "next": "Qw0918="
         }
@@ -2803,6 +2878,7 @@ LITE ENDPOINT: lite/v1/order_history
                         }
                     },
                     "b": "BROKER_CODE",
+                    "s": "WEB",
                     "ie": null
                 },
                 "s1": {
@@ -2812,7 +2888,9 @@ LITE ENDPOINT: lite/v1/order_history
                     "ts": ["1.5"],
                     "ut": "1697788800000000000",
                     "af": ["60000.4"]
-                }
+                },
+                "il": null,
+                "id": null
             }],
             "n": "Qw0918="
         }
@@ -3592,10 +3670,13 @@ LITE ENDPOINT: lite/v1/fill_history
                 "trade_id": "209358-2",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
+                "is_liquidation": false,
                 "client_order_id": "23042",
+                "trade_index": 2,
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "broker": "UNSPECIFIED",
-                "is_rpi": false
+                "is_rpi": false,
+                "source": "WEB"
             }],
             "next": "Qw0918="
         }
@@ -3621,10 +3702,13 @@ LITE ENDPOINT: lite/v1/fill_history
                 "ti": "209358-2",
                 "oi": "0x10000101000203040506",
                 "v": "ORDERBOOK",
+                "il": false,
                 "co": "23042",
+                "ti1": 2,
                 "s1": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "b": "UNSPECIFIED",
-                "ir1": false
+                "ir1": false,
+                "s2": "WEB"
             }],
             "n": "Qw0918="
         }
