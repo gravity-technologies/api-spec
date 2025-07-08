@@ -7,6 +7,7 @@
     |create_time<br>`ct` |string|False<br>`0`|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
     |trigger<br>`t` |TriggerOrderMetadata|False<br>``|Trigger fields are used to support any type of trigger order such as TP/SL|
     |broker<br>`b` |BrokerTag|False<br>``|Specifies the broker who brokered the order|
+    |is_ecn<br>`ie` |boolean|False<br>`false`|Specifies if the order is an ECN order|
     ??? info "[TriggerOrderMetadata](/../../schemas/trigger_order_metadata)"
         Contains metadata related to trigger orders, such as Take Profit (TP) or Stop Loss (SL).<br><br>Trigger orders are used to automatically execute an order when a predefined price condition is met, allowing traders to implement risk management strategies.<br><br><br>
 
@@ -38,6 +39,8 @@
                 |`UNSPECIFIED` = 0|no trigger condition|
                 |`INDEX` = 1|INDEX - Order is activated when the index price reaches the trigger price|
                 |`LAST` = 2|LAST - Order is activated when the last trade price reaches the trigger price|
+                |`MID` = 3|MID - Order is activated when the mid price reaches the trigger price|
+                |`MARK` = 4|MARK - Order is activated when the mark price reaches the trigger price|
     ??? info "[BrokerTag](/../../schemas/broker_tag)"
         BrokerTag is a tag for the broker that the order is sent from.<br>
 

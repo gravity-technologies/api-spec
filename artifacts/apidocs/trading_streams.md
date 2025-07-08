@@ -140,7 +140,8 @@ STREAM: v1.order
                             "close_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "is_ecn": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -191,7 +192,8 @@ STREAM: v1.order
                             "cp": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ie": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3845,7 +3847,7 @@ STREAM: v1.transfer
                     "nonce": 1234567890
                 },
                 "event_time": "1697788800000000000",
-                "transfer_type": "STANDARD",
+                "transfer_type": "UNSPECIFIED",
                 "transfer_metadata": null
             }
         }
@@ -3873,7 +3875,7 @@ STREAM: v1.transfer
                     "n": 1234567890
                 },
                 "et": "1697788800000000000",
-                "tt": "STANDARD",
+                "tt": "UNSPECIFIED",
                 "tm": null
             }
         }
