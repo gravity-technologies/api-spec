@@ -578,11 +578,6 @@ class Fill:
     # The venue where the trade occurred
     venue: Venue
     """
-    [Interal-Only; not documented in public API spec]
-    If the trade was a liquidation
-    """
-    is_liquidation: bool
-    """
     A unique identifier for the active order within a subaccount, specified by the client
     This is used to identify the order in the client's system
     This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer
@@ -594,22 +589,12 @@ class Fill:
     When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
     """
     client_order_id: str
-    """
-    [Interal-Only; not documented in public API spec]
-    A trade index
-    """
-    trade_index: int
     # The address (public key) of the wallet signing the payload
     signer: str
     # If the trade is a RPI trade
     is_rpi: bool
     # Specifies the broker who brokered the order
     broker: BrokerTag | None = None
-    """
-    [Interal-Only; not documented in public API spec]
-    Specifies the source of the viewing party of the trade
-    """
-    source: Source | None = None
 
 
 @dataclass
@@ -1334,16 +1319,6 @@ class Trade:
     trade_id: str
     # The venue where the trade occurred
     venue: Venue
-    """
-    [Interal-Only; not documented in public API spec]
-    If the trade was a liquidation
-    """
-    is_liquidation: bool
-    """
-    [Interal-Only; not documented in public API spec]
-    A trade index
-    """
-    trade_index: int
     # If the trade is a RPI trade
     is_rpi: bool
 
@@ -1576,25 +1551,10 @@ class Instrument:
     tick_size: str
     # The minimum contract size, expressed in base asset decimal units
     min_size: str
-    """
-    [Interal-Only; not documented in public API spec]
-    The minimum block trade size, expressed in base asset decimal units
-    """
-    min_block_trade_size: str
     # Creation time in unix nanoseconds
     create_time: str
     # The maximum position size, expressed in base asset decimal units
     max_position_size: str
-    """
-    [Interal-Only; not documented in public API spec]
-    The expiry time of the instrument in unix nanoseconds
-    """
-    expiry: str | None = None
-    """
-    [Interal-Only; not documented in public API spec]
-    The strike price of the instrument, expressed in `9` decimals
-    """
-    strike_price: str | None = None
 
 
 @dataclass
@@ -1790,11 +1750,6 @@ class OrderMetadata:
     trigger: TriggerOrderMetadata | None = None
     # Specifies the broker who brokered the order
     broker: BrokerTag | None = None
-    """
-    [Interal-Only; not documented in public API spec]
-    Specifies the source of the order
-    """
-    source: Source | None = None
     # Specifies if the order is an ECN order
     is_ecn: bool | None = None
 
@@ -1848,20 +1803,6 @@ class Order:
     signature: Signature
     # Order Metadata, ignored by the smart contract, and unsigned by the client
     metadata: OrderMetadata
-    """
-    [Interal-Only; not documented in public API spec]
-    If the order is a liquidation order.
-    Liquidation Orders can be signed by the insurance fund, however, SubAccount must be provably under MM.
-    Trade.FeeCharged will mean liquidation fee. Sent to insurance fund instead of fee collection fund.
-    """
-    is_liquidation: bool
-    """
-    [Interal-Only; not documented in public API spec]
-    If the order is a derisk order.
-    Derisk orders are signed by the insurance fund, and are always reduce only IOC orders.
-    Trade.FeeCharged will mean derisk fee. Sent to insurance fund instead of fee collection fund.
-    """
-    is_derisk: bool
     # [Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
     order_id: str | None = None
     """

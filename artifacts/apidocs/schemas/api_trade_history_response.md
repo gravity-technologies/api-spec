@@ -19,8 +19,6 @@
         |forward_price<br>`fp` |string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
         |trade_id<br>`ti` |string|True|A trade identifier, globally unique, and monotonically increasing (not by `1`).<br>All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.<br>`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.|
         |venue<br>`v` |Venue|True|The venue where the trade occurred|
-        |is_liquidation<br>`il` |boolean|True|[Interal-Only; not documented in public API spec]<br>If the trade was a liquidation|
-        |trade_index<br>`ti1` |integer|True|[Interal-Only; not documented in public API spec]<br>A trade index|
         |is_rpi<br>`ir1` |boolean|True|If the trade is a RPI trade|
         ??? info "[Venue](/../../schemas/venue)"
             The list of Trading Venues that are supported on the GRVT exchange<br>
