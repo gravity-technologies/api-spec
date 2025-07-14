@@ -12070,7 +12070,7 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
                 "num_lp_tokens": 1000000,
                 "max_redemption_period_timestamp": 1727788800000000000,
                 "age_category": "NORMAL",
-                "investor_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"
+                "is_manager": true
             }],
             "pending_redemption_token_count": null,
             "urgent_redemption_token_count": null,
@@ -12086,7 +12086,7 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
                 "nl": 1000000,
                 "mr": 1727788800000000000,
                 "ac": "NORMAL",
-                "ii": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"
+                "im": true
             }],
             "pr": null,
             "ur": null,

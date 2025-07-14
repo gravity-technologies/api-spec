@@ -2534,7 +2534,7 @@ class ApiVaultViewRedemptionQueueRequest:
 
 
 @dataclass
-class VaultRedemptionReqView:
+class VaultRedemptionRequest:
     # [Filled by GRVT Backend] Time at which the redemption request was received by GRVT in unix nanoseconds
     request_time: str
     # The number of shares to redeem
@@ -2543,8 +2543,8 @@ class VaultRedemptionReqView:
     max_redemption_period_timestamp: str
     # Age category of this redemption request.
     age_category: VaultRedemptionReqAgeCategory
-    # The address of the investor who submitted the request.
-    investor_id: str
+    # `true` if this request belongs to the vault manager, omitted otherwise.
+    is_manager: bool | None = None
 
 
 @dataclass
@@ -2560,7 +2560,7 @@ class ApiVaultViewRedemptionQueueResponse:
     """
 
     # Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minmimum redemption period.
-    redemption_queue: list[VaultRedemptionReqView]
+    redemption_queue: list[VaultRedemptionRequest]
     # Number of shares eligible for automated redemption (held in queue for at least the minimum redemption period).
     pending_redemption_token_count: str
     # Number of shares nearing the maximum redemption period (>= 90% of maximum redemption period).
