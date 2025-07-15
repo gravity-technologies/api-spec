@@ -1461,6 +1461,29 @@ class ApiGetFilteredInstrumentsResponse:
 
 
 @dataclass
+class ApiGetCurrencyRequest:
+    pass
+
+
+@dataclass
+class CurrencyDetail:
+    # The integer value of the currency
+    id: int
+    # The name of the currency
+    symbol: str
+    # The balance decimals of the currency
+    balance_decimals: int
+    # The quantity multiplier of the currency
+    quantity_multiplier: str
+
+
+@dataclass
+class ApiGetCurrencyResponse:
+    # The list of currencies
+    result: list[CurrencyDetail]
+
+
+@dataclass
 class ApiCandlestickRequest:
     """
     Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.

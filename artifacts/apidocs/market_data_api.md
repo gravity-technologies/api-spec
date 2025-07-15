@@ -975,6 +975,271 @@ LITE ENDPOINT: lite/v1/instruments
             ```
         </section>
 <hr class="solid">
+### Get Currency
+```
+FULL ENDPOINT: full/v1/currency
+LITE ENDPOINT: lite/v1/currency
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_get_currency_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_get_currency_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": [{
+                "id": 3,
+                "symbol": "USDT",
+                "balance_decimals": 6,
+                "quantity_multiplier": 1000000
+            }]
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "i": 3,
+                "s": "USDT",
+                "bd": 6,
+                "qm": 1000000
+            }]
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1004|404|Data Not Found|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1002,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
+        }
+        ```
+    </section>
+=== "Try it out"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/currency' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/currency",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/currency' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/currency",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/currency' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/currency",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/currency' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/currency",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/currency' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/currency",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/currency' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/currency",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/currency' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/currency",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/currency' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/currency",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
 ## Ticker
 ### Mini Ticker
 ```
