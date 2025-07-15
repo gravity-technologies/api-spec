@@ -4268,6 +4268,63 @@
       ]
     },
     {
+      "name": "ClientTier",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "tier",
+          "lite_name": "t",
+          "semantic_type": "uint8",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        },
+        {
+          "name": "futures_taker_fee",
+          "lite_name": "ft",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        },
+        {
+          "name": "futures_maker_fee",
+          "lite_name": "fm",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        },
+        {
+          "name": "options_taker_fee",
+          "lite_name": "ot",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        },
+        {
+          "name": "options_maker_fee",
+          "lite_name": "om",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiFundingAccountSummaryResponse",
       "is_root": true,
       "fields": [
@@ -4281,6 +4338,18 @@
           "optional": false,
           "comment": [
             "The funding account summary"
+          ]
+        },
+        {
+          "name": "tier",
+          "lite_name": "t",
+          "semantic_type": "ClientTier",
+          "json_type": "ClientTier",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Client fee tier at the time of query"
           ]
         }
       ],

@@ -658,9 +658,20 @@ class FundingAccountSummary:
 
 
 @dataclass
+class ClientTier:
+    tier: int
+    futures_taker_fee: int
+    futures_maker_fee: int
+    options_taker_fee: int
+    options_maker_fee: int
+
+
+@dataclass
 class ApiFundingAccountSummaryResponse:
     # The funding account summary
     result: FundingAccountSummary
+    # Client fee tier at the time of query
+    tier: ClientTier
 
 
 @dataclass

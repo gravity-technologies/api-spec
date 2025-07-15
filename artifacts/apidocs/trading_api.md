@@ -8383,6 +8383,13 @@ LITE ENDPOINT: lite/v1/funding_account_summary
                     "balance": "123456.78",
                     "index_price": "1.0000102"
                 }]
+            },
+            "tier": {
+                "tier": null,
+                "futures_taker_fee": null,
+                "futures_maker_fee": null,
+                "options_taker_fee": null,
+                "options_maker_fee": null
             }
         }
         ```
@@ -8397,6 +8404,13 @@ LITE ENDPOINT: lite/v1/funding_account_summary
                     "b": "123456.78",
                     "ip": "1.0000102"
                 }]
+            },
+            "t": {
+                "t": null,
+                "ft": null,
+                "fm": null,
+                "ot": null,
+                "om": null
             }
         }
         ```
