@@ -38,6 +38,8 @@
                 |`UNSPECIFIED` = 0|no trigger condition|
                 |`INDEX` = 1|INDEX - Order is activated when the index price reaches the trigger price|
                 |`LAST` = 2|LAST - Order is activated when the last trade price reaches the trigger price|
+                |`MID` = 3|MID - Order is activated when the mid price reaches the trigger price|
+                |`MARK` = 4|MARK - Order is activated when the mark price reaches the trigger price|
     ??? info "[BrokerTag](/../../schemas/broker_tag)"
         BrokerTag is a tag for the broker that the order is sent from.<br>
 

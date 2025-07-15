@@ -762,17 +762,17 @@
             },
             {
               "code": 2000,
-              "message": "Order signature is from an unauthorized signer",
+              "message": "Signature is from an unauthorized signer",
               "status": 403
             },
             {
               "code": 2001,
-              "message": "Order signature has expired",
+              "message": "Signature has expired",
               "status": 403
             },
             {
               "code": 2002,
-              "message": "Order signature does not match payload",
+              "message": "Signature does not match payload",
               "status": 403
             },
             {
@@ -782,22 +782,22 @@
             },
             {
               "code": 2004,
-              "message": "Order signature is from an expired session key",
+              "message": "Signature is from an expired session key",
               "status": 403
             },
             {
               "code": 2006,
-              "message": "Order signature R/S must have exactly 64 characters long without 0x prefix",
+              "message": "Signature R/S must have exactly 64 characters long without 0x prefix",
               "status": 403
             },
             {
               "code": 2005,
-              "message": "Order signature V must be 27/28",
+              "message": "Signature V must be 27/28",
               "status": 403
             },
             {
               "code": 2007,
-              "message": "Order signature S must be in the lower half of the curve",
+              "message": "Signature S must be in the lower half of the curve",
               "status": 403
             },
             {
@@ -1500,6 +1500,26 @@
               "code": 5005,
               "message": "Invalid ChainID for the transfer request.",
               "status": 400
+            },
+            {
+              "code": 7100,
+              "message": "Unknown transaction type",
+              "status": 500
+            },
+            {
+              "code": 7101,
+              "message": "Transfer account not found",
+              "status": 400
+            },
+            {
+              "code": 7102,
+              "message": "Transfer sub-account not found",
+              "status": 400
+            },
+            {
+              "code": 7103,
+              "message": "Charged trading fee below the config minimum",
+              "status": 500
             }
           ]
         },
@@ -1786,6 +1806,52 @@
           ]
         },
         {
+          "namespace": "DeriskMMRatio",
+          "name": "RPCSetDeriskMMRatioV1",
+          "version": 1,
+          "route": "/set_derisk_mm_ratio",
+          "auth_required": true,
+          "request": "ApiSetDeriskToMaintenanceMarginRatioRequest",
+          "response": "ApiSetDeriskToMaintenanceMarginRatioResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 6100,
+              "message": "Derisk MM Ratio is out of range",
+              "status": 400
+            }
+          ]
+        },
+        {
           "namespace": "InitialLeverage",
           "name": "RPCGetAllInitialLeverageV1",
           "version": 1,
@@ -1869,6 +1935,458 @@
               "code": 2100,
               "message": "Invalid initial leverage",
               "status": 400
+            },
+            {
+              "code": 2101,
+              "message": "Vaults cannot configure leverage",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Vault",
+          "name": "RPCVaultBurnTokensV1",
+          "version": 1,
+          "route": "/vault_burn_tokens",
+          "auth_required": true,
+          "request": "ApiVaultBurnTokensRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
+            },
+            {
+              "code": 2000,
+              "message": "Signature is from an unauthorized signer",
+              "status": 403
+            },
+            {
+              "code": 2001,
+              "message": "Signature has expired",
+              "status": 403
+            },
+            {
+              "code": 2002,
+              "message": "Signature does not match payload",
+              "status": 403
+            },
+            {
+              "code": 2004,
+              "message": "Signature is from an expired session key",
+              "status": 403
+            },
+            {
+              "code": 2006,
+              "message": "Signature R/S must have exactly 64 characters long without 0x prefix",
+              "status": 403
+            },
+            {
+              "code": 2005,
+              "message": "Signature V must be 27/28",
+              "status": 403
+            },
+            {
+              "code": 2007,
+              "message": "Signature S must be in the lower half of the curve",
+              "status": 403
+            },
+            {
+              "code": 2008,
+              "message": "Signature exceeds maximum allowed duration.",
+              "status": 403
+            },
+            {
+              "code": 7000,
+              "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            },
+            {
+              "code": 7005,
+              "message": "You are attempting to burn more vault tokens than you own.",
+              "status": 400
+            },
+            {
+              "code": 7006,
+              "message": "You are attempting to burn vault tokens whilst having an active redemption request.",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Vault",
+          "name": "RPCVaultInvestV1",
+          "version": 1,
+          "route": "/vault_invest",
+          "auth_required": true,
+          "request": "ApiVaultInvestRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
+            },
+            {
+              "code": 2000,
+              "message": "Signature is from an unauthorized signer",
+              "status": 403
+            },
+            {
+              "code": 2001,
+              "message": "Signature has expired",
+              "status": 403
+            },
+            {
+              "code": 2002,
+              "message": "Signature does not match payload",
+              "status": 403
+            },
+            {
+              "code": 2004,
+              "message": "Signature is from an expired session key",
+              "status": 403
+            },
+            {
+              "code": 2006,
+              "message": "Signature R/S must have exactly 64 characters long without 0x prefix",
+              "status": 403
+            },
+            {
+              "code": 2005,
+              "message": "Signature V must be 27/28",
+              "status": 403
+            },
+            {
+              "code": 2007,
+              "message": "Signature S must be in the lower half of the curve",
+              "status": 403
+            },
+            {
+              "code": 2008,
+              "message": "Signature exceeds maximum allowed duration.",
+              "status": 403
+            },
+            {
+              "code": 4000,
+              "message": "Insufficient balance to complete transfer",
+              "status": 400
+            },
+            {
+              "code": 7000,
+              "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            },
+            {
+              "code": 7003,
+              "message": "This vault has been delisted/closed.",
+              "status": 400
+            },
+            {
+              "code": 7004,
+              "message": "This investment would cause the vault to exceed its valuation cap.",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Vault",
+          "name": "RPCVaultInvestorSummaryV1",
+          "version": 1,
+          "route": "/vault_investor_summary",
+          "auth_required": true,
+          "request": "ApiVaultInvestorSummaryRequest",
+          "response": "ApiVaultInvestorSummaryResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 7000,
+              "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            },
+            {
+              "code": 7007,
+              "message": "The investor is not an LP for this vault.",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Vault",
+          "name": "RPCVaultRedeemV1",
+          "version": 1,
+          "route": "/vault_redeem",
+          "auth_required": true,
+          "request": "ApiVaultRedeemRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 7000,
+              "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            },
+            {
+              "code": 7001,
+              "message": "Vault does not have sufficient LP token balance",
+              "status": 400
+            },
+            {
+              "code": 7002,
+              "message": "User has an ongoing redemption",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Vault",
+          "name": "RPCVaultRedeemCancelV1",
+          "version": 1,
+          "route": "/vault_redeem_cancel",
+          "auth_required": true,
+          "request": "ApiVaultRedeemCancelRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 7000,
+              "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Vault",
+          "name": "RPCVaultRedemptionQueueV1",
+          "version": 1,
+          "route": "/vault_view_redemption_queue",
+          "auth_required": true,
+          "request": "ApiVaultViewRedemptionQueueRequest",
+          "response": "ApiVaultViewRedemptionQueueResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 7000,
+              "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Vault",
+          "name": "RPCQueryVaultManagerInvestorHistoryV1",
+          "version": 1,
+          "route": "/vault_manager_investor_history",
+          "auth_required": true,
+          "request": "ApiQueryVaultManagerInvestorHistoryRequest",
+          "response": "ApiQueryVaultManagerInvestorHistoryResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         }
@@ -2297,8 +2815,8 @@
         {
           "name": "base",
           "lite_name": "b",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 2,
           "array_depth": 1,
           "optional": true,
@@ -2311,8 +2829,8 @@
         {
           "name": "quote",
           "lite_name": "q",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 3,
           "array_depth": 1,
           "optional": true,
@@ -2590,8 +3108,8 @@
         {
           "name": "base",
           "lite_name": "b",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 2,
           "array_depth": 1,
           "optional": true,
@@ -2604,8 +3122,8 @@
         {
           "name": "quote",
           "lite_name": "q",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 3,
           "array_depth": 1,
           "optional": true,
@@ -3140,8 +3658,8 @@
         {
           "name": "currency",
           "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 3,
           "array_depth": 0,
           "optional": false,
@@ -3240,8 +3758,8 @@
         {
           "name": "currency",
           "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 0,
           "array_depth": 0,
           "optional": false,
@@ -3325,8 +3843,8 @@
         {
           "name": "settle_currency",
           "lite_name": "sc",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 3,
           "array_depth": 0,
           "optional": false,
@@ -3444,6 +3962,57 @@
           "example": "'1.0000102'",
           "comment": [
             "The index price of the settle currency. (reported in `USD`)"
+          ]
+        },
+        {
+          "name": "is_vault",
+          "lite_name": "iv",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 12,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Whether this sub account is a vault"
+          ]
+        },
+        {
+          "name": "vault_im_additions",
+          "lite_name": "vi",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 13,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "Total amount of IM (reported in `settle_currency`) deducted from the vault due to redemptions nearing the end of their redemption period"
+          ]
+        },
+        {
+          "name": "derisk_margin",
+          "lite_name": "dm",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 14,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'185185.77'",
+          "comment": [
+            "The derisk margin of this sub account"
+          ]
+        },
+        {
+          "name": "derisk_to_maintenance_margin_ratio",
+          "lite_name": "dt",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 15,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1.5'",
+          "comment": [
+            "The derisk margin to maintenance margin ratio of this sub account"
           ]
         }
       ],
@@ -3892,1837 +4461,161 @@
       ]
     },
     {
-      "name": "ApiOrderbookLevelsRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "depth",
-          "lite_name": "d",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "50",
-          "comment": [
-            "Depth of the order book to be retrieved (10, 50, 100, 500)"
-          ]
-        }
-      ],
-      "comment": [
-        "Retrieves aggregated price depth for a single instrument, with a maximum depth of 10 levels. Do not use this to poll for data -- a websocket subscription is much more performant, and useful."
-      ]
-    },
-    {
-      "name": "OrderbookLevel",
+      "name": "Signature",
       "is_root": false,
       "fields": [
         {
-          "name": "price",
-          "lite_name": "p",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'65038.01'",
-          "comment": [
-            "The price of the level, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "size",
+          "name": "signer",
           "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'3456.78'",
-          "comment": [
-            "The number of assets offered, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "num_orders",
-          "lite_name": "no",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123'",
-          "comment": [
-            "The number of open orders at this level"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "OrderbookLevels",
-      "is_root": false,
-      "fields": [
-        {
-          "name": "event_time",
-          "lite_name": "et",
-          "semantic_type": "timestamp",
+          "semantic_type": "uint256",
           "json_type": "string",
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'1697788800000000000'",
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
-            "Time at which the event was emitted in unix nanoseconds"
+            "The address (public key) of the wallet signing the payload"
           ]
         },
         {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "bids",
-          "lite_name": "b",
-          "semantic_type": "OrderbookLevel",
-          "json_type": "OrderbookLevel",
-          "index": 2,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The list of best bids up till query depth"
-          ]
-        },
-        {
-          "name": "asks",
-          "lite_name": "a",
-          "semantic_type": "OrderbookLevel",
-          "json_type": "OrderbookLevel",
-          "index": 3,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The list of best asks up till query depth"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiOrderbookLevelsResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
+          "name": "r",
           "lite_name": "r",
-          "semantic_type": "OrderbookLevels",
-          "json_type": "OrderbookLevels",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The orderbook levels objects matching the request asset"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiMiniTickerRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        }
-      ],
-      "comment": [
-        "Retrieves a single mini ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful."
-      ]
-    },
-    {
-      "name": "MiniTicker",
-      "is_root": false,
-      "fields": [
-        {
-          "name": "event_time",
-          "lite_name": "et",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'1697788800000000000'",
-          "comment": [
-            "Time at which the event was emitted in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "mark_price",
-          "lite_name": "mp",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The mark price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "index_price",
-          "lite_name": "ip",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The index price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "last_price",
-          "lite_name": "lp",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The last traded price of the instrument (also close price), expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "last_size",
-          "lite_name": "ls",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 5,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'123456.78'",
-          "comment": [
-            "The number of assets traded in the last trade, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "mid_price",
-          "lite_name": "mp1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 6,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The mid price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "best_bid_price",
-          "lite_name": "bb",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 7,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The best bid price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "best_bid_size",
-          "lite_name": "bb1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 8,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'123456.78'",
-          "comment": [
-            "The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "best_ask_price",
-          "lite_name": "ba",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 9,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The best ask price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "best_ask_size",
-          "lite_name": "ba1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 10,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'123456.78'",
-          "comment": [
-            "The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiMiniTickerResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "MiniTicker",
-          "json_type": "MiniTicker",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The mini ticker matching the request asset"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiTickerRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        }
-      ],
-      "comment": [
-        "Retrieves a single ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful."
-      ]
-    },
-    {
-      "name": "Ticker",
-      "is_root": false,
-      "fields": [
-        {
-          "name": "event_time",
-          "lite_name": "et",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'1697788800000000000'",
-          "comment": [
-            "Time at which the event was emitted in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "mark_price",
-          "lite_name": "mp",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The mark price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "index_price",
-          "lite_name": "ip",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The index price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "last_price",
-          "lite_name": "lp",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The last traded price of the instrument (also close price), expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "last_size",
-          "lite_name": "ls",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 5,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'123456.78'",
-          "comment": [
-            "The number of assets traded in the last trade, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "mid_price",
-          "lite_name": "mp1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 6,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The mid price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "best_bid_price",
-          "lite_name": "bb",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 7,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The best bid price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "best_bid_size",
-          "lite_name": "bb1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 8,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'123456.78'",
-          "comment": [
-            "The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "best_ask_price",
-          "lite_name": "ba",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 9,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The best ask price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "best_ask_size",
-          "lite_name": "ba1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 10,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'123456.78'",
-          "comment": [
-            "The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "funding_rate_8h_curr",
-          "lite_name": "fr",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 11,
-          "array_depth": 0,
-          "optional": true,
-          "example": "0.0003",
-          "comment": [
-            "The current funding rate of the instrument, expressed in percentage points"
-          ]
-        },
-        {
-          "name": "funding_rate_8h_avg",
-          "lite_name": "fr1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 12,
-          "array_depth": 0,
-          "optional": true,
-          "example": "0.0003",
-          "comment": [
-            "The average funding rate of the instrument (over last 8h), expressed in percentage points"
-          ]
-        },
-        {
-          "name": "interest_rate",
-          "lite_name": "ir",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 13,
-          "array_depth": 0,
-          "optional": true,
-          "example": "0.0003",
-          "comment": [
-            "The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)"
-          ]
-        },
-        {
-          "name": "forward_price",
-          "lite_name": "fp",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 14,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "[Options] The forward price of the option, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "buy_volume_24h_b",
-          "lite_name": "bv",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 15,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'123456.78'",
-          "comment": [
-            "The 24 hour taker buy volume of the instrument, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "sell_volume_24h_b",
-          "lite_name": "sv",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 16,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'123456.78'",
-          "comment": [
-            "The 24 hour taker sell volume of the instrument, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "buy_volume_24h_q",
-          "lite_name": "bv1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 17,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'123456.78'",
-          "comment": [
-            "The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units"
-          ]
-        },
-        {
-          "name": "sell_volume_24h_q",
-          "lite_name": "sv1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 18,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'123456.78'",
-          "comment": [
-            "The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units"
-          ]
-        },
-        {
-          "name": "high_price",
-          "lite_name": "hp",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 19,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The 24 hour highest traded price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "low_price",
-          "lite_name": "lp1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 20,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The 24 hour lowest traded price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "open_price",
-          "lite_name": "op",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 21,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'65038.01'",
-          "comment": [
-            "The 24 hour first traded price of the instrument, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "open_interest",
-          "lite_name": "oi",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 22,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'123456.78'",
-          "comment": [
-            "The open interest in the instrument, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "long_short_ratio",
-          "lite_name": "ls1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 23,
-          "array_depth": 0,
-          "optional": true,
-          "example": "'0.5'",
-          "comment": [
-            "The ratio of accounts that are net long vs net short on this instrument"
-          ]
-        }
-      ],
-      "comment": [
-        "Derived data such as the below, will not be included by default:",
-        "  - 24 hour volume (`buyVolume + sellVolume`)",
-        "  - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)",
-        "  - 24 hour average trade price (`volumeQ / volumeU`)",
-        "  - 24 hour average trade volume (`volume / trades`)",
-        "  - 24 hour percentage change (`24hStatChange / 24hStat`)",
-        "  - 48 hour statistics (`2 * 24hStat - 24hStatChange`)",
-        "",
-        "To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.",
-        "Ticker extensions are currently under design to offer you more convenience.",
-        "These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.",
-        ""
-      ]
-    },
-    {
-      "name": "ApiTickerResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "Ticker",
-          "json_type": "Ticker",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The mini ticker matching the request asset"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiTradeRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "limit",
-          "lite_name": "l",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "500",
-          "comment": [
-            "The limit to query for. Defaults to 500; Max 1000"
-          ]
-        }
-      ],
-      "comment": [
-        "Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.",
-        "This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape."
-      ]
-    },
-    {
-      "name": "Trade",
-      "is_root": false,
-      "fields": [
-        {
-          "name": "event_time",
-          "lite_name": "et",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1697788800000000000'",
-          "comment": [
-            "Time at which the event was emitted in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "is_taker_buyer",
-          "lite_name": "it",
-          "semantic_type": "bool",
-          "json_type": "boolean",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "true",
-          "comment": [
-            "If taker was the buyer on the trade"
-          ]
-        },
-        {
-          "name": "size",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The number of assets being traded, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "price",
-          "lite_name": "p",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'65038.01'",
-          "comment": [
-            "The traded price, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "mark_price",
-          "lite_name": "mp",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 5,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'65038.01'",
-          "comment": [
-            "The mark price of the instrument at point of trade, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "index_price",
-          "lite_name": "ip",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 6,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'65038.01'",
-          "comment": [
-            "The index price of the instrument at point of trade, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "interest_rate",
-          "lite_name": "ir",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 7,
-          "array_depth": 0,
-          "optional": false,
-          "example": "0.0003",
-          "comment": [
-            "The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)"
-          ]
-        },
-        {
-          "name": "forward_price",
-          "lite_name": "fp",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 8,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'65038.01'",
-          "comment": [
-            "[Options] The forward price of the option at point of trade, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "trade_id",
-          "lite_name": "ti",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 9,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'209358-2'",
-          "comment": [
-            "A trade identifier, globally unique, and monotonically increasing (not by `1`).",
-            "All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.",
-            "`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`."
-          ]
-        },
-        {
-          "name": "venue",
-          "lite_name": "v",
-          "semantic_type": "Venue",
-          "json_type": "Venue",
-          "index": 10,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The venue where the trade occurred"
-          ]
-        },
-        {
-          "name": "is_rpi",
-          "lite_name": "ir1",
-          "semantic_type": "bool",
-          "json_type": "boolean",
-          "index": 13,
-          "array_depth": 0,
-          "optional": false,
-          "example": "false",
-          "comment": [
-            "If the trade is a RPI trade"
-          ]
-        }
-      ],
-      "comment": [
-        "All private RFQs and Private AXEs will be filtered out from the responses"
-      ]
-    },
-    {
-      "name": "ApiTradeResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "Trade",
-          "json_type": "Trade",
-          "index": 0,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The public trades matching the request asset"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiTradeHistoryRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "start_time",
-          "lite_name": "st",
-          "semantic_type": "int64",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": true,
-          "default": "0",
-          "example": "'1697788800000000000'",
-          "comment": [
-            "The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned"
-          ]
-        },
-        {
-          "name": "end_time",
-          "lite_name": "et",
-          "semantic_type": "int64",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": true,
-          "default": "now()",
-          "example": "'1697788800000000000'",
-          "comment": [
-            "The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned"
-          ]
-        },
-        {
-          "name": "limit",
-          "lite_name": "l",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 3,
-          "array_depth": 0,
-          "optional": true,
-          "default": "500",
-          "example": "500",
-          "comment": [
-            "The limit to query for. Defaults to 500; Max 1000"
-          ]
-        },
-        {
-          "name": "cursor",
-          "lite_name": "c",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": true,
-          "default": "''",
-          "example": "''",
-          "comment": [
-            "The cursor to indicate when to start the query from"
-          ]
-        }
-      ],
-      "comment": [
-        "Perform historical lookup of public trades in any given instrument.",
-        "This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.",
-        "Only data from the last three months will be retained.",
-        "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
-      ]
-    },
-    {
-      "name": "ApiTradeHistoryResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "Trade",
-          "json_type": "Trade",
-          "index": 0,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The public trades matching the request asset"
-          ]
-        },
-        {
-          "name": "next",
-          "lite_name": "n",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": true,
-          "default": "''",
-          "example": "'Qw0918='",
-          "comment": [
-            "The cursor to indicate when to start the next query from"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiGetInstrumentRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        }
-      ],
-      "comment": [
-        "Fetch a single instrument by supplying the asset or instrument name"
-      ]
-    },
-    {
-      "name": "Instrument",
-      "is_root": false,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "instrument_hash",
-          "lite_name": "ih",
           "semantic_type": "uint256",
           "json_type": "string",
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "'0x030501'",
+          "example": "'0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8'",
           "comment": [
-            "The asset ID used for instrument signing."
+            "Signature R"
           ]
         },
         {
-          "name": "base",
-          "lite_name": "b",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "name": "s",
+          "lite_name": "s1",
+          "semantic_type": "uint256",
+          "json_type": "string",
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "example": "'BTC'",
+          "example": "'0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d'",
           "comment": [
-            "The base currency"
+            "Signature S"
           ]
         },
         {
-          "name": "quote",
-          "lite_name": "q",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "name": "v",
+          "lite_name": "v",
+          "semantic_type": "uint8",
+          "json_type": "integer",
           "index": 3,
           "array_depth": 0,
           "optional": false,
-          "example": "'USDT'",
+          "example": "'28'",
           "comment": [
-            "The quote currency"
+            "Signature V"
           ]
         },
         {
-          "name": "kind",
-          "lite_name": "k",
-          "semantic_type": "Kind",
-          "json_type": "Kind",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'PERPETUAL'",
-          "comment": [
-            "The kind of instrument"
-          ]
-        },
-        {
-          "name": "venues",
-          "lite_name": "v",
-          "semantic_type": "Venue",
-          "json_type": "Venue",
-          "index": 7,
-          "array_depth": 1,
-          "optional": false,
-          "example": "['ORDERBOOK']",
-          "comment": [
-            "Venues that this instrument can be traded at"
-          ]
-        },
-        {
-          "name": "settlement_period",
-          "lite_name": "sp1",
-          "semantic_type": "InstrumentSettlementPeriod",
-          "json_type": "InstrumentSettlementPeriod",
-          "index": 8,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'PERPETUAL'",
-          "comment": [
-            "The settlement period of the instrument"
-          ]
-        },
-        {
-          "name": "base_decimals",
-          "lite_name": "bd",
-          "semantic_type": "int8",
-          "json_type": "integer",
-          "index": 9,
-          "array_depth": 0,
-          "optional": false,
-          "example": "3",
-          "comment": [
-            "The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)"
-          ]
-        },
-        {
-          "name": "quote_decimals",
-          "lite_name": "qd",
-          "semantic_type": "int8",
-          "json_type": "integer",
-          "index": 10,
-          "array_depth": 0,
-          "optional": false,
-          "example": "3",
-          "comment": [
-            "The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)"
-          ]
-        },
-        {
-          "name": "tick_size",
-          "lite_name": "ts",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 11,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0.01'",
-          "comment": [
-            "The size of a single tick, expressed in price decimal units"
-          ]
-        },
-        {
-          "name": "min_size",
-          "lite_name": "ms",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 12,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0.01'",
-          "comment": [
-            "The minimum contract size, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "create_time",
-          "lite_name": "ct",
+          "name": "expiration",
+          "lite_name": "e",
           "semantic_type": "timestamp",
           "json_type": "string",
-          "index": 14,
+          "index": 4,
           "array_depth": 0,
           "optional": false,
           "example": "'1697788800000000000'",
           "comment": [
-            "Creation time in unix nanoseconds"
+            "Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days"
           ]
         },
         {
-          "name": "max_position_size",
-          "lite_name": "mp",
+          "name": "nonce",
+          "lite_name": "n",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1234567890'",
+          "comment": [
+            "Users can randomly generate this value, used as a signature deconflicting key.",
+            "ie. You can send the same exact instruction twice with different nonces.",
+            "When the same nonce is used, the same payload will generate the same signature.",
+            "Our system will consider the payload a duplicate, and ignore it."
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiSetDeriskToMaintenanceMarginRatioRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to set the leverage for"
+          ]
+        },
+        {
+          "name": "ratio",
+          "lite_name": "r",
           "semantic_type": "string",
           "json_type": "string",
-          "index": 15,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'100.0'",
-          "comment": [
-            "The maximum position size, expressed in base asset decimal units"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiGetInstrumentResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "Instrument",
-          "json_type": "Instrument",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The instrument matching the request asset"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiGetFilteredInstrumentsRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "kind",
-          "lite_name": "k",
-          "semantic_type": "Kind",
-          "json_type": "Kind",
-          "index": 0,
-          "array_depth": 1,
-          "optional": true,
-          "default": "all",
-          "example": "['PERPETUAL']",
-          "comment": [
-            "The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned"
-          ]
-        },
-        {
-          "name": "base",
-          "lite_name": "b",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
           "index": 1,
-          "array_depth": 1,
-          "optional": true,
-          "default": "all",
-          "example": "['BTC', 'ETH']",
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1.5'",
           "comment": [
-            "The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned"
+            "The derisk margin to maintenance margin ratio of this sub account"
           ]
         },
         {
-          "name": "quote",
-          "lite_name": "q",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
           "index": 2,
-          "array_depth": 1,
-          "optional": true,
-          "default": "all",
-          "example": "['USDT', 'USDC']",
+          "array_depth": 0,
+          "optional": false,
           "comment": [
-            "The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned"
+            "The signature of this operation"
           ]
-        },
+        }
+      ],
+      "comment": [
+        "The request to set the derisk margin to maintenance margin ratio of a sub account"
+      ]
+    },
+    {
+      "name": "ApiSetDeriskToMaintenanceMarginRatioResponse",
+      "is_root": true,
+      "fields": [
         {
-          "name": "is_active",
-          "lite_name": "ia",
+          "name": "success",
+          "lite_name": "s",
           "semantic_type": "bool",
           "json_type": "boolean",
-          "index": 3,
+          "index": 0,
           "array_depth": 0,
-          "optional": true,
-          "default": "false",
-          "example": "true",
+          "optional": false,
+          "example": "'true'",
           "comment": [
-            "Request for active instruments only"
-          ]
-        },
-        {
-          "name": "limit",
-          "lite_name": "l",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 4,
-          "array_depth": 0,
-          "optional": true,
-          "default": "500",
-          "example": "500",
-          "comment": [
-            "The limit to query for. Defaults to 500; Max 100000"
+            "Whether the derisk margin to maintenance margin ratio was set successfully"
           ]
         }
       ],
       "comment": [
-        "Fetch a list of instruments based on the filters provided"
+        "The response to set the derisk margin to maintenance margin ratio of a sub account"
       ]
-    },
-    {
-      "name": "ApiGetFilteredInstrumentsResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "Instrument",
-          "json_type": "Instrument",
-          "index": 0,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The instruments matching the request filter"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiCandlestickRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "interval",
-          "lite_name": "i1",
-          "semantic_type": "CandlestickInterval",
-          "json_type": "CandlestickInterval",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The interval of each candlestick"
-          ]
-        },
-        {
-          "name": "type",
-          "lite_name": "t",
-          "semantic_type": "CandlestickType",
-          "json_type": "CandlestickType",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The type of candlestick data to retrieve"
-          ]
-        },
-        {
-          "name": "start_time",
-          "lite_name": "st",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 0,
-          "optional": true,
-          "default": "0",
-          "example": "'1697788800000000000'",
-          "comment": [
-            "Start time of kline data in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "end_time",
-          "lite_name": "et",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": true,
-          "default": "now()",
-          "example": "'1697788800000000000'",
-          "comment": [
-            "End time of kline data in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "limit",
-          "lite_name": "l",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 5,
-          "array_depth": 0,
-          "optional": true,
-          "default": "500",
-          "example": "500",
-          "comment": [
-            "The limit to query for. Defaults to 500; Max 1000"
-          ]
-        },
-        {
-          "name": "cursor",
-          "lite_name": "c",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 6,
-          "array_depth": 0,
-          "optional": true,
-          "default": "''",
-          "example": "''",
-          "comment": [
-            "The cursor to indicate when to start the query from"
-          ]
-        }
-      ],
-      "comment": [
-        "Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.",
-        "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
-      ]
-    },
-    {
-      "name": "Candlestick",
-      "is_root": false,
-      "fields": [
-        {
-          "name": "open_time",
-          "lite_name": "ot",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1697788800000000000'",
-          "comment": [
-            "Open time of kline bar in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "close_time",
-          "lite_name": "ct",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1697788800000000000'",
-          "comment": [
-            "Close time of kline bar in unix nanosecond"
-          ]
-        },
-        {
-          "name": "open",
-          "lite_name": "o",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The open price, expressed in underlying currency resolution units"
-          ]
-        },
-        {
-          "name": "close",
-          "lite_name": "c",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The close price, expressed in underlying currency resolution units"
-          ]
-        },
-        {
-          "name": "high",
-          "lite_name": "h",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The high price, expressed in underlying currency resolution units"
-          ]
-        },
-        {
-          "name": "low",
-          "lite_name": "l",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 5,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The low price, expressed in underlying currency resolution units"
-          ]
-        },
-        {
-          "name": "volume_b",
-          "lite_name": "vb",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 6,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The underlying volume transacted, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "volume_q",
-          "lite_name": "vq",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 7,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The quote volume transacted, expressed in quote asset decimal units"
-          ]
-        },
-        {
-          "name": "trades",
-          "lite_name": "t",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 8,
-          "array_depth": 0,
-          "optional": false,
-          "example": "123456",
-          "comment": [
-            "The number of trades transacted"
-          ]
-        },
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 9,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        }
-      ],
-      "comment": [
-        ""
-      ]
-    },
-    {
-      "name": "ApiCandlestickResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "Candlestick",
-          "json_type": "Candlestick",
-          "index": 0,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The candlestick result set for given interval"
-          ]
-        },
-        {
-          "name": "next",
-          "lite_name": "n",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": true,
-          "default": "''",
-          "example": "'Qw0918='",
-          "comment": [
-            "The cursor to indicate when to start the next query from"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiFundingRateRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "start_time",
-          "lite_name": "st",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": true,
-          "default": "0",
-          "example": "'1697788800000000000'",
-          "comment": [
-            "Start time of funding rate in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "end_time",
-          "lite_name": "et",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": true,
-          "default": "now()",
-          "example": "'1697788800000000000'",
-          "comment": [
-            "End time of funding rate in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "limit",
-          "lite_name": "l",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 3,
-          "array_depth": 0,
-          "optional": true,
-          "default": "500",
-          "example": "500",
-          "comment": [
-            "The limit to query for. Defaults to 500; Max 1000"
-          ]
-        },
-        {
-          "name": "cursor",
-          "lite_name": "c",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": true,
-          "default": "''",
-          "example": "''",
-          "comment": [
-            "The cursor to indicate when to start the query from"
-          ]
-        }
-      ],
-      "comment": [
-        "Lookup the historical funding rate of a perpetual future.",
-        "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
-      ]
-    },
-    {
-      "name": "FundingRate",
-      "is_root": false,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "funding_rate",
-          "lite_name": "fr",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "0.0003",
-          "comment": [
-            "The funding rate of the instrument, expressed in percentage points"
-          ]
-        },
-        {
-          "name": "funding_time",
-          "lite_name": "ft",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1697788800000000000'",
-          "comment": [
-            "The funding timestamp of the funding rate, expressed in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "mark_price",
-          "lite_name": "mp",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'65038.01'",
-          "comment": [
-            "The mark price of the instrument at funding timestamp, expressed in `9` decimals"
-          ]
-        },
-        {
-          "name": "funding_rate_8_h_avg",
-          "lite_name": "fr1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "0.0003",
-          "comment": [
-            "The 8h average funding rate of the instrument, expressed in percentage points"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiFundingRateResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "FundingRate",
-          "json_type": "FundingRate",
-          "index": 0,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The funding rate result set for given interval"
-          ]
-        },
-        {
-          "name": "next",
-          "lite_name": "n",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": true,
-          "default": "''",
-          "example": "'Qw0918='",
-          "comment": [
-            "The cursor to indicate when to start the next query from"
-          ]
-        }
-      ],
-      "comment": []
     },
     {
       "name": "JSONRPCRequest",
@@ -6374,6 +5267,109 @@
       ]
     },
     {
+      "name": "OrderbookLevel",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "price",
+          "lite_name": "p",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65038.01'",
+          "comment": [
+            "The price of the level, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "size",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3456.78'",
+          "comment": [
+            "The number of assets offered, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "num_orders",
+          "lite_name": "no",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123'",
+          "comment": [
+            "The number of open orders at this level"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "OrderbookLevels",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        },
+        {
+          "name": "bids",
+          "lite_name": "b",
+          "semantic_type": "OrderbookLevel",
+          "json_type": "OrderbookLevel",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of best bids up till query depth"
+          ]
+        },
+        {
+          "name": "asks",
+          "lite_name": "a",
+          "semantic_type": "OrderbookLevel",
+          "json_type": "OrderbookLevel",
+          "index": 3,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of best asks up till query depth"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "WSOrderbookLevelsFeedDataV1",
       "is_root": true,
       "fields": [
@@ -6492,6 +5488,156 @@
         "",
         "Field Semantics:\u003cul\u003e\u003cli\u003e[DeltaOnly] If a field is not updated, {}\u003c/li\u003e\u003cli\u003eIf a field is updated, {field: '123'}\u003c/li\u003e\u003cli\u003eIf a field is set to zero, {field: '0'}\u003c/li\u003e\u003cli\u003eIf a field is set to null, {field: ''}\u003c/li\u003e\u003c/ul\u003e"
       ]
+    },
+    {
+      "name": "MiniTicker",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        },
+        {
+          "name": "mark_price",
+          "lite_name": "mp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The mark price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "index_price",
+          "lite_name": "ip",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The index price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "last_price",
+          "lite_name": "lp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The last traded price of the instrument (also close price), expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "last_size",
+          "lite_name": "ls",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The number of assets traded in the last trade, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "mid_price",
+          "lite_name": "mp1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The mid price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "best_bid_price",
+          "lite_name": "bb",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The best bid price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "best_bid_size",
+          "lite_name": "bb1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "best_ask_price",
+          "lite_name": "ba",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The best ask price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "best_ask_size",
+          "lite_name": "ba1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units"
+          ]
+        }
+      ],
+      "comment": []
     },
     {
       "name": "WSMiniTickerFeedDataV1",
@@ -6614,6 +5760,338 @@
       ]
     },
     {
+      "name": "Ticker",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        },
+        {
+          "name": "mark_price",
+          "lite_name": "mp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The mark price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "index_price",
+          "lite_name": "ip",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The index price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "last_price",
+          "lite_name": "lp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The last traded price of the instrument (also close price), expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "last_size",
+          "lite_name": "ls",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The number of assets traded in the last trade, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "mid_price",
+          "lite_name": "mp1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The mid price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "best_bid_price",
+          "lite_name": "bb",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The best bid price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "best_bid_size",
+          "lite_name": "bb1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "best_ask_price",
+          "lite_name": "ba",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The best ask price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "best_ask_size",
+          "lite_name": "ba1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "funding_rate_8h_curr",
+          "lite_name": "fr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 11,
+          "array_depth": 0,
+          "optional": true,
+          "example": "0.0003",
+          "comment": [
+            "The current funding rate of the instrument, expressed in percentage points"
+          ]
+        },
+        {
+          "name": "funding_rate_8h_avg",
+          "lite_name": "fr1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 12,
+          "array_depth": 0,
+          "optional": true,
+          "example": "0.0003",
+          "comment": [
+            "The average funding rate of the instrument (over last 8h), expressed in percentage points"
+          ]
+        },
+        {
+          "name": "interest_rate",
+          "lite_name": "ir",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 13,
+          "array_depth": 0,
+          "optional": true,
+          "example": "0.0003",
+          "comment": [
+            "The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)"
+          ]
+        },
+        {
+          "name": "forward_price",
+          "lite_name": "fp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 14,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "[Options] The forward price of the option, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "buy_volume_24h_b",
+          "lite_name": "bv",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 15,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The 24 hour taker buy volume of the instrument, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "sell_volume_24h_b",
+          "lite_name": "sv",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 16,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The 24 hour taker sell volume of the instrument, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "buy_volume_24h_q",
+          "lite_name": "bv1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 17,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units"
+          ]
+        },
+        {
+          "name": "sell_volume_24h_q",
+          "lite_name": "sv1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 18,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units"
+          ]
+        },
+        {
+          "name": "high_price",
+          "lite_name": "hp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 19,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The 24 hour highest traded price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "low_price",
+          "lite_name": "lp1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 20,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The 24 hour lowest traded price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "open_price",
+          "lite_name": "op",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 21,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "The 24 hour first traded price of the instrument, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "open_interest",
+          "lite_name": "oi",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 22,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The open interest in the instrument, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "long_short_ratio",
+          "lite_name": "ls1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 23,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'0.5'",
+          "comment": [
+            "The ratio of accounts that are net long vs net short on this instrument"
+          ]
+        }
+      ],
+      "comment": [
+        "Derived data such as the below, will not be included by default:",
+        "  - 24 hour volume (`buyVolume + sellVolume`)",
+        "  - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)",
+        "  - 24 hour average trade price (`volumeQ / volumeU`)",
+        "  - 24 hour average trade volume (`volume / trades`)",
+        "  - 24 hour percentage change (`24hStatChange / 24hStat`)",
+        "  - 48 hour statistics (`2 * 24hStat - 24hStatChange`)",
+        "",
+        "To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.",
+        "Ticker extensions are currently under design to offer you more convenience.",
+        "These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.",
+        ""
+      ]
+    },
+    {
       "name": "WSTickerFeedDataV1",
       "is_root": true,
       "fields": [
@@ -6724,6 +6202,172 @@
       ],
       "comment": [
         "Subscribes to a stream of Public Trades for an instrument."
+      ]
+    },
+    {
+      "name": "Trade",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        },
+        {
+          "name": "is_taker_buyer",
+          "lite_name": "it",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "If taker was the buyer on the trade"
+          ]
+        },
+        {
+          "name": "size",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The number of assets being traded, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "price",
+          "lite_name": "p",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65038.01'",
+          "comment": [
+            "The traded price, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "mark_price",
+          "lite_name": "mp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65038.01'",
+          "comment": [
+            "The mark price of the instrument at point of trade, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "index_price",
+          "lite_name": "ip",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65038.01'",
+          "comment": [
+            "The index price of the instrument at point of trade, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "interest_rate",
+          "lite_name": "ir",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "0.0003",
+          "comment": [
+            "The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)"
+          ]
+        },
+        {
+          "name": "forward_price",
+          "lite_name": "fp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65038.01'",
+          "comment": [
+            "[Options] The forward price of the option at point of trade, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "trade_id",
+          "lite_name": "ti",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'209358-2'",
+          "comment": [
+            "A trade identifier, globally unique, and monotonically increasing (not by `1`).",
+            "All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.",
+            "`trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`."
+          ]
+        },
+        {
+          "name": "venue",
+          "lite_name": "v",
+          "semantic_type": "Venue",
+          "json_type": "Venue",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The venue where the trade occurred"
+          ]
+        },
+        {
+          "name": "is_rpi",
+          "lite_name": "ir1",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 13,
+          "array_depth": 0,
+          "optional": false,
+          "example": "false",
+          "comment": [
+            "If the trade is a RPI trade"
+          ]
+        }
+      ],
+      "comment": [
+        "All private RFQs and Private AXEs will be filtered out from the responses"
       ]
     },
     {
@@ -6850,6 +6494,145 @@
       "comment": [
         "Subscribes to a stream of Kline/Candlestick updates for an instrument. A Kline is uniquely identified by its open time.",
         "A new Kline is published every interval (if it exists). Upon subscription, the server will send the 5 most recent Kline for the requested interval."
+      ]
+    },
+    {
+      "name": "Candlestick",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "open_time",
+          "lite_name": "ot",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Open time of kline bar in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "close_time",
+          "lite_name": "ct",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Close time of kline bar in unix nanosecond"
+          ]
+        },
+        {
+          "name": "open",
+          "lite_name": "o",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The open price, expressed in underlying currency resolution units"
+          ]
+        },
+        {
+          "name": "close",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The close price, expressed in underlying currency resolution units"
+          ]
+        },
+        {
+          "name": "high",
+          "lite_name": "h",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The high price, expressed in underlying currency resolution units"
+          ]
+        },
+        {
+          "name": "low",
+          "lite_name": "l",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The low price, expressed in underlying currency resolution units"
+          ]
+        },
+        {
+          "name": "volume_b",
+          "lite_name": "vb",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The underlying volume transacted, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "volume_q",
+          "lite_name": "vq",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The quote volume transacted, expressed in quote asset decimal units"
+          ]
+        },
+        {
+          "name": "trades",
+          "lite_name": "t",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "123456",
+          "comment": [
+            "The number of trades transacted"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        }
+      ],
+      "comment": [
+        ""
       ]
     },
     {
@@ -7020,6 +6803,949 @@
       ]
     },
     {
+      "name": "ApiOrderbookLevelsRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        },
+        {
+          "name": "depth",
+          "lite_name": "d",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "50",
+          "comment": [
+            "Depth of the order book to be retrieved (10, 50, 100, 500)"
+          ]
+        }
+      ],
+      "comment": [
+        "Retrieves aggregated price depth for a single instrument, with a maximum depth of 10 levels. Do not use this to poll for data -- a websocket subscription is much more performant, and useful."
+      ]
+    },
+    {
+      "name": "ApiOrderbookLevelsResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "OrderbookLevels",
+          "json_type": "OrderbookLevels",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The orderbook levels objects matching the request asset"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiMiniTickerRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        }
+      ],
+      "comment": [
+        "Retrieves a single mini ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful."
+      ]
+    },
+    {
+      "name": "ApiMiniTickerResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "MiniTicker",
+          "json_type": "MiniTicker",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The mini ticker matching the request asset"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiTickerRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        }
+      ],
+      "comment": [
+        "Retrieves a single ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful."
+      ]
+    },
+    {
+      "name": "ApiTickerResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "Ticker",
+          "json_type": "Ticker",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The mini ticker matching the request asset"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiTradeRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "500",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
+        }
+      ],
+      "comment": [
+        "Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.",
+        "This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape."
+      ]
+    },
+    {
+      "name": "ApiTradeResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "Trade",
+          "json_type": "Trade",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The public trades matching the request asset"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiTradeHistoryRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "now()",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "500",
+          "example": "500",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "''",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": [
+        "Perform historical lookup of public trades in any given instrument.",
+        "This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.",
+        "Only data from the last three months will be retained.",
+        "",
+        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+      ]
+    },
+    {
+      "name": "ApiTradeHistoryResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "Trade",
+          "json_type": "Trade",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The public trades matching the request asset"
+          ]
+        },
+        {
+          "name": "next",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the next query from"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetInstrumentRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        }
+      ],
+      "comment": [
+        "Fetch a single instrument by supplying the asset or instrument name"
+      ]
+    },
+    {
+      "name": "Instrument",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        },
+        {
+          "name": "instrument_hash",
+          "lite_name": "ih",
+          "semantic_type": "uint256",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0x030501'",
+          "comment": [
+            "The asset ID used for instrument signing."
+          ]
+        },
+        {
+          "name": "base",
+          "lite_name": "b",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC'",
+          "comment": [
+            "The base currency"
+          ]
+        },
+        {
+          "name": "quote",
+          "lite_name": "q",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The quote currency"
+          ]
+        },
+        {
+          "name": "kind",
+          "lite_name": "k",
+          "semantic_type": "Kind",
+          "json_type": "Kind",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'PERPETUAL'",
+          "comment": [
+            "The kind of instrument"
+          ]
+        },
+        {
+          "name": "venues",
+          "lite_name": "v",
+          "semantic_type": "Venue",
+          "json_type": "Venue",
+          "index": 7,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['ORDERBOOK']",
+          "comment": [
+            "Venues that this instrument can be traded at"
+          ]
+        },
+        {
+          "name": "settlement_period",
+          "lite_name": "sp1",
+          "semantic_type": "InstrumentSettlementPeriod",
+          "json_type": "InstrumentSettlementPeriod",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'PERPETUAL'",
+          "comment": [
+            "The settlement period of the instrument"
+          ]
+        },
+        {
+          "name": "base_decimals",
+          "lite_name": "bd",
+          "semantic_type": "int8",
+          "json_type": "integer",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "3",
+          "comment": [
+            "The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)"
+          ]
+        },
+        {
+          "name": "quote_decimals",
+          "lite_name": "qd",
+          "semantic_type": "int8",
+          "json_type": "integer",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "example": "3",
+          "comment": [
+            "The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)"
+          ]
+        },
+        {
+          "name": "tick_size",
+          "lite_name": "ts",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 11,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.01'",
+          "comment": [
+            "The size of a single tick, expressed in price decimal units"
+          ]
+        },
+        {
+          "name": "min_size",
+          "lite_name": "ms",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 12,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.01'",
+          "comment": [
+            "The minimum contract size, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "create_time",
+          "lite_name": "ct",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 14,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Creation time in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "max_position_size",
+          "lite_name": "mp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 15,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'100.0'",
+          "comment": [
+            "The maximum position size, expressed in base asset decimal units"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetInstrumentResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "Instrument",
+          "json_type": "Instrument",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The instrument matching the request asset"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetFilteredInstrumentsRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "kind",
+          "lite_name": "k",
+          "semantic_type": "Kind",
+          "json_type": "Kind",
+          "index": 0,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['PERPETUAL']",
+          "comment": [
+            "The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "base",
+          "lite_name": "b",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['BTC', 'ETH']",
+          "comment": [
+            "The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "quote",
+          "lite_name": "q",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['USDT', 'USDC']",
+          "comment": [
+            "The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "is_active",
+          "lite_name": "ia",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "example": "true",
+          "comment": [
+            "Request for active instruments only"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "500",
+          "example": "500",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 100000"
+          ]
+        }
+      ],
+      "comment": [
+        "Fetch a list of instruments based on the filters provided"
+      ]
+    },
+    {
+      "name": "ApiGetFilteredInstrumentsResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "Instrument",
+          "json_type": "Instrument",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The instruments matching the request filter"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiCandlestickRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        },
+        {
+          "name": "interval",
+          "lite_name": "i1",
+          "semantic_type": "CandlestickInterval",
+          "json_type": "CandlestickInterval",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The interval of each candlestick"
+          ]
+        },
+        {
+          "name": "type",
+          "lite_name": "t",
+          "semantic_type": "CandlestickType",
+          "json_type": "CandlestickType",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The type of candlestick data to retrieve"
+          ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Start time of kline data in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "now()",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "End time of kline data in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "default": "500",
+          "example": "500",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "''",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": [
+        "Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.",
+        "",
+        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+      ]
+    },
+    {
+      "name": "ApiCandlestickResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "Candlestick",
+          "json_type": "Candlestick",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The candlestick result set for given interval"
+          ]
+        },
+        {
+          "name": "next",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the next query from"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiFundingRateRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Start time of funding rate in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "now()",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "End time of funding rate in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "500",
+          "example": "500",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "''",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": [
+        "Lookup the historical funding rate of a perpetual future.",
+        "",
+        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+      ]
+    },
+    {
+      "name": "FundingRate",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        },
+        {
+          "name": "funding_rate",
+          "lite_name": "fr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "0.0003",
+          "comment": [
+            "The funding rate of the instrument, expressed in percentage points"
+          ]
+        },
+        {
+          "name": "funding_time",
+          "lite_name": "ft",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The funding timestamp of the funding rate, expressed in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "mark_price",
+          "lite_name": "mp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65038.01'",
+          "comment": [
+            "The mark price of the instrument at funding timestamp, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "funding_rate_8_h_avg",
+          "lite_name": "fr1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "0.0003",
+          "comment": [
+            "The 8h average funding rate of the instrument, expressed in percentage points"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiFundingRateResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "FundingRate",
+          "json_type": "FundingRate",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The funding rate result set for given interval"
+          ]
+        },
+        {
+          "name": "next",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the next query from"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiGetAllInstrumentsRequest",
       "is_root": true,
       "fields": [
@@ -7060,6 +7786,175 @@
         }
       ],
       "comment": []
+    },
+    {
+      "name": "ApiQueryVaultManagerInvestorHistoryRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'2312134'",
+          "comment": [
+            "The unique identifier of the vault to filter by"
+          ]
+        },
+        {
+          "name": "only_own_investments",
+          "lite_name": "oo",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "Whether to only return investments made by the manager"
+          ]
+        }
+      ],
+      "comment": [
+        "Request for the manager to retrieve the vault investor history for their vault"
+      ]
+    },
+    {
+      "name": "ApiVaultInvestorHistory",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "off_chain_account_id",
+          "lite_name": "oc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ACC:123456'",
+          "comment": [
+            "The off chain account id of the investor, only visible to the manager"
+          ]
+        },
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'2312134'",
+          "comment": [
+            "The unique identifier of the vault."
+          ]
+        },
+        {
+          "name": "type",
+          "lite_name": "t",
+          "semantic_type": "VaultInvestorAction",
+          "json_type": "VaultInvestorAction",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'vaultInvest'",
+          "comment": [
+            "The type of transaction that occurred. List of types: vaultInvest, vaultBurnLpToken, vaultRedeem"
+          ]
+        },
+        {
+          "name": "price",
+          "lite_name": "p",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The price of the vault LP tokens at the time of the event."
+          ]
+        },
+        {
+          "name": "size",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The amount of Vault LP tokens invested or redeemed."
+          ]
+        },
+        {
+          "name": "realized_pnl",
+          "lite_name": "rp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The realized PnL of the vault."
+          ]
+        },
+        {
+          "name": "performance_fee",
+          "lite_name": "pf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The performance fee of the vault."
+          ]
+        }
+      ],
+      "comment": [
+        "The vault investor history returned by the service to client"
+      ]
+    },
+    {
+      "name": "ApiQueryVaultManagerInvestorHistoryResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "ApiVaultInvestorHistory",
+          "json_type": "ApiVaultInvestorHistory",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of vault investor history belong to the manager"
+          ]
+        }
+      ],
+      "comment": [
+        "Response to retrieve the vault summary for a given vault"
+      ]
     },
     {
       "name": "OrderLeg",
@@ -7118,94 +8013,6 @@
           "example": "true",
           "comment": [
             "Specifies if the order leg is a buy or sell"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "Signature",
-      "is_root": false,
-      "fields": [
-        {
-          "name": "signer",
-          "lite_name": "s",
-          "semantic_type": "uint256",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": [
-            "The address (public key) of the wallet signing the payload"
-          ]
-        },
-        {
-          "name": "r",
-          "lite_name": "r",
-          "semantic_type": "uint256",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8'",
-          "comment": [
-            "Signature R"
-          ]
-        },
-        {
-          "name": "s",
-          "lite_name": "s1",
-          "semantic_type": "uint256",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d'",
-          "comment": [
-            "Signature S"
-          ]
-        },
-        {
-          "name": "v",
-          "lite_name": "v",
-          "semantic_type": "uint8",
-          "json_type": "integer",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'28'",
-          "comment": [
-            "Signature V"
-          ]
-        },
-        {
-          "name": "expiration",
-          "lite_name": "e",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1697788800000000000'",
-          "comment": [
-            "Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days"
-          ]
-        },
-        {
-          "name": "nonce",
-          "lite_name": "n",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 5,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1234567890'",
-          "comment": [
-            "Users can randomly generate this value, used as a signature deconflicting key.",
-            "ie. You can send the same exact instruction twice with different nonces.",
-            "When the same nonce is used, the same payload will generate the same signature.",
-            "Our system will consider the payload a duplicate, and ignore it."
           ]
         }
       ],
@@ -7768,8 +8575,8 @@
         {
           "name": "base",
           "lite_name": "b",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 2,
           "array_depth": 1,
           "optional": true,
@@ -7782,8 +8589,8 @@
         {
           "name": "quote",
           "lite_name": "q",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 3,
           "array_depth": 1,
           "optional": true,
@@ -7832,8 +8639,8 @@
         {
           "name": "base",
           "lite_name": "b",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 2,
           "array_depth": 1,
           "optional": true,
@@ -7846,8 +8653,8 @@
         {
           "name": "quote",
           "lite_name": "q",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 3,
           "array_depth": 1,
           "optional": true,
@@ -7915,8 +8722,8 @@
         {
           "name": "base",
           "lite_name": "b",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 2,
           "array_depth": 1,
           "optional": true,
@@ -7929,8 +8736,8 @@
         {
           "name": "quote",
           "lite_name": "q",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 3,
           "array_depth": 1,
           "optional": true,
@@ -8830,8 +9637,8 @@
         {
           "name": "currency",
           "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 5,
           "array_depth": 0,
           "optional": false,
@@ -9040,8 +9847,8 @@
         {
           "name": "currency",
           "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 2,
           "array_depth": 0,
           "optional": false,
@@ -9201,8 +10008,8 @@
         {
           "name": "currency",
           "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 2,
           "array_depth": 0,
           "optional": false,
@@ -9538,8 +10345,8 @@
         {
           "name": "currency",
           "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 2,
           "array_depth": 0,
           "optional": false,
@@ -9642,8 +10449,8 @@
         {
           "name": "currency",
           "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 4,
           "array_depth": 0,
           "optional": false,
@@ -9777,8 +10584,8 @@
         {
           "name": "currency",
           "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 0,
           "array_depth": 1,
           "optional": false,
@@ -9911,8 +10718,8 @@
         {
           "name": "currency",
           "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 3,
           "array_depth": 0,
           "optional": false,
@@ -10016,8 +10823,8 @@
         {
           "name": "currency",
           "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 0,
           "array_depth": 1,
           "optional": false,
@@ -10158,8 +10965,8 @@
         {
           "name": "currency",
           "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 0,
           "array_depth": 1,
           "optional": false,
@@ -10292,8 +11099,8 @@
         {
           "name": "currency",
           "lite_name": "c",
-          "semantic_type": "Currency",
-          "json_type": "Currency",
+          "semantic_type": "string",
+          "json_type": "string",
           "index": 3,
           "array_depth": 0,
           "optional": false,
@@ -10375,29 +11182,695 @@
         }
       ],
       "comment": []
-    }
-  ],
-  "enums": [
+    },
     {
-      "name": "BridgeType",
-      "values": [
+      "name": "ApiVaultInvestRequest",
+      "is_root": true,
+      "fields": [
         {
-          "name": "XY",
-          "value": 1,
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
           "comment": [
-            "XY Bridge type"
+            "The address of the main account initiating the investment."
           ]
         },
         {
-          "name": "RHINO",
-          "value": 2,
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3477045127917224'",
           "comment": [
-            "Rhino Bridge type"
+            "The unique identifier of the vault to invest in."
+          ]
+        },
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency used for the investment. This should be the vault's quote currency."
+          ]
+        },
+        {
+          "name": "num_tokens",
+          "lite_name": "nt",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The investment sum, in terms of the token currency specified (i.e., `numTokens` of '1000' with `tokenCurrency` of 'USDT' denotes investment of 1,000 USDT)."
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The digital signature from the investing account.",
+            "This signature must be generated by the main account ID and is used to verify the authenticity of the request.",
+            "The signature must comply with AccountPermExternalTransfer permission."
           ]
         }
       ],
-      "comment": []
+      "comment": [
+        "Request payload for investing in a vault.",
+        "",
+        "This API allows a client to invest a specified amount of tokens in a particular vault."
+      ]
     },
+    {
+      "name": "ApiVaultRedeemRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The address of the main account initiating the redemption."
+          ]
+        },
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3477045127917224'",
+          "comment": [
+            "The unique identifier of the vault to redeem from."
+          ]
+        },
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency used for the redemption. This should be the vault's quote currency."
+          ]
+        },
+        {
+          "name": "num_tokens",
+          "lite_name": "nt",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The number of shares to redeem."
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The digital signature from the investing account.",
+            "This signature must be generated by the main account ID and is used to verify the authenticity of the request.",
+            "The signature must comply with AccountPermExternalTransfer permission."
+          ]
+        }
+      ],
+      "comment": [
+        "Request payload for redeeming from a vault.",
+        "",
+        "This API allows a client to redeem a specified amount of tokens from a particular vault."
+      ]
+    },
+    {
+      "name": "ApiVaultRedeemCancelRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The address of the main account initiating the cancellation."
+          ]
+        },
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3477045127917224'",
+          "comment": [
+            "The unique identifier of the vault to cancel the redemption from."
+          ]
+        }
+      ],
+      "comment": [
+        "Request payload for canceling a vault redemption.",
+        "",
+        "This API allows a client to cancel a previously initiated redemption from a vault."
+      ]
+    },
+    {
+      "name": "ApiVaultViewRedemptionQueueRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The address of the vault manager making the request."
+          ]
+        },
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3477045127917224'",
+          "comment": [
+            "The unique identifier of the vault to fetch the redemption queue for."
+          ]
+        }
+      ],
+      "comment": [
+        "Request payload for a vault manager to view the redemption queue for their vault.",
+        "",
+        "Fetches the redemption queue for a vault, ordered by descending priority.",
+        "",
+        "\u003cb\u003eUrgent\u003c/b\u003e redemption requests, defined as having been pending \u003e90% of the manager-defined maximum redemption period, have top priority (following insertion order).",
+        "",
+        "\u003cb\u003eNon-urgent\u003c/b\u003e redemption requests are otherwise prioritized by insertion order, \u003cb\u003eunless\u003c/b\u003e they are \u003e5x the size of the smallest redemption request.",
+        "",
+        "E.g., If FIFO ordering (all non-urgent) is 1k -\u003e 50k -\u003e 100k -\u003e 20k -\u003e 10k -\u003e 25k, then priority ordering is 1k -\u003e 10k -\u003e 50k -\u003e 20k -\u003e 100k -\u003e 25k.",
+        "",
+        "Only displays redemption requests that are eligible for automated redemption, i.e., have been pending for the manager-defined minimum redemption period."
+      ]
+    },
+    {
+      "name": "VaultRedemptionRequest",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "request_time",
+          "lite_name": "rt",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "[Filled by GRVT Backend] Time at which the redemption request was received by GRVT in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "num_lp_tokens",
+          "lite_name": "nl",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The number of shares to redeem"
+          ]
+        },
+        {
+          "name": "max_redemption_period_timestamp",
+          "lite_name": "mr",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1727788800000000000",
+          "comment": [
+            "[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed."
+          ]
+        },
+        {
+          "name": "age_category",
+          "lite_name": "ac",
+          "semantic_type": "VaultRedemptionReqAgeCategory",
+          "json_type": "VaultRedemptionReqAgeCategory",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'NORMAL'",
+          "comment": [
+            "Age category of this redemption request."
+          ]
+        },
+        {
+          "name": "is_manager",
+          "lite_name": "im",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "example": "true",
+          "comment": [
+            "`true` if this request belongs to the vault manager, omitted otherwise."
+          ]
+        }
+      ],
+      "comment": [
+        "Representation of a pending redemption request for a given vault."
+      ]
+    },
+    {
+      "name": "ApiVaultViewRedemptionQueueResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "redemption_queue",
+          "lite_name": "rq",
+          "semantic_type": "VaultRedemptionRequest",
+          "json_type": "VaultRedemptionRequest",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minmimum redemption period."
+          ]
+        },
+        {
+          "name": "pending_redemption_token_count",
+          "lite_name": "pr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Number of shares eligible for automated redemption (held in queue for at least the minimum redemption period)."
+          ]
+        },
+        {
+          "name": "urgent_redemption_token_count",
+          "lite_name": "ur",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Number of shares nearing the maximum redemption period (\u003e= 90% of maximum redemption period)."
+          ]
+        },
+        {
+          "name": "auto_redeemable_balance",
+          "lite_name": "ar",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Amount available for automated redemption request servicing (in USD)."
+          ]
+        },
+        {
+          "name": "share_price",
+          "lite_name": "sp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Current share price (in USD)."
+          ]
+        }
+      ],
+      "comment": [
+        "Response payload for a vault manager to view the redemption queue for their vault, ordered by descending priority.",
+        "",
+        "Excludes requests that have not yet aged past the minmimum redemption period.",
+        "",
+        "Also includes counters for total redemption sizes pending as well as urgent (refer to API integration guide for more detail on redemption request classifications).",
+        "",
+        ""
+      ]
+    },
+    {
+      "name": "ApiVaultInvestorSummaryRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The address of the main account initiating the request."
+          ]
+        },
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3477045127917224'",
+          "comment": [
+            "The unique identifier of the vault to fetch the summary for."
+          ]
+        }
+      ],
+      "comment": [
+        "Request payload for fetching the summary of a vault investor.",
+        "",
+        "This API allows a client to retrieve the summary of investments in a specific vault."
+      ]
+    },
+    {
+      "name": "VaultRedemption",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "num_lp_tokens",
+          "lite_name": "nl",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The number of LP Tokens requested for redemption."
+          ]
+        },
+        {
+          "name": "request_valuation",
+          "lite_name": "rv",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The valuation (in USD) of the redemption request."
+          ]
+        },
+        {
+          "name": "request_time",
+          "lite_name": "rt",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "[Filled by GRVT Backend] Time at which the redemption request was received by GRVT in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "max_redemption_period_timestamp",
+          "lite_name": "mr",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1727788800000000000",
+          "comment": [
+            "[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed."
+          ]
+        }
+      ],
+      "comment": [
+        "Vault redemption information.",
+        "",
+        "This struct contains information about a pending redemption from a vault."
+      ]
+    },
+    {
+      "name": "VaultInvestorSummary",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The unique identifier of the vault sub account."
+          ]
+        },
+        {
+          "name": "num_lp_tokens",
+          "lite_name": "nl",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The number of Vault LP tokens held by the investor."
+          ]
+        },
+        {
+          "name": "avg_entry_price",
+          "lite_name": "ae",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The average entry price (in USD) of the vault LP tokens."
+          ]
+        },
+        {
+          "name": "current_price",
+          "lite_name": "cp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The current price (in USD) of the vault LP tokens."
+          ]
+        },
+        {
+          "name": "total_equity",
+          "lite_name": "te",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The current valuation (in USD) of all held vault LP tokens."
+          ]
+        },
+        {
+          "name": "all_time_realized_pnl",
+          "lite_name": "at",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The all-time realized PnL (in USD) that the investor has received from the vault."
+          ]
+        },
+        {
+          "name": "pending_redemption",
+          "lite_name": "pr",
+          "semantic_type": "VaultRedemption",
+          "json_type": "VaultRedemption",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "The singleton pending redemption (omitted if none)."
+          ]
+        }
+      ],
+      "comment": [
+        "Vault investor summary information.",
+        "",
+        "This struct contains the summary of investments in a vault."
+      ]
+    },
+    {
+      "name": "ApiVaultInvestorSummaryResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "vault_investor_summary",
+          "lite_name": "vi",
+          "semantic_type": "VaultInvestorSummary",
+          "json_type": "VaultInvestorSummary",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The summary of investments in the vault."
+          ]
+        }
+      ],
+      "comment": [
+        "Response payload for the summary of a vault investor.",
+        "",
+        "This API provides the summary of investments in a specific vault."
+      ]
+    },
+    {
+      "name": "ApiVaultBurnTokensRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The address of the main account initiating the burn."
+          ]
+        },
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3477045127917224'",
+          "comment": [
+            "The unique identifier of the vault to burn tokens from."
+          ]
+        },
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency used for the burn. This should be the vault's quote currency."
+          ]
+        },
+        {
+          "name": "num_tokens",
+          "lite_name": "nt",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The number of tokens to burn."
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The digital signature from the investing account.",
+            "This signature must be generated by the main account ID and is used to verify the authenticity of the request.",
+            "The signature must comply with AccountPermExternalTransfer permission."
+          ]
+        }
+      ],
+      "comment": [
+        "Request payload for burning tokens in a vault.",
+        "",
+        "This API allows a client to burn a specified amount of tokens in a particular vault."
+      ]
+    }
+  ],
+  "enums": [
     {
       "name": "BrokerTag",
       "values": [
@@ -10613,384 +12086,6 @@
           "value": 4,
           "comment": [
             "Tracks book mid prices"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "Currency",
-      "values": [
-        {
-          "name": "USD",
-          "value": 1,
-          "comment": [
-            "the USD fiat currency"
-          ]
-        },
-        {
-          "name": "USDC",
-          "value": 2,
-          "comment": [
-            "the USDC token"
-          ]
-        },
-        {
-          "name": "USDT",
-          "value": 3,
-          "comment": [
-            "the USDT token"
-          ]
-        },
-        {
-          "name": "ETH",
-          "value": 4,
-          "comment": [
-            "the ETH token"
-          ]
-        },
-        {
-          "name": "BTC",
-          "value": 5,
-          "comment": [
-            "the BTC token"
-          ]
-        },
-        {
-          "name": "SOL",
-          "value": 6,
-          "comment": [
-            "the SOL token"
-          ]
-        },
-        {
-          "name": "ARB",
-          "value": 7,
-          "comment": [
-            "the ARB token"
-          ]
-        },
-        {
-          "name": "BNB",
-          "value": 8,
-          "comment": [
-            "the BNB token"
-          ]
-        },
-        {
-          "name": "ZK",
-          "value": 9,
-          "comment": [
-            "the ZK token"
-          ]
-        },
-        {
-          "name": "POL",
-          "value": 10,
-          "comment": [
-            "the POL token"
-          ]
-        },
-        {
-          "name": "OP",
-          "value": 11,
-          "comment": [
-            "the OP token"
-          ]
-        },
-        {
-          "name": "ATOM",
-          "value": 12,
-          "comment": [
-            "the ATOM token"
-          ]
-        },
-        {
-          "name": "KPEPE",
-          "value": 13,
-          "comment": [
-            "the 1000PEPE token"
-          ]
-        },
-        {
-          "name": "TON",
-          "value": 14,
-          "comment": [
-            "the TON token"
-          ]
-        },
-        {
-          "name": "XRP",
-          "value": 15,
-          "comment": [
-            "the XRP token"
-          ]
-        },
-        {
-          "name": "XLM",
-          "value": 16,
-          "comment": [
-            "the XLM token"
-          ]
-        },
-        {
-          "name": "WLD",
-          "value": 17,
-          "comment": [
-            "the WLD token"
-          ]
-        },
-        {
-          "name": "WIF",
-          "value": 18,
-          "comment": [
-            "the WIF token"
-          ]
-        },
-        {
-          "name": "VIRTUAL",
-          "value": 19,
-          "comment": [
-            "the VIRTUAL token"
-          ]
-        },
-        {
-          "name": "TRUMP",
-          "value": 20,
-          "comment": [
-            "the TRUMP token"
-          ]
-        },
-        {
-          "name": "SUI",
-          "value": 21,
-          "comment": [
-            "the SUI token"
-          ]
-        },
-        {
-          "name": "KSHIB",
-          "value": 22,
-          "comment": [
-            "the 1000SHIB token"
-          ]
-        },
-        {
-          "name": "POPCAT",
-          "value": 23,
-          "comment": [
-            "the POPCAT token"
-          ]
-        },
-        {
-          "name": "PENGU",
-          "value": 24,
-          "comment": [
-            "the PENGU token"
-          ]
-        },
-        {
-          "name": "LINK",
-          "value": 25,
-          "comment": [
-            "the LINK token"
-          ]
-        },
-        {
-          "name": "KBONK",
-          "value": 26,
-          "comment": [
-            "the 1000BONK token"
-          ]
-        },
-        {
-          "name": "JUP",
-          "value": 27,
-          "comment": [
-            "the JUP token"
-          ]
-        },
-        {
-          "name": "FARTCOIN",
-          "value": 28,
-          "comment": [
-            "the FARTCOIN token"
-          ]
-        },
-        {
-          "name": "ENA",
-          "value": 29,
-          "comment": [
-            "the ENA token"
-          ]
-        },
-        {
-          "name": "DOGE",
-          "value": 30,
-          "comment": [
-            "the DOGE token"
-          ]
-        },
-        {
-          "name": "AIXBT",
-          "value": 31,
-          "comment": [
-            "the AIXBT token"
-          ]
-        },
-        {
-          "name": "AI_16_Z",
-          "value": 32,
-          "comment": [
-            "the AI16Z token"
-          ]
-        },
-        {
-          "name": "ADA",
-          "value": 33,
-          "comment": [
-            "the ADA token"
-          ]
-        },
-        {
-          "name": "AAVE",
-          "value": 34,
-          "comment": [
-            "the AAVE token"
-          ]
-        },
-        {
-          "name": "BERA",
-          "value": 35,
-          "comment": [
-            "the BERA token"
-          ]
-        },
-        {
-          "name": "VINE",
-          "value": 36,
-          "comment": [
-            "the VINE token"
-          ]
-        },
-        {
-          "name": "PENDLE",
-          "value": 37,
-          "comment": [
-            "the PENDLE token"
-          ]
-        },
-        {
-          "name": "UXLINK",
-          "value": 38,
-          "comment": [
-            "the UXLINK token"
-          ]
-        },
-        {
-          "name": "KAITO",
-          "value": 39,
-          "comment": [
-            "the KAITO token"
-          ]
-        },
-        {
-          "name": "IP",
-          "value": 40,
-          "comment": [
-            "the IP token"
-          ]
-        }
-      ],
-      "comment": [
-        "The list of Currencies that are supported on the GRVT exchange"
-      ]
-    },
-    {
-      "name": "EpochBadgeType",
-      "values": [
-        {
-          "name": "CHAMPION",
-          "value": 1,
-          "comment": [
-            "Champion"
-          ]
-        },
-        {
-          "name": "LEGEND",
-          "value": 2,
-          "comment": [
-            "Legend"
-          ]
-        },
-        {
-          "name": "VETERAN",
-          "value": 3,
-          "comment": [
-            "Veteran"
-          ]
-        },
-        {
-          "name": "ELITE",
-          "value": 4,
-          "comment": [
-            "Elite"
-          ]
-        },
-        {
-          "name": "MASTER",
-          "value": 5,
-          "comment": [
-            "Master"
-          ]
-        },
-        {
-          "name": "EXPERT",
-          "value": 6,
-          "comment": [
-            "Expert"
-          ]
-        },
-        {
-          "name": "WARRIOR",
-          "value": 7,
-          "comment": [
-            "Warrior"
-          ]
-        },
-        {
-          "name": "SERGEANT",
-          "value": 8,
-          "comment": [
-            "Sergeant"
-          ]
-        },
-        {
-          "name": "RANGER",
-          "value": 9,
-          "comment": [
-            "Ranger"
-          ]
-        },
-        {
-          "name": "CHALLENGER",
-          "value": 10,
-          "comment": [
-            "Challenger"
-          ]
-        },
-        {
-          "name": "APPRENTICE",
-          "value": 11,
-          "comment": [
-            "Apprentice"
-          ]
-        },
-        {
-          "name": "ROOKIE",
-          "value": 12,
-          "comment": [
-            "Rookie"
           ]
         }
       ],
@@ -11326,6 +12421,41 @@
           "comment": [
             "the order was replaced by a client replace request"
           ]
+        },
+        {
+          "name": "DERISK_MUST_BE_IOC",
+          "value": 33,
+          "comment": [
+            "the derisk order must be an IOC order"
+          ]
+        },
+        {
+          "name": "DERISK_MUST_BE_REDUCE_ONLY",
+          "value": 34,
+          "comment": [
+            "the derisk order must be a reduce-only order"
+          ]
+        },
+        {
+          "name": "DERISK_NOT_SUPPORTED",
+          "value": 35,
+          "comment": [
+            "derisk is not supported"
+          ]
+        },
+        {
+          "name": "INVALID_ORDER_TYPE",
+          "value": 36,
+          "comment": [
+            "the order type is invalid"
+          ]
+        },
+        {
+          "name": "CURRENCY_NOT_DEFINED",
+          "value": 37,
+          "comment": [
+            "the currency is not defined"
+          ]
         }
       ],
       "comment": []
@@ -11366,88 +12496,6 @@
           "value": 5,
           "comment": [
             "Order is cancelled by the user using one of the supported APIs (See OrderRejectReason). Before an order is open, it cannot be cancelled."
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "RewardEpochStatus",
-      "values": [
-        {
-          "name": "PAST",
-          "value": 1,
-          "comment": [
-            "Past"
-          ]
-        },
-        {
-          "name": "CURRENT",
-          "value": 2,
-          "comment": [
-            "Current"
-          ]
-        },
-        {
-          "name": "FUTURE",
-          "value": 3,
-          "comment": [
-            "Future"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "RewardProgramType",
-      "values": [
-        {
-          "name": "ECOSYSTEM",
-          "value": 1,
-          "comment": []
-        },
-        {
-          "name": "TRADER",
-          "value": 2,
-          "comment": []
-        },
-        {
-          "name": "LP",
-          "value": 3,
-          "comment": []
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "SubAccountTradeInterval",
-      "values": [
-        {
-          "name": "SAT_1_MO",
-          "value": 1,
-          "comment": [
-            "1 month"
-          ]
-        },
-        {
-          "name": "SAT_1_D",
-          "value": 2,
-          "comment": [
-            "1 day"
-          ]
-        },
-        {
-          "name": "SAT_1_H",
-          "value": 3,
-          "comment": [
-            "1 hour"
-          ]
-        },
-        {
-          "name": "SAT_4_H",
-          "value": 4,
-          "comment": [
-            "4 hour"
           ]
         }
       ],
@@ -11501,44 +12549,15 @@
       ]
     },
     {
-      "name": "TimeInterval",
-      "values": [
-        {
-          "name": "INTERVAL_1_D",
-          "value": 1,
-          "comment": [
-            "1 day"
-          ]
-        },
-        {
-          "name": "INTERVAL_7_D",
-          "value": 2,
-          "comment": [
-            "7 days"
-          ]
-        },
-        {
-          "name": "INTERVAL_30_D",
-          "value": 3,
-          "comment": [
-            "30 days"
-          ]
-        },
-        {
-          "name": "INTERVAL_90_D",
-          "value": 4,
-          "comment": [
-            "90 days"
-          ]
-        }
-      ],
-      "comment": [
-        "Time interval can be used as a filter in metric/portfolio management APIs"
-      ]
-    },
-    {
       "name": "TransferType",
       "values": [
+        {
+          "name": "UNSPECIFIED",
+          "value": 0,
+          "comment": [
+            "Default transfer that has nothing to do with bridging"
+          ]
+        },
         {
           "name": "STANDARD",
           "value": 1,
@@ -11600,6 +12619,20 @@
           "comment": [
             "LAST - Order is activated when the last trade price reaches the trigger price"
           ]
+        },
+        {
+          "name": "MID",
+          "value": 3,
+          "comment": [
+            "MID - Order is activated when the mid price reaches the trigger price"
+          ]
+        },
+        {
+          "name": "MARK",
+          "value": 4,
+          "comment": [
+            "MARK - Order is activated when the mark price reaches the trigger price"
+          ]
         }
       ],
       "comment": [
@@ -11644,24 +12677,68 @@
       ]
     },
     {
-      "name": "VaultType",
+      "name": "VaultInvestorAction",
       "values": [
         {
-          "name": "PRIME",
-          "value": 1,
-          "comment": [
-            "Prime vault"
-          ]
+          "name": "UNSPECIFIED",
+          "value": 0,
+          "comment": []
         },
         {
-          "name": "LAUNCH_PAD",
+          "name": "VAULT_INVEST",
+          "value": 1,
+          "comment": []
+        },
+        {
+          "name": "VAULT_BURN_LP_TOKEN",
           "value": 2,
-          "comment": [
-            "Launchpad vault"
-          ]
+          "comment": []
+        },
+        {
+          "name": "VAULT_REDEEM",
+          "value": 3,
+          "comment": []
         }
       ],
       "comment": []
+    },
+    {
+      "name": "VaultRedemptionReqAgeCategory",
+      "values": [
+        {
+          "name": "NORMAL",
+          "value": 1,
+          "comment": [
+            "This request is at least as old as the minimum redemption period, and is eligible for automated redemption."
+          ]
+        },
+        {
+          "name": "URGENT",
+          "value": 2,
+          "comment": [
+            "This request is nearing the maxmimum redemption period and will be factored into pre-order check margin requirements."
+          ]
+        },
+        {
+          "name": "OVERDUE",
+          "value": 3,
+          "comment": [
+            "This request has exceeded the maximum redemption period and will be considered for forced redemptions."
+          ]
+        },
+        {
+          "name": "PRE_MIN",
+          "value": 4,
+          "comment": [
+            "This request has yet to exceed the minimum redemption period, and is not yet eligible for automated redemption."
+          ]
+        }
+      ],
+      "comment": [
+        "Denotes the age category of a given redemption request.",
+        "",
+        ""
+      ]
     },
     {
       "name": "Venue",
