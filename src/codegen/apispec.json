@@ -105,6 +105,37 @@
           ]
         },
         {
+          "namespace": "Instrument",
+          "name": "RPCGetCurrencyV1",
+          "version": 1,
+          "route": "/currency",
+          "auth_required": false,
+          "request": "ApiGetCurrencyRequest",
+          "response": "ApiGetCurrencyResponse",
+          "on_request_errors": [
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            }
+          ]
+        },
+        {
           "namespace": "Ticker",
           "name": "RPCMiniTickerV1",
           "version": 1,
@@ -4268,6 +4299,63 @@
       ]
     },
     {
+      "name": "ClientTier",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "tier",
+          "lite_name": "t",
+          "semantic_type": "uint8",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        },
+        {
+          "name": "futures_taker_fee",
+          "lite_name": "ft",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        },
+        {
+          "name": "futures_maker_fee",
+          "lite_name": "fm",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        },
+        {
+          "name": "options_taker_fee",
+          "lite_name": "ot",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        },
+        {
+          "name": "options_maker_fee",
+          "lite_name": "om",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiFundingAccountSummaryResponse",
       "is_root": true,
       "fields": [
@@ -4281,6 +4369,18 @@
           "optional": false,
           "comment": [
             "The funding account summary"
+          ]
+        },
+        {
+          "name": "tier",
+          "lite_name": "t",
+          "semantic_type": "ClientTier",
+          "json_type": "ClientTier",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Client fee tier at the time of query"
           ]
         }
       ],
@@ -7422,6 +7522,94 @@
         }
       ],
       "comment": []
+    },
+    {
+      "name": "ApiGetCurrencyRequest",
+      "is_root": true,
+      "fields": [],
+      "comment": [
+        "Fetch all currencies"
+      ]
+    },
+    {
+      "name": "CurrencyDetail",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "id",
+          "lite_name": "i",
+          "semantic_type": "uint16",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "3",
+          "comment": [
+            "The integer value of the currency"
+          ]
+        },
+        {
+          "name": "symbol",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The name of the currency"
+          ]
+        },
+        {
+          "name": "balance_decimals",
+          "lite_name": "bd",
+          "semantic_type": "int8",
+          "json_type": "integer",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "6",
+          "comment": [
+            "The balance decimals of the currency"
+          ]
+        },
+        {
+          "name": "quantity_multiplier",
+          "lite_name": "qm",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The quantity multiplier of the currency"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetCurrencyResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "CurrencyDetail",
+          "json_type": "CurrencyDetail",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of currencies"
+          ]
+        }
+      ],
+      "comment": [
+        "The list of currencies"
+      ]
     },
     {
       "name": "ApiCandlestickRequest",
