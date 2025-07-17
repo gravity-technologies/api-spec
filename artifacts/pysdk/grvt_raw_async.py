@@ -352,7 +352,7 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             types.ApiVaultViewRedemptionQueueResponse, resp, Config(cast=[Enum])
         )
 
-    async def query_vault_manager_investor_history_v1(
+    async def vault_manager_investment_history_v1(
         self, req: types.ApiQueryVaultManagerInvestorHistoryRequest
     ) -> types.ApiQueryVaultManagerInvestorHistoryResponse | GrvtError:
         resp = await self._post(

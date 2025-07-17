@@ -3,5 +3,4 @@
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |main_account_id<br>`ma` |string|True|The address of the vault manager making the request.|
     |vault_id<br>`vi` |string|True|The unique identifier of the vault to fetch the redemption queue for.|

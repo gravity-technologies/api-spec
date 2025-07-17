@@ -2382,7 +2382,7 @@
         },
         {
           "namespace": "Vault",
-          "name": "RPCQueryVaultManagerInvestorHistoryV1",
+          "name": "RPCVaultManagerInvestmentHistoryV1",
           "version": 1,
           "route": "/vault_manager_investor_history",
           "auth_required": true,
@@ -4186,6 +4186,54 @@
       "comment": []
     },
     {
+      "name": "VaultInvestment",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "123456789",
+          "comment": [
+            "The trading account ID of the vault invested in."
+          ]
+        },
+        {
+          "name": "num_lp_tokens",
+          "lite_name": "nl",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The number of shares held by the investor."
+          ]
+        },
+        {
+          "name": "share_price",
+          "lite_name": "sp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The current share price (in USD) of this vault investment."
+          ]
+        }
+      ],
+      "comment": [
+        "Summarizes a vault investment held by a funding account"
+      ]
+    },
+    {
       "name": "AggregatedAccountSummary",
       "is_root": false,
       "fields": [
@@ -4225,6 +4273,18 @@
           "optional": false,
           "comment": [
             "The list of spot assets owned by this main (+ sub) account, and their balances"
+          ]
+        },
+        {
+          "name": "vault_investments",
+          "lite_name": "vi",
+          "semantic_type": "VaultInvestment",
+          "json_type": "VaultInvestment",
+          "index": 3,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of vault investments held by this main account"
           ]
         }
       ],
@@ -4291,6 +4351,18 @@
           "optional": false,
           "comment": [
             "The list of spot assets owned by this main account, and their balances"
+          ]
+        },
+        {
+          "name": "vault_investments",
+          "lite_name": "vi",
+          "semantic_type": "VaultInvestment",
+          "json_type": "VaultInvestment",
+          "index": 3,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of vault investments held by this main account"
           ]
         }
       ],
@@ -11376,19 +11448,6 @@
       "is_root": true,
       "fields": [
         {
-          "name": "main_account_id",
-          "lite_name": "ma",
-          "semantic_type": "address",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": [
-            "The address of the main account initiating the investment."
-          ]
-        },
-        {
           "name": "vault_id",
           "lite_name": "vi",
           "semantic_type": "uint64",
@@ -11452,19 +11511,6 @@
       "name": "ApiVaultRedeemRequest",
       "is_root": true,
       "fields": [
-        {
-          "name": "main_account_id",
-          "lite_name": "ma",
-          "semantic_type": "address",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": [
-            "The address of the main account initiating the redemption."
-          ]
-        },
         {
           "name": "vault_id",
           "lite_name": "vi",
@@ -11530,19 +11576,6 @@
       "is_root": true,
       "fields": [
         {
-          "name": "main_account_id",
-          "lite_name": "ma",
-          "semantic_type": "address",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": [
-            "The address of the main account initiating the cancellation."
-          ]
-        },
-        {
           "name": "vault_id",
           "lite_name": "vi",
           "semantic_type": "uint64",
@@ -11566,19 +11599,6 @@
       "name": "ApiVaultViewRedemptionQueueRequest",
       "is_root": true,
       "fields": [
-        {
-          "name": "main_account_id",
-          "lite_name": "ma",
-          "semantic_type": "address",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": [
-            "The address of the vault manager making the request."
-          ]
-        },
         {
           "name": "vault_id",
           "lite_name": "vi",
@@ -11632,7 +11652,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
-          "example": "1000000",
+          "example": "'1000000'",
           "comment": [
             "The number of shares to redeem"
           ]
@@ -11645,7 +11665,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
-          "example": "1727788800000000000",
+          "example": "'1727788800000000000'",
           "comment": [
             "[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed."
           ]
@@ -11675,10 +11695,57 @@
           "comment": [
             "`true` if this request belongs to the vault manager, omitted otherwise."
           ]
+        },
+        {
+          "name": "eligible_for_auto_redemption_timestamp",
+          "lite_name": "ef",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1727788800000000000'",
+          "comment": [
+            "[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be eligible for automated redemption."
+          ]
         }
       ],
       "comment": [
         "Representation of a pending redemption request for a given vault."
+      ]
+    },
+    {
+      "name": "PreMinRedemptions",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "requests",
+          "lite_name": "r",
+          "semantic_type": "VaultRedemptionRequest",
+          "json_type": "VaultRedemptionRequest",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Pre-minimum-age redemption requests, ordered by age (first element is the oldest request that is pre-minimum-age)."
+          ]
+        },
+        {
+          "name": "token_count",
+          "lite_name": "tc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000000'",
+          "comment": [
+            "Number of shares in the pre-minimum-age section of the vault's redemption queue."
+          ]
+        }
+      ],
+      "comment": [
+        "Vault redemption queue section hidden from main view. All requests here have yet to age past the vault's minimum redemption period."
       ]
     },
     {
@@ -11705,6 +11772,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "example": "'1000000'",
           "comment": [
             "Number of shares eligible for automated redemption (held in queue for at least the minimum redemption period)."
           ]
@@ -11717,6 +11785,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "example": "'0'",
           "comment": [
             "Number of shares nearing the maximum redemption period (\u003e= 90% of maximum redemption period)."
           ]
@@ -11729,6 +11798,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "example": "'0'",
           "comment": [
             "Amount available for automated redemption request servicing (in USD)."
           ]
@@ -11741,15 +11811,26 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
+          "example": "'1.25'",
           "comment": [
             "Current share price (in USD)."
+          ]
+        },
+        {
+          "name": "pre_min",
+          "lite_name": "pm",
+          "semantic_type": "PreMinRedemptions",
+          "json_type": "PreMinRedemptions",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Dedicated section for requests yet to wait at least the minimum redemption period."
           ]
         }
       ],
       "comment": [
         "Response payload for a vault manager to view the redemption queue for their vault, ordered by descending priority.",
-        "",
-        "Excludes requests that have not yet aged past the minmimum redemption period.",
         "",
         "Also includes counters for total redemption sizes pending as well as urgent (refer to API integration guide for more detail on redemption request classifications).",
         "",
@@ -11760,19 +11841,6 @@
       "name": "ApiVaultInvestorSummaryRequest",
       "is_root": true,
       "fields": [
-        {
-          "name": "main_account_id",
-          "lite_name": "ma",
-          "semantic_type": "address",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": [
-            "The address of the main account initiating the request."
-          ]
-        },
         {
           "name": "vault_id",
           "lite_name": "vi",
@@ -11984,19 +12052,6 @@
       "name": "ApiVaultBurnTokensRequest",
       "is_root": true,
       "fields": [
-        {
-          "name": "main_account_id",
-          "lite_name": "ma",
-          "semantic_type": "address",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
-          "comment": [
-            "The address of the main account initiating the burn."
-          ]
-        },
         {
           "name": "vault_id",
           "lite_name": "vi",
