@@ -3,5 +3,4 @@
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |main_account_id<br>`ma` |string|True|The address of the main account initiating the cancellation.|
     |vault_id<br>`vi` |string|True|The unique identifier of the vault to cancel the redemption from.|

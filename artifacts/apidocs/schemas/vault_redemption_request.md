@@ -8,6 +8,7 @@
     |max_redemption_period_timestamp<br>`mr` |string|True|[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed.|
     |age_category<br>`ac` |VaultRedemptionReqAgeCategory|True|Age category of this redemption request.|
     |is_manager<br>`im` |boolean|False<br>`None`|`true` if this request belongs to the vault manager, omitted otherwise.|
+    |eligible_for_auto_redemption_timestamp<br>`ef` |string|True|[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be eligible for automated redemption.|
     ??? info "[VaultRedemptionReqAgeCategory](/../../schemas/vault_redemption_req_age_category)"
         Denotes the age category of a given redemption request.<br><br><br>
 

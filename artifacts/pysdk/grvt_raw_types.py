@@ -632,6 +632,16 @@ class ApiSubAccountHistoryResponse:
 
 
 @dataclass
+class VaultInvestment:
+    # The trading account ID of the vault invested in.
+    vault_id: str
+    # The number of shares held by the investor.
+    num_lp_tokens: str
+    # The current share price (in USD) of this vault investment.
+    share_price: str
+
+
+@dataclass
 class AggregatedAccountSummary:
     # The main account ID of the account to which the summary belongs
     main_account_id: str
@@ -639,6 +649,8 @@ class AggregatedAccountSummary:
     total_equity: str
     # The list of spot assets owned by this main (+ sub) account, and their balances
     spot_balances: list[SpotBalance]
+    # The list of vault investments held by this main account
+    vault_investments: list[VaultInvestment]
 
 
 @dataclass
@@ -655,6 +667,8 @@ class FundingAccountSummary:
     total_equity: str
     # The list of spot assets owned by this main account, and their balances
     spot_balances: list[SpotBalance]
+    # The list of vault investments held by this main account
+    vault_investments: list[VaultInvestment]
 
 
 @dataclass
@@ -2491,8 +2505,6 @@ class ApiVaultInvestRequest:
     This API allows a client to invest a specified amount of tokens in a particular vault.
     """
 
-    # The address of the main account initiating the investment.
-    main_account_id: str
     # The unique identifier of the vault to invest in.
     vault_id: str
     # The currency used for the investment. This should be the vault's quote currency.
@@ -2515,8 +2527,6 @@ class ApiVaultRedeemRequest:
     This API allows a client to redeem a specified amount of tokens from a particular vault.
     """
 
-    # The address of the main account initiating the redemption.
-    main_account_id: str
     # The unique identifier of the vault to redeem from.
     vault_id: str
     # The currency used for the redemption. This should be the vault's quote currency.
@@ -2539,8 +2549,6 @@ class ApiVaultRedeemCancelRequest:
     This API allows a client to cancel a previously initiated redemption from a vault.
     """
 
-    # The address of the main account initiating the cancellation.
-    main_account_id: str
     # The unique identifier of the vault to cancel the redemption from.
     vault_id: str
 
@@ -2561,8 +2569,6 @@ class ApiVaultViewRedemptionQueueRequest:
     Only displays redemption requests that are eligible for automated redemption, i.e., have been pending for the manager-defined minimum redemption period.
     """
 
-    # The address of the vault manager making the request.
-    main_account_id: str
     # The unique identifier of the vault to fetch the redemption queue for.
     vault_id: str
 
@@ -2577,16 +2583,24 @@ class VaultRedemptionRequest:
     max_redemption_period_timestamp: str
     # Age category of this redemption request.
     age_category: VaultRedemptionReqAgeCategory
+    # [Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be eligible for automated redemption.
+    eligible_for_auto_redemption_timestamp: str
     # `true` if this request belongs to the vault manager, omitted otherwise.
     is_manager: bool | None = None
+
+
+@dataclass
+class PreMinRedemptions:
+    # Pre-minimum-age redemption requests, ordered by age (first element is the oldest request that is pre-minimum-age).
+    requests: list[VaultRedemptionRequest]
+    # Number of shares in the pre-minimum-age section of the vault's redemption queue.
+    token_count: str
 
 
 @dataclass
 class ApiVaultViewRedemptionQueueResponse:
     """
     Response payload for a vault manager to view the redemption queue for their vault, ordered by descending priority.
-
-    Excludes requests that have not yet aged past the minmimum redemption period.
 
     Also includes counters for total redemption sizes pending as well as urgent (refer to API integration guide for more detail on redemption request classifications).
 
@@ -2603,6 +2617,8 @@ class ApiVaultViewRedemptionQueueResponse:
     auto_redeemable_balance: str
     # Current share price (in USD).
     share_price: str
+    # Dedicated section for requests yet to wait at least the minimum redemption period.
+    pre_min: PreMinRedemptions
 
 
 @dataclass
@@ -2613,8 +2629,6 @@ class ApiVaultInvestorSummaryRequest:
     This API allows a client to retrieve the summary of investments in a specific vault.
     """
 
-    # The address of the main account initiating the request.
-    main_account_id: str
     # The unique identifier of the vault to fetch the summary for.
     vault_id: str
 
@@ -2681,8 +2695,6 @@ class ApiVaultBurnTokensRequest:
     This API allows a client to burn a specified amount of tokens in a particular vault.
     """
 
-    # The address of the main account initiating the burn.
-    main_account_id: str
     # The unique identifier of the vault to burn tokens from.
     vault_id: str
     # The currency used for the burn. This should be the vault's quote currency.

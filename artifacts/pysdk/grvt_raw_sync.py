@@ -338,7 +338,7 @@ class GrvtRawSync(GrvtRawSyncBase):
             types.ApiVaultViewRedemptionQueueResponse, resp, Config(cast=[Enum])
         )
 
-    def query_vault_manager_investor_history_v1(
+    def vault_manager_investment_history_v1(
         self, req: types.ApiQueryVaultManagerInvestorHistoryRequest
     ) -> types.ApiQueryVaultManagerInvestorHistoryResponse | GrvtError:
         resp = self._post(

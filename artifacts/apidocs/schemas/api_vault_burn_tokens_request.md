@@ -3,7 +3,6 @@
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |main_account_id<br>`ma` |string|True|The address of the main account initiating the burn.|
     |vault_id<br>`vi` |string|True|The unique identifier of the vault to burn tokens from.|
     |currency<br>`c` |string|True|The currency used for the burn. This should be the vault's quote currency.|
     |num_tokens<br>`nt` |string|True|The number of tokens to burn.|

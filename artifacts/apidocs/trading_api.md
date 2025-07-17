@@ -8077,6 +8077,11 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                     "currency": "USDT",
                     "balance": "123456.78",
                     "index_price": "1.0000102"
+                }],
+                "vault_investments": [{
+                    "vault_id": 123456789,
+                    "num_lp_tokens": 1000000,
+                    "share_price": 1000000
                 }]
             }
         }
@@ -8091,6 +8096,11 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                     "c": "USDT",
                     "b": "123456.78",
                     "ip": "1.0000102"
+                }],
+                "vi": [{
+                    "vi": 123456789,
+                    "nl": 1000000,
+                    "sp": 1000000
                 }]
             }
         }
@@ -8382,6 +8392,11 @@ LITE ENDPOINT: lite/v1/funding_account_summary
                     "currency": "USDT",
                     "balance": "123456.78",
                     "index_price": "1.0000102"
+                }],
+                "vault_investments": [{
+                    "vault_id": 123456789,
+                    "num_lp_tokens": 1000000,
+                    "share_price": 1000000
                 }]
             },
             "tier": {
@@ -8403,6 +8418,11 @@ LITE ENDPOINT: lite/v1/funding_account_summary
                     "c": "USDT",
                     "b": "123456.78",
                     "ip": "1.0000102"
+                }],
+                "vi": [{
+                    "vi": 123456789,
+                    "nl": 1000000,
+                    "sp": 1000000
                 }]
             },
             "t": {
@@ -9815,7 +9835,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
         **Full Request**
         ``` { .json .copy }
         {
-            "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "vault_id": "3477045127917224",
             "currency": "USDT",
             "num_tokens": 1000000,
@@ -9832,7 +9851,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
         **Lite Request**
         ``` { .json .copy }
         {
-            "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "vi": "3477045127917224",
             "c": "USDT",
             "nt": 1000000,
@@ -9925,7 +9943,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224",
                 "currency": "USDT",
                 "num_tokens": 1000000,
@@ -9950,7 +9967,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                 "jsonrpc": "2.0",
                 "method": "v1/vault_burn_tokens",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224",
                     "currency": "USDT",
                     "num_tokens": 1000000,
@@ -9975,7 +9991,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224",
                 "c": "USDT",
                 "nt": 1000000,
@@ -10000,7 +10015,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                 "j": "2.0",
                 "m": "v1/vault_burn_tokens",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224",
                     "c": "USDT",
                     "nt": 1000000,
@@ -10026,7 +10040,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224",
                 "currency": "USDT",
                 "num_tokens": 1000000,
@@ -10051,7 +10064,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                 "jsonrpc": "2.0",
                 "method": "v1/vault_burn_tokens",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224",
                     "currency": "USDT",
                     "num_tokens": 1000000,
@@ -10076,7 +10088,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224",
                 "c": "USDT",
                 "nt": 1000000,
@@ -10101,7 +10112,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                 "j": "2.0",
                 "m": "v1/vault_burn_tokens",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224",
                     "c": "USDT",
                     "nt": 1000000,
@@ -10127,7 +10137,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224",
                 "currency": "USDT",
                 "num_tokens": 1000000,
@@ -10152,7 +10161,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                 "jsonrpc": "2.0",
                 "method": "v1/vault_burn_tokens",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224",
                     "currency": "USDT",
                     "num_tokens": 1000000,
@@ -10177,7 +10185,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224",
                 "c": "USDT",
                 "nt": 1000000,
@@ -10202,7 +10209,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                 "j": "2.0",
                 "m": "v1/vault_burn_tokens",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224",
                     "c": "USDT",
                     "nt": 1000000,
@@ -10228,7 +10234,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224",
                 "currency": "USDT",
                 "num_tokens": 1000000,
@@ -10253,7 +10258,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                 "jsonrpc": "2.0",
                 "method": "v1/vault_burn_tokens",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224",
                     "currency": "USDT",
                     "num_tokens": 1000000,
@@ -10278,7 +10282,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224",
                 "c": "USDT",
                 "nt": 1000000,
@@ -10303,7 +10306,6 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                 "j": "2.0",
                 "m": "v1/vault_burn_tokens",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224",
                     "c": "USDT",
                     "nt": 1000000,
@@ -10337,7 +10339,6 @@ LITE ENDPOINT: lite/v1/vault_invest
         **Full Request**
         ``` { .json .copy }
         {
-            "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "vault_id": "3477045127917224",
             "currency": "USDT",
             "num_tokens": 1000000,
@@ -10354,7 +10355,6 @@ LITE ENDPOINT: lite/v1/vault_invest
         **Lite Request**
         ``` { .json .copy }
         {
-            "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "vi": "3477045127917224",
             "c": "USDT",
             "nt": 1000000,
@@ -10448,7 +10448,6 @@ LITE ENDPOINT: lite/v1/vault_invest
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224",
                 "currency": "USDT",
                 "num_tokens": 1000000,
@@ -10473,7 +10472,6 @@ LITE ENDPOINT: lite/v1/vault_invest
                 "jsonrpc": "2.0",
                 "method": "v1/vault_invest",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224",
                     "currency": "USDT",
                     "num_tokens": 1000000,
@@ -10498,7 +10496,6 @@ LITE ENDPOINT: lite/v1/vault_invest
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224",
                 "c": "USDT",
                 "nt": 1000000,
@@ -10523,7 +10520,6 @@ LITE ENDPOINT: lite/v1/vault_invest
                 "j": "2.0",
                 "m": "v1/vault_invest",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224",
                     "c": "USDT",
                     "nt": 1000000,
@@ -10549,7 +10545,6 @@ LITE ENDPOINT: lite/v1/vault_invest
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224",
                 "currency": "USDT",
                 "num_tokens": 1000000,
@@ -10574,7 +10569,6 @@ LITE ENDPOINT: lite/v1/vault_invest
                 "jsonrpc": "2.0",
                 "method": "v1/vault_invest",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224",
                     "currency": "USDT",
                     "num_tokens": 1000000,
@@ -10599,7 +10593,6 @@ LITE ENDPOINT: lite/v1/vault_invest
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224",
                 "c": "USDT",
                 "nt": 1000000,
@@ -10624,7 +10617,6 @@ LITE ENDPOINT: lite/v1/vault_invest
                 "j": "2.0",
                 "m": "v1/vault_invest",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224",
                     "c": "USDT",
                     "nt": 1000000,
@@ -10650,7 +10642,6 @@ LITE ENDPOINT: lite/v1/vault_invest
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224",
                 "currency": "USDT",
                 "num_tokens": 1000000,
@@ -10675,7 +10666,6 @@ LITE ENDPOINT: lite/v1/vault_invest
                 "jsonrpc": "2.0",
                 "method": "v1/vault_invest",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224",
                     "currency": "USDT",
                     "num_tokens": 1000000,
@@ -10700,7 +10690,6 @@ LITE ENDPOINT: lite/v1/vault_invest
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224",
                 "c": "USDT",
                 "nt": 1000000,
@@ -10725,7 +10714,6 @@ LITE ENDPOINT: lite/v1/vault_invest
                 "j": "2.0",
                 "m": "v1/vault_invest",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224",
                     "c": "USDT",
                     "nt": 1000000,
@@ -10751,7 +10739,6 @@ LITE ENDPOINT: lite/v1/vault_invest
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224",
                 "currency": "USDT",
                 "num_tokens": 1000000,
@@ -10776,7 +10763,6 @@ LITE ENDPOINT: lite/v1/vault_invest
                 "jsonrpc": "2.0",
                 "method": "v1/vault_invest",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224",
                     "currency": "USDT",
                     "num_tokens": 1000000,
@@ -10801,7 +10787,6 @@ LITE ENDPOINT: lite/v1/vault_invest
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224",
                 "c": "USDT",
                 "nt": 1000000,
@@ -10826,7 +10811,6 @@ LITE ENDPOINT: lite/v1/vault_invest
                 "j": "2.0",
                 "m": "v1/vault_invest",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224",
                     "c": "USDT",
                     "nt": 1000000,
@@ -10860,14 +10844,12 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
         **Full Request**
         ``` { .json .copy }
         {
-            "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "vault_id": "3477045127917224"
         }
         ```
         **Lite Request**
         ``` { .json .copy }
         {
-            "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "vi": "3477045127917224"
         }
         ```
@@ -10962,7 +10944,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224"
             }
             '
@@ -10977,7 +10958,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                 "jsonrpc": "2.0",
                 "method": "v1/vault_investor_summary",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224"
                 },
                 "id": 123
@@ -10992,7 +10972,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224"
             }
             '
@@ -11007,7 +10986,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                 "j": "2.0",
                 "m": "v1/vault_investor_summary",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224"
                 },
                 "i": 123
@@ -11023,7 +11001,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224"
             }
             '
@@ -11038,7 +11015,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                 "jsonrpc": "2.0",
                 "method": "v1/vault_investor_summary",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224"
                 },
                 "id": 123
@@ -11053,7 +11029,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224"
             }
             '
@@ -11068,7 +11043,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                 "j": "2.0",
                 "m": "v1/vault_investor_summary",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224"
                 },
                 "i": 123
@@ -11084,7 +11058,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224"
             }
             '
@@ -11099,7 +11072,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                 "jsonrpc": "2.0",
                 "method": "v1/vault_investor_summary",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224"
                 },
                 "id": 123
@@ -11114,7 +11086,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224"
             }
             '
@@ -11129,7 +11100,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                 "j": "2.0",
                 "m": "v1/vault_investor_summary",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224"
                 },
                 "i": 123
@@ -11145,7 +11115,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224"
             }
             '
@@ -11160,7 +11129,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                 "jsonrpc": "2.0",
                 "method": "v1/vault_investor_summary",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224"
                 },
                 "id": 123
@@ -11175,7 +11143,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224"
             }
             '
@@ -11190,7 +11157,6 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                 "j": "2.0",
                 "m": "v1/vault_investor_summary",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224"
                 },
                 "i": 123
@@ -11214,7 +11180,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
         **Full Request**
         ``` { .json .copy }
         {
-            "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "vault_id": "3477045127917224",
             "currency": "USDT",
             "num_tokens": 1000000,
@@ -11231,7 +11196,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
         **Lite Request**
         ``` { .json .copy }
         {
-            "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "vi": "3477045127917224",
             "c": "USDT",
             "nt": 1000000,
@@ -11315,7 +11279,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224",
                 "currency": "USDT",
                 "num_tokens": 1000000,
@@ -11340,7 +11303,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
                 "jsonrpc": "2.0",
                 "method": "v1/vault_redeem",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224",
                     "currency": "USDT",
                     "num_tokens": 1000000,
@@ -11365,7 +11327,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224",
                 "c": "USDT",
                 "nt": 1000000,
@@ -11390,7 +11351,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
                 "j": "2.0",
                 "m": "v1/vault_redeem",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224",
                     "c": "USDT",
                     "nt": 1000000,
@@ -11416,7 +11376,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224",
                 "currency": "USDT",
                 "num_tokens": 1000000,
@@ -11441,7 +11400,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
                 "jsonrpc": "2.0",
                 "method": "v1/vault_redeem",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224",
                     "currency": "USDT",
                     "num_tokens": 1000000,
@@ -11466,7 +11424,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224",
                 "c": "USDT",
                 "nt": 1000000,
@@ -11491,7 +11448,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
                 "j": "2.0",
                 "m": "v1/vault_redeem",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224",
                     "c": "USDT",
                     "nt": 1000000,
@@ -11517,7 +11473,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224",
                 "currency": "USDT",
                 "num_tokens": 1000000,
@@ -11542,7 +11497,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
                 "jsonrpc": "2.0",
                 "method": "v1/vault_redeem",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224",
                     "currency": "USDT",
                     "num_tokens": 1000000,
@@ -11567,7 +11521,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224",
                 "c": "USDT",
                 "nt": 1000000,
@@ -11592,7 +11545,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
                 "j": "2.0",
                 "m": "v1/vault_redeem",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224",
                     "c": "USDT",
                     "nt": 1000000,
@@ -11618,7 +11570,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224",
                 "currency": "USDT",
                 "num_tokens": 1000000,
@@ -11643,7 +11594,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
                 "jsonrpc": "2.0",
                 "method": "v1/vault_redeem",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224",
                     "currency": "USDT",
                     "num_tokens": 1000000,
@@ -11668,7 +11618,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224",
                 "c": "USDT",
                 "nt": 1000000,
@@ -11693,7 +11642,6 @@ LITE ENDPOINT: lite/v1/vault_redeem
                 "j": "2.0",
                 "m": "v1/vault_redeem",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224",
                     "c": "USDT",
                     "nt": 1000000,
@@ -11727,14 +11675,12 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
         **Full Request**
         ``` { .json .copy }
         {
-            "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "vault_id": "3477045127917224"
         }
         ```
         **Lite Request**
         ``` { .json .copy }
         {
-            "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "vi": "3477045127917224"
         }
         ```
@@ -11806,7 +11752,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224"
             }
             '
@@ -11821,7 +11766,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
                 "jsonrpc": "2.0",
                 "method": "v1/vault_redeem_cancel",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224"
                 },
                 "id": 123
@@ -11836,7 +11780,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224"
             }
             '
@@ -11851,7 +11794,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
                 "j": "2.0",
                 "m": "v1/vault_redeem_cancel",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224"
                 },
                 "i": 123
@@ -11867,7 +11809,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224"
             }
             '
@@ -11882,7 +11823,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
                 "jsonrpc": "2.0",
                 "method": "v1/vault_redeem_cancel",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224"
                 },
                 "id": 123
@@ -11897,7 +11837,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224"
             }
             '
@@ -11912,7 +11851,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
                 "j": "2.0",
                 "m": "v1/vault_redeem_cancel",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224"
                 },
                 "i": 123
@@ -11928,7 +11866,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224"
             }
             '
@@ -11943,7 +11880,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
                 "jsonrpc": "2.0",
                 "method": "v1/vault_redeem_cancel",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224"
                 },
                 "id": 123
@@ -11958,7 +11894,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224"
             }
             '
@@ -11973,7 +11908,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
                 "j": "2.0",
                 "m": "v1/vault_redeem_cancel",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224"
                 },
                 "i": 123
@@ -11989,7 +11923,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224"
             }
             '
@@ -12004,7 +11937,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
                 "jsonrpc": "2.0",
                 "method": "v1/vault_redeem_cancel",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224"
                 },
                 "id": 123
@@ -12019,7 +11951,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224"
             }
             '
@@ -12034,7 +11965,6 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
                 "j": "2.0",
                 "m": "v1/vault_redeem_cancel",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224"
                 },
                 "i": 123
@@ -12058,14 +11988,12 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
         **Full Request**
         ``` { .json .copy }
         {
-            "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "vault_id": "3477045127917224"
         }
         ```
         **Lite Request**
         ``` { .json .copy }
         {
-            "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
             "vi": "3477045127917224"
         }
         ```
@@ -12081,15 +12009,27 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
         {
             "redemption_queue": [{
                 "request_time": "1697788800000000000",
-                "num_lp_tokens": 1000000,
-                "max_redemption_period_timestamp": 1727788800000000000,
+                "num_lp_tokens": "1000000",
+                "max_redemption_period_timestamp": "1727788800000000000",
                 "age_category": "NORMAL",
-                "is_manager": true
+                "is_manager": true,
+                "eligible_for_auto_redemption_timestamp": "1727788800000000000"
             }],
-            "pending_redemption_token_count": null,
-            "urgent_redemption_token_count": null,
-            "auto_redeemable_balance": null,
-            "share_price": null
+            "pending_redemption_token_count": "1000000",
+            "urgent_redemption_token_count": "0",
+            "auto_redeemable_balance": "0",
+            "share_price": "1.25",
+            "pre_min": {
+                "requests": [{
+                    "request_time": "1697788800000000000",
+                    "num_lp_tokens": "1000000",
+                    "max_redemption_period_timestamp": "1727788800000000000",
+                    "age_category": "NORMAL",
+                    "is_manager": true,
+                    "eligible_for_auto_redemption_timestamp": "1727788800000000000"
+                }],
+                "token_count": "1000000"
+            }
         }
         ```
         **Lite Response**
@@ -12097,15 +12037,27 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
         {
             "rq": [{
                 "rt": "1697788800000000000",
-                "nl": 1000000,
-                "mr": 1727788800000000000,
+                "nl": "1000000",
+                "mr": "1727788800000000000",
                 "ac": "NORMAL",
-                "im": true
+                "im": true,
+                "ef": "1727788800000000000"
             }],
-            "pr": null,
-            "ur": null,
-            "ar": null,
-            "sp": null
+            "pr": "1000000",
+            "ur": "0",
+            "ar": "0",
+            "sp": "1.25",
+            "pm": {
+                "r": [{
+                    "rt": "1697788800000000000",
+                    "nl": "1000000",
+                    "mr": "1727788800000000000",
+                    "ac": "NORMAL",
+                    "im": true,
+                    "ef": "1727788800000000000"
+                }],
+                "tc": "1000000"
+            }
         }
         ```
     </section>
@@ -12153,7 +12105,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224"
             }
             '
@@ -12168,7 +12119,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
                 "jsonrpc": "2.0",
                 "method": "v1/vault_view_redemption_queue",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224"
                 },
                 "id": 123
@@ -12183,7 +12133,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224"
             }
             '
@@ -12198,7 +12147,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
                 "j": "2.0",
                 "m": "v1/vault_view_redemption_queue",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224"
                 },
                 "i": 123
@@ -12214,7 +12162,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224"
             }
             '
@@ -12229,7 +12176,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
                 "jsonrpc": "2.0",
                 "method": "v1/vault_view_redemption_queue",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224"
                 },
                 "id": 123
@@ -12244,7 +12190,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224"
             }
             '
@@ -12259,7 +12204,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
                 "j": "2.0",
                 "m": "v1/vault_view_redemption_queue",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224"
                 },
                 "i": 123
@@ -12275,7 +12219,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224"
             }
             '
@@ -12290,7 +12233,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
                 "jsonrpc": "2.0",
                 "method": "v1/vault_view_redemption_queue",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224"
                 },
                 "id": 123
@@ -12305,7 +12247,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224"
             }
             '
@@ -12320,7 +12261,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
                 "j": "2.0",
                 "m": "v1/vault_view_redemption_queue",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224"
                 },
                 "i": 123
@@ -12336,7 +12276,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vault_id": "3477045127917224"
             }
             '
@@ -12351,7 +12290,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
                 "jsonrpc": "2.0",
                 "method": "v1/vault_view_redemption_queue",
                 "params": {
-                    "main_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vault_id": "3477045127917224"
                 },
                 "id": 123
@@ -12366,7 +12304,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
             --header "Cookie: $GRVT_COOKIE" \
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
-                "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "vi": "3477045127917224"
             }
             '
@@ -12381,7 +12318,6 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
                 "j": "2.0",
                 "m": "v1/vault_view_redemption_queue",
                 "p": {
-                    "ma": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                     "vi": "3477045127917224"
                 },
                 "i": 123
@@ -12390,7 +12326,7 @@ LITE ENDPOINT: lite/v1/vault_view_redemption_queue
             ```
         </section>
 <hr class="solid">
-### Query Vault Manager Investor History
+### Vault Manager Investment History
 ```
 FULL ENDPOINT: full/v1/vault_manager_investor_history
 LITE ENDPOINT: lite/v1/vault_manager_investor_history
