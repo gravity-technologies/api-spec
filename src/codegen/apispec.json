@@ -8133,7 +8133,7 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
-          "example": "'vaultInvest'",
+          "example": "'VAULT_INVEST'",
           "comment": [
             "The type of transaction that occurred. List of types: vaultInvest, vaultBurnLpToken, vaultRedeem"
           ]
@@ -8146,7 +8146,7 @@
           "index": 4,
           "array_depth": 0,
           "optional": false,
-          "example": "1000000",
+          "example": "'1000000'",
           "comment": [
             "The price of the vault LP tokens at the time of the event."
           ]
@@ -8159,7 +8159,7 @@
           "index": 5,
           "array_depth": 0,
           "optional": false,
-          "example": "1000000",
+          "example": "'1000000'",
           "comment": [
             "The amount of Vault LP tokens invested or redeemed."
           ]
@@ -8172,7 +8172,7 @@
           "index": 6,
           "array_depth": 0,
           "optional": false,
-          "example": "1000000",
+          "example": "'1000000'",
           "comment": [
             "The realized PnL of the vault."
           ]
@@ -8185,7 +8185,7 @@
           "index": 7,
           "array_depth": 0,
           "optional": false,
-          "example": "1000000",
+          "example": "'1000000'",
           "comment": [
             "The performance fee of the vault."
           ]
@@ -12016,6 +12016,19 @@
           "optional": true,
           "comment": [
             "The singleton pending redemption (omitted if none)."
+          ]
+        },
+        {
+          "name": "can_burn",
+          "lite_name": "cb",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 7,
+          "array_depth": 0,
+          "optional": true,
+          "default": "true",
+          "comment": [
+            "True if the requesting account is authorized to burn tokens on this vault, omitted otherwise."
           ]
         }
       ],

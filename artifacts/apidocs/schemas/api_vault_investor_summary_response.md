@@ -16,6 +16,7 @@
         |total_equity<br>`te` |string|True|The current valuation (in USD) of all held vault LP tokens.|
         |all_time_realized_pnl<br>`at` |string|True|The all-time realized PnL (in USD) that the investor has received from the vault.|
         |pending_redemption<br>`pr` |VaultRedemption|False<br>`None`|The singleton pending redemption (omitted if none).|
+        |can_burn<br>`cb` |boolean|False<br>`true`|True if the requesting account is authorized to burn tokens on this vault, omitted otherwise.|
         ??? info "[VaultRedemption](/../../schemas/vault_redemption)"
             Vault redemption information.<br><br>This struct contains information about a pending redemption from a vault.<br>
 
