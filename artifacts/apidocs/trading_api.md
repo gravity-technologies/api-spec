@@ -10875,7 +10875,8 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                     "request_valuation": 1000000,
                     "request_time": "1697788800000000000",
                     "max_redemption_period_timestamp": 1727788800000000000
-                }
+                },
+                "can_burn": null
             }]
         }
         ```
@@ -10894,7 +10895,8 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                     "rv": 1000000,
                     "rt": "1697788800000000000",
                     "mr": 1727788800000000000
-                }
+                },
+                "cb": null
             }]
         }
         ```
@@ -12366,11 +12368,11 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "event_time": "1697788800000000000",
                 "off_chain_account_id": "ACC:123456",
                 "vault_id": "2312134",
-                "type": "vaultInvest",
-                "price": 1000000,
-                "size": 1000000,
-                "realized_pnl": 1000000,
-                "performance_fee": 1000000
+                "type": "VAULT_INVEST",
+                "price": "1000000",
+                "size": "1000000",
+                "realized_pnl": "1000000",
+                "performance_fee": "1000000"
             }]
         }
         ```
@@ -12381,11 +12383,11 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "et": "1697788800000000000",
                 "oc": "ACC:123456",
                 "vi": "2312134",
-                "t": "vaultInvest",
-                "p": 1000000,
-                "s": 1000000,
-                "rp": 1000000,
-                "pf": 1000000
+                "t": "VAULT_INVEST",
+                "p": "1000000",
+                "s": "1000000",
+                "rp": "1000000",
+                "pf": "1000000"
             }]
         }
         ```

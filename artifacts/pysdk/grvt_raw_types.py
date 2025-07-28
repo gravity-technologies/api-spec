@@ -2673,6 +2673,8 @@ class VaultInvestorSummary:
     all_time_realized_pnl: str
     # The singleton pending redemption (omitted if none).
     pending_redemption: VaultRedemption | None = None
+    # True if the requesting account is authorized to burn tokens on this vault, omitted otherwise.
+    can_burn: bool | None = None
 
 
 @dataclass
