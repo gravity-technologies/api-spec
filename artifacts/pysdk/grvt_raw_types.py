@@ -2607,7 +2607,7 @@ class ApiVaultViewRedemptionQueueResponse:
 
     """
 
-    # Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minmimum redemption period.
+    # Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minimum redemption period.
     redemption_queue: list[VaultRedemptionRequest]
     # Number of shares eligible for automated redemption (held in queue for at least the minimum redemption period).
     pending_redemption_token_count: str
