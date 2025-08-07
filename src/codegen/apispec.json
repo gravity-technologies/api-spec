@@ -11761,7 +11761,7 @@
           "array_depth": 1,
           "optional": false,
           "comment": [
-            "Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minmimum redemption period."
+            "Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minimum redemption period."
           ]
         },
         {
