@@ -1295,6 +1295,317 @@
           ]
         },
         {
+          "namespace": "Order",
+          "name": "RPCBulkOrdersV1",
+          "version": 1,
+          "route": "/bulk_order",
+          "auth_required": true,
+          "request": "ApiBulkOrdersRequest",
+          "response": "ApiBulkOrdersResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 1005,
+              "message": "Unknown Error",
+              "status": 500
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1400,
+              "message": "Signer does not have trade permission",
+              "status": 403
+            },
+            {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
+            },
+            {
+              "code": 2000,
+              "message": "Signature is from an unauthorized signer",
+              "status": 403
+            },
+            {
+              "code": 2001,
+              "message": "Signature has expired",
+              "status": 403
+            },
+            {
+              "code": 2002,
+              "message": "Signature does not match payload",
+              "status": 403
+            },
+            {
+              "code": 2003,
+              "message": "Order sub account does not match logged in user",
+              "status": 403
+            },
+            {
+              "code": 2004,
+              "message": "Signature is from an expired session key",
+              "status": 403
+            },
+            {
+              "code": 2006,
+              "message": "Signature R/S must have exactly 64 characters long without 0x prefix",
+              "status": 403
+            },
+            {
+              "code": 2005,
+              "message": "Signature V must be 27/28",
+              "status": 403
+            },
+            {
+              "code": 2007,
+              "message": "Signature S must be in the lower half of the curve",
+              "status": 403
+            },
+            {
+              "code": 2010,
+              "message": "Order ID should be empty when creating an order",
+              "status": 400
+            },
+            {
+              "code": 2011,
+              "message": "Client Order ID should be supplied when creating an order",
+              "status": 400
+            },
+            {
+              "code": 2012,
+              "message": "Client Order ID overlaps with existing active order",
+              "status": 400
+            },
+            {
+              "code": 2030,
+              "message": "Orderbook Orders must have a TimeInForce of GTT/IOC/FOK",
+              "status": 400
+            },
+            {
+              "code": 2031,
+              "message": "RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK",
+              "status": 400
+            },
+            {
+              "code": 2032,
+              "message": "Post Only can only be set to true for GTT/AON orders",
+              "status": 400
+            },
+            {
+              "code": 2020,
+              "message": "Market Order must always be supplied without a limit price",
+              "status": 400
+            },
+            {
+              "code": 2021,
+              "message": "Limit Order must always be supplied with a limit price",
+              "status": 400
+            },
+            {
+              "code": 2040,
+              "message": "Order must contain at least one leg",
+              "status": 400
+            },
+            {
+              "code": 2041,
+              "message": "Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice",
+              "status": 400
+            },
+            {
+              "code": 2042,
+              "message": "Orderbook Orders must contain only one leg",
+              "status": 400
+            },
+            {
+              "code": 2050,
+              "message": "Order state must be empty upon creation",
+              "status": 400
+            },
+            {
+              "code": 2051,
+              "message": "Order execution metadata must be empty upon creation",
+              "status": 400
+            },
+            {
+              "code": 2060,
+              "message": "Order Legs contain one or more inactive derivative",
+              "status": 400
+            },
+            {
+              "code": 2061,
+              "message": "Unsupported Instrument Requested",
+              "status": 400
+            },
+            {
+              "code": 2062,
+              "message": "Order size smaller than min size",
+              "status": 400
+            },
+            {
+              "code": 2063,
+              "message": "Order size smaller than min block size in block trade venue",
+              "status": 400
+            },
+            {
+              "code": 2064,
+              "message": "Invalid limit price tick",
+              "status": 400
+            },
+            {
+              "code": 2065,
+              "message": "Order size too granular",
+              "status": 400
+            },
+            {
+              "code": 2070,
+              "message": "Liquidation Order is not supported",
+              "status": 400
+            },
+            {
+              "code": 2080,
+              "message": "Insufficient margin to create order",
+              "status": 400
+            },
+            {
+              "code": 2081,
+              "message": "Order Fill would result in exceeding maximum position size",
+              "status": 400
+            },
+            {
+              "code": 2082,
+              "message": "Pre-order check failed",
+              "status": 400
+            },
+            {
+              "code": 2083,
+              "message": "Order Fill would result in exceeding maximum position size under current configurable leverage tier",
+              "status": 400
+            },
+            {
+              "code": 2090,
+              "message": "Max open orders exceeded",
+              "status": 429
+            },
+            {
+              "code": 2110,
+              "message": "Invalid trigger by",
+              "status": 400
+            },
+            {
+              "code": 2111,
+              "message": "Unsupported trigger by",
+              "status": 400
+            },
+            {
+              "code": 2112,
+              "message": "Invalid trigger order",
+              "status": 400
+            },
+            {
+              "code": 2113,
+              "message": "Trigger price must be non-zero",
+              "status": 400
+            },
+            {
+              "code": 2114,
+              "message": "Invalid position linked TPSL orders, position linked TPSL must be a reduce-only order",
+              "status": 400
+            },
+            {
+              "code": 2115,
+              "message": "Invalid position linked TPSL orders, position linked TPSL must not have smaller size than the position",
+              "status": 400
+            },
+            {
+              "code": 2116,
+              "message": "Position linked TPSL order for this asset already exists",
+              "status": 400
+            },
+            {
+              "code": 3004,
+              "message": "Instrument does not have a valid maintenance margin configuration",
+              "status": 500
+            },
+            {
+              "code": 3005,
+              "message": "Instrument's underlying currency does not have a valid balance decimal configuration",
+              "status": 500
+            },
+            {
+              "code": 3006,
+              "message": "Instrument's quote currency does not have a valid balance decimal configuration",
+              "status": 500
+            },
+            {
+              "code": 2400,
+              "message": "Reduce only order with no position",
+              "status": 400
+            },
+            {
+              "code": 2401,
+              "message": "Reduce only order must not increase position size",
+              "status": 400
+            },
+            {
+              "code": 2233,
+              "message": "Both order ID and client order ID cannot be provided",
+              "status": 400
+            },
+            {
+              "code": 2234,
+              "message": "Bulk create orders must have the same instrument",
+              "status": 400
+            },
+            {
+              "code": 2235,
+              "message": "Bulk order count exceeds the maximum allowed",
+              "status": 400
+            },
+            {
+              "code": 2236,
+              "message": "Bulk order does not support trigger order",
+              "status": 400
+            },
+            {
+              "code": 2237,
+              "message": "Bulk order must be from API source",
+              "status": 400
+            }
+          ]
+        },
+        {
           "namespace": "Execution",
           "name": "RPCFillHistoryV1",
           "version": 1,
@@ -9273,6 +9584,143 @@
       ]
     },
     {
+      "name": "ApiBulkOrdersRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID of the user creating the request"
+          ]
+        },
+        {
+          "name": "orders",
+          "lite_name": "o",
+          "semantic_type": "Order",
+          "json_type": "Order",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Orders to create or replace, supply up to 20 orders"
+          ]
+        },
+        {
+          "name": "order_i_ds",
+          "lite_name": "oi",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The order IDs of the orders to cancel or replace, supply up to 20 orderIDs (if both orderIDs and clientOrderIDs are provided, we will reject the payload)"
+          ]
+        },
+        {
+          "name": "client_order_i_ds",
+          "lite_name": "co",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The client order IDs of the orders to cancel or replace, supply up to 20 clientOrderIDs (if both orderIDs and clientOrderIDs are provided, we will reject the payload)"
+          ]
+        },
+        {
+          "name": "time_to_live_ms",
+          "lite_name": "tt",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "100",
+          "example": "'500'",
+          "comment": [
+            "Specifies the time-to-live (in milliseconds) for this cancellation.",
+            "During this period, any order creation with a matching `client_order_id` will be cancelled and not be added to the GRVT matching engine.",
+            "This mechanism helps mitigate time-of-flight issues where cancellations might arrive before the corresponding orders.",
+            "Hence, cancellation by `order_id` ignores this field as the exchange can only assign `order_id`s to already-processed order creations.",
+            "The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `'670'` -\u003e `'600'`, `'30'` -\u003e `'0'`) and capped at 5 seconds (i.e., `'5000'`).",
+            "Value of `'0'` or omission results in the default time-to-live value being applied.",
+            "If the caller requests multiple successive cancellations for a given order, such that the time-to-live windows overlap, only the first request will be considered.",
+            ""
+          ]
+        }
+      ],
+      "comment": [
+        "Usage Parameters",
+        "",
+        "* Rate Limits",
+        "  - If N orders are created, it will consume N create_order rate limit tokens",
+        "  - If M orders are cancelled, it will consume 1 cancel_order rate limit tokens",
+        "",
+        "• Usage Pattern",
+        "  - This can be used as BulkCreate if no cancellations are supplied",
+        "  - This can be used as BulkCancel if no creations are supplied",
+        "  - This can be used as BulkReplace if both creations and cancellations are supplied",
+        "",
+        "* Order Replacement",
+        "  - For a pair of create and cancel payloads at the same index:",
+        "    * If they belong to the same inst/side/price",
+        "    * And the created order has an order_size smaller than the book_size of the cancelled order",
+        "    * The created order will replace the cancelled order, and retain its priority in the orderbook",
+        "  - For instance, to replace 2 orders, place 1 order, and cancel 2 orders:",
+        "    * orders = \u003creplace_1, replace_2, create_1\u003e",
+        "    * order_ids = \u003creplace_1, replace_2, cancel_1, cancel_2\u003e",
+        "",
+        "* Speed Bump",
+        "  - The highest speed_bump level applies across all sub-payloads and will be applied on the BulkOrder",
+        "  - To ensure that creations/cancellations are not speed bumped, ensure that all orders have post_only = true",
+        "",
+        "* Restrictions",
+        "  - This is only available to API users",
+        "  - All create orders must use the same instrument",
+        "  - TPSL (Take Profit / Stop Loss) orders are not supported"
+      ]
+    },
+    {
+      "name": "ApiBulkOrdersResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "orders",
+          "lite_name": "o",
+          "semantic_type": "Order",
+          "json_type": "Order",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The orders in same order as requested"
+          ]
+        },
+        {
+          "name": "cancel_acks",
+          "lite_name": "ca",
+          "semantic_type": "Ack",
+          "json_type": "Ack",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "A list of acks for the cancelled orders"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "WSOrderFeedSelectorV1",
       "is_root": true,
       "fields": [
@@ -11761,7 +12209,7 @@
           "array_depth": 1,
           "optional": false,
           "comment": [
-            "Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minmimum redemption period."
+            "Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minimum redemption period."
           ]
         },
         {

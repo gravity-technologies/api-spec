@@ -3,7 +3,7 @@
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |redemption_queue<br>`rq` |[VaultRedemptionRequest]|True|Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minmimum redemption period.|
+    |redemption_queue<br>`rq` |[VaultRedemptionRequest]|True|Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minimum redemption period.|
     |pending_redemption_token_count<br>`pr` |string|True|Number of shares eligible for automated redemption (held in queue for at least the minimum redemption period).|
     |urgent_redemption_token_count<br>`ur` |string|True|Number of shares nearing the maximum redemption period (>= 90% of maximum redemption period).|
     |auto_redeemable_balance<br>`ar` |string|True|Amount available for automated redemption request servicing (in USD).|
