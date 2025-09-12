@@ -363,3 +363,33 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         return from_dict(
             types.ApiQueryVaultManagerInvestorHistoryResponse, resp, Config(cast=[Enum])
         )
+
+    async def cross_exch_vault_view_investment_queue_v1(
+        self, req: types.ApiCrossExchVaultViewInvestmentQueueRequest
+    ) -> types.ApiCrossExchVaultViewInvestmentQueueResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/cev_view_investment_queue", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiCrossExchVaultViewInvestmentQueueResponse, resp, Config(cast=[Enum])
+        )
+
+    async def cross_exch_vault_trigger_redemption_v1(
+        self, req: types.ApiCrossExchVaultTriggerRedemptionRequest
+    ) -> types.AckResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/cev_trigger_redemption", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
+
+    async def cross_exch_vault_attest_equity_v1(
+        self, req: types.ApiCrossExchVaultAttestEquityRequest
+    ) -> types.AckResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/cev_attest_equity", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))

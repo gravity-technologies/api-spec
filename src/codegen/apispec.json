@@ -2420,6 +2420,214 @@
               "status": 401
             }
           ]
+        },
+        {
+          "namespace": "CrossExchangeVault",
+          "name": "RPCCrossExchVaultViewInvestmentQueueV1",
+          "version": 1,
+          "route": "/cev_view_investment_queue",
+          "auth_required": true,
+          "request": "ApiCrossExchVaultViewInvestmentQueueRequest",
+          "response": "ApiCrossExchVaultViewInvestmentQueueResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 7000,
+              "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "CrossExchangeVault",
+          "name": "RPCCrossExchVaultTriggerRedemptionV1",
+          "version": 1,
+          "route": "/cev_trigger_redemption",
+          "auth_required": true,
+          "request": "ApiCrossExchVaultTriggerRedemptionRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 7000,
+              "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "CrossExchangeVault",
+          "name": "RPCCrossExchVaultAttestEquityV1",
+          "version": 1,
+          "route": "/cev_attest_equity",
+          "auth_required": true,
+          "request": "ApiCrossExchVaultAttestEquityRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
+            },
+            {
+              "code": 2000,
+              "message": "Signature is from an unauthorized signer",
+              "status": 403
+            },
+            {
+              "code": 2001,
+              "message": "Signature has expired",
+              "status": 403
+            },
+            {
+              "code": 2002,
+              "message": "Signature does not match payload",
+              "status": 403
+            },
+            {
+              "code": 2004,
+              "message": "Signature is from an expired session key",
+              "status": 403
+            },
+            {
+              "code": 2006,
+              "message": "Signature R/S must have exactly 64 characters long without 0x prefix",
+              "status": 403
+            },
+            {
+              "code": 2005,
+              "message": "Signature V must be 27/28",
+              "status": 403
+            },
+            {
+              "code": 2007,
+              "message": "Signature S must be in the lower half of the curve",
+              "status": 403
+            },
+            {
+              "code": 2008,
+              "message": "Signature exceeds maximum allowed duration.",
+              "status": 403
+            },
+            {
+              "code": 4000,
+              "message": "Insufficient balance to complete transfer",
+              "status": 400
+            },
+            {
+              "code": 7000,
+              "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            },
+            {
+              "code": 7003,
+              "message": "This vault has been delisted/closed.",
+              "status": 400
+            },
+            {
+              "code": 7020,
+              "message": "Attested share price is inconsistent with signed total-equity value.",
+              "status": 400
+            },
+            {
+              "code": 7021,
+              "message": "Attested last-updated time is inconsistent with GRVT record.",
+              "status": 400
+            },
+            {
+              "code": 7022,
+              "message": "Attested token supply is inconsistent with GRVT record.",
+              "status": 400
+            }
+          ]
         }
       ],
       "streams": [
@@ -3081,6 +3289,32 @@
           "example": "'10'",
           "comment": [
             "The current leverage value for this position"
+          ]
+        },
+        {
+          "name": "cumulative_fee",
+          "lite_name": "cf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 15,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'100000.20'",
+          "comment": [
+            "The cumulative fee paid on the position, expressed in quote asset decimal units"
+          ]
+        },
+        {
+          "name": "cumulative_realized_funding_payment",
+          "lite_name": "cr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 16,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'100000.20'",
+          "comment": [
+            "The cumulative realized funding payment of the position, expressed in quote asset decimal units"
           ]
         }
       ],
@@ -8076,6 +8310,34 @@
           "comment": [
             "Whether to only return investments made by the manager"
           ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Optional. Start time in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "now()",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Optional. End time in unix nanoseconds"
+          ]
         }
       ],
       "comment": [
@@ -11406,6 +11668,33 @@
           "comment": [
             "The timestamp of the withdrawal in unix nanoseconds"
           ]
+        },
+        {
+          "name": "l_1_hash",
+          "lite_name": "l1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "'0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'",
+          "comment": [
+            "The finalized withdrawal transaction hash on L1"
+          ]
+        },
+        {
+          "name": "l_2_hash",
+          "lite_name": "l2",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890'",
+          "comment": [
+            "The transaction hash on L2"
+          ]
         }
       ],
       "comment": []
@@ -12123,6 +12412,257 @@
         "Request payload for burning tokens in a vault.",
         "",
         "This API allows a client to burn a specified amount of tokens in a particular vault."
+      ]
+    },
+    {
+      "name": "ApiCrossExchVaultViewInvestmentQueueRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3477045127917224'",
+          "comment": [
+            "The unique identifier of the cross-exchange vault to fetch the investment queue for."
+          ]
+        }
+      ],
+      "comment": [
+        "Request payload for a cross-exchange vault manager to view the investment queue for their vault in FIFO order.",
+        "",
+        "This queue gets drained on every equity attestation event submitted by the cross-exchange vault manager.",
+        "",
+        ""
+      ]
+    },
+    {
+      "name": "CrossExchVaultPendingInvestment",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "request_time",
+          "lite_name": "rt",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "[Filled by GRVT Backend] Time at which the investment request was confirmed and enqueued by GRVT in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency used for the investment. This should be the vault's quote currency."
+          ]
+        },
+        {
+          "name": "num_tokens",
+          "lite_name": "nt",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The investment sum, in terms of the token currency specified (i.e., `numTokens` of '1000' with `tokenCurrency` of 'USDT' denotes investment of 1,000 USDT)."
+          ]
+        },
+        {
+          "name": "is_manager",
+          "lite_name": "im",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "example": "true",
+          "comment": [
+            "`true` if this pending investment belongs to the vault manager, omitted otherwise."
+          ]
+        }
+      ],
+      "comment": [
+        "Representation of a pending investment for a given cross-exchange vault."
+      ]
+    },
+    {
+      "name": "ApiCrossExchVaultViewInvestmentQueueResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "investment_queue",
+          "lite_name": "iq",
+          "semantic_type": "CrossExchVaultPendingInvestment",
+          "json_type": "CrossExchVaultPendingInvestment",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Outstanding cross-exchange vault investment requests in FIFO order."
+          ]
+        },
+        {
+          "name": "total_investment_equity",
+          "lite_name": "ti",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The current valuation (in USD) of all pending investments."
+          ]
+        }
+      ],
+      "comment": [
+        "Response payload for a cross-exchange vault manager to view the investment queue for their vault in FIFO order.",
+        "",
+        "This queue gets drained on every equity attestation event submitted by the cross-exchange vault manager.",
+        "",
+        ""
+      ]
+    },
+    {
+      "name": "ApiCrossExchVaultTriggerRedemptionRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3477045127917224'",
+          "comment": [
+            "The unique identifier of the cross-exchange vault to redeem from."
+          ]
+        },
+        {
+          "name": "request_time",
+          "lite_name": "rt",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Value provided must be equal to the `request_time` field of the first element returned from the View Investment Queue API."
+          ]
+        }
+      ],
+      "comment": [
+        "Request payload for a cross-exchange vault manager to trigger execution of the redemption request at the head of their cross-exchange vault's redemption queue."
+      ]
+    },
+    {
+      "name": "ApiCrossExchVaultAttestEquityRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3477045127917224'",
+          "comment": [
+            "The unique identifier of the cross-exchange vault."
+          ]
+        },
+        {
+          "name": "total_equity",
+          "lite_name": "te",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "[Signed] The total equity implied by `num_lp_tokens * share_price`, in USD, expressed in up to 6 decimal places."
+          ]
+        },
+        {
+          "name": "num_lp_tokens",
+          "lite_name": "nl",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "[Signed] The number of shares in circulation for the cross-exchange vault, expressed in up to 6 decimal places."
+          ]
+        },
+        {
+          "name": "share_price",
+          "lite_name": "sp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "[Signed] The share price of the cross-exchange vault, in USD, expressed in up to 9 decimal places."
+          ]
+        },
+        {
+          "name": "last_update_timestamp",
+          "lite_name": "lu",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "[Signed] GRVT timestamp for the latest confirmed attestation event of this vault, in unix-nanoseconds.",
+            "Should be equal to the `last_update_timestamp` value returned from the Vault Detail API."
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The digital signature from the cross-exchange vault manager account.",
+            "This signature must be generated by the main account ID and is used to verify the authenticity of the request.",
+            "The signature must comply with AccountPermAdmin permission."
+          ]
+        }
+      ],
+      "comment": [
+        "Request payload for a cross-exchange vault maanger to publish an equity attestation event to GRVT systems.",
+        "",
+        ""
       ]
     }
   ],

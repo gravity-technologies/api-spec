@@ -13,6 +13,8 @@
         |num_tokens<br>`nt` |string|True|The number of tokens to withdraw|
         |signature<br>`s` |Signature|True|The signature of the withdrawal|
         |event_time<br>`et` |string|True|The timestamp of the withdrawal in unix nanoseconds|
+        |l_1_hash<br>`l1` |string|False<br>`''`|The finalized withdrawal transaction hash on L1|
+        |l_2_hash<br>`l2` |string|True|The transaction hash on L2|
         ??? info "[Signature](/../../schemas/signature)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|

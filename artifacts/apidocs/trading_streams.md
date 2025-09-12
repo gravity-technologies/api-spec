@@ -2632,7 +2632,9 @@ STREAM: v1.position
                 "roi": "10.20",
                 "quote_index_price": "1.0000102",
                 "est_liquidation_price": 60000.25,
-                "leverage": "10"
+                "leverage": "10",
+                "cumulative_fee": "100000.20",
+                "cumulative_realized_funding_payment": "100000.20"
             }
         }
         ```
@@ -2657,7 +2659,9 @@ STREAM: v1.position
                 "r": "10.20",
                 "qi": "1.0000102",
                 "el": 60000.25,
-                "l": "10"
+                "l": "10",
+                "cf": "100000.20",
+                "cr": "100000.20"
             }
         }
         ```
