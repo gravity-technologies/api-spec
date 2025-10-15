@@ -10,3 +10,16 @@
     |cursor<br>`c1` |string|False<br>`''`|The cursor to indicate when to start the next query from|
     |tx_id<br>`ti` |string|False<br>`0`|The transaction ID to query for|
     |main_account_id<br>`ma` |string|False<br>``|Main account ID being queried. By default, applies the requestor's main account ID.|
+    |transfer_types<br>`tt` |[TransferType]|False<br>`[]`|The transfer type to filters for. If the list is empty, return all transfer types.|
+    ??? info "[TransferType](/../../schemas/transfer_type)"
+        |Value| Description |
+        |-|-|
+        |`UNSPECIFIED` = 0|Default transfer that has nothing to do with bridging|
+        |`STANDARD` = 1|Standard transfer that has nothing to do with bridging|
+        |`FAST_ARB_DEPOSIT` = 2|Fast Arb Deposit Metadata type|
+        |`FAST_ARB_WITHDRAWAL` = 3|Fast Arb Withdrawal Metadata type|
+        |`NON_NATIVE_BRIDGE_DEPOSIT` = 4|Transfer type for non native bridging deposit|
+        |`NON_NATIVE_BRIDGE_WITHDRAWAL` = 5|Transfer type for non native bridging withdrawal|
+        |`ADHOC_INCENTIVE` = 6|Transfer type for adhoc incentive|
+        |`REFERRAL_INCENTIVE` = 7|Transfer type for referral incentive|
+        |`TRADING_DEPOSIT_YIELD_INCENTIVE` = 8|Transfer type for trading deposit yield incentive|

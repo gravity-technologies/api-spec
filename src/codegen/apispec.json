@@ -792,6 +792,11 @@
               "status": 503
             },
             {
+              "code": 1012,
+              "message": "Invalid signature chain ID",
+              "status": 400
+            },
+            {
               "code": 2000,
               "message": "Signature is from an unauthorized signer",
               "status": 403
@@ -3082,6 +3087,32 @@
           "comment": [
             "The current leverage value for this position"
           ]
+        },
+        {
+          "name": "cumulative_fee",
+          "lite_name": "cf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 15,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'100000.20'",
+          "comment": [
+            "The cumulative fee paid on the position, expressed in quote asset decimal units"
+          ]
+        },
+        {
+          "name": "cumulative_realized_funding_payment",
+          "lite_name": "cr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 16,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'100000.20'",
+          "comment": [
+            "The cumulative realized funding payment of the position, expressed in quote asset decimal units"
+          ]
         }
       ],
       "comment": []
@@ -4286,6 +4317,19 @@
           "comment": [
             "The list of vault investments held by this main account"
           ]
+        },
+        {
+          "name": "total_sub_account_balance",
+          "lite_name": "ts",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3945034.23'",
+          "comment": [
+            "Total balance of the sub accounts, denominated in USD"
+          ]
         }
       ],
       "comment": []
@@ -4715,6 +4759,19 @@
             "ie. You can send the same exact instruction twice with different nonces.",
             "When the same nonce is used, the same payload will generate the same signature.",
             "Our system will consider the payload a duplicate, and ignore it."
+          ]
+        },
+        {
+          "name": "chain_id",
+          "lite_name": "ci",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'325'",
+          "comment": [
+            "Chain ID used in EIP-712 domain. Zero value fallbacks to GRVT Chain ID."
           ]
         }
       ],
@@ -6088,7 +6145,7 @@
           "optional": true,
           "example": "0.0003",
           "comment": [
-            "The current funding rate of the instrument, expressed in percentage points"
+            "DEPRECATED: To be removed in a future release. Please refer to the field `funding_rate` instead, for the funding rate being applied over `funding_interval_hours` (interval ending at `next_funding_time`)."
           ]
         },
         {
@@ -6101,7 +6158,7 @@
           "optional": true,
           "example": "0.0003",
           "comment": [
-            "The average funding rate of the instrument (over last 8h), expressed in percentage points"
+            "DEPRECATED: To be removed in a future release. Please refer to the field `funding_rate` instead, for the funding rate being applied over `funding_interval_hours` (interval ending at `next_funding_time`)."
           ]
         },
         {
@@ -6245,6 +6302,32 @@
           "example": "'0.5'",
           "comment": [
             "The ratio of accounts that are net long vs net short on this instrument"
+          ]
+        },
+        {
+          "name": "funding_rate",
+          "lite_name": "fr2",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 24,
+          "array_depth": 0,
+          "optional": true,
+          "example": "0.0003",
+          "comment": [
+            "The current indicative funding rate for the active interval, expressed in centibeeps"
+          ]
+        },
+        {
+          "name": "next_funding_time",
+          "lite_name": "nf",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 26,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Timestamp in nanoseconds when the current funding interval ends"
           ]
         }
       ],
@@ -7303,7 +7386,7 @@
       ]
     },
     {
-      "name": "Instrument",
+      "name": "InstrumentDisplay",
       "is_root": false,
       "fields": [
         {
@@ -7474,6 +7557,44 @@
           "comment": [
             "The maximum position size, expressed in base asset decimal units"
           ]
+        },
+        {
+          "name": "funding_interval_hours",
+          "lite_name": "fi",
+          "semantic_type": "uint8",
+          "json_type": "integer",
+          "index": 17,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Defines the funding interval to be applied."
+          ]
+        },
+        {
+          "name": "adjusted_funding_rate_cap",
+          "lite_name": "af",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 18,
+          "array_depth": 0,
+          "optional": true,
+          "example": "2.5",
+          "comment": [
+            "Funding rate cap over the defined `intervalHours`."
+          ]
+        },
+        {
+          "name": "adjusted_funding_rate_floor",
+          "lite_name": "af1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 19,
+          "array_depth": 0,
+          "optional": true,
+          "example": "-2.5",
+          "comment": [
+            "Funding rate floor over the defined `intervalHours`."
+          ]
         }
       ],
       "comment": []
@@ -7485,8 +7606,8 @@
         {
           "name": "result",
           "lite_name": "r",
-          "semantic_type": "Instrument",
-          "json_type": "Instrument",
+          "semantic_type": "InstrumentDisplay",
+          "json_type": "InstrumentDisplay",
           "index": 0,
           "array_depth": 0,
           "optional": false,
@@ -7583,8 +7704,8 @@
         {
           "name": "result",
           "lite_name": "r",
-          "semantic_type": "Instrument",
-          "json_type": "Instrument",
+          "semantic_type": "InstrumentDisplay",
+          "json_type": "InstrumentDisplay",
           "index": 0,
           "array_depth": 1,
           "optional": false,
@@ -8035,8 +8156,8 @@
         {
           "name": "result",
           "lite_name": "r",
-          "semantic_type": "Instrument",
-          "json_type": "Instrument",
+          "semantic_type": "InstrumentDisplay",
+          "json_type": "InstrumentDisplay",
           "index": 0,
           "array_depth": 1,
           "optional": false,
@@ -8075,6 +8196,34 @@
           "example": "true",
           "comment": [
             "Whether to only return investments made by the manager"
+          ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Optional. Start time in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "now()",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Optional. End time in unix nanoseconds"
           ]
         }
       ],
@@ -8436,6 +8585,19 @@
           "example": "'BROKER_CODE'",
           "comment": [
             "Specifies the broker who brokered the order"
+          ]
+        },
+        {
+          "name": "allow_crossing",
+          "lite_name": "ac",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 7,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "comment": [
+            "Specifies if post only order is allowed to cross the orderbook"
           ]
         }
       ],
@@ -11176,6 +11338,19 @@
           "comment": [
             "Main account ID being queried. By default, applies the requestor's main account ID."
           ]
+        },
+        {
+          "name": "transfer_types",
+          "lite_name": "tt",
+          "semantic_type": "TransferType",
+          "json_type": "TransferType",
+          "index": 7,
+          "array_depth": 1,
+          "optional": true,
+          "default": "[]",
+          "comment": [
+            "The transfer type to filters for. If the list is empty, return all transfer types."
+          ]
         }
       ],
       "comment": [
@@ -11405,6 +11580,33 @@
           "example": "'1697788800000000000'",
           "comment": [
             "The timestamp of the withdrawal in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "l_1_hash",
+          "lite_name": "l1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "'0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'",
+          "comment": [
+            "The finalized withdrawal transaction hash on L1"
+          ]
+        },
+        {
+          "name": "l_2_hash",
+          "lite_name": "l2",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890'",
+          "comment": [
+            "The transaction hash on L2"
           ]
         }
       ],
@@ -11915,6 +12117,19 @@
           "example": "1727788800000000000",
           "comment": [
             "[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed."
+          ]
+        },
+        {
+          "name": "cancel_blocked",
+          "lite_name": "cb",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "true",
+          "comment": [
+            "Omitted for redemption requests to non-cross exchange vaults. True if cancellation is blocked within the CEV allocation allowance for the user's current tier (e.g. because the user has already transferred out the spot balance underlying the redemption request)."
           ]
         }
       ],
@@ -12712,6 +12927,13 @@
           "comment": [
             "the currency is not defined"
           ]
+        },
+        {
+          "name": "INVALID_CHAIN_ID",
+          "value": 38,
+          "comment": [
+            "the chain ID is invalid"
+          ]
         }
       ],
       "comment": []
@@ -12847,6 +13069,27 @@
           "value": 5,
           "comment": [
             "Transfer type for non native bridging withdrawal"
+          ]
+        },
+        {
+          "name": "ADHOC_INCENTIVE",
+          "value": 6,
+          "comment": [
+            "Transfer type for adhoc incentive"
+          ]
+        },
+        {
+          "name": "REFERRAL_INCENTIVE",
+          "value": 7,
+          "comment": [
+            "Transfer type for referral incentive"
+          ]
+        },
+        {
+          "name": "TRADING_DEPOSIT_YIELD_INCENTIVE",
+          "value": 8,
+          "comment": [
+            "Transfer type for trading deposit yield incentive"
           ]
         }
       ],
