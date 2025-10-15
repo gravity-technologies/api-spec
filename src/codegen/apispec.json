@@ -6580,7 +6580,7 @@
           "optional": true,
           "example": "0.0003",
           "comment": [
-            "The current funding rate of the instrument, expressed in percentage points"
+            "DEPRECATED: To be removed in a future release. Please refer to the field `funding_rate` instead, for the funding rate being applied over `funding_interval_hours` (interval ending at `next_funding_time`)."
           ]
         },
         {
@@ -6593,7 +6593,7 @@
           "optional": true,
           "example": "0.0003",
           "comment": [
-            "The average funding rate of the instrument (over last 8h), expressed in percentage points"
+            "DEPRECATED: To be removed in a future release. Please refer to the field `funding_rate` instead, for the funding rate being applied over `funding_interval_hours` (interval ending at `next_funding_time`)."
           ]
         },
         {

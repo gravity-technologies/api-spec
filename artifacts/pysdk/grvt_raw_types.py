@@ -1141,9 +1141,9 @@ class Ticker:
     best_ask_price: str | None = None
     # The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units
     best_ask_size: str | None = None
-    # The current funding rate of the instrument, expressed in percentage points
+    # DEPRECATED: To be removed in a future release. Please refer to the field `funding_rate` instead, for the funding rate being applied over `funding_interval_hours` (interval ending at `next_funding_time`).
     funding_rate_8h_curr: str | None = None
-    # The average funding rate of the instrument (over last 8h), expressed in percentage points
+    # DEPRECATED: To be removed in a future release. Please refer to the field `funding_rate` instead, for the funding rate being applied over `funding_interval_hours` (interval ending at `next_funding_time`).
     funding_rate_8h_avg: str | None = None
     # The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)
     interest_rate: str | None = None
