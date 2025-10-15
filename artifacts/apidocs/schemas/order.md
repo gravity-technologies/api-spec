@@ -43,6 +43,7 @@
         |v<br>`v` |integer|True|Signature V|
         |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
         |nonce<br>`n` |integer|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
+        |chain_id<br>`ci` |string|True|Chain ID used in EIP-712 domain. Zero value fallbacks to GRVT Chain ID.|
     ??? info "[OrderMetadata](/../../schemas/order_metadata)"
         Metadata fields are used to support Backend only operations. These operations are not trustless by nature.<br>Hence, fields in here are never signed, and is never transmitted to the smart contract.<br>
 
@@ -52,6 +53,7 @@
         |create_time<br>`ct` |string|False<br>`0`|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
         |trigger<br>`t` |TriggerOrderMetadata|False<br>``|Trigger fields are used to support any type of trigger order such as TP/SL|
         |broker<br>`b` |BrokerTag|False<br>``|Specifies the broker who brokered the order|
+        |allow_crossing<br>`ac` |boolean|False<br>`false`|Specifies if post only order is allowed to cross the orderbook|
         ??? info "[TriggerOrderMetadata](/../../schemas/trigger_order_metadata)"
             Contains metadata related to trigger orders, such as Take Profit (TP) or Stop Loss (SL).<br><br>Trigger orders are used to automatically execute an order when a predefined price condition is met, allowing traders to implement risk management strategies.<br><br><br>
 
@@ -152,3 +154,4 @@
             |`DERISK_NOT_SUPPORTED` = 35|derisk is not supported|
             |`INVALID_ORDER_TYPE` = 36|the order type is invalid|
             |`CURRENCY_NOT_DEFINED` = 37|the currency is not defined|
+            |`INVALID_CHAIN_ID` = 38|the chain ID is invalid|

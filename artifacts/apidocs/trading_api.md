@@ -35,7 +35,8 @@ LITE ENDPOINT: lite/v1/create_order
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -48,7 +49,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "close_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "allow_crossing": null
                 }
             }
         }
@@ -74,7 +76,8 @@ LITE ENDPOINT: lite/v1/create_order
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "m": {
                     "co": "23042",
@@ -87,7 +90,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "cp": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ac": null
                 }
             }
         }
@@ -121,7 +125,8 @@ LITE ENDPOINT: lite/v1/create_order
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -134,7 +139,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "close_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "allow_crossing": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -169,7 +175,8 @@ LITE ENDPOINT: lite/v1/create_order
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "m": {
                     "co": "23042",
@@ -182,7 +189,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "cp": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ac": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -211,6 +219,7 @@ LITE ENDPOINT: lite/v1/create_order
         |1008|401|Your IP has not been whitelisted for access|
         |1400|403|Signer does not have trade permission|
         |1009|503|We are temporarily deactivating this API endpoint, please try again later|
+        |1012|400|Invalid signature chain ID|
         |2000|403|Signature is from an unauthorized signer|
         |2001|403|Signature has expired|
         |2002|403|Signature does not match payload|
@@ -306,7 +315,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "metadata": {
                         "client_order_id": "23042",
@@ -319,7 +329,8 @@ LITE ENDPOINT: lite/v1/create_order
                                 "close_position": false
                             }
                         },
-                        "broker": "BROKER_CODE"
+                        "broker": "BROKER_CODE",
+                        "allow_crossing": null
                     }
                 }
             }
@@ -353,7 +364,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "expiration": "1697788800000000000",
-                            "nonce": 1234567890
+                            "nonce": 1234567890,
+                            "chain_id": "325"
                         },
                         "metadata": {
                             "client_order_id": "23042",
@@ -366,7 +378,8 @@ LITE ENDPOINT: lite/v1/create_order
                                     "close_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE"
+                            "broker": "BROKER_CODE",
+                            "allow_crossing": null
                         }
                     }
                 },
@@ -400,7 +413,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "m": {
                         "co": "23042",
@@ -413,7 +427,8 @@ LITE ENDPOINT: lite/v1/create_order
                                 "cp": false
                             }
                         },
-                        "b": "BROKER_CODE"
+                        "b": "BROKER_CODE",
+                        "ac": null
                     }
                 }
             }
@@ -447,7 +462,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "e": "1697788800000000000",
-                            "n": 1234567890
+                            "n": 1234567890,
+                            "ci": "325"
                         },
                         "m": {
                             "co": "23042",
@@ -460,7 +476,8 @@ LITE ENDPOINT: lite/v1/create_order
                                     "cp": false
                                 }
                             },
-                            "b": "BROKER_CODE"
+                            "b": "BROKER_CODE",
+                            "ac": null
                         }
                     }
                 },
@@ -495,7 +512,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "metadata": {
                         "client_order_id": "23042",
@@ -508,7 +526,8 @@ LITE ENDPOINT: lite/v1/create_order
                                 "close_position": false
                             }
                         },
-                        "broker": "BROKER_CODE"
+                        "broker": "BROKER_CODE",
+                        "allow_crossing": null
                     }
                 }
             }
@@ -542,7 +561,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "expiration": "1697788800000000000",
-                            "nonce": 1234567890
+                            "nonce": 1234567890,
+                            "chain_id": "325"
                         },
                         "metadata": {
                             "client_order_id": "23042",
@@ -555,7 +575,8 @@ LITE ENDPOINT: lite/v1/create_order
                                     "close_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE"
+                            "broker": "BROKER_CODE",
+                            "allow_crossing": null
                         }
                     }
                 },
@@ -589,7 +610,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "m": {
                         "co": "23042",
@@ -602,7 +624,8 @@ LITE ENDPOINT: lite/v1/create_order
                                 "cp": false
                             }
                         },
-                        "b": "BROKER_CODE"
+                        "b": "BROKER_CODE",
+                        "ac": null
                     }
                 }
             }
@@ -636,7 +659,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "e": "1697788800000000000",
-                            "n": 1234567890
+                            "n": 1234567890,
+                            "ci": "325"
                         },
                         "m": {
                             "co": "23042",
@@ -649,7 +673,8 @@ LITE ENDPOINT: lite/v1/create_order
                                     "cp": false
                                 }
                             },
-                            "b": "BROKER_CODE"
+                            "b": "BROKER_CODE",
+                            "ac": null
                         }
                     }
                 },
@@ -684,7 +709,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "metadata": {
                         "client_order_id": "23042",
@@ -697,7 +723,8 @@ LITE ENDPOINT: lite/v1/create_order
                                 "close_position": false
                             }
                         },
-                        "broker": "BROKER_CODE"
+                        "broker": "BROKER_CODE",
+                        "allow_crossing": null
                     }
                 }
             }
@@ -731,7 +758,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "expiration": "1697788800000000000",
-                            "nonce": 1234567890
+                            "nonce": 1234567890,
+                            "chain_id": "325"
                         },
                         "metadata": {
                             "client_order_id": "23042",
@@ -744,7 +772,8 @@ LITE ENDPOINT: lite/v1/create_order
                                     "close_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE"
+                            "broker": "BROKER_CODE",
+                            "allow_crossing": null
                         }
                     }
                 },
@@ -778,7 +807,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "m": {
                         "co": "23042",
@@ -791,7 +821,8 @@ LITE ENDPOINT: lite/v1/create_order
                                 "cp": false
                             }
                         },
-                        "b": "BROKER_CODE"
+                        "b": "BROKER_CODE",
+                        "ac": null
                     }
                 }
             }
@@ -825,7 +856,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "e": "1697788800000000000",
-                            "n": 1234567890
+                            "n": 1234567890,
+                            "ci": "325"
                         },
                         "m": {
                             "co": "23042",
@@ -838,7 +870,8 @@ LITE ENDPOINT: lite/v1/create_order
                                     "cp": false
                                 }
                             },
-                            "b": "BROKER_CODE"
+                            "b": "BROKER_CODE",
+                            "ac": null
                         }
                     }
                 },
@@ -873,7 +906,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "metadata": {
                         "client_order_id": "23042",
@@ -886,7 +920,8 @@ LITE ENDPOINT: lite/v1/create_order
                                 "close_position": false
                             }
                         },
-                        "broker": "BROKER_CODE"
+                        "broker": "BROKER_CODE",
+                        "allow_crossing": null
                     }
                 }
             }
@@ -920,7 +955,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "expiration": "1697788800000000000",
-                            "nonce": 1234567890
+                            "nonce": 1234567890,
+                            "chain_id": "325"
                         },
                         "metadata": {
                             "client_order_id": "23042",
@@ -933,7 +969,8 @@ LITE ENDPOINT: lite/v1/create_order
                                     "close_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE"
+                            "broker": "BROKER_CODE",
+                            "allow_crossing": null
                         }
                     }
                 },
@@ -967,7 +1004,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "m": {
                         "co": "23042",
@@ -980,7 +1018,8 @@ LITE ENDPOINT: lite/v1/create_order
                                 "cp": false
                             }
                         },
-                        "b": "BROKER_CODE"
+                        "b": "BROKER_CODE",
+                        "ac": null
                     }
                 }
             }
@@ -1014,7 +1053,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "e": "1697788800000000000",
-                            "n": 1234567890
+                            "n": 1234567890,
+                            "ci": "325"
                         },
                         "m": {
                             "co": "23042",
@@ -1027,7 +1067,8 @@ LITE ENDPOINT: lite/v1/create_order
                                     "cp": false
                                 }
                             },
-                            "b": "BROKER_CODE"
+                            "b": "BROKER_CODE",
+                            "ac": null
                         }
                     }
                 },
@@ -1829,7 +1870,8 @@ LITE ENDPOINT: lite/v1/order
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -1842,7 +1884,8 @@ LITE ENDPOINT: lite/v1/order
                             "close_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "allow_crossing": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -1877,7 +1920,8 @@ LITE ENDPOINT: lite/v1/order
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "m": {
                     "co": "23042",
@@ -1890,7 +1934,8 @@ LITE ENDPOINT: lite/v1/order
                             "cp": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ac": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2261,7 +2306,8 @@ LITE ENDPOINT: lite/v1/open_orders
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -2274,7 +2320,8 @@ LITE ENDPOINT: lite/v1/open_orders
                             "close_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "allow_crossing": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -2309,7 +2356,8 @@ LITE ENDPOINT: lite/v1/open_orders
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "m": {
                     "co": "23042",
@@ -2322,7 +2370,8 @@ LITE ENDPOINT: lite/v1/open_orders
                             "cp": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ac": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2715,7 +2764,8 @@ LITE ENDPOINT: lite/v1/order_history
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -2728,7 +2778,8 @@ LITE ENDPOINT: lite/v1/order_history
                             "close_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "allow_crossing": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -2764,7 +2815,8 @@ LITE ENDPOINT: lite/v1/order_history
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "m": {
                     "co": "23042",
@@ -2777,7 +2829,8 @@ LITE ENDPOINT: lite/v1/order_history
                             "cp": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ac": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -4035,7 +4088,9 @@ LITE ENDPOINT: lite/v1/positions
                 "roi": "10.20",
                 "quote_index_price": "1.0000102",
                 "est_liquidation_price": 60000.25,
-                "leverage": "10"
+                "leverage": "10",
+                "cumulative_fee": "100000.20",
+                "cumulative_realized_funding_payment": "100000.20"
             }]
         }
         ```
@@ -4057,7 +4112,9 @@ LITE ENDPOINT: lite/v1/positions
                 "r": "10.20",
                 "qi": "1.0000102",
                 "el": 60000.25,
-                "l": "10"
+                "l": "10",
+                "cf": "100000.20",
+                "cr": "100000.20"
             }]
         }
         ```
@@ -5234,7 +5291,8 @@ LITE ENDPOINT: lite/v1/transfer
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": 1234567890
+                "nonce": 1234567890,
+                "chain_id": "325"
             },
             "transfer_type": "UNSPECIFIED",
             "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5255,7 +5313,8 @@ LITE ENDPOINT: lite/v1/transfer
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "e": "1697788800000000000",
-                "n": 1234567890
+                "n": 1234567890,
+                "ci": "325"
             },
             "tt": "UNSPECIFIED",
             "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5353,7 +5412,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "transfer_type": "UNSPECIFIED",
                 "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5382,7 +5442,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "transfer_type": "UNSPECIFIED",
                     "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5411,7 +5472,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "tt": "UNSPECIFIED",
                 "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5440,7 +5502,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "tt": "UNSPECIFIED",
                     "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5470,7 +5533,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "transfer_type": "UNSPECIFIED",
                 "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5499,7 +5563,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "transfer_type": "UNSPECIFIED",
                     "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5528,7 +5593,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "tt": "UNSPECIFIED",
                 "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5557,7 +5623,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "tt": "UNSPECIFIED",
                     "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5587,7 +5654,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "transfer_type": "UNSPECIFIED",
                 "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5616,7 +5684,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "transfer_type": "UNSPECIFIED",
                     "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5645,7 +5714,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "tt": "UNSPECIFIED",
                 "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5674,7 +5744,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "tt": "UNSPECIFIED",
                     "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5704,7 +5775,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "transfer_type": "UNSPECIFIED",
                 "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5733,7 +5805,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "transfer_type": "UNSPECIFIED",
                     "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5762,7 +5835,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "tt": "UNSPECIFIED",
                 "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5791,7 +5865,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "tt": "UNSPECIFIED",
                     "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5823,7 +5898,8 @@ LITE ENDPOINT: lite/v1/transfer_history
             "limit": 500,
             "cursor": "",
             "tx_id": "1028403",
-            "main_account_id": null
+            "main_account_id": null,
+            "transfer_types": ["UNSPECIFIED"]
         }
         ```
         **Lite Request**
@@ -5835,7 +5911,8 @@ LITE ENDPOINT: lite/v1/transfer_history
             "l": 500,
             "c1": "",
             "ti": "1028403",
-            "ma": null
+            "ma": null,
+            "tt": ["UNSPECIFIED"]
         }
         ```
     </section>
@@ -5862,7 +5939,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "event_time": "1697788800000000000",
                 "transfer_type": "UNSPECIFIED",
@@ -5888,7 +5966,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "et": "1697788800000000000",
                 "tt": "UNSPECIFIED",
@@ -5947,7 +6026,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "limit": 500,
                 "cursor": "",
                 "tx_id": "1028403",
-                "main_account_id": null
+                "main_account_id": null,
+                "transfer_types": ["UNSPECIFIED"]
             }
             '
             ```
@@ -5967,7 +6047,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "limit": 500,
                     "cursor": "",
                     "tx_id": "1028403",
-                    "main_account_id": null
+                    "main_account_id": null,
+                    "transfer_types": ["UNSPECIFIED"]
                 },
                 "id": 123
             }
@@ -5987,7 +6068,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "l": 500,
                 "c1": "",
                 "ti": "1028403",
-                "ma": null
+                "ma": null,
+                "tt": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6007,7 +6089,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "l": 500,
                     "c1": "",
                     "ti": "1028403",
-                    "ma": null
+                    "ma": null,
+                    "tt": ["UNSPECIFIED"]
                 },
                 "i": 123
             }
@@ -6028,7 +6111,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "limit": 500,
                 "cursor": "",
                 "tx_id": "1028403",
-                "main_account_id": null
+                "main_account_id": null,
+                "transfer_types": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6048,7 +6132,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "limit": 500,
                     "cursor": "",
                     "tx_id": "1028403",
-                    "main_account_id": null
+                    "main_account_id": null,
+                    "transfer_types": ["UNSPECIFIED"]
                 },
                 "id": 123
             }
@@ -6068,7 +6153,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "l": 500,
                 "c1": "",
                 "ti": "1028403",
-                "ma": null
+                "ma": null,
+                "tt": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6088,7 +6174,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "l": 500,
                     "c1": "",
                     "ti": "1028403",
-                    "ma": null
+                    "ma": null,
+                    "tt": ["UNSPECIFIED"]
                 },
                 "i": 123
             }
@@ -6109,7 +6196,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "limit": 500,
                 "cursor": "",
                 "tx_id": "1028403",
-                "main_account_id": null
+                "main_account_id": null,
+                "transfer_types": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6129,7 +6217,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "limit": 500,
                     "cursor": "",
                     "tx_id": "1028403",
-                    "main_account_id": null
+                    "main_account_id": null,
+                    "transfer_types": ["UNSPECIFIED"]
                 },
                 "id": 123
             }
@@ -6149,7 +6238,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "l": 500,
                 "c1": "",
                 "ti": "1028403",
-                "ma": null
+                "ma": null,
+                "tt": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6169,7 +6259,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "l": 500,
                     "c1": "",
                     "ti": "1028403",
-                    "ma": null
+                    "ma": null,
+                    "tt": ["UNSPECIFIED"]
                 },
                 "i": 123
             }
@@ -6190,7 +6281,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "limit": 500,
                 "cursor": "",
                 "tx_id": "1028403",
-                "main_account_id": null
+                "main_account_id": null,
+                "transfer_types": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6210,7 +6302,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "limit": 500,
                     "cursor": "",
                     "tx_id": "1028403",
-                    "main_account_id": null
+                    "main_account_id": null,
+                    "transfer_types": ["UNSPECIFIED"]
                 },
                 "id": 123
             }
@@ -6230,7 +6323,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "l": 500,
                 "c1": "",
                 "ti": "1028403",
-                "ma": null
+                "ma": null,
+                "tt": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6250,7 +6344,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "l": 500,
                     "c1": "",
                     "ti": "1028403",
-                    "ma": null
+                    "ma": null,
+                    "tt": ["UNSPECIFIED"]
                 },
                 "i": 123
             }
@@ -6283,7 +6378,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": 1234567890
+                "nonce": 1234567890,
+                "chain_id": "325"
             }
         }
         ```
@@ -6300,7 +6396,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "e": "1697788800000000000",
-                "n": 1234567890
+                "n": 1234567890,
+                "ci": "325"
             }
         }
         ```
@@ -6382,7 +6479,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -6407,7 +6505,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -6432,7 +6531,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -6457,7 +6557,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -6483,7 +6584,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -6508,7 +6610,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -6533,7 +6636,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -6558,7 +6662,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -6584,7 +6689,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -6609,7 +6715,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -6634,7 +6741,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -6659,7 +6767,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -6685,7 +6794,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -6710,7 +6820,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -6735,7 +6846,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -6760,7 +6872,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -6825,9 +6938,12 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
-                "event_time": "1697788800000000000"
+                "event_time": "1697788800000000000",
+                "l_1_hash": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+                "l_2_hash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
             }],
             "next": "Qw0918="
         }
@@ -6847,9 +6963,12 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
-                "et": "1697788800000000000"
+                "et": "1697788800000000000",
+                "l1": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+                "l2": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
             }],
             "n": "Qw0918="
         }
@@ -7264,7 +7383,9 @@ LITE ENDPOINT: lite/v1/account_summary
                     "roi": "10.20",
                     "quote_index_price": "1.0000102",
                     "est_liquidation_price": 60000.25,
-                    "leverage": "10"
+                    "leverage": "10",
+                    "cumulative_fee": "100000.20",
+                    "cumulative_realized_funding_payment": "100000.20"
                 }],
                 "settle_index_price": "1.0000102",
                 "is_vault": null,
@@ -7307,7 +7428,9 @@ LITE ENDPOINT: lite/v1/account_summary
                     "r": "10.20",
                     "qi": "1.0000102",
                     "el": 60000.25,
-                    "l": "10"
+                    "l": "10",
+                    "cf": "100000.20",
+                    "cr": "100000.20"
                 }],
                 "si": "1.0000102",
                 "iv": null,
@@ -7654,7 +7777,9 @@ LITE ENDPOINT: lite/v1/account_history
                     "roi": "10.20",
                     "quote_index_price": "1.0000102",
                     "est_liquidation_price": 60000.25,
-                    "leverage": "10"
+                    "leverage": "10",
+                    "cumulative_fee": "100000.20",
+                    "cumulative_realized_funding_payment": "100000.20"
                 }],
                 "settle_index_price": "1.0000102",
                 "is_vault": null,
@@ -7698,7 +7823,9 @@ LITE ENDPOINT: lite/v1/account_history
                     "r": "10.20",
                     "qi": "1.0000102",
                     "el": 60000.25,
-                    "l": "10"
+                    "l": "10",
+                    "cf": "100000.20",
+                    "cr": "100000.20"
                 }],
                 "si": "1.0000102",
                 "iv": null,
@@ -8082,7 +8209,8 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                     "vault_id": 123456789,
                     "num_lp_tokens": 1000000,
                     "share_price": 1000000
-                }]
+                }],
+                "total_sub_account_balance": "3945034.23"
             }
         }
         ```
@@ -8101,7 +8229,8 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                     "vi": 123456789,
                     "nl": 1000000,
                     "sp": 1000000
-                }]
+                }],
+                "ts": "3945034.23"
             }
         }
         ```
@@ -8706,7 +8835,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": 1234567890
+                "nonce": 1234567890,
+                "chain_id": "325"
             }
         }
         ```
@@ -8721,7 +8851,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "e": "1697788800000000000",
-                "n": 1234567890
+                "n": 1234567890,
+                "ci": "325"
             }
         }
         ```
@@ -8797,7 +8928,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -8820,7 +8952,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -8843,7 +8976,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -8866,7 +9000,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -8890,7 +9025,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -8913,7 +9049,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -8936,7 +9073,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -8959,7 +9097,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -8983,7 +9122,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -9006,7 +9146,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -9029,7 +9170,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -9052,7 +9194,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -9076,7 +9219,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -9099,7 +9243,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -9122,7 +9267,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -9145,7 +9291,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -9844,7 +9991,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": 1234567890
+                "nonce": 1234567890,
+                "chain_id": "325"
             }
         }
         ```
@@ -9860,7 +10008,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "e": "1697788800000000000",
-                "n": 1234567890
+                "n": 1234567890,
+                "ci": "325"
             }
         }
         ```
@@ -9952,7 +10101,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -9976,7 +10126,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10000,7 +10151,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10024,7 +10176,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10049,7 +10202,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10073,7 +10227,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10097,7 +10252,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10121,7 +10277,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10146,7 +10303,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10170,7 +10328,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10194,7 +10353,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10218,7 +10378,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10243,7 +10404,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10267,7 +10429,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10291,7 +10454,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10315,7 +10479,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10348,7 +10513,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": 1234567890
+                "nonce": 1234567890,
+                "chain_id": "325"
             }
         }
         ```
@@ -10364,7 +10530,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "e": "1697788800000000000",
-                "n": 1234567890
+                "n": 1234567890,
+                "ci": "325"
             }
         }
         ```
@@ -10457,7 +10624,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10481,7 +10649,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10505,7 +10674,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10529,7 +10699,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10554,7 +10725,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10578,7 +10750,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10602,7 +10775,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10626,7 +10800,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10651,7 +10826,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10675,7 +10851,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10699,7 +10876,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10723,7 +10901,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10748,7 +10927,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10772,7 +10952,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10796,7 +10977,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10820,7 +11002,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10874,7 +11057,8 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                     "num_lp_tokens": 1000000,
                     "request_valuation": 1000000,
                     "request_time": "1697788800000000000",
-                    "max_redemption_period_timestamp": 1727788800000000000
+                    "max_redemption_period_timestamp": 1727788800000000000,
+                    "cancel_blocked": null
                 },
                 "can_burn": null
             }]
@@ -10894,7 +11078,8 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                     "nl": 1000000,
                     "rv": 1000000,
                     "rt": "1697788800000000000",
-                    "mr": 1727788800000000000
+                    "mr": 1727788800000000000,
+                    "cb": null
                 },
                 "cb": null
             }]
@@ -11191,7 +11376,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": 1234567890
+                "nonce": 1234567890,
+                "chain_id": "325"
             }
         }
         ```
@@ -11207,7 +11393,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "e": "1697788800000000000",
-                "n": 1234567890
+                "n": 1234567890,
+                "ci": "325"
             }
         }
         ```
@@ -11290,7 +11477,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -11314,7 +11502,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -11338,7 +11527,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -11362,7 +11552,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -11387,7 +11578,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -11411,7 +11603,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -11435,7 +11628,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -11459,7 +11653,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -11484,7 +11679,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -11508,7 +11704,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -11532,7 +11729,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -11556,7 +11754,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -11581,7 +11780,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -11605,7 +11805,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -11629,7 +11830,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -11653,7 +11855,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -12344,14 +12547,18 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
         ``` { .json .copy }
         {
             "vault_id": "2312134",
-            "only_own_investments": true
+            "only_own_investments": true,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000"
         }
         ```
         **Lite Request**
         ``` { .json .copy }
         {
             "vi": "2312134",
-            "oo": true
+            "oo": true,
+            "st": "1697788800000000000",
+            "et": "1697788800000000000"
         }
         ```
     </section>
@@ -12436,7 +12643,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vault_id": "2312134",
-                "only_own_investments": true
+                "only_own_investments": true,
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000"
             }
             '
             ```
@@ -12451,7 +12660,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "method": "v1/vault_manager_investor_history",
                 "params": {
                     "vault_id": "2312134",
-                    "only_own_investments": true
+                    "only_own_investments": true,
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000"
                 },
                 "id": 123
             }
@@ -12466,7 +12677,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vi": "2312134",
-                "oo": true
+                "oo": true,
+                "st": "1697788800000000000",
+                "et": "1697788800000000000"
             }
             '
             ```
@@ -12481,7 +12694,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "m": "v1/vault_manager_investor_history",
                 "p": {
                     "vi": "2312134",
-                    "oo": true
+                    "oo": true,
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000"
                 },
                 "i": 123
             }
@@ -12497,7 +12712,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vault_id": "2312134",
-                "only_own_investments": true
+                "only_own_investments": true,
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000"
             }
             '
             ```
@@ -12512,7 +12729,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "method": "v1/vault_manager_investor_history",
                 "params": {
                     "vault_id": "2312134",
-                    "only_own_investments": true
+                    "only_own_investments": true,
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000"
                 },
                 "id": 123
             }
@@ -12527,7 +12746,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vi": "2312134",
-                "oo": true
+                "oo": true,
+                "st": "1697788800000000000",
+                "et": "1697788800000000000"
             }
             '
             ```
@@ -12542,7 +12763,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "m": "v1/vault_manager_investor_history",
                 "p": {
                     "vi": "2312134",
-                    "oo": true
+                    "oo": true,
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000"
                 },
                 "i": 123
             }
@@ -12558,7 +12781,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vault_id": "2312134",
-                "only_own_investments": true
+                "only_own_investments": true,
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000"
             }
             '
             ```
@@ -12573,7 +12798,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "method": "v1/vault_manager_investor_history",
                 "params": {
                     "vault_id": "2312134",
-                    "only_own_investments": true
+                    "only_own_investments": true,
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000"
                 },
                 "id": 123
             }
@@ -12588,7 +12815,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vi": "2312134",
-                "oo": true
+                "oo": true,
+                "st": "1697788800000000000",
+                "et": "1697788800000000000"
             }
             '
             ```
@@ -12603,7 +12832,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "m": "v1/vault_manager_investor_history",
                 "p": {
                     "vi": "2312134",
-                    "oo": true
+                    "oo": true,
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000"
                 },
                 "i": 123
             }
@@ -12619,7 +12850,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vault_id": "2312134",
-                "only_own_investments": true
+                "only_own_investments": true,
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000"
             }
             '
             ```
@@ -12634,7 +12867,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "method": "v1/vault_manager_investor_history",
                 "params": {
                     "vault_id": "2312134",
-                    "only_own_investments": true
+                    "only_own_investments": true,
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000"
                 },
                 "id": 123
             }
@@ -12649,7 +12884,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vi": "2312134",
-                "oo": true
+                "oo": true,
+                "st": "1697788800000000000",
+                "et": "1697788800000000000"
             }
             '
             ```
@@ -12664,7 +12901,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "m": "v1/vault_manager_investor_history",
                 "p": {
                     "vi": "2312134",
-                    "oo": true
+                    "oo": true,
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000"
                 },
                 "i": 123
             }

@@ -49,7 +49,10 @@ LITE ENDPOINT: lite/v1/instrument
                 "tick_size": "0.01",
                 "min_size": "0.01",
                 "create_time": "1697788800000000000",
-                "max_position_size": "100.0"
+                "max_position_size": "100.0",
+                "funding_interval_hours": null,
+                "adjusted_funding_rate_cap": 2.5,
+                "adjusted_funding_rate_floor": -2.5
             }
         }
         ```
@@ -69,7 +72,10 @@ LITE ENDPOINT: lite/v1/instrument
                 "ts": "0.01",
                 "ms": "0.01",
                 "ct": "1697788800000000000",
-                "mp": "100.0"
+                "mp": "100.0",
+                "fi": null,
+                "af": 2.5,
+                "af1": -2.5
             }
         }
         ```
@@ -350,7 +356,10 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "tick_size": "0.01",
                 "min_size": "0.01",
                 "create_time": "1697788800000000000",
-                "max_position_size": "100.0"
+                "max_position_size": "100.0",
+                "funding_interval_hours": null,
+                "adjusted_funding_rate_cap": 2.5,
+                "adjusted_funding_rate_floor": -2.5
             }]
         }
         ```
@@ -370,7 +379,10 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "ts": "0.01",
                 "ms": "0.01",
                 "ct": "1697788800000000000",
-                "mp": "100.0"
+                "mp": "100.0",
+                "fi": null,
+                "af": 2.5,
+                "af1": -2.5
             }]
         }
         ```
@@ -658,7 +670,10 @@ LITE ENDPOINT: lite/v1/instruments
                 "tick_size": "0.01",
                 "min_size": "0.01",
                 "create_time": "1697788800000000000",
-                "max_position_size": "100.0"
+                "max_position_size": "100.0",
+                "funding_interval_hours": null,
+                "adjusted_funding_rate_cap": 2.5,
+                "adjusted_funding_rate_floor": -2.5
             }]
         }
         ```
@@ -678,7 +693,10 @@ LITE ENDPOINT: lite/v1/instruments
                 "ts": "0.01",
                 "ms": "0.01",
                 "ct": "1697788800000000000",
-                "mp": "100.0"
+                "mp": "100.0",
+                "fi": null,
+                "af": 2.5,
+                "af1": -2.5
             }]
         }
         ```
@@ -1596,7 +1614,9 @@ LITE ENDPOINT: lite/v1/ticker
                 "low_price": "65038.01",
                 "open_price": "65038.01",
                 "open_interest": "123456.78",
-                "long_short_ratio": "0.5"
+                "long_short_ratio": "0.5",
+                "funding_rate": 0.0003,
+                "next_funding_time": "1697788800000000000"
             }
         }
         ```
@@ -1627,7 +1647,9 @@ LITE ENDPOINT: lite/v1/ticker
                 "lp1": "65038.01",
                 "op": "65038.01",
                 "oi": "123456.78",
-                "ls1": "0.5"
+                "ls1": "0.5",
+                "fr2": 0.0003,
+                "nf": "1697788800000000000"
             }
         }
         ```

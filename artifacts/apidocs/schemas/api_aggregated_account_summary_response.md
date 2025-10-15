@@ -11,6 +11,7 @@
         |total_equity<br>`te` |string|True|Total equity of the main (+ sub) account, denominated in USD|
         |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this main (+ sub) account, and their balances|
         |vault_investments<br>`vi` |[VaultInvestment]|True|The list of vault investments held by this main account|
+        |total_sub_account_balance<br>`ts` |string|True|Total balance of the sub accounts, denominated in USD|
         ??? info "[SpotBalance](/../../schemas/spot_balance)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|

@@ -39,3 +39,4 @@
     |`DERISK_NOT_SUPPORTED` = 35|derisk is not supported|
     |`INVALID_ORDER_TYPE` = 36|the order type is invalid|
     |`CURRENCY_NOT_DEFINED` = 37|the currency is not defined|
+    |`INVALID_CHAIN_ID` = 38|the chain ID is invalid|
