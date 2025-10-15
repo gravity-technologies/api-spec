@@ -185,6 +185,8 @@ class OrderRejectReason(Enum):
     INVALID_ORDER_TYPE = "INVALID_ORDER_TYPE"
     # the currency is not defined
     CURRENCY_NOT_DEFINED = "CURRENCY_NOT_DEFINED"
+    # the chain ID is invalid
+    INVALID_CHAIN_ID = "INVALID_CHAIN_ID"
 
 
 class OrderStatus(Enum):
@@ -234,6 +236,12 @@ class TransferType(Enum):
     NON_NATIVE_BRIDGE_DEPOSIT = "NON_NATIVE_BRIDGE_DEPOSIT"
     # Transfer type for non native bridging withdrawal
     NON_NATIVE_BRIDGE_WITHDRAWAL = "NON_NATIVE_BRIDGE_WITHDRAWAL"
+    # Transfer type for adhoc incentive
+    ADHOC_INCENTIVE = "ADHOC_INCENTIVE"
+    # Transfer type for referral incentive
+    REFERRAL_INCENTIVE = "REFERRAL_INCENTIVE"
+    # Transfer type for trading deposit yield incentive
+    TRADING_DEPOSIT_YIELD_INCENTIVE = "TRADING_DEPOSIT_YIELD_INCENTIVE"
 
 
 class TriggerBy(Enum):
@@ -369,6 +377,10 @@ class Positions:
     est_liquidation_price: str
     # The current leverage value for this position
     leverage: str
+    # The cumulative fee paid on the position, expressed in quote asset decimal units
+    cumulative_fee: str
+    # The cumulative realized funding payment of the position, expressed in quote asset decimal units
+    cumulative_realized_funding_payment: str
 
 
 @dataclass
@@ -651,6 +663,8 @@ class AggregatedAccountSummary:
     spot_balances: list[SpotBalance]
     # The list of vault investments held by this main account
     vault_investments: list[VaultInvestment]
+    # Total balance of the sub accounts, denominated in USD
+    total_sub_account_balance: str
 
 
 @dataclass
@@ -747,6 +761,8 @@ class Signature:
     Our system will consider the payload a duplicate, and ignore it.
     """
     nonce: int
+    # Chain ID used in EIP-712 domain. Zero value fallbacks to GRVT Chain ID.
+    chain_id: str
 
 
 @dataclass
@@ -1151,6 +1167,10 @@ class Ticker:
     open_interest: str | None = None
     # The ratio of accounts that are net long vs net short on this instrument
     long_short_ratio: str | None = None
+    # The current indicative funding rate for the active interval, expressed in centibeeps
+    funding_rate: str | None = None
+    # Timestamp in nanoseconds when the current funding interval ends
+    next_funding_time: str | None = None
 
 
 @dataclass
@@ -1419,7 +1439,7 @@ class ApiGetInstrumentRequest:
 
 
 @dataclass
-class Instrument:
+class InstrumentDisplay:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
     # The asset ID used for instrument signing.
@@ -1446,12 +1466,18 @@ class Instrument:
     create_time: str
     # The maximum position size, expressed in base asset decimal units
     max_position_size: str
+    # Defines the funding interval to be applied.
+    funding_interval_hours: int | None = None
+    # Funding rate cap over the defined `intervalHours`.
+    adjusted_funding_rate_cap: str | None = None
+    # Funding rate floor over the defined `intervalHours`.
+    adjusted_funding_rate_floor: str | None = None
 
 
 @dataclass
 class ApiGetInstrumentResponse:
     # The instrument matching the request asset
-    result: Instrument
+    result: InstrumentDisplay
 
 
 @dataclass
@@ -1471,7 +1497,7 @@ class ApiGetFilteredInstrumentsRequest:
 @dataclass
 class ApiGetFilteredInstrumentsResponse:
     # The instruments matching the request filter
-    result: list[Instrument]
+    result: list[InstrumentDisplay]
 
 
 @dataclass
@@ -1580,7 +1606,7 @@ class ApiGetAllInstrumentsRequest:
 @dataclass
 class ApiGetAllInstrumentsResponse:
     # List of instruments
-    result: list[Instrument]
+    result: list[InstrumentDisplay]
 
 
 @dataclass
@@ -1589,6 +1615,10 @@ class ApiQueryVaultManagerInvestorHistoryRequest:
     vault_id: str
     # Whether to only return investments made by the manager
     only_own_investments: bool
+    # Optional. Start time in unix nanoseconds
+    start_time: str | None = None
+    # Optional. End time in unix nanoseconds
+    end_time: str | None = None
 
 
 @dataclass
@@ -2438,6 +2468,8 @@ class ApiTransferHistoryRequest:
     tx_id: str | None = None
     # Main account ID being queried. By default, applies the requestor's main account ID.
     main_account_id: str | None = None
+    # The transfer type to filters for. If the list is empty, return all transfer types.
+    transfer_types: list[TransferType] | None = None
 
 
 @dataclass
@@ -2487,6 +2519,10 @@ class WithdrawalHistory:
     signature: Signature
     # The timestamp of the withdrawal in unix nanoseconds
     event_time: str
+    # The transaction hash on L2
+    l_2_hash: str
+    # The finalized withdrawal transaction hash on L1
+    l_1_hash: str | None = None
 
 
 @dataclass
@@ -2649,6 +2685,8 @@ class VaultRedemption:
     request_time: str
     # [Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed.
     max_redemption_period_timestamp: str
+    # Omitted for redemption requests to non-cross exchange vaults. True if cancellation is blocked within the CEV allocation allowance for the user's current tier (e.g. because the user has already transferred out the spot balance underlying the redemption request).
+    cancel_blocked: bool | None = None
 
 
 @dataclass
@@ -2709,3 +2747,112 @@ class ApiVaultBurnTokensRequest:
     The signature must comply with AccountPermExternalTransfer permission.
     """
     signature: Signature
+
+
+@dataclass
+class ApiCrossExchVaultViewInvestmentQueueRequest:
+    """
+    Request payload for a cross-exchange vault manager to view the investment queue for their vault in FIFO order.
+
+    This queue gets drained on every equity attestation event submitted by the cross-exchange vault manager.
+
+
+    """
+
+    # The unique identifier of the cross-exchange vault to fetch the investment queue for.
+    vault_id: str
+
+
+@dataclass
+class CrossExchVaultPendingInvestment:
+    # [Filled by GRVT Backend] Time at which the investment request was confirmed and enqueued by GRVT in unix nanoseconds
+    request_time: str
+    # The currency used for the investment. This should be the vault's quote currency.
+    currency: str
+    # The investment sum, in terms of the token currency specified (i.e., `numTokens` of '1000' with `tokenCurrency` of 'USDT' denotes investment of 1,000 USDT).
+    num_tokens: str
+    # `true` if this pending investment belongs to the vault manager, omitted otherwise.
+    is_manager: bool | None = None
+
+
+@dataclass
+class ApiCrossExchVaultViewInvestmentQueueResponse:
+    """
+    Response payload for a cross-exchange vault manager to view the investment queue for their vault in FIFO order.
+
+    This queue gets drained on every equity attestation event submitted by the cross-exchange vault manager.
+
+
+    """
+
+    # Outstanding cross-exchange vault investment requests in FIFO order.
+    investment_queue: list[CrossExchVaultPendingInvestment]
+    # The current valuation (in USD) of all pending investments.
+    total_investment_equity: str
+
+
+@dataclass
+class ApiCrossExchVaultTriggerRedemptionRequest:
+    # The unique identifier of the cross-exchange vault to redeem from.
+    vault_id: str
+    # Value provided must be equal to the `request_time` field of the first element returned from the View Investment Queue API.
+    request_time: str
+
+
+@dataclass
+class ApiCrossExchVaultAttestEquityRequest:
+    """
+    Request payload for a cross-exchange vault maanger to publish an equity attestation event to GRVT systems.
+
+
+    """
+
+    # The unique identifier of the cross-exchange vault.
+    vault_id: str
+    # [Signed] The total equity implied by `num_lp_tokens * share_price`, in USD, expressed in up to 6 decimal places.
+    total_equity: str
+    # [Signed] The number of shares in circulation for the cross-exchange vault, expressed in up to 6 decimal places.
+    num_lp_tokens: str
+    # [Signed] The share price of the cross-exchange vault, in USD, expressed in up to 9 decimal places.
+    share_price: str
+    """
+    [Signed] GRVT timestamp for the latest confirmed attestation event of this vault, in unix-nanoseconds.
+    Should be equal to the `last_update_timestamp` value returned from the Vault Detail API.
+    """
+    last_update_timestamp: str
+    """
+    The digital signature from the cross-exchange vault manager account.
+    This signature must be generated by the main account ID and is used to verify the authenticity of the request.
+    The signature must comply with AccountPermAdmin permission.
+    """
+    signature: Signature
+
+
+@dataclass
+class ApiCrossExchVaultLockRequest:
+    """
+    Request payload for a cross-exchange vault manager to engage the update lock for their vault.
+
+    While locked, all operations that could change the vault's share count (e.g. invest / redeem / burn) become disabled.
+
+    Should be done prior to an equity-attest update to ensure a fixed-reference share count.
+
+    WARN: Stays locked until the corresponding Unlock API is called, OR a successful equity-attest update.
+
+    Vault managers leaving their vaults locked for prolonged periods will receive GRVT warning alerts.
+    """
+
+    # The unique identifier of the cross-exchange vault to lock.
+    cross_exch_vault_id: str
+
+
+@dataclass
+class ApiCrossExchVaultUnlockRequest:
+    """
+    Request payload for a cross-exchange vault manager to disengage the update lock for their vault.
+
+
+    """
+
+    # The unique identifier of the cross-exchange vault to unlock.
+    cross_exch_vault_id: str

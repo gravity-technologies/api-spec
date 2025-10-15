@@ -31,3 +31,5 @@
         |open_price<br>`op` |string|False<br>`None`|The 24 hour first traded price of the instrument, expressed in `9` decimals|
         |open_interest<br>`oi` |string|False<br>`None`|The open interest in the instrument, expressed in base asset decimal units|
         |long_short_ratio<br>`ls1` |string|False<br>`None`|The ratio of accounts that are net long vs net short on this instrument|
+        |funding_rate<br>`fr2` |string|False<br>`None`|The current indicative funding rate for the active interval, expressed in centibeeps|
+        |next_funding_time<br>`nf` |string|False<br>`None`|Timestamp in nanoseconds when the current funding interval ends|

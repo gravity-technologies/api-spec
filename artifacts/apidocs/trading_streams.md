@@ -127,7 +127,8 @@ STREAM: v1.order
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -178,7 +179,8 @@ STREAM: v1.order
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "m": {
                     "co": "23042",
@@ -2632,7 +2634,9 @@ STREAM: v1.position
                 "roi": "10.20",
                 "quote_index_price": "1.0000102",
                 "est_liquidation_price": 60000.25,
-                "leverage": "10"
+                "leverage": "10",
+                "cumulative_fee": "100000.20",
+                "cumulative_realized_funding_payment": "100000.20"
             }
         }
         ```
@@ -2657,7 +2661,9 @@ STREAM: v1.position
                 "r": "10.20",
                 "qi": "1.0000102",
                 "el": 60000.25,
-                "l": "10"
+                "l": "10",
+                "cf": "100000.20",
+                "cr": "100000.20"
             }
         }
         ```
@@ -3842,7 +3848,8 @@ STREAM: v1.transfer
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "event_time": "1697788800000000000",
                 "transfer_type": "UNSPECIFIED",
@@ -3870,7 +3877,8 @@ STREAM: v1.transfer
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "et": "1697788800000000000",
                 "tt": "UNSPECIFIED",
@@ -4460,7 +4468,8 @@ STREAM: v1.withdrawal
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
         }
@@ -4482,7 +4491,8 @@ STREAM: v1.withdrawal
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
         }

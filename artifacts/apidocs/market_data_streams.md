@@ -1250,7 +1250,9 @@ STREAM: v1.ticker.s
                 "low_price": "65038.01",
                 "open_price": "65038.01",
                 "open_interest": "123456.78",
-                "long_short_ratio": "0.5"
+                "long_short_ratio": "0.5",
+                "funding_rate": 0.0003,
+                "next_funding_time": "1697788800000000000"
             }
         }
         ```
@@ -1284,7 +1286,9 @@ STREAM: v1.ticker.s
                 "lp1": "65038.01",
                 "op": "65038.01",
                 "oi": "123456.78",
-                "ls1": "0.5"
+                "ls1": "0.5",
+                "fr2": 0.0003,
+                "nf": "1697788800000000000"
             }
         }
         ```
@@ -1835,7 +1839,9 @@ STREAM: v1.ticker.d
                 "low_price": "65038.01",
                 "open_price": "65038.01",
                 "open_interest": "123456.78",
-                "long_short_ratio": "0.5"
+                "long_short_ratio": "0.5",
+                "funding_rate": 0.0003,
+                "next_funding_time": "1697788800000000000"
             }
         }
         ```
@@ -1869,7 +1875,9 @@ STREAM: v1.ticker.d
                 "lp1": "65038.01",
                 "op": "65038.01",
                 "oi": "123456.78",
-                "ls1": "0.5"
+                "ls1": "0.5",
+                "fr2": 0.0003,
+                "nf": "1697788800000000000"
             }
         }
         ```

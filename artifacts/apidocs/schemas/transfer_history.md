@@ -21,6 +21,7 @@
         |v<br>`v` |integer|True|Signature V|
         |expiration<br>`e` |string|True|Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days|
         |nonce<br>`n` |integer|True|Users can randomly generate this value, used as a signature deconflicting key.<br>ie. You can send the same exact instruction twice with different nonces.<br>When the same nonce is used, the same payload will generate the same signature.<br>Our system will consider the payload a duplicate, and ignore it.|
+        |chain_id<br>`ci` |string|True|Chain ID used in EIP-712 domain. Zero value fallbacks to GRVT Chain ID.|
     ??? info "[TransferType](/../../schemas/transfer_type)"
         |Value| Description |
         |-|-|
@@ -30,3 +31,6 @@
         |`FAST_ARB_WITHDRAWAL` = 3|Fast Arb Withdrawal Metadata type|
         |`NON_NATIVE_BRIDGE_DEPOSIT` = 4|Transfer type for non native bridging deposit|
         |`NON_NATIVE_BRIDGE_WITHDRAWAL` = 5|Transfer type for non native bridging withdrawal|
+        |`ADHOC_INCENTIVE` = 6|Transfer type for adhoc incentive|
+        |`REFERRAL_INCENTIVE` = 7|Transfer type for referral incentive|
+        |`TRADING_DEPOSIT_YIELD_INCENTIVE` = 8|Transfer type for trading deposit yield incentive|

@@ -1,8 +1,8 @@
 !!! info "[ApiGetAllInstrumentsResponse](/../../schemas/api_get_all_instruments_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |result<br>`r` |[Instrument]|True|List of instruments|
-    ??? info "[Instrument](/../../schemas/instrument)"
+    |result<br>`r` |[InstrumentDisplay]|True|List of instruments|
+    ??? info "[InstrumentDisplay](/../../schemas/instrument_display)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
         |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
@@ -18,6 +18,9 @@
         |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
         |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
         |max_position_size<br>`mp` |string|True|The maximum position size, expressed in base asset decimal units|
+        |funding_interval_hours<br>`fi` |integer|False<br>`None`|Defines the funding interval to be applied.|
+        |adjusted_funding_rate_cap<br>`af` |string|False<br>`None`|Funding rate cap over the defined `intervalHours`.|
+        |adjusted_funding_rate_floor<br>`af1` |string|False<br>`None`|Funding rate floor over the defined `intervalHours`.|
         ??? info "[Kind](/../../schemas/kind)"
             The list of asset kinds that are supported on the GRVT exchange<br>
 

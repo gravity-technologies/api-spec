@@ -35,7 +35,8 @@ LITE ENDPOINT: lite/v1/create_order
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -74,7 +75,8 @@ LITE ENDPOINT: lite/v1/create_order
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "m": {
                     "co": "23042",
@@ -121,7 +123,8 @@ LITE ENDPOINT: lite/v1/create_order
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -169,7 +172,8 @@ LITE ENDPOINT: lite/v1/create_order
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "m": {
                     "co": "23042",
@@ -211,6 +215,7 @@ LITE ENDPOINT: lite/v1/create_order
         |1008|401|Your IP has not been whitelisted for access|
         |1400|403|Signer does not have trade permission|
         |1009|503|We are temporarily deactivating this API endpoint, please try again later|
+        |1012|400|Invalid signature chain ID|
         |2000|403|Signature is from an unauthorized signer|
         |2001|403|Signature has expired|
         |2002|403|Signature does not match payload|
@@ -306,7 +311,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "metadata": {
                         "client_order_id": "23042",
@@ -353,7 +359,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "expiration": "1697788800000000000",
-                            "nonce": 1234567890
+                            "nonce": 1234567890,
+                            "chain_id": "325"
                         },
                         "metadata": {
                             "client_order_id": "23042",
@@ -400,7 +407,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "m": {
                         "co": "23042",
@@ -447,7 +455,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "e": "1697788800000000000",
-                            "n": 1234567890
+                            "n": 1234567890,
+                            "ci": "325"
                         },
                         "m": {
                             "co": "23042",
@@ -495,7 +504,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "metadata": {
                         "client_order_id": "23042",
@@ -542,7 +552,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "expiration": "1697788800000000000",
-                            "nonce": 1234567890
+                            "nonce": 1234567890,
+                            "chain_id": "325"
                         },
                         "metadata": {
                             "client_order_id": "23042",
@@ -589,7 +600,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "m": {
                         "co": "23042",
@@ -636,7 +648,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "e": "1697788800000000000",
-                            "n": 1234567890
+                            "n": 1234567890,
+                            "ci": "325"
                         },
                         "m": {
                             "co": "23042",
@@ -684,7 +697,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "metadata": {
                         "client_order_id": "23042",
@@ -731,7 +745,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "expiration": "1697788800000000000",
-                            "nonce": 1234567890
+                            "nonce": 1234567890,
+                            "chain_id": "325"
                         },
                         "metadata": {
                             "client_order_id": "23042",
@@ -778,7 +793,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "m": {
                         "co": "23042",
@@ -825,7 +841,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "e": "1697788800000000000",
-                            "n": 1234567890
+                            "n": 1234567890,
+                            "ci": "325"
                         },
                         "m": {
                             "co": "23042",
@@ -873,7 +890,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "metadata": {
                         "client_order_id": "23042",
@@ -920,7 +938,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "expiration": "1697788800000000000",
-                            "nonce": 1234567890
+                            "nonce": 1234567890,
+                            "chain_id": "325"
                         },
                         "metadata": {
                             "client_order_id": "23042",
@@ -967,7 +986,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "m": {
                         "co": "23042",
@@ -1014,7 +1034,8 @@ LITE ENDPOINT: lite/v1/create_order
                             "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                             "v": 28,
                             "e": "1697788800000000000",
-                            "n": 1234567890
+                            "n": 1234567890,
+                            "ci": "325"
                         },
                         "m": {
                             "co": "23042",
@@ -1829,7 +1850,8 @@ LITE ENDPOINT: lite/v1/order
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -1877,7 +1899,8 @@ LITE ENDPOINT: lite/v1/order
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "m": {
                     "co": "23042",
@@ -2261,7 +2284,8 @@ LITE ENDPOINT: lite/v1/open_orders
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -2309,7 +2333,8 @@ LITE ENDPOINT: lite/v1/open_orders
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "m": {
                     "co": "23042",
@@ -2715,7 +2740,8 @@ LITE ENDPOINT: lite/v1/order_history
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "metadata": {
                     "client_order_id": "23042",
@@ -2764,7 +2790,8 @@ LITE ENDPOINT: lite/v1/order_history
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "m": {
                     "co": "23042",
@@ -4035,7 +4062,9 @@ LITE ENDPOINT: lite/v1/positions
                 "roi": "10.20",
                 "quote_index_price": "1.0000102",
                 "est_liquidation_price": 60000.25,
-                "leverage": "10"
+                "leverage": "10",
+                "cumulative_fee": "100000.20",
+                "cumulative_realized_funding_payment": "100000.20"
             }]
         }
         ```
@@ -4057,7 +4086,9 @@ LITE ENDPOINT: lite/v1/positions
                 "r": "10.20",
                 "qi": "1.0000102",
                 "el": 60000.25,
-                "l": "10"
+                "l": "10",
+                "cf": "100000.20",
+                "cr": "100000.20"
             }]
         }
         ```
@@ -5234,7 +5265,8 @@ LITE ENDPOINT: lite/v1/transfer
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": 1234567890
+                "nonce": 1234567890,
+                "chain_id": "325"
             },
             "transfer_type": "UNSPECIFIED",
             "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5255,7 +5287,8 @@ LITE ENDPOINT: lite/v1/transfer
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "e": "1697788800000000000",
-                "n": 1234567890
+                "n": 1234567890,
+                "ci": "325"
             },
             "tt": "UNSPECIFIED",
             "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5353,7 +5386,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "transfer_type": "UNSPECIFIED",
                 "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5382,7 +5416,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "transfer_type": "UNSPECIFIED",
                     "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5411,7 +5446,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "tt": "UNSPECIFIED",
                 "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5440,7 +5476,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "tt": "UNSPECIFIED",
                     "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5470,7 +5507,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "transfer_type": "UNSPECIFIED",
                 "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5499,7 +5537,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "transfer_type": "UNSPECIFIED",
                     "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5528,7 +5567,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "tt": "UNSPECIFIED",
                 "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5557,7 +5597,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "tt": "UNSPECIFIED",
                     "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5587,7 +5628,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "transfer_type": "UNSPECIFIED",
                 "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5616,7 +5658,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "transfer_type": "UNSPECIFIED",
                     "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5645,7 +5688,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "tt": "UNSPECIFIED",
                 "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5674,7 +5718,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "tt": "UNSPECIFIED",
                     "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5704,7 +5749,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "transfer_type": "UNSPECIFIED",
                 "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5733,7 +5779,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     },
                     "transfer_type": "UNSPECIFIED",
                     "transfer_metadata": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5762,7 +5809,8 @@ LITE ENDPOINT: lite/v1/transfer
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "tt": "UNSPECIFIED",
                 "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5791,7 +5839,8 @@ LITE ENDPOINT: lite/v1/transfer
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     },
                     "tt": "UNSPECIFIED",
                     "tm": {"provider":"XY","direction":"WITHDRAWAL","provider_tx_id":"txn123456","chainid":"42161","endpoint":"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0"}
@@ -5823,7 +5872,8 @@ LITE ENDPOINT: lite/v1/transfer_history
             "limit": 500,
             "cursor": "",
             "tx_id": "1028403",
-            "main_account_id": null
+            "main_account_id": null,
+            "transfer_types": ["UNSPECIFIED"]
         }
         ```
         **Lite Request**
@@ -5835,7 +5885,8 @@ LITE ENDPOINT: lite/v1/transfer_history
             "l": 500,
             "c1": "",
             "ti": "1028403",
-            "ma": null
+            "ma": null,
+            "tt": ["UNSPECIFIED"]
         }
         ```
     </section>
@@ -5862,7 +5913,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
                 "event_time": "1697788800000000000",
                 "transfer_type": "UNSPECIFIED",
@@ -5888,7 +5940,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
                 "et": "1697788800000000000",
                 "tt": "UNSPECIFIED",
@@ -5947,7 +6000,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "limit": 500,
                 "cursor": "",
                 "tx_id": "1028403",
-                "main_account_id": null
+                "main_account_id": null,
+                "transfer_types": ["UNSPECIFIED"]
             }
             '
             ```
@@ -5967,7 +6021,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "limit": 500,
                     "cursor": "",
                     "tx_id": "1028403",
-                    "main_account_id": null
+                    "main_account_id": null,
+                    "transfer_types": ["UNSPECIFIED"]
                 },
                 "id": 123
             }
@@ -5987,7 +6042,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "l": 500,
                 "c1": "",
                 "ti": "1028403",
-                "ma": null
+                "ma": null,
+                "tt": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6007,7 +6063,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "l": 500,
                     "c1": "",
                     "ti": "1028403",
-                    "ma": null
+                    "ma": null,
+                    "tt": ["UNSPECIFIED"]
                 },
                 "i": 123
             }
@@ -6028,7 +6085,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "limit": 500,
                 "cursor": "",
                 "tx_id": "1028403",
-                "main_account_id": null
+                "main_account_id": null,
+                "transfer_types": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6048,7 +6106,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "limit": 500,
                     "cursor": "",
                     "tx_id": "1028403",
-                    "main_account_id": null
+                    "main_account_id": null,
+                    "transfer_types": ["UNSPECIFIED"]
                 },
                 "id": 123
             }
@@ -6068,7 +6127,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "l": 500,
                 "c1": "",
                 "ti": "1028403",
-                "ma": null
+                "ma": null,
+                "tt": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6088,7 +6148,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "l": 500,
                     "c1": "",
                     "ti": "1028403",
-                    "ma": null
+                    "ma": null,
+                    "tt": ["UNSPECIFIED"]
                 },
                 "i": 123
             }
@@ -6109,7 +6170,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "limit": 500,
                 "cursor": "",
                 "tx_id": "1028403",
-                "main_account_id": null
+                "main_account_id": null,
+                "transfer_types": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6129,7 +6191,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "limit": 500,
                     "cursor": "",
                     "tx_id": "1028403",
-                    "main_account_id": null
+                    "main_account_id": null,
+                    "transfer_types": ["UNSPECIFIED"]
                 },
                 "id": 123
             }
@@ -6149,7 +6212,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "l": 500,
                 "c1": "",
                 "ti": "1028403",
-                "ma": null
+                "ma": null,
+                "tt": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6169,7 +6233,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "l": 500,
                     "c1": "",
                     "ti": "1028403",
-                    "ma": null
+                    "ma": null,
+                    "tt": ["UNSPECIFIED"]
                 },
                 "i": 123
             }
@@ -6190,7 +6255,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "limit": 500,
                 "cursor": "",
                 "tx_id": "1028403",
-                "main_account_id": null
+                "main_account_id": null,
+                "transfer_types": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6210,7 +6276,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "limit": 500,
                     "cursor": "",
                     "tx_id": "1028403",
-                    "main_account_id": null
+                    "main_account_id": null,
+                    "transfer_types": ["UNSPECIFIED"]
                 },
                 "id": 123
             }
@@ -6230,7 +6297,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                 "l": 500,
                 "c1": "",
                 "ti": "1028403",
-                "ma": null
+                "ma": null,
+                "tt": ["UNSPECIFIED"]
             }
             '
             ```
@@ -6250,7 +6318,8 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "l": 500,
                     "c1": "",
                     "ti": "1028403",
-                    "ma": null
+                    "ma": null,
+                    "tt": ["UNSPECIFIED"]
                 },
                 "i": 123
             }
@@ -6283,7 +6352,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": 1234567890
+                "nonce": 1234567890,
+                "chain_id": "325"
             }
         }
         ```
@@ -6300,7 +6370,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "e": "1697788800000000000",
-                "n": 1234567890
+                "n": 1234567890,
+                "ci": "325"
             }
         }
         ```
@@ -6382,7 +6453,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -6407,7 +6479,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -6432,7 +6505,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -6457,7 +6531,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -6483,7 +6558,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -6508,7 +6584,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -6533,7 +6610,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -6558,7 +6636,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -6584,7 +6663,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -6609,7 +6689,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -6634,7 +6715,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -6659,7 +6741,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -6685,7 +6768,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -6710,7 +6794,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -6735,7 +6820,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -6760,7 +6846,8 @@ LITE ENDPOINT: lite/v1/withdrawal
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -6825,9 +6912,12 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 },
-                "event_time": "1697788800000000000"
+                "event_time": "1697788800000000000",
+                "l_1_hash": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+                "l_2_hash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
             }],
             "next": "Qw0918="
         }
@@ -6847,9 +6937,12 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 },
-                "et": "1697788800000000000"
+                "et": "1697788800000000000",
+                "l1": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+                "l2": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
             }],
             "n": "Qw0918="
         }
@@ -7264,7 +7357,9 @@ LITE ENDPOINT: lite/v1/account_summary
                     "roi": "10.20",
                     "quote_index_price": "1.0000102",
                     "est_liquidation_price": 60000.25,
-                    "leverage": "10"
+                    "leverage": "10",
+                    "cumulative_fee": "100000.20",
+                    "cumulative_realized_funding_payment": "100000.20"
                 }],
                 "settle_index_price": "1.0000102",
                 "is_vault": null,
@@ -7307,7 +7402,9 @@ LITE ENDPOINT: lite/v1/account_summary
                     "r": "10.20",
                     "qi": "1.0000102",
                     "el": 60000.25,
-                    "l": "10"
+                    "l": "10",
+                    "cf": "100000.20",
+                    "cr": "100000.20"
                 }],
                 "si": "1.0000102",
                 "iv": null,
@@ -7654,7 +7751,9 @@ LITE ENDPOINT: lite/v1/account_history
                     "roi": "10.20",
                     "quote_index_price": "1.0000102",
                     "est_liquidation_price": 60000.25,
-                    "leverage": "10"
+                    "leverage": "10",
+                    "cumulative_fee": "100000.20",
+                    "cumulative_realized_funding_payment": "100000.20"
                 }],
                 "settle_index_price": "1.0000102",
                 "is_vault": null,
@@ -7698,7 +7797,9 @@ LITE ENDPOINT: lite/v1/account_history
                     "r": "10.20",
                     "qi": "1.0000102",
                     "el": 60000.25,
-                    "l": "10"
+                    "l": "10",
+                    "cf": "100000.20",
+                    "cr": "100000.20"
                 }],
                 "si": "1.0000102",
                 "iv": null,
@@ -8082,7 +8183,8 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                     "vault_id": 123456789,
                     "num_lp_tokens": 1000000,
                     "share_price": 1000000
-                }]
+                }],
+                "total_sub_account_balance": "3945034.23"
             }
         }
         ```
@@ -8101,7 +8203,8 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                     "vi": 123456789,
                     "nl": 1000000,
                     "sp": 1000000
-                }]
+                }],
+                "ts": "3945034.23"
             }
         }
         ```
@@ -8706,7 +8809,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": 1234567890
+                "nonce": 1234567890,
+                "chain_id": "325"
             }
         }
         ```
@@ -8721,7 +8825,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "e": "1697788800000000000",
-                "n": 1234567890
+                "n": 1234567890,
+                "ci": "325"
             }
         }
         ```
@@ -8797,7 +8902,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -8820,7 +8926,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -8843,7 +8950,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -8866,7 +8974,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -8890,7 +8999,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -8913,7 +9023,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -8936,7 +9047,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -8959,7 +9071,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -8983,7 +9096,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -9006,7 +9120,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -9029,7 +9144,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -9052,7 +9168,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -9076,7 +9193,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -9099,7 +9217,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -9122,7 +9241,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -9145,7 +9265,8 @@ LITE ENDPOINT: lite/v1/set_derisk_mm_ratio
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -9844,7 +9965,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": 1234567890
+                "nonce": 1234567890,
+                "chain_id": "325"
             }
         }
         ```
@@ -9860,7 +9982,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "e": "1697788800000000000",
-                "n": 1234567890
+                "n": 1234567890,
+                "ci": "325"
             }
         }
         ```
@@ -9952,7 +10075,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -9976,7 +10100,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10000,7 +10125,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10024,7 +10150,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10049,7 +10176,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10073,7 +10201,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10097,7 +10226,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10121,7 +10251,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10146,7 +10277,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10170,7 +10302,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10194,7 +10327,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10218,7 +10352,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10243,7 +10378,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10267,7 +10403,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10291,7 +10428,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10315,7 +10453,8 @@ LITE ENDPOINT: lite/v1/vault_burn_tokens
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10348,7 +10487,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": 1234567890
+                "nonce": 1234567890,
+                "chain_id": "325"
             }
         }
         ```
@@ -10364,7 +10504,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "e": "1697788800000000000",
-                "n": 1234567890
+                "n": 1234567890,
+                "ci": "325"
             }
         }
         ```
@@ -10457,7 +10598,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10481,7 +10623,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10505,7 +10648,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10529,7 +10673,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10554,7 +10699,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10578,7 +10724,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10602,7 +10749,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10626,7 +10774,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10651,7 +10800,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10675,7 +10825,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10699,7 +10850,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10723,7 +10875,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10748,7 +10901,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -10772,7 +10926,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -10796,7 +10951,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -10820,7 +10976,8 @@ LITE ENDPOINT: lite/v1/vault_invest
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -10874,7 +11031,8 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                     "num_lp_tokens": 1000000,
                     "request_valuation": 1000000,
                     "request_time": "1697788800000000000",
-                    "max_redemption_period_timestamp": 1727788800000000000
+                    "max_redemption_period_timestamp": 1727788800000000000,
+                    "cancel_blocked": null
                 },
                 "can_burn": null
             }]
@@ -10894,7 +11052,8 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                     "nl": 1000000,
                     "rv": 1000000,
                     "rt": "1697788800000000000",
-                    "mr": 1727788800000000000
+                    "mr": 1727788800000000000,
+                    "cb": null
                 },
                 "cb": null
             }]
@@ -11191,7 +11350,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                 "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "expiration": "1697788800000000000",
-                "nonce": 1234567890
+                "nonce": 1234567890,
+                "chain_id": "325"
             }
         }
         ```
@@ -11207,7 +11367,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                 "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                 "v": 28,
                 "e": "1697788800000000000",
-                "n": 1234567890
+                "n": 1234567890,
+                "ci": "325"
             }
         }
         ```
@@ -11290,7 +11451,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -11314,7 +11476,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -11338,7 +11501,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -11362,7 +11526,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -11387,7 +11552,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -11411,7 +11577,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -11435,7 +11602,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -11459,7 +11627,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -11484,7 +11653,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -11508,7 +11678,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -11532,7 +11703,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -11556,7 +11728,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -11581,7 +11754,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "expiration": "1697788800000000000",
-                    "nonce": 1234567890
+                    "nonce": 1234567890,
+                    "chain_id": "325"
                 }
             }
             '
@@ -11605,7 +11779,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "expiration": "1697788800000000000",
-                        "nonce": 1234567890
+                        "nonce": 1234567890,
+                        "chain_id": "325"
                     }
                 },
                 "id": 123
@@ -11629,7 +11804,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                     "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                     "v": 28,
                     "e": "1697788800000000000",
-                    "n": 1234567890
+                    "n": 1234567890,
+                    "ci": "325"
                 }
             }
             '
@@ -11653,7 +11829,8 @@ LITE ENDPOINT: lite/v1/vault_redeem
                         "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
                         "v": 28,
                         "e": "1697788800000000000",
-                        "n": 1234567890
+                        "n": 1234567890,
+                        "ci": "325"
                     }
                 },
                 "i": 123
@@ -12344,14 +12521,18 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
         ``` { .json .copy }
         {
             "vault_id": "2312134",
-            "only_own_investments": true
+            "only_own_investments": true,
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000"
         }
         ```
         **Lite Request**
         ``` { .json .copy }
         {
             "vi": "2312134",
-            "oo": true
+            "oo": true,
+            "st": "1697788800000000000",
+            "et": "1697788800000000000"
         }
         ```
     </section>
@@ -12436,7 +12617,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vault_id": "2312134",
-                "only_own_investments": true
+                "only_own_investments": true,
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000"
             }
             '
             ```
@@ -12451,7 +12634,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "method": "v1/vault_manager_investor_history",
                 "params": {
                     "vault_id": "2312134",
-                    "only_own_investments": true
+                    "only_own_investments": true,
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000"
                 },
                 "id": 123
             }
@@ -12466,7 +12651,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vi": "2312134",
-                "oo": true
+                "oo": true,
+                "st": "1697788800000000000",
+                "et": "1697788800000000000"
             }
             '
             ```
@@ -12481,7 +12668,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "m": "v1/vault_manager_investor_history",
                 "p": {
                     "vi": "2312134",
-                    "oo": true
+                    "oo": true,
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000"
                 },
                 "i": 123
             }
@@ -12497,7 +12686,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vault_id": "2312134",
-                "only_own_investments": true
+                "only_own_investments": true,
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000"
             }
             '
             ```
@@ -12512,7 +12703,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "method": "v1/vault_manager_investor_history",
                 "params": {
                     "vault_id": "2312134",
-                    "only_own_investments": true
+                    "only_own_investments": true,
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000"
                 },
                 "id": 123
             }
@@ -12527,7 +12720,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vi": "2312134",
-                "oo": true
+                "oo": true,
+                "st": "1697788800000000000",
+                "et": "1697788800000000000"
             }
             '
             ```
@@ -12542,7 +12737,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "m": "v1/vault_manager_investor_history",
                 "p": {
                     "vi": "2312134",
-                    "oo": true
+                    "oo": true,
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000"
                 },
                 "i": 123
             }
@@ -12558,7 +12755,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vault_id": "2312134",
-                "only_own_investments": true
+                "only_own_investments": true,
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000"
             }
             '
             ```
@@ -12573,7 +12772,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "method": "v1/vault_manager_investor_history",
                 "params": {
                     "vault_id": "2312134",
-                    "only_own_investments": true
+                    "only_own_investments": true,
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000"
                 },
                 "id": 123
             }
@@ -12588,7 +12789,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vi": "2312134",
-                "oo": true
+                "oo": true,
+                "st": "1697788800000000000",
+                "et": "1697788800000000000"
             }
             '
             ```
@@ -12603,7 +12806,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "m": "v1/vault_manager_investor_history",
                 "p": {
                     "vi": "2312134",
-                    "oo": true
+                    "oo": true,
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000"
                 },
                 "i": 123
             }
@@ -12619,7 +12824,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vault_id": "2312134",
-                "only_own_investments": true
+                "only_own_investments": true,
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000"
             }
             '
             ```
@@ -12634,7 +12841,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "method": "v1/vault_manager_investor_history",
                 "params": {
                     "vault_id": "2312134",
-                    "only_own_investments": true
+                    "only_own_investments": true,
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000"
                 },
                 "id": 123
             }
@@ -12649,7 +12858,9 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "vi": "2312134",
-                "oo": true
+                "oo": true,
+                "st": "1697788800000000000",
+                "et": "1697788800000000000"
             }
             '
             ```
@@ -12664,7 +12875,1876 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                 "m": "v1/vault_manager_investor_history",
                 "p": {
                     "vi": "2312134",
-                    "oo": true
+                    "oo": true,
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+## CrossExchangeVault
+### Cross Exch Vault View Investment Queue
+```
+FULL ENDPOINT: full/v1/cev_view_investment_queue
+LITE ENDPOINT: lite/v1/cev_view_investment_queue
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_cross_exch_vault_view_investment_queue_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "vault_id": "3477045127917224"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "vi": "3477045127917224"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_cross_exch_vault_view_investment_queue_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "investment_queue": [{
+                "request_time": "1697788800000000000",
+                "currency": "USDT",
+                "num_tokens": 1000000,
+                "is_manager": true
+            }],
+            "total_investment_equity": 1000000
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "iq": [{
+                "rt": "1697788800000000000",
+                "c": "USDT",
+                "nt": 1000000,
+                "im": true
+            }],
+            "ti": 1000000
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |7000|400|Vault ID provided is invalid and does not belong to any vault|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cev_view_investment_queue' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vault_id": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_view_investment_queue",
+                "params": {
+                    "vault_id": "3477045127917224"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cev_view_investment_queue' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vi": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_view_investment_queue",
+                "p": {
+                    "vi": "3477045127917224"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cev_view_investment_queue' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vault_id": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_view_investment_queue",
+                "params": {
+                    "vault_id": "3477045127917224"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cev_view_investment_queue' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vi": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_view_investment_queue",
+                "p": {
+                    "vi": "3477045127917224"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/cev_view_investment_queue' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vault_id": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_view_investment_queue",
+                "params": {
+                    "vault_id": "3477045127917224"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/cev_view_investment_queue' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vi": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_view_investment_queue",
+                "p": {
+                    "vi": "3477045127917224"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/cev_view_investment_queue' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vault_id": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_view_investment_queue",
+                "params": {
+                    "vault_id": "3477045127917224"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/cev_view_investment_queue' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vi": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_view_investment_queue",
+                "p": {
+                    "vi": "3477045127917224"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Cross Exch Vault Trigger Redemption
+```
+FULL ENDPOINT: full/v1/cev_trigger_redemption
+LITE ENDPOINT: lite/v1/cev_trigger_redemption
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_cross_exch_vault_trigger_redemption_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "vault_id": "3477045127917224",
+            "request_time": "1697788800000000000"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "vi": "3477045127917224",
+            "rt": "1697788800000000000"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/ack_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": {
+                "ack": "true"
+            }
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "a": "true"
+            }
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1004|404|Data Not Found|
+        |7000|400|Vault ID provided is invalid and does not belong to any vault|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cev_trigger_redemption' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vault_id": "3477045127917224",
+                "request_time": "1697788800000000000"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_trigger_redemption",
+                "params": {
+                    "vault_id": "3477045127917224",
+                    "request_time": "1697788800000000000"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cev_trigger_redemption' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vi": "3477045127917224",
+                "rt": "1697788800000000000"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_trigger_redemption",
+                "p": {
+                    "vi": "3477045127917224",
+                    "rt": "1697788800000000000"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cev_trigger_redemption' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vault_id": "3477045127917224",
+                "request_time": "1697788800000000000"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_trigger_redemption",
+                "params": {
+                    "vault_id": "3477045127917224",
+                    "request_time": "1697788800000000000"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cev_trigger_redemption' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vi": "3477045127917224",
+                "rt": "1697788800000000000"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_trigger_redemption",
+                "p": {
+                    "vi": "3477045127917224",
+                    "rt": "1697788800000000000"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/cev_trigger_redemption' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vault_id": "3477045127917224",
+                "request_time": "1697788800000000000"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_trigger_redemption",
+                "params": {
+                    "vault_id": "3477045127917224",
+                    "request_time": "1697788800000000000"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/cev_trigger_redemption' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vi": "3477045127917224",
+                "rt": "1697788800000000000"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_trigger_redemption",
+                "p": {
+                    "vi": "3477045127917224",
+                    "rt": "1697788800000000000"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/cev_trigger_redemption' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vault_id": "3477045127917224",
+                "request_time": "1697788800000000000"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_trigger_redemption",
+                "params": {
+                    "vault_id": "3477045127917224",
+                    "request_time": "1697788800000000000"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/cev_trigger_redemption' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vi": "3477045127917224",
+                "rt": "1697788800000000000"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_trigger_redemption",
+                "p": {
+                    "vi": "3477045127917224",
+                    "rt": "1697788800000000000"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Cross Exch Vault Attest Equity
+```
+FULL ENDPOINT: full/v1/cev_attest_equity
+LITE ENDPOINT: lite/v1/cev_attest_equity
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_cross_exch_vault_attest_equity_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "vault_id": "3477045127917224",
+            "total_equity": 1000000,
+            "num_lp_tokens": 1000000,
+            "share_price": 1000000,
+            "last_update_timestamp": "1697788800000000000",
+            "signature": {
+                "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                "v": 28,
+                "expiration": "1697788800000000000",
+                "nonce": 1234567890,
+                "chain_id": "325"
+            }
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "vi": "3477045127917224",
+            "te": 1000000,
+            "nl": 1000000,
+            "sp": 1000000,
+            "lu": "1697788800000000000",
+            "s": {
+                "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                "v": 28,
+                "e": "1697788800000000000",
+                "n": 1234567890,
+                "ci": "325"
+            }
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/ack_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": {
+                "ack": "true"
+            }
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "a": "true"
+            }
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |1009|503|We are temporarily deactivating this API endpoint, please try again later|
+        |2000|403|Signature is from an unauthorized signer|
+        |2001|403|Signature has expired|
+        |2002|403|Signature does not match payload|
+        |2004|403|Signature is from an expired session key|
+        |2006|403|Signature R/S must have exactly 64 characters long without 0x prefix|
+        |2005|403|Signature V must be 27/28|
+        |2007|403|Signature S must be in the lower half of the curve|
+        |2008|403|Signature exceeds maximum allowed duration.|
+        |4000|400|Insufficient balance to complete transfer|
+        |7000|400|Vault ID provided is invalid and does not belong to any vault|
+        |7003|400|This vault has been delisted/closed.|
+        |7020|400|Attested share price is inconsistent with signed total-equity value.|
+        |7021|400|Attested last-updated time is inconsistent with GRVT record.|
+        |7022|400|Attested token supply is inconsistent with GRVT record.|
+        |7025|400|This operation requires a locked cross-exchange vault|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cev_attest_equity' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vault_id": "3477045127917224",
+                "total_equity": 1000000,
+                "num_lp_tokens": 1000000,
+                "share_price": 1000000,
+                "last_update_timestamp": "1697788800000000000",
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890,
+                    "chain_id": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_attest_equity",
+                "params": {
+                    "vault_id": "3477045127917224",
+                    "total_equity": 1000000,
+                    "num_lp_tokens": 1000000,
+                    "share_price": 1000000,
+                    "last_update_timestamp": "1697788800000000000",
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890,
+                        "chain_id": "325"
+                    }
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cev_attest_equity' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vi": "3477045127917224",
+                "te": 1000000,
+                "nl": 1000000,
+                "sp": 1000000,
+                "lu": "1697788800000000000",
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890,
+                    "ci": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_attest_equity",
+                "p": {
+                    "vi": "3477045127917224",
+                    "te": 1000000,
+                    "nl": 1000000,
+                    "sp": 1000000,
+                    "lu": "1697788800000000000",
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890,
+                        "ci": "325"
+                    }
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cev_attest_equity' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vault_id": "3477045127917224",
+                "total_equity": 1000000,
+                "num_lp_tokens": 1000000,
+                "share_price": 1000000,
+                "last_update_timestamp": "1697788800000000000",
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890,
+                    "chain_id": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_attest_equity",
+                "params": {
+                    "vault_id": "3477045127917224",
+                    "total_equity": 1000000,
+                    "num_lp_tokens": 1000000,
+                    "share_price": 1000000,
+                    "last_update_timestamp": "1697788800000000000",
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890,
+                        "chain_id": "325"
+                    }
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cev_attest_equity' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vi": "3477045127917224",
+                "te": 1000000,
+                "nl": 1000000,
+                "sp": 1000000,
+                "lu": "1697788800000000000",
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890,
+                    "ci": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_attest_equity",
+                "p": {
+                    "vi": "3477045127917224",
+                    "te": 1000000,
+                    "nl": 1000000,
+                    "sp": 1000000,
+                    "lu": "1697788800000000000",
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890,
+                        "ci": "325"
+                    }
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/cev_attest_equity' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vault_id": "3477045127917224",
+                "total_equity": 1000000,
+                "num_lp_tokens": 1000000,
+                "share_price": 1000000,
+                "last_update_timestamp": "1697788800000000000",
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890,
+                    "chain_id": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_attest_equity",
+                "params": {
+                    "vault_id": "3477045127917224",
+                    "total_equity": 1000000,
+                    "num_lp_tokens": 1000000,
+                    "share_price": 1000000,
+                    "last_update_timestamp": "1697788800000000000",
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890,
+                        "chain_id": "325"
+                    }
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/cev_attest_equity' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vi": "3477045127917224",
+                "te": 1000000,
+                "nl": 1000000,
+                "sp": 1000000,
+                "lu": "1697788800000000000",
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890,
+                    "ci": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_attest_equity",
+                "p": {
+                    "vi": "3477045127917224",
+                    "te": 1000000,
+                    "nl": 1000000,
+                    "sp": 1000000,
+                    "lu": "1697788800000000000",
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890,
+                        "ci": "325"
+                    }
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/cev_attest_equity' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vault_id": "3477045127917224",
+                "total_equity": 1000000,
+                "num_lp_tokens": 1000000,
+                "share_price": 1000000,
+                "last_update_timestamp": "1697788800000000000",
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890,
+                    "chain_id": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_attest_equity",
+                "params": {
+                    "vault_id": "3477045127917224",
+                    "total_equity": 1000000,
+                    "num_lp_tokens": 1000000,
+                    "share_price": 1000000,
+                    "last_update_timestamp": "1697788800000000000",
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890,
+                        "chain_id": "325"
+                    }
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/cev_attest_equity' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "vi": "3477045127917224",
+                "te": 1000000,
+                "nl": 1000000,
+                "sp": 1000000,
+                "lu": "1697788800000000000",
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890,
+                    "ci": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_attest_equity",
+                "p": {
+                    "vi": "3477045127917224",
+                    "te": 1000000,
+                    "nl": 1000000,
+                    "sp": 1000000,
+                    "lu": "1697788800000000000",
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890,
+                        "ci": "325"
+                    }
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Cross Exch Vault Lock
+```
+FULL ENDPOINT: full/v1/cev_lock
+LITE ENDPOINT: lite/v1/cev_lock
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_cross_exch_vault_lock_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "cross_exch_vault_id": "3477045127917224"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "ce": "3477045127917224"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/ack_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": {
+                "ack": "true"
+            }
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "a": "true"
+            }
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |1009|503|We are temporarily deactivating this API endpoint, please try again later|
+        |2000|403|Signature is from an unauthorized signer|
+        |2001|403|Signature has expired|
+        |2002|403|Signature does not match payload|
+        |2004|403|Signature is from an expired session key|
+        |2006|403|Signature R/S must have exactly 64 characters long without 0x prefix|
+        |2005|403|Signature V must be 27/28|
+        |2007|403|Signature S must be in the lower half of the curve|
+        |2008|403|Signature exceeds maximum allowed duration.|
+        |4000|400|Insufficient balance to complete transfer|
+        |7000|400|Vault ID provided is invalid and does not belong to any vault|
+        |7003|400|This vault has been delisted/closed.|
+        |7004|400|This investment would cause the vault to exceed its valuation cap.|
+        |7023|400|This cross-exchange vault is already locked|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cev_lock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "cross_exch_vault_id": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_lock",
+                "params": {
+                    "cross_exch_vault_id": "3477045127917224"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cev_lock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "ce": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_lock",
+                "p": {
+                    "ce": "3477045127917224"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cev_lock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "cross_exch_vault_id": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_lock",
+                "params": {
+                    "cross_exch_vault_id": "3477045127917224"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cev_lock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "ce": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_lock",
+                "p": {
+                    "ce": "3477045127917224"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/cev_lock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "cross_exch_vault_id": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_lock",
+                "params": {
+                    "cross_exch_vault_id": "3477045127917224"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/cev_lock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "ce": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_lock",
+                "p": {
+                    "ce": "3477045127917224"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/cev_lock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "cross_exch_vault_id": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_lock",
+                "params": {
+                    "cross_exch_vault_id": "3477045127917224"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/cev_lock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "ce": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_lock",
+                "p": {
+                    "ce": "3477045127917224"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Cross Exch Vault Unlock
+```
+FULL ENDPOINT: full/v1/cev_unlock
+LITE ENDPOINT: lite/v1/cev_unlock
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_cross_exch_vault_unlock_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "cross_exch_vault_id": "3477045127917224"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "ce": "3477045127917224"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/ack_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": {
+                "ack": "true"
+            }
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "a": "true"
+            }
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |1009|503|We are temporarily deactivating this API endpoint, please try again later|
+        |2000|403|Signature is from an unauthorized signer|
+        |2001|403|Signature has expired|
+        |2002|403|Signature does not match payload|
+        |2004|403|Signature is from an expired session key|
+        |2006|403|Signature R/S must have exactly 64 characters long without 0x prefix|
+        |2005|403|Signature V must be 27/28|
+        |2007|403|Signature S must be in the lower half of the curve|
+        |2008|403|Signature exceeds maximum allowed duration.|
+        |4000|400|Insufficient balance to complete transfer|
+        |7000|400|Vault ID provided is invalid and does not belong to any vault|
+        |7003|400|This vault has been delisted/closed.|
+        |7004|400|This investment would cause the vault to exceed its valuation cap.|
+        |7024|400|This cross-exchange vault is already unlocked|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/cev_unlock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "cross_exch_vault_id": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_unlock",
+                "params": {
+                    "cross_exch_vault_id": "3477045127917224"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/cev_unlock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "ce": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_unlock",
+                "p": {
+                    "ce": "3477045127917224"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/cev_unlock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "cross_exch_vault_id": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_unlock",
+                "params": {
+                    "cross_exch_vault_id": "3477045127917224"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/cev_unlock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "ce": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_unlock",
+                "p": {
+                    "ce": "3477045127917224"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/cev_unlock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "cross_exch_vault_id": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_unlock",
+                "params": {
+                    "cross_exch_vault_id": "3477045127917224"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/cev_unlock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "ce": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_unlock",
+                "p": {
+                    "ce": "3477045127917224"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/cev_unlock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "cross_exch_vault_id": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/cev_unlock",
+                "params": {
+                    "cross_exch_vault_id": "3477045127917224"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/cev_unlock' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "ce": "3477045127917224"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/cev_unlock",
+                "p": {
+                    "ce": "3477045127917224"
                 },
                 "i": 123
             }
