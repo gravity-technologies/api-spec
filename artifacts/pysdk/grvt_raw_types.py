@@ -77,6 +77,17 @@ class CandlestickType(Enum):
     MID = "MID"
 
 
+class FundingRateAggregationType(Enum):
+    # Default value -- one record returned per funding interval. Query instruments endpoint to learn funding interval of each instrument.
+    FUNDING_INTERVAL = "FUNDING_INTERVAL"
+    # Returns one record per hour -- normalizes all funding rates to 1h durations, so `fundingRate`  value is cumulative and can exceed a funding interval's configured cap / floor.
+    ONE_HOURLY = "ONE_HOURLY"
+    # Returns one record per 4 hours -- normalizes all funding rates to 4h durations, so `fundingRate`  value is cumulative and can exceed a funding interval's configured cap / floor.
+    FOUR_HOURLY = "FOUR_HOURLY"
+    # Returns one record for eight hours -- normalizes all funding rates to 8h durations, so `fundingRate`  value is cumulative and can exceed a funding interval's configured cap / floor.
+    EIGHT_HOURLY = "EIGHT_HOURLY"
+
+
 class InstrumentSettlementPeriod(Enum):
     # Instrument settles through perpetual funding cycles
     PERPETUAL = "PERPETUAL"
@@ -782,6 +793,437 @@ class ApiSetDeriskToMaintenanceMarginRatioResponse:
 
 
 @dataclass
+class ApiOrderbookLevelsRequest:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # Depth of the order book to be retrieved (10, 50, 100, 500)
+    depth: int
+
+
+@dataclass
+class OrderbookLevel:
+    # The price of the level, expressed in `9` decimals
+    price: str
+    # The number of assets offered, expressed in base asset decimal units
+    size: str
+    # The number of open orders at this level
+    num_orders: int
+
+
+@dataclass
+class OrderbookLevels:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The list of best bids up till query depth
+    bids: list[OrderbookLevel]
+    # The list of best asks up till query depth
+    asks: list[OrderbookLevel]
+
+
+@dataclass
+class ApiOrderbookLevelsResponse:
+    # The orderbook levels objects matching the request asset
+    result: OrderbookLevels
+
+
+@dataclass
+class ApiMiniTickerRequest:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+
+
+@dataclass
+class MiniTicker:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str | None = None
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str | None = None
+    # The mark price of the instrument, expressed in `9` decimals
+    mark_price: str | None = None
+    # The index price of the instrument, expressed in `9` decimals
+    index_price: str | None = None
+    # The last traded price of the instrument (also close price), expressed in `9` decimals
+    last_price: str | None = None
+    # The number of assets traded in the last trade, expressed in base asset decimal units
+    last_size: str | None = None
+    # The mid price of the instrument, expressed in `9` decimals
+    mid_price: str | None = None
+    # The best bid price of the instrument, expressed in `9` decimals
+    best_bid_price: str | None = None
+    # The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units
+    best_bid_size: str | None = None
+    # The best ask price of the instrument, expressed in `9` decimals
+    best_ask_price: str | None = None
+    # The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units
+    best_ask_size: str | None = None
+
+
+@dataclass
+class ApiMiniTickerResponse:
+    # The mini ticker matching the request asset
+    result: MiniTicker
+
+
+@dataclass
+class ApiTickerRequest:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+
+
+@dataclass
+class Ticker:
+    """
+    Derived data such as the below, will not be included by default:
+      - 24 hour volume (`buyVolume + sellVolume`)
+      - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)
+      - 24 hour average trade price (`volumeQ / volumeU`)
+      - 24 hour average trade volume (`volume / trades`)
+      - 24 hour percentage change (`24hStatChange / 24hStat`)
+      - 48 hour statistics (`2 * 24hStat - 24hStatChange`)
+
+    To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.
+    Ticker extensions are currently under design to offer you more convenience.
+    These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.
+
+    """
+
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str | None = None
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str | None = None
+    # The mark price of the instrument, expressed in `9` decimals
+    mark_price: str | None = None
+    # The index price of the instrument, expressed in `9` decimals
+    index_price: str | None = None
+    # The last traded price of the instrument (also close price), expressed in `9` decimals
+    last_price: str | None = None
+    # The number of assets traded in the last trade, expressed in base asset decimal units
+    last_size: str | None = None
+    # The mid price of the instrument, expressed in `9` decimals
+    mid_price: str | None = None
+    # The best bid price of the instrument, expressed in `9` decimals
+    best_bid_price: str | None = None
+    # The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units
+    best_bid_size: str | None = None
+    # The best ask price of the instrument, expressed in `9` decimals
+    best_ask_price: str | None = None
+    # The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units
+    best_ask_size: str | None = None
+    # DEPRECATED: To be removed in a future release. Please refer to the field `funding_rate` instead, for the funding rate being applied over `funding_interval_hours` (interval ending at `next_funding_time`).
+    funding_rate_8h_curr: str | None = None
+    # DEPRECATED: To be removed in a future release. Please refer to the field `funding_rate` instead, for the funding rate being applied over `funding_interval_hours` (interval ending at `next_funding_time`).
+    funding_rate_8h_avg: str | None = None
+    # The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)
+    interest_rate: str | None = None
+    # [Options] The forward price of the option, expressed in `9` decimals
+    forward_price: str | None = None
+    # The 24 hour taker buy volume of the instrument, expressed in base asset decimal units
+    buy_volume_24h_b: str | None = None
+    # The 24 hour taker sell volume of the instrument, expressed in base asset decimal units
+    sell_volume_24h_b: str | None = None
+    # The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units
+    buy_volume_24h_q: str | None = None
+    # The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units
+    sell_volume_24h_q: str | None = None
+    # The 24 hour highest traded price of the instrument, expressed in `9` decimals
+    high_price: str | None = None
+    # The 24 hour lowest traded price of the instrument, expressed in `9` decimals
+    low_price: str | None = None
+    # The 24 hour first traded price of the instrument, expressed in `9` decimals
+    open_price: str | None = None
+    # The open interest in the instrument, expressed in base asset decimal units
+    open_interest: str | None = None
+    # The ratio of accounts that are net long vs net short on this instrument
+    long_short_ratio: str | None = None
+    # The current indicative funding rate for the active interval, expressed in centibeeps
+    funding_rate: str | None = None
+    # Timestamp in nanoseconds when the current funding interval ends
+    next_funding_time: str | None = None
+
+
+@dataclass
+class ApiTickerResponse:
+    # The mini ticker matching the request asset
+    result: Ticker
+
+
+@dataclass
+class ApiTradeRequest:
+    """
+    Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.
+    This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
+    """
+
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int
+
+
+@dataclass
+class Trade:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # If taker was the buyer on the trade
+    is_taker_buyer: bool
+    # The number of assets being traded, expressed in base asset decimal units
+    size: str
+    # The traded price, expressed in `9` decimals
+    price: str
+    # The mark price of the instrument at point of trade, expressed in `9` decimals
+    mark_price: str
+    # The index price of the instrument at point of trade, expressed in `9` decimals
+    index_price: str
+    # The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)
+    interest_rate: str
+    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
+    forward_price: str
+    """
+    A trade identifier, globally unique, and monotonically increasing (not by `1`).
+    All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.
+    `trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.
+    """
+    trade_id: str
+    # The venue where the trade occurred
+    venue: Venue
+    # If the trade is a RPI trade
+    is_rpi: bool
+
+
+@dataclass
+class ApiTradeResponse:
+    # The public trades matching the request asset
+    result: list[Trade]
+
+
+@dataclass
+class ApiTradeHistoryRequest:
+    """
+    Perform historical lookup of public trades in any given instrument.
+    This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
+    Only data from the last three months will be retained.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
+    start_time: str | None = None
+    # The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+
+
+@dataclass
+class ApiTradeHistoryResponse:
+    # The public trades matching the request asset
+    result: list[Trade]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
+
+
+@dataclass
+class ApiGetInstrumentRequest:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+
+
+@dataclass
+class InstrumentDisplay:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The asset ID used for instrument signing.
+    instrument_hash: str
+    # The base currency
+    base: str
+    # The quote currency
+    quote: str
+    # The kind of instrument
+    kind: Kind
+    # Venues that this instrument can be traded at
+    venues: list[Venue]
+    # The settlement period of the instrument
+    settlement_period: InstrumentSettlementPeriod
+    # The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
+    base_decimals: int
+    # The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
+    quote_decimals: int
+    # The size of a single tick, expressed in price decimal units
+    tick_size: str
+    # The minimum contract size, expressed in base asset decimal units
+    min_size: str
+    # Creation time in unix nanoseconds
+    create_time: str
+    # The maximum position size, expressed in base asset decimal units
+    max_position_size: str
+    # Defines the funding interval to be applied.
+    funding_interval_hours: int | None = None
+    # Funding rate cap over the defined `intervalHours`.
+    adjusted_funding_rate_cap: str | None = None
+    # Funding rate floor over the defined `intervalHours`.
+    adjusted_funding_rate_floor: str | None = None
+
+
+@dataclass
+class ApiGetInstrumentResponse:
+    # The instrument matching the request asset
+    result: InstrumentDisplay
+
+
+@dataclass
+class ApiGetFilteredInstrumentsRequest:
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
+    kind: list[Kind] | None = None
+    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
+    base: list[str] | None = None
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    quote: list[str] | None = None
+    # Request for active instruments only
+    is_active: bool | None = None
+    # The limit to query for. Defaults to 500; Max 100000
+    limit: int | None = None
+
+
+@dataclass
+class ApiGetFilteredInstrumentsResponse:
+    # The instruments matching the request filter
+    result: list[InstrumentDisplay]
+
+
+@dataclass
+class ApiGetCurrencyRequest:
+    pass
+
+
+@dataclass
+class CurrencyDetail:
+    # The integer value of the currency
+    id: int
+    # The name of the currency
+    symbol: str
+    # The balance decimals of the currency
+    balance_decimals: int
+    # The quantity multiplier of the currency
+    quantity_multiplier: str
+
+
+@dataclass
+class ApiGetCurrencyResponse:
+    # The list of currencies
+    result: list[CurrencyDetail]
+
+
+@dataclass
+class ApiCandlestickRequest:
+    """
+    Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The interval of each candlestick
+    interval: CandlestickInterval
+    # The type of candlestick data to retrieve
+    type: CandlestickType
+    # Start time of kline data in unix nanoseconds
+    start_time: str | None = None
+    # End time of kline data in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+
+
+@dataclass
+class Candlestick:
+    # Open time of kline bar in unix nanoseconds
+    open_time: str
+    # Close time of kline bar in unix nanosecond
+    close_time: str
+    # The open price, expressed in underlying currency resolution units
+    open: str
+    # The close price, expressed in underlying currency resolution units
+    close: str
+    # The high price, expressed in underlying currency resolution units
+    high: str
+    # The low price, expressed in underlying currency resolution units
+    low: str
+    # The underlying volume transacted, expressed in base asset decimal units
+    volume_b: str
+    # The quote volume transacted, expressed in quote asset decimal units
+    volume_q: str
+    # The number of trades transacted
+    trades: int
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+
+
+@dataclass
+class ApiCandlestickResponse:
+    # The candlestick result set for given interval
+    result: list[Candlestick]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
+
+
+@dataclass
+class ApiFundingRateRequest:
+    """
+    Lookup the historical funding rate of a perpetual future.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # Start time of funding rate in unix nanoseconds
+    start_time: str | None = None
+    # End time of funding rate in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+    # Aggregation method for historical funding rate observations. Defaults to using the instrument-specific funding interval.
+    agg_type: FundingRateAggregationType | None = None
+
+
+@dataclass
+class ApiFundingRate:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The funding rate of the instrument, expressed in percentage points
+    funding_rate: str
+    # The funding timestamp of the funding rate, expressed in unix nanoseconds
+    funding_time: str
+    # The mark price of the instrument at funding timestamp, expressed in `9` decimals
+    mark_price: str
+    # Deprecated: Refer to `funding_rate` instead. Will be removed in a future release.
+    funding_rate_8_h_avg: str
+    # Funding interval in hours (e.g. 1/4/8/etc).
+    funding_interval_hours: int
+
+
+@dataclass
+class ApiFundingRateResponse:
+    # The funding rate result set for given interval
+    result: list[ApiFundingRate]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
+
+
+@dataclass
 class JSONRPCRequest:
     """
     All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.
@@ -971,28 +1413,6 @@ class WSOrderbookLevelsFeedSelectorV1:
 
 
 @dataclass
-class OrderbookLevel:
-    # The price of the level, expressed in `9` decimals
-    price: str
-    # The number of assets offered, expressed in base asset decimal units
-    size: str
-    # The number of open orders at this level
-    num_orders: int
-
-
-@dataclass
-class OrderbookLevels:
-    # Time at which the event was emitted in unix nanoseconds
-    event_time: str
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The list of best bids up till query depth
-    bids: list[OrderbookLevel]
-    # The list of best asks up till query depth
-    asks: list[OrderbookLevel]
-
-
-@dataclass
 class WSOrderbookLevelsFeedDataV1:
     # Stream name
     stream: str
@@ -1032,32 +1452,6 @@ class WSMiniTickerFeedSelectorV1:
     Snapshot (200, 500, 1000, 5000)
     """
     rate: int
-
-
-@dataclass
-class MiniTicker:
-    # Time at which the event was emitted in unix nanoseconds
-    event_time: str | None = None
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str | None = None
-    # The mark price of the instrument, expressed in `9` decimals
-    mark_price: str | None = None
-    # The index price of the instrument, expressed in `9` decimals
-    index_price: str | None = None
-    # The last traded price of the instrument (also close price), expressed in `9` decimals
-    last_price: str | None = None
-    # The number of assets traded in the last trade, expressed in base asset decimal units
-    last_size: str | None = None
-    # The mid price of the instrument, expressed in `9` decimals
-    mid_price: str | None = None
-    # The best bid price of the instrument, expressed in `9` decimals
-    best_bid_price: str | None = None
-    # The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units
-    best_bid_size: str | None = None
-    # The best ask price of the instrument, expressed in `9` decimals
-    best_ask_price: str | None = None
-    # The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units
-    best_ask_size: str | None = None
 
 
 @dataclass
@@ -1103,77 +1497,6 @@ class WSTickerFeedSelectorV1:
 
 
 @dataclass
-class Ticker:
-    """
-    Derived data such as the below, will not be included by default:
-      - 24 hour volume (`buyVolume + sellVolume`)
-      - 24 hour taker buy/sell ratio (`buyVolume / sellVolume`)
-      - 24 hour average trade price (`volumeQ / volumeU`)
-      - 24 hour average trade volume (`volume / trades`)
-      - 24 hour percentage change (`24hStatChange / 24hStat`)
-      - 48 hour statistics (`2 * 24hStat - 24hStatChange`)
-
-    To query for an extended ticker payload, leverage the `greeks` and the `derived` flags.
-    Ticker extensions are currently under design to offer you more convenience.
-    These flags are only supported on the `Ticker Snapshot` WS endpoint, and on the `Ticker` API endpoint.
-
-    """
-
-    # Time at which the event was emitted in unix nanoseconds
-    event_time: str | None = None
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str | None = None
-    # The mark price of the instrument, expressed in `9` decimals
-    mark_price: str | None = None
-    # The index price of the instrument, expressed in `9` decimals
-    index_price: str | None = None
-    # The last traded price of the instrument (also close price), expressed in `9` decimals
-    last_price: str | None = None
-    # The number of assets traded in the last trade, expressed in base asset decimal units
-    last_size: str | None = None
-    # The mid price of the instrument, expressed in `9` decimals
-    mid_price: str | None = None
-    # The best bid price of the instrument, expressed in `9` decimals
-    best_bid_price: str | None = None
-    # The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units
-    best_bid_size: str | None = None
-    # The best ask price of the instrument, expressed in `9` decimals
-    best_ask_price: str | None = None
-    # The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units
-    best_ask_size: str | None = None
-    # DEPRECATED: To be removed in a future release. Please refer to the field `funding_rate` instead, for the funding rate being applied over `funding_interval_hours` (interval ending at `next_funding_time`).
-    funding_rate_8h_curr: str | None = None
-    # DEPRECATED: To be removed in a future release. Please refer to the field `funding_rate` instead, for the funding rate being applied over `funding_interval_hours` (interval ending at `next_funding_time`).
-    funding_rate_8h_avg: str | None = None
-    # The interest rate of the underlying, expressed in centibeeps (1/100th of a basis point)
-    interest_rate: str | None = None
-    # [Options] The forward price of the option, expressed in `9` decimals
-    forward_price: str | None = None
-    # The 24 hour taker buy volume of the instrument, expressed in base asset decimal units
-    buy_volume_24h_b: str | None = None
-    # The 24 hour taker sell volume of the instrument, expressed in base asset decimal units
-    sell_volume_24h_b: str | None = None
-    # The 24 hour taker buy volume of the instrument, expressed in quote asset decimal units
-    buy_volume_24h_q: str | None = None
-    # The 24 hour taker sell volume of the instrument, expressed in quote asset decimal units
-    sell_volume_24h_q: str | None = None
-    # The 24 hour highest traded price of the instrument, expressed in `9` decimals
-    high_price: str | None = None
-    # The 24 hour lowest traded price of the instrument, expressed in `9` decimals
-    low_price: str | None = None
-    # The 24 hour first traded price of the instrument, expressed in `9` decimals
-    open_price: str | None = None
-    # The open interest in the instrument, expressed in base asset decimal units
-    open_interest: str | None = None
-    # The ratio of accounts that are net long vs net short on this instrument
-    long_short_ratio: str | None = None
-    # The current indicative funding rate for the active interval, expressed in centibeeps
-    funding_rate: str | None = None
-    # Timestamp in nanoseconds when the current funding interval ends
-    next_funding_time: str | None = None
-
-
-@dataclass
 class WSTickerFeedDataV1:
     # Stream name
     stream: str
@@ -1200,38 +1523,6 @@ class WSTradeFeedSelectorV1:
     instrument: str
     # The limit to query for. Valid values are (50, 200, 500, 1000). Default is 50
     limit: int
-
-
-@dataclass
-class Trade:
-    # Time at which the event was emitted in unix nanoseconds
-    event_time: str
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # If taker was the buyer on the trade
-    is_taker_buyer: bool
-    # The number of assets being traded, expressed in base asset decimal units
-    size: str
-    # The traded price, expressed in `9` decimals
-    price: str
-    # The mark price of the instrument at point of trade, expressed in `9` decimals
-    mark_price: str
-    # The index price of the instrument at point of trade, expressed in `9` decimals
-    index_price: str
-    # The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)
-    interest_rate: str
-    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
-    forward_price: str
-    """
-    A trade identifier, globally unique, and monotonically increasing (not by `1`).
-    All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.
-    `trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.
-    """
-    trade_id: str
-    # The venue where the trade occurred
-    venue: Venue
-    # If the trade is a RPI trade
-    is_rpi: bool
 
 
 @dataclass
@@ -1268,30 +1559,6 @@ class WSCandlestickFeedSelectorV1:
     interval: CandlestickInterval
     # The type of candlestick data to retrieve
     type: CandlestickType
-
-
-@dataclass
-class Candlestick:
-    # Open time of kline bar in unix nanoseconds
-    open_time: str
-    # Close time of kline bar in unix nanosecond
-    close_time: str
-    # The open price, expressed in underlying currency resolution units
-    open: str
-    # The close price, expressed in underlying currency resolution units
-    close: str
-    # The high price, expressed in underlying currency resolution units
-    high: str
-    # The low price, expressed in underlying currency resolution units
-    low: str
-    # The underlying volume transacted, expressed in base asset decimal units
-    volume_b: str
-    # The quote volume transacted, expressed in quote asset decimal units
-    volume_q: str
-    # The number of trades transacted
-    trades: int
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
 
 
 @dataclass
@@ -1343,258 +1610,6 @@ class WSListStreamsParams:
 class WSListStreamsResult:
     # The list of stream references  the connection is connected to
     stream_reference: list[StreamReference]
-
-
-@dataclass
-class ApiOrderbookLevelsRequest:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # Depth of the order book to be retrieved (10, 50, 100, 500)
-    depth: int
-
-
-@dataclass
-class ApiOrderbookLevelsResponse:
-    # The orderbook levels objects matching the request asset
-    result: OrderbookLevels
-
-
-@dataclass
-class ApiMiniTickerRequest:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-
-
-@dataclass
-class ApiMiniTickerResponse:
-    # The mini ticker matching the request asset
-    result: MiniTicker
-
-
-@dataclass
-class ApiTickerRequest:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-
-
-@dataclass
-class ApiTickerResponse:
-    # The mini ticker matching the request asset
-    result: Ticker
-
-
-@dataclass
-class ApiTradeRequest:
-    """
-    Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.
-    This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
-    """
-
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int
-
-
-@dataclass
-class ApiTradeResponse:
-    # The public trades matching the request asset
-    result: list[Trade]
-
-
-@dataclass
-class ApiTradeHistoryRequest:
-    """
-    Perform historical lookup of public trades in any given instrument.
-    This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
-    Only data from the last three months will be retained.
-
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
-    """
-
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
-    start_time: str | None = None
-    # The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the query from
-    cursor: str | None = None
-
-
-@dataclass
-class ApiTradeHistoryResponse:
-    # The public trades matching the request asset
-    result: list[Trade]
-    # The cursor to indicate when to start the next query from
-    next: str | None = None
-
-
-@dataclass
-class ApiGetInstrumentRequest:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-
-
-@dataclass
-class InstrumentDisplay:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The asset ID used for instrument signing.
-    instrument_hash: str
-    # The base currency
-    base: str
-    # The quote currency
-    quote: str
-    # The kind of instrument
-    kind: Kind
-    # Venues that this instrument can be traded at
-    venues: list[Venue]
-    # The settlement period of the instrument
-    settlement_period: InstrumentSettlementPeriod
-    # The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
-    base_decimals: int
-    # The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
-    quote_decimals: int
-    # The size of a single tick, expressed in price decimal units
-    tick_size: str
-    # The minimum contract size, expressed in base asset decimal units
-    min_size: str
-    # Creation time in unix nanoseconds
-    create_time: str
-    # The maximum position size, expressed in base asset decimal units
-    max_position_size: str
-    # Defines the funding interval to be applied.
-    funding_interval_hours: int | None = None
-    # Funding rate cap over the defined `intervalHours`.
-    adjusted_funding_rate_cap: str | None = None
-    # Funding rate floor over the defined `intervalHours`.
-    adjusted_funding_rate_floor: str | None = None
-
-
-@dataclass
-class ApiGetInstrumentResponse:
-    # The instrument matching the request asset
-    result: InstrumentDisplay
-
-
-@dataclass
-class ApiGetFilteredInstrumentsRequest:
-    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
-    kind: list[Kind] | None = None
-    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
-    base: list[str] | None = None
-    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
-    quote: list[str] | None = None
-    # Request for active instruments only
-    is_active: bool | None = None
-    # The limit to query for. Defaults to 500; Max 100000
-    limit: int | None = None
-
-
-@dataclass
-class ApiGetFilteredInstrumentsResponse:
-    # The instruments matching the request filter
-    result: list[InstrumentDisplay]
-
-
-@dataclass
-class ApiGetCurrencyRequest:
-    pass
-
-
-@dataclass
-class CurrencyDetail:
-    # The integer value of the currency
-    id: int
-    # The name of the currency
-    symbol: str
-    # The balance decimals of the currency
-    balance_decimals: int
-    # The quantity multiplier of the currency
-    quantity_multiplier: str
-
-
-@dataclass
-class ApiGetCurrencyResponse:
-    # The list of currencies
-    result: list[CurrencyDetail]
-
-
-@dataclass
-class ApiCandlestickRequest:
-    """
-    Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.
-
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
-    """
-
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The interval of each candlestick
-    interval: CandlestickInterval
-    # The type of candlestick data to retrieve
-    type: CandlestickType
-    # Start time of kline data in unix nanoseconds
-    start_time: str | None = None
-    # End time of kline data in unix nanoseconds
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the query from
-    cursor: str | None = None
-
-
-@dataclass
-class ApiCandlestickResponse:
-    # The candlestick result set for given interval
-    result: list[Candlestick]
-    # The cursor to indicate when to start the next query from
-    next: str | None = None
-
-
-@dataclass
-class ApiFundingRateRequest:
-    """
-    Lookup the historical funding rate of a perpetual future.
-
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
-    """
-
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # Start time of funding rate in unix nanoseconds
-    start_time: str | None = None
-    # End time of funding rate in unix nanoseconds
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the query from
-    cursor: str | None = None
-
-
-@dataclass
-class FundingRate:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The funding rate of the instrument, expressed in percentage points
-    funding_rate: str
-    # The funding timestamp of the funding rate, expressed in unix nanoseconds
-    funding_time: str
-    # The mark price of the instrument at funding timestamp, expressed in `9` decimals
-    mark_price: str
-    # The 8h average funding rate of the instrument, expressed in percentage points
-    funding_rate_8_h_avg: str
-
-
-@dataclass
-class ApiFundingRateResponse:
-    # The funding rate result set for given interval
-    result: list[FundingRate]
-    # The cursor to indicate when to start the next query from
-    next: str | None = None
 
 
 @dataclass
@@ -1728,8 +1743,6 @@ class OrderMetadata:
     trigger: TriggerOrderMetadata | None = None
     # Specifies the broker who brokered the order
     broker: BrokerTag | None = None
-    # Specifies if post only order is allowed to cross the orderbook
-    allow_crossing: bool | None = None
 
 
 @dataclass
