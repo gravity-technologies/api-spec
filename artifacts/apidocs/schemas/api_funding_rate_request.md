@@ -8,3 +8,13 @@
     |end_time<br>`et` |string|False<br>`now()`|End time of funding rate in unix nanoseconds|
     |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|
     |cursor<br>`c` |string|False<br>`''`|The cursor to indicate when to start the query from|
+    |agg_type<br>`at` |FundingRateAggregationType|False<br>`'FUNDING_INTERVAL'`|Aggregation method for historical funding rate observations. Defaults to using the instrument-specific funding interval.|
+    ??? info "[FundingRateAggregationType](/../../schemas/funding_rate_aggregation_type)"
+        Specifies different methods of aggregating historical funding rates<br>
+
+        |Value| Description |
+        |-|-|
+        |`FUNDING_INTERVAL` = 1|Default value -- one record returned per funding interval. Query instruments endpoint to learn funding interval of each instrument.|
+        |`ONE_HOURLY` = 2|Returns one record per hour -- normalizes all funding rates to 1h durations, so `fundingRate`  value is cumulative and can exceed a funding interval's configured cap / floor.|
+        |`FOUR_HOURLY` = 3|Returns one record per 4 hours -- normalizes all funding rates to 4h durations, so `fundingRate`  value is cumulative and can exceed a funding interval's configured cap / floor.|
+        |`EIGHT_HOURLY` = 4|Returns one record for eight hours -- normalizes all funding rates to 8h durations, so `fundingRate`  value is cumulative and can exceed a funding interval's configured cap / floor.|
