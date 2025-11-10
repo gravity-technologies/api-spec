@@ -3317,7 +3317,8 @@ LITE ENDPOINT: lite/v1/funding
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
             "limit": 500,
-            "cursor": ""
+            "cursor": "",
+            "agg_type": "FUNDING_INTERVAL"
         }
         ```
         **Lite Request**
@@ -3327,7 +3328,8 @@ LITE ENDPOINT: lite/v1/funding
             "st": "1697788800000000000",
             "et": "1697788800000000000",
             "l": 500,
-            "c": ""
+            "c": "",
+            "at": "FUNDING_INTERVAL"
         }
         ```
     </section>
@@ -3345,7 +3347,8 @@ LITE ENDPOINT: lite/v1/funding
                 "funding_rate": 0.0003,
                 "funding_time": "1697788800000000000",
                 "mark_price": "65038.01",
-                "funding_rate_8_h_avg": 0.0003
+                "funding_rate_8_h_avg": 0.0003,
+                "funding_interval_hours": 8
             }],
             "next": "Qw0918="
         }
@@ -3358,7 +3361,8 @@ LITE ENDPOINT: lite/v1/funding
                 "fr": 0.0003,
                 "ft": "1697788800000000000",
                 "mp": "65038.01",
-                "fr1": 0.0003
+                "fr1": 0.0003,
+                "fi": 8
             }],
             "n": "Qw0918="
         }
@@ -3405,7 +3409,8 @@ LITE ENDPOINT: lite/v1/funding
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "agg_type": "FUNDING_INTERVAL"
             }
             '
             ```
@@ -3421,7 +3426,8 @@ LITE ENDPOINT: lite/v1/funding
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "agg_type": "FUNDING_INTERVAL"
                 },
                 "id": 123
             }
@@ -3437,7 +3443,8 @@ LITE ENDPOINT: lite/v1/funding
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c": ""
+                "c": "",
+                "at": "FUNDING_INTERVAL"
             }
             '
             ```
@@ -3453,7 +3460,8 @@ LITE ENDPOINT: lite/v1/funding
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c": ""
+                    "c": "",
+                    "at": "FUNDING_INTERVAL"
                 },
                 "i": 123
             }
@@ -3470,7 +3478,8 @@ LITE ENDPOINT: lite/v1/funding
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "agg_type": "FUNDING_INTERVAL"
             }
             '
             ```
@@ -3486,7 +3495,8 @@ LITE ENDPOINT: lite/v1/funding
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "agg_type": "FUNDING_INTERVAL"
                 },
                 "id": 123
             }
@@ -3502,7 +3512,8 @@ LITE ENDPOINT: lite/v1/funding
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c": ""
+                "c": "",
+                "at": "FUNDING_INTERVAL"
             }
             '
             ```
@@ -3518,7 +3529,8 @@ LITE ENDPOINT: lite/v1/funding
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c": ""
+                    "c": "",
+                    "at": "FUNDING_INTERVAL"
                 },
                 "i": 123
             }
@@ -3535,7 +3547,8 @@ LITE ENDPOINT: lite/v1/funding
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "agg_type": "FUNDING_INTERVAL"
             }
             '
             ```
@@ -3551,7 +3564,8 @@ LITE ENDPOINT: lite/v1/funding
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "agg_type": "FUNDING_INTERVAL"
                 },
                 "id": 123
             }
@@ -3567,7 +3581,8 @@ LITE ENDPOINT: lite/v1/funding
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c": ""
+                "c": "",
+                "at": "FUNDING_INTERVAL"
             }
             '
             ```
@@ -3583,7 +3598,8 @@ LITE ENDPOINT: lite/v1/funding
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c": ""
+                    "c": "",
+                    "at": "FUNDING_INTERVAL"
                 },
                 "i": 123
             }
@@ -3600,7 +3616,8 @@ LITE ENDPOINT: lite/v1/funding
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
                 "limit": 500,
-                "cursor": ""
+                "cursor": "",
+                "agg_type": "FUNDING_INTERVAL"
             }
             '
             ```
@@ -3616,7 +3633,8 @@ LITE ENDPOINT: lite/v1/funding
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
                     "limit": 500,
-                    "cursor": ""
+                    "cursor": "",
+                    "agg_type": "FUNDING_INTERVAL"
                 },
                 "id": 123
             }
@@ -3632,7 +3650,8 @@ LITE ENDPOINT: lite/v1/funding
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
                 "l": 500,
-                "c": ""
+                "c": "",
+                "at": "FUNDING_INTERVAL"
             }
             '
             ```
@@ -3648,7 +3667,8 @@ LITE ENDPOINT: lite/v1/funding
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
                     "l": 500,
-                    "c": ""
+                    "c": "",
+                    "at": "FUNDING_INTERVAL"
                 },
                 "i": 123
             }

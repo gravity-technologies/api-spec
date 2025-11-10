@@ -7,7 +7,6 @@
     |create_time<br>`ct` |string|False<br>`0`|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
     |trigger<br>`t` |TriggerOrderMetadata|False<br>``|Trigger fields are used to support any type of trigger order such as TP/SL|
     |broker<br>`b` |BrokerTag|False<br>``|Specifies the broker who brokered the order|
-    |allow_crossing<br>`ac` |boolean|False<br>`false`|Specifies if post only order is allowed to cross the orderbook|
     ??? info "[TriggerOrderMetadata](/../../schemas/trigger_order_metadata)"
         Contains metadata related to trigger orders, such as Take Profit (TP) or Stop Loss (SL).<br><br>Trigger orders are used to automatically execute an order when a predefined price condition is met, allowing traders to implement risk management strategies.<br><br><br>
 

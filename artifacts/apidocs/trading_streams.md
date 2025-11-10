@@ -141,8 +141,7 @@ STREAM: v1.order
                             "close_position": false
                         }
                     },
-                    "broker": "BROKER_CODE",
-                    "allow_crossing": null
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -194,8 +193,7 @@ STREAM: v1.order
                             "cp": false
                         }
                     },
-                    "b": "BROKER_CODE",
-                    "ac": null
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",

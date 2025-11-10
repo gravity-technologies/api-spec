@@ -77,6 +77,17 @@ class CandlestickType(Enum):
     MID = "MID"
 
 
+class FundingRateAggregationType(Enum):
+    # Default value -- one record returned per funding interval. Query instruments endpoint to learn funding interval of each instrument.
+    FUNDING_INTERVAL = "FUNDING_INTERVAL"
+    # Returns one record per hour -- normalizes all funding rates to 1h durations, so `fundingRate`  value is cumulative and can exceed a funding interval's configured cap / floor.
+    ONE_HOURLY = "ONE_HOURLY"
+    # Returns one record per 4 hours -- normalizes all funding rates to 4h durations, so `fundingRate`  value is cumulative and can exceed a funding interval's configured cap / floor.
+    FOUR_HOURLY = "FOUR_HOURLY"
+    # Returns one record for eight hours -- normalizes all funding rates to 8h durations, so `fundingRate`  value is cumulative and can exceed a funding interval's configured cap / floor.
+    EIGHT_HOURLY = "EIGHT_HOURLY"
+
+
 class InstrumentSettlementPeriod(Enum):
     # Instrument settles through perpetual funding cycles
     PERPETUAL = "PERPETUAL"
@@ -379,7 +390,7 @@ class Positions:
     leverage: str
     # The cumulative fee paid on the position, expressed in quote asset decimal units
     cumulative_fee: str
-    # The cumulative realized funding payment of the position, expressed in quote asset decimal units
+    # The cumulative realized funding payment of the position, expressed in quote asset decimal units. Positive if paid, negative if received
     cumulative_realized_funding_payment: str
 
 
@@ -1573,10 +1584,12 @@ class ApiFundingRateRequest:
     limit: int | None = None
     # The cursor to indicate when to start the query from
     cursor: str | None = None
+    # Aggregation method for historical funding rate observations. Defaults to using the instrument-specific funding interval.
+    agg_type: FundingRateAggregationType | None = None
 
 
 @dataclass
-class FundingRate:
+class ApiFundingRate:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
     # The funding rate of the instrument, expressed in percentage points
@@ -1585,14 +1598,16 @@ class FundingRate:
     funding_time: str
     # The mark price of the instrument at funding timestamp, expressed in `9` decimals
     mark_price: str
-    # The 8h average funding rate of the instrument, expressed in percentage points
+    # Deprecated: Refer to `funding_rate` instead. Will be removed in a future release.
     funding_rate_8_h_avg: str
+    # Funding interval in hours (e.g. 1/4/8/etc).
+    funding_interval_hours: int
 
 
 @dataclass
 class ApiFundingRateResponse:
     # The funding rate result set for given interval
-    result: list[FundingRate]
+    result: list[ApiFundingRate]
     # The cursor to indicate when to start the next query from
     next: str | None = None
 
@@ -1728,8 +1743,6 @@ class OrderMetadata:
     trigger: TriggerOrderMetadata | None = None
     # Specifies the broker who brokered the order
     broker: BrokerTag | None = None
-    # Specifies if post only order is allowed to cross the orderbook
-    allow_crossing: bool | None = None
 
 
 @dataclass
