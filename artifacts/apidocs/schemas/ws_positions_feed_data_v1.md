@@ -24,4 +24,4 @@
         |est_liquidation_price<br>`el` |string|True|The estimated liquidation price|
         |leverage<br>`l` |string|True|The current leverage value for this position|
         |cumulative_fee<br>`cf` |string|True|The cumulative fee paid on the position, expressed in quote asset decimal units|
-        |cumulative_realized_funding_payment<br>`cr` |string|True|The cumulative realized funding payment of the position, expressed in quote asset decimal units|
+        |cumulative_realized_funding_payment<br>`cr` |string|True|The cumulative realized funding payment of the position, expressed in quote asset decimal units. Positive if paid, negative if received|

@@ -49,8 +49,7 @@ LITE ENDPOINT: lite/v1/create_order
                             "close_position": false
                         }
                     },
-                    "broker": "BROKER_CODE",
-                    "allow_crossing": null
+                    "broker": "BROKER_CODE"
                 }
             }
         }
@@ -90,8 +89,7 @@ LITE ENDPOINT: lite/v1/create_order
                             "cp": false
                         }
                     },
-                    "b": "BROKER_CODE",
-                    "ac": null
+                    "b": "BROKER_CODE"
                 }
             }
         }
@@ -139,8 +137,7 @@ LITE ENDPOINT: lite/v1/create_order
                             "close_position": false
                         }
                     },
-                    "broker": "BROKER_CODE",
-                    "allow_crossing": null
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -189,8 +186,7 @@ LITE ENDPOINT: lite/v1/create_order
                             "cp": false
                         }
                     },
-                    "b": "BROKER_CODE",
-                    "ac": null
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -329,8 +325,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "close_position": false
                             }
                         },
-                        "broker": "BROKER_CODE",
-                        "allow_crossing": null
+                        "broker": "BROKER_CODE"
                     }
                 }
             }
@@ -378,8 +373,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "close_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE",
-                            "allow_crossing": null
+                            "broker": "BROKER_CODE"
                         }
                     }
                 },
@@ -427,8 +421,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "cp": false
                             }
                         },
-                        "b": "BROKER_CODE",
-                        "ac": null
+                        "b": "BROKER_CODE"
                     }
                 }
             }
@@ -476,8 +469,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "cp": false
                                 }
                             },
-                            "b": "BROKER_CODE",
-                            "ac": null
+                            "b": "BROKER_CODE"
                         }
                     }
                 },
@@ -526,8 +518,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "close_position": false
                             }
                         },
-                        "broker": "BROKER_CODE",
-                        "allow_crossing": null
+                        "broker": "BROKER_CODE"
                     }
                 }
             }
@@ -575,8 +566,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "close_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE",
-                            "allow_crossing": null
+                            "broker": "BROKER_CODE"
                         }
                     }
                 },
@@ -624,8 +614,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "cp": false
                             }
                         },
-                        "b": "BROKER_CODE",
-                        "ac": null
+                        "b": "BROKER_CODE"
                     }
                 }
             }
@@ -673,8 +662,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "cp": false
                                 }
                             },
-                            "b": "BROKER_CODE",
-                            "ac": null
+                            "b": "BROKER_CODE"
                         }
                     }
                 },
@@ -723,8 +711,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "close_position": false
                             }
                         },
-                        "broker": "BROKER_CODE",
-                        "allow_crossing": null
+                        "broker": "BROKER_CODE"
                     }
                 }
             }
@@ -772,8 +759,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "close_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE",
-                            "allow_crossing": null
+                            "broker": "BROKER_CODE"
                         }
                     }
                 },
@@ -821,8 +807,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "cp": false
                             }
                         },
-                        "b": "BROKER_CODE",
-                        "ac": null
+                        "b": "BROKER_CODE"
                     }
                 }
             }
@@ -870,8 +855,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "cp": false
                                 }
                             },
-                            "b": "BROKER_CODE",
-                            "ac": null
+                            "b": "BROKER_CODE"
                         }
                     }
                 },
@@ -920,8 +904,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "close_position": false
                             }
                         },
-                        "broker": "BROKER_CODE",
-                        "allow_crossing": null
+                        "broker": "BROKER_CODE"
                     }
                 }
             }
@@ -969,8 +952,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "close_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE",
-                            "allow_crossing": null
+                            "broker": "BROKER_CODE"
                         }
                     }
                 },
@@ -1018,8 +1000,7 @@ LITE ENDPOINT: lite/v1/create_order
                                 "cp": false
                             }
                         },
-                        "b": "BROKER_CODE",
-                        "ac": null
+                        "b": "BROKER_CODE"
                     }
                 }
             }
@@ -1067,8 +1048,7 @@ LITE ENDPOINT: lite/v1/create_order
                                     "cp": false
                                 }
                             },
-                            "b": "BROKER_CODE",
-                            "ac": null
+                            "b": "BROKER_CODE"
                         }
                     }
                 },
@@ -1884,8 +1864,7 @@ LITE ENDPOINT: lite/v1/order
                             "close_position": false
                         }
                     },
-                    "broker": "BROKER_CODE",
-                    "allow_crossing": null
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -1934,8 +1913,7 @@ LITE ENDPOINT: lite/v1/order
                             "cp": false
                         }
                     },
-                    "b": "BROKER_CODE",
-                    "ac": null
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2320,8 +2298,7 @@ LITE ENDPOINT: lite/v1/open_orders
                             "close_position": false
                         }
                     },
-                    "broker": "BROKER_CODE",
-                    "allow_crossing": null
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -2370,8 +2347,7 @@ LITE ENDPOINT: lite/v1/open_orders
                             "cp": false
                         }
                     },
-                    "b": "BROKER_CODE",
-                    "ac": null
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2778,8 +2754,7 @@ LITE ENDPOINT: lite/v1/order_history
                             "close_position": false
                         }
                     },
-                    "broker": "BROKER_CODE",
-                    "allow_crossing": null
+                    "broker": "BROKER_CODE"
                 },
                 "state": {
                     "status": "PENDING",
@@ -2829,8 +2804,7 @@ LITE ENDPOINT: lite/v1/order_history
                             "cp": false
                         }
                     },
-                    "b": "BROKER_CODE",
-                    "ac": null
+                    "b": "BROKER_CODE"
                 },
                 "s1": {
                     "s": "PENDING",
