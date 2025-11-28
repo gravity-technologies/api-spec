@@ -136,6 +136,42 @@
           ]
         },
         {
+          "namespace": "Instrument",
+          "name": "RPCGetMarginRulesV1",
+          "version": 1,
+          "route": "/margin_rules",
+          "auth_required": false,
+          "request": "ApiGetMarginRulesRequest",
+          "response": "ApiGetMarginRulesResponse",
+          "on_request_errors": [
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 3000,
+              "message": "Instrument is invalid",
+              "status": 400
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            }
+          ]
+        },
+        {
           "namespace": "Ticker",
           "name": "RPCMiniTickerV1",
           "version": 1,
@@ -1019,6 +1055,11 @@
             {
               "code": 2401,
               "message": "Reduce only order must not increase position size",
+              "status": 400
+            },
+            {
+              "code": 2402,
+              "message": "Reduce only order size exceeds maximum allowed value",
               "status": 400
             }
           ]
@@ -4328,7 +4369,46 @@
           "optional": false,
           "example": "'3945034.23'",
           "comment": [
-            "Total balance of the sub accounts, denominated in USD"
+            "Deprecated: Use totalSubAccountEquity instead"
+          ]
+        },
+        {
+          "name": "total_sub_account_equity",
+          "lite_name": "ts1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3945034.23'",
+          "comment": [
+            "Total equity of the sub accounts, denominated in USD"
+          ]
+        },
+        {
+          "name": "total_vault_investments_balance",
+          "lite_name": "tv",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3945034.23'",
+          "comment": [
+            "Total amount of the vault investments, denominated in USD"
+          ]
+        },
+        {
+          "name": "total_sub_account_available_balance",
+          "lite_name": "ts2",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3945034.23'",
+          "comment": [
+            "Total available balance of the main account, denominated in USD"
           ]
         }
       ],
@@ -4844,6 +4924,173 @@
       ],
       "comment": [
         "The response to set the derisk margin to maintenance margin ratio of a sub account"
+      ]
+    },
+    {
+      "name": "ApiGetMarginRulesRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument to query margin rules for"
+          ]
+        }
+      ],
+      "comment": [
+        "API request payload to get margin rules for a particular instrument"
+      ]
+    },
+    {
+      "name": "RiskBracket",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "tier",
+          "lite_name": "t",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1",
+          "comment": [
+            "1-indexed tier number"
+          ]
+        },
+        {
+          "name": "notional_floor",
+          "lite_name": "nf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0'",
+          "comment": [
+            "Lower bound of notional value (inclusive) in quote currency"
+          ]
+        },
+        {
+          "name": "notional_cap",
+          "lite_name": "nc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'600000'",
+          "comment": [
+            "Upper bound of notional value (exclusive) in quote currency, empty for last tier"
+          ]
+        },
+        {
+          "name": "maintenance_margin_rate",
+          "lite_name": "mm",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.01'",
+          "comment": [
+            "Maintenance margin rate as a decimal (e.g., '0.01' for 1%)"
+          ]
+        },
+        {
+          "name": "initial_margin_rate",
+          "lite_name": "im",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.02'",
+          "comment": [
+            "Initial margin rate as a decimal (e.g., '0.02' for 2%)"
+          ]
+        },
+        {
+          "name": "max_leverage",
+          "lite_name": "ml",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "50",
+          "comment": [
+            "Maximum leverage allowed at this tier (floor of 1 / initial_margin_rate)"
+          ]
+        },
+        {
+          "name": "cumulative_maintenance_amount",
+          "lite_name": "cm",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0'",
+          "comment": [
+            "Cumulative maintenance margin amount in quote currency"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetMarginRulesResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument name"
+          ]
+        },
+        {
+          "name": "max_position_size",
+          "lite_name": "mp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'100.0'",
+          "comment": [
+            "The maximum position size, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "risk_brackets",
+          "lite_name": "rb",
+          "semantic_type": "RiskBracket",
+          "json_type": "RiskBracket",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "List of risk brackets defining margin requirements at different notional tiers"
+          ]
+        }
+      ],
+      "comment": [
+        "API response payload for margin rules of a particular instrument"
       ]
     },
     {
