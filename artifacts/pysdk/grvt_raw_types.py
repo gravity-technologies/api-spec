@@ -213,6 +213,11 @@ class OrderStatus(Enum):
     CANCELLED = "CANCELLED"
 
 
+class PositionMarginType(Enum):
+    # Cross Margin Mode: uses all available funds in your account as collateral across all cross margin positions
+    CROSS = "CROSS"
+
+
 class TimeInForce(Enum):
     """
     |                       | Must Fill All | Can Fill Partial |
@@ -674,8 +679,14 @@ class AggregatedAccountSummary:
     spot_balances: list[SpotBalance]
     # The list of vault investments held by this main account
     vault_investments: list[VaultInvestment]
-    # Total balance of the sub accounts, denominated in USD
+    # Deprecated: Use totalSubAccountEquity instead
     total_sub_account_balance: str
+    # Total equity of the sub accounts, denominated in USD
+    total_sub_account_equity: str
+    # Total amount of the vault investments, denominated in USD
+    total_vault_investments_balance: str
+    # Total available balance of the main account, denominated in USD
+    total_sub_account_available_balance: str
 
 
 @dataclass
@@ -790,6 +801,85 @@ class ApiSetDeriskToMaintenanceMarginRatioRequest:
 class ApiSetDeriskToMaintenanceMarginRatioResponse:
     # Whether the derisk margin to maintenance margin ratio was set successfully
     success: bool
+
+
+@dataclass
+class ApiSetSubAccountPositionMarginConfigRequest:
+    """
+    Sets the margin type and leverage configuration for a specific position (instrument) within a sub account.
+
+    This configuration is applied per-instrument, allowing different margin settings for different positions.
+
+    """
+
+    # The sub account ID to set the margin type and leverage for
+    sub_account_id: str
+    # The instrument of the position to set the margin type and leverage for
+    instrument: str
+    # The margin type to set for the position
+    margin_type: PositionMarginType
+    # The leverage to set for the position
+    leverage: str
+    # The signature of this operation
+    signature: Signature
+
+
+@dataclass
+class ApiSetSubAccountPositionMarginConfigResponse:
+    # Whether the margin type and leverage was acked
+    ack: bool
+
+
+@dataclass
+class ApiAddIsolatedPositionMarginRequest:
+    # The sub account ID to add isolated margin in or remove margin from
+    sub_account_id: str
+    # The instrument to add margin into, or remove margin from
+    instrument: str
+    # The amount of margin to add to the position, positive to add, negative to remove, expressed in quote asset decimal units
+    amount: str
+    # The signature of this operation
+    signature: Signature
+
+
+@dataclass
+class ApiAddIsolatedPositionMarginResponse:
+    # Whether the margin mode and leverage was set successfully
+    success: bool
+
+
+@dataclass
+class ApiGetMarginRulesRequest:
+    # The instrument to query margin rules for
+    instrument: str
+
+
+@dataclass
+class RiskBracket:
+    # 1-indexed tier number
+    tier: int
+    # Lower bound of notional value (inclusive) in quote currency
+    notional_floor: str
+    # Upper bound of notional value (exclusive) in quote currency, empty for last tier
+    notional_cap: str
+    # Maintenance margin rate as a decimal (e.g., '0.01' for 1%)
+    maintenance_margin_rate: str
+    # Initial margin rate as a decimal (e.g., '0.02' for 2%)
+    initial_margin_rate: str
+    # Maximum leverage allowed at this tier (floor of 1 / initial_margin_rate)
+    max_leverage: int
+    # Cumulative maintenance margin amount in quote currency
+    cumulative_maintenance_amount: str
+
+
+@dataclass
+class ApiGetMarginRulesResponse:
+    # The instrument name
+    instrument: str
+    # The maximum position size, expressed in base asset decimal units
+    max_position_size: str
+    # List of risk brackets defining margin requirements at different notional tiers
+    risk_brackets: list[RiskBracket]
 
 
 @dataclass

@@ -136,6 +136,42 @@
           ]
         },
         {
+          "namespace": "Instrument",
+          "name": "RPCGetMarginRulesV1",
+          "version": 1,
+          "route": "/margin_rules",
+          "auth_required": false,
+          "request": "ApiGetMarginRulesRequest",
+          "response": "ApiGetMarginRulesResponse",
+          "on_request_errors": [
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 3000,
+              "message": "Instrument is invalid",
+              "status": 400
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            }
+          ]
+        },
+        {
           "namespace": "Ticker",
           "name": "RPCMiniTickerV1",
           "version": 1,
@@ -1019,6 +1055,11 @@
             {
               "code": 2401,
               "message": "Reduce only order must not increase position size",
+              "status": 400
+            },
+            {
+              "code": 2402,
+              "message": "Reduce only order size exceeds maximum allowed value",
               "status": 400
             }
           ]
@@ -2423,6 +2464,128 @@
               "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "Margin",
+          "name": "RPCSetPositionMarginConfigV1",
+          "version": 1,
+          "route": "/set_position_margin_config",
+          "auth_required": true,
+          "request": "ApiSetSubAccountPositionMarginConfigRequest",
+          "response": "ApiSetSubAccountPositionMarginConfigResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 2102,
+              "message": "Margin type change failed, has open position for this instrument",
+              "status": 400
+            },
+            {
+              "code": 2103,
+              "message": "Margin type change failed, has open orders for this instrument",
+              "status": 400
+            },
+            {
+              "code": 2101,
+              "message": "Vaults cannot configure leverage",
+              "status": 400
+            },
+            {
+              "code": 2104,
+              "message": "Margin type not supported",
+              "status": 400
+            },
+            {
+              "code": 2105,
+              "message": "Margin type change failed",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Margin",
+          "name": "RPCAddIsolatedPositionMarginV1",
+          "version": 1,
+          "route": "/add_isolated_position_margin",
+          "auth_required": true,
+          "request": "ApiAddIsolatedPositionMarginRequest",
+          "response": "ApiAddIsolatedPositionMarginResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 7450,
+              "message": "Add margin failed",
+              "status": 400
+            },
+            {
+              "code": 7451,
+              "message": "Add margin to empty position",
+              "status": 400
+            },
+            {
+              "code": 7452,
+              "message": "Add margin to non isolated position",
+              "status": 400
             }
           ]
         }
@@ -4328,7 +4491,46 @@
           "optional": false,
           "example": "'3945034.23'",
           "comment": [
-            "Total balance of the sub accounts, denominated in USD"
+            "Deprecated: Use totalSubAccountEquity instead"
+          ]
+        },
+        {
+          "name": "total_sub_account_equity",
+          "lite_name": "ts1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3945034.23'",
+          "comment": [
+            "Total equity of the sub accounts, denominated in USD"
+          ]
+        },
+        {
+          "name": "total_vault_investments_balance",
+          "lite_name": "tv",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3945034.23'",
+          "comment": [
+            "Total amount of the vault investments, denominated in USD"
+          ]
+        },
+        {
+          "name": "total_sub_account_available_balance",
+          "lite_name": "ts2",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3945034.23'",
+          "comment": [
+            "Total available balance of the main account, denominated in USD"
           ]
         }
       ],
@@ -4844,6 +5046,352 @@
       ],
       "comment": [
         "The response to set the derisk margin to maintenance margin ratio of a sub account"
+      ]
+    },
+    {
+      "name": "ApiSetSubAccountPositionMarginConfigRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to set the margin type and leverage for"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument of the position to set the margin type and leverage for"
+          ]
+        },
+        {
+          "name": "margin_type",
+          "lite_name": "mt",
+          "semantic_type": "PositionMarginType",
+          "json_type": "PositionMarginType",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The margin type to set for the position"
+          ]
+        },
+        {
+          "name": "leverage",
+          "lite_name": "l",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1.5'",
+          "comment": [
+            "The leverage to set for the position"
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The signature of this operation"
+          ]
+        }
+      ],
+      "comment": [
+        "Sets the margin type and leverage configuration for a specific position (instrument) within a sub account.",
+        "",
+        "This configuration is applied per-instrument, allowing different margin settings for different positions.",
+        ""
+      ]
+    },
+    {
+      "name": "ApiSetSubAccountPositionMarginConfigResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "ack",
+          "lite_name": "a",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'true'",
+          "comment": [
+            "Whether the margin type and leverage was acked"
+          ]
+        }
+      ],
+      "comment": [
+        "The response to set the margin type and leverage for a position"
+      ]
+    },
+    {
+      "name": "ApiAddIsolatedPositionMarginRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to add isolated margin in or remove margin from"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument to add margin into, or remove margin from"
+          ]
+        },
+        {
+          "name": "amount",
+          "lite_name": "a",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The amount of margin to add to the position, positive to add, negative to remove, expressed in quote asset decimal units"
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The signature of this operation"
+          ]
+        }
+      ],
+      "comment": [
+        "The request to add margin to a isolated position"
+      ]
+    },
+    {
+      "name": "ApiAddIsolatedPositionMarginResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "success",
+          "lite_name": "s",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'true'",
+          "comment": [
+            "Whether the margin mode and leverage was set successfully"
+          ]
+        }
+      ],
+      "comment": [
+        "The response to add margin to a isolated position"
+      ]
+    },
+    {
+      "name": "ApiGetMarginRulesRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument to query margin rules for"
+          ]
+        }
+      ],
+      "comment": [
+        "API request payload to get margin rules for a particular instrument"
+      ]
+    },
+    {
+      "name": "RiskBracket",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "tier",
+          "lite_name": "t",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1",
+          "comment": [
+            "1-indexed tier number"
+          ]
+        },
+        {
+          "name": "notional_floor",
+          "lite_name": "nf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0'",
+          "comment": [
+            "Lower bound of notional value (inclusive) in quote currency"
+          ]
+        },
+        {
+          "name": "notional_cap",
+          "lite_name": "nc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'600000'",
+          "comment": [
+            "Upper bound of notional value (exclusive) in quote currency, empty for last tier"
+          ]
+        },
+        {
+          "name": "maintenance_margin_rate",
+          "lite_name": "mm",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.01'",
+          "comment": [
+            "Maintenance margin rate as a decimal (e.g., '0.01' for 1%)"
+          ]
+        },
+        {
+          "name": "initial_margin_rate",
+          "lite_name": "im",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.02'",
+          "comment": [
+            "Initial margin rate as a decimal (e.g., '0.02' for 2%)"
+          ]
+        },
+        {
+          "name": "max_leverage",
+          "lite_name": "ml",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "50",
+          "comment": [
+            "Maximum leverage allowed at this tier (floor of 1 / initial_margin_rate)"
+          ]
+        },
+        {
+          "name": "cumulative_maintenance_amount",
+          "lite_name": "cm",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0'",
+          "comment": [
+            "Cumulative maintenance margin amount in quote currency"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetMarginRulesResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument name"
+          ]
+        },
+        {
+          "name": "max_position_size",
+          "lite_name": "mp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'100.0'",
+          "comment": [
+            "The maximum position size, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "risk_brackets",
+          "lite_name": "rb",
+          "semantic_type": "RiskBracket",
+          "json_type": "RiskBracket",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "List of risk brackets defining margin requirements at different notional tiers"
+          ]
+        }
+      ],
+      "comment": [
+        "API response payload for margin rules of a particular instrument"
       ]
     },
     {
@@ -13024,6 +13572,19 @@
           "value": 5,
           "comment": [
             "Order is cancelled by the user using one of the supported APIs (See OrderRejectReason). Before an order is open, it cannot be cancelled."
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "PositionMarginType",
+      "values": [
+        {
+          "name": "CROSS",
+          "value": 2,
+          "comment": [
+            "Cross Margin Mode: uses all available funds in your account as collateral across all cross margin positions"
           ]
         }
       ],

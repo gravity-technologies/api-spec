@@ -1258,6 +1258,300 @@ LITE ENDPOINT: lite/v1/currency
             ```
         </section>
 <hr class="solid">
+### Get Margin Rules
+```
+FULL ENDPOINT: full/v1/margin_rules
+LITE ENDPOINT: lite/v1/margin_rules
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_get_margin_rules_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "instrument": "BTC_USDT_Perp"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "i": "BTC_USDT_Perp"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_get_margin_rules_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "instrument": "BTC_USDT_Perp",
+            "max_position_size": "100.0",
+            "risk_brackets": [{
+                "tier": 1,
+                "notional_floor": "0",
+                "notional_cap": "600000",
+                "maintenance_margin_rate": "0.01",
+                "initial_margin_rate": "0.02",
+                "max_leverage": 50,
+                "cumulative_maintenance_amount": "0"
+            }]
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "i": "BTC_USDT_Perp",
+            "mp": "100.0",
+            "rb": [{
+                "t": 1,
+                "nf": "0",
+                "nc": "600000",
+                "mm": "0.01",
+                "im": "0.02",
+                "ml": 50,
+                "cm": "0"
+            }]
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |3000|400|Instrument is invalid|
+        |1004|404|Data Not Found|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1002,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
+        }
+        ```
+    </section>
+=== "Try it out"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/margin_rules' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/margin_rules",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/margin_rules' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/margin_rules",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/margin_rules' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/margin_rules",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/margin_rules' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/margin_rules",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/margin_rules' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/margin_rules",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/margin_rules' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/margin_rules",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/margin_rules' \
+            --data '{
+                "instrument": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/margin_rules",
+                "params": {
+                    "instrument": "BTC_USDT_Perp"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/margin_rules' \
+            --data '{
+                "i": "BTC_USDT_Perp"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/margin_rules",
+                "p": {
+                    "i": "BTC_USDT_Perp"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
 ## Ticker
 ### Mini Ticker
 ```

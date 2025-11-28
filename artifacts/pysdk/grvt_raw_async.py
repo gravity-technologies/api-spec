@@ -48,6 +48,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiGetCurrencyResponse, resp, Config(cast=[Enum]))
 
+    async def get_margin_rules_v1(
+        self, req: types.ApiGetMarginRulesRequest
+    ) -> types.ApiGetMarginRulesResponse | GrvtError:
+        resp = await self._post(False, self.md_rpc + "/full/v1/margin_rules", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiGetMarginRulesResponse, resp, Config(cast=[Enum]))
+
     async def mini_ticker_v1(
         self, req: types.ApiMiniTickerRequest
     ) -> types.ApiMiniTickerResponse | GrvtError:
@@ -362,4 +370,28 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(
             types.ApiQueryVaultManagerInvestorHistoryResponse, resp, Config(cast=[Enum])
+        )
+
+    async def set_position_margin_config_v1(
+        self, req: types.ApiSetSubAccountPositionMarginConfigRequest
+    ) -> types.ApiSetSubAccountPositionMarginConfigResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/set_position_margin_config", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiSetSubAccountPositionMarginConfigResponse, resp, Config(cast=[Enum])
+        )
+
+    async def add_isolated_position_margin_v1(
+        self, req: types.ApiAddIsolatedPositionMarginRequest
+    ) -> types.ApiAddIsolatedPositionMarginResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/add_isolated_position_margin", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiAddIsolatedPositionMarginResponse, resp, Config(cast=[Enum])
         )
