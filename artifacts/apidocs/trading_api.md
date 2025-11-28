@@ -261,6 +261,7 @@ LITE ENDPOINT: lite/v1/create_order
         |3006|500|Instrument's quote currency does not have a valid balance decimal configuration|
         |2400|400|Reduce only order with no position|
         |2401|400|Reduce only order must not increase position size|
+        |2402|400|Reduce only order size exceeds maximum allowed value|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -8184,7 +8185,10 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                     "num_lp_tokens": 1000000,
                     "share_price": 1000000
                 }],
-                "total_sub_account_balance": "3945034.23"
+                "total_sub_account_balance": "3945034.23",
+                "total_sub_account_equity": "3945034.23",
+                "total_vault_investments_balance": "3945034.23",
+                "total_sub_account_available_balance": "3945034.23"
             }
         }
         ```
@@ -8204,7 +8208,10 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                     "nl": 1000000,
                     "sp": 1000000
                 }],
-                "ts": "3945034.23"
+                "ts": "3945034.23",
+                "ts1": "3945034.23",
+                "tv": "3945034.23",
+                "ts2": "3945034.23"
             }
         }
         ```

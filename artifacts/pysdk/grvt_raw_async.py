@@ -48,6 +48,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiGetCurrencyResponse, resp, Config(cast=[Enum]))
 
+    async def get_margin_rules_v1(
+        self, req: types.ApiGetMarginRulesRequest
+    ) -> types.ApiGetMarginRulesResponse | GrvtError:
+        resp = await self._post(False, self.md_rpc + "/full/v1/margin_rules", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiGetMarginRulesResponse, resp, Config(cast=[Enum]))
+
     async def mini_ticker_v1(
         self, req: types.ApiMiniTickerRequest
     ) -> types.ApiMiniTickerResponse | GrvtError:
