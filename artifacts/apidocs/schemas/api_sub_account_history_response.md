@@ -22,6 +22,8 @@
         |vault_im_additions<br>`vi` |string|False<br>`None`|Total amount of IM (reported in `settle_currency`) deducted from the vault due to redemptions nearing the end of their redemption period|
         |derisk_margin<br>`dm` |string|True|The derisk margin of this sub account|
         |derisk_to_maintenance_margin_ratio<br>`dt` |string|True|The derisk margin to maintenance margin ratio of this sub account|
+        |total_cross_equity<br>`tc` |string|True|The total equity of this sub account for cross margin|
+        |cross_unrealized_pnl<br>`cu` |string|True|The unrealized PnL of this sub account for cross margin|
         ??? info "[MarginType](/../../schemas/margin_type)"
             |Value| Description |
             |-|-|

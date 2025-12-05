@@ -28,6 +28,7 @@
             |vault_id<br>`vi` |string|True|The trading account ID of the vault invested in.|
             |num_lp_tokens<br>`nl` |string|True|The number of shares held by the investor.|
             |share_price<br>`sp` |string|True|The current share price (in USD) of this vault investment.|
+            |usd_notional_invested<br>`un` |string|True|The USD notional invested in this vault investment.|
     ??? info "[ClientTier](/../../schemas/client_tier)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|

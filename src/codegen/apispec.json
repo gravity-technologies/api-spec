@@ -1033,6 +1033,11 @@
               "status": 400
             },
             {
+              "code": 2117,
+              "message": "Position linked TPSL orders must be created from web or mobile clients",
+              "status": 400
+            },
+            {
               "code": 3004,
               "message": "Instrument does not have a valid maintenance margin configuration",
               "status": 500
@@ -4117,6 +4122,32 @@
           "comment": [
             "The derisk margin to maintenance margin ratio of this sub account"
           ]
+        },
+        {
+          "name": "total_cross_equity",
+          "lite_name": "tc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 16,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The total equity of this sub account for cross margin"
+          ]
+        },
+        {
+          "name": "cross_unrealized_pnl",
+          "lite_name": "cu",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 17,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The unrealized PnL of this sub account for cross margin"
+          ]
         }
       ],
       "comment": []
@@ -4299,6 +4330,19 @@
           "comment": [
             "The current share price (in USD) of this vault investment."
           ]
+        },
+        {
+          "name": "usd_notional_invested",
+          "lite_name": "un",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The USD notional invested in this vault investment."
+          ]
         }
       ],
       "comment": [
@@ -4409,6 +4453,19 @@
           "example": "'3945034.23'",
           "comment": [
             "Total available balance of the main account, denominated in USD"
+          ]
+        },
+        {
+          "name": "total_usd_notional_invested",
+          "lite_name": "tu",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3945034.23'",
+          "comment": [
+            "Total entry (initial investment) amount of the open investments, denominated in USD"
           ]
         }
       ],
@@ -4838,7 +4895,8 @@
             "Users can randomly generate this value, used as a signature deconflicting key.",
             "ie. You can send the same exact instruction twice with different nonces.",
             "When the same nonce is used, the same payload will generate the same signature.",
-            "Our system will consider the payload a duplicate, and ignore it."
+            "Our system will consider the payload a duplicate, and ignore it.",
+            "Range: 0 to 4,294,967,295 (uint32)"
           ]
         },
         {
@@ -5094,593 +5152,7 @@
       ]
     },
     {
-      "name": "JSONRPCRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "jsonrpc",
-          "lite_name": "j",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'2.0'",
-          "comment": [
-            "The JSON RPC version to use for the request"
-          ]
-        },
-        {
-          "name": "method",
-          "lite_name": "m",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'subscribe'",
-          "comment": [
-            "The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )"
-          ]
-        },
-        {
-          "name": "params",
-          "lite_name": "p",
-          "semantic_type": "any",
-          "json_type": "object",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The parameters for the request"
-          ]
-        },
-        {
-          "name": "id",
-          "lite_name": "i",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 3,
-          "array_depth": 0,
-          "optional": true,
-          "default": "0",
-          "example": "123",
-          "comment": [
-            "Optional Field which is used to match the response by the client.",
-            "If not passed, this field will not be returned"
-          ]
-        }
-      ],
-      "comment": [
-        "All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.",
-        "If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).",
-        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
-      ]
-    },
-    {
-      "name": "Error",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "code",
-          "lite_name": "c",
-          "semantic_type": "uint16",
-          "json_type": "integer",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "123",
-          "comment": [
-            "The error code for the request"
-          ]
-        },
-        {
-          "name": "message",
-          "lite_name": "m",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'An error occurred'",
-          "comment": [
-            "The error message for the request"
-          ]
-        }
-      ],
-      "comment": [
-        "An error response"
-      ]
-    },
-    {
-      "name": "JSONRPCResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "jsonrpc",
-          "lite_name": "j",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'2.0'",
-          "comment": [
-            "The JSON RPC version to use for the request"
-          ]
-        },
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "any",
-          "json_type": "object",
-          "index": 1,
-          "array_depth": 0,
-          "optional": true,
-          "default": "null",
-          "comment": [
-            "The result for the request"
-          ]
-        },
-        {
-          "name": "error",
-          "lite_name": "e",
-          "semantic_type": "Error",
-          "json_type": "Error",
-          "index": 2,
-          "array_depth": 0,
-          "optional": true,
-          "default": "null",
-          "comment": [
-            "The error for the request"
-          ]
-        },
-        {
-          "name": "id",
-          "lite_name": "i",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 3,
-          "array_depth": 0,
-          "optional": true,
-          "default": "0",
-          "example": "123",
-          "comment": [
-            "Optional Field which is used to match the response by the client.",
-            "If not passed, this field will not be returned"
-          ]
-        },
-        {
-          "name": "method",
-          "lite_name": "m",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'subscribe'",
-          "comment": [
-            "The method used in the request for this response (eg: `subscribe` / `unsubscribe` / `v1/instrument` )"
-          ]
-        }
-      ],
-      "comment": [
-        "All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.",
-        "If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response."
-      ]
-    },
-    {
-      "name": "WSSubscribeParams",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "stream",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'v1.ticker.d'",
-          "comment": [
-            "The channel to subscribe to (eg: ticker.s / ticker.d)"
-          ]
-        },
-        {
-          "name": "selectors",
-          "lite_name": "s1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 1,
-          "optional": false,
-          "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
-          "comment": [
-            "The list of feeds to subscribe to"
-          ]
-        },
-        {
-          "name": "use_global_sequence_number",
-          "lite_name": "ug",
-          "semantic_type": "bool",
-          "json_type": "boolean",
-          "index": 2,
-          "array_depth": 0,
-          "optional": true,
-          "default": "false",
-          "example": "true",
-          "comment": [
-            "Whether to use the global sequence number for the stream"
-          ]
-        }
-      ],
-      "comment": [
-        "All V1 Websocket Subscription Requests are housed in this wrapper. You may specify a stream and a list of feeds to subscribe to.",
-        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.",
-        "Sequence numbers can be either gateway-specific or global:",
-        "- **Gateway Unique Sequence Number**: Increments by one per stream, resets to 0 on gateway restart.",
-        "- **Global Unique Sequence Number**: A cluster-wide unique number assigned to each cluster payload, does not reset on gateway restarts, and can be used to track and identify message order across streams using `sequence_number` and `prev_sequence_number` in the feed response.",
-        "Set `useGlobalSequenceNumber = true` if you need a persistent, unique identifier across all streams or ordering across multiple feeds."
-      ]
-    },
-    {
-      "name": "WSSubscribeResult",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "stream",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'v1.ticker.d'",
-          "comment": [
-            "The channel to subscribe to (eg: ticker.s / ticker.d)"
-          ]
-        },
-        {
-          "name": "subs",
-          "lite_name": "s1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 1,
-          "optional": false,
-          "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
-          "comment": [
-            "The list of feeds subscribed to"
-          ]
-        },
-        {
-          "name": "unsubs",
-          "lite_name": "u",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 1,
-          "optional": false,
-          "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
-          "comment": [
-            "The list of feeds unsubscribed from"
-          ]
-        },
-        {
-          "name": "num_snapshots",
-          "lite_name": "ns",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 3,
-          "array_depth": 1,
-          "optional": false,
-          "example": "10",
-          "comment": [
-            "The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`"
-          ]
-        },
-        {
-          "name": "first_sequence_number",
-          "lite_name": "fs",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 1,
-          "optional": false,
-          "example": "872634876",
-          "comment": [
-            "The first sequence number to expect for each subscribed feed. Returned in same order as `subs`"
-          ]
-        },
-        {
-          "name": "latest_sequence_number",
-          "lite_name": "ls",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 5,
-          "array_depth": 1,
-          "optional": false,
-          "example": "872634875",
-          "comment": [
-            "The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`"
-          ]
-        }
-      ],
-      "comment": [
-        "To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:\u003cul\u003e\u003cli\u003eAll snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas\u003c/li\u003e\u003cli\u003eNum snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots\u003c/li\u003e\u003cli\u003eFirst sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots\u003c/li\u003e\u003cli\u003eSequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect\u003c/li\u003e\u003cli\u003eDuplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.\u003c/li\u003e\u003c/ul\u003e",
-        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
-      ]
-    },
-    {
-      "name": "WSUnsubscribeParams",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "stream",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'v1.ticker.d'",
-          "comment": [
-            "The channel to unsubscribe from (eg: ticker.s / ticker.d)"
-          ]
-        },
-        {
-          "name": "selectors",
-          "lite_name": "s1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 1,
-          "optional": false,
-          "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
-          "comment": [
-            "The list of feeds to unsubscribe from"
-          ]
-        },
-        {
-          "name": "use_global_sequence_number",
-          "lite_name": "ug",
-          "semantic_type": "bool",
-          "json_type": "boolean",
-          "index": 2,
-          "array_depth": 0,
-          "optional": true,
-          "default": "false",
-          "example": "true",
-          "comment": [
-            "Whether to use the global sequence number for the stream"
-          ]
-        }
-      ],
-      "comment": [
-        "All V1 Websocket Unsubscription Requests are housed in this wrapper. You may specify a stream, a list of feeds and whether those feeds use global sequence numbers to unsubscribe from."
-      ]
-    },
-    {
-      "name": "WSUnsubscribeResult",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "stream",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'v1.ticker.d'",
-          "comment": [
-            "The channel to subscribe to (eg: ticker.s / ticker.d)"
-          ]
-        },
-        {
-          "name": "unsubs",
-          "lite_name": "u",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 1,
-          "optional": false,
-          "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
-          "comment": [
-            "The list of feeds unsubscribed from"
-          ]
-        }
-      ],
-      "comment": [
-        "Returns a confirmation of all unsubscribes"
-      ]
-    },
-    {
-      "name": "WSSubscribeRequestV1Legacy",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "request_id",
-          "lite_name": "ri",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 0,
-          "array_depth": 0,
-          "optional": true,
-          "default": "0",
-          "example": "123",
-          "comment": [
-            "Optional Field which is used to match the response by the client.",
-            "If not passed, this field will not be returned"
-          ]
-        },
-        {
-          "name": "stream",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'v1.ticker.d'",
-          "comment": [
-            "The channel to subscribe to (eg: ticker.s / ticker.d)"
-          ]
-        },
-        {
-          "name": "feed",
-          "lite_name": "f",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 1,
-          "optional": false,
-          "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
-          "comment": [
-            "The list of feeds to subscribe to"
-          ]
-        },
-        {
-          "name": "method",
-          "lite_name": "m",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'subscribe'",
-          "comment": [
-            "The method to use for the request (eg: subscribe / unsubscribe)"
-          ]
-        },
-        {
-          "name": "is_full",
-          "lite_name": "if",
-          "semantic_type": "bool",
-          "json_type": "boolean",
-          "index": 4,
-          "array_depth": 0,
-          "optional": true,
-          "default": "false",
-          "example": "true",
-          "comment": [
-            "Whether the request is for full data or lite data"
-          ]
-        }
-      ],
-      "comment": [
-        "All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.",
-        "If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).",
-        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
-      ]
-    },
-    {
-      "name": "WSSubscribeResponseV1Legacy",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "request_id",
-          "lite_name": "ri",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 0,
-          "array_depth": 0,
-          "optional": true,
-          "default": "0",
-          "example": "123",
-          "comment": [
-            "Optional Field which is used to match the response by the client.",
-            "If not passed, this field will not be returned"
-          ]
-        },
-        {
-          "name": "stream",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'v1.ticker.d'",
-          "comment": [
-            "The channel to subscribe to (eg: ticker.s / ticker.d)"
-          ]
-        },
-        {
-          "name": "subs",
-          "lite_name": "s1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 1,
-          "optional": false,
-          "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
-          "comment": [
-            "The list of feeds subscribed to"
-          ]
-        },
-        {
-          "name": "unsubs",
-          "lite_name": "u",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 1,
-          "optional": false,
-          "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
-          "comment": [
-            "The list of feeds unsubscribed from"
-          ]
-        },
-        {
-          "name": "num_snapshots",
-          "lite_name": "ns",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 4,
-          "array_depth": 1,
-          "optional": false,
-          "example": "10",
-          "comment": [
-            "The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`"
-          ]
-        },
-        {
-          "name": "first_sequence_number",
-          "lite_name": "fs",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 5,
-          "array_depth": 1,
-          "optional": false,
-          "example": "872634876",
-          "comment": [
-            "The first sequence number to expect for each subscribed feed. Returned in same order as `subs`"
-          ]
-        },
-        {
-          "name": "latest_sequence_number",
-          "lite_name": "ls",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 6,
-          "array_depth": 1,
-          "optional": false,
-          "example": "872634875",
-          "comment": [
-            "The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`"
-          ]
-        }
-      ],
-      "comment": [
-        "All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.",
-        "If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.",
-        "To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:\u003cul\u003e\u003cli\u003eAll snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas\u003c/li\u003e\u003cli\u003eNum snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots\u003c/li\u003e\u003cli\u003eFirst sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots\u003c/li\u003e\u003cli\u003eSequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect\u003c/li\u003e\u003cli\u003eDuplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.\u003c/li\u003e\u003c/ul\u003e",
-        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
-      ]
-    },
-    {
-      "name": "WSOrderbookLevelsFeedSelectorV1",
+      "name": "ApiOrderbookLevelsRequest",
       "is_root": true,
       "fields": [
         {
@@ -5694,52 +5166,24 @@
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ],
-          "selector": "primary"
-        },
-        {
-          "name": "rate",
-          "lite_name": "r",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "500",
-          "comment": [
-            "The minimal rate at which we publish feeds (in milliseconds)",
-            "Delta (50, 100, 500, 1000)",
-            "Snapshot (500, 1000)"
-          ],
-          "selector": "secondary"
+          ]
         },
         {
           "name": "depth",
           "lite_name": "d",
           "semantic_type": "uint32",
           "json_type": "integer",
-          "index": 2,
+          "index": 1,
           "array_depth": 0,
-          "optional": true,
-          "default": "'0'",
+          "optional": false,
           "example": "50",
           "comment": [
-            "Depth of the order book to be retrieved",
-            "Delta(0 - `unlimited`)",
-            "Snapshot(10, 50, 100, 500)"
-          ],
-          "selector": "secondary"
+            "Depth of the order book to be retrieved (10, 50, 100, 500)"
+          ]
         }
       ],
       "comment": [
-        "Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.",
-        "Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.",
-        "",
-        "The Delta feed will work as follows:\u003cul\u003e\u003cli\u003eOn subscription, the server will send a full snapshot of all levels of the Orderbook.\u003c/li\u003e\u003cli\u003eAfter the snapshot, the server will only send levels that have changed in value.\u003c/li\u003e\u003c/ul\u003e",
-        "",
-        "Subscription Pattern:\u003cul\u003e\u003cli\u003eDelta - `instrument@rate`\u003c/li\u003e\u003cli\u003eSnapshot - `instrument@rate-depth`\u003c/li\u003e\u003c/ul\u003e",
-        "",
-        "Field Semantics:\u003cul\u003e\u003cli\u003e[DeltaOnly] If a level is not updated, level not published\u003c/li\u003e\u003cli\u003eIf a level is updated, {size: '123'}\u003c/li\u003e\u003cli\u003eIf a level is set to zero, {size: '0'}\u003c/li\u003e\u003cli\u003eIncoming levels will be published as soon as price moves\u003c/li\u003e\u003cli\u003eOutgoing levels will be published with `size = 0`\u003c/li\u003e\u003c/ul\u003e"
+        "Retrieves aggregated price depth for a single instrument, with a maximum depth of 10 levels. Do not use this to poll for data -- a websocket subscription is much more performant, and useful."
       ]
     },
     {
@@ -5846,83 +5290,26 @@
       "comment": []
     },
     {
-      "name": "WSOrderbookLevelsFeedDataV1",
+      "name": "ApiOrderbookLevelsResponse",
       "is_root": true,
       "fields": [
         {
-          "name": "stream",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "OrderbookLevels",
+          "json_type": "OrderbookLevels",
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'v1.book.s'",
           "comment": [
-            "Stream name"
-          ]
-        },
-        {
-          "name": "selector",
-          "lite_name": "s1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "Primary selector"
-          ]
-        },
-        {
-          "name": "sequence_number",
-          "lite_name": "sn",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'872634876'",
-          "comment": [
-            "A sequence number used to determine message order within a stream.",
-            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
-            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
-            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
-            "  - To distinguish each stream payload, a `dedupCounter` is included.",
-            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
-          ]
-        },
-        {
-          "name": "feed",
-          "lite_name": "f",
-          "semantic_type": "OrderbookLevels",
-          "json_type": "OrderbookLevels",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "An orderbook levels object matching the request filter"
-          ]
-        },
-        {
-          "name": "prev_sequence_number",
-          "lite_name": "ps",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'872634875'",
-          "comment": [
-            "The previous sequence number that determines the message order"
+            "The orderbook levels objects matching the request asset"
           ]
         }
       ],
       "comment": []
     },
     {
-      "name": "WSMiniTickerFeedSelectorV1",
+      "name": "ApiMiniTickerRequest",
       "is_root": true,
       "fields": [
         {
@@ -5936,33 +5323,11 @@
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ],
-          "selector": "primary"
-        },
-        {
-          "name": "rate",
-          "lite_name": "r",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "500",
-          "comment": [
-            "The minimal rate at which we publish feeds (in milliseconds)",
-            "Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)",
-            "Snapshot (200, 500, 1000, 5000)"
-          ],
-          "selector": "secondary"
+          ]
         }
       ],
       "comment": [
-        "Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.",
-        "Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.",
-        "",
-        "The Delta feed will work as follows:\u003cul\u003e\u003cli\u003eOn subscription, the server will send a full snapshot of the mini ticker.\u003c/li\u003e\u003cli\u003eAfter the snapshot, the server will only send deltas of the mini ticker.\u003c/li\u003e\u003cli\u003eThe server will send a delta if any of the fields in the mini ticker have changed.\u003c/li\u003e\u003c/ul\u003e",
-        "",
-        "Field Semantics:\u003cul\u003e\u003cli\u003e[DeltaOnly] If a field is not updated, {}\u003c/li\u003e\u003cli\u003eIf a field is updated, {field: '123'}\u003c/li\u003e\u003cli\u003eIf a field is set to zero, {field: '0'}\u003c/li\u003e\u003cli\u003eIf a field is set to null, {field: ''}\u003c/li\u003e\u003c/ul\u003e"
+        "Retrieves a single mini ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful."
       ]
     },
     {
@@ -6116,83 +5481,26 @@
       "comment": []
     },
     {
-      "name": "WSMiniTickerFeedDataV1",
+      "name": "ApiMiniTickerResponse",
       "is_root": true,
       "fields": [
         {
-          "name": "stream",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "MiniTicker",
+          "json_type": "MiniTicker",
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'v1.mini.s'",
           "comment": [
-            "Stream name"
-          ]
-        },
-        {
-          "name": "selector",
-          "lite_name": "s1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "Primary selector"
-          ]
-        },
-        {
-          "name": "sequence_number",
-          "lite_name": "sn",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'872634876'",
-          "comment": [
-            "A sequence number used to determine message order within a stream.",
-            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
-            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
-            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
-            "  - To distinguish each stream payload, a `dedupCounter` is included.",
-            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
-          ]
-        },
-        {
-          "name": "feed",
-          "lite_name": "f",
-          "semantic_type": "MiniTicker",
-          "json_type": "MiniTicker",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "A mini ticker matching the request filter"
-          ]
-        },
-        {
-          "name": "prev_sequence_number",
-          "lite_name": "ps",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'872634875'",
-          "comment": [
-            "The previous sequence number that determines the message order"
+            "The mini ticker matching the request asset"
           ]
         }
       ],
       "comment": []
     },
     {
-      "name": "WSTickerFeedSelectorV1",
+      "name": "ApiTickerRequest",
       "is_root": true,
       "fields": [
         {
@@ -6206,33 +5514,11 @@
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ],
-          "selector": "primary"
-        },
-        {
-          "name": "rate",
-          "lite_name": "r",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "500",
-          "comment": [
-            "The minimal rate at which we publish feeds (in milliseconds)",
-            "Delta (100, 200, 500, 1000, 5000)",
-            "Snapshot (500, 1000, 5000)"
-          ],
-          "selector": "secondary"
+          ]
         }
       ],
       "comment": [
-        "Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.",
-        "Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.",
-        "",
-        "The Delta feed will work as follows:\u003cul\u003e\u003cli\u003eOn subscription, the server will send a full snapshot of the ticker.\u003c/li\u003e\u003cli\u003eAfter the snapshot, the server will only send deltas of the ticker.\u003c/li\u003e\u003cli\u003eThe server will send a delta if any of the fields in the ticker have changed.\u003c/li\u003e\u003c/ul\u003e",
-        "",
-        "Field Semantics:\u003cul\u003e\u003cli\u003e[DeltaOnly] If a field is not updated, {}\u003c/li\u003e\u003cli\u003eIf a field is updated, {field: '123'}\u003c/li\u003e\u003cli\u003eIf a field is set to zero, {field: '0'}\u003c/li\u003e\u003cli\u003eIf a field is set to null, {field: ''}\u003c/li\u003e\u003c/ul\u003e"
+        "Retrieves a single ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful."
       ]
     },
     {
@@ -6594,83 +5880,26 @@
       ]
     },
     {
-      "name": "WSTickerFeedDataV1",
+      "name": "ApiTickerResponse",
       "is_root": true,
       "fields": [
         {
-          "name": "stream",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "Ticker",
+          "json_type": "Ticker",
           "index": 0,
           "array_depth": 0,
           "optional": false,
-          "example": "'v1.ticker.s'",
           "comment": [
-            "Stream name"
-          ]
-        },
-        {
-          "name": "selector",
-          "lite_name": "s1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "Primary selector"
-          ]
-        },
-        {
-          "name": "sequence_number",
-          "lite_name": "sn",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'872634876'",
-          "comment": [
-            "A sequence number used to determine message order within a stream.",
-            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
-            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
-            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
-            "  - To distinguish each stream payload, a `dedupCounter` is included.",
-            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
-          ]
-        },
-        {
-          "name": "feed",
-          "lite_name": "f",
-          "semantic_type": "Ticker",
-          "json_type": "Ticker",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "A ticker matching the request filter"
-          ]
-        },
-        {
-          "name": "prev_sequence_number",
-          "lite_name": "ps",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'872634875'",
-          "comment": [
-            "The previous sequence number that determines the message order"
+            "The mini ticker matching the request asset"
           ]
         }
       ],
       "comment": []
     },
     {
-      "name": "WSTradeFeedSelectorV1",
+      "name": "ApiTradeRequest",
       "is_root": true,
       "fields": [
         {
@@ -6684,8 +5913,7 @@
           "example": "'BTC_USDT_Perp'",
           "comment": [
             "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ],
-          "selector": "primary"
+          ]
         },
         {
           "name": "limit",
@@ -6697,13 +5925,13 @@
           "optional": false,
           "example": "500",
           "comment": [
-            "The limit to query for. Valid values are (50, 200, 500, 1000). Default is 50"
-          ],
-          "selector": "secondary"
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
         }
       ],
       "comment": [
-        "Subscribes to a stream of Public Trades for an instrument."
+        "Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.",
+        "This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape."
       ]
     },
     {
@@ -6870,610 +6098,6 @@
       ],
       "comment": [
         "All private RFQs and Private AXEs will be filtered out from the responses"
-      ]
-    },
-    {
-      "name": "WSTradeFeedDataV1",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "stream",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'v1.trade'",
-          "comment": [
-            "Stream name"
-          ]
-        },
-        {
-          "name": "selector",
-          "lite_name": "s1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "Primary selector"
-          ]
-        },
-        {
-          "name": "sequence_number",
-          "lite_name": "sn",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'872634876'",
-          "comment": [
-            "A sequence number used to determine message order within a stream.",
-            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
-            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
-            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
-            "  - To distinguish each stream payload, a `dedupCounter` is included.",
-            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
-          ]
-        },
-        {
-          "name": "feed",
-          "lite_name": "f",
-          "semantic_type": "Trade",
-          "json_type": "Trade",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "A public trade matching the request filter"
-          ]
-        },
-        {
-          "name": "prev_sequence_number",
-          "lite_name": "ps",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'872634875'",
-          "comment": [
-            "The previous sequence number that determines the message order"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "WSCandlestickFeedSelectorV1",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ],
-          "selector": "primary"
-        },
-        {
-          "name": "interval",
-          "lite_name": "i1",
-          "semantic_type": "CandlestickInterval",
-          "json_type": "CandlestickInterval",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The interval of each candlestick"
-          ],
-          "selector": "secondary"
-        },
-        {
-          "name": "type",
-          "lite_name": "t",
-          "semantic_type": "CandlestickType",
-          "json_type": "CandlestickType",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The type of candlestick data to retrieve"
-          ],
-          "selector": "secondary"
-        }
-      ],
-      "comment": [
-        "Subscribes to a stream of Kline/Candlestick updates for an instrument. A Kline is uniquely identified by its open time.",
-        "A new Kline is published every interval (if it exists). Upon subscription, the server will send the 5 most recent Kline for the requested interval."
-      ]
-    },
-    {
-      "name": "Candlestick",
-      "is_root": false,
-      "fields": [
-        {
-          "name": "open_time",
-          "lite_name": "ot",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1697788800000000000'",
-          "comment": [
-            "Open time of kline bar in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "close_time",
-          "lite_name": "ct",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'1697788800000000000'",
-          "comment": [
-            "Close time of kline bar in unix nanosecond"
-          ]
-        },
-        {
-          "name": "open",
-          "lite_name": "o",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The open price, expressed in underlying currency resolution units"
-          ]
-        },
-        {
-          "name": "close",
-          "lite_name": "c",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The close price, expressed in underlying currency resolution units"
-          ]
-        },
-        {
-          "name": "high",
-          "lite_name": "h",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The high price, expressed in underlying currency resolution units"
-          ]
-        },
-        {
-          "name": "low",
-          "lite_name": "l",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 5,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The low price, expressed in underlying currency resolution units"
-          ]
-        },
-        {
-          "name": "volume_b",
-          "lite_name": "vb",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 6,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The underlying volume transacted, expressed in base asset decimal units"
-          ]
-        },
-        {
-          "name": "volume_q",
-          "lite_name": "vq",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 7,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'123456.78'",
-          "comment": [
-            "The quote volume transacted, expressed in quote asset decimal units"
-          ]
-        },
-        {
-          "name": "trades",
-          "lite_name": "t",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 8,
-          "array_depth": 0,
-          "optional": false,
-          "example": "123456",
-          "comment": [
-            "The number of trades transacted"
-          ]
-        },
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 9,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        }
-      ],
-      "comment": [
-        ""
-      ]
-    },
-    {
-      "name": "WSCandlestickFeedDataV1",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "stream",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'v1.candle'",
-          "comment": [
-            "Stream name"
-          ]
-        },
-        {
-          "name": "selector",
-          "lite_name": "s1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "Primary selector"
-          ]
-        },
-        {
-          "name": "sequence_number",
-          "lite_name": "sn",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'872634876'",
-          "comment": [
-            "A sequence number used to determine message order within a stream.",
-            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
-            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
-            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
-            "  - To distinguish each stream payload, a `dedupCounter` is included.",
-            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
-          ]
-        },
-        {
-          "name": "feed",
-          "lite_name": "f",
-          "semantic_type": "Candlestick",
-          "json_type": "Candlestick",
-          "index": 3,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "A candlestick entry matching the request filters"
-          ]
-        },
-        {
-          "name": "prev_sequence_number",
-          "lite_name": "ps",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'872634875'",
-          "comment": [
-            "The previous sequence number that determines the message order"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "WSUnsubscribeAllParams",
-      "is_root": true,
-      "fields": [],
-      "comment": [
-        "All V1 Websocket Unsubscription Request to unsubscribe from all active websocket streams."
-      ]
-    },
-    {
-      "name": "StreamReference",
-      "is_root": false,
-      "fields": [
-        {
-          "name": "stream",
-          "lite_name": "s",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'v1.ticker.d'",
-          "comment": [
-            "The channel to subscribe to (eg: ticker.s / ticker.d)"
-          ]
-        },
-        {
-          "name": "selectors",
-          "lite_name": "s1",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 1,
-          "optional": false,
-          "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
-          "comment": [
-            "The list of selectors for the stream"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "WSUnsubscribeAllResult",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "stream_reference",
-          "lite_name": "sr",
-          "semantic_type": "StreamReference",
-          "json_type": "StreamReference",
-          "index": 0,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The list of stream references unsubscribed from"
-          ]
-        }
-      ],
-      "comment": [
-        "Returns a list of all rooms the client has unsubscribed from."
-      ]
-    },
-    {
-      "name": "WSListStreamsParams",
-      "is_root": true,
-      "fields": [],
-      "comment": [
-        "List down all the streams this connection has connected to."
-      ]
-    },
-    {
-      "name": "WSListStreamsResult",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "stream_reference",
-          "lite_name": "sr",
-          "semantic_type": "StreamReference",
-          "json_type": "StreamReference",
-          "index": 0,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The list of stream references  the connection is connected to"
-          ]
-        }
-      ],
-      "comment": [
-        "Returns a list of all rooms the client has subscribed to."
-      ]
-    },
-    {
-      "name": "ApiOrderbookLevelsRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "depth",
-          "lite_name": "d",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "50",
-          "comment": [
-            "Depth of the order book to be retrieved (10, 50, 100, 500)"
-          ]
-        }
-      ],
-      "comment": [
-        "Retrieves aggregated price depth for a single instrument, with a maximum depth of 10 levels. Do not use this to poll for data -- a websocket subscription is much more performant, and useful."
-      ]
-    },
-    {
-      "name": "ApiOrderbookLevelsResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "OrderbookLevels",
-          "json_type": "OrderbookLevels",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The orderbook levels objects matching the request asset"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiMiniTickerRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        }
-      ],
-      "comment": [
-        "Retrieves a single mini ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful."
-      ]
-    },
-    {
-      "name": "ApiMiniTickerResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "MiniTicker",
-          "json_type": "MiniTicker",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The mini ticker matching the request asset"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiTickerRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        }
-      ],
-      "comment": [
-        "Retrieves a single ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful."
-      ]
-    },
-    {
-      "name": "ApiTickerResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "Ticker",
-          "json_type": "Ticker",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "comment": [
-            "The mini ticker matching the request asset"
-          ]
-        }
-      ],
-      "comment": []
-    },
-    {
-      "name": "ApiTradeRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "instrument",
-          "lite_name": "i",
-          "semantic_type": "asset",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'BTC_USDT_Perp'",
-          "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
-          ]
-        },
-        {
-          "name": "limit",
-          "lite_name": "l",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "500",
-          "comment": [
-            "The limit to query for. Defaults to 500; Max 1000"
-          ]
-        }
-      ],
-      "comment": [
-        "Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.",
-        "This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape."
       ]
     },
     {
@@ -8156,6 +6780,145 @@
       ]
     },
     {
+      "name": "Candlestick",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "open_time",
+          "lite_name": "ot",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Open time of kline bar in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "close_time",
+          "lite_name": "ct",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Close time of kline bar in unix nanosecond"
+          ]
+        },
+        {
+          "name": "open",
+          "lite_name": "o",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The open price, expressed in underlying currency resolution units"
+          ]
+        },
+        {
+          "name": "close",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The close price, expressed in underlying currency resolution units"
+          ]
+        },
+        {
+          "name": "high",
+          "lite_name": "h",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The high price, expressed in underlying currency resolution units"
+          ]
+        },
+        {
+          "name": "low",
+          "lite_name": "l",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The low price, expressed in underlying currency resolution units"
+          ]
+        },
+        {
+          "name": "volume_b",
+          "lite_name": "vb",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The underlying volume transacted, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "volume_q",
+          "lite_name": "vq",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The quote volume transacted, expressed in quote asset decimal units"
+          ]
+        },
+        {
+          "name": "trades",
+          "lite_name": "t",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "123456",
+          "comment": [
+            "The number of trades transacted"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ]
+        }
+      ],
+      "comment": [
+        ""
+      ]
+    },
+    {
       "name": "ApiCandlestickResponse",
       "is_root": true,
       "fields": [
@@ -8399,6 +7162,1303 @@
         }
       ],
       "comment": []
+    },
+    {
+      "name": "JSONRPCRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "jsonrpc",
+          "lite_name": "j",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'2.0'",
+          "comment": [
+            "The JSON RPC version to use for the request"
+          ]
+        },
+        {
+          "name": "method",
+          "lite_name": "m",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'subscribe'",
+          "comment": [
+            "The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )"
+          ]
+        },
+        {
+          "name": "params",
+          "lite_name": "p",
+          "semantic_type": "any",
+          "json_type": "object",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The parameters for the request"
+          ]
+        },
+        {
+          "name": "id",
+          "lite_name": "i",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "123",
+          "comment": [
+            "Optional Field which is used to match the response by the client.",
+            "If not passed, this field will not be returned"
+          ]
+        }
+      ],
+      "comment": [
+        "All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.",
+        "If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).",
+        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
+      ]
+    },
+    {
+      "name": "Error",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "code",
+          "lite_name": "c",
+          "semantic_type": "uint16",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "123",
+          "comment": [
+            "The error code for the request"
+          ]
+        },
+        {
+          "name": "message",
+          "lite_name": "m",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'An error occurred'",
+          "comment": [
+            "The error message for the request"
+          ]
+        }
+      ],
+      "comment": [
+        "An error response"
+      ]
+    },
+    {
+      "name": "JSONRPCResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "jsonrpc",
+          "lite_name": "j",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'2.0'",
+          "comment": [
+            "The JSON RPC version to use for the request"
+          ]
+        },
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "any",
+          "json_type": "object",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "null",
+          "comment": [
+            "The result for the request"
+          ]
+        },
+        {
+          "name": "error",
+          "lite_name": "e",
+          "semantic_type": "Error",
+          "json_type": "Error",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "null",
+          "comment": [
+            "The error for the request"
+          ]
+        },
+        {
+          "name": "id",
+          "lite_name": "i",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "123",
+          "comment": [
+            "Optional Field which is used to match the response by the client.",
+            "If not passed, this field will not be returned.",
+            "Range: 0 to 4,294,967,295 (uint32)"
+          ]
+        },
+        {
+          "name": "method",
+          "lite_name": "m",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'subscribe'",
+          "comment": [
+            "The method used in the request for this response (eg: `subscribe` / `unsubscribe` / `v1/instrument` )"
+          ]
+        }
+      ],
+      "comment": [
+        "All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.",
+        "If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response."
+      ]
+    },
+    {
+      "name": "WSSubscribeParams",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.ticker.d'",
+          "comment": [
+            "The channel to subscribe to (eg: ticker.s / ticker.d)"
+          ]
+        },
+        {
+          "name": "selectors",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
+          "comment": [
+            "The list of feeds to subscribe to"
+          ]
+        },
+        {
+          "name": "use_global_sequence_number",
+          "lite_name": "ug",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "example": "true",
+          "comment": [
+            "Whether to use the global sequence number for the stream"
+          ]
+        }
+      ],
+      "comment": [
+        "All V1 Websocket Subscription Requests are housed in this wrapper. You may specify a stream and a list of feeds to subscribe to.",
+        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.",
+        "Sequence numbers can be either gateway-specific or global:",
+        "- **Gateway Unique Sequence Number**: Increments by one per stream, resets to 0 on gateway restart.",
+        "- **Global Unique Sequence Number**: A cluster-wide unique number assigned to each cluster payload, does not reset on gateway restarts, and can be used to track and identify message order across streams using `sequence_number` and `prev_sequence_number` in the feed response.",
+        "Set `useGlobalSequenceNumber = true` if you need a persistent, unique identifier across all streams or ordering across multiple feeds."
+      ]
+    },
+    {
+      "name": "WSSubscribeResult",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.ticker.d'",
+          "comment": [
+            "The channel to subscribe to (eg: ticker.s / ticker.d)"
+          ]
+        },
+        {
+          "name": "subs",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
+          "comment": [
+            "The list of feeds subscribed to"
+          ]
+        },
+        {
+          "name": "unsubs",
+          "lite_name": "u",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
+          "comment": [
+            "The list of feeds unsubscribed from"
+          ]
+        },
+        {
+          "name": "num_snapshots",
+          "lite_name": "ns",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 1,
+          "optional": false,
+          "example": "10",
+          "comment": [
+            "The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`"
+          ]
+        },
+        {
+          "name": "first_sequence_number",
+          "lite_name": "fs",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 1,
+          "optional": false,
+          "example": "872634876",
+          "comment": [
+            "The first sequence number to expect for each subscribed feed. Returned in same order as `subs`"
+          ]
+        },
+        {
+          "name": "latest_sequence_number",
+          "lite_name": "ls",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 1,
+          "optional": false,
+          "example": "872634875",
+          "comment": [
+            "The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`"
+          ]
+        }
+      ],
+      "comment": [
+        "To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:\u003cul\u003e\u003cli\u003eAll snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas\u003c/li\u003e\u003cli\u003eNum snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots\u003c/li\u003e\u003cli\u003eFirst sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots\u003c/li\u003e\u003cli\u003eSequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect\u003c/li\u003e\u003cli\u003eDuplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.\u003c/li\u003e\u003c/ul\u003e",
+        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
+      ]
+    },
+    {
+      "name": "WSUnsubscribeParams",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.ticker.d'",
+          "comment": [
+            "The channel to unsubscribe from (eg: ticker.s / ticker.d)"
+          ]
+        },
+        {
+          "name": "selectors",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
+          "comment": [
+            "The list of feeds to unsubscribe from"
+          ]
+        },
+        {
+          "name": "use_global_sequence_number",
+          "lite_name": "ug",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "example": "true",
+          "comment": [
+            "Whether to use the global sequence number for the stream"
+          ]
+        }
+      ],
+      "comment": [
+        "All V1 Websocket Unsubscription Requests are housed in this wrapper. You may specify a stream, a list of feeds and whether those feeds use global sequence numbers to unsubscribe from."
+      ]
+    },
+    {
+      "name": "WSUnsubscribeResult",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.ticker.d'",
+          "comment": [
+            "The channel to subscribe to (eg: ticker.s / ticker.d)"
+          ]
+        },
+        {
+          "name": "unsubs",
+          "lite_name": "u",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
+          "comment": [
+            "The list of feeds unsubscribed from"
+          ]
+        }
+      ],
+      "comment": [
+        "Returns a confirmation of all unsubscribes"
+      ]
+    },
+    {
+      "name": "WSSubscribeRequestV1Legacy",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "request_id",
+          "lite_name": "ri",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "123",
+          "comment": [
+            "Optional Field which is used to match the response by the client.",
+            "If not passed, this field will not be returned.",
+            "Range: 0 to 4,294,967,295 (uint32)"
+          ]
+        },
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.ticker.d'",
+          "comment": [
+            "The channel to subscribe to (eg: ticker.s / ticker.d)"
+          ]
+        },
+        {
+          "name": "feed",
+          "lite_name": "f",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
+          "comment": [
+            "The list of feeds to subscribe to"
+          ]
+        },
+        {
+          "name": "method",
+          "lite_name": "m",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'subscribe'",
+          "comment": [
+            "The method to use for the request (eg: subscribe / unsubscribe)"
+          ]
+        },
+        {
+          "name": "is_full",
+          "lite_name": "if",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "example": "true",
+          "comment": [
+            "Whether the request is for full data or lite data"
+          ]
+        }
+      ],
+      "comment": [
+        "All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.",
+        "If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).",
+        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
+      ]
+    },
+    {
+      "name": "WSSubscribeResponseV1Legacy",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "request_id",
+          "lite_name": "ri",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "123",
+          "comment": [
+            "Optional Field which is used to match the response by the client.",
+            "If not passed, this field will not be returned"
+          ]
+        },
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.ticker.d'",
+          "comment": [
+            "The channel to subscribe to (eg: ticker.s / ticker.d)"
+          ]
+        },
+        {
+          "name": "subs",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
+          "comment": [
+            "The list of feeds subscribed to"
+          ]
+        },
+        {
+          "name": "unsubs",
+          "lite_name": "u",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['BTC_USDT_Perp@500', 'ETH_USDT_Perp@500']",
+          "comment": [
+            "The list of feeds unsubscribed from"
+          ]
+        },
+        {
+          "name": "num_snapshots",
+          "lite_name": "ns",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 4,
+          "array_depth": 1,
+          "optional": false,
+          "example": "10",
+          "comment": [
+            "The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`"
+          ]
+        },
+        {
+          "name": "first_sequence_number",
+          "lite_name": "fs",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 1,
+          "optional": false,
+          "example": "872634876",
+          "comment": [
+            "The first sequence number to expect for each subscribed feed. Returned in same order as `subs`"
+          ]
+        },
+        {
+          "name": "latest_sequence_number",
+          "lite_name": "ls",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 1,
+          "optional": false,
+          "example": "872634875",
+          "comment": [
+            "The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`"
+          ]
+        }
+      ],
+      "comment": [
+        "All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.",
+        "If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.",
+        "To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:\u003cul\u003e\u003cli\u003eAll snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas\u003c/li\u003e\u003cli\u003eNum snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots\u003c/li\u003e\u003cli\u003eFirst sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots\u003c/li\u003e\u003cli\u003eSequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect\u003c/li\u003e\u003cli\u003eDuplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.\u003c/li\u003e\u003c/ul\u003e",
+        "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
+      ]
+    },
+    {
+      "name": "WSOrderbookLevelsFeedSelectorV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ],
+          "selector": "primary"
+        },
+        {
+          "name": "rate",
+          "lite_name": "r",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "500",
+          "comment": [
+            "The minimal rate at which we publish feeds (in milliseconds)",
+            "Delta (50, 100, 500, 1000)",
+            "Snapshot (500, 1000)"
+          ],
+          "selector": "secondary"
+        },
+        {
+          "name": "depth",
+          "lite_name": "d",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'0'",
+          "example": "50",
+          "comment": [
+            "Depth of the order book to be retrieved",
+            "Delta(0 - `unlimited`)",
+            "Snapshot(10, 50, 100, 500)"
+          ],
+          "selector": "secondary"
+        }
+      ],
+      "comment": [
+        "Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.",
+        "Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.",
+        "",
+        "The Delta feed will work as follows:\u003cul\u003e\u003cli\u003eOn subscription, the server will send a full snapshot of all levels of the Orderbook.\u003c/li\u003e\u003cli\u003eAfter the snapshot, the server will only send levels that have changed in value.\u003c/li\u003e\u003c/ul\u003e",
+        "",
+        "Subscription Pattern:\u003cul\u003e\u003cli\u003eDelta - `instrument@rate`\u003c/li\u003e\u003cli\u003eSnapshot - `instrument@rate-depth`\u003c/li\u003e\u003c/ul\u003e",
+        "",
+        "Field Semantics:\u003cul\u003e\u003cli\u003e[DeltaOnly] If a level is not updated, level not published\u003c/li\u003e\u003cli\u003eIf a level is updated, {size: '123'}\u003c/li\u003e\u003cli\u003eIf a level is set to zero, {size: '0'}\u003c/li\u003e\u003cli\u003eIncoming levels will be published as soon as price moves\u003c/li\u003e\u003cli\u003eOutgoing levels will be published with `size = 0`\u003c/li\u003e\u003c/ul\u003e"
+      ]
+    },
+    {
+      "name": "WSOrderbookLevelsFeedDataV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.book.s'",
+          "comment": [
+            "Stream name"
+          ]
+        },
+        {
+          "name": "selector",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "Primary selector"
+          ]
+        },
+        {
+          "name": "sequence_number",
+          "lite_name": "sn",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634876'",
+          "comment": [
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
+          ]
+        },
+        {
+          "name": "feed",
+          "lite_name": "f",
+          "semantic_type": "OrderbookLevels",
+          "json_type": "OrderbookLevels",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "An orderbook levels object matching the request filter"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines the message order"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "WSMiniTickerFeedSelectorV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ],
+          "selector": "primary"
+        },
+        {
+          "name": "rate",
+          "lite_name": "r",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "500",
+          "comment": [
+            "The minimal rate at which we publish feeds (in milliseconds)",
+            "Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)",
+            "Snapshot (200, 500, 1000, 5000)"
+          ],
+          "selector": "secondary"
+        }
+      ],
+      "comment": [
+        "Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.",
+        "Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.",
+        "",
+        "The Delta feed will work as follows:\u003cul\u003e\u003cli\u003eOn subscription, the server will send a full snapshot of the mini ticker.\u003c/li\u003e\u003cli\u003eAfter the snapshot, the server will only send deltas of the mini ticker.\u003c/li\u003e\u003cli\u003eThe server will send a delta if any of the fields in the mini ticker have changed.\u003c/li\u003e\u003c/ul\u003e",
+        "",
+        "Field Semantics:\u003cul\u003e\u003cli\u003e[DeltaOnly] If a field is not updated, {}\u003c/li\u003e\u003cli\u003eIf a field is updated, {field: '123'}\u003c/li\u003e\u003cli\u003eIf a field is set to zero, {field: '0'}\u003c/li\u003e\u003cli\u003eIf a field is set to null, {field: ''}\u003c/li\u003e\u003c/ul\u003e"
+      ]
+    },
+    {
+      "name": "WSMiniTickerFeedDataV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.mini.s'",
+          "comment": [
+            "Stream name"
+          ]
+        },
+        {
+          "name": "selector",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "Primary selector"
+          ]
+        },
+        {
+          "name": "sequence_number",
+          "lite_name": "sn",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634876'",
+          "comment": [
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
+          ]
+        },
+        {
+          "name": "feed",
+          "lite_name": "f",
+          "semantic_type": "MiniTicker",
+          "json_type": "MiniTicker",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "A mini ticker matching the request filter"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines the message order"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "WSTickerFeedSelectorV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ],
+          "selector": "primary"
+        },
+        {
+          "name": "rate",
+          "lite_name": "r",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "500",
+          "comment": [
+            "The minimal rate at which we publish feeds (in milliseconds)",
+            "Delta (100, 200, 500, 1000, 5000)",
+            "Snapshot (500, 1000, 5000)"
+          ],
+          "selector": "secondary"
+        }
+      ],
+      "comment": [
+        "Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.",
+        "Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.",
+        "",
+        "The Delta feed will work as follows:\u003cul\u003e\u003cli\u003eOn subscription, the server will send a full snapshot of the ticker.\u003c/li\u003e\u003cli\u003eAfter the snapshot, the server will only send deltas of the ticker.\u003c/li\u003e\u003cli\u003eThe server will send a delta if any of the fields in the ticker have changed.\u003c/li\u003e\u003c/ul\u003e",
+        "",
+        "Field Semantics:\u003cul\u003e\u003cli\u003e[DeltaOnly] If a field is not updated, {}\u003c/li\u003e\u003cli\u003eIf a field is updated, {field: '123'}\u003c/li\u003e\u003cli\u003eIf a field is set to zero, {field: '0'}\u003c/li\u003e\u003cli\u003eIf a field is set to null, {field: ''}\u003c/li\u003e\u003c/ul\u003e"
+      ]
+    },
+    {
+      "name": "WSTickerFeedDataV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.ticker.s'",
+          "comment": [
+            "Stream name"
+          ]
+        },
+        {
+          "name": "selector",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "Primary selector"
+          ]
+        },
+        {
+          "name": "sequence_number",
+          "lite_name": "sn",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634876'",
+          "comment": [
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
+          ]
+        },
+        {
+          "name": "feed",
+          "lite_name": "f",
+          "semantic_type": "Ticker",
+          "json_type": "Ticker",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "A ticker matching the request filter"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines the message order"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "WSTradeFeedSelectorV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ],
+          "selector": "primary"
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "500",
+          "comment": [
+            "The limit to query for. Valid values are (50, 200, 500, 1000). Default is 50"
+          ],
+          "selector": "secondary"
+        }
+      ],
+      "comment": [
+        "Subscribes to a stream of Public Trades for an instrument."
+      ]
+    },
+    {
+      "name": "WSTradeFeedDataV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.trade'",
+          "comment": [
+            "Stream name"
+          ]
+        },
+        {
+          "name": "selector",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "Primary selector"
+          ]
+        },
+        {
+          "name": "sequence_number",
+          "lite_name": "sn",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634876'",
+          "comment": [
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
+          ]
+        },
+        {
+          "name": "feed",
+          "lite_name": "f",
+          "semantic_type": "Trade",
+          "json_type": "Trade",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "A public trade matching the request filter"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines the message order"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "WSCandlestickFeedSelectorV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+          ],
+          "selector": "primary"
+        },
+        {
+          "name": "interval",
+          "lite_name": "i1",
+          "semantic_type": "CandlestickInterval",
+          "json_type": "CandlestickInterval",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The interval of each candlestick"
+          ],
+          "selector": "secondary"
+        },
+        {
+          "name": "type",
+          "lite_name": "t",
+          "semantic_type": "CandlestickType",
+          "json_type": "CandlestickType",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The type of candlestick data to retrieve"
+          ],
+          "selector": "secondary"
+        }
+      ],
+      "comment": [
+        "Subscribes to a stream of Kline/Candlestick updates for an instrument. A Kline is uniquely identified by its open time.",
+        "A new Kline is published every interval (if it exists). Upon subscription, the server will send the 5 most recent Kline for the requested interval."
+      ]
+    },
+    {
+      "name": "WSCandlestickFeedDataV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.candle'",
+          "comment": [
+            "Stream name"
+          ]
+        },
+        {
+          "name": "selector",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "Primary selector"
+          ]
+        },
+        {
+          "name": "sequence_number",
+          "lite_name": "sn",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634876'",
+          "comment": [
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
+          ]
+        },
+        {
+          "name": "feed",
+          "lite_name": "f",
+          "semantic_type": "Candlestick",
+          "json_type": "Candlestick",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "A candlestick entry matching the request filters"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines the message order"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "WSUnsubscribeAllParams",
+      "is_root": true,
+      "fields": [],
+      "comment": [
+        "All V1 Websocket Unsubscription Request to unsubscribe from all active websocket streams."
+      ]
+    },
+    {
+      "name": "StreamReference",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.ticker.d'",
+          "comment": [
+            "The channel to subscribe to (eg: ticker.s / ticker.d)"
+          ]
+        },
+        {
+          "name": "selectors",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['BTC_USDT_Perp', 'ETH_USDT_Perp']",
+          "comment": [
+            "The list of selectors for the stream"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "WSUnsubscribeAllResult",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream_reference",
+          "lite_name": "sr",
+          "semantic_type": "StreamReference",
+          "json_type": "StreamReference",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of stream references unsubscribed from"
+          ]
+        }
+      ],
+      "comment": [
+        "Returns a list of all rooms the client has unsubscribed from."
+      ]
+    },
+    {
+      "name": "WSListStreamsParams",
+      "is_root": true,
+      "fields": [],
+      "comment": [
+        "List down all the streams this connection has connected to."
+      ]
+    },
+    {
+      "name": "WSListStreamsResult",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream_reference",
+          "lite_name": "sr",
+          "semantic_type": "StreamReference",
+          "json_type": "StreamReference",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of stream references  the connection is connected to"
+          ]
+        }
+      ],
+      "comment": [
+        "Returns a list of all rooms the client has subscribed to."
+      ]
     },
     {
       "name": "ApiGetAllInstrumentsRequest",

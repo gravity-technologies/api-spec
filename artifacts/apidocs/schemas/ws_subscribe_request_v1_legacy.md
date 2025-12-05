@@ -3,7 +3,7 @@
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+    |request_id<br>`ri` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned.<br>Range: 0 to 4,294,967,295 (uint32)|
     |stream<br>`s` |string|True|The channel to subscribe to (eg: ticker.s / ticker.d)|
     |feed<br>`f` |[string]|True|The list of feeds to subscribe to|
     |method<br>`m` |string|True|The method to use for the request (eg: subscribe / unsubscribe)|
