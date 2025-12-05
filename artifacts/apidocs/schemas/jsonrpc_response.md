@@ -6,7 +6,7 @@
     |jsonrpc<br>`j` |string|True|The JSON RPC version to use for the request|
     |result<br>`r` |object|False<br>`null`|The result for the request|
     |error<br>`e` |Error|False<br>`null`|The error for the request|
-    |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned|
+    |id<br>`i` |integer|False<br>`0`|Optional Field which is used to match the response by the client.<br>If not passed, this field will not be returned.<br>Range: 0 to 4,294,967,295 (uint32)|
     |method<br>`m` |string|True|The method used in the request for this response (eg: `subscribe` / `unsubscribe` / `v1/instrument` )|
     ??? info "[Error](/../../schemas/error)"
         An error response<br>

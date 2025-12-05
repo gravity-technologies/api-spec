@@ -611,6 +611,10 @@ class SubAccount:
     derisk_margin: str
     # The derisk margin to maintenance margin ratio of this sub account
     derisk_to_maintenance_margin_ratio: str
+    # The total equity of this sub account for cross margin
+    total_cross_equity: str
+    # The unrealized PnL of this sub account for cross margin
+    cross_unrealized_pnl: str
     # Whether this sub account is a vault
     is_vault: bool | None = None
     # Total amount of IM (reported in `settle_currency`) deducted from the vault due to redemptions nearing the end of their redemption period
@@ -662,6 +666,8 @@ class VaultInvestment:
     num_lp_tokens: str
     # The current share price (in USD) of this vault investment.
     share_price: str
+    # The USD notional invested in this vault investment.
+    usd_notional_invested: str
 
 
 @dataclass
@@ -682,6 +688,8 @@ class AggregatedAccountSummary:
     total_vault_investments_balance: str
     # Total available balance of the main account, denominated in USD
     total_sub_account_available_balance: str
+    # Total entry (initial investment) amount of the open investments, denominated in USD
+    total_usd_notional_invested: str
 
 
 @dataclass
@@ -776,6 +784,7 @@ class Signature:
     ie. You can send the same exact instruction twice with different nonces.
     When the same nonce is used, the same payload will generate the same signature.
     Our system will consider the payload a duplicate, and ignore it.
+    Range: 0 to 4,294,967,295 (uint32)
     """
     nonce: int
     # Chain ID used in EIP-712 domain. Zero value fallbacks to GRVT Chain ID.
@@ -833,192 +842,11 @@ class ApiGetMarginRulesResponse:
 
 
 @dataclass
-class JSONRPCRequest:
-    """
-    All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.
-    If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).
-    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
-    """
-
-    # The JSON RPC version to use for the request
-    jsonrpc: str
-    # The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )
-    method: str
-    # The parameters for the request
-    params: Any
-    """
-    Optional Field which is used to match the response by the client.
-    If not passed, this field will not be returned
-    """
-    id: int | None = None
-
-
-@dataclass
-class Error:
-    # The error code for the request
-    code: int
-    # The error message for the request
-    message: str
-
-
-@dataclass
-class JSONRPCResponse:
-    """
-    All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.
-    If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.
-    """
-
-    # The JSON RPC version to use for the request
-    jsonrpc: str
-    # The method used in the request for this response (eg: `subscribe` / `unsubscribe` / `v1/instrument` )
-    method: str
-    # The result for the request
-    result: Any | None = None
-    # The error for the request
-    error: Error | None = None
-    """
-    Optional Field which is used to match the response by the client.
-    If not passed, this field will not be returned
-    """
-    id: int | None = None
-
-
-@dataclass
-class WSSubscribeParams:
-    """
-    All V1 Websocket Subscription Requests are housed in this wrapper. You may specify a stream and a list of feeds to subscribe to.
-    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
-    Sequence numbers can be either gateway-specific or global:
-    - **Gateway Unique Sequence Number**: Increments by one per stream, resets to 0 on gateway restart.
-    - **Global Unique Sequence Number**: A cluster-wide unique number assigned to each cluster payload, does not reset on gateway restarts, and can be used to track and identify message order across streams using `sequence_number` and `prev_sequence_number` in the feed response.
-    Set `useGlobalSequenceNumber = true` if you need a persistent, unique identifier across all streams or ordering across multiple feeds.
-    """
-
-    # The channel to subscribe to (eg: ticker.s / ticker.d)
-    stream: str
-    # The list of feeds to subscribe to
-    selectors: list[str]
-    # Whether to use the global sequence number for the stream
-    use_global_sequence_number: bool | None = None
-
-
-@dataclass
-class WSSubscribeResult:
-    """
-    To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul>
-    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
-    """
-
-    # The channel to subscribe to (eg: ticker.s / ticker.d)
-    stream: str
-    # The list of feeds subscribed to
-    subs: list[str]
-    # The list of feeds unsubscribed from
-    unsubs: list[str]
-    # The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`
-    num_snapshots: list[int]
-    # The first sequence number to expect for each subscribed feed. Returned in same order as `subs`
-    first_sequence_number: list[str]
-    # The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`
-    latest_sequence_number: list[str]
-
-
-@dataclass
-class WSUnsubscribeParams:
-    # The channel to unsubscribe from (eg: ticker.s / ticker.d)
-    stream: str
-    # The list of feeds to unsubscribe from
-    selectors: list[str]
-    # Whether to use the global sequence number for the stream
-    use_global_sequence_number: bool | None = None
-
-
-@dataclass
-class WSUnsubscribeResult:
-    # The channel to subscribe to (eg: ticker.s / ticker.d)
-    stream: str
-    # The list of feeds unsubscribed from
-    unsubs: list[str]
-
-
-@dataclass
-class WSSubscribeRequestV1Legacy:
-    """
-    All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.
-    If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).
-    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
-    """
-
-    # The channel to subscribe to (eg: ticker.s / ticker.d)
-    stream: str
-    # The list of feeds to subscribe to
-    feed: list[str]
-    # The method to use for the request (eg: subscribe / unsubscribe)
-    method: str
-    """
-    Optional Field which is used to match the response by the client.
-    If not passed, this field will not be returned
-    """
-    request_id: int | None = None
-    # Whether the request is for full data or lite data
-    is_full: bool | None = None
-
-
-@dataclass
-class WSSubscribeResponseV1Legacy:
-    """
-    All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.
-    If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.
-    To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul>
-    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
-    """
-
-    # The channel to subscribe to (eg: ticker.s / ticker.d)
-    stream: str
-    # The list of feeds subscribed to
-    subs: list[str]
-    # The list of feeds unsubscribed from
-    unsubs: list[str]
-    # The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`
-    num_snapshots: list[int]
-    # The first sequence number to expect for each subscribed feed. Returned in same order as `subs`
-    first_sequence_number: list[str]
-    # The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`
-    latest_sequence_number: list[str]
-    """
-    Optional Field which is used to match the response by the client.
-    If not passed, this field will not be returned
-    """
-    request_id: int | None = None
-
-
-@dataclass
-class WSOrderbookLevelsFeedSelectorV1:
-    """
-    Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.
-    Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.
-
-    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul>
-
-    Subscription Pattern:<ul><li>Delta - `instrument@rate`</li><li>Snapshot - `instrument@rate-depth`</li></ul>
-
-    Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul>
-    """
-
+class ApiOrderbookLevelsRequest:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
-    """
-    The minimal rate at which we publish feeds (in milliseconds)
-    Delta (50, 100, 500, 1000)
-    Snapshot (500, 1000)
-    """
-    rate: int
-    """
-    Depth of the order book to be retrieved
-    Delta(0 - `unlimited`)
-    Snapshot(10, 50, 100, 500)
-    """
-    depth: int | None = None
+    # Depth of the order book to be retrieved (10, 50, 100, 500)
+    depth: int
 
 
 @dataclass
@@ -1044,45 +872,15 @@ class OrderbookLevels:
 
 
 @dataclass
-class WSOrderbookLevelsFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # An orderbook levels object matching the request filter
-    feed: OrderbookLevels
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
+class ApiOrderbookLevelsResponse:
+    # The orderbook levels objects matching the request asset
+    result: OrderbookLevels
 
 
 @dataclass
-class WSMiniTickerFeedSelectorV1:
-    """
-    Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.
-    Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.
-
-    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul>
-
-    Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul>
-    """
-
+class ApiMiniTickerRequest:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
-    """
-    The minimal rate at which we publish feeds (in milliseconds)
-    Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)
-    Snapshot (200, 500, 1000, 5000)
-    """
-    rate: int
 
 
 @dataclass
@@ -1112,45 +910,15 @@ class MiniTicker:
 
 
 @dataclass
-class WSMiniTickerFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # A mini ticker matching the request filter
-    feed: MiniTicker
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
+class ApiMiniTickerResponse:
+    # The mini ticker matching the request asset
+    result: MiniTicker
 
 
 @dataclass
-class WSTickerFeedSelectorV1:
-    """
-    Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.
-    Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.
-
-    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the ticker.</li><li>After the snapshot, the server will only send deltas of the ticker.</li><li>The server will send a delta if any of the fields in the ticker have changed.</li></ul>
-
-    Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul>
-    """
-
+class ApiTickerRequest:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
-    """
-    The minimal rate at which we publish feeds (in milliseconds)
-    Delta (100, 200, 500, 1000, 5000)
-    Snapshot (500, 1000, 5000)
-    """
-    rate: int
 
 
 @dataclass
@@ -1225,31 +993,21 @@ class Ticker:
 
 
 @dataclass
-class WSTickerFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # A ticker matching the request filter
-    feed: Ticker
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
+class ApiTickerResponse:
+    # The mini ticker matching the request asset
+    result: Ticker
 
 
 @dataclass
-class WSTradeFeedSelectorV1:
+class ApiTradeRequest:
+    """
+    Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.
+    This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
+    """
+
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
-    # The limit to query for. Valid values are (50, 200, 500, 1000). Default is 50
+    # The limit to query for. Defaults to 500; Max 1000
     limit: int
 
 
@@ -1283,168 +1041,6 @@ class Trade:
     venue: Venue
     # If the trade is a RPI trade
     is_rpi: bool
-
-
-@dataclass
-class WSTradeFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # A public trade matching the request filter
-    feed: Trade
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSCandlestickFeedSelectorV1:
-    """
-    Subscribes to a stream of Kline/Candlestick updates for an instrument. A Kline is uniquely identified by its open time.
-    A new Kline is published every interval (if it exists). Upon subscription, the server will send the 5 most recent Kline for the requested interval.
-    """
-
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The interval of each candlestick
-    interval: CandlestickInterval
-    # The type of candlestick data to retrieve
-    type: CandlestickType
-
-
-@dataclass
-class Candlestick:
-    # Open time of kline bar in unix nanoseconds
-    open_time: str
-    # Close time of kline bar in unix nanosecond
-    close_time: str
-    # The open price, expressed in underlying currency resolution units
-    open: str
-    # The close price, expressed in underlying currency resolution units
-    close: str
-    # The high price, expressed in underlying currency resolution units
-    high: str
-    # The low price, expressed in underlying currency resolution units
-    low: str
-    # The underlying volume transacted, expressed in base asset decimal units
-    volume_b: str
-    # The quote volume transacted, expressed in quote asset decimal units
-    volume_q: str
-    # The number of trades transacted
-    trades: int
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-
-
-@dataclass
-class WSCandlestickFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # A candlestick entry matching the request filters
-    feed: Candlestick
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSUnsubscribeAllParams:
-    pass
-
-
-@dataclass
-class StreamReference:
-    # The channel to subscribe to (eg: ticker.s / ticker.d)
-    stream: str
-    # The list of selectors for the stream
-    selectors: list[str]
-
-
-@dataclass
-class WSUnsubscribeAllResult:
-    # The list of stream references unsubscribed from
-    stream_reference: list[StreamReference]
-
-
-@dataclass
-class WSListStreamsParams:
-    pass
-
-
-@dataclass
-class WSListStreamsResult:
-    # The list of stream references  the connection is connected to
-    stream_reference: list[StreamReference]
-
-
-@dataclass
-class ApiOrderbookLevelsRequest:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # Depth of the order book to be retrieved (10, 50, 100, 500)
-    depth: int
-
-
-@dataclass
-class ApiOrderbookLevelsResponse:
-    # The orderbook levels objects matching the request asset
-    result: OrderbookLevels
-
-
-@dataclass
-class ApiMiniTickerRequest:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-
-
-@dataclass
-class ApiMiniTickerResponse:
-    # The mini ticker matching the request asset
-    result: MiniTicker
-
-
-@dataclass
-class ApiTickerRequest:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-
-
-@dataclass
-class ApiTickerResponse:
-    # The mini ticker matching the request asset
-    result: Ticker
-
-
-@dataclass
-class ApiTradeRequest:
-    """
-    Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.
-    This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
-    """
-
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int
 
 
 @dataclass
@@ -1599,6 +1195,30 @@ class ApiCandlestickRequest:
 
 
 @dataclass
+class Candlestick:
+    # Open time of kline bar in unix nanoseconds
+    open_time: str
+    # Close time of kline bar in unix nanosecond
+    close_time: str
+    # The open price, expressed in underlying currency resolution units
+    open: str
+    # The close price, expressed in underlying currency resolution units
+    close: str
+    # The high price, expressed in underlying currency resolution units
+    high: str
+    # The low price, expressed in underlying currency resolution units
+    low: str
+    # The underlying volume transacted, expressed in base asset decimal units
+    volume_b: str
+    # The quote volume transacted, expressed in quote asset decimal units
+    volume_q: str
+    # The number of trades transacted
+    trades: int
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+
+
+@dataclass
 class ApiCandlestickResponse:
     # The candlestick result set for given interval
     result: list[Candlestick]
@@ -1650,6 +1270,397 @@ class ApiFundingRateResponse:
     result: list[ApiFundingRate]
     # The cursor to indicate when to start the next query from
     next: str | None = None
+
+
+@dataclass
+class JSONRPCRequest:
+    """
+    All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.
+    If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).
+    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
+    """
+
+    # The JSON RPC version to use for the request
+    jsonrpc: str
+    # The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )
+    method: str
+    # The parameters for the request
+    params: Any
+    """
+    Optional Field which is used to match the response by the client.
+    If not passed, this field will not be returned
+    """
+    id: int | None = None
+
+
+@dataclass
+class Error:
+    # The error code for the request
+    code: int
+    # The error message for the request
+    message: str
+
+
+@dataclass
+class JSONRPCResponse:
+    """
+    All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.
+    If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.
+    """
+
+    # The JSON RPC version to use for the request
+    jsonrpc: str
+    # The method used in the request for this response (eg: `subscribe` / `unsubscribe` / `v1/instrument` )
+    method: str
+    # The result for the request
+    result: Any | None = None
+    # The error for the request
+    error: Error | None = None
+    """
+    Optional Field which is used to match the response by the client.
+    If not passed, this field will not be returned.
+    Range: 0 to 4,294,967,295 (uint32)
+    """
+    id: int | None = None
+
+
+@dataclass
+class WSSubscribeParams:
+    """
+    All V1 Websocket Subscription Requests are housed in this wrapper. You may specify a stream and a list of feeds to subscribe to.
+    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
+    Sequence numbers can be either gateway-specific or global:
+    - **Gateway Unique Sequence Number**: Increments by one per stream, resets to 0 on gateway restart.
+    - **Global Unique Sequence Number**: A cluster-wide unique number assigned to each cluster payload, does not reset on gateway restarts, and can be used to track and identify message order across streams using `sequence_number` and `prev_sequence_number` in the feed response.
+    Set `useGlobalSequenceNumber = true` if you need a persistent, unique identifier across all streams or ordering across multiple feeds.
+    """
+
+    # The channel to subscribe to (eg: ticker.s / ticker.d)
+    stream: str
+    # The list of feeds to subscribe to
+    selectors: list[str]
+    # Whether to use the global sequence number for the stream
+    use_global_sequence_number: bool | None = None
+
+
+@dataclass
+class WSSubscribeResult:
+    """
+    To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul>
+    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
+    """
+
+    # The channel to subscribe to (eg: ticker.s / ticker.d)
+    stream: str
+    # The list of feeds subscribed to
+    subs: list[str]
+    # The list of feeds unsubscribed from
+    unsubs: list[str]
+    # The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`
+    num_snapshots: list[int]
+    # The first sequence number to expect for each subscribed feed. Returned in same order as `subs`
+    first_sequence_number: list[str]
+    # The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`
+    latest_sequence_number: list[str]
+
+
+@dataclass
+class WSUnsubscribeParams:
+    # The channel to unsubscribe from (eg: ticker.s / ticker.d)
+    stream: str
+    # The list of feeds to unsubscribe from
+    selectors: list[str]
+    # Whether to use the global sequence number for the stream
+    use_global_sequence_number: bool | None = None
+
+
+@dataclass
+class WSUnsubscribeResult:
+    # The channel to subscribe to (eg: ticker.s / ticker.d)
+    stream: str
+    # The list of feeds unsubscribed from
+    unsubs: list[str]
+
+
+@dataclass
+class WSSubscribeRequestV1Legacy:
+    """
+    All V1 Websocket Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.
+    If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).
+    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
+    """
+
+    # The channel to subscribe to (eg: ticker.s / ticker.d)
+    stream: str
+    # The list of feeds to subscribe to
+    feed: list[str]
+    # The method to use for the request (eg: subscribe / unsubscribe)
+    method: str
+    """
+    Optional Field which is used to match the response by the client.
+    If not passed, this field will not be returned.
+    Range: 0 to 4,294,967,295 (uint32)
+    """
+    request_id: int | None = None
+    # Whether the request is for full data or lite data
+    is_full: bool | None = None
+
+
+@dataclass
+class WSSubscribeResponseV1Legacy:
+    """
+    All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.
+    If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.
+    To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul>
+    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
+    """
+
+    # The channel to subscribe to (eg: ticker.s / ticker.d)
+    stream: str
+    # The list of feeds subscribed to
+    subs: list[str]
+    # The list of feeds unsubscribed from
+    unsubs: list[str]
+    # The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`
+    num_snapshots: list[int]
+    # The first sequence number to expect for each subscribed feed. Returned in same order as `subs`
+    first_sequence_number: list[str]
+    # The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`
+    latest_sequence_number: list[str]
+    """
+    Optional Field which is used to match the response by the client.
+    If not passed, this field will not be returned
+    """
+    request_id: int | None = None
+
+
+@dataclass
+class WSOrderbookLevelsFeedSelectorV1:
+    """
+    Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.
+    Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.
+
+    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul>
+
+    Subscription Pattern:<ul><li>Delta - `instrument@rate`</li><li>Snapshot - `instrument@rate-depth`</li></ul>
+
+    Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul>
+    """
+
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    """
+    The minimal rate at which we publish feeds (in milliseconds)
+    Delta (50, 100, 500, 1000)
+    Snapshot (500, 1000)
+    """
+    rate: int
+    """
+    Depth of the order book to be retrieved
+    Delta(0 - `unlimited`)
+    Snapshot(10, 50, 100, 500)
+    """
+    depth: int | None = None
+
+
+@dataclass
+class WSOrderbookLevelsFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # An orderbook levels object matching the request filter
+    feed: OrderbookLevels
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSMiniTickerFeedSelectorV1:
+    """
+    Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.
+    Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.
+
+    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul>
+
+    Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul>
+    """
+
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    """
+    The minimal rate at which we publish feeds (in milliseconds)
+    Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)
+    Snapshot (200, 500, 1000, 5000)
+    """
+    rate: int
+
+
+@dataclass
+class WSMiniTickerFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # A mini ticker matching the request filter
+    feed: MiniTicker
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSTickerFeedSelectorV1:
+    """
+    Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.
+    Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.
+
+    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the ticker.</li><li>After the snapshot, the server will only send deltas of the ticker.</li><li>The server will send a delta if any of the fields in the ticker have changed.</li></ul>
+
+    Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul>
+    """
+
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    """
+    The minimal rate at which we publish feeds (in milliseconds)
+    Delta (100, 200, 500, 1000, 5000)
+    Snapshot (500, 1000, 5000)
+    """
+    rate: int
+
+
+@dataclass
+class WSTickerFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # A ticker matching the request filter
+    feed: Ticker
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSTradeFeedSelectorV1:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The limit to query for. Valid values are (50, 200, 500, 1000). Default is 50
+    limit: int
+
+
+@dataclass
+class WSTradeFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # A public trade matching the request filter
+    feed: Trade
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSCandlestickFeedSelectorV1:
+    """
+    Subscribes to a stream of Kline/Candlestick updates for an instrument. A Kline is uniquely identified by its open time.
+    A new Kline is published every interval (if it exists). Upon subscription, the server will send the 5 most recent Kline for the requested interval.
+    """
+
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The interval of each candlestick
+    interval: CandlestickInterval
+    # The type of candlestick data to retrieve
+    type: CandlestickType
+
+
+@dataclass
+class WSCandlestickFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # A candlestick entry matching the request filters
+    feed: Candlestick
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSUnsubscribeAllParams:
+    pass
+
+
+@dataclass
+class StreamReference:
+    # The channel to subscribe to (eg: ticker.s / ticker.d)
+    stream: str
+    # The list of selectors for the stream
+    selectors: list[str]
+
+
+@dataclass
+class WSUnsubscribeAllResult:
+    # The list of stream references unsubscribed from
+    stream_reference: list[StreamReference]
+
+
+@dataclass
+class WSListStreamsParams:
+    pass
+
+
+@dataclass
+class WSListStreamsResult:
+    # The list of stream references  the connection is connected to
+    stream_reference: list[StreamReference]
 
 
 @dataclass
