@@ -256,6 +256,7 @@ LITE ENDPOINT: lite/v1/create_order
         |2114|400|Invalid position linked TPSL orders, position linked TPSL must be a reduce-only order|
         |2115|400|Invalid position linked TPSL orders, position linked TPSL must not have smaller size than the position|
         |2116|400|Position linked TPSL order for this asset already exists|
+        |2117|400|Position linked TPSL orders must be created from web or mobile clients|
         |3004|500|Instrument does not have a valid maintenance margin configuration|
         |3005|500|Instrument's underlying currency does not have a valid balance decimal configuration|
         |3006|500|Instrument's quote currency does not have a valid balance decimal configuration|
@@ -7366,7 +7367,9 @@ LITE ENDPOINT: lite/v1/account_summary
                 "is_vault": null,
                 "vault_im_additions": "123456.78",
                 "derisk_margin": "185185.77",
-                "derisk_to_maintenance_margin_ratio": "1.5"
+                "derisk_to_maintenance_margin_ratio": "1.5",
+                "total_cross_equity": "123456.78",
+                "cross_unrealized_pnl": "123456.78"
             }
         }
         ```
@@ -7411,7 +7414,9 @@ LITE ENDPOINT: lite/v1/account_summary
                 "iv": null,
                 "vi": "123456.78",
                 "dm": "185185.77",
-                "dt": "1.5"
+                "dt": "1.5",
+                "tc": "123456.78",
+                "cu": "123456.78"
             }
         }
         ```
@@ -7760,7 +7765,9 @@ LITE ENDPOINT: lite/v1/account_history
                 "is_vault": null,
                 "vault_im_additions": "123456.78",
                 "derisk_margin": "185185.77",
-                "derisk_to_maintenance_margin_ratio": "1.5"
+                "derisk_to_maintenance_margin_ratio": "1.5",
+                "total_cross_equity": "123456.78",
+                "cross_unrealized_pnl": "123456.78"
             }],
             "next": "Qw0918="
         }
@@ -7806,7 +7813,9 @@ LITE ENDPOINT: lite/v1/account_history
                 "iv": null,
                 "vi": "123456.78",
                 "dm": "185185.77",
-                "dt": "1.5"
+                "dt": "1.5",
+                "tc": "123456.78",
+                "cu": "123456.78"
             }],
             "n": "Qw0918="
         }
@@ -8183,12 +8192,14 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                 "vault_investments": [{
                     "vault_id": 123456789,
                     "num_lp_tokens": 1000000,
-                    "share_price": 1000000
+                    "share_price": 1000000,
+                    "usd_notional_invested": 1000000
                 }],
                 "total_sub_account_balance": "3945034.23",
                 "total_sub_account_equity": "3945034.23",
                 "total_vault_investments_balance": "3945034.23",
-                "total_sub_account_available_balance": "3945034.23"
+                "total_sub_account_available_balance": "3945034.23",
+                "total_usd_notional_invested": "3945034.23"
             }
         }
         ```
@@ -8206,12 +8217,14 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                 "vi": [{
                     "vi": 123456789,
                     "nl": 1000000,
-                    "sp": 1000000
+                    "sp": 1000000,
+                    "un": 1000000
                 }],
                 "ts": "3945034.23",
                 "ts1": "3945034.23",
                 "tv": "3945034.23",
-                "ts2": "3945034.23"
+                "ts2": "3945034.23",
+                "tu": "3945034.23"
             }
         }
         ```
@@ -8506,7 +8519,8 @@ LITE ENDPOINT: lite/v1/funding_account_summary
                 "vault_investments": [{
                     "vault_id": 123456789,
                     "num_lp_tokens": 1000000,
-                    "share_price": 1000000
+                    "share_price": 1000000,
+                    "usd_notional_invested": 1000000
                 }]
             },
             "tier": {
@@ -8532,7 +8546,8 @@ LITE ENDPOINT: lite/v1/funding_account_summary
                 "vi": [{
                     "vi": 123456789,
                     "nl": 1000000,
-                    "sp": 1000000
+                    "sp": 1000000,
+                    "un": 1000000
                 }]
             },
             "t": {
