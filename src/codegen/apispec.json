@@ -1388,6 +1388,47 @@
         },
         {
           "namespace": "Execution",
+          "name": "RPCFundingPaymentHistoryV1",
+          "version": 1,
+          "route": "/funding_payment_history",
+          "auth_required": true,
+          "request": "ApiFundingPaymentHistoryRequest",
+          "response": "ApiFundingPaymentHistoryResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "Position",
           "name": "RPCPositionsV1",
           "version": 1,
           "route": "/positions",
@@ -1428,13 +1469,13 @@
           ]
         },
         {
-          "namespace": "Execution",
-          "name": "RPCFundingPaymentHistoryV1",
+          "namespace": "Position",
+          "name": "RPCSetPositionConfigV1",
           "version": 1,
-          "route": "/funding_payment_history",
+          "route": "/set_position_config",
           "auth_required": true,
-          "request": "ApiFundingPaymentHistoryRequest",
-          "response": "ApiFundingPaymentHistoryResponse",
+          "request": "ApiSetSubAccountPositionMarginConfigRequest",
+          "response": "ApiSetSubAccountPositionMarginConfigResponse",
           "on_request_errors": [
             {
               "code": 1000,
@@ -1462,9 +1503,161 @@
               "status": 429
             },
             {
-              "code": 1008,
-              "message": "Your IP has not been whitelisted for access",
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 2102,
+              "message": "Margin type change failed, has open position for this instrument",
+              "status": 400
+            },
+            {
+              "code": 2103,
+              "message": "Margin type change failed, has open orders for this instrument",
+              "status": 400
+            },
+            {
+              "code": 2101,
+              "message": "Vaults cannot configure leverage",
+              "status": 400
+            },
+            {
+              "code": 2104,
+              "message": "Margin type not supported",
+              "status": 400
+            },
+            {
+              "code": 2105,
+              "message": "Margin type change failed",
+              "status": 400
+            },
+            {
+              "code": 2100,
+              "message": "Invalid initial leverage",
+              "status": 400
+            },
+            {
+              "code": 2107,
+              "message": "Attempted to set leverage below minimum",
+              "status": 400
+            },
+            {
+              "code": 2108,
+              "message": "Attempted to set leverage above maximum",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Position",
+          "name": "RPCAddPositionMarginV1",
+          "version": 1,
+          "route": "/add_position_margin",
+          "auth_required": true,
+          "request": "ApiAddIsolatedPositionMarginRequest",
+          "response": "ApiAddIsolatedPositionMarginResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
               "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 7450,
+              "message": "Add margin failed",
+              "status": 400
+            },
+            {
+              "code": 7451,
+              "message": "Add margin to empty position",
+              "status": 400
+            },
+            {
+              "code": 7452,
+              "message": "Add margin to non isolated position",
+              "status": 400
+            },
+            {
+              "code": 7453,
+              "message": "Max addable amount exceeded",
+              "status": 400
+            },
+            {
+              "code": 7454,
+              "message": "Max removable amount exceeded",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Position",
+          "name": "RPCGetPositionMarginLimitsV1",
+          "version": 1,
+          "route": "/get_position_margin_limits",
+          "auth_required": true,
+          "request": "ApiGetIsolatedPositionMarginLimitsRequest",
+          "response": "ApiGetIsolatedPositionMarginLimitsResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 7455,
+              "message": "Not isolated margin position",
+              "status": 400
             }
           ]
         },
@@ -2471,6 +2664,149 @@
               "status": 401
             }
           ]
+        },
+        {
+          "namespace": "Builder",
+          "name": "RPCAuthorizeBuilderV1",
+          "version": 1,
+          "route": "/authorize_builder",
+          "auth_required": true,
+          "request": "ApiAuthorizeBuilderRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 7500,
+              "message": "Builder Fee exceeds the allowed program limit.",
+              "status": 400
+            },
+            {
+              "code": 7501,
+              "message": "Builder Fee can't be negative.",
+              "status": 400
+            },
+            {
+              "code": 7502,
+              "message": "Builder Account does not exist.",
+              "status": 400
+            },
+            {
+              "code": 7503,
+              "message": "Builder is already authorized for this account with the given fee.",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Builder",
+          "name": "RPCGetAuthorizedBuildersV1",
+          "version": 1,
+          "route": "/get_authorized_builders",
+          "auth_required": true,
+          "request": "EmptyRequest",
+          "response": "ApiGetAuthorizedBuildersResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "Execution",
+          "name": "RPCBuilderFillHistoryV1",
+          "version": 1,
+          "route": "/builder_fill_history",
+          "auth_required": true,
+          "request": "ApiBuilderFillHistoryRequest",
+          "response": "ApiBuilderFillHistoryResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            }
+          ]
         }
       ],
       "streams": [
@@ -3159,6 +3495,58 @@
           "comment": [
             "The cumulative realized funding payment of the position, expressed in quote asset decimal units. Positive if paid, negative if received"
           ]
+        },
+        {
+          "name": "margin_type",
+          "lite_name": "mt",
+          "semantic_type": "PositionMarginType",
+          "json_type": "PositionMarginType",
+          "index": 17,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'cross'",
+          "comment": [
+            "The margin type of the position"
+          ]
+        },
+        {
+          "name": "isolated_balance",
+          "lite_name": "ib",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 18,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'100000.20'",
+          "comment": [
+            "[IsolatedOnly] The wallet balance reserved for this isolated margin position, expressed in quote asset decimal units. If this positions is liquidated, this is the maximal balance that can be lost"
+          ]
+        },
+        {
+          "name": "isolated_im",
+          "lite_name": "ii",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 19,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'100000.20'",
+          "comment": [
+            "[IsolatedOnly] The initial margin of the isolated margin position, expressed in quote asset decimal units. The `total_equity` required to open more size in the position"
+          ]
+        },
+        {
+          "name": "isolated_mm",
+          "lite_name": "im",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 20,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'100000.20'",
+          "comment": [
+            "[IsolatedOnly] The maintenance margin of the isolated margin position, expressed in quote asset decimal units. The `total_equity` required to avoid liquidation of the position"
+          ]
         }
       ],
       "comment": []
@@ -3589,6 +3977,44 @@
           "example": "false",
           "comment": [
             "If the trade is a RPI trade"
+          ]
+        },
+        {
+          "name": "builder",
+          "lite_name": "b1",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 24,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_MAIN_ACCOUNT_ID'",
+          "comment": [
+            "The main account ID of the builder. referred to Order.builder"
+          ]
+        },
+        {
+          "name": "builder_fee_rate",
+          "lite_name": "bf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 25,
+          "array_depth": 0,
+          "optional": false,
+          "example": "0.001",
+          "comment": [
+            "Builder fee percentage charged for this order. referred to Order.builder builderFee "
+          ]
+        },
+        {
+          "name": "builder_fee",
+          "lite_name": "bf1",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 26,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee"
           ]
         }
       ],
@@ -4983,6 +5409,518 @@
       "comment": [
         "The response to set the derisk margin to maintenance margin ratio of a sub account"
       ]
+    },
+    {
+      "name": "ApiSetSubAccountPositionMarginConfigRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to set the margin type and leverage for"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument of the position to set the margin type and leverage for"
+          ]
+        },
+        {
+          "name": "margin_type",
+          "lite_name": "mt",
+          "semantic_type": "PositionMarginType",
+          "json_type": "PositionMarginType",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The margin type to set for the position"
+          ]
+        },
+        {
+          "name": "leverage",
+          "lite_name": "l",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1.5'",
+          "comment": [
+            "The leverage to set for the position"
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The signature of this operation"
+          ]
+        }
+      ],
+      "comment": [
+        "Sets the margin type and leverage configuration for a specific position (instrument) within a sub account.",
+        "",
+        "This configuration is applied per-instrument, allowing different margin settings for different positions.",
+        ""
+      ]
+    },
+    {
+      "name": "ApiSetSubAccountPositionMarginConfigResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "ack",
+          "lite_name": "a",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'true'",
+          "comment": [
+            "Whether the margin type and leverage was acked"
+          ]
+        }
+      ],
+      "comment": [
+        "The response to set the margin type and leverage for a position"
+      ]
+    },
+    {
+      "name": "ApiAddIsolatedPositionMarginRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to add isolated margin in or remove margin from"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument to add margin into, or remove margin from"
+          ]
+        },
+        {
+          "name": "amount",
+          "lite_name": "a",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The amount of margin to add to the position, positive to add, negative to remove, expressed in quote asset decimal units"
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The signature of this operation"
+          ]
+        }
+      ],
+      "comment": [
+        "The request to add margin to a isolated position"
+      ]
+    },
+    {
+      "name": "ApiAddIsolatedPositionMarginResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "success",
+          "lite_name": "s",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'true'",
+          "comment": [
+            "Whether the margin mode and leverage was set successfully"
+          ]
+        }
+      ],
+      "comment": [
+        "The response to add margin to a isolated position"
+      ]
+    },
+    {
+      "name": "ApiGetIsolatedPositionMarginLimitsRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to get the margin limits for"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The isolated position asset to get the margin limits for"
+          ]
+        }
+      ],
+      "comment": [
+        "The request to get the max addable and removable amount for an isolated position"
+      ]
+    },
+    {
+      "name": "ApiGetIsolatedPositionMarginLimitsResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The isolated position asset"
+          ]
+        },
+        {
+          "name": "max_addable_amount",
+          "lite_name": "ma",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The max addable amount that can be added to the isolated position, expressed in quote asset decimal units"
+          ]
+        },
+        {
+          "name": "max_removable_amount",
+          "lite_name": "mr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'123456.78'",
+          "comment": [
+            "The max removable amount that can be removed from the isolated position, expressed in quote asset decimal units"
+          ]
+        }
+      ],
+      "comment": [
+        "The response to get the max addable and removable amount for an isolated position request"
+      ]
+    },
+    {
+      "name": "ApiBuilderFillHistoryRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The start time to query for in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "now()",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The end time to query for in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "500",
+          "example": "500",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "''",
+          "comment": [
+            "The cursor to indicate when to start the next query from"
+          ]
+        }
+      ],
+      "comment": [
+        "The request to get the historical builder trade of a builder",
+        "The history is returned in reverse chronological order",
+        "",
+        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+      ]
+    },
+    {
+      "name": "BuilderFillHistory",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "off_chain_account_id",
+          "lite_name": "oc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ACC:123456'",
+          "comment": [
+            "The off chain account id"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument being represented"
+          ]
+        },
+        {
+          "name": "is_buyer",
+          "lite_name": "ib",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "The side that the subaccount took on the trade"
+          ]
+        },
+        {
+          "name": "is_taker",
+          "lite_name": "it",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "The role that the subaccount took on the trade"
+          ]
+        },
+        {
+          "name": "size",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.30'",
+          "comment": [
+            "The number of assets being traded, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "price",
+          "lite_name": "p",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65038.01'",
+          "comment": [
+            "The traded price, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "mark_price",
+          "lite_name": "mp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65038.01'",
+          "comment": [
+            "The mark price of the instrument at point of trade, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "index_price",
+          "lite_name": "ip",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65038.01'",
+          "comment": [
+            "The index price of the instrument at point of trade, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "fee_rate",
+          "lite_name": "fr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "0.001",
+          "comment": [
+            "Builder fee percentage charged for this order. referred to Order.builder builderFee "
+          ]
+        },
+        {
+          "name": "fee",
+          "lite_name": "f",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiBuilderFillHistoryResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "BuilderFillHistory",
+          "json_type": "BuilderFillHistory",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The builder fill history matching the request builder account"
+          ]
+        },
+        {
+          "name": "next",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the next query from"
+          ]
+        }
+      ],
+      "comment": []
     },
     {
       "name": "ApiGetMarginRulesRequest",
@@ -9161,6 +10099,32 @@
           "comment": [
             "[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client"
           ]
+        },
+        {
+          "name": "builder",
+          "lite_name": "b",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 12,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_MAIN_ACCOUNT_ID'",
+          "comment": [
+            "The main account ID of the builder"
+          ]
+        },
+        {
+          "name": "builder_fee",
+          "lite_name": "bf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 13,
+          "array_depth": 0,
+          "optional": false,
+          "example": "0.001",
+          "comment": [
+            "Builder fee charged for this order "
+          ]
         }
       ],
       "comment": [
@@ -9753,6 +10717,150 @@
         "Market Maker will send a heartbeat message by calling the endpoint at specific intervals (ex. every 30 seconds) to the server to refresh the count down.",
         "",
         "If the server does not receive a heartbeat message within the countdown time, it will cancel all open orders for the specified Sub Account ID."
+      ]
+    },
+    {
+      "name": "ApiAuthorizeBuilderRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_MAIN_ACCOUNT_ID'",
+          "comment": [
+            "The Main Account ID of the user granting the authorization."
+          ]
+        },
+        {
+          "name": "builder_account_id",
+          "lite_name": "ba",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_MAIN_ACCOUNT_ID'",
+          "comment": [
+            "The Main Account ID of the Builder receiving the authorization."
+          ]
+        },
+        {
+          "name": "max_futures_fee_rate",
+          "lite_name": "mf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "0.001",
+          "comment": [
+            "The maximum fee rate cap for **Futures** trades executed by this builder. The builder cannot charge fees exceeding this limit."
+          ]
+        },
+        {
+          "name": "max_spot_fee_rate",
+          "lite_name": "ms",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "0.0001",
+          "comment": [
+            "The maximum fee rate cap for **Spot** trades executed by this builder. The builder cannot charge fees exceeding this limit."
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The cryptographic signature authenticating this request. Must be signed by the private key associated with `mainAccountID`."
+          ]
+        }
+      ],
+      "comment": [
+        "Authorizes a specific Builder to execute transactions on behalf of the Main Account.",
+        "",
+        "This endpoint acts as an **upsert** operation:",
+        "- **New Authorization**: If the builder is not currently authorized, a new record is created.",
+        "- **Update Limit**: If the builder is already authorized, this request updates the `maxFuturesFeeRate` and `maxSpotFeeRate` to the new values provided."
+      ]
+    },
+    {
+      "name": "ApiAuthorizedBuilder",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "builder_account_id",
+          "lite_name": "ba",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_MAIN_ACCOUNT_ID'",
+          "comment": [
+            "The main account ID of the builder"
+          ]
+        },
+        {
+          "name": "max_futures_fee_rate",
+          "lite_name": "mf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "0.001",
+          "comment": [
+            "The maximum fee rate for the authorized builder"
+          ]
+        },
+        {
+          "name": "max_spot_fee_rate",
+          "lite_name": "ms",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "0.0001",
+          "comment": [
+            "The maximum fee rate for the authorized builder"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiGetAuthorizedBuildersResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "results",
+          "lite_name": "r",
+          "semantic_type": "ApiAuthorizedBuilder",
+          "json_type": "ApiAuthorizedBuilder",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of authorized builders"
+          ]
+        }
+      ],
+      "comment": [
+        "Returns list of authorized builders and the associated fee"
       ]
     },
     {
@@ -13291,6 +14399,34 @@
           "comment": [
             "the chain ID is invalid"
           ]
+        },
+        {
+          "name": "BUILDER_ORDER_FEE_EXCEED",
+          "value": 39,
+          "comment": [
+            "Builder fee exceed the limit"
+          ]
+        },
+        {
+          "name": "BUILDER_ORDER_FEE_NEGATIVE",
+          "value": 40,
+          "comment": [
+            "Builder fee is below 0"
+          ]
+        },
+        {
+          "name": "BUILDER_ORDER_BUILDER_NOT_AUTHORIZED",
+          "value": 41,
+          "comment": [
+            "Builder is not an authorized builder for client"
+          ]
+        },
+        {
+          "name": "BUILDER_ORDER_BUILDER_NOT_EXIST",
+          "value": 42,
+          "comment": [
+            "Builder does not exist"
+          ]
         }
       ],
       "comment": []
@@ -13331,6 +14467,19 @@
           "value": 5,
           "comment": [
             "Order is cancelled by the user using one of the supported APIs (See OrderRejectReason). Before an order is open, it cannot be cancelled."
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "PositionMarginType",
+      "values": [
+        {
+          "name": "CROSS",
+          "value": 2,
+          "comment": [
+            "Cross Margin Mode: uses all available funds in your account as collateral across all cross margin positions"
           ]
         }
       ],

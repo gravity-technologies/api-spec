@@ -198,6 +198,14 @@ class OrderRejectReason(Enum):
     CURRENCY_NOT_DEFINED = "CURRENCY_NOT_DEFINED"
     # the chain ID is invalid
     INVALID_CHAIN_ID = "INVALID_CHAIN_ID"
+    # Builder fee exceed the limit
+    BUILDER_ORDER_FEE_EXCEED = "BUILDER_ORDER_FEE_EXCEED"
+    # Builder fee is below 0
+    BUILDER_ORDER_FEE_NEGATIVE = "BUILDER_ORDER_FEE_NEGATIVE"
+    # Builder is not an authorized builder for client
+    BUILDER_ORDER_BUILDER_NOT_AUTHORIZED = "BUILDER_ORDER_BUILDER_NOT_AUTHORIZED"
+    # Builder does not exist
+    BUILDER_ORDER_BUILDER_NOT_EXIST = "BUILDER_ORDER_BUILDER_NOT_EXIST"
 
 
 class OrderStatus(Enum):
@@ -211,6 +219,11 @@ class OrderStatus(Enum):
     REJECTED = "REJECTED"
     # Order is cancelled by the user using one of the supported APIs (See OrderRejectReason). Before an order is open, it cannot be cancelled.
     CANCELLED = "CANCELLED"
+
+
+class PositionMarginType(Enum):
+    # Cross Margin Mode: uses all available funds in your account as collateral across all cross margin positions
+    CROSS = "CROSS"
 
 
 class TimeInForce(Enum):
@@ -392,6 +405,14 @@ class Positions:
     cumulative_fee: str
     # The cumulative realized funding payment of the position, expressed in quote asset decimal units. Positive if paid, negative if received
     cumulative_realized_funding_payment: str
+    # The margin type of the position
+    margin_type: PositionMarginType
+    # [IsolatedOnly] The wallet balance reserved for this isolated margin position, expressed in quote asset decimal units. If this positions is liquidated, this is the maximal balance that can be lost
+    isolated_balance: str | None = None
+    # [IsolatedOnly] The initial margin of the isolated margin position, expressed in quote asset decimal units. The `total_equity` required to open more size in the position
+    isolated_im: str | None = None
+    # [IsolatedOnly] The maintenance margin of the isolated margin position, expressed in quote asset decimal units. The `total_equity` required to avoid liquidation of the position
+    isolated_mm: str | None = None
 
 
 @dataclass
@@ -482,6 +503,12 @@ class Fill:
     signer: str
     # If the trade is a RPI trade
     is_rpi: bool
+    # The main account ID of the builder. referred to Order.builder
+    builder: str
+    # Builder fee percentage charged for this order. referred to Order.builder builderFee
+    builder_fee_rate: str
+    # The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee
+    builder_fee: str
     # Specifies the broker who brokered the order
     broker: BrokerTag | None = None
 
@@ -805,6 +832,122 @@ class ApiSetDeriskToMaintenanceMarginRatioRequest:
 class ApiSetDeriskToMaintenanceMarginRatioResponse:
     # Whether the derisk margin to maintenance margin ratio was set successfully
     success: bool
+
+
+@dataclass
+class ApiSetSubAccountPositionMarginConfigRequest:
+    """
+    Sets the margin type and leverage configuration for a specific position (instrument) within a sub account.
+
+    This configuration is applied per-instrument, allowing different margin settings for different positions.
+
+    """
+
+    # The sub account ID to set the margin type and leverage for
+    sub_account_id: str
+    # The instrument of the position to set the margin type and leverage for
+    instrument: str
+    # The margin type to set for the position
+    margin_type: PositionMarginType
+    # The leverage to set for the position
+    leverage: str
+    # The signature of this operation
+    signature: Signature
+
+
+@dataclass
+class ApiSetSubAccountPositionMarginConfigResponse:
+    # Whether the margin type and leverage was acked
+    ack: bool
+
+
+@dataclass
+class ApiAddIsolatedPositionMarginRequest:
+    # The sub account ID to add isolated margin in or remove margin from
+    sub_account_id: str
+    # The instrument to add margin into, or remove margin from
+    instrument: str
+    # The amount of margin to add to the position, positive to add, negative to remove, expressed in quote asset decimal units
+    amount: str
+    # The signature of this operation
+    signature: Signature
+
+
+@dataclass
+class ApiAddIsolatedPositionMarginResponse:
+    # Whether the margin mode and leverage was set successfully
+    success: bool
+
+
+@dataclass
+class ApiGetIsolatedPositionMarginLimitsRequest:
+    # The sub account ID to get the margin limits for
+    sub_account_id: str
+    # The isolated position asset to get the margin limits for
+    instrument: str
+
+
+@dataclass
+class ApiGetIsolatedPositionMarginLimitsResponse:
+    # The isolated position asset
+    instrument: str
+    # The max addable amount that can be added to the isolated position, expressed in quote asset decimal units
+    max_addable_amount: str
+    # The max removable amount that can be removed from the isolated position, expressed in quote asset decimal units
+    max_removable_amount: str
+
+
+@dataclass
+class ApiBuilderFillHistoryRequest:
+    """
+    The request to get the historical builder trade of a builder
+    The history is returned in reverse chronological order
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The start time to query for in unix nanoseconds
+    start_time: str | None = None
+    # The end time to query for in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the next query from
+    cursor: str | None = None
+
+
+@dataclass
+class BuilderFillHistory:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The off chain account id
+    off_chain_account_id: str
+    # The instrument being represented
+    instrument: str
+    # The side that the subaccount took on the trade
+    is_buyer: bool
+    # The role that the subaccount took on the trade
+    is_taker: bool
+    # The number of assets being traded, expressed in base asset decimal units
+    size: str
+    # The traded price, expressed in `9` decimals
+    price: str
+    # The mark price of the instrument at point of trade, expressed in `9` decimals
+    mark_price: str
+    # The index price of the instrument at point of trade, expressed in `9` decimals
+    index_price: str
+    # Builder fee percentage charged for this order. referred to Order.builder builderFee
+    fee_rate: str
+    # The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee
+    fee: str
+
+
+@dataclass
+class ApiBuilderFillHistoryResponse:
+    # The builder fill history matching the request builder account
+    result: list[BuilderFillHistory]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
 
 
 @dataclass
@@ -1845,6 +1988,10 @@ class Order:
     signature: Signature
     # Order Metadata, ignored by the smart contract, and unsigned by the client
     metadata: OrderMetadata
+    # The main account ID of the builder
+    builder: str
+    # Builder fee charged for this order
+    builder_fee: str
     # [Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
     order_id: str | None = None
     """
@@ -2029,6 +2176,44 @@ class ApiCancelOnDisconnectRequest:
     Maximum acceptable value is 300,000
     """
     countdown_time: str | None = None
+
+
+@dataclass
+class ApiAuthorizeBuilderRequest:
+    """
+    Authorizes a specific Builder to execute transactions on behalf of the Main Account.
+
+    This endpoint acts as an **upsert** operation:
+    - **New Authorization**: If the builder is not currently authorized, a new record is created.
+    - **Update Limit**: If the builder is already authorized, this request updates the `maxFuturesFeeRate` and `maxSpotFeeRate` to the new values provided.
+    """
+
+    # The Main Account ID of the user granting the authorization.
+    main_account_id: str
+    # The Main Account ID of the Builder receiving the authorization.
+    builder_account_id: str
+    # The maximum fee rate cap for **Futures** trades executed by this builder. The builder cannot charge fees exceeding this limit.
+    max_futures_fee_rate: str
+    # The maximum fee rate cap for **Spot** trades executed by this builder. The builder cannot charge fees exceeding this limit.
+    max_spot_fee_rate: str
+    # The cryptographic signature authenticating this request. Must be signed by the private key associated with `mainAccountID`.
+    signature: Signature
+
+
+@dataclass
+class ApiAuthorizedBuilder:
+    # The main account ID of the builder
+    builder_account_id: str
+    # The maximum fee rate for the authorized builder
+    max_futures_fee_rate: str
+    # The maximum fee rate for the authorized builder
+    max_spot_fee_rate: str
+
+
+@dataclass
+class ApiGetAuthorizedBuildersResponse:
+    # The list of authorized builders
+    results: list[ApiAuthorizedBuilder]
 
 
 @dataclass

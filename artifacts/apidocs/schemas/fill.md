@@ -22,6 +22,9 @@
     |signer<br>`s1` |string|True|The address (public key) of the wallet signing the payload|
     |broker<br>`b` |BrokerTag|False<br>``|Specifies the broker who brokered the order|
     |is_rpi<br>`ir1` |boolean|True|If the trade is a RPI trade|
+    |builder<br>`b1` |string|True|The main account ID of the builder. referred to Order.builder|
+    |builder_fee_rate<br>`bf` |string|True|Builder fee percentage charged for this order. referred to Order.builder builderFee |
+    |builder_fee<br>`bf1` |string|True|The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee|
     ??? info "[Venue](/../../schemas/venue)"
         The list of Trading Venues that are supported on the GRVT exchange<br>
 

@@ -22,3 +22,11 @@
         |leverage<br>`l` |string|True|The current leverage value for this position|
         |cumulative_fee<br>`cf` |string|True|The cumulative fee paid on the position, expressed in quote asset decimal units|
         |cumulative_realized_funding_payment<br>`cr` |string|True|The cumulative realized funding payment of the position, expressed in quote asset decimal units. Positive if paid, negative if received|
+        |margin_type<br>`mt` |PositionMarginType|True|The margin type of the position|
+        |isolated_balance<br>`ib` |string|False<br>`None`|[IsolatedOnly] The wallet balance reserved for this isolated margin position, expressed in quote asset decimal units. If this positions is liquidated, this is the maximal balance that can be lost|
+        |isolated_im<br>`ii` |string|False<br>`None`|[IsolatedOnly] The initial margin of the isolated margin position, expressed in quote asset decimal units. The `total_equity` required to open more size in the position|
+        |isolated_mm<br>`im` |string|False<br>`None`|[IsolatedOnly] The maintenance margin of the isolated margin position, expressed in quote asset decimal units. The `total_equity` required to avoid liquidation of the position|
+        ??? info "[PositionMarginType](/../../schemas/position_margin_type)"
+            |Value| Description |
+            |-|-|
+            |`CROSS` = 2|Cross Margin Mode: uses all available funds in your account as collateral across all cross margin positions|
