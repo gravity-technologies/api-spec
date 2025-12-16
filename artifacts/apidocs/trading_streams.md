@@ -150,7 +150,9 @@ STREAM: v1.order
                     "traded_size": ["1.5"],
                     "update_time": "1697788800000000000",
                     "avg_fill_price": ["60000.4"]
-                }
+                },
+                "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
+                "builder_fee": 0.001
             }
         }
         ```
@@ -202,7 +204,9 @@ STREAM: v1.order
                     "ts": ["1.5"],
                     "ut": "1697788800000000000",
                     "af": ["60000.4"]
-                }
+                },
+                "b": "'$GRVT_MAIN_ACCOUNT_ID'",
+                "bf": 0.001
             }
         }
         ```
@@ -2007,10 +2011,14 @@ STREAM: v1.fill
                 "trade_id": "209358-2",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
+                "is_liquidation": false,
                 "client_order_id": "23042",
                 "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "broker": "UNSPECIFIED",
-                "is_rpi": false
+                "is_rpi": false,
+                "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
+                "builder_fee_rate": 0.001,
+                "builder_fee": null
             }
         }
         ```
@@ -2038,10 +2046,14 @@ STREAM: v1.fill
                 "ti": "209358-2",
                 "oi": "0x10000101000203040506",
                 "v": "ORDERBOOK",
+                "il": false,
                 "co": "23042",
                 "s1": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "b": "UNSPECIFIED",
-                "ir1": false
+                "ir1": false,
+                "b1": "'$GRVT_MAIN_ACCOUNT_ID'",
+                "bf": 0.001,
+                "bf1": null
             }
         }
         ```
@@ -2636,7 +2648,11 @@ STREAM: v1.position
                 "est_liquidation_price": 60000.25,
                 "leverage": "10",
                 "cumulative_fee": "100000.20",
-                "cumulative_realized_funding_payment": "100000.20"
+                "cumulative_realized_funding_payment": "100000.20",
+                "margin_type": "cross",
+                "isolated_balance": "100000.20",
+                "isolated_im": "100000.20",
+                "isolated_mm": "100000.20"
             }
         }
         ```
@@ -2663,7 +2679,11 @@ STREAM: v1.position
                 "el": 60000.25,
                 "l": "10",
                 "cf": "100000.20",
-                "cr": "100000.20"
+                "cr": "100000.20",
+                "mt": "cross",
+                "ib": "100000.20",
+                "ii": "100000.20",
+                "im": "100000.20"
             }
         }
         ```
