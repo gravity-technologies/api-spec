@@ -19,6 +19,8 @@
         |signature<br>`s` |Signature|True|The signature approving this order|
         |metadata<br>`m` |OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
         |state<br>`s1` |OrderState|False<br>`''`|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
+        |builder<br>`b` |string|True|The main account ID of the builder|
+        |builder_fee<br>`bf` |string|True|Builder fee charged for this order, expressed as a percentage (e.g., 0.001 means 0.001%). |
         ??? info "[TimeInForce](/../../schemas/time_in_force)"
             |                       | Must Fill All | Can Fill Partial |
             | -                     | -             | -                |
@@ -160,3 +162,7 @@
                 |`INVALID_ORDER_TYPE` = 36|the order type is invalid|
                 |`CURRENCY_NOT_DEFINED` = 37|the currency is not defined|
                 |`INVALID_CHAIN_ID` = 38|the chain ID is invalid|
+                |`BUILDER_ORDER_FEE_EXCEED` = 39|Builder fee exceed the limit|
+                |`BUILDER_ORDER_FEE_NEGATIVE` = 40|Builder fee is below 0|
+                |`BUILDER_ORDER_BUILDER_NOT_AUTHORIZED` = 41|Builder is not an authorized builder for client|
+                |`BUILDER_ORDER_BUILDER_NOT_EXIST` = 42|Builder does not exist|
