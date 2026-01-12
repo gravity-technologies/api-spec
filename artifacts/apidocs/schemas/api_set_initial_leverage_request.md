@@ -1,5 +1,5 @@
 !!! info "[ApiSetInitialLeverageRequest](/../../schemas/api_set_initial_leverage_request)"
-    The request to set the initial leverage of a sub account<br>
+    The request to set the initial leverage of a sub account.<br> DEPRECATED: This API is deprecated, use set_position_config API instead<br>
 
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
