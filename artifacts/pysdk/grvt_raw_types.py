@@ -198,6 +198,14 @@ class OrderRejectReason(Enum):
     CURRENCY_NOT_DEFINED = "CURRENCY_NOT_DEFINED"
     # the chain ID is invalid
     INVALID_CHAIN_ID = "INVALID_CHAIN_ID"
+    # Builder fee exceed the limit
+    BUILDER_ORDER_FEE_EXCEED = "BUILDER_ORDER_FEE_EXCEED"
+    # Builder fee is below 0
+    BUILDER_ORDER_FEE_NEGATIVE = "BUILDER_ORDER_FEE_NEGATIVE"
+    # Builder is not an authorized builder for client
+    BUILDER_ORDER_BUILDER_NOT_AUTHORIZED = "BUILDER_ORDER_BUILDER_NOT_AUTHORIZED"
+    # Builder does not exist
+    BUILDER_ORDER_BUILDER_NOT_EXIST = "BUILDER_ORDER_BUILDER_NOT_EXIST"
 
 
 class OrderStatus(Enum):
@@ -211,6 +219,13 @@ class OrderStatus(Enum):
     REJECTED = "REJECTED"
     # Order is cancelled by the user using one of the supported APIs (See OrderRejectReason). Before an order is open, it cannot be cancelled.
     CANCELLED = "CANCELLED"
+
+
+class PositionMarginType(Enum):
+    # Isolated Margin Mode: each position is allocated a fixed amount of collateral
+    ISOLATED = "ISOLATED"
+    # Cross Margin Mode: uses all available funds in your account as collateral across all cross margin positions
+    CROSS = "CROSS"
 
 
 class TimeInForce(Enum):
@@ -325,6 +340,586 @@ class Venue(Enum):
 
 
 @dataclass
+class Ack:
+    # Gravity has acknowledged that the request has been successfully received and it will process it in the backend
+    ack: bool
+
+
+@dataclass
+class AckResponse:
+    # The Ack Object
+    result: Ack
+
+
+@dataclass
+class AggregatedAccountSummary:
+    # The main account ID of the account to which the summary belongs
+    main_account_id: str
+    # Total equity of the main (+ sub) account, denominated in USD
+    total_equity: str
+    # The list of spot assets owned by this main (+ sub) account, and their balances
+    spot_balances: list[SpotBalance]
+    # The list of vault investments held by this main account
+    vault_investments: list[VaultInvestment]
+    # Deprecated: Use totalSubAccountEquity instead
+    total_sub_account_balance: str
+    # Total equity of the sub accounts, denominated in USD
+    total_sub_account_equity: str
+    # Total amount of the vault investments, denominated in USD
+    total_vault_investments_balance: str
+    # Total available balance of the main account, denominated in USD
+    total_sub_account_available_balance: str
+    # Total entry (initial investment) amount of the open investments, denominated in USD
+    total_usd_notional_invested: str
+
+
+@dataclass
+class ApiAddIsolatedPositionMarginRequest:
+    # The sub account ID to add isolated margin in or remove margin from
+    sub_account_id: str
+    # The instrument to add margin into, or remove margin from
+    instrument: str
+    # The amount of margin to add to the position, positive to add, negative to remove, expressed in quote asset decimal units
+    amount: str
+    # The signature of this operation
+    signature: Signature
+
+
+@dataclass
+class ApiAddIsolatedPositionMarginResponse:
+    # Whether the margin mode and leverage was set successfully
+    success: bool
+
+
+@dataclass
+class ApiAggregatedAccountSummaryResponse:
+    # The aggregated account summary
+    result: AggregatedAccountSummary
+
+
+@dataclass
+class ApiAuthorizeBuilderRequest:
+    """
+    Authorizes a specific Builder to execute transactions on behalf of the Main Account.
+
+    This endpoint acts as an **upsert** operation:
+    - **New Authorization**: If the builder is not currently authorized, a new record is created.
+    - **Update Limit**: If the builder is already authorized, this request updates the `maxFuturesFeeRate` and `maxSpotFeeRate` to the new values provided.
+    """
+
+    # The Main Account ID of the user granting the authorization.
+    main_account_id: str
+    # The Main Account ID of the Builder receiving the authorization.
+    builder_account_id: str
+    # The maximum fee rate cap for **Futures** trades executed by this builder, expressed as a percentage (e.g., 0.001 means 0.001%). The builder cannot charge fees exceeding this limit.
+    max_futures_fee_rate: str
+    # The maximum fee rate cap for **Spot** trades executed by this builder, expressed as a percentage (e.g., 0.0001 means 0.0001%). The builder cannot charge fees exceeding this limit.
+    max_spot_fee_rate: str
+    # The cryptographic signature authenticating this request. Must be signed by the private key associated with `mainAccountID`.
+    signature: Signature
+
+
+@dataclass
+class ApiAuthorizedBuilder:
+    # The main account ID of the builder
+    builder_account_id: str
+    # The maximum fee rate for the authorized builder
+    max_futures_fee_rate: str
+    # The maximum fee rate for the authorized builder
+    max_spot_fee_rate: str
+
+
+@dataclass
+class ApiBuilderFillHistoryRequest:
+    """
+    The request to get the historical builder trade of a builder
+    The history is returned in reverse chronological order
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The start time to query for in unix nanoseconds
+    start_time: str | None = None
+    # The end time to query for in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the next query from
+    cursor: str | None = None
+
+
+@dataclass
+class ApiBuilderFillHistoryResponse:
+    # The builder fill history matching the request builder account
+    result: list[BuilderFillHistory]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
+
+
+@dataclass
+class ApiCancelAllOrdersRequest:
+    # The subaccount ID cancelling all orders
+    sub_account_id: str
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be cancelled
+    kind: list[Kind] | None = None
+    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be cancelled
+    base: list[str] | None = None
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be cancelled
+    quote: list[str] | None = None
+
+
+@dataclass
+class ApiCancelOnDisconnectRequest:
+    """
+    Auto-Cancel All Open Orders when the countdown time hits zero.
+
+    Market Maker inputs a countdown time parameter in milliseconds (e.g. 120000 for 120s) rounded down to the smallest second follows the following logic:
+      - Market Maker initially entered a value between 0 -> 1000, which is rounded to 0: will result in termination of their COD
+      - Market Maker initially entered a value between 1001 -> 300_000, which is rounded to the nearest second: will result in refresh of their COD
+      - Market Maker initially entered a value bigger than 300_000, which will result in error (upper bound)
+    Market Maker will send a heartbeat message by calling the endpoint at specific intervals (ex. every 30 seconds) to the server to refresh the count down.
+
+    If the server does not receive a heartbeat message within the countdown time, it will cancel all open orders for the specified Sub Account ID.
+    """
+
+    # The subaccount ID cancelling the orders for
+    sub_account_id: str
+    """
+    Countdown time in milliseconds (ex. 120000 for 120s).
+
+    0 to disable the timer.
+
+    Does not accept negative values.
+
+    Minimum acceptable value is 1,000.
+
+    Maximum acceptable value is 300,000
+    """
+    countdown_time: str | None = None
+
+
+@dataclass
+class ApiCancelOrderRequest:
+    # The subaccount ID cancelling the order
+    sub_account_id: str
+    # Cancel the order with this `order_id`
+    order_id: str | None = None
+    # Cancel the order with this `client_order_id`
+    client_order_id: str | None = None
+    """
+    Specifies the time-to-live (in milliseconds) for this cancellation.
+    During this period, any order creation with a matching `client_order_id` will be cancelled and not be added to the GRVT matching engine.
+    This mechanism helps mitigate time-of-flight issues where cancellations might arrive before the corresponding orders.
+    Hence, cancellation by `order_id` ignores this field as the exchange can only assign `order_id`s to already-processed order creations.
+    The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `'670'` -> `'600'`, `'30'` -> `'0'`) and capped at 5 seconds (i.e., `'5000'`).
+    Value of `'0'` or omission results in the default time-to-live value being applied.
+    If the caller requests multiple successive cancellations for a given order, such that the time-to-live windows overlap, only the first request will be considered.
+
+    """
+    time_to_live_ms: str | None = None
+
+
+@dataclass
+class ApiCandlestickRequest:
+    """
+    Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The interval of each candlestick
+    interval: CandlestickInterval
+    # The type of candlestick data to retrieve
+    type: CandlestickType
+    # Start time of kline data in unix nanoseconds
+    start_time: str | None = None
+    # End time of kline data in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+
+
+@dataclass
+class ApiCandlestickResponse:
+    # The candlestick result set for given interval
+    result: list[Candlestick]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
+
+
+@dataclass
+class ApiCreateOrderRequest:
+    # The order to create
+    order: Order
+
+
+@dataclass
+class ApiCreateOrderResponse:
+    # The created order
+    result: Order
+
+
+@dataclass
+class ApiDepositHistoryRequest:
+    """
+    The request to get the historical deposits of an account
+    The history is returned in reverse chronological order
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The token currency to query for, if nil or empty, return all deposits. Otherwise, only entries matching the filter will be returned
+    currency: list[str]
+    # The start time to query for in unix nanoseconds
+    start_time: str | None = None
+    # The end time to query for in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the next query from
+    cursor: str | None = None
+    # Main account ID being queried. By default, applies the requestor's main account ID.
+    main_account_id: str | None = None
+
+
+@dataclass
+class ApiDepositHistoryResponse:
+    # The deposit history matching the request account
+    result: list[DepositHistory]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
+
+
+@dataclass
+class ApiFillHistoryRequest:
+    """
+    Query for all historical fills made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The sub account ID to request for
+    sub_account_id: str
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
+    kind: list[Kind] | None = None
+    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
+    base: list[str] | None = None
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    quote: list[str] | None = None
+    # The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
+    start_time: str | None = None
+    # The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+
+
+@dataclass
+class ApiFillHistoryResponse:
+    # The private trades matching the request asset
+    result: list[Fill]
+    # The cursor to indicate when to start the query from
+    next: str
+
+
+@dataclass
+class ApiFundingAccountSummaryResponse:
+    # The funding account summary
+    result: FundingAccountSummary
+    # Client fee tier at the time of query
+    tier: ClientTier
+
+
+@dataclass
+class ApiFundingPaymentHistoryRequest:
+    """
+    Query for all historical funding payments made by a single account.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The sub account ID to request for
+    sub_account_id: str
+    # The perpetual instrument to filter for
+    instrument: str | None = None
+    # The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
+    start_time: str | None = None
+    # The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
+    kind: list[Kind] | None = None
+    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
+    base: list[str] | None = None
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    quote: list[str] | None = None
+
+
+@dataclass
+class ApiFundingPaymentHistoryResponse:
+    # The funding payments matching the request asset
+    result: list[FundingPayment]
+    # The cursor to indicate when to start the query from
+    next: str
+
+
+@dataclass
+class ApiFundingRate:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The funding rate of the instrument, expressed in percentage points
+    funding_rate: str
+    # The funding timestamp of the funding rate, expressed in unix nanoseconds
+    funding_time: str
+    # The mark price of the instrument at funding timestamp, expressed in `9` decimals
+    mark_price: str
+    # Deprecated: Refer to `funding_rate` instead. Will be removed in a future release.
+    funding_rate_8_h_avg: str
+    # Funding interval in hours (e.g. 1/4/8/etc).
+    funding_interval_hours: int
+
+
+@dataclass
+class ApiFundingRateRequest:
+    """
+    Lookup the historical funding rate of a perpetual future.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # Start time of funding rate in unix nanoseconds
+    start_time: str | None = None
+    # End time of funding rate in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+    # Aggregation method for historical funding rate observations. Defaults to using the instrument-specific funding interval.
+    agg_type: FundingRateAggregationType | None = None
+
+
+@dataclass
+class ApiFundingRateResponse:
+    # The funding rate result set for given interval
+    result: list[ApiFundingRate]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
+
+
+@dataclass
+class ApiGetAllInitialLeverageRequest:
+    # The sub account ID to get the leverage for
+    sub_account_id: str
+
+
+@dataclass
+class ApiGetAllInitialLeverageResponse:
+    # The initial leverage of the sub account
+    results: list[InitialLeverageResult]
+
+
+@dataclass
+class ApiGetAllInstrumentsRequest:
+    # Fetch only active instruments
+    is_active: bool | None = None
+
+
+@dataclass
+class ApiGetAllInstrumentsResponse:
+    # List of instruments
+    result: list[InstrumentDisplay]
+
+
+@dataclass
+class ApiGetAuthorizedBuildersResponse:
+    # The list of authorized builders
+    results: list[ApiAuthorizedBuilder]
+
+
+@dataclass
+class ApiGetCurrencyRequest:
+    pass
+
+
+@dataclass
+class ApiGetCurrencyResponse:
+    # The list of currencies
+    result: list[CurrencyDetail]
+
+
+@dataclass
+class ApiGetFilteredInstrumentsRequest:
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
+    kind: list[Kind] | None = None
+    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
+    base: list[str] | None = None
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    quote: list[str] | None = None
+    # Request for active instruments only
+    is_active: bool | None = None
+    # The limit to query for. Defaults to 500; Max 100000
+    limit: int | None = None
+
+
+@dataclass
+class ApiGetFilteredInstrumentsResponse:
+    # The instruments matching the request filter
+    result: list[InstrumentDisplay]
+
+
+@dataclass
+class ApiGetInstrumentRequest:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+
+
+@dataclass
+class ApiGetInstrumentResponse:
+    # The instrument matching the request asset
+    result: InstrumentDisplay
+
+
+@dataclass
+class ApiGetIsolatedPositionMarginLimitsRequest:
+    # The sub account ID to get the margin limits for
+    sub_account_id: str
+    # The isolated position asset to get the margin limits for
+    instrument: str
+
+
+@dataclass
+class ApiGetIsolatedPositionMarginLimitsResponse:
+    # The isolated position asset
+    instrument: str
+    # The max addable amount that can be added to the isolated position, expressed in quote asset decimal units
+    max_addable_amount: str
+    # The max removable amount that can be removed from the isolated position, expressed in quote asset decimal units
+    max_removable_amount: str
+
+
+@dataclass
+class ApiGetMarginRulesRequest:
+    # The instrument to query margin rules for
+    instrument: str
+
+
+@dataclass
+class ApiGetMarginRulesResponse:
+    # The instrument name
+    instrument: str
+    # The maximum position size, expressed in base asset decimal units
+    max_position_size: str
+    # List of risk brackets defining margin requirements at different notional tiers
+    risk_brackets: list[RiskBracket]
+
+
+@dataclass
+class ApiGetOrderRequest:
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # Filter for `order_id`
+    order_id: str | None = None
+    # Filter for `client_order_id`
+    client_order_id: str | None = None
+
+
+@dataclass
+class ApiGetOrderResponse:
+    # The order object for the requested filter
+    result: Order
+
+
+@dataclass
+class ApiMiniTickerRequest:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+
+
+@dataclass
+class ApiMiniTickerResponse:
+    # The mini ticker matching the request asset
+    result: MiniTicker
+
+
+@dataclass
+class ApiOpenOrdersRequest:
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
+    kind: list[Kind] | None = None
+    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
+    base: list[str] | None = None
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    quote: list[str] | None = None
+
+
+@dataclass
+class ApiOpenOrdersResponse:
+    # The Open Orders matching the request filter
+    result: list[Order]
+
+
+@dataclass
+class ApiOrderHistoryRequest:
+    """
+    Retrieves the order history for the account.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
+    kind: list[Kind] | None = None
+    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
+    base: list[str] | None = None
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
+    quote: list[str] | None = None
+    # The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
+    start_time: str | None = None
+    # The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+
+
+@dataclass
+class ApiOrderHistoryResponse:
+    # The Open Orders matching the request filter
+    result: list[Order]
+    # The cursor to indicate when to start the query from
+    next: str
+
+
+@dataclass
+class ApiOrderbookLevelsRequest:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # Depth of the order book to be retrieved (10, 50, 100, 500)
+    depth: int
+
+
+@dataclass
+class ApiOrderbookLevelsResponse:
+    # The orderbook levels objects matching the request asset
+    result: OrderbookLevels
+
+
+@dataclass
 class ApiPositionsRequest:
     # The sub account ID to request for
     sub_account_id: str
@@ -334,6 +929,1015 @@ class ApiPositionsRequest:
     base: list[str] | None = None
     # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
     quote: list[str] | None = None
+
+
+@dataclass
+class ApiPositionsResponse:
+    # The positions matching the request filter
+    result: list[Positions]
+
+
+@dataclass
+class ApiQueryVaultManagerInvestorHistoryRequest:
+    # The unique identifier of the vault to filter by
+    vault_id: str
+    # Whether to only return investments made by the manager
+    only_own_investments: bool
+    # Optional. Start time in unix nanoseconds
+    start_time: str | None = None
+    # Optional. End time in unix nanoseconds
+    end_time: str | None = None
+
+
+@dataclass
+class ApiQueryVaultManagerInvestorHistoryResponse:
+    # The list of vault investor history belong to the manager
+    result: list[ApiVaultInvestorHistory]
+
+
+@dataclass
+class ApiSetDeriskToMaintenanceMarginRatioRequest:
+    # The sub account ID to set the leverage for
+    sub_account_id: str
+    # The derisk margin to maintenance margin ratio of this sub account
+    ratio: str
+    # The signature of this operation
+    signature: Signature
+
+
+@dataclass
+class ApiSetDeriskToMaintenanceMarginRatioResponse:
+    # Whether the derisk margin to maintenance margin ratio was set successfully
+    success: bool
+
+
+@dataclass
+class ApiSetInitialLeverageRequest:
+    """
+    The request to set the initial leverage of a sub account.
+     DEPRECATED: This API is deprecated, use set_position_config API instead
+    """
+
+    # The sub account ID to set the leverage for
+    sub_account_id: str
+    # The instrument to set the leverage for
+    instrument: str
+    # The leverage to set for the sub account
+    leverage: str
+
+
+@dataclass
+class ApiSetInitialLeverageResponse:
+    """
+    The response to set the initial leverage of a sub account.
+     DEPRECATED: This API is deprecated, use set_position_config API instead
+    """
+
+    # Whether the leverage was set successfully
+    success: bool
+
+
+@dataclass
+class ApiSetSubAccountPositionMarginConfigRequest:
+    """
+    Sets the margin type and leverage configuration for a specific position (instrument) within a sub account.
+
+    This configuration is applied per-instrument, allowing different margin settings for different positions.
+
+    """
+
+    # The sub account ID to set the margin type and leverage for
+    sub_account_id: str
+    # The instrument of the position to set the margin type and leverage for
+    instrument: str
+    # The margin type to set for the position
+    margin_type: PositionMarginType
+    # The leverage to set for the position
+    leverage: str
+    # The signature of this operation
+    signature: Signature
+
+
+@dataclass
+class ApiSetSubAccountPositionMarginConfigResponse:
+    # Whether the margin type and leverage was acked
+    ack: bool
+
+
+@dataclass
+class ApiSubAccountHistoryRequest:
+    """
+    The request to get the history of a sub account
+    SubAccount Summary values are snapshotted once every hour
+    No snapshots are taken if the sub account has no activity in the hourly window
+    History is preserved only for the last 30 days
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The sub account ID to request for
+    sub_account_id: str
+    # Start time of sub account history in unix nanoseconds
+    start_time: str | None = None
+    # End time of sub account history in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the next query from
+    cursor: str | None = None
+
+
+@dataclass
+class ApiSubAccountHistoryResponse:
+    # The sub account history matching the request sub account
+    result: list[SubAccount]
+    # The cursor to indicate when to start the next query from
+    next: str
+
+
+@dataclass
+class ApiSubAccountSummaryRequest:
+    # The subaccount ID to filter by
+    sub_account_id: str
+
+
+@dataclass
+class ApiSubAccountSummaryResponse:
+    # The sub account matching the request sub account
+    result: SubAccount
+
+
+@dataclass
+class ApiTickerRequest:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+
+
+@dataclass
+class ApiTickerResponse:
+    # The mini ticker matching the request asset
+    result: Ticker
+
+
+@dataclass
+class ApiTradeHistoryRequest:
+    """
+    Perform historical lookup of public trades in any given instrument.
+    This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
+    Only data from the last three months will be retained.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
+    start_time: str | None = None
+    # The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+
+
+@dataclass
+class ApiTradeHistoryResponse:
+    # The public trades matching the request asset
+    result: list[Trade]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
+
+
+@dataclass
+class ApiTradeRequest:
+    """
+    Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.
+    This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
+    """
+
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int
+
+
+@dataclass
+class ApiTradeResponse:
+    # The public trades matching the request asset
+    result: list[Trade]
+
+
+@dataclass
+class ApiTransferAck:
+    # Gravity has acknowledged that the transfer has been successfully processed. If true, a `tx_id` will be returned. If false, an error will be returned.
+    ack: bool
+    # The transaction ID of the transfer. This is only returned if the transfer is successful.
+    tx_id: str
+
+
+@dataclass
+class ApiTransferHistoryRequest:
+    """
+    The request to get the historical transfers of an account
+    The history is returned in reverse chronological order
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned
+    currency: list[str]
+    # The start time to query for in unix nanoseconds
+    start_time: str | None = None
+    # The end time to query for in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the next query from
+    cursor: str | None = None
+    # The transaction ID to query for
+    tx_id: str | None = None
+    # Main account ID being queried. By default, applies the requestor's main account ID.
+    main_account_id: str | None = None
+    # The transfer type to filters for. If the list is empty, return all transfer types.
+    transfer_types: list[TransferType] | None = None
+
+
+@dataclass
+class ApiTransferHistoryResponse:
+    # The transfer history matching the request account
+    result: list[TransferHistory]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
+
+
+@dataclass
+class ApiTransferRequest:
+    """
+    This API allows you to transfer funds in multiple different ways<ul>
+    <li>Between SubAccounts within your Main Account</li>
+    <li>Between your MainAccount and your SubAccounts</li>
+    <li>To other MainAccounts that you have previously allowlisted</li>
+    </ul><b>Fast Withdrawal Funding Address</b>
+    For fast withdrawals, funds must be sent to the designated funding account address. Please ensure you use the correct address based on the environment:
+    <b>Production Environment Address:</b>
+    <em>[To be updated, not ready yet]</em>
+    This address should be specified as the <code>to_account_id</code> in your API requests for transferring funds using the transfer API. Ensure accurate input to avoid loss of funds or use the UI.
+
+    """
+
+    # The main account to transfer from
+    from_account_id: str
+    # The subaccount to transfer from (0 if transferring from main account)
+    from_sub_account_id: str
+    # The main account to deposit into
+    to_account_id: str
+    # The subaccount to transfer to (0 if transferring to main account)
+    to_sub_account_id: str
+    # The token currency to transfer
+    currency: str
+    # The number of tokens to transfer, quoted in tokenCurrency decimal units
+    num_tokens: str
+    # The signature of the transfer
+    signature: Signature
+    # The type of transfer
+    transfer_type: TransferType
+    # The metadata of the transfer
+    transfer_metadata: str
+
+
+@dataclass
+class ApiTransferResponse:
+    # The Transfer response object
+    result: ApiTransferAck
+
+
+@dataclass
+class ApiVaultBurnTokensRequest:
+    """
+    Request payload for burning tokens in a vault.
+
+    This API allows a client to burn a specified amount of tokens in a particular vault.
+    """
+
+    # The unique identifier of the vault to burn tokens from.
+    vault_id: str
+    # The currency used for the burn. This should be the vault's quote currency.
+    currency: str
+    # The number of tokens to burn.
+    num_tokens: str
+    """
+    The digital signature from the investing account.
+    This signature must be generated by the main account ID and is used to verify the authenticity of the request.
+    The signature must comply with AccountPermExternalTransfer permission.
+    """
+    signature: Signature
+
+
+@dataclass
+class ApiVaultInvestRequest:
+    """
+    Request payload for investing in a vault.
+
+    This API allows a client to invest a specified amount of tokens in a particular vault.
+    """
+
+    # The unique identifier of the vault to invest in.
+    vault_id: str
+    # The currency used for the investment. This should be the vault's quote currency.
+    currency: str
+    # The investment sum, in terms of the token currency specified (i.e., `numTokens` of '1000' with `tokenCurrency` of 'USDT' denotes investment of 1,000 USDT).
+    num_tokens: str
+    """
+    The digital signature from the investing account.
+    This signature must be generated by the main account ID and is used to verify the authenticity of the request.
+    The signature must comply with AccountPermExternalTransfer permission.
+    """
+    signature: Signature
+
+
+@dataclass
+class ApiVaultInvestorHistory:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The off chain account id of the investor, only visible to the manager
+    off_chain_account_id: str
+    # The unique identifier of the vault.
+    vault_id: str
+    # The type of transaction that occurred. List of types: vaultInvest, vaultBurnLpToken, vaultRedeem
+    type: VaultInvestorAction
+    # The price of the vault LP tokens at the time of the event.
+    price: str
+    # The amount of Vault LP tokens invested or redeemed.
+    size: str
+    # The realized PnL of the vault.
+    realized_pnl: str
+    # The performance fee of the vault.
+    performance_fee: str
+
+
+@dataclass
+class ApiVaultInvestorSummaryRequest:
+    """
+    Request payload for fetching the summary of a vault investor.
+
+    This API allows a client to retrieve the summary of investments in a specific vault.
+    """
+
+    # The unique identifier of the vault to fetch the summary for.
+    vault_id: str
+
+
+@dataclass
+class ApiVaultInvestorSummaryResponse:
+    """
+    Response payload for the summary of a vault investor.
+
+    This API provides the summary of investments in a specific vault.
+    """
+
+    # The summary of investments in the vault.
+    vault_investor_summary: list[VaultInvestorSummary]
+
+
+@dataclass
+class ApiVaultRedeemCancelRequest:
+    """
+    Request payload for canceling a vault redemption.
+
+    This API allows a client to cancel a previously initiated redemption from a vault.
+    """
+
+    # The unique identifier of the vault to cancel the redemption from.
+    vault_id: str
+
+
+@dataclass
+class ApiVaultRedeemRequest:
+    """
+    Request payload for redeeming from a vault.
+
+    This API allows a client to redeem a specified amount of tokens from a particular vault.
+    """
+
+    # The unique identifier of the vault to redeem from.
+    vault_id: str
+    # The currency used for the redemption. This should be the vault's quote currency.
+    currency: str
+    # The number of shares to redeem.
+    num_tokens: str
+    """
+    The digital signature from the investing account.
+    This signature must be generated by the main account ID and is used to verify the authenticity of the request.
+    The signature must comply with AccountPermExternalTransfer permission.
+    """
+    signature: Signature
+
+
+@dataclass
+class ApiVaultViewRedemptionQueueRequest:
+    """
+    Request payload for a vault manager to view the redemption queue for their vault.
+
+    Fetches the redemption queue for a vault, ordered by descending priority.
+
+    <b>Urgent</b> redemption requests, defined as having been pending >90% of the manager-defined maximum redemption period, have top priority (following insertion order).
+
+    <b>Non-urgent</b> redemption requests are otherwise prioritized by insertion order, <b>unless</b> they are >5x the size of the smallest redemption request.
+
+    E.g., If FIFO ordering (all non-urgent) is 1k -> 50k -> 100k -> 20k -> 10k -> 25k, then priority ordering is 1k -> 10k -> 50k -> 20k -> 100k -> 25k.
+
+    Only displays redemption requests that are eligible for automated redemption, i.e., have been pending for the manager-defined minimum redemption period.
+    """
+
+    # The unique identifier of the vault to fetch the redemption queue for.
+    vault_id: str
+
+
+@dataclass
+class ApiVaultViewRedemptionQueueResponse:
+    """
+    Response payload for a vault manager to view the redemption queue for their vault, ordered by descending priority.
+
+    Also includes counters for total redemption sizes pending as well as urgent (refer to API integration guide for more detail on redemption request classifications).
+
+
+    """
+
+    # Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minimum redemption period.
+    redemption_queue: list[VaultRedemptionRequest]
+    # Number of shares eligible for automated redemption (held in queue for at least the minimum redemption period).
+    pending_redemption_token_count: str
+    # Number of shares nearing the maximum redemption period (>= 90% of maximum redemption period).
+    urgent_redemption_token_count: str
+    # Amount available for automated redemption request servicing (in USD).
+    auto_redeemable_balance: str
+    # Current share price (in USD).
+    share_price: str
+    # Dedicated section for requests yet to wait at least the minimum redemption period.
+    pre_min: PreMinRedemptions
+
+
+@dataclass
+class ApiWithdrawalHistoryRequest:
+    """
+    The request to get the historical withdrawals of an account
+    The history is returned in reverse chronological order
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The token currency to query for, if nil or empty, return all withdrawals. Otherwise, only entries matching the filter will be returned
+    currency: list[str]
+    # The start time to query for in unix nanoseconds
+    start_time: str | None = None
+    # The end time to query for in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the next query from
+    cursor: str | None = None
+    # Main account ID being queried. By default, applies the requestor's main account ID.
+    main_account_id: str | None = None
+
+
+@dataclass
+class ApiWithdrawalHistoryResponse:
+    # The withdrawals history matching the request account
+    result: list[WithdrawalHistory]
+    # The cursor to indicate when to start the next query from
+    next: str | None = None
+
+
+@dataclass
+class ApiWithdrawalRequest:
+    """
+    Leverage this API to initialize a withdrawal from GRVT's Hyperchain onto Ethereum.
+    Do take note that the bridging process does take time. The GRVT UI will help you keep track of bridging progress, and notify you once its complete.
+
+    If not withdrawing the entirety of your balance, there is a minimum withdrawal amount. Currently that amount is ~25 USDT.
+    Withdrawal fees also apply to cover the cost of the Ethereum transaction.
+    Note that your funds will always remain in self-custory throughout the withdrawal process. At no stage does GRVT gain control over your funds.
+    """
+
+    # The main account to withdraw from
+    from_account_id: str
+    # The Ethereum wallet to withdraw into
+    to_eth_address: str
+    # The token currency to withdraw
+    currency: str
+    # The number of tokens to withdraw, quoted in tokenCurrency decimal units
+    num_tokens: str
+    # The signature of the withdrawal
+    signature: Signature
+
+
+@dataclass
+class BuilderFillHistory:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The off chain account id
+    off_chain_account_id: str
+    # The instrument being represented
+    instrument: str
+    # The side that the subaccount took on the trade
+    is_buyer: bool
+    # The role that the subaccount took on the trade
+    is_taker: bool
+    # The number of assets being traded, expressed in base asset decimal units
+    size: str
+    # The traded price, expressed in `9` decimals
+    price: str
+    # The mark price of the instrument at point of trade, expressed in `9` decimals
+    mark_price: str
+    # The index price of the instrument at point of trade, expressed in `9` decimals
+    index_price: str
+    # Builder fee percentage charged for this order. referred to Order.builder builderFee
+    fee_rate: str
+    # The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee
+    fee: str
+
+
+@dataclass
+class CancelStatusFeed:
+    # The subaccount ID that requested the cancellation
+    sub_account_id: str
+    # A unique identifier for the active order within a subaccount, specified by the client
+    client_order_id: str
+    # A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
+    order_id: str
+    # The user-provided reason for cancelling the order
+    reason: OrderRejectReason
+    # Status of the cancellation attempt
+    cancel_status: CancelStatus
+    # [Filled by GRVT Backend] Time at which the cancellation status was updated by GRVT in unix nanoseconds
+    update_time: str | None = None
+
+
+@dataclass
+class Candlestick:
+    # Open time of kline bar in unix nanoseconds
+    open_time: str
+    # Close time of kline bar in unix nanosecond
+    close_time: str
+    # The open price, expressed in underlying currency resolution units
+    open: str
+    # The close price, expressed in underlying currency resolution units
+    close: str
+    # The high price, expressed in underlying currency resolution units
+    high: str
+    # The low price, expressed in underlying currency resolution units
+    low: str
+    # The underlying volume transacted, expressed in base asset decimal units
+    volume_b: str
+    # The quote volume transacted, expressed in quote asset decimal units
+    volume_q: str
+    # The number of trades transacted
+    trades: int
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+
+
+@dataclass
+class ClientTier:
+    tier: int
+    futures_taker_fee: int
+    futures_maker_fee: int
+    options_taker_fee: int
+    options_maker_fee: int
+
+
+@dataclass
+class CurrencyDetail:
+    # The integer value of the currency
+    id: int
+    # The name of the currency
+    symbol: str
+    # The balance decimals of the currency
+    balance_decimals: int
+    # The quantity multiplier of the currency
+    quantity_multiplier: str
+
+
+@dataclass
+class Deposit:
+    # The hash of the bridgemint event producing the deposit
+    tx_hash: str
+    # The account to deposit into
+    to_account_id: str
+    # The token currency to deposit
+    currency: str
+    # The number of tokens to deposit
+    num_tokens: str
+
+
+@dataclass
+class DepositHistory:
+    # The L1 txHash of the deposit
+    l_1_hash: str
+    # The L2 txHash of the deposit
+    l_2_hash: str
+    # The account to deposit into
+    to_account_id: str
+    # The token currency to deposit
+    currency: str
+    # The number of tokens to deposit
+    num_tokens: str
+    # The timestamp when the deposit was initiated on L1 in unix nanoseconds
+    initiated_time: str
+    # The timestamp when the deposit was confirmed on L2 in unix nanoseconds
+    confirmed_time: str
+    # The address of the sender
+    from_address: str
+
+
+@dataclass
+class EmptyRequest:
+    pass
+
+
+@dataclass
+class Error:
+    # The error code for the request
+    code: int
+    # The error message for the request
+    message: str
+
+
+@dataclass
+class Fill:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The sub account ID that participated in the trade
+    sub_account_id: str
+    # The instrument being represented
+    instrument: str
+    # The side that the subaccount took on the trade
+    is_buyer: bool
+    # The role that the subaccount took on the trade
+    is_taker: bool
+    # The number of assets being traded, expressed in base asset decimal units
+    size: str
+    # The traded price, expressed in `9` decimals
+    price: str
+    # The mark price of the instrument at point of trade, expressed in `9` decimals
+    mark_price: str
+    # The index price of the instrument at point of trade, expressed in `9` decimals
+    index_price: str
+    # The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)
+    interest_rate: str
+    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
+    forward_price: str
+    # The realized PnL of the trade, expressed in quote asset decimal units (0 if increasing position size)
+    realized_pnl: str
+    # The fees paid on the trade, expressed in quote asset decimal unit (negative if maker rebate applied)
+    fee: str
+    # The fee rate paid on the trade
+    fee_rate: str
+    """
+    A trade identifier, globally unique, and monotonically increasing (not by `1`).
+    All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.
+    `trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.
+    """
+    trade_id: str
+    # An order identifier
+    order_id: str
+    # The venue where the trade occurred
+    venue: Venue
+    # If the trade was a liquidation
+    is_liquidation: bool
+    """
+    A unique identifier for the active order within a subaccount, specified by the client
+    This is used to identify the order in the client's system
+    This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer
+    This field will not be propagated to the smart contract, and should not be signed by the client
+    This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected
+    Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]
+    To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]
+
+    When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
+    """
+    client_order_id: str
+    # The address (public key) of the wallet signing the payload
+    signer: str
+    # If the trade is a RPI trade
+    is_rpi: bool
+    # The main account ID of the builder. referred to Order.builder
+    builder: str
+    # Builder fee percentage charged for this order. referred to Order.builder builderFee
+    builder_fee_rate: str
+    # The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee
+    builder_fee: str
+    # Specifies the broker who brokered the order
+    broker: BrokerTag | None = None
+
+
+@dataclass
+class FundingAccountSummary:
+    # The main account ID of the account to which the summary belongs
+    main_account_id: str
+    # Total equity of the main account, denominated in USD
+    total_equity: str
+    # The list of spot assets owned by this main account, and their balances
+    spot_balances: list[SpotBalance]
+    # The list of vault investments held by this main account
+    vault_investments: list[VaultInvestment]
+
+
+@dataclass
+class FundingPayment:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The sub account ID that made the funding payment
+    sub_account_id: str
+    # The perpetual instrument being funded
+    instrument: str
+    # The currency of the funding payment
+    currency: str
+    # The amount of the funding payment. Positive if paid, negative if received
+    amount: str
+    """
+    The transaction ID of the funding payment.
+    Funding payments can be triggered by a trade, transfer, or liquidation.
+    The `tx_id` will match the corresponding `trade_id` or `tx_id`.
+    """
+    tx_id: str
+
+
+@dataclass
+class InitialLeverageResult:
+    # The instrument to get the leverage for
+    instrument: str
+    # The initial leverage of this instrument
+    leverage: str
+    # The min leverage user can set for this instrument
+    min_leverage: str
+    # The max leverage user can set for this instrument
+    max_leverage: str
+    # The margin type of this instrument
+    margin_type: PositionMarginType
+
+
+@dataclass
+class InstrumentDisplay:
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The asset ID used for instrument signing.
+    instrument_hash: str
+    # The base currency
+    base: str
+    # The quote currency
+    quote: str
+    # The kind of instrument
+    kind: Kind
+    # Venues that this instrument can be traded at
+    venues: list[Venue]
+    # The settlement period of the instrument
+    settlement_period: InstrumentSettlementPeriod
+    # The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
+    base_decimals: int
+    # The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
+    quote_decimals: int
+    # The size of a single tick, expressed in price decimal units
+    tick_size: str
+    # The minimum contract size, expressed in base asset decimal units
+    min_size: str
+    # Creation time in unix nanoseconds
+    create_time: str
+    # The maximum position size, expressed in base asset decimal units
+    max_position_size: str
+    # The minimum order notional value, expressed in quote currency decimal units
+    min_notional: str
+    # Defines the funding interval to be applied.
+    funding_interval_hours: int | None = None
+    # Funding rate cap over the defined `intervalHours`.
+    adjusted_funding_rate_cap: str | None = None
+    # Funding rate floor over the defined `intervalHours`.
+    adjusted_funding_rate_floor: str | None = None
+
+
+@dataclass
+class JSONRPCRequest:
+    """
+    All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.
+    If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).
+    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
+    """
+
+    # The JSON RPC version to use for the request
+    jsonrpc: str
+    # The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )
+    method: str
+    # The parameters for the request
+    params: Any
+    """
+    Optional Field which is used to match the response by the client.
+    If not passed, this field will not be returned
+    """
+    id: int | None = None
+
+
+@dataclass
+class JSONRPCResponse:
+    """
+    All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.
+    If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.
+    """
+
+    # The JSON RPC version to use for the request
+    jsonrpc: str
+    # The method used in the request for this response (eg: `subscribe` / `unsubscribe` / `v1/instrument` )
+    method: str
+    # The result for the request
+    result: Any | None = None
+    # The error for the request
+    error: Error | None = None
+    """
+    Optional Field which is used to match the response by the client.
+    If not passed, this field will not be returned.
+    Range: 0 to 4,294,967,295 (uint32)
+    """
+    id: int | None = None
+
+
+@dataclass
+class MiniTicker:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str | None = None
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str | None = None
+    # The mark price of the instrument, expressed in `9` decimals
+    mark_price: str | None = None
+    # The index price of the instrument, expressed in `9` decimals
+    index_price: str | None = None
+    # The last traded price of the instrument (also close price), expressed in `9` decimals
+    last_price: str | None = None
+    # The number of assets traded in the last trade, expressed in base asset decimal units
+    last_size: str | None = None
+    # The mid price of the instrument, expressed in `9` decimals
+    mid_price: str | None = None
+    # The best bid price of the instrument, expressed in `9` decimals
+    best_bid_price: str | None = None
+    # The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units
+    best_bid_size: str | None = None
+    # The best ask price of the instrument, expressed in `9` decimals
+    best_ask_price: str | None = None
+    # The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units
+    best_ask_size: str | None = None
+
+
+@dataclass
+class Order:
+    """
+    Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.
+    GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.
+    This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.
+    Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.
+
+    All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.
+    This minimizes the amount of trust users have to offer to GRVT
+    """
+
+    # The subaccount initiating the order
+    sub_account_id: str
+    """
+    Four supported types of orders: GTT, IOC, AON, FOK:<ul>
+    <li>PARTIAL EXECUTION = GTT / IOC - allows partial size execution on each leg</li>
+    <li>FULL EXECUTION = AON / FOK - only allows full size execution on all legs</li>
+    <li>TAKER ONLY = IOC / FOK - only allows taker orders</li>
+    <li>MAKER OR TAKER = GTT / AON - allows maker or taker orders</li>
+    </ul>Exchange only supports (GTT, IOC, FOK)
+    RFQ Maker only supports (GTT, AON), RFQ Taker only supports (FOK)
+    """
+    time_in_force: TimeInForce
+    """
+    The legs present in this order
+    The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice
+    """
+    legs: list[OrderLeg]
+    # The signature approving this order
+    signature: Signature
+    # Order Metadata, ignored by the smart contract, and unsigned by the client
+    metadata: OrderMetadata
+    # The main account ID of the builder
+    builder: str
+    # Builder fee charged for this order, expressed as a percentage (e.g., 0.001 means 0.001%).
+    builder_fee: str
+    # [Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
+    order_id: str | None = None
+    """
+    If the order is a market order
+    Market Orders do not have a limit price, and are always executed according to the maker order price.
+    Market Orders must always be taker orders
+    """
+    is_market: bool | None = None
+    """
+    If True, Order must be a maker order. It has to fill the orderbook instead of match it.
+    If False, Order can be either a maker or taker order. <b>In this case, order creation is currently subject to a speedbump of 25ms to ensure orders are matched against updated orderbook quotes.</b>
+
+    |               | Must Fill All | Can Fill Partial |
+    | -             | -             | -                |
+    | Must Be Taker | FOK + False   | IOC + False      |
+    | Can Be Either | AON + False   | GTC + False      |
+    | Must Be Maker | AON + True    | GTC + True       |
+
+    """
+    post_only: bool | None = None
+    # If True, Order must reduce the position size, or be cancelled
+    reduce_only: bool | None = None
+    # [Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client
+    state: OrderState | None = None
+
+
+@dataclass
+class OrderLeg:
+    # The instrument to trade in this leg
+    instrument: str
+    # The total number of assets to trade in this leg, expressed in base asset decimal units.
+    size: str
+    # Specifies if the order leg is a buy or sell
+    is_buying_asset: bool
+    """
+    The limit price of the order leg, expressed in `9` decimals.
+    This is the number of quote currency units to pay/receive for this leg.
+    This should be `null/0` if the order is a market order
+    """
+    limit_price: str | None = None
+
+
+@dataclass
+class OrderMetadata:
+    """
+    Metadata fields are used to support Backend only operations. These operations are not trustless by nature.
+    Hence, fields in here are never signed, and is never transmitted to the smart contract.
+    """
+
+    """
+    A unique identifier for the active order within a subaccount, specified by the client
+    This is used to identify the order in the client's system
+    This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer
+    This field will not be propagated to the smart contract, and should not be signed by the client
+    This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected
+    Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]
+    To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]
+
+    When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
+    """
+    client_order_id: str
+    # [Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds
+    create_time: str | None = None
+    # Trigger fields are used to support any type of trigger order such as TP/SL
+    trigger: TriggerOrderMetadata | None = None
+    # Specifies the broker who brokered the order
+    broker: BrokerTag | None = None
+
+
+@dataclass
+class OrderState:
+    # The status of the order
+    status: OrderStatus
+    # The reason for rejection or cancellation
+    reject_reason: OrderRejectReason
+    # The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs
+    book_size: list[str]
+    # The total number of assets traded. Sorted in same order as Order.Legs
+    traded_size: list[str]
+    # Time at which the order was updated by GRVT, expressed in unix nanoseconds
+    update_time: str
+    # The average fill price of the order. Sorted in same order as Order.Legs
+    avg_fill_price: list[str]
+
+
+@dataclass
+class OrderStateFeed:
+    # A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
+    order_id: str
+    # A unique identifier for the active order within a subaccount, specified by the client
+    client_order_id: str
+    # The order state object being created or updated
+    order_state: OrderState
+
+
+@dataclass
+class OrderbookLevel:
+    # The price of the level, expressed in `9` decimals
+    price: str
+    # The number of assets offered, expressed in base asset decimal units
+    size: str
+    # The number of open orders at this level
+    num_orders: int
+
+
+@dataclass
+class OrderbookLevels:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
+    instrument: str
+    # The list of best bids up till query depth
+    bids: list[OrderbookLevel]
+    # The list of best asks up till query depth
+    asks: list[OrderbookLevel]
 
 
 @dataclass
@@ -392,162 +1996,64 @@ class Positions:
     cumulative_fee: str
     # The cumulative realized funding payment of the position, expressed in quote asset decimal units. Positive if paid, negative if received
     cumulative_realized_funding_payment: str
+    # The margin type of the position
+    margin_type: PositionMarginType
+    # [IsolatedOnly] The wallet balance reserved for this isolated margin position, expressed in quote asset decimal units. If this positions is liquidated, this is the maximal balance that can be lost
+    isolated_balance: str | None = None
+    # [IsolatedOnly] The initial margin of the isolated margin position, expressed in quote asset decimal units. The `total_equity` required to open more size in the position
+    isolated_im: str | None = None
+    # [IsolatedOnly] The maintenance margin of the isolated margin position, expressed in quote asset decimal units. The `total_equity` required to avoid liquidation of the position
+    isolated_mm: str | None = None
 
 
 @dataclass
-class ApiPositionsResponse:
-    # The positions matching the request filter
-    result: list[Positions]
+class PreMinRedemptions:
+    # Pre-minimum-age redemption requests, ordered by age (first element is the oldest request that is pre-minimum-age).
+    requests: list[VaultRedemptionRequest]
+    # Number of shares in the pre-minimum-age section of the vault's redemption queue.
+    token_count: str
 
 
 @dataclass
-class ApiFillHistoryRequest:
-    """
-    Query for all historical fills made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.
-
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
-    """
-
-    # The sub account ID to request for
-    sub_account_id: str
-    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
-    kind: list[Kind] | None = None
-    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
-    base: list[str] | None = None
-    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
-    quote: list[str] | None = None
-    # The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
-    start_time: str | None = None
-    # The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the query from
-    cursor: str | None = None
+class RiskBracket:
+    # 1-indexed tier number
+    tier: int
+    # Lower bound of notional value (inclusive) in quote currency
+    notional_floor: str
+    # Upper bound of notional value (exclusive) in quote currency, empty for last tier
+    notional_cap: str
+    # Maintenance margin rate as a decimal (e.g., '0.01' for 1%)
+    maintenance_margin_rate: str
+    # Initial margin rate as a decimal (e.g., '0.02' for 2%)
+    initial_margin_rate: str
+    # Maximum leverage allowed at this tier (floor of 1 / initial_margin_rate)
+    max_leverage: int
+    # Cumulative maintenance margin amount in quote currency
+    cumulative_maintenance_amount: str
 
 
 @dataclass
-class Fill:
-    # Time at which the event was emitted in unix nanoseconds
-    event_time: str
-    # The sub account ID that participated in the trade
-    sub_account_id: str
-    # The instrument being represented
-    instrument: str
-    # The side that the subaccount took on the trade
-    is_buyer: bool
-    # The role that the subaccount took on the trade
-    is_taker: bool
-    # The number of assets being traded, expressed in base asset decimal units
-    size: str
-    # The traded price, expressed in `9` decimals
-    price: str
-    # The mark price of the instrument at point of trade, expressed in `9` decimals
-    mark_price: str
-    # The index price of the instrument at point of trade, expressed in `9` decimals
-    index_price: str
-    # The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)
-    interest_rate: str
-    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
-    forward_price: str
-    # The realized PnL of the trade, expressed in quote asset decimal units (0 if increasing position size)
-    realized_pnl: str
-    # The fees paid on the trade, expressed in quote asset decimal unit (negative if maker rebate applied)
-    fee: str
-    # The fee rate paid on the trade
-    fee_rate: str
-    """
-    A trade identifier, globally unique, and monotonically increasing (not by `1`).
-    All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.
-    `trade_id` is guaranteed to be consistent across MarketData `Trade` and Trading `Fill`.
-    """
-    trade_id: str
-    # An order identifier
-    order_id: str
-    # The venue where the trade occurred
-    venue: Venue
-    """
-    A unique identifier for the active order within a subaccount, specified by the client
-    This is used to identify the order in the client's system
-    This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer
-    This field will not be propagated to the smart contract, and should not be signed by the client
-    This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected
-    Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]
-    To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]
-
-    When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
-    """
-    client_order_id: str
+class Signature:
     # The address (public key) of the wallet signing the payload
     signer: str
-    # If the trade is a RPI trade
-    is_rpi: bool
-    # Specifies the broker who brokered the order
-    broker: BrokerTag | None = None
-
-
-@dataclass
-class ApiFillHistoryResponse:
-    # The private trades matching the request asset
-    result: list[Fill]
-    # The cursor to indicate when to start the query from
-    next: str
-
-
-@dataclass
-class ApiFundingPaymentHistoryRequest:
+    # Signature R
+    r: str
+    # Signature S
+    s: str
+    # Signature V
+    v: int
+    # Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days
+    expiration: str
     """
-    Query for all historical funding payments made by a single account.
-
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    Users can randomly generate this value, used as a signature deconflicting key.
+    ie. You can send the same exact instruction twice with different nonces.
+    When the same nonce is used, the same payload will generate the same signature.
+    Our system will consider the payload a duplicate, and ignore it.
+    Range: 0 to 4,294,967,295 (uint32)
     """
-
-    # The sub account ID to request for
-    sub_account_id: str
-    # The perpetual instrument to filter for
-    instrument: str | None = None
-    # The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
-    start_time: str | None = None
-    # The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the query from
-    cursor: str | None = None
-
-
-@dataclass
-class FundingPayment:
-    # Time at which the event was emitted in unix nanoseconds
-    event_time: str
-    # The sub account ID that made the funding payment
-    sub_account_id: str
-    # The perpetual instrument being funded
-    instrument: str
-    # The currency of the funding payment
-    currency: str
-    # The amount of the funding payment. Positive if paid, negative if received
-    amount: str
-    """
-    The transaction ID of the funding payment.
-    Funding payments can be triggered by a trade, transfer, or liquidation.
-    The `tx_id` will match the corresponding `trade_id` or `tx_id`.
-    """
-    tx_id: str
-
-
-@dataclass
-class ApiFundingPaymentHistoryResponse:
-    # The funding payments matching the request asset
-    result: list[FundingPayment]
-    # The cursor to indicate when to start the query from
-    next: str
-
-
-@dataclass
-class ApiSubAccountSummaryRequest:
-    # The subaccount ID to filter by
-    sub_account_id: str
+    nonce: int
+    # Chain ID used in EIP-712 domain. Zero value fallbacks to GRVT Chain ID.
+    chain_id: str
 
 
 @dataclass
@@ -558,6 +2064,14 @@ class SpotBalance:
     balance: str
     # The index price of this currency. (reported in `USD`)
     index_price: str
+
+
+@dataclass
+class StreamReference:
+    # The channel to subscribe to (eg: ticker.s / ticker.d)
+    stream: str
+    # The list of selectors for the stream
+    selectors: list[str]
 
 
 @dataclass
@@ -622,303 +2136,23 @@ class SubAccount:
 
 
 @dataclass
-class ApiSubAccountSummaryResponse:
-    # The sub account matching the request sub account
-    result: SubAccount
-
-
-@dataclass
-class ApiSubAccountHistoryRequest:
+class TPSLOrderMetadata:
     """
-    The request to get the history of a sub account
-    SubAccount Summary values are snapshotted once every hour
-    No snapshots are taken if the sub account has no activity in the hourly window
-    History is preserved only for the last 30 days
+    Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.
 
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    ### Fields:
+    - **triggerBy**: Defines the price type that activates the order (e.g., index price).
+    - **triggerPrice**: The price at which the order is triggered, expressed in `9` decimal precision.
+
+
     """
 
-    # The sub account ID to request for
-    sub_account_id: str
-    # Start time of sub account history in unix nanoseconds
-    start_time: str | None = None
-    # End time of sub account history in unix nanoseconds
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the next query from
-    cursor: str | None = None
-
-
-@dataclass
-class ApiSubAccountHistoryResponse:
-    # The sub account history matching the request sub account
-    result: list[SubAccount]
-    # The cursor to indicate when to start the next query from
-    next: str
-
-
-@dataclass
-class VaultInvestment:
-    # The trading account ID of the vault invested in.
-    vault_id: str
-    # The number of shares held by the investor.
-    num_lp_tokens: str
-    # The current share price (in USD) of this vault investment.
-    share_price: str
-    # The USD notional invested in this vault investment.
-    usd_notional_invested: str
-
-
-@dataclass
-class AggregatedAccountSummary:
-    # The main account ID of the account to which the summary belongs
-    main_account_id: str
-    # Total equity of the main (+ sub) account, denominated in USD
-    total_equity: str
-    # The list of spot assets owned by this main (+ sub) account, and their balances
-    spot_balances: list[SpotBalance]
-    # The list of vault investments held by this main account
-    vault_investments: list[VaultInvestment]
-    # Deprecated: Use totalSubAccountEquity instead
-    total_sub_account_balance: str
-    # Total equity of the sub accounts, denominated in USD
-    total_sub_account_equity: str
-    # Total amount of the vault investments, denominated in USD
-    total_vault_investments_balance: str
-    # Total available balance of the main account, denominated in USD
-    total_sub_account_available_balance: str
-    # Total entry (initial investment) amount of the open investments, denominated in USD
-    total_usd_notional_invested: str
-
-
-@dataclass
-class ApiAggregatedAccountSummaryResponse:
-    # The aggregated account summary
-    result: AggregatedAccountSummary
-
-
-@dataclass
-class FundingAccountSummary:
-    # The main account ID of the account to which the summary belongs
-    main_account_id: str
-    # Total equity of the main account, denominated in USD
-    total_equity: str
-    # The list of spot assets owned by this main account, and their balances
-    spot_balances: list[SpotBalance]
-    # The list of vault investments held by this main account
-    vault_investments: list[VaultInvestment]
-
-
-@dataclass
-class ClientTier:
-    tier: int
-    futures_taker_fee: int
-    futures_maker_fee: int
-    options_taker_fee: int
-    options_maker_fee: int
-
-
-@dataclass
-class ApiFundingAccountSummaryResponse:
-    # The funding account summary
-    result: FundingAccountSummary
-    # Client fee tier at the time of query
-    tier: ClientTier
-
-
-@dataclass
-class ApiSetInitialLeverageRequest:
-    # The sub account ID to set the leverage for
-    sub_account_id: str
-    # The instrument to set the leverage for
-    instrument: str
-    # The leverage to set for the sub account
-    leverage: str
-
-
-@dataclass
-class ApiSetInitialLeverageResponse:
-    # Whether the leverage was set successfully
-    success: bool
-
-
-@dataclass
-class ApiGetAllInitialLeverageRequest:
-    # The sub account ID to get the leverage for
-    sub_account_id: str
-
-
-@dataclass
-class InitialLeverageResult:
-    # The instrument to get the leverage for
-    instrument: str
-    # The initial leverage of the sub account
-    leverage: str
-    # The min leverage this sub account can set
-    min_leverage: str
-    # The max leverage this sub account can set
-    max_leverage: str
-
-
-@dataclass
-class ApiGetAllInitialLeverageResponse:
-    # The initial leverage of the sub account
-    results: list[InitialLeverageResult]
-
-
-@dataclass
-class Signature:
-    # The address (public key) of the wallet signing the payload
-    signer: str
-    # Signature R
-    r: str
-    # Signature S
-    s: str
-    # Signature V
-    v: int
-    # Timestamp after which this signature expires, expressed in unix nanoseconds. Must be capped at 30 days
-    expiration: str
-    """
-    Users can randomly generate this value, used as a signature deconflicting key.
-    ie. You can send the same exact instruction twice with different nonces.
-    When the same nonce is used, the same payload will generate the same signature.
-    Our system will consider the payload a duplicate, and ignore it.
-    Range: 0 to 4,294,967,295 (uint32)
-    """
-    nonce: int
-    # Chain ID used in EIP-712 domain. Zero value fallbacks to GRVT Chain ID.
-    chain_id: str
-
-
-@dataclass
-class ApiSetDeriskToMaintenanceMarginRatioRequest:
-    # The sub account ID to set the leverage for
-    sub_account_id: str
-    # The derisk margin to maintenance margin ratio of this sub account
-    ratio: str
-    # The signature of this operation
-    signature: Signature
-
-
-@dataclass
-class ApiSetDeriskToMaintenanceMarginRatioResponse:
-    # Whether the derisk margin to maintenance margin ratio was set successfully
-    success: bool
-
-
-@dataclass
-class ApiGetMarginRulesRequest:
-    # The instrument to query margin rules for
-    instrument: str
-
-
-@dataclass
-class RiskBracket:
-    # 1-indexed tier number
-    tier: int
-    # Lower bound of notional value (inclusive) in quote currency
-    notional_floor: str
-    # Upper bound of notional value (exclusive) in quote currency, empty for last tier
-    notional_cap: str
-    # Maintenance margin rate as a decimal (e.g., '0.01' for 1%)
-    maintenance_margin_rate: str
-    # Initial margin rate as a decimal (e.g., '0.02' for 2%)
-    initial_margin_rate: str
-    # Maximum leverage allowed at this tier (floor of 1 / initial_margin_rate)
-    max_leverage: int
-    # Cumulative maintenance margin amount in quote currency
-    cumulative_maintenance_amount: str
-
-
-@dataclass
-class ApiGetMarginRulesResponse:
-    # The instrument name
-    instrument: str
-    # The maximum position size, expressed in base asset decimal units
-    max_position_size: str
-    # List of risk brackets defining margin requirements at different notional tiers
-    risk_brackets: list[RiskBracket]
-
-
-@dataclass
-class ApiOrderbookLevelsRequest:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # Depth of the order book to be retrieved (10, 50, 100, 500)
-    depth: int
-
-
-@dataclass
-class OrderbookLevel:
-    # The price of the level, expressed in `9` decimals
-    price: str
-    # The number of assets offered, expressed in base asset decimal units
-    size: str
-    # The number of open orders at this level
-    num_orders: int
-
-
-@dataclass
-class OrderbookLevels:
-    # Time at which the event was emitted in unix nanoseconds
-    event_time: str
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The list of best bids up till query depth
-    bids: list[OrderbookLevel]
-    # The list of best asks up till query depth
-    asks: list[OrderbookLevel]
-
-
-@dataclass
-class ApiOrderbookLevelsResponse:
-    # The orderbook levels objects matching the request asset
-    result: OrderbookLevels
-
-
-@dataclass
-class ApiMiniTickerRequest:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-
-
-@dataclass
-class MiniTicker:
-    # Time at which the event was emitted in unix nanoseconds
-    event_time: str | None = None
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str | None = None
-    # The mark price of the instrument, expressed in `9` decimals
-    mark_price: str | None = None
-    # The index price of the instrument, expressed in `9` decimals
-    index_price: str | None = None
-    # The last traded price of the instrument (also close price), expressed in `9` decimals
-    last_price: str | None = None
-    # The number of assets traded in the last trade, expressed in base asset decimal units
-    last_size: str | None = None
-    # The mid price of the instrument, expressed in `9` decimals
-    mid_price: str | None = None
-    # The best bid price of the instrument, expressed in `9` decimals
-    best_bid_price: str | None = None
-    # The number of assets offered on the best bid price of the instrument, expressed in base asset decimal units
-    best_bid_size: str | None = None
-    # The best ask price of the instrument, expressed in `9` decimals
-    best_ask_price: str | None = None
-    # The number of assets offered on the best ask price of the instrument, expressed in base asset decimal units
-    best_ask_size: str | None = None
-
-
-@dataclass
-class ApiMiniTickerResponse:
-    # The mini ticker matching the request asset
-    result: MiniTicker
-
-
-@dataclass
-class ApiTickerRequest:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
+    # Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order
+    trigger_by: TriggerBy
+    # The Trigger Price of the order, expressed in `9` decimals.
+    trigger_price: str
+    # If True, the order will close the position when the trigger price is reached
+    close_position: bool
 
 
 @dataclass
@@ -993,25 +2227,6 @@ class Ticker:
 
 
 @dataclass
-class ApiTickerResponse:
-    # The mini ticker matching the request asset
-    result: Ticker
-
-
-@dataclass
-class ApiTradeRequest:
-    """
-    Retrieves up to 1000 of the most recent trades in any given instrument. Do not use this to poll for data -- a websocket subscription is much more performant, and useful.
-    This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
-    """
-
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int
-
-
-@dataclass
 class Trade:
     # Time at which the event was emitted in unix nanoseconds
     event_time: str
@@ -1044,138 +2259,187 @@ class Trade:
 
 
 @dataclass
-class ApiTradeResponse:
-    # The public trades matching the request asset
-    result: list[Trade]
+class TransferHistory:
+    # The transaction ID of the transfer
+    tx_id: str
+    # The account to transfer from
+    from_account_id: str
+    # The subaccount to transfer from (0 if transferring from main account)
+    from_sub_account_id: str
+    # The account to deposit into
+    to_account_id: str
+    # The subaccount to transfer to (0 if transferring to main account)
+    to_sub_account_id: str
+    # The token currency to transfer
+    currency: str
+    # The number of tokens to transfer
+    num_tokens: str
+    # The signature of the transfer
+    signature: Signature
+    # The timestamp of the transfer in unix nanoseconds
+    event_time: str
+    # The type of transfer
+    transfer_type: TransferType
+    # The metadata of the transfer
+    transfer_metadata: str
 
 
 @dataclass
-class ApiTradeHistoryRequest:
+class TriggerOrderMetadata:
     """
-    Perform historical lookup of public trades in any given instrument.
-    This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.
-    Only data from the last three months will be retained.
+    Contains metadata related to trigger orders, such as Take Profit (TP) or Stop Loss (SL).
 
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    Trigger orders are used to automatically execute an order when a predefined price condition is met, allowing traders to implement risk management strategies.
+
+
     """
 
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
-    start_time: str | None = None
-    # The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the query from
-    cursor: str | None = None
-
-
-@dataclass
-class ApiTradeHistoryResponse:
-    # The public trades matching the request asset
-    result: list[Trade]
-    # The cursor to indicate when to start the next query from
-    next: str | None = None
-
-
-@dataclass
-class ApiGetInstrumentRequest:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-
-
-@dataclass
-class InstrumentDisplay:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The asset ID used for instrument signing.
-    instrument_hash: str
-    # The base currency
-    base: str
-    # The quote currency
-    quote: str
-    # The kind of instrument
-    kind: Kind
-    # Venues that this instrument can be traded at
-    venues: list[Venue]
-    # The settlement period of the instrument
-    settlement_period: InstrumentSettlementPeriod
-    # The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
-    base_decimals: int
-    # The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
-    quote_decimals: int
-    # The size of a single tick, expressed in price decimal units
-    tick_size: str
-    # The minimum contract size, expressed in base asset decimal units
-    min_size: str
-    # Creation time in unix nanoseconds
-    create_time: str
-    # The maximum position size, expressed in base asset decimal units
-    max_position_size: str
-    # Defines the funding interval to be applied.
-    funding_interval_hours: int | None = None
-    # Funding rate cap over the defined `intervalHours`.
-    adjusted_funding_rate_cap: str | None = None
-    # Funding rate floor over the defined `intervalHours`.
-    adjusted_funding_rate_floor: str | None = None
-
-
-@dataclass
-class ApiGetInstrumentResponse:
-    # The instrument matching the request asset
-    result: InstrumentDisplay
-
-
-@dataclass
-class ApiGetFilteredInstrumentsRequest:
-    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
-    kind: list[Kind] | None = None
-    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
-    base: list[str] | None = None
-    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
-    quote: list[str] | None = None
-    # Request for active instruments only
-    is_active: bool | None = None
-    # The limit to query for. Defaults to 500; Max 100000
-    limit: int | None = None
-
-
-@dataclass
-class ApiGetFilteredInstrumentsResponse:
-    # The instruments matching the request filter
-    result: list[InstrumentDisplay]
-
-
-@dataclass
-class ApiGetCurrencyRequest:
-    pass
-
-
-@dataclass
-class CurrencyDetail:
-    # The integer value of the currency
-    id: int
-    # The name of the currency
-    symbol: str
-    # The balance decimals of the currency
-    balance_decimals: int
-    # The quantity multiplier of the currency
-    quantity_multiplier: str
-
-
-@dataclass
-class ApiGetCurrencyResponse:
-    # The list of currencies
-    result: list[CurrencyDetail]
-
-
-@dataclass
-class ApiCandlestickRequest:
+    # Type of the trigger order. eg: Take Profit, Stop Loss, etc
+    trigger_type: TriggerType
     """
-    Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.
+    Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.
 
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+
+    """
+    tpsl: TPSLOrderMetadata
+
+
+@dataclass
+class VaultInvestment:
+    # The trading account ID of the vault invested in.
+    vault_id: str
+    # The number of shares held by the investor.
+    num_lp_tokens: str
+    # The current share price (in USD) of this vault investment.
+    share_price: str
+    # The USD notional invested in this vault investment.
+    usd_notional_invested: str
+
+
+@dataclass
+class VaultInvestorSummary:
+    """
+    Vault investor summary information.
+
+    This struct contains the summary of investments in a vault.
+    """
+
+    # The unique identifier of the vault sub account.
+    sub_account_id: str
+    # The number of Vault LP tokens held by the investor.
+    num_lp_tokens: str
+    # The average entry price (in USD) of the vault LP tokens.
+    avg_entry_price: str
+    # The current price (in USD) of the vault LP tokens.
+    current_price: str
+    # The current valuation (in USD) of all held vault LP tokens.
+    total_equity: str
+    # The all-time realized PnL (in USD) that the investor has received from the vault.
+    all_time_realized_pnl: str
+    # The singleton pending redemption (omitted if none).
+    pending_redemption: VaultRedemption | None = None
+    # True if the requesting account is authorized to burn tokens on this vault, omitted otherwise.
+    can_burn: bool | None = None
+
+
+@dataclass
+class VaultRedemption:
+    """
+    Vault redemption information.
+
+    This struct contains information about a pending redemption from a vault.
+    """
+
+    # The number of LP Tokens requested for redemption.
+    num_lp_tokens: str
+    # The valuation (in USD) of the redemption request.
+    request_valuation: str
+    # [Filled by GRVT Backend] Time at which the redemption request was received by GRVT in unix nanoseconds
+    request_time: str
+    # [Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed.
+    max_redemption_period_timestamp: str
+    # Omitted for redemption requests to non-cross exchange vaults. True if cancellation is blocked within the CEV allocation allowance for the user's current tier (e.g. because the user has already transferred out the spot balance underlying the redemption request).
+    cancel_blocked: bool | None = None
+
+
+@dataclass
+class VaultRedemptionRequest:
+    # [Filled by GRVT Backend] Time at which the redemption request was received by GRVT in unix nanoseconds
+    request_time: str
+    # The number of shares to redeem
+    num_lp_tokens: str
+    # [Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed.
+    max_redemption_period_timestamp: str
+    # Age category of this redemption request.
+    age_category: VaultRedemptionReqAgeCategory
+    # [Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be eligible for automated redemption.
+    eligible_for_auto_redemption_timestamp: str
+    # `true` if this request belongs to the vault manager, omitted otherwise.
+    is_manager: bool | None = None
+
+
+@dataclass
+class WSCancelFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # Data relating to the status of the cancellation attempt
+    feed: CancelStatusFeed
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSCancelFeedSelectorV1:
+    """
+    Subscribes to a feed of time-to-live expiry events for order cancellations requested by a given subaccount.
+    **This stream presently only provides expiry updates for cancel-order requests set with a valid TTL value**.
+    Successful order cancellations will reflect as updates published to the [order-state stream](https://api-docs.grvt.io/trading_streams/#order-state).
+    _A future release will expand the functionality of this stream to provide more general status updates on order cancellation requests._
+    Each Order can be uniquely identified by its `client_order_id`.
+
+    """
+
+    # The subaccount ID to filter by
+    sub_account_id: str
+
+
+@dataclass
+class WSCandlestickFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # A candlestick entry matching the request filters
+    feed: Candlestick
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSCandlestickFeedSelectorV1:
+    """
+    Subscribes to a stream of Kline/Candlestick updates for an instrument. A Kline is uniquely identified by its open time.
+    A new Kline is published every interval (if it exists). Upon subscription, the server will send the 5 most recent Kline for the requested interval.
     """
 
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
@@ -1184,144 +2448,285 @@ class ApiCandlestickRequest:
     interval: CandlestickInterval
     # The type of candlestick data to retrieve
     type: CandlestickType
-    # Start time of kline data in unix nanoseconds
-    start_time: str | None = None
-    # End time of kline data in unix nanoseconds
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the query from
-    cursor: str | None = None
 
 
 @dataclass
-class Candlestick:
-    # Open time of kline bar in unix nanoseconds
-    open_time: str
-    # Close time of kline bar in unix nanosecond
-    close_time: str
-    # The open price, expressed in underlying currency resolution units
-    open: str
-    # The close price, expressed in underlying currency resolution units
-    close: str
-    # The high price, expressed in underlying currency resolution units
-    high: str
-    # The low price, expressed in underlying currency resolution units
-    low: str
-    # The underlying volume transacted, expressed in base asset decimal units
-    volume_b: str
-    # The quote volume transacted, expressed in quote asset decimal units
-    volume_q: str
-    # The number of trades transacted
-    trades: int
+class WSDepositFeedDataV1:
+    # The websocket channel to which the response is sent
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # The Deposit object
+    feed: Deposit
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSDepositFeedSelectorV1:
+    """
+    Subscribes to a feed of deposits. This will execute when there is any deposit to selected account.
+    To subscribe to a main account, specify the account ID (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a`).
+    """
+
+    # The main account ID to request for
+    main_account_id: str
+
+
+@dataclass
+class WSFillFeedDataV1:
+    # The websocket channel to which the response is sent
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # A private trade matching the request filter
+    feed: Fill
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSFillFeedSelectorV1:
+    """
+    Subscribes to a feed of private trade updates. This happens when a trade is executed.
+    To subscribe to all private trades, specify an empty `instrument` (eg. `2345123`).
+    Otherwise, specify the `instrument` to only receive private trades for that instrument (eg. `2345123-BTC_USDT_Perp`).
+    """
+
+    # The sub account ID to request for
+    sub_account_id: str
+    # The instrument filter to apply.
+    instrument: str | None = None
+
+
+@dataclass
+class WSListStreamsParams:
+    pass
+
+
+@dataclass
+class WSListStreamsResult:
+    # The list of stream references  the connection is connected to
+    stream_reference: list[StreamReference]
+
+
+@dataclass
+class WSMiniTickerFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # A mini ticker matching the request filter
+    feed: MiniTicker
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSMiniTickerFeedSelectorV1:
+    """
+    Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.
+    Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.
+
+    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul>
+
+    Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul>
+    """
+
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
-
-
-@dataclass
-class ApiCandlestickResponse:
-    # The candlestick result set for given interval
-    result: list[Candlestick]
-    # The cursor to indicate when to start the next query from
-    next: str | None = None
-
-
-@dataclass
-class ApiFundingRateRequest:
     """
-    Lookup the historical funding rate of a perpetual future.
+    The minimal rate at which we publish feeds (in milliseconds)
+    Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)
+    Snapshot (200, 500, 1000, 5000)
+    """
+    rate: int
 
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+
+@dataclass
+class WSOrderFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # The order object being created or updated
+    feed: Order
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSOrderFeedSelectorV1:
+    """
+    Subscribes to a feed of order updates pertaining to orders made by your account.
+    Each Order can be uniquely identified by its `order_id` or `client_order_id`.
+    To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).
+    Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`).
+    """
+
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The instrument filter to apply.
+    instrument: str | None = None
+
+
+@dataclass
+class WSOrderStateFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # The Order State Feed
+    feed: OrderStateFeed
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSOrderStateFeedSelectorV1:
+    """
+    Subscribes to a feed of order updates pertaining to orders made by your account.
+    Unlike the Order Stream, this only streams state updates, drastically improving throughput, and latency.
+    Each Order can be uniquely identified by its `order_id` or `client_order_id`.
+    To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).
+    Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`).
+    """
+
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The instrument filter to apply.
+    instrument: str | None = None
+
+
+@dataclass
+class WSOrderbookLevelsFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # An orderbook levels object matching the request filter
+    feed: OrderbookLevels
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSOrderbookLevelsFeedSelectorV1:
+    """
+    Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.
+    Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.
+
+    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul>
+
+    Subscription Pattern:<ul><li>Delta - `instrument@rate`</li><li>Snapshot - `instrument@rate-depth`</li></ul>
+
+    Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul>
     """
 
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
-    # Start time of funding rate in unix nanoseconds
-    start_time: str | None = None
-    # End time of funding rate in unix nanoseconds
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the query from
-    cursor: str | None = None
-    # Aggregation method for historical funding rate observations. Defaults to using the instrument-specific funding interval.
-    agg_type: FundingRateAggregationType | None = None
+    """
+    The minimal rate at which we publish feeds (in milliseconds)
+    Delta (50, 100, 500, 1000)
+    Snapshot (500, 1000)
+    """
+    rate: int
+    """
+    Depth of the order book to be retrieved
+    Delta(0 - `unlimited`)
+    Snapshot(10, 50, 100, 500)
+    """
+    depth: int | None = None
 
 
 @dataclass
-class ApiFundingRate:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The funding rate of the instrument, expressed in percentage points
-    funding_rate: str
-    # The funding timestamp of the funding rate, expressed in unix nanoseconds
-    funding_time: str
-    # The mark price of the instrument at funding timestamp, expressed in `9` decimals
-    mark_price: str
-    # Deprecated: Refer to `funding_rate` instead. Will be removed in a future release.
-    funding_rate_8_h_avg: str
-    # Funding interval in hours (e.g. 1/4/8/etc).
-    funding_interval_hours: int
+class WSPositionsFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # A Position being created or updated matching the request filter
+    feed: Positions
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
 
 
 @dataclass
-class ApiFundingRateResponse:
-    # The funding rate result set for given interval
-    result: list[ApiFundingRate]
-    # The cursor to indicate when to start the next query from
-    next: str | None = None
-
-
-@dataclass
-class JSONRPCRequest:
+class WSPositionsFeedSelectorV1:
     """
-    All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.
-    If a `request_id` is supplied in this JSON RPC request, it will be propagated back to any relevant JSON RPC responses (including error).
-    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
+    Subscribes to a feed of position updates.
+    Updates get published when a trade is executed, and when leverage configurations are changed for instruments with ongoing positions.
+    To subscribe to all positions, specify an empty `instrument` (eg. `2345123`).
+    Otherwise, specify the `instrument` to only receive positions for that instrument (eg. `2345123-BTC_USDT_Perp`).
     """
 
-    # The JSON RPC version to use for the request
-    jsonrpc: str
-    # The method to use for the request (eg: `subscribe` / `unsubscribe` / `v1/instrument` )
-    method: str
-    # The parameters for the request
-    params: Any
-    """
-    Optional Field which is used to match the response by the client.
-    If not passed, this field will not be returned
-    """
-    id: int | None = None
-
-
-@dataclass
-class Error:
-    # The error code for the request
-    code: int
-    # The error message for the request
-    message: str
-
-
-@dataclass
-class JSONRPCResponse:
-    """
-    All Websocket JSON RPC Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.
-    If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.
-    """
-
-    # The JSON RPC version to use for the request
-    jsonrpc: str
-    # The method used in the request for this response (eg: `subscribe` / `unsubscribe` / `v1/instrument` )
-    method: str
-    # The result for the request
-    result: Any | None = None
-    # The error for the request
-    error: Error | None = None
-    """
-    Optional Field which is used to match the response by the client.
-    If not passed, this field will not be returned.
-    Range: 0 to 4,294,967,295 (uint32)
-    """
-    id: int | None = None
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The instrument filter to apply.
+    instrument: str | None = None
 
 
 @dataclass
@@ -1341,45 +2746,6 @@ class WSSubscribeParams:
     selectors: list[str]
     # Whether to use the global sequence number for the stream
     use_global_sequence_number: bool | None = None
-
-
-@dataclass
-class WSSubscribeResult:
-    """
-    To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul>
-    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
-    """
-
-    # The channel to subscribe to (eg: ticker.s / ticker.d)
-    stream: str
-    # The list of feeds subscribed to
-    subs: list[str]
-    # The list of feeds unsubscribed from
-    unsubs: list[str]
-    # The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`
-    num_snapshots: list[int]
-    # The first sequence number to expect for each subscribed feed. Returned in same order as `subs`
-    first_sequence_number: list[str]
-    # The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`
-    latest_sequence_number: list[str]
-
-
-@dataclass
-class WSUnsubscribeParams:
-    # The channel to unsubscribe from (eg: ticker.s / ticker.d)
-    stream: str
-    # The list of feeds to unsubscribe from
-    selectors: list[str]
-    # Whether to use the global sequence number for the stream
-    use_global_sequence_number: bool | None = None
-
-
-@dataclass
-class WSUnsubscribeResult:
-    # The channel to subscribe to (eg: ticker.s / ticker.d)
-    stream: str
-    # The list of feeds unsubscribed from
-    unsubs: list[str]
 
 
 @dataclass
@@ -1435,36 +2801,28 @@ class WSSubscribeResponseV1Legacy:
 
 
 @dataclass
-class WSOrderbookLevelsFeedSelectorV1:
+class WSSubscribeResult:
     """
-    Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.
-    Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.
-
-    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul>
-
-    Subscription Pattern:<ul><li>Delta - `instrument@rate`</li><li>Snapshot - `instrument@rate-depth`</li></ul>
-
-    Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul>
+    To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul>
+    When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details.
     """
 
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    """
-    The minimal rate at which we publish feeds (in milliseconds)
-    Delta (50, 100, 500, 1000)
-    Snapshot (500, 1000)
-    """
-    rate: int
-    """
-    Depth of the order book to be retrieved
-    Delta(0 - `unlimited`)
-    Snapshot(10, 50, 100, 500)
-    """
-    depth: int | None = None
+    # The channel to subscribe to (eg: ticker.s / ticker.d)
+    stream: str
+    # The list of feeds subscribed to
+    subs: list[str]
+    # The list of feeds unsubscribed from
+    unsubs: list[str]
+    # The number of snapshot payloads to expect for each subscribed feed. Returned in same order as `subs`
+    num_snapshots: list[int]
+    # The first sequence number to expect for each subscribed feed. Returned in same order as `subs`
+    first_sequence_number: list[str]
+    # The sequence number of the most recent message in the stream. Next received sequence number must be larger than this one. Returned in same order as `subs`
+    latest_sequence_number: list[str]
 
 
 @dataclass
-class WSOrderbookLevelsFeedDataV1:
+class WSTickerFeedDataV1:
     # Stream name
     stream: str
     # Primary selector
@@ -1478,50 +2836,8 @@ class WSOrderbookLevelsFeedDataV1:
       - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
     """
     sequence_number: str
-    # An orderbook levels object matching the request filter
-    feed: OrderbookLevels
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSMiniTickerFeedSelectorV1:
-    """
-    Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.
-    Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.
-
-    The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul>
-
-    Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul>
-    """
-
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    """
-    The minimal rate at which we publish feeds (in milliseconds)
-    Delta (0 - `raw`, 50, 100, 200, 500, 1000, 5000)
-    Snapshot (200, 500, 1000, 5000)
-    """
-    rate: int
-
-
-@dataclass
-class WSMiniTickerFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # A mini ticker matching the request filter
-    feed: MiniTicker
+    # A ticker matching the request filter
+    feed: Ticker
     # The previous sequence number that determines the message order
     prev_sequence_number: str
 
@@ -1548,35 +2864,6 @@ class WSTickerFeedSelectorV1:
 
 
 @dataclass
-class WSTickerFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # A ticker matching the request filter
-    feed: Ticker
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSTradeFeedSelectorV1:
-    # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
-    instrument: str
-    # The limit to query for. Valid values are (50, 200, 500, 1000). Default is 50
-    limit: int
-
-
-@dataclass
 class WSTradeFeedDataV1:
     # Stream name
     stream: str
@@ -1598,631 +2885,11 @@ class WSTradeFeedDataV1:
 
 
 @dataclass
-class WSCandlestickFeedSelectorV1:
-    """
-    Subscribes to a stream of Kline/Candlestick updates for an instrument. A Kline is uniquely identified by its open time.
-    A new Kline is published every interval (if it exists). Upon subscription, the server will send the 5 most recent Kline for the requested interval.
-    """
-
+class WSTradeFeedSelectorV1:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
-    # The interval of each candlestick
-    interval: CandlestickInterval
-    # The type of candlestick data to retrieve
-    type: CandlestickType
-
-
-@dataclass
-class WSCandlestickFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # A candlestick entry matching the request filters
-    feed: Candlestick
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSUnsubscribeAllParams:
-    pass
-
-
-@dataclass
-class StreamReference:
-    # The channel to subscribe to (eg: ticker.s / ticker.d)
-    stream: str
-    # The list of selectors for the stream
-    selectors: list[str]
-
-
-@dataclass
-class WSUnsubscribeAllResult:
-    # The list of stream references unsubscribed from
-    stream_reference: list[StreamReference]
-
-
-@dataclass
-class WSListStreamsParams:
-    pass
-
-
-@dataclass
-class WSListStreamsResult:
-    # The list of stream references  the connection is connected to
-    stream_reference: list[StreamReference]
-
-
-@dataclass
-class ApiGetAllInstrumentsRequest:
-    # Fetch only active instruments
-    is_active: bool | None = None
-
-
-@dataclass
-class ApiGetAllInstrumentsResponse:
-    # List of instruments
-    result: list[InstrumentDisplay]
-
-
-@dataclass
-class ApiQueryVaultManagerInvestorHistoryRequest:
-    # The unique identifier of the vault to filter by
-    vault_id: str
-    # Whether to only return investments made by the manager
-    only_own_investments: bool
-    # Optional. Start time in unix nanoseconds
-    start_time: str | None = None
-    # Optional. End time in unix nanoseconds
-    end_time: str | None = None
-
-
-@dataclass
-class ApiVaultInvestorHistory:
-    # Time at which the event was emitted in unix nanoseconds
-    event_time: str
-    # The off chain account id of the investor, only visible to the manager
-    off_chain_account_id: str
-    # The unique identifier of the vault.
-    vault_id: str
-    # The type of transaction that occurred. List of types: vaultInvest, vaultBurnLpToken, vaultRedeem
-    type: VaultInvestorAction
-    # The price of the vault LP tokens at the time of the event.
-    price: str
-    # The amount of Vault LP tokens invested or redeemed.
-    size: str
-    # The realized PnL of the vault.
-    realized_pnl: str
-    # The performance fee of the vault.
-    performance_fee: str
-
-
-@dataclass
-class ApiQueryVaultManagerInvestorHistoryResponse:
-    # The list of vault investor history belong to the manager
-    result: list[ApiVaultInvestorHistory]
-
-
-@dataclass
-class OrderLeg:
-    # The instrument to trade in this leg
-    instrument: str
-    # The total number of assets to trade in this leg, expressed in base asset decimal units.
-    size: str
-    # Specifies if the order leg is a buy or sell
-    is_buying_asset: bool
-    """
-    The limit price of the order leg, expressed in `9` decimals.
-    This is the number of quote currency units to pay/receive for this leg.
-    This should be `null/0` if the order is a market order
-    """
-    limit_price: str | None = None
-
-
-@dataclass
-class TPSLOrderMetadata:
-    """
-    Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.
-
-    ### Fields:
-    - **triggerBy**: Defines the price type that activates the order (e.g., index price).
-    - **triggerPrice**: The price at which the order is triggered, expressed in `9` decimal precision.
-
-
-    """
-
-    # Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order
-    trigger_by: TriggerBy
-    # The Trigger Price of the order, expressed in `9` decimals.
-    trigger_price: str
-    # If True, the order will close the position when the trigger price is reached
-    close_position: bool
-
-
-@dataclass
-class TriggerOrderMetadata:
-    """
-    Contains metadata related to trigger orders, such as Take Profit (TP) or Stop Loss (SL).
-
-    Trigger orders are used to automatically execute an order when a predefined price condition is met, allowing traders to implement risk management strategies.
-
-
-    """
-
-    # Type of the trigger order. eg: Take Profit, Stop Loss, etc
-    trigger_type: TriggerType
-    """
-    Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.
-
-
-    """
-    tpsl: TPSLOrderMetadata
-
-
-@dataclass
-class OrderMetadata:
-    """
-    Metadata fields are used to support Backend only operations. These operations are not trustless by nature.
-    Hence, fields in here are never signed, and is never transmitted to the smart contract.
-    """
-
-    """
-    A unique identifier for the active order within a subaccount, specified by the client
-    This is used to identify the order in the client's system
-    This field can be used for order amendment/cancellation, but has no bearing on the smart contract layer
-    This field will not be propagated to the smart contract, and should not be signed by the client
-    This value must be unique for all active orders in a subaccount, or amendment/cancellation will not work as expected
-    Gravity UI will generate a random clientOrderID for each order in the range [0, 2^63 - 1]
-    To prevent any conflicts, client machines should generate a random clientOrderID in the range [2^63, 2^64 - 1]
-
-    When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
-    """
-    client_order_id: str
-    # [Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds
-    create_time: str | None = None
-    # Trigger fields are used to support any type of trigger order such as TP/SL
-    trigger: TriggerOrderMetadata | None = None
-    # Specifies the broker who brokered the order
-    broker: BrokerTag | None = None
-
-
-@dataclass
-class OrderState:
-    # The status of the order
-    status: OrderStatus
-    # The reason for rejection or cancellation
-    reject_reason: OrderRejectReason
-    # The number of assets available for orderbook/RFQ matching. Sorted in same order as Order.Legs
-    book_size: list[str]
-    # The total number of assets traded. Sorted in same order as Order.Legs
-    traded_size: list[str]
-    # Time at which the order was updated by GRVT, expressed in unix nanoseconds
-    update_time: str
-    # The average fill price of the order. Sorted in same order as Order.Legs
-    avg_fill_price: list[str]
-
-
-@dataclass
-class Order:
-    """
-    Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.
-    GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.
-    This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.
-    Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.
-
-    All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.
-    This minimizes the amount of trust users have to offer to GRVT
-    """
-
-    # The subaccount initiating the order
-    sub_account_id: str
-    """
-    Four supported types of orders: GTT, IOC, AON, FOK:<ul>
-    <li>PARTIAL EXECUTION = GTT / IOC - allows partial size execution on each leg</li>
-    <li>FULL EXECUTION = AON / FOK - only allows full size execution on all legs</li>
-    <li>TAKER ONLY = IOC / FOK - only allows taker orders</li>
-    <li>MAKER OR TAKER = GTT / AON - allows maker or taker orders</li>
-    </ul>Exchange only supports (GTT, IOC, FOK)
-    RFQ Maker only supports (GTT, AON), RFQ Taker only supports (FOK)
-    """
-    time_in_force: TimeInForce
-    """
-    The legs present in this order
-    The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice
-    """
-    legs: list[OrderLeg]
-    # The signature approving this order
-    signature: Signature
-    # Order Metadata, ignored by the smart contract, and unsigned by the client
-    metadata: OrderMetadata
-    # [Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
-    order_id: str | None = None
-    """
-    If the order is a market order
-    Market Orders do not have a limit price, and are always executed according to the maker order price.
-    Market Orders must always be taker orders
-    """
-    is_market: bool | None = None
-    """
-    If True, Order must be a maker order. It has to fill the orderbook instead of match it.
-    If False, Order can be either a maker or taker order. <b>In this case, order creation is currently subject to a speedbump of 25ms to ensure orders are matched against updated orderbook quotes.</b>
-
-    |               | Must Fill All | Can Fill Partial |
-    | -             | -             | -                |
-    | Must Be Taker | FOK + False   | IOC + False      |
-    | Can Be Either | AON + False   | GTC + False      |
-    | Must Be Maker | AON + True    | GTC + True       |
-
-    """
-    post_only: bool | None = None
-    # If True, Order must reduce the position size, or be cancelled
-    reduce_only: bool | None = None
-    # [Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client
-    state: OrderState | None = None
-
-
-@dataclass
-class ApiCreateOrderRequest:
-    # The order to create
-    order: Order
-
-
-@dataclass
-class ApiCreateOrderResponse:
-    # The created order
-    result: Order
-
-
-@dataclass
-class ApiCancelOrderRequest:
-    # The subaccount ID cancelling the order
-    sub_account_id: str
-    # Cancel the order with this `order_id`
-    order_id: str | None = None
-    # Cancel the order with this `client_order_id`
-    client_order_id: str | None = None
-    """
-    Specifies the time-to-live (in milliseconds) for this cancellation.
-    During this period, any order creation with a matching `client_order_id` will be cancelled and not be added to the GRVT matching engine.
-    This mechanism helps mitigate time-of-flight issues where cancellations might arrive before the corresponding orders.
-    Hence, cancellation by `order_id` ignores this field as the exchange can only assign `order_id`s to already-processed order creations.
-    The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `'670'` -> `'600'`, `'30'` -> `'0'`) and capped at 5 seconds (i.e., `'5000'`).
-    Value of `'0'` or omission results in the default time-to-live value being applied.
-    If the caller requests multiple successive cancellations for a given order, such that the time-to-live windows overlap, only the first request will be considered.
-
-    """
-    time_to_live_ms: str | None = None
-
-
-@dataclass
-class ApiCancelAllOrdersRequest:
-    # The subaccount ID cancelling all orders
-    sub_account_id: str
-    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be cancelled
-    kind: list[Kind] | None = None
-    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be cancelled
-    base: list[str] | None = None
-    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be cancelled
-    quote: list[str] | None = None
-
-
-@dataclass
-class ApiOpenOrdersRequest:
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
-    kind: list[Kind] | None = None
-    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
-    base: list[str] | None = None
-    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
-    quote: list[str] | None = None
-
-
-@dataclass
-class ApiOpenOrdersResponse:
-    # The Open Orders matching the request filter
-    result: list[Order]
-
-
-@dataclass
-class ApiOrderHistoryRequest:
-    """
-    Retrieves the order history for the account.
-
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
-    """
-
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
-    kind: list[Kind] | None = None
-    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
-    base: list[str] | None = None
-    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
-    quote: list[str] | None = None
-    # The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
-    start_time: str | None = None
-    # The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the query from
-    cursor: str | None = None
-
-
-@dataclass
-class ApiOrderHistoryResponse:
-    # The Open Orders matching the request filter
-    result: list[Order]
-    # The cursor to indicate when to start the query from
-    next: str
-
-
-@dataclass
-class EmptyRequest:
-    pass
-
-
-@dataclass
-class Ack:
-    # Gravity has acknowledged that the request has been successfully received and it will process it in the backend
-    ack: bool
-
-
-@dataclass
-class AckResponse:
-    # The Ack Object
-    result: Ack
-
-
-@dataclass
-class ApiGetOrderRequest:
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # Filter for `order_id`
-    order_id: str | None = None
-    # Filter for `client_order_id`
-    client_order_id: str | None = None
-
-
-@dataclass
-class ApiGetOrderResponse:
-    # The order object for the requested filter
-    result: Order
-
-
-@dataclass
-class ApiCancelOnDisconnectRequest:
-    """
-    Auto-Cancel All Open Orders when the countdown time hits zero.
-
-    Market Maker inputs a countdown time parameter in milliseconds (e.g. 120000 for 120s) rounded down to the smallest second follows the following logic:
-      - Market Maker initially entered a value between 0 -> 1000, which is rounded to 0: will result in termination of their COD
-      - Market Maker initially entered a value between 1001 -> 300_000, which is rounded to the nearest second: will result in refresh of their COD
-      - Market Maker initially entered a value bigger than 300_000, which will result in error (upper bound)
-    Market Maker will send a heartbeat message by calling the endpoint at specific intervals (ex. every 30 seconds) to the server to refresh the count down.
-
-    If the server does not receive a heartbeat message within the countdown time, it will cancel all open orders for the specified Sub Account ID.
-    """
-
-    # The subaccount ID cancelling the orders for
-    sub_account_id: str
-    """
-    Countdown time in milliseconds (ex. 120000 for 120s).
-
-    0 to disable the timer.
-
-    Does not accept negative values.
-
-    Minimum acceptable value is 1,000.
-
-    Maximum acceptable value is 300,000
-    """
-    countdown_time: str | None = None
-
-
-@dataclass
-class WSOrderFeedSelectorV1:
-    """
-    Subscribes to a feed of order updates pertaining to orders made by your account.
-    Each Order can be uniquely identified by its `order_id` or `client_order_id`.
-    To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).
-    Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`).
-    """
-
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # The instrument filter to apply.
-    instrument: str | None = None
-
-
-@dataclass
-class WSOrderFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # The order object being created or updated
-    feed: Order
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSOrderStateFeedSelectorV1:
-    """
-    Subscribes to a feed of order updates pertaining to orders made by your account.
-    Unlike the Order Stream, this only streams state updates, drastically improving throughput, and latency.
-    Each Order can be uniquely identified by its `order_id` or `client_order_id`.
-    To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).
-    Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`).
-    """
-
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # The instrument filter to apply.
-    instrument: str | None = None
-
-
-@dataclass
-class OrderStateFeed:
-    # A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
-    order_id: str
-    # A unique identifier for the active order within a subaccount, specified by the client
-    client_order_id: str
-    # The order state object being created or updated
-    order_state: OrderState
-
-
-@dataclass
-class WSOrderStateFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # The Order State Feed
-    feed: OrderStateFeed
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSPositionsFeedSelectorV1:
-    """
-    Subscribes to a feed of position updates.
-    Updates get published when a trade is executed, and when leverage configurations are changed for instruments with ongoing positions.
-    To subscribe to all positions, specify an empty `instrument` (eg. `2345123`).
-    Otherwise, specify the `instrument` to only receive positions for that instrument (eg. `2345123-BTC_USDT_Perp`).
-    """
-
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # The instrument filter to apply.
-    instrument: str | None = None
-
-
-@dataclass
-class WSPositionsFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # A Position being created or updated matching the request filter
-    feed: Positions
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSFillFeedSelectorV1:
-    """
-    Subscribes to a feed of private trade updates. This happens when a trade is executed.
-    To subscribe to all private trades, specify an empty `instrument` (eg. `2345123`).
-    Otherwise, specify the `instrument` to only receive private trades for that instrument (eg. `2345123-BTC_USDT_Perp`).
-    """
-
-    # The sub account ID to request for
-    sub_account_id: str
-    # The instrument filter to apply.
-    instrument: str | None = None
-
-
-@dataclass
-class WSFillFeedDataV1:
-    # The websocket channel to which the response is sent
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # A private trade matching the request filter
-    feed: Fill
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSTransferFeedSelectorV1:
-    """
-    Subscribes to a feed of transfers. This will execute when there is any transfer to or from the selected account.
-    To subscribe to a main account, specify the account ID (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a`).
-    To subscribe to a sub account, specify the main account and the sub account dash separated (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a-1920109784202388`).
-    """
-
-    # The main account ID to request for
-    main_account_id: str
-    # The sub account ID to request for
-    sub_account_id: str | None = None
-
-
-@dataclass
-class TransferHistory:
-    # The transaction ID of the transfer
-    tx_id: str
-    # The account to transfer from
-    from_account_id: str
-    # The subaccount to transfer from (0 if transferring from main account)
-    from_sub_account_id: str
-    # The account to deposit into
-    to_account_id: str
-    # The subaccount to transfer to (0 if transferring to main account)
-    to_sub_account_id: str
-    # The token currency to transfer
-    currency: str
-    # The number of tokens to transfer
-    num_tokens: str
-    # The signature of the transfer
-    signature: Signature
-    # The timestamp of the transfer in unix nanoseconds
-    event_time: str
-    # The type of transfer
-    transfer_type: TransferType
-    # The metadata of the transfer
-    transfer_metadata: str
+    # The limit to query for. Valid values are (50, 200, 500, 1000). Default is 50
+    limit: int
 
 
 @dataclass
@@ -2247,30 +2914,50 @@ class WSTransferFeedDataV1:
 
 
 @dataclass
-class WSDepositFeedSelectorV1:
+class WSTransferFeedSelectorV1:
     """
-    Subscribes to a feed of deposits. This will execute when there is any deposit to selected account.
+    Subscribes to a feed of transfers. This will execute when there is any transfer to or from the selected account.
     To subscribe to a main account, specify the account ID (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a`).
+    To subscribe to a sub account, specify the main account and the sub account dash separated (eg. `0x9fe3758b67ce7a2875ee4b452f01a5282d84ed8a-1920109784202388`).
     """
 
     # The main account ID to request for
     main_account_id: str
+    # The sub account ID to request for
+    sub_account_id: str | None = None
 
 
 @dataclass
-class Deposit:
-    # The hash of the bridgemint event producing the deposit
-    tx_hash: str
-    # The account to deposit into
-    to_account_id: str
-    # The token currency to deposit
-    currency: str
-    # The number of tokens to deposit
-    num_tokens: str
+class WSUnsubscribeAllParams:
+    pass
 
 
 @dataclass
-class WSDepositFeedDataV1:
+class WSUnsubscribeAllResult:
+    # The list of stream references unsubscribed from
+    stream_reference: list[StreamReference]
+
+
+@dataclass
+class WSUnsubscribeParams:
+    # The channel to unsubscribe from (eg: ticker.s / ticker.d)
+    stream: str
+    # The list of feeds to unsubscribe from
+    selectors: list[str]
+    # Whether to use the global sequence number for the stream
+    use_global_sequence_number: bool | None = None
+
+
+@dataclass
+class WSUnsubscribeResult:
+    # The channel to subscribe to (eg: ticker.s / ticker.d)
+    stream: str
+    # The list of feeds unsubscribed from
+    unsubs: list[str]
+
+
+@dataclass
+class WSWithdrawalFeedDataV1:
     # The websocket channel to which the response is sent
     stream: str
     # Primary selector
@@ -2284,8 +2971,8 @@ class WSDepositFeedDataV1:
       - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
     """
     sequence_number: str
-    # The Deposit object
-    feed: Deposit
+    # The Withdrawal object
+    feed: Withdrawal
     # The previous sequence number that determines the message order
     prev_sequence_number: str
 
@@ -2316,260 +3003,6 @@ class Withdrawal:
 
 
 @dataclass
-class WSWithdrawalFeedDataV1:
-    # The websocket channel to which the response is sent
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # The Withdrawal object
-    feed: Withdrawal
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class CancelStatusFeed:
-    # The subaccount ID that requested the cancellation
-    sub_account_id: str
-    # A unique identifier for the active order within a subaccount, specified by the client
-    client_order_id: str
-    # A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
-    order_id: str
-    # The user-provided reason for cancelling the order
-    reason: OrderRejectReason
-    # Status of the cancellation attempt
-    cancel_status: CancelStatus
-    # [Filled by GRVT Backend] Time at which the cancellation status was updated by GRVT in unix nanoseconds
-    update_time: str | None = None
-
-
-@dataclass
-class WSCancelFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # Data relating to the status of the cancellation attempt
-    feed: CancelStatusFeed
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSCancelFeedSelectorV1:
-    """
-    Subscribes to a feed of time-to-live expiry events for order cancellations requested by a given subaccount.
-    **This stream presently only provides expiry updates for cancel-order requests set with a valid TTL value**.
-    Successful order cancellations will reflect as updates published to the [order-state stream](https://api-docs.grvt.io/trading_streams/#order-state).
-    _A future release will expand the functionality of this stream to provide more general status updates on order cancellation requests._
-    Each Order can be uniquely identified by its `client_order_id`.
-
-    """
-
-    # The subaccount ID to filter by
-    sub_account_id: str
-
-
-@dataclass
-class ApiWithdrawalRequest:
-    """
-    Leverage this API to initialize a withdrawal from GRVT's Hyperchain onto Ethereum.
-    Do take note that the bridging process does take time. The GRVT UI will help you keep track of bridging progress, and notify you once its complete.
-
-    If not withdrawing the entirety of your balance, there is a minimum withdrawal amount. Currently that amount is ~25 USDT.
-    Withdrawal fees also apply to cover the cost of the Ethereum transaction.
-    Note that your funds will always remain in self-custory throughout the withdrawal process. At no stage does GRVT gain control over your funds.
-    """
-
-    # The main account to withdraw from
-    from_account_id: str
-    # The Ethereum wallet to withdraw into
-    to_eth_address: str
-    # The token currency to withdraw
-    currency: str
-    # The number of tokens to withdraw, quoted in tokenCurrency decimal units
-    num_tokens: str
-    # The signature of the withdrawal
-    signature: Signature
-
-
-@dataclass
-class ApiTransferRequest:
-    """
-    This API allows you to transfer funds in multiple different ways<ul>
-    <li>Between SubAccounts within your Main Account</li>
-    <li>Between your MainAccount and your SubAccounts</li>
-    <li>To other MainAccounts that you have previously allowlisted</li>
-    </ul><b>Fast Withdrawal Funding Address</b>
-    For fast withdrawals, funds must be sent to the designated funding account address. Please ensure you use the correct address based on the environment:
-    <b>Production Environment Address:</b>
-    <em>[To be updated, not ready yet]</em>
-    This address should be specified as the <code>to_account_id</code> in your API requests for transferring funds using the transfer API. Ensure accurate input to avoid loss of funds or use the UI.
-
-    """
-
-    # The main account to transfer from
-    from_account_id: str
-    # The subaccount to transfer from (0 if transferring from main account)
-    from_sub_account_id: str
-    # The main account to deposit into
-    to_account_id: str
-    # The subaccount to transfer to (0 if transferring to main account)
-    to_sub_account_id: str
-    # The token currency to transfer
-    currency: str
-    # The number of tokens to transfer, quoted in tokenCurrency decimal units
-    num_tokens: str
-    # The signature of the transfer
-    signature: Signature
-    # The type of transfer
-    transfer_type: TransferType
-    # The metadata of the transfer
-    transfer_metadata: str
-
-
-@dataclass
-class ApiTransferAck:
-    # Gravity has acknowledged that the transfer has been successfully processed. If true, a `tx_id` will be returned. If false, an error will be returned.
-    ack: bool
-    # The transaction ID of the transfer. This is only returned if the transfer is successful.
-    tx_id: str
-
-
-@dataclass
-class ApiTransferResponse:
-    # The Transfer response object
-    result: ApiTransferAck
-
-
-@dataclass
-class ApiDepositHistoryRequest:
-    """
-    The request to get the historical deposits of an account
-    The history is returned in reverse chronological order
-
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
-    """
-
-    # The token currency to query for, if nil or empty, return all deposits. Otherwise, only entries matching the filter will be returned
-    currency: list[str]
-    # The start time to query for in unix nanoseconds
-    start_time: str | None = None
-    # The end time to query for in unix nanoseconds
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the next query from
-    cursor: str | None = None
-    # Main account ID being queried. By default, applies the requestor's main account ID.
-    main_account_id: str | None = None
-
-
-@dataclass
-class DepositHistory:
-    # The L1 txHash of the deposit
-    l_1_hash: str
-    # The L2 txHash of the deposit
-    l_2_hash: str
-    # The account to deposit into
-    to_account_id: str
-    # The token currency to deposit
-    currency: str
-    # The number of tokens to deposit
-    num_tokens: str
-    # The timestamp when the deposit was initiated on L1 in unix nanoseconds
-    initiated_time: str
-    # The timestamp when the deposit was confirmed on L2 in unix nanoseconds
-    confirmed_time: str
-    # The address of the sender
-    from_address: str
-
-
-@dataclass
-class ApiDepositHistoryResponse:
-    # The deposit history matching the request account
-    result: list[DepositHistory]
-    # The cursor to indicate when to start the next query from
-    next: str | None = None
-
-
-@dataclass
-class ApiTransferHistoryRequest:
-    """
-    The request to get the historical transfers of an account
-    The history is returned in reverse chronological order
-
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
-    """
-
-    # The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned
-    currency: list[str]
-    # The start time to query for in unix nanoseconds
-    start_time: str | None = None
-    # The end time to query for in unix nanoseconds
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the next query from
-    cursor: str | None = None
-    # The transaction ID to query for
-    tx_id: str | None = None
-    # Main account ID being queried. By default, applies the requestor's main account ID.
-    main_account_id: str | None = None
-    # The transfer type to filters for. If the list is empty, return all transfer types.
-    transfer_types: list[TransferType] | None = None
-
-
-@dataclass
-class ApiTransferHistoryResponse:
-    # The transfer history matching the request account
-    result: list[TransferHistory]
-    # The cursor to indicate when to start the next query from
-    next: str | None = None
-
-
-@dataclass
-class ApiWithdrawalHistoryRequest:
-    """
-    The request to get the historical withdrawals of an account
-    The history is returned in reverse chronological order
-
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
-    """
-
-    # The token currency to query for, if nil or empty, return all withdrawals. Otherwise, only entries matching the filter will be returned
-    currency: list[str]
-    # The start time to query for in unix nanoseconds
-    start_time: str | None = None
-    # The end time to query for in unix nanoseconds
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the next query from
-    cursor: str | None = None
-    # Main account ID being queried. By default, applies the requestor's main account ID.
-    main_account_id: str | None = None
-
-
-@dataclass
 class WithdrawalHistory:
     # The transaction ID of the withdrawal
     tx_id: str
@@ -2589,227 +3022,3 @@ class WithdrawalHistory:
     l_2_hash: str
     # The finalized withdrawal transaction hash on L1
     l_1_hash: str | None = None
-
-
-@dataclass
-class ApiWithdrawalHistoryResponse:
-    # The withdrawals history matching the request account
-    result: list[WithdrawalHistory]
-    # The cursor to indicate when to start the next query from
-    next: str | None = None
-
-
-@dataclass
-class ApiVaultInvestRequest:
-    """
-    Request payload for investing in a vault.
-
-    This API allows a client to invest a specified amount of tokens in a particular vault.
-    """
-
-    # The unique identifier of the vault to invest in.
-    vault_id: str
-    # The currency used for the investment. This should be the vault's quote currency.
-    currency: str
-    # The investment sum, in terms of the token currency specified (i.e., `numTokens` of '1000' with `tokenCurrency` of 'USDT' denotes investment of 1,000 USDT).
-    num_tokens: str
-    """
-    The digital signature from the investing account.
-    This signature must be generated by the main account ID and is used to verify the authenticity of the request.
-    The signature must comply with AccountPermExternalTransfer permission.
-    """
-    signature: Signature
-
-
-@dataclass
-class ApiVaultRedeemRequest:
-    """
-    Request payload for redeeming from a vault.
-
-    This API allows a client to redeem a specified amount of tokens from a particular vault.
-    """
-
-    # The unique identifier of the vault to redeem from.
-    vault_id: str
-    # The currency used for the redemption. This should be the vault's quote currency.
-    currency: str
-    # The number of shares to redeem.
-    num_tokens: str
-    """
-    The digital signature from the investing account.
-    This signature must be generated by the main account ID and is used to verify the authenticity of the request.
-    The signature must comply with AccountPermExternalTransfer permission.
-    """
-    signature: Signature
-
-
-@dataclass
-class ApiVaultRedeemCancelRequest:
-    """
-    Request payload for canceling a vault redemption.
-
-    This API allows a client to cancel a previously initiated redemption from a vault.
-    """
-
-    # The unique identifier of the vault to cancel the redemption from.
-    vault_id: str
-
-
-@dataclass
-class ApiVaultViewRedemptionQueueRequest:
-    """
-    Request payload for a vault manager to view the redemption queue for their vault.
-
-    Fetches the redemption queue for a vault, ordered by descending priority.
-
-    <b>Urgent</b> redemption requests, defined as having been pending >90% of the manager-defined maximum redemption period, have top priority (following insertion order).
-
-    <b>Non-urgent</b> redemption requests are otherwise prioritized by insertion order, <b>unless</b> they are >5x the size of the smallest redemption request.
-
-    E.g., If FIFO ordering (all non-urgent) is 1k -> 50k -> 100k -> 20k -> 10k -> 25k, then priority ordering is 1k -> 10k -> 50k -> 20k -> 100k -> 25k.
-
-    Only displays redemption requests that are eligible for automated redemption, i.e., have been pending for the manager-defined minimum redemption period.
-    """
-
-    # The unique identifier of the vault to fetch the redemption queue for.
-    vault_id: str
-
-
-@dataclass
-class VaultRedemptionRequest:
-    # [Filled by GRVT Backend] Time at which the redemption request was received by GRVT in unix nanoseconds
-    request_time: str
-    # The number of shares to redeem
-    num_lp_tokens: str
-    # [Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed.
-    max_redemption_period_timestamp: str
-    # Age category of this redemption request.
-    age_category: VaultRedemptionReqAgeCategory
-    # [Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be eligible for automated redemption.
-    eligible_for_auto_redemption_timestamp: str
-    # `true` if this request belongs to the vault manager, omitted otherwise.
-    is_manager: bool | None = None
-
-
-@dataclass
-class PreMinRedemptions:
-    # Pre-minimum-age redemption requests, ordered by age (first element is the oldest request that is pre-minimum-age).
-    requests: list[VaultRedemptionRequest]
-    # Number of shares in the pre-minimum-age section of the vault's redemption queue.
-    token_count: str
-
-
-@dataclass
-class ApiVaultViewRedemptionQueueResponse:
-    """
-    Response payload for a vault manager to view the redemption queue for their vault, ordered by descending priority.
-
-    Also includes counters for total redemption sizes pending as well as urgent (refer to API integration guide for more detail on redemption request classifications).
-
-
-    """
-
-    # Outstanding vault redemption requests, ordered by descending priority. Excludes requests that have not yet aged past the minimum redemption period.
-    redemption_queue: list[VaultRedemptionRequest]
-    # Number of shares eligible for automated redemption (held in queue for at least the minimum redemption period).
-    pending_redemption_token_count: str
-    # Number of shares nearing the maximum redemption period (>= 90% of maximum redemption period).
-    urgent_redemption_token_count: str
-    # Amount available for automated redemption request servicing (in USD).
-    auto_redeemable_balance: str
-    # Current share price (in USD).
-    share_price: str
-    # Dedicated section for requests yet to wait at least the minimum redemption period.
-    pre_min: PreMinRedemptions
-
-
-@dataclass
-class ApiVaultInvestorSummaryRequest:
-    """
-    Request payload for fetching the summary of a vault investor.
-
-    This API allows a client to retrieve the summary of investments in a specific vault.
-    """
-
-    # The unique identifier of the vault to fetch the summary for.
-    vault_id: str
-
-
-@dataclass
-class VaultRedemption:
-    """
-    Vault redemption information.
-
-    This struct contains information about a pending redemption from a vault.
-    """
-
-    # The number of LP Tokens requested for redemption.
-    num_lp_tokens: str
-    # The valuation (in USD) of the redemption request.
-    request_valuation: str
-    # [Filled by GRVT Backend] Time at which the redemption request was received by GRVT in unix nanoseconds
-    request_time: str
-    # [Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed.
-    max_redemption_period_timestamp: str
-    # Omitted for redemption requests to non-cross exchange vaults. True if cancellation is blocked within the CEV allocation allowance for the user's current tier (e.g. because the user has already transferred out the spot balance underlying the redemption request).
-    cancel_blocked: bool | None = None
-
-
-@dataclass
-class VaultInvestorSummary:
-    """
-    Vault investor summary information.
-
-    This struct contains the summary of investments in a vault.
-    """
-
-    # The unique identifier of the vault sub account.
-    sub_account_id: str
-    # The number of Vault LP tokens held by the investor.
-    num_lp_tokens: str
-    # The average entry price (in USD) of the vault LP tokens.
-    avg_entry_price: str
-    # The current price (in USD) of the vault LP tokens.
-    current_price: str
-    # The current valuation (in USD) of all held vault LP tokens.
-    total_equity: str
-    # The all-time realized PnL (in USD) that the investor has received from the vault.
-    all_time_realized_pnl: str
-    # The singleton pending redemption (omitted if none).
-    pending_redemption: VaultRedemption | None = None
-    # True if the requesting account is authorized to burn tokens on this vault, omitted otherwise.
-    can_burn: bool | None = None
-
-
-@dataclass
-class ApiVaultInvestorSummaryResponse:
-    """
-    Response payload for the summary of a vault investor.
-
-    This API provides the summary of investments in a specific vault.
-    """
-
-    # The summary of investments in the vault.
-    vault_investor_summary: list[VaultInvestorSummary]
-
-
-@dataclass
-class ApiVaultBurnTokensRequest:
-    """
-    Request payload for burning tokens in a vault.
-
-    This API allows a client to burn a specified amount of tokens in a particular vault.
-    """
-
-    # The unique identifier of the vault to burn tokens from.
-    vault_id: str
-    # The currency used for the burn. This should be the vault's quote currency.
-    currency: str
-    # The number of tokens to burn.
-    num_tokens: str
-    """
-    The digital signature from the investing account.
-    This signature must be generated by the main account ID and is used to verify the authenticity of the request.
-    The signature must comply with AccountPermExternalTransfer permission.
-    """
-    signature: Signature

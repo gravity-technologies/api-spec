@@ -52,7 +52,8 @@ LITE ENDPOINT: lite/v1/instrument
                 "max_position_size": "100.0",
                 "funding_interval_hours": null,
                 "adjusted_funding_rate_cap": 2.5,
-                "adjusted_funding_rate_floor": -2.5
+                "adjusted_funding_rate_floor": -2.5,
+                "min_notional": "20.0"
             }
         }
         ```
@@ -75,7 +76,8 @@ LITE ENDPOINT: lite/v1/instrument
                 "mp": "100.0",
                 "fi": null,
                 "af": 2.5,
-                "af1": -2.5
+                "af1": -2.5,
+                "mn": "20.0"
             }
         }
         ```
@@ -359,7 +361,8 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "max_position_size": "100.0",
                 "funding_interval_hours": null,
                 "adjusted_funding_rate_cap": 2.5,
-                "adjusted_funding_rate_floor": -2.5
+                "adjusted_funding_rate_floor": -2.5,
+                "min_notional": "20.0"
             }]
         }
         ```
@@ -382,7 +385,8 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "mp": "100.0",
                 "fi": null,
                 "af": 2.5,
-                "af1": -2.5
+                "af1": -2.5,
+                "mn": "20.0"
             }]
         }
         ```
@@ -673,7 +677,8 @@ LITE ENDPOINT: lite/v1/instruments
                 "max_position_size": "100.0",
                 "funding_interval_hours": null,
                 "adjusted_funding_rate_cap": 2.5,
-                "adjusted_funding_rate_floor": -2.5
+                "adjusted_funding_rate_floor": -2.5,
+                "min_notional": "20.0"
             }]
         }
         ```
@@ -696,7 +701,8 @@ LITE ENDPOINT: lite/v1/instruments
                 "mp": "100.0",
                 "fi": null,
                 "af": 2.5,
-                "af1": -2.5
+                "af1": -2.5,
+                "mn": "20.0"
             }]
         }
         ```

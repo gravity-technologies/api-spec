@@ -17,6 +17,7 @@
     |funding_interval_hours<br>`fi` |integer|False<br>`None`|Defines the funding interval to be applied.|
     |adjusted_funding_rate_cap<br>`af` |string|False<br>`None`|Funding rate cap over the defined `intervalHours`.|
     |adjusted_funding_rate_floor<br>`af1` |string|False<br>`None`|Funding rate floor over the defined `intervalHours`.|
+    |min_notional<br>`mn` |string|True|The minimum order notional value, expressed in quote currency decimal units|
     ??? info "[Kind](/../../schemas/kind)"
         The list of asset kinds that are supported on the GRVT exchange<br>
 
