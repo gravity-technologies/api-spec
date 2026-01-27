@@ -12193,13 +12193,13 @@ LITE ENDPOINT: lite/v1/get_sub_accounts
         **Full Response**
         ``` { .json .copy }
         {
-            "sub_account_ids": [null]
+            "sub_account_ids": ["4724219064482495","2095919380","1170592370"]
         }
         ```
         **Lite Response**
         ``` { .json .copy }
         {
-            "sa": [null]
+            "sa": ["4724219064482495","2095919380","1170592370"]
         }
         ```
     </section>
