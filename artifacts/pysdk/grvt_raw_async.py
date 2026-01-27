@@ -168,6 +168,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
+    async def bulk_orders_v2(
+        self, req: types.ApiBulkOrdersRequest
+    ) -> types.ApiBulkOrdersResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v2/bulk_orders", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiBulkOrdersResponse, resp, Config(cast=[Enum]))
+
     async def fill_history_v1(
         self, req: types.ApiFillHistoryRequest
     ) -> types.ApiFillHistoryResponse | GrvtError:
@@ -175,14 +183,6 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiFillHistoryResponse, resp, Config(cast=[Enum]))
-
-    async def positions_v1(
-        self, req: types.ApiPositionsRequest
-    ) -> types.ApiPositionsResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/positions", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiPositionsResponse, resp, Config(cast=[Enum]))
 
     async def funding_payment_history_v1(
         self, req: types.ApiFundingPaymentHistoryRequest
@@ -194,6 +194,46 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(
             types.ApiFundingPaymentHistoryResponse, resp, Config(cast=[Enum])
+        )
+
+    async def positions_v1(
+        self, req: types.ApiPositionsRequest
+    ) -> types.ApiPositionsResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/positions", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiPositionsResponse, resp, Config(cast=[Enum]))
+
+    async def set_position_config_v1(
+        self, req: types.ApiSetSubAccountPositionMarginConfigRequest
+    ) -> types.ApiSetSubAccountPositionMarginConfigResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/set_position_config", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiSetSubAccountPositionMarginConfigResponse, resp, Config(cast=[Enum])
+        )
+
+    async def add_position_margin_v1(
+        self, req: types.ApiAddIsolatedPositionMarginRequest
+    ) -> types.ApiAddIsolatedPositionMarginResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/add_position_margin", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiAddIsolatedPositionMarginResponse, resp, Config(cast=[Enum])
+        )
+
+    async def get_position_margin_limits_v1(
+        self, req: types.ApiGetIsolatedPositionMarginLimitsRequest
+    ) -> types.ApiGetIsolatedPositionMarginLimitsResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/get_position_margin_limits", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiGetIsolatedPositionMarginLimitsResponse, resp, Config(cast=[Enum])
         )
 
     async def deposit_history_v1(
@@ -286,6 +326,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             types.ApiSetDeriskToMaintenanceMarginRatioResponse, resp, Config(cast=[Enum])
         )
 
+    async def get_sub_accounts_v1(
+        self, req: types.EmptyRequest
+    ) -> types.ApiGetSubAccountsResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/get_sub_accounts", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiGetSubAccountsResponse, resp, Config(cast=[Enum]))
+
     async def get_all_initial_leverage_v1(
         self, req: types.ApiGetAllInitialLeverageRequest
     ) -> types.ApiGetAllInitialLeverageResponse | GrvtError:
@@ -371,3 +419,31 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         return from_dict(
             types.ApiQueryVaultManagerInvestorHistoryResponse, resp, Config(cast=[Enum])
         )
+
+    async def authorize_builder_v1(
+        self, req: types.ApiAuthorizeBuilderRequest
+    ) -> types.AckResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/authorize_builder", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
+
+    async def get_authorized_builders_v1(
+        self, req: types.EmptyRequest
+    ) -> types.ApiGetAuthorizedBuildersResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/get_authorized_builders", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiGetAuthorizedBuildersResponse, resp, Config(cast=[Enum])
+        )
+
+    async def builder_fill_history_v1(
+        self, req: types.ApiBuilderFillHistoryRequest
+    ) -> types.ApiBuilderFillHistoryResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/builder_fill_history", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiBuilderFillHistoryResponse, resp, Config(cast=[Enum]))
