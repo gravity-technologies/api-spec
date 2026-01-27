@@ -166,14 +166,6 @@ class GrvtRawSync(GrvtRawSyncBase):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
-    def bulk_orders_v2(
-        self, req: types.ApiBulkOrdersRequest
-    ) -> types.ApiBulkOrdersResponse | GrvtError:
-        resp = self._post(True, self.td_rpc + "/full/v2/bulk_orders", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiBulkOrdersResponse, resp, Config(cast=[Enum]))
-
     def fill_history_v1(
         self, req: types.ApiFillHistoryRequest
     ) -> types.ApiFillHistoryResponse | GrvtError:

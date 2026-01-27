@@ -457,68 +457,6 @@ class ApiBuilderFillHistoryResponse:
 
 
 @dataclass
-class ApiBulkOrdersRequest:
-    """
-    Usage Parameters
-
-    * Rate Limits
-      - If N orders are created, it will consume N create_order rate limit tokens
-      - If M orders are cancelled, it will consume 1 cancel_order rate limit tokens
-
-    • Usage Pattern
-      - This can be used as BulkCreate if no cancellations are supplied
-      - This can be used as BulkCancel if no creations are supplied
-      - This can be used as BulkReplace if both creations and cancellations are supplied
-
-    * Order Replacement
-      - For a pair of create and cancel payloads at the same index:
-        * If they belong to the same inst/side/price
-        * And the created order has an order_size smaller than the book_size of the cancelled order
-        * The created order will replace the cancelled order, and retain its priority in the orderbook
-      - For instance, to replace 2 orders, place 1 order, and cancel 2 orders:
-        * orders = <replace_1, replace_2, create_1>
-        * order_ids = <replace_1, replace_2, cancel_1, cancel_2>
-
-    * Speed Bump
-      - The highest speed_bump level applies across all sub-payloads and will be applied on the BulkOrder
-      - To ensure that creations/cancellations are not speed bumped, ensure that all orders have post_only = true
-
-    * Restrictions
-      - This is only available to API users
-      - All create orders must use the same instrument
-      - TPSL (Take Profit / Stop Loss) orders are not supported
-    """
-
-    # The subaccount ID of the user creating the request
-    sub_account_id: str
-    # Orders to create or replace, supply up to 20 orders
-    orders: list[Order]
-    # The order IDs of the orders to cancel or replace, supply up to 20 orderIDs (if both orderIDs and clientOrderIDs are provided, we will reject the payload)
-    order_i_ds: list[str]
-    # The client order IDs of the orders to cancel or replace, supply up to 20 clientOrderIDs (if both orderIDs and clientOrderIDs are provided, we will reject the payload)
-    client_order_i_ds: list[str]
-    """
-    Specifies the time-to-live (in milliseconds) for this cancellation.
-    During this period, any order creation with a matching `client_order_id` will be cancelled and not be added to the GRVT matching engine.
-    This mechanism helps mitigate time-of-flight issues where cancellations might arrive before the corresponding orders.
-    Hence, cancellation by `order_id` ignores this field as the exchange can only assign `order_id`s to already-processed order creations.
-    The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `'670'` -> `'600'`, `'30'` -> `'0'`) and capped at 5 seconds (i.e., `'5000'`).
-    Value of `'0'` or omission results in the default time-to-live value being applied.
-    If the caller requests multiple successive cancellations for a given order, such that the time-to-live windows overlap, only the first request will be considered.
-
-    """
-    time_to_live_ms: str | None = None
-
-
-@dataclass
-class ApiBulkOrdersResponse:
-    # The orders in same order as requested
-    orders: list[Order]
-    # A list of acks for the cancelled orders
-    cancel_acks: list[Ack]
-
-
-@dataclass
 class ApiCancelAllOrdersRequest:
     # The subaccount ID cancelling all orders
     sub_account_id: str
