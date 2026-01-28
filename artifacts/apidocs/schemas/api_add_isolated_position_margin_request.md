@@ -1,15 +1,12 @@
-!!! info "[WithdrawalHistory](/../../schemas/withdrawal_history)"
+!!! info "[ApiAddIsolatedPositionMarginRequest](/../../schemas/api_add_isolated_position_margin_request)"
+    The request to add margin to a isolated position<br>
+
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |tx_id<br>`ti` |string|True|The transaction ID of the withdrawal|
-    |from_account_id<br>`fa` |string|True|The subaccount to withdraw from|
-    |to_eth_address<br>`te` |string|True|The ethereum address to withdraw to|
-    |currency<br>`c` |string|True|The token currency to withdraw|
-    |num_tokens<br>`nt` |string|True|The number of tokens to withdraw|
-    |signature<br>`s` |Signature|True|The signature of the withdrawal|
-    |event_time<br>`et` |string|True|The timestamp of the withdrawal in unix nanoseconds|
-    |l_1_hash<br>`l1` |string|False<br>`''`|The finalized withdrawal transaction hash on L1, empty if the withdrawal is 'pending'.|
-    |l_2_hash<br>`l2` |string|True|The transaction hash on L2|
+    |sub_account_id<br>`sa` |string|True|The sub account ID to add isolated margin in or remove margin from|
+    |instrument<br>`i` |string|True|The instrument to add margin into, or remove margin from|
+    |amount<br>`a` |string|True|The amount of margin to add to the position, positive to add, negative to remove, expressed in quote asset decimal units|
+    |signature<br>`s` |Signature|True|The signature of this operation|
     ??? info "[Signature](/../../schemas/signature)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|

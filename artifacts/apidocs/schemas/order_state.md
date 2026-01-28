@@ -57,3 +57,7 @@
         |`INVALID_ORDER_TYPE` = 36|the order type is invalid|
         |`CURRENCY_NOT_DEFINED` = 37|the currency is not defined|
         |`INVALID_CHAIN_ID` = 38|the chain ID is invalid|
+        |`BUILDER_ORDER_FEE_EXCEED` = 39|Builder fee exceed the limit|
+        |`BUILDER_ORDER_FEE_NEGATIVE` = 40|Builder fee is below 0|
+        |`BUILDER_ORDER_BUILDER_NOT_AUTHORIZED` = 41|Builder is not an authorized builder for client|
+        |`BUILDER_ORDER_BUILDER_NOT_EXIST` = 42|Builder does not exist|
