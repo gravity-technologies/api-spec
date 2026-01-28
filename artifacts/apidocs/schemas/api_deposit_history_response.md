@@ -12,5 +12,5 @@
         |currency<br>`c` |string|True|The token currency to deposit|
         |num_tokens<br>`nt` |string|True|The number of tokens to deposit|
         |initiated_time<br>`it` |string|True|The timestamp when the deposit was initiated on L1 in unix nanoseconds|
-        |confirmed_time<br>`ct` |string|True|The timestamp when the deposit was confirmed on L2 in unix nanoseconds|
+        |confirmed_time<br>`ct` |string|True|The timestamp when the deposit was confirmed on L2 in unix nanoseconds, empty if the deposit is pending.|
         |from_address<br>`fa` |string|True|The address of the sender|
