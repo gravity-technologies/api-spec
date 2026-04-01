@@ -4011,7 +4011,7 @@ STREAM: v1.candle
             "method": "subscribe",
             "params": {
                 "stream": "v1.candle",
-                "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                "selectors": ["BTC_USDT_Perp@CI_1M-TRADE"]
             },
             "id": 123
         }
@@ -4022,7 +4022,7 @@ STREAM: v1.candle
             "jsonrpc": "2.0",
             "result": {
                 "stream": "v1.candle",
-                "subs": ["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "subs": ["BTC_USDT_Perp@CI_1M-TRADE"],
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
@@ -4039,7 +4039,7 @@ STREAM: v1.candle
             "method": "unsubscribe",
             "params": {
                 "stream": "v1.candle",
-                "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                "selectors": ["BTC_USDT_Perp@CI_1M-TRADE"]
             },
             "id": 123
         }
@@ -4050,7 +4050,7 @@ STREAM: v1.candle
             "jsonrpc": "2.0",
             "result": {
                 "stream": "v1.candle",
-                "unsubs": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                "unsubs": ["BTC_USDT_Perp@CI_1M-TRADE"]
             },
             "id": 123,
             "method": "subscribe"
@@ -4062,7 +4062,7 @@ STREAM: v1.candle
         {
             "request_id":1,
             "stream":"v1.candle",
-            "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "feed":["BTC_USDT_Perp@CI_1M-TRADE"],
             "method":"subscribe",
             "is_full":true
         }
@@ -4072,7 +4072,7 @@ STREAM: v1.candle
         {
             "request_id":1,
             "stream":"v1.candle",
-            "subs":["BTC_USDT_Perp@CI_1_M-TRADE"],
+            "subs":["BTC_USDT_Perp@CI_1M-TRADE"],
             "unsubs":[],
             "num_snapshots":[1],
             "first_sequence_number":[2813]
@@ -4138,6 +4138,7 @@ STREAM: v1.candle
         |3000|400|Instrument is invalid|
         |3040|400|Candlestick interval is invalid|
         |3041|400|Candlestick type is invalid|
+        |3042|400|Candlestick type is not applicable for spot instruments|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -4187,7 +4188,7 @@ STREAM: v1.candle
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.candle",
-                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "selectors": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "id": 123
             }
@@ -4202,7 +4203,7 @@ STREAM: v1.candle
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.candle",
-                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "selectors": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "id": 123
             }
@@ -4215,7 +4216,7 @@ STREAM: v1.candle
             {
                 "request_id":1,
                 "stream":"v1.candle",
-                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "feed":["BTC_USDT_Perp@CI_1M-TRADE"],
                 "method":"subscribe",
                 "is_full":true
             }
@@ -4232,7 +4233,7 @@ STREAM: v1.candle
                 "m": "subscribe",
                 "p": {
                     "s": "v1.candle",
-                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "s1": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "i": 123
             }
@@ -4247,7 +4248,7 @@ STREAM: v1.candle
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.candle",
-                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "s1": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "i": 123
             }
@@ -4260,7 +4261,7 @@ STREAM: v1.candle
             {
                 "request_id":1,
                 "stream":"v1.candle",
-                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "feed":["BTC_USDT_Perp@CI_1M-TRADE"],
                 "method":"subscribe",
                 "is_full":false
             }
@@ -4278,7 +4279,7 @@ STREAM: v1.candle
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.candle",
-                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "selectors": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "id": 123
             }
@@ -4293,7 +4294,7 @@ STREAM: v1.candle
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.candle",
-                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "selectors": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "id": 123
             }
@@ -4306,7 +4307,7 @@ STREAM: v1.candle
             {
                 "request_id":1,
                 "stream":"v1.candle",
-                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "feed":["BTC_USDT_Perp@CI_1M-TRADE"],
                 "method":"subscribe",
                 "is_full":true
             }
@@ -4323,7 +4324,7 @@ STREAM: v1.candle
                 "m": "subscribe",
                 "p": {
                     "s": "v1.candle",
-                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "s1": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "i": 123
             }
@@ -4338,7 +4339,7 @@ STREAM: v1.candle
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.candle",
-                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "s1": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "i": 123
             }
@@ -4351,7 +4352,7 @@ STREAM: v1.candle
             {
                 "request_id":1,
                 "stream":"v1.candle",
-                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "feed":["BTC_USDT_Perp@CI_1M-TRADE"],
                 "method":"subscribe",
                 "is_full":false
             }
@@ -4369,7 +4370,7 @@ STREAM: v1.candle
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.candle",
-                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "selectors": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "id": 123
             }
@@ -4384,7 +4385,7 @@ STREAM: v1.candle
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.candle",
-                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "selectors": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "id": 123
             }
@@ -4397,7 +4398,7 @@ STREAM: v1.candle
             {
                 "request_id":1,
                 "stream":"v1.candle",
-                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "feed":["BTC_USDT_Perp@CI_1M-TRADE"],
                 "method":"subscribe",
                 "is_full":true
             }
@@ -4414,7 +4415,7 @@ STREAM: v1.candle
                 "m": "subscribe",
                 "p": {
                     "s": "v1.candle",
-                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "s1": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "i": 123
             }
@@ -4429,7 +4430,7 @@ STREAM: v1.candle
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.candle",
-                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "s1": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "i": 123
             }
@@ -4442,7 +4443,7 @@ STREAM: v1.candle
             {
                 "request_id":1,
                 "stream":"v1.candle",
-                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "feed":["BTC_USDT_Perp@CI_1M-TRADE"],
                 "method":"subscribe",
                 "is_full":false
             }
@@ -4460,7 +4461,7 @@ STREAM: v1.candle
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.candle",
-                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "selectors": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "id": 123
             }
@@ -4475,7 +4476,7 @@ STREAM: v1.candle
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.candle",
-                    "selectors": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "selectors": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "id": 123
             }
@@ -4488,7 +4489,7 @@ STREAM: v1.candle
             {
                 "request_id":1,
                 "stream":"v1.candle",
-                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "feed":["BTC_USDT_Perp@CI_1M-TRADE"],
                 "method":"subscribe",
                 "is_full":true
             }
@@ -4505,7 +4506,7 @@ STREAM: v1.candle
                 "m": "subscribe",
                 "p": {
                     "s": "v1.candle",
-                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "s1": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "i": 123
             }
@@ -4520,7 +4521,7 @@ STREAM: v1.candle
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.candle",
-                    "s1": ["BTC_USDT_Perp@CI_1_M-TRADE"]
+                    "s1": ["BTC_USDT_Perp@CI_1M-TRADE"]
                 },
                 "i": 123
             }
@@ -4533,7 +4534,7 @@ STREAM: v1.candle
             {
                 "request_id":1,
                 "stream":"v1.candle",
-                "feed":["BTC_USDT_Perp@CI_1_M-TRADE"],
+                "feed":["BTC_USDT_Perp@CI_1M-TRADE"],
                 "method":"subscribe",
                 "is_full":false
             }
