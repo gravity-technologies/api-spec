@@ -27,7 +27,6 @@
         |`FUTURE` = 2|the future asset kind|
         |`CALL` = 3|the call option asset kind|
         |`PUT` = 4|the put option asset kind|
-        |`SPOT_SWAP` = 8|the spot swap asset kind|
     ??? info "[Venue](/../../schemas/venue)"
         The list of Trading Venues that are supported on the GRVT exchange<br>
 

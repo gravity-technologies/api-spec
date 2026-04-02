@@ -110,8 +110,6 @@ class Kind(Enum):
     CALL = "CALL"
     # the put option asset kind
     PUT = "PUT"
-    # the spot swap asset kind
-    SPOT_SWAP = "SPOT_SWAP"
 
 
 class MarginType(Enum):
@@ -212,18 +210,8 @@ class OrderRejectReason(Enum):
     TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE = "TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE"
     # the order was cancelled due to matching with too many maker orders
     TOO_MANY_MAKER_ORDERS = "TOO_MANY_MAKER_ORDERS"
-    # reduce-only order is not supported for spot order
-    REDUCE_ONLY_NOT_SUPPORTED_FOR_SPOT_ORDER = "REDUCE_ONLY_NOT_SUPPORTED_FOR_SPOT_ORDER"
-    # tpsl is not supported for spot order
-    TPSL_NOT_SUPPORTED_FOR_SPOT_ORDER = "TPSL_NOT_SUPPORTED_FOR_SPOT_ORDER"
-    # spot order is not supported
-    SPOT_ORDER_NOT_SUPPORTED = "SPOT_ORDER_NOT_SUPPORTED"
     # the subaccount has insufficient balance
     INSUFFICIENT_BALANCE = "INSUFFICIENT_BALANCE"
-    # spot trading is blocked during socialized loss (SLOW)
-    SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS = (
-        "SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS"
-    )
     # the order will bring the sub account below initial margin requirement considering wide price deviation
     BELOW_MARGIN_WITH_PENALTY_DEVIATION = "BELOW_MARGIN_WITH_PENALTY_DEVIATION"
 
@@ -257,11 +245,6 @@ class PositionMarginType(Enum):
     ISOLATED = "ISOLATED"
     # Cross Margin Mode: uses all available funds in your account as collateral across all cross margin positions
     CROSS = "CROSS"
-
-
-class SubAccountMode(Enum):
-    # Single asset mode: the subaccount is only allowed to hold one asset as collateral
-    SINGLE_ASSET_MODE = "SINGLE_ASSET_MODE"
 
 
 class TimeInForce(Enum):
@@ -373,15 +356,6 @@ class Venue(Enum):
     ORDERBOOK = "ORDERBOOK"
     # the trade is cleared on the RFQ venue
     RFQ = "RFQ"
-
-
-class WalletType(Enum):
-    # Funding wallet
-    FUNDING = "FUNDING"
-    # Spot wallet
-    SPOT = "SPOT"
-    # Futures wallet
-    FUTURES = "FUTURES"
 
 
 @dataclass
@@ -554,7 +528,7 @@ class ApiCandlestickRequest:
     instrument: str
     # The interval of each candlestick
     interval: CandlestickInterval
-    # The type of candlestick data to retrieve. Note: For spot instruments, only `trade` and `mid` are available
+    # The type of candlestick data to retrieve
     type: CandlestickType
     # Start time of kline data in unix nanoseconds
     start_time: str | None = None
@@ -875,10 +849,6 @@ class ApiGetSubAccountsResponse:
 class ApiGetSupportedAssetsResponse:
     # Assets supported in funding wallets
     funding: list[SupportedAsset]
-    # Assets supported in spot wallets
-    spot: list[SupportedAsset]
-    # Assets supported in futures wallets, grouped by mode
-    futures: list[FuturesWalletAssets]
 
 
 @dataclass
@@ -1167,18 +1137,6 @@ class ApiSetSubAccountPositionMarginConfigResponse:
 
 
 @dataclass
-class ApiSpotSubAccountSummaryRequest:
-    # The subaccount ID to filter by
-    sub_account_id: str
-
-
-@dataclass
-class ApiSpotSubAccountSummaryResponse:
-    # The spot sub account summary
-    result: SpotSubAccount
-
-
-@dataclass
 class ApiSubAccountHistoryRequest:
     """
     The request to get the history of a sub account
@@ -1358,10 +1316,6 @@ class ApiTransferRequest:
     transfer_type: TransferType
     # The metadata of the transfer
     transfer_metadata: str
-    # The wallet type of the from account or subaccount
-    from_wallet_type: WalletType
-    # The wallet type of the to account or subaccount
-    to_wallet_type: WalletType
 
 
 @dataclass
@@ -1664,8 +1618,6 @@ class ClientTier:
     futures_maker_fee: int
     options_taker_fee: int
     options_maker_fee: int
-    spot_taker_fee: int
-    spot_maker_fee: int
 
 
 @dataclass
@@ -1805,10 +1757,6 @@ class FundingAccountSummary:
     spot_balances: list[SpotBalance]
     # The list of vault investments held by this main account
     vault_investments: list[VaultInvestment]
-    # Total balance of cash (stablecoin) currencies, denominated in USD
-    total_cash_balance: str
-    # Total balance of non-cash spot currencies, denominated in USD
-    total_spot_asset_balance: str
 
 
 @dataclass
@@ -1829,14 +1777,6 @@ class FundingPayment:
     The `tx_id` will match the corresponding `trade_id` or `tx_id`.
     """
     tx_id: str
-
-
-@dataclass
-class FuturesWalletAssets:
-    # The sub account mode
-    mode: SubAccountMode
-    # Assets supported under this futures mode
-    supported_assets: list[SupportedAsset]
 
 
 @dataclass
@@ -2239,26 +2179,6 @@ class SpotBalance:
     balance: str
     # The index price of this currency. (reported in `USD`)
     index_price: str
-    # The entry price of this spot currency. (reported in `USD`)
-    entry_price: str
-    # The realized PnL of this spot currency. (reported in `USD`)
-    realized_pnl: str
-    # The unrealized PnL of this spot currency. (reported in `USD`)
-    unrealized_pnl: str
-    # The available to transfer amount of this spot currency.
-    available_to_transfer: str
-
-
-@dataclass
-class SpotSubAccount:
-    # Time at which the event was emitted in unix nanoseconds
-    event_time: str
-    # The sub account ID this entry refers to
-    sub_account_id: str
-    # Total equity of the spot sub account, denominated USD
-    total_equity: str
-    # The list of spot assets owned by this spot sub account, and their balances
-    spot_balances: list[SpotBalance]
 
 
 @dataclass
@@ -2324,8 +2244,6 @@ class SubAccount:
     total_cross_equity: str
     # The unrealized PnL of this sub account for cross margin
     cross_unrealized_pnl: str
-    # The mode of the sub account
-    sub_account_mode: SubAccountMode
     # Whether this sub account is a vault
     is_vault: bool | None = None
     # Total amount of IM (reported in `settle_currency`) deducted from the vault due to redemptions nearing the end of their redemption period

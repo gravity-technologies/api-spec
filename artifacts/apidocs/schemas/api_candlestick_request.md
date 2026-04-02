@@ -5,7 +5,7 @@
     |-|-|-|-|
     |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
     |interval<br>`i1` |CandlestickInterval|True|The interval of each candlestick|
-    |type<br>`t` |CandlestickType|True|The type of candlestick data to retrieve. Note: For spot instruments, only `trade` and `mid` are available|
+    |type<br>`t` |CandlestickType|True|The type of candlestick data to retrieve|
     |start_time<br>`st` |string|False<br>`0`|Start time of kline data in unix nanoseconds|
     |end_time<br>`et` |string|False<br>`now()`|End time of kline data in unix nanoseconds|
     |limit<br>`l` |integer|False<br>`500`|The limit to query for. Defaults to 500; Max 1000|

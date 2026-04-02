@@ -4138,7 +4138,6 @@ STREAM: v1.candle
         |3000|400|Instrument is invalid|
         |3040|400|Candlestick interval is invalid|
         |3041|400|Candlestick type is invalid|
-        |3042|400|Candlestick type is not applicable for spot instruments|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">

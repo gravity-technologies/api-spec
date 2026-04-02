@@ -292,16 +292,6 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiSubAccountSummaryResponse, resp, Config(cast=[Enum]))
 
-    async def spot_account_summary_v1(
-        self, req: types.ApiSpotSubAccountSummaryRequest
-    ) -> types.ApiSpotSubAccountSummaryResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/spot_account_summary", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(
-            types.ApiSpotSubAccountSummaryResponse, resp, Config(cast=[Enum])
-        )
-
     async def sub_account_history_v1(
         self, req: types.ApiSubAccountHistoryRequest
     ) -> types.ApiSubAccountHistoryResponse | GrvtError:

@@ -14,18 +14,12 @@
         |total_equity<br>`te` |string|True|Total equity of the main account, denominated in USD|
         |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this main account, and their balances|
         |vault_investments<br>`vi` |[VaultInvestment]|True|The list of vault investments held by this main account|
-        |total_cash_balance<br>`tc` |string|True|Total balance of cash (stablecoin) currencies, denominated in USD|
-        |total_spot_asset_balance<br>`ts` |string|True|Total balance of non-cash spot currencies, denominated in USD|
         ??? info "[SpotBalance](/../../schemas/spot_balance)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |currency<br>`c` |string|True|The currency you hold a spot balance in|
             |balance<br>`b` |string|True|This currency's balance in this trading account.|
             |index_price<br>`ip` |string|True|The index price of this currency. (reported in `USD`)|
-            |entry_price<br>`ep` |string|True|The entry price of this spot currency. (reported in `USD`)|
-            |realized_pnl<br>`rp` |string|True|The realized PnL of this spot currency. (reported in `USD`)|
-            |unrealized_pnl<br>`up` |string|True|The unrealized PnL of this spot currency. (reported in `USD`)|
-            |available_to_transfer<br>`at` |string|True|The available to transfer amount of this spot currency.|
         ??? info "[VaultInvestment](/../../schemas/vault_investment)"
             Summarizes a vault investment held by a funding account<br>
 
@@ -43,5 +37,3 @@
         |futures_maker_fee<br>`fm` |integer|True||
         |options_taker_fee<br>`ot` |integer|True||
         |options_maker_fee<br>`om` |integer|True||
-        |spot_taker_fee<br>`st` |integer|True||
-        |spot_maker_fee<br>`sm` |integer|True||
