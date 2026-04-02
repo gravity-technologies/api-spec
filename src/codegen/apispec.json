@@ -137,6 +137,32 @@
         },
         {
           "namespace": "Instrument",
+          "name": "RPCGetSupportedAssetsV1",
+          "version": 1,
+          "route": "/supported_assets",
+          "auth_required": false,
+          "request": "EmptyRequest",
+          "response": "ApiGetSupportedAssetsResponse",
+          "on_request_errors": [
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            }
+          ]
+        },
+        {
+          "namespace": "Instrument",
           "name": "RPCGetMarginRulesV1",
           "version": 1,
           "route": "/margin_rules",
@@ -400,7 +426,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -445,7 +471,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -490,7 +516,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -535,7 +561,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -580,7 +606,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -630,7 +656,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -670,7 +696,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -715,7 +741,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -998,6 +1024,11 @@
               "status": 400
             },
             {
+              "code": 2084,
+              "message": "Post-order check failed",
+              "status": 400
+            },
+            {
               "code": 2083,
               "message": "Order Fill would result in exceeding maximum position size under current configurable leverage tier",
               "status": 400
@@ -1048,6 +1079,11 @@
               "status": 400
             },
             {
+              "code": 2242,
+              "message": "Split TPSL functionality not supported; you may be using a deprecated API, or this functionality is temporarily disabled",
+              "status": 400
+            },
+            {
               "code": 3004,
               "message": "Instrument does not have a valid maintenance margin configuration",
               "status": 500
@@ -1075,6 +1111,11 @@
             {
               "code": 2402,
               "message": "Reduce only order size exceeds maximum allowed value",
+              "status": 400
+            },
+            {
+              "code": 7304,
+              "message": "Only position-reducing orders (`reduce_only` as true) allowed for this asset right now.",
               "status": 400
             }
           ]
@@ -1480,6 +1521,47 @@
         },
         {
           "namespace": "Position",
+          "name": "RPCPositionHistoryV1",
+          "version": 1,
+          "route": "/position_history",
+          "auth_required": true,
+          "request": "ApiPositionHistoryRequest",
+          "response": "ApiPositionHistoryResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "Position",
           "name": "RPCSetPositionConfigV1",
           "version": 1,
           "route": "/set_position_config",
@@ -1805,6 +1887,36 @@
               "code": 7103,
               "message": "Charged trading fee below the config minimum",
               "status": 500
+            },
+            {
+              "code": 7104,
+              "message": "Transfer sub-account doesn't belong to the transfer main account",
+              "status": 400
+            },
+            {
+              "code": 4004,
+              "message": "Both transfer wallet types must be provided",
+              "status": 400
+            },
+            {
+              "code": 4005,
+              "message": "Invalid wallet type for funding account",
+              "status": 400
+            },
+            {
+              "code": 4006,
+              "message": "Invalid wallet type for sub account",
+              "status": 400
+            },
+            {
+              "code": 4008,
+              "message": "Currency is not allowed in the target wallet type",
+              "status": 400
+            },
+            {
+              "code": 4007,
+              "message": "Transfer failed because signature is an exact duplicate of another recently-observed transfer.",
+              "status": 400
             }
           ]
         },
@@ -2815,7 +2927,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -2870,7 +2982,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -2925,7 +3037,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -2980,7 +3092,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -3035,7 +3147,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -3080,7 +3192,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -3115,7 +3227,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -3155,7 +3267,7 @@
             },
             {
               "code": 1101,
-              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "message": "Feed Format must be in the format of <primary>@<secondary>",
               "status": 400
             },
             {
@@ -3551,7 +3663,7 @@
         "The request to get the historical builder trade of a builder",
         "The history is returned in reverse chronological order",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>"
       ]
     },
     {
@@ -3695,8 +3807,8 @@
         "Auto-Cancel All Open Orders when the countdown time hits zero.",
         "",
         "Market Maker inputs a countdown time parameter in milliseconds (e.g. 120000 for 120s) rounded down to the smallest second follows the following logic:",
-        "  - Market Maker initially entered a value between 0 -\u003e 1000, which is rounded to 0: will result in termination of their COD",
-        "  - Market Maker initially entered a value between 1001 -\u003e 300_000, which is rounded to the nearest second: will result in refresh of their COD",
+        "  - Market Maker initially entered a value between 0 -> 1000, which is rounded to 0: will result in termination of their COD",
+        "  - Market Maker initially entered a value between 1001 -> 300_000, which is rounded to the nearest second: will result in refresh of their COD",
         "  - Market Maker initially entered a value bigger than 300_000, which will result in error (upper bound)",
         "Market Maker will send a heartbeat message by calling the endpoint at specific intervals (ex. every 30 seconds) to the server to refresh the count down.",
         "",
@@ -3763,7 +3875,7 @@
             "During this period, any order creation with a matching `client_order_id` will be cancelled and not be added to the GRVT matching engine.",
             "This mechanism helps mitigate time-of-flight issues where cancellations might arrive before the corresponding orders.",
             "Hence, cancellation by `order_id` ignores this field as the exchange can only assign `order_id`s to already-processed order creations.",
-            "The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `'670'` -\u003e `'600'`, `'30'` -\u003e `'0'`) and capped at 5 seconds (i.e., `'5000'`).",
+            "The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `'670'` -> `'600'`, `'30'` -> `'0'`) and capped at 5 seconds (i.e., `'5000'`).",
             "Value of `'0'` or omission results in the default time-to-live value being applied.",
             "If the caller requests multiple successive cancellations for a given order, such that the time-to-live windows overlap, only the first request will be considered.",
             ""
@@ -3788,7 +3900,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         },
         {
@@ -3799,6 +3911,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "example": "'CI_1M'",
           "comment": [
             "The interval of each candlestick"
           ]
@@ -3811,6 +3924,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "example": "'TRADE'",
           "comment": [
             "The type of candlestick data to retrieve"
           ]
@@ -3875,7 +3989,7 @@
       "comment": [
         "Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>"
       ]
     },
     {
@@ -4044,7 +4158,7 @@
         "The history is returned in reverse chronological order",
         "Both finalized and pending deposits are returned, and pending deposits are indicated by an empty `confirmedTime` field.",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>"
       ]
     },
     {
@@ -4199,7 +4313,7 @@
       "comment": [
         "Query for all historical fills made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>"
       ]
     },
     {
@@ -4400,7 +4514,7 @@
       "comment": [
         "Query for all historical funding payments made by a single account.",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>"
       ]
     },
     {
@@ -4449,7 +4563,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         },
         {
@@ -4534,7 +4648,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         },
         {
@@ -4611,7 +4725,7 @@
       "comment": [
         "Lookup the historical funding rate of a perpetual future.",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>"
       ]
     },
     {
@@ -4894,7 +5008,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         }
       ],
@@ -5165,6 +5279,27 @@
       ]
     },
     {
+      "name": "ApiGetSupportedAssetsResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "funding",
+          "lite_name": "f",
+          "semantic_type": "SupportedAsset",
+          "json_type": "SupportedAsset",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Assets supported in funding wallets"
+          ]
+        }
+      ],
+      "comment": [
+        "Response for the supported assets endpoint"
+      ]
+    },
+    {
       "name": "ApiMiniTickerRequest",
       "is_root": true,
       "fields": [
@@ -5178,7 +5313,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         }
       ],
@@ -5407,7 +5542,7 @@
       "comment": [
         "Retrieves the order history for the account.",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>"
       ]
     },
     {
@@ -5456,7 +5591,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         },
         {
@@ -5491,6 +5626,483 @@
           "optional": false,
           "comment": [
             "The orderbook levels objects matching the request asset"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiPositionHistory",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Trading account ID which held this position"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Asset this position was for"
+          ]
+        },
+        {
+          "name": "open_time",
+          "lite_name": "ot",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Timestamp of first trade that opened this lifecycle"
+          ]
+        },
+        {
+          "name": "status",
+          "lite_name": "s",
+          "semantic_type": "PositionCloseStatus",
+          "json_type": "PositionCloseStatus",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'CLOSED'",
+          "comment": []
+        },
+        {
+          "name": "is_long",
+          "lite_name": "il",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "True if the closed position was long"
+          ]
+        },
+        {
+          "name": "margin_type",
+          "lite_name": "mt",
+          "semantic_type": "PositionMarginType",
+          "json_type": "PositionMarginType",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'SIMPLE_CROSS_MARGIN'",
+          "comment": []
+        },
+        {
+          "name": "close_time",
+          "lite_name": "ct",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Timestamp when the position lifecycle ended. Omitted when status is `PARTIALLY_CLOSED`"
+          ]
+        },
+        {
+          "name": "entry_price",
+          "lite_name": "ep",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Average entry price at 9 decimals"
+          ]
+        },
+        {
+          "name": "exit_price",
+          "lite_name": "ep1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Average exit price at 9 decimals"
+          ]
+        },
+        {
+          "name": "position_close_mark_price",
+          "lite_name": "pc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Mark price at close. Omitted when status is `PARTIALLY_CLOSED`"
+          ]
+        },
+        {
+          "name": "realized_pnl",
+          "lite_name": "rp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Cumulative realized PnL in quote currency"
+          ]
+        },
+        {
+          "name": "cumulative_fee",
+          "lite_name": "cf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 11,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Cumulative fees in quote currency"
+          ]
+        },
+        {
+          "name": "cumulative_realized_funding_payment",
+          "lite_name": "cr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 12,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Cumulative realized funding payment in quote currency"
+          ]
+        },
+        {
+          "name": "closed_volume_base",
+          "lite_name": "cv",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 13,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Sum of abs(reducingTradeSize) across all reducing trades"
+          ]
+        },
+        {
+          "name": "closed_volume_quote",
+          "lite_name": "cv1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 14,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Sum of abs(reducingTradeSize) * tradePrice across all reducing trades"
+          ]
+        },
+        {
+          "name": "max_open_interest_base",
+          "lite_name": "mo",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 15,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Max absolute position size reached during lifecycle"
+          ]
+        },
+        {
+          "name": "max_open_interest_quote",
+          "lite_name": "mo1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 16,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Max abs(size) * entryVWAP reached during lifecycle"
+          ]
+        },
+        {
+          "name": "cumulative_initial_margin",
+          "lite_name": "ci",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 17,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Sum of markPrice * abs(tradeSize) / leverage for position-increasing trades"
+          ]
+        },
+        {
+          "name": "max_initial_margin",
+          "lite_name": "mi",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 18,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "High-water mark of cumulativeInitialMargin during lifecycle"
+          ]
+        },
+        {
+          "name": "leverage",
+          "lite_name": "l",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 19,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Leverage at time of close. When status is `PARTIALLY_CLOSED`, this is the current leverage"
+          ]
+        },
+        {
+          "name": "unrealized_pnl",
+          "lite_name": "up",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 20,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "The unrealized PnL of the position, expressed in quote asset decimal units",
+            "`unrealized_pnl = (mark_price - entry_price) * size` where `size` is signed (negative for short positions)",
+            "Only present when status is `PARTIALLY_CLOSED`"
+          ]
+        }
+      ],
+      "comment": [
+        "A position lifecycle record.",
+        "",
+        "When status is `PARTIALLY_CLOSED`, the position is still open. Fields that describe the close event (`close_time`, `position_close_mark_price`) will be omitted, and `leverage` reflects the current value"
+      ]
+    },
+    {
+      "name": "ApiPositionHistoryRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to request for"
+          ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Start of the close-time range in unix nanoseconds. If nil, defaults to no lower bound. Only positions with close_time >= start_time are returned. Does not apply to partially closed positions (they have no close time and will be excluded when this field is set)"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "now()",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "End of the close-time range in unix nanoseconds. If nil, defaults to now. Only positions with close_time <= end_time are returned. Does not apply to partially closed positions (they have no close time and will be excluded when this field is set)"
+          ]
+        },
+        {
+          "name": "kind",
+          "lite_name": "k",
+          "semantic_type": "Kind",
+          "json_type": "Kind",
+          "index": 3,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['PERPETUAL']",
+          "comment": [
+            "The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only positions matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "base",
+          "lite_name": "b",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['BTC', 'ETH']",
+          "comment": [
+            "The base filter to apply. If nil, this defaults to all bases. Otherwise, only positions matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "quote",
+          "lite_name": "q",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['USDT', 'USDC']",
+          "comment": [
+            "The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only positions matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "default": "500",
+          "example": "500",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000. Applies to fully closed positions only; limit excludes any matching partially-closed positions"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "''",
+          "comment": [
+            "The cursor to indicate when to start the next page query from. Partially closed positions are only returned on the initial page (when cursor is unset)"
+          ]
+        },
+        {
+          "name": "status",
+          "lite_name": "s",
+          "semantic_type": "PositionCloseStatus",
+          "json_type": "PositionCloseStatus",
+          "index": 8,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['CLOSED', 'LIQUIDATED']",
+          "comment": [
+            "The status filter to apply. If nil, this defaults to all statuses. Otherwise, only positions matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "is_long",
+          "lite_name": "il",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 9,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "comment": [
+            "Set to true to filter for long positions. If both is_long and is_short are false (default), positions of both directions are returned"
+          ]
+        },
+        {
+          "name": "is_short",
+          "lite_name": "is",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 10,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "comment": [
+            "Set to true to filter for short positions. If both is_long and is_short are false (default), positions of both directions are returned"
+          ]
+        },
+        {
+          "name": "margin_type",
+          "lite_name": "mt",
+          "semantic_type": "PositionMarginType",
+          "json_type": "PositionMarginType",
+          "index": 11,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['CROSS', 'ISOLATED']",
+          "comment": [
+            "The margin type filter to apply. If nil, this defaults to all margin types. Otherwise, only positions matching the filter will be returned"
+          ]
+        }
+      ],
+      "comment": [
+        "Query for position lifecycle records for a single sub account.",
+        "",
+        "Returns both fully closed positions and positions that are still open but have been partially reduced (`PARTIALLY_CLOSED`).",
+        "",
+        "Results are ordered as follows: partially closed positions (most recently opened first), then fully closed positions (most recently closed first).",
+        "",
+        "Partially closed positions are included only when all of the following are true:<ul><li>`start_time` is unset (partially closed positions have no close time)</li><li>`end_time` is unset (partially closed positions have no close time)</li><li>`cursor` is unset (they are only returned on the initial page)</li><li>`status` is nil or includes `PARTIALLY_CLOSED`</li></ul>Since these positions have no close time, query-row limits, as well as time-range and cursor-based pagination, do not apply to them.",
+        "",
+        "Pagination works as follows:<ul><li>We perform a reverse chronological lookup by position-close time, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>"
+      ]
+    },
+    {
+      "name": "ApiPositionHistoryResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "ApiPositionHistory",
+          "json_type": "ApiPositionHistory",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Position lifecycle records matching the request filters. Partially closed positions appear first (most recently opened first), followed by fully closed positions (most recently closed first)"
+          ]
+        },
+        {
+          "name": "next",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the query from"
           ]
         }
       ],
@@ -5777,7 +6389,8 @@
         }
       ],
       "comment": [
-        "The request to set the initial leverage of a sub account"
+        "The request to set the initial leverage of a sub account.",
+        " DEPRECATED: This API is deprecated, use set_position_config API instead"
       ]
     },
     {
@@ -5799,7 +6412,8 @@
         }
       ],
       "comment": [
-        "The response to set the initial leverage of a sub account"
+        "The response to set the initial leverage of a sub account.",
+        " DEPRECATED: This API is deprecated, use set_position_config API instead"
       ]
     },
     {
@@ -5979,7 +6593,7 @@
         "No snapshots are taken if the sub account has no activity in the hourly window",
         "History is preserved only for the last 30 days",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>"
       ]
     },
     {
@@ -6052,7 +6666,7 @@
         }
       ],
       "comment": [
-        "Query for sub-account details, including base currency balance, all derivative positions, margin levels, and P\u0026L."
+        "Query for sub-account details, including base currency balance, all derivative positions, margin levels, and P&L."
       ]
     },
     {
@@ -6069,7 +6683,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         }
       ],
@@ -6110,7 +6724,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         },
         {
@@ -6175,7 +6789,7 @@
         "This endpoint offers public trading data, use the Trading APIs instead to query for your personalized trade tape.",
         "Only data from the last three months will be retained.",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>"
       ]
     },
     {
@@ -6225,7 +6839,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         },
         {
@@ -6418,7 +7032,7 @@
         "The request to get the historical transfers of an account",
         "The history is returned in reverse chronological order",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>"
       ]
     },
     {
@@ -6575,15 +7189,15 @@
         }
       ],
       "comment": [
-        "This API allows you to transfer funds in multiple different ways\u003cul\u003e",
-        "\u003cli\u003eBetween SubAccounts within your Main Account\u003c/li\u003e",
-        "\u003cli\u003eBetween your MainAccount and your SubAccounts\u003c/li\u003e",
-        "\u003cli\u003eTo other MainAccounts that you have previously allowlisted\u003c/li\u003e",
-        "\u003c/ul\u003e\u003cb\u003eFast Withdrawal Funding Address\u003c/b\u003e",
+        "This API allows you to transfer funds in multiple different ways<ul>",
+        "<li>Between SubAccounts within your Main Account</li>",
+        "<li>Between your MainAccount and your SubAccounts</li>",
+        "<li>To other MainAccounts that you have previously allowlisted</li>",
+        "</ul><b>Fast Withdrawal Funding Address</b>",
         "For fast withdrawals, funds must be sent to the designated funding account address. Please ensure you use the correct address based on the environment:",
-        "\u003cb\u003eProduction Environment Address:\u003c/b\u003e",
-        "\u003cem\u003e[To be updated, not ready yet]\u003c/em\u003e",
-        "This address should be specified as the \u003ccode\u003eto_account_id\u003c/code\u003e in your API requests for transferring funds using the transfer API. Ensure accurate input to avoid loss of funds or use the UI.",
+        "<b>Production Environment Address:</b>",
+        "<em>[To be updated, not ready yet]</em>",
+        "This address should be specified as the <code>to_account_id</code> in your API requests for transferring funds using the transfer API. Ensure accurate input to avoid loss of funds or use the UI.",
         ""
       ]
     },
@@ -7007,11 +7621,11 @@
         "",
         "Fetches the redemption queue for a vault, ordered by descending priority.",
         "",
-        "\u003cb\u003eUrgent\u003c/b\u003e redemption requests, defined as having been pending \u003e90% of the manager-defined maximum redemption period, have top priority (following insertion order).",
+        "<b>Urgent</b> redemption requests, defined as having been pending >90% of the manager-defined maximum redemption period, have top priority (following insertion order).",
         "",
-        "\u003cb\u003eNon-urgent\u003c/b\u003e redemption requests are otherwise prioritized by insertion order, \u003cb\u003eunless\u003c/b\u003e they are \u003e5x the size of the smallest redemption request.",
+        "<b>Non-urgent</b> redemption requests are otherwise prioritized by insertion order, <b>unless</b> they are >5x the size of the smallest redemption request.",
         "",
-        "E.g., If FIFO ordering (all non-urgent) is 1k -\u003e 50k -\u003e 100k -\u003e 20k -\u003e 10k -\u003e 25k, then priority ordering is 1k -\u003e 10k -\u003e 50k -\u003e 20k -\u003e 100k -\u003e 25k.",
+        "E.g., If FIFO ordering (all non-urgent) is 1k -> 50k -> 100k -> 20k -> 10k -> 25k, then priority ordering is 1k -> 10k -> 50k -> 20k -> 100k -> 25k.",
         "",
         "Only displays redemption requests that are eligible for automated redemption, i.e., have been pending for the manager-defined minimum redemption period."
       ]
@@ -7055,7 +7669,7 @@
           "optional": false,
           "example": "'0'",
           "comment": [
-            "Number of shares nearing the maximum redemption period (\u003e= 90% of maximum redemption period)."
+            "Number of shares nearing the maximum redemption period (>= 90% of maximum redemption period)."
           ]
         },
         {
@@ -7198,7 +7812,7 @@
         "The history is returned in reverse chronological order",
         "Both finalized and pending withdrawals are returned, and pending withdrawals are indicated by an empty `l1Hash` field.",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>"
       ]
     },
     {
@@ -7676,7 +8290,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         }
       ],
@@ -8115,7 +8729,7 @@
           "json_type": "string",
           "index": 7,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'65038.01'",
           "comment": [
             "The mark price of the instrument at point of trade, expressed in `9` decimals"
@@ -8154,7 +8768,7 @@
           "json_type": "string",
           "index": 10,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'65038.01'",
           "comment": [
             "[Options] The forward price of the option at point of trade, expressed in `9` decimals"
@@ -8350,6 +8964,19 @@
           "example": "'0.2'",
           "comment": [
             "The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee"
+          ]
+        },
+        {
+          "name": "fee_currency",
+          "lite_name": "fc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 27,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency of the fee paid on the trade"
           ]
         }
       ],
@@ -8586,7 +9213,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         },
         {
@@ -8661,7 +9288,7 @@
           "json_type": "InstrumentSettlementPeriod",
           "index": 8,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'PERPETUAL'",
           "comment": [
             "The settlement period of the instrument"
@@ -8739,7 +9366,7 @@
           "json_type": "string",
           "index": 15,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'100.0'",
           "comment": [
             "The maximum position size, expressed in base asset decimal units"
@@ -8753,6 +9380,7 @@
           "index": 17,
           "array_depth": 0,
           "optional": true,
+          "example": "8",
           "comment": [
             "Defines the funding interval to be applied."
           ]
@@ -8968,7 +9596,7 @@
           "optional": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         },
         {
@@ -9147,12 +9775,12 @@
           "array_depth": 0,
           "optional": false,
           "comment": [
-            "Four supported types of orders: GTT, IOC, AON, FOK:\u003cul\u003e",
-            "\u003cli\u003ePARTIAL EXECUTION = GTT / IOC - allows partial size execution on each leg\u003c/li\u003e",
-            "\u003cli\u003eFULL EXECUTION = AON / FOK - only allows full size execution on all legs\u003c/li\u003e",
-            "\u003cli\u003eTAKER ONLY = IOC / FOK - only allows taker orders\u003c/li\u003e",
-            "\u003cli\u003eMAKER OR TAKER = GTT / AON - allows maker or taker orders\u003c/li\u003e",
-            "\u003c/ul\u003eExchange only supports (GTT, IOC, FOK)",
+            "Four supported types of orders: GTT, IOC, AON, FOK:<ul>",
+            "<li>PARTIAL EXECUTION = GTT / IOC - allows partial size execution on each leg</li>",
+            "<li>FULL EXECUTION = AON / FOK - only allows full size execution on all legs</li>",
+            "<li>TAKER ONLY = IOC / FOK - only allows taker orders</li>",
+            "<li>MAKER OR TAKER = GTT / AON - allows maker or taker orders</li>",
+            "</ul>Exchange only supports (GTT, IOC, FOK)",
             "RFQ Maker only supports (GTT, AON), RFQ Taker only supports (FOK)"
           ]
         },
@@ -9168,7 +9796,7 @@
           "example": "false",
           "comment": [
             "If True, Order must be a maker order. It has to fill the orderbook instead of match it.",
-            "If False, Order can be either a maker or taker order. \u003cb\u003eIn this case, order creation is currently subject to a speedbump of 25ms to ensure orders are matched against updated orderbook quotes.\u003c/b\u003e",
+            "If False, Order can be either a maker or taker order. <b>In this case, order creation is currently subject to a speedbump of 25ms to ensure orders are matched against updated orderbook quotes.</b>",
             "",
             "|               | Must Fill All | Can Fill Partial |",
             "| -             | -             | -                |",
@@ -9263,9 +9891,9 @@
           "index": 13,
           "array_depth": 0,
           "optional": false,
-          "example": "0.001",
+          "example": "'0.001'",
           "comment": [
-            "Builder fee charged for this order "
+            "Builder fee charged for this order, expressed as a percentage (e.g., 0.001 means 0.001%). "
           ]
         }
       ],
@@ -9615,7 +10243,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         },
         {
@@ -10421,6 +11049,7 @@
           "index": 12,
           "array_depth": 0,
           "optional": true,
+          "example": "false",
           "comment": [
             "Whether this sub account is a vault"
           ]
@@ -10494,6 +11123,54 @@
       "comment": []
     },
     {
+      "name": "SupportedAsset",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "asset_id",
+          "lite_name": "ai",
+          "semantic_type": "uint16",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "3",
+          "comment": [
+            "The currency ID of the asset"
+          ]
+        },
+        {
+          "name": "asset_code",
+          "lite_name": "ac",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The readable currency code of the asset"
+          ]
+        },
+        {
+          "name": "balance_decimals",
+          "lite_name": "bd",
+          "semantic_type": "int8",
+          "json_type": "integer",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "6",
+          "comment": [
+            "The number of decimals used for balance representation"
+          ]
+        }
+      ],
+      "comment": [
+        "An asset supported for a given wallet type"
+      ]
+    },
+    {
       "name": "TPSLOrderMetadata",
       "is_root": false,
       "fields": [
@@ -10507,7 +11184,7 @@
           "optional": false,
           "example": "'LAST'",
           "comment": [
-            "Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order"
+            "Defines the price type (e.g., index price) that activates a Take Profit (TP) or Stop Loss (SL) order"
           ]
         },
         {
@@ -10535,15 +11212,23 @@
           "comment": [
             "If True, the order will close the position when the trigger price is reached"
           ]
+        },
+        {
+          "name": "is_split_position",
+          "lite_name": "is",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "false",
+          "comment": [
+            "If True, the order will be treated as part of a position's split-TP/SL set, subject to aggregate size/count limits."
+          ]
         }
       ],
       "comment": [
         "Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.",
-        "",
-        "### Fields:",
-        "- **triggerBy**: Defines the price type that activates the order (e.g., index price).",
-        "- **triggerPrice**: The price at which the order is triggered, expressed in `9` decimal precision.",
-        "",
         ""
       ]
     },
@@ -10574,7 +11259,7 @@
           "optional": true,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         },
         {
@@ -10932,7 +11617,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ]
         },
         {
@@ -10981,7 +11666,7 @@
           "json_type": "string",
           "index": 5,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'65038.01'",
           "comment": [
             "The mark price of the instrument at point of trade, expressed in `9` decimals"
@@ -11020,7 +11705,7 @@
           "json_type": "string",
           "index": 8,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'65038.01'",
           "comment": [
             "[Options] The forward price of the option at point of trade, expressed in `9` decimals"
@@ -11049,6 +11734,7 @@
           "index": 10,
           "array_depth": 0,
           "optional": false,
+          "example": "'ORDERBOOK'",
           "comment": [
             "The venue where the trade occurred"
           ]
@@ -11199,6 +11885,7 @@
           "index": 9,
           "array_depth": 0,
           "optional": false,
+          "example": "'STANDARD'",
           "comment": [
             "The type of transfer"
           ]
@@ -11498,6 +12185,7 @@
           "array_depth": 0,
           "optional": true,
           "default": "true",
+          "example": "false",
           "comment": [
             "Omitted for redemption requests to non-cross exchange vaults. True if cancellation is blocked within the CEV allocation allowance for the user's current tier (e.g. because the user has already transferred out the spot balance underlying the redemption request)."
           ]
@@ -11790,7 +12478,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ],
           "selector": "primary"
         },
@@ -11802,6 +12490,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "example": "'CI_1M'",
           "comment": [
             "The interval of each candlestick"
           ],
@@ -11815,6 +12504,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "example": "'TRADE'",
           "comment": [
             "The type of candlestick data to retrieve"
           ],
@@ -12163,7 +12853,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ],
           "selector": "primary"
         },
@@ -12188,9 +12878,9 @@
         "Subscribes to a mini ticker feed for a single instrument. The `mini.s` channel offers simpler integration. To experience higher publishing rates, please use the `mini.d` channel.",
         "Unlike the `mini.d` channel which publishes an initial snapshot, then only streams deltas after, the `mini.s` channel publishes full snapshots at each feed.",
         "",
-        "The Delta feed will work as follows:\u003cul\u003e\u003cli\u003eOn subscription, the server will send a full snapshot of the mini ticker.\u003c/li\u003e\u003cli\u003eAfter the snapshot, the server will only send deltas of the mini ticker.\u003c/li\u003e\u003cli\u003eThe server will send a delta if any of the fields in the mini ticker have changed.\u003c/li\u003e\u003c/ul\u003e",
+        "The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the mini ticker.</li><li>After the snapshot, the server will only send deltas of the mini ticker.</li><li>The server will send a delta if any of the fields in the mini ticker have changed.</li></ul>",
         "",
-        "Field Semantics:\u003cul\u003e\u003cli\u003e[DeltaOnly] If a field is not updated, {}\u003c/li\u003e\u003cli\u003eIf a field is updated, {field: '123'}\u003c/li\u003e\u003cli\u003eIf a field is set to zero, {field: '0'}\u003c/li\u003e\u003cli\u003eIf a field is set to null, {field: ''}\u003c/li\u003e\u003c/ul\u003e"
+        "Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul>"
       ]
     },
     {
@@ -12518,7 +13208,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ],
           "selector": "primary"
         },
@@ -12560,11 +13250,11 @@
         "Subscribes to aggregated orderbook updates for a single instrument. The `book.s` channel offers simpler integration. To experience higher publishing rates, please use the `book.d` channel.",
         "Unlike the `book.d` channel which publishes an initial snapshot, then only streams deltas after, the `book.s` channel publishes full snapshots at each feed.",
         "",
-        "The Delta feed will work as follows:\u003cul\u003e\u003cli\u003eOn subscription, the server will send a full snapshot of all levels of the Orderbook.\u003c/li\u003e\u003cli\u003eAfter the snapshot, the server will only send levels that have changed in value.\u003c/li\u003e\u003c/ul\u003e",
+        "The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of all levels of the Orderbook.</li><li>After the snapshot, the server will only send levels that have changed in value.</li></ul>",
         "",
-        "Subscription Pattern:\u003cul\u003e\u003cli\u003eDelta - `instrument@rate`\u003c/li\u003e\u003cli\u003eSnapshot - `instrument@rate-depth`\u003c/li\u003e\u003c/ul\u003e",
+        "Subscription Pattern:<ul><li>Delta - `instrument@rate`</li><li>Snapshot - `instrument@rate-depth`</li></ul>",
         "",
-        "Field Semantics:\u003cul\u003e\u003cli\u003e[DeltaOnly] If a level is not updated, level not published\u003c/li\u003e\u003cli\u003eIf a level is updated, {size: '123'}\u003c/li\u003e\u003cli\u003eIf a level is set to zero, {size: '0'}\u003c/li\u003e\u003cli\u003eIncoming levels will be published as soon as price moves\u003c/li\u003e\u003cli\u003eOutgoing levels will be published with `size = 0`\u003c/li\u003e\u003c/ul\u003e"
+        "Field Semantics:<ul><li>[DeltaOnly] If a level is not updated, level not published</li><li>If a level is updated, {size: '123'}</li><li>If a level is set to zero, {size: '0'}</li><li>Incoming levels will be published as soon as price moves</li><li>Outgoing levels will be published with `size = 0`</li></ul>"
       ]
     },
     {
@@ -12919,7 +13609,7 @@
       "comment": [
         "All V1 Websocket Responses are housed in this wrapper. It returns a confirmation of the JSON RPC subscribe request.",
         "If a `request_id` is supplied in the JSON RPC request, it will be propagated back in this JSON RPC response.",
-        "To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:\u003cul\u003e\u003cli\u003eAll snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas\u003c/li\u003e\u003cli\u003eNum snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots\u003c/li\u003e\u003cli\u003eFirst sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots\u003c/li\u003e\u003cli\u003eSequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect\u003c/li\u003e\u003cli\u003eDuplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.\u003c/li\u003e\u003c/ul\u003e",
+        "To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul>",
         "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
       ]
     },
@@ -13007,7 +13697,7 @@
         }
       ],
       "comment": [
-        "To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:\u003cul\u003e\u003cli\u003eAll snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas\u003c/li\u003e\u003cli\u003eNum snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots\u003c/li\u003e\u003cli\u003eFirst sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots\u003c/li\u003e\u003cli\u003eSequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect\u003c/li\u003e\u003cli\u003eDuplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.\u003c/li\u003e\u003c/ul\u003e",
+        "To ensure you always know if you have missed any payloads, GRVT servers apply the following heuristics to sequence numbers:<ul><li>All snapshot payloads will have a sequence number of `0`. All delta payloads will have a sequence number of `1+`. So its easy to distinguish between snapshots, and deltas</li><li>Num snapshots returned in Response (per stream): You can ensure that you received the right number of snapshots</li><li>First sequence number returned in Response (per stream): You can ensure that you received the first stream, without gaps from snapshots</li><li>Sequence numbers should always monotonically increase by `1`. If it decreases, or increases by more than `1`. Please reconnect</li><li>Duplicate sequence numbers are possible due to network retries. If you receive a duplicate, please ignore it, or idempotently re-update it.</li></ul>",
         "When subscribing to the same primary selector again, the previous secondary selector will be replaced. See `Overview` page for more details."
       ]
     },
@@ -13101,7 +13791,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ],
           "selector": "primary"
         },
@@ -13126,9 +13816,9 @@
         "Subscribes to a ticker feed for a single instrument. The `ticker.s` channel offers simpler integration. To experience higher publishing rates, please use the `ticker.d` channel.",
         "Unlike the `ticker.d` channel which publishes an initial snapshot, then only streams deltas after, the `ticker.s` channel publishes full snapshots at each feed.",
         "",
-        "The Delta feed will work as follows:\u003cul\u003e\u003cli\u003eOn subscription, the server will send a full snapshot of the ticker.\u003c/li\u003e\u003cli\u003eAfter the snapshot, the server will only send deltas of the ticker.\u003c/li\u003e\u003cli\u003eThe server will send a delta if any of the fields in the ticker have changed.\u003c/li\u003e\u003c/ul\u003e",
+        "The Delta feed will work as follows:<ul><li>On subscription, the server will send a full snapshot of the ticker.</li><li>After the snapshot, the server will only send deltas of the ticker.</li><li>The server will send a delta if any of the fields in the ticker have changed.</li></ul>",
         "",
-        "Field Semantics:\u003cul\u003e\u003cli\u003e[DeltaOnly] If a field is not updated, {}\u003c/li\u003e\u003cli\u003eIf a field is updated, {field: '123'}\u003c/li\u003e\u003cli\u003eIf a field is set to zero, {field: '0'}\u003c/li\u003e\u003cli\u003eIf a field is set to null, {field: ''}\u003c/li\u003e\u003c/ul\u003e"
+        "Field Semantics:<ul><li>[DeltaOnly] If a field is not updated, {}</li><li>If a field is updated, {field: '123'}</li><li>If a field is set to zero, {field: '0'}</li><li>If a field is set to null, {field: ''}</li></ul>"
       ]
     },
     {
@@ -13221,7 +13911,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The readable instrument name:\u003cul\u003e\u003cli\u003ePerpetual: `ETH_USDT_Perp`\u003c/li\u003e\u003cli\u003eFuture: `BTC_USDT_Fut_20Oct23`\u003c/li\u003e\u003cli\u003eCall: `ETH_USDT_Call_20Oct23_2800`\u003c/li\u003e\u003cli\u003ePut: `ETH_USDT_Put_20Oct23_2800`\u003c/li\u003e\u003c/ul\u003e"
+            "The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>"
           ],
           "selector": "primary"
         },
@@ -14430,6 +15120,34 @@
           "comment": [
             "Builder does not exist"
           ]
+        },
+        {
+          "name": "TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE",
+          "value": 44,
+          "comment": [
+            "the trade price is worse than the bankruptcy price"
+          ]
+        },
+        {
+          "name": "TOO_MANY_MAKER_ORDERS",
+          "value": 45,
+          "comment": [
+            "the order was cancelled due to matching with too many maker orders"
+          ]
+        },
+        {
+          "name": "INSUFFICIENT_BALANCE",
+          "value": 49,
+          "comment": [
+            "the subaccount has insufficient balance"
+          ]
+        },
+        {
+          "name": "BELOW_MARGIN_WITH_PENALTY_DEVIATION",
+          "value": 51,
+          "comment": [
+            "the order will bring the sub account below initial margin requirement considering wide price deviation"
+          ]
         }
       ],
       "comment": []
@@ -14470,6 +15188,40 @@
           "value": 5,
           "comment": [
             "Order is cancelled by the user using one of the supported APIs (See OrderRejectReason). Before an order is open, it cannot be cancelled."
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "PositionCloseStatus",
+      "values": [
+        {
+          "name": "CLOSED",
+          "value": 1,
+          "comment": [
+            "Position fully closed via reducing trade or flip"
+          ]
+        },
+        {
+          "name": "LIQUIDATED",
+          "value": 2,
+          "comment": [
+            "Position closed via liquidation"
+          ]
+        },
+        {
+          "name": "SETTLED",
+          "value": 3,
+          "comment": [
+            "Position closed via settlement"
+          ]
+        },
+        {
+          "name": "PARTIALLY_CLOSED",
+          "value": 4,
+          "comment": [
+            "Position partially closed"
           ]
         }
       ],

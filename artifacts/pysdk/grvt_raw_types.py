@@ -206,6 +206,14 @@ class OrderRejectReason(Enum):
     BUILDER_ORDER_BUILDER_NOT_AUTHORIZED = "BUILDER_ORDER_BUILDER_NOT_AUTHORIZED"
     # Builder does not exist
     BUILDER_ORDER_BUILDER_NOT_EXIST = "BUILDER_ORDER_BUILDER_NOT_EXIST"
+    # the trade price is worse than the bankruptcy price
+    TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE = "TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE"
+    # the order was cancelled due to matching with too many maker orders
+    TOO_MANY_MAKER_ORDERS = "TOO_MANY_MAKER_ORDERS"
+    # the subaccount has insufficient balance
+    INSUFFICIENT_BALANCE = "INSUFFICIENT_BALANCE"
+    # the order will bring the sub account below initial margin requirement considering wide price deviation
+    BELOW_MARGIN_WITH_PENALTY_DEVIATION = "BELOW_MARGIN_WITH_PENALTY_DEVIATION"
 
 
 class OrderStatus(Enum):
@@ -219,6 +227,17 @@ class OrderStatus(Enum):
     REJECTED = "REJECTED"
     # Order is cancelled by the user using one of the supported APIs (See OrderRejectReason). Before an order is open, it cannot be cancelled.
     CANCELLED = "CANCELLED"
+
+
+class PositionCloseStatus(Enum):
+    # Position fully closed via reducing trade or flip
+    CLOSED = "CLOSED"
+    # Position closed via liquidation
+    LIQUIDATED = "LIQUIDATED"
+    # Position closed via settlement
+    SETTLED = "SETTLED"
+    # Position partially closed
+    PARTIALLY_CLOSED = "PARTIALLY_CLOSED"
 
 
 class PositionMarginType(Enum):
@@ -827,6 +846,12 @@ class ApiGetSubAccountsResponse:
 
 
 @dataclass
+class ApiGetSupportedAssetsResponse:
+    # Assets supported in funding wallets
+    funding: list[SupportedAsset]
+
+
+@dataclass
 class ApiMiniTickerRequest:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
@@ -905,6 +930,108 @@ class ApiOrderbookLevelsResponse:
 
 
 @dataclass
+class ApiPositionHistory:
+    """
+    A position lifecycle record.
+
+    When status is `PARTIALLY_CLOSED`, the position is still open. Fields that describe the close event (`close_time`, `position_close_mark_price`) will be omitted, and `leverage` reflects the current value
+    """
+
+    # Trading account ID which held this position
+    sub_account_id: str
+    # Asset this position was for
+    instrument: str
+    # Timestamp of first trade that opened this lifecycle
+    open_time: str
+    status: PositionCloseStatus
+    # True if the closed position was long
+    is_long: bool
+    margin_type: PositionMarginType
+    # Average entry price at 9 decimals
+    entry_price: str
+    # Average exit price at 9 decimals
+    exit_price: str
+    # Cumulative realized PnL in quote currency
+    realized_pnl: str
+    # Cumulative fees in quote currency
+    cumulative_fee: str
+    # Cumulative realized funding payment in quote currency
+    cumulative_realized_funding_payment: str
+    # Sum of abs(reducingTradeSize) across all reducing trades
+    closed_volume_base: str
+    # Sum of abs(reducingTradeSize) * tradePrice across all reducing trades
+    closed_volume_quote: str
+    # Max absolute position size reached during lifecycle
+    max_open_interest_base: str
+    # Max abs(size) * entryVWAP reached during lifecycle
+    max_open_interest_quote: str
+    # Sum of markPrice * abs(tradeSize) / leverage for position-increasing trades
+    cumulative_initial_margin: str
+    # High-water mark of cumulativeInitialMargin during lifecycle
+    max_initial_margin: str
+    # Leverage at time of close. When status is `PARTIALLY_CLOSED`, this is the current leverage
+    leverage: str
+    # Timestamp when the position lifecycle ended. Omitted when status is `PARTIALLY_CLOSED`
+    close_time: str | None = None
+    # Mark price at close. Omitted when status is `PARTIALLY_CLOSED`
+    position_close_mark_price: str | None = None
+    """
+    The unrealized PnL of the position, expressed in quote asset decimal units
+    `unrealized_pnl = (mark_price - entry_price) * size` where `size` is signed (negative for short positions)
+    Only present when status is `PARTIALLY_CLOSED`
+    """
+    unrealized_pnl: str | None = None
+
+
+@dataclass
+class ApiPositionHistoryRequest:
+    """
+    Query for position lifecycle records for a single sub account.
+
+    Returns both fully closed positions and positions that are still open but have been partially reduced (`PARTIALLY_CLOSED`).
+
+    Results are ordered as follows: partially closed positions (most recently opened first), then fully closed positions (most recently closed first).
+
+    Partially closed positions are included only when all of the following are true:<ul><li>`start_time` is unset (partially closed positions have no close time)</li><li>`end_time` is unset (partially closed positions have no close time)</li><li>`cursor` is unset (they are only returned on the initial page)</li><li>`status` is nil or includes `PARTIALLY_CLOSED`</li></ul>Since these positions have no close time, query-row limits, as well as time-range and cursor-based pagination, do not apply to them.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup by position-close time, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The sub account ID to request for
+    sub_account_id: str
+    # Start of the close-time range in unix nanoseconds. If nil, defaults to no lower bound. Only positions with close_time >= start_time are returned. Does not apply to partially closed positions (they have no close time and will be excluded when this field is set)
+    start_time: str | None = None
+    # End of the close-time range in unix nanoseconds. If nil, defaults to now. Only positions with close_time <= end_time are returned. Does not apply to partially closed positions (they have no close time and will be excluded when this field is set)
+    end_time: str | None = None
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only positions matching the filter will be returned
+    kind: list[Kind] | None = None
+    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only positions matching the filter will be returned
+    base: list[str] | None = None
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only positions matching the filter will be returned
+    quote: list[str] | None = None
+    # The limit to query for. Defaults to 500; Max 1000. Applies to fully closed positions only; limit excludes any matching partially-closed positions
+    limit: int | None = None
+    # The cursor to indicate when to start the next page query from. Partially closed positions are only returned on the initial page (when cursor is unset)
+    cursor: str | None = None
+    # The status filter to apply. If nil, this defaults to all statuses. Otherwise, only positions matching the filter will be returned
+    status: list[PositionCloseStatus] | None = None
+    # Set to true to filter for long positions. If both is_long and is_short are false (default), positions of both directions are returned
+    is_long: bool | None = None
+    # Set to true to filter for short positions. If both is_long and is_short are false (default), positions of both directions are returned
+    is_short: bool | None = None
+    # The margin type filter to apply. If nil, this defaults to all margin types. Otherwise, only positions matching the filter will be returned
+    margin_type: list[PositionMarginType] | None = None
+
+
+@dataclass
+class ApiPositionHistoryResponse:
+    # Position lifecycle records matching the request filters. Partially closed positions appear first (most recently opened first), followed by fully closed positions (most recently closed first)
+    result: list[ApiPositionHistory]
+    # The cursor to indicate when to start the query from
+    next: str
+
+
+@dataclass
 class ApiPositionsRequest:
     # The sub account ID to request for
     sub_account_id: str
@@ -958,6 +1085,11 @@ class ApiSetDeriskToMaintenanceMarginRatioResponse:
 
 @dataclass
 class ApiSetInitialLeverageRequest:
+    """
+    The request to set the initial leverage of a sub account.
+     DEPRECATED: This API is deprecated, use set_position_config API instead
+    """
+
     # The sub account ID to set the leverage for
     sub_account_id: str
     # The instrument to set the leverage for
@@ -968,6 +1100,11 @@ class ApiSetInitialLeverageRequest:
 
 @dataclass
 class ApiSetInitialLeverageResponse:
+    """
+    The response to set the initial leverage of a sub account.
+     DEPRECATED: This API is deprecated, use set_position_config API instead
+    """
+
     # Whether the leverage was set successfully
     success: bool
 
@@ -1556,14 +1693,10 @@ class Fill:
     size: str
     # The traded price, expressed in `9` decimals
     price: str
-    # The mark price of the instrument at point of trade, expressed in `9` decimals
-    mark_price: str
     # The index price of the instrument at point of trade, expressed in `9` decimals
     index_price: str
     # The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)
     interest_rate: str
-    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
-    forward_price: str
     # The realized PnL of the trade, expressed in quote asset decimal units (0 if increasing position size)
     realized_pnl: str
     # The fees paid on the trade, expressed in quote asset decimal unit (negative if maker rebate applied)
@@ -1604,6 +1737,12 @@ class Fill:
     builder_fee_rate: str
     # The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee
     builder_fee: str
+    # The currency of the fee paid on the trade
+    fee_currency: str
+    # The mark price of the instrument at point of trade, expressed in `9` decimals
+    mark_price: str | None = None
+    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
+    forward_price: str | None = None
     # Specifies the broker who brokered the order
     broker: BrokerTag | None = None
 
@@ -1668,8 +1807,6 @@ class InstrumentDisplay:
     kind: Kind
     # Venues that this instrument can be traded at
     venues: list[Venue]
-    # The settlement period of the instrument
-    settlement_period: InstrumentSettlementPeriod
     # The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
     base_decimals: int
     # The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
@@ -1680,10 +1817,12 @@ class InstrumentDisplay:
     min_size: str
     # Creation time in unix nanoseconds
     create_time: str
-    # The maximum position size, expressed in base asset decimal units
-    max_position_size: str
     # The minimum order notional value, expressed in quote currency decimal units
     min_notional: str
+    # The settlement period of the instrument
+    settlement_period: InstrumentSettlementPeriod | None = None
+    # The maximum position size, expressed in base asset decimal units
+    max_position_size: str | None = None
     # Defines the funding interval to be applied.
     funding_interval_hours: int | None = None
     # Funding rate cap over the defined `intervalHours`.
@@ -1797,7 +1936,7 @@ class Order:
     metadata: OrderMetadata
     # The main account ID of the builder
     builder: str
-    # Builder fee charged for this order
+    # Builder fee charged for this order, expressed as a percentage (e.g., 0.001 means 0.001%).
     builder_fee: str
     # [Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
     order_id: str | None = None
@@ -2112,23 +2251,30 @@ class SubAccount:
 
 
 @dataclass
+class SupportedAsset:
+    # The currency ID of the asset
+    asset_id: int
+    # The readable currency code of the asset
+    asset_code: str
+    # The number of decimals used for balance representation
+    balance_decimals: int
+
+
+@dataclass
 class TPSLOrderMetadata:
     """
     Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.
 
-    ### Fields:
-    - **triggerBy**: Defines the price type that activates the order (e.g., index price).
-    - **triggerPrice**: The price at which the order is triggered, expressed in `9` decimal precision.
-
-
     """
 
-    # Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order
+    # Defines the price type (e.g., index price) that activates a Take Profit (TP) or Stop Loss (SL) order
     trigger_by: TriggerBy
     # The Trigger Price of the order, expressed in `9` decimals.
     trigger_price: str
     # If True, the order will close the position when the trigger price is reached
     close_position: bool
+    # If True, the order will be treated as part of a position's split-TP/SL set, subject to aggregate size/count limits.
+    is_split_position: bool
 
 
 @dataclass
@@ -2214,14 +2360,10 @@ class Trade:
     size: str
     # The traded price, expressed in `9` decimals
     price: str
-    # The mark price of the instrument at point of trade, expressed in `9` decimals
-    mark_price: str
     # The index price of the instrument at point of trade, expressed in `9` decimals
     index_price: str
     # The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)
     interest_rate: str
-    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
-    forward_price: str
     """
     A trade identifier, globally unique, and monotonically increasing (not by `1`).
     All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.
@@ -2232,6 +2374,10 @@ class Trade:
     venue: Venue
     # If the trade is a RPI trade
     is_rpi: bool
+    # The mark price of the instrument at point of trade, expressed in `9` decimals
+    mark_price: str | None = None
+    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
+    forward_price: str | None = None
 
 
 @dataclass

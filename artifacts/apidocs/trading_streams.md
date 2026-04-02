@@ -138,7 +138,8 @@ STREAM: v1.order
                         "tpsl": {
                             "trigger_by": "LAST",
                             "trigger_price": "65038.10",
-                            "close_position": false
+                            "close_position": false,
+                            "is_split_position": false
                         }
                     },
                     "broker": "BROKER_CODE"
@@ -152,7 +153,7 @@ STREAM: v1.order
                     "avg_fill_price": ["60000.4"]
                 },
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "builder_fee": 0.001
+                "builder_fee": "0.001"
             }
         }
         ```
@@ -192,7 +193,8 @@ STREAM: v1.order
                         "t": {
                             "tb": "LAST",
                             "tp": "65038.10",
-                            "cp": false
+                            "cp": false,
+                            "is": false
                         }
                     },
                     "b": "BROKER_CODE"
@@ -206,7 +208,7 @@ STREAM: v1.order
                     "af": ["60000.4"]
                 },
                 "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "bf": 0.001
+                "bf": "0.001"
             }
         }
         ```
@@ -2018,7 +2020,8 @@ STREAM: v1.fill
                 "is_rpi": false,
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                 "builder_fee_rate": 0.001,
-                "builder_fee": "0.2"
+                "builder_fee": "0.2",
+                "fee_currency": "USDT"
             }
         }
         ```
@@ -2053,7 +2056,8 @@ STREAM: v1.fill
                 "ir1": false,
                 "b1": "'$GRVT_MAIN_ACCOUNT_ID'",
                 "bf": 0.001,
-                "bf1": "0.2"
+                "bf1": "0.2",
+                "fc": "USDT"
             }
         }
         ```
@@ -3872,7 +3876,7 @@ STREAM: v1.transfer
                     "chain_id": "325"
                 },
                 "event_time": "1697788800000000000",
-                "transfer_type": "UNSPECIFIED",
+                "transfer_type": "STANDARD",
                 "transfer_metadata": null
             }
         }
@@ -3901,7 +3905,7 @@ STREAM: v1.transfer
                     "ci": "325"
                 },
                 "et": "1697788800000000000",
-                "tt": "UNSPECIFIED",
+                "tt": "STANDARD",
                 "tm": null
             }
         }

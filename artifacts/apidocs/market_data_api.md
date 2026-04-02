@@ -50,7 +50,7 @@ LITE ENDPOINT: lite/v1/instrument
                 "min_size": "0.01",
                 "create_time": "1697788800000000000",
                 "max_position_size": "100.0",
-                "funding_interval_hours": null,
+                "funding_interval_hours": 8,
                 "adjusted_funding_rate_cap": 2.5,
                 "adjusted_funding_rate_floor": -2.5,
                 "min_notional": "20.0"
@@ -74,7 +74,7 @@ LITE ENDPOINT: lite/v1/instrument
                 "ms": "0.01",
                 "ct": "1697788800000000000",
                 "mp": "100.0",
-                "fi": null,
+                "fi": 8,
                 "af": 2.5,
                 "af1": -2.5,
                 "mn": "20.0"
@@ -359,7 +359,7 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "min_size": "0.01",
                 "create_time": "1697788800000000000",
                 "max_position_size": "100.0",
-                "funding_interval_hours": null,
+                "funding_interval_hours": 8,
                 "adjusted_funding_rate_cap": 2.5,
                 "adjusted_funding_rate_floor": -2.5,
                 "min_notional": "20.0"
@@ -383,7 +383,7 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "ms": "0.01",
                 "ct": "1697788800000000000",
                 "mp": "100.0",
-                "fi": null,
+                "fi": 8,
                 "af": 2.5,
                 "af1": -2.5,
                 "mn": "20.0"
@@ -675,7 +675,7 @@ LITE ENDPOINT: lite/v1/instruments
                 "min_size": "0.01",
                 "create_time": "1697788800000000000",
                 "max_position_size": "100.0",
-                "funding_interval_hours": null,
+                "funding_interval_hours": 8,
                 "adjusted_funding_rate_cap": 2.5,
                 "adjusted_funding_rate_floor": -2.5,
                 "min_notional": "20.0"
@@ -699,7 +699,7 @@ LITE ENDPOINT: lite/v1/instruments
                 "ms": "0.01",
                 "ct": "1697788800000000000",
                 "mp": "100.0",
-                "fi": null,
+                "fi": 8,
                 "af": 2.5,
                 "af1": -2.5,
                 "mn": "20.0"
@@ -3209,7 +3209,7 @@ LITE ENDPOINT: lite/v1/kline
         ``` { .json .copy }
         {
             "instrument": "BTC_USDT_Perp",
-            "interval": "CI_1_M",
+            "interval": "CI_1M",
             "type": "TRADE",
             "start_time": "1697788800000000000",
             "end_time": "1697788800000000000",
@@ -3221,7 +3221,7 @@ LITE ENDPOINT: lite/v1/kline
         ``` { .json .copy }
         {
             "i": "BTC_USDT_Perp",
-            "i1": "CI_1_M",
+            "i1": "CI_1M",
             "t": "TRADE",
             "st": "1697788800000000000",
             "et": "1697788800000000000",
@@ -3311,7 +3311,7 @@ LITE ENDPOINT: lite/v1/kline
             curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/kline' \
             --data '{
                 "instrument": "BTC_USDT_Perp",
-                "interval": "CI_1_M",
+                "interval": "CI_1M",
                 "type": "TRADE",
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
@@ -3329,7 +3329,7 @@ LITE ENDPOINT: lite/v1/kline
                 "method": "v1/kline",
                 "params": {
                     "instrument": "BTC_USDT_Perp",
-                    "interval": "CI_1_M",
+                    "interval": "CI_1M",
                     "type": "TRADE",
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
@@ -3347,7 +3347,7 @@ LITE ENDPOINT: lite/v1/kline
             curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/kline' \
             --data '{
                 "i": "BTC_USDT_Perp",
-                "i1": "CI_1_M",
+                "i1": "CI_1M",
                 "t": "TRADE",
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
@@ -3365,7 +3365,7 @@ LITE ENDPOINT: lite/v1/kline
                 "m": "v1/kline",
                 "p": {
                     "i": "BTC_USDT_Perp",
-                    "i1": "CI_1_M",
+                    "i1": "CI_1M",
                     "t": "TRADE",
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
@@ -3384,7 +3384,7 @@ LITE ENDPOINT: lite/v1/kline
             curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/kline' \
             --data '{
                 "instrument": "BTC_USDT_Perp",
-                "interval": "CI_1_M",
+                "interval": "CI_1M",
                 "type": "TRADE",
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
@@ -3402,7 +3402,7 @@ LITE ENDPOINT: lite/v1/kline
                 "method": "v1/kline",
                 "params": {
                     "instrument": "BTC_USDT_Perp",
-                    "interval": "CI_1_M",
+                    "interval": "CI_1M",
                     "type": "TRADE",
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
@@ -3420,7 +3420,7 @@ LITE ENDPOINT: lite/v1/kline
             curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/kline' \
             --data '{
                 "i": "BTC_USDT_Perp",
-                "i1": "CI_1_M",
+                "i1": "CI_1M",
                 "t": "TRADE",
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
@@ -3438,7 +3438,7 @@ LITE ENDPOINT: lite/v1/kline
                 "m": "v1/kline",
                 "p": {
                     "i": "BTC_USDT_Perp",
-                    "i1": "CI_1_M",
+                    "i1": "CI_1M",
                     "t": "TRADE",
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
@@ -3457,7 +3457,7 @@ LITE ENDPOINT: lite/v1/kline
             curl --location 'https://market-data.testnet.grvt.io/full/v1/kline' \
             --data '{
                 "instrument": "BTC_USDT_Perp",
-                "interval": "CI_1_M",
+                "interval": "CI_1M",
                 "type": "TRADE",
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
@@ -3475,7 +3475,7 @@ LITE ENDPOINT: lite/v1/kline
                 "method": "v1/kline",
                 "params": {
                     "instrument": "BTC_USDT_Perp",
-                    "interval": "CI_1_M",
+                    "interval": "CI_1M",
                     "type": "TRADE",
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
@@ -3493,7 +3493,7 @@ LITE ENDPOINT: lite/v1/kline
             curl --location 'https://market-data.testnet.grvt.io/lite/v1/kline' \
             --data '{
                 "i": "BTC_USDT_Perp",
-                "i1": "CI_1_M",
+                "i1": "CI_1M",
                 "t": "TRADE",
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
@@ -3511,7 +3511,7 @@ LITE ENDPOINT: lite/v1/kline
                 "m": "v1/kline",
                 "p": {
                     "i": "BTC_USDT_Perp",
-                    "i1": "CI_1_M",
+                    "i1": "CI_1M",
                     "t": "TRADE",
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",
@@ -3530,7 +3530,7 @@ LITE ENDPOINT: lite/v1/kline
             curl --location 'https://market-data.grvt.io/full/v1/kline' \
             --data '{
                 "instrument": "BTC_USDT_Perp",
-                "interval": "CI_1_M",
+                "interval": "CI_1M",
                 "type": "TRADE",
                 "start_time": "1697788800000000000",
                 "end_time": "1697788800000000000",
@@ -3548,7 +3548,7 @@ LITE ENDPOINT: lite/v1/kline
                 "method": "v1/kline",
                 "params": {
                     "instrument": "BTC_USDT_Perp",
-                    "interval": "CI_1_M",
+                    "interval": "CI_1M",
                     "type": "TRADE",
                     "start_time": "1697788800000000000",
                     "end_time": "1697788800000000000",
@@ -3566,7 +3566,7 @@ LITE ENDPOINT: lite/v1/kline
             curl --location 'https://market-data.grvt.io/lite/v1/kline' \
             --data '{
                 "i": "BTC_USDT_Perp",
-                "i1": "CI_1_M",
+                "i1": "CI_1M",
                 "t": "TRADE",
                 "st": "1697788800000000000",
                 "et": "1697788800000000000",
@@ -3584,7 +3584,7 @@ LITE ENDPOINT: lite/v1/kline
                 "m": "v1/kline",
                 "p": {
                     "i": "BTC_USDT_Perp",
-                    "i1": "CI_1_M",
+                    "i1": "CI_1M",
                     "t": "TRADE",
                     "st": "1697788800000000000",
                     "et": "1697788800000000000",

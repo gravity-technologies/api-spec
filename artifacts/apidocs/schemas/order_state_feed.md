@@ -67,3 +67,7 @@
             |`BUILDER_ORDER_FEE_NEGATIVE` = 40|Builder fee is below 0|
             |`BUILDER_ORDER_BUILDER_NOT_AUTHORIZED` = 41|Builder is not an authorized builder for client|
             |`BUILDER_ORDER_BUILDER_NOT_EXIST` = 42|Builder does not exist|
+            |`TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE` = 44|the trade price is worse than the bankruptcy price|
+            |`TOO_MANY_MAKER_ORDERS` = 45|the order was cancelled due to matching with too many maker orders|
+            |`INSUFFICIENT_BALANCE` = 49|the subaccount has insufficient balance|
+            |`BELOW_MARGIN_WITH_PENALTY_DEVIATION` = 51|the order will bring the sub account below initial margin requirement considering wide price deviation|

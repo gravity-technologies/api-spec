@@ -48,6 +48,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiGetCurrencyResponse, resp, Config(cast=[Enum]))
 
+    async def get_supported_assets_v1(
+        self, req: types.EmptyRequest
+    ) -> types.ApiGetSupportedAssetsResponse | GrvtError:
+        resp = await self._post(False, self.md_rpc + "/full/v1/supported_assets", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiGetSupportedAssetsResponse, resp, Config(cast=[Enum]))
+
     async def get_margin_rules_v1(
         self, req: types.ApiGetMarginRulesRequest
     ) -> types.ApiGetMarginRulesResponse | GrvtError:
@@ -195,6 +203,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiPositionsResponse, resp, Config(cast=[Enum]))
+
+    async def position_history_v1(
+        self, req: types.ApiPositionHistoryRequest
+    ) -> types.ApiPositionHistoryResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/position_history", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiPositionHistoryResponse, resp, Config(cast=[Enum]))
 
     async def set_position_config_v1(
         self, req: types.ApiSetSubAccountPositionMarginConfigRequest
