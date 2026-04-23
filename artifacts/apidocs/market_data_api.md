@@ -50,7 +50,7 @@ LITE ENDPOINT: lite/v1/instrument
                 "min_size": "0.01",
                 "create_time": "1697788800000000000",
                 "max_position_size": "100.0",
-                "funding_interval_hours": null,
+                "funding_interval_hours": 8,
                 "adjusted_funding_rate_cap": 2.5,
                 "adjusted_funding_rate_floor": -2.5,
                 "min_notional": "20.0"
@@ -74,7 +74,7 @@ LITE ENDPOINT: lite/v1/instrument
                 "ms": "0.01",
                 "ct": "1697788800000000000",
                 "mp": "100.0",
-                "fi": null,
+                "fi": 8,
                 "af": 2.5,
                 "af1": -2.5,
                 "mn": "20.0"
@@ -359,7 +359,7 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "min_size": "0.01",
                 "create_time": "1697788800000000000",
                 "max_position_size": "100.0",
-                "funding_interval_hours": null,
+                "funding_interval_hours": 8,
                 "adjusted_funding_rate_cap": 2.5,
                 "adjusted_funding_rate_floor": -2.5,
                 "min_notional": "20.0"
@@ -383,7 +383,7 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "ms": "0.01",
                 "ct": "1697788800000000000",
                 "mp": "100.0",
-                "fi": null,
+                "fi": 8,
                 "af": 2.5,
                 "af1": -2.5,
                 "mn": "20.0"
@@ -675,7 +675,7 @@ LITE ENDPOINT: lite/v1/instruments
                 "min_size": "0.01",
                 "create_time": "1697788800000000000",
                 "max_position_size": "100.0",
-                "funding_interval_hours": null,
+                "funding_interval_hours": 8,
                 "adjusted_funding_rate_cap": 2.5,
                 "adjusted_funding_rate_floor": -2.5,
                 "min_notional": "20.0"
@@ -699,7 +699,7 @@ LITE ENDPOINT: lite/v1/instruments
                 "ms": "0.01",
                 "ct": "1697788800000000000",
                 "mp": "100.0",
-                "fi": null,
+                "fi": 8,
                 "af": 2.5,
                 "af1": -2.5,
                 "mn": "20.0"
@@ -1256,6 +1256,294 @@ LITE ENDPOINT: lite/v1/currency
             {
                 "j": "2.0",
                 "m": "v1/currency",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Get Supported Assets
+```
+FULL ENDPOINT: full/v1/supported_assets
+LITE ENDPOINT: lite/v1/supported_assets
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/empty_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_get_supported_assets_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "funding": [{
+                "asset_id": 3,
+                "asset_code": "USDT",
+                "balance_decimals": 6
+            }],
+            "spot": [{
+                "asset_id": 3,
+                "asset_code": "USDT",
+                "balance_decimals": 6
+            }],
+            "futures": [{
+                "mode": "SINGLE_ASSET",
+                "supported_assets": [{
+                    "asset_id": 3,
+                    "asset_code": "USDT",
+                    "balance_decimals": 6
+                }]
+            }]
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "f": [{
+                "ai": 3,
+                "ac": "USDT",
+                "bd": 6
+            }],
+            "s": [{
+                "ai": 3,
+                "ac": "USDT",
+                "bd": 6
+            }],
+            "f1": [{
+                "m": "SINGLE_ASSET",
+                "sa": [{
+                    "ai": 3,
+                    "ac": "USDT",
+                    "bd": 6
+                }]
+            }]
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1002,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
+        }
+        ```
+    </section>
+=== "Try it out"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/full/v1/supported_assets' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/supported_assets",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.dev.gravitymarkets.io/lite/v1/supported_assets' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.dev.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/supported_assets",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/supported_assets' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/supported_assets",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/supported_assets' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/supported_assets",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/supported_assets' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/supported_assets",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/supported_assets' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/supported_assets",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/supported_assets' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/supported_assets",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/supported_assets' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/supported_assets",
                 "p": {
                 },
                 "i": 123
@@ -3281,6 +3569,7 @@ LITE ENDPOINT: lite/v1/kline
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |3042|400|Candlestick type is not applicable for spot instruments|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -3676,6 +3965,7 @@ LITE ENDPOINT: lite/v1/funding
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |3007|400|API is not applicable for spot instruments|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure

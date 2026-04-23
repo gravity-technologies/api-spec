@@ -8,10 +8,10 @@
     |is_taker<br>`it` |boolean|True|The role that the subaccount took on the trade|
     |size<br>`s` |string|True|The number of assets being traded, expressed in base asset decimal units|
     |price<br>`p` |string|True|The traded price, expressed in `9` decimals|
-    |mark_price<br>`mp` |string|True|The mark price of the instrument at point of trade, expressed in `9` decimals|
+    |mark_price<br>`mp` |string|False<br>`None`|The mark price of the instrument at point of trade, expressed in `9` decimals|
     |index_price<br>`ip` |string|True|The index price of the instrument at point of trade, expressed in `9` decimals|
     |interest_rate<br>`ir` |string|True|The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)|
-    |forward_price<br>`fp` |string|True|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
+    |forward_price<br>`fp` |string|False<br>`None`|[Options] The forward price of the option at point of trade, expressed in `9` decimals|
     |realized_pnl<br>`rp` |string|True|The realized PnL of the trade, expressed in quote asset decimal units (0 if increasing position size)|
     |fee<br>`f` |string|True|The fees paid on the trade, expressed in quote asset decimal unit (negative if maker rebate applied)|
     |fee_rate<br>`fr` |string|True|The fee rate paid on the trade|
@@ -26,6 +26,7 @@
     |builder<br>`b1` |string|True|The main account ID of the builder. referred to Order.builder|
     |builder_fee_rate<br>`bf` |string|True|Builder fee percentage charged for this order. referred to Order.builder builderFee |
     |builder_fee<br>`bf1` |string|True|The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee|
+    |fee_currency<br>`fc` |string|True|The currency of the fee paid on the trade|
     ??? info "[Venue](/../../schemas/venue)"
         The list of Trading Venues that are supported on the GRVT exchange<br>
 

@@ -110,6 +110,8 @@ class Kind(Enum):
     CALL = "CALL"
     # the put option asset kind
     PUT = "PUT"
+    # the spot swap asset kind
+    SPOT_SWAP = "SPOT_SWAP"
 
 
 class MarginType(Enum):
@@ -206,6 +208,24 @@ class OrderRejectReason(Enum):
     BUILDER_ORDER_BUILDER_NOT_AUTHORIZED = "BUILDER_ORDER_BUILDER_NOT_AUTHORIZED"
     # Builder does not exist
     BUILDER_ORDER_BUILDER_NOT_EXIST = "BUILDER_ORDER_BUILDER_NOT_EXIST"
+    # the trade price is worse than the bankruptcy price
+    TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE = "TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE"
+    # the order was cancelled due to matching with too many maker orders
+    TOO_MANY_MAKER_ORDERS = "TOO_MANY_MAKER_ORDERS"
+    # reduce-only order is not supported for spot order
+    REDUCE_ONLY_NOT_SUPPORTED_FOR_SPOT_ORDER = "REDUCE_ONLY_NOT_SUPPORTED_FOR_SPOT_ORDER"
+    # tpsl is not supported for spot order
+    TPSL_NOT_SUPPORTED_FOR_SPOT_ORDER = "TPSL_NOT_SUPPORTED_FOR_SPOT_ORDER"
+    # spot order is not supported
+    SPOT_ORDER_NOT_SUPPORTED = "SPOT_ORDER_NOT_SUPPORTED"
+    # the subaccount has insufficient balance
+    INSUFFICIENT_BALANCE = "INSUFFICIENT_BALANCE"
+    # spot trading is blocked during socialized loss (SLOW)
+    SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS = (
+        "SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS"
+    )
+    # the order will bring the sub account below initial margin requirement considering wide price deviation
+    BELOW_MARGIN_WITH_PENALTY_DEVIATION = "BELOW_MARGIN_WITH_PENALTY_DEVIATION"
 
 
 class OrderStatus(Enum):
@@ -221,11 +241,27 @@ class OrderStatus(Enum):
     CANCELLED = "CANCELLED"
 
 
+class PositionCloseStatus(Enum):
+    # Position fully closed via reducing trade or flip
+    CLOSED = "CLOSED"
+    # Position closed via liquidation
+    LIQUIDATED = "LIQUIDATED"
+    # Position closed via settlement
+    SETTLED = "SETTLED"
+    # Position partially closed
+    PARTIALLY_CLOSED = "PARTIALLY_CLOSED"
+
+
 class PositionMarginType(Enum):
     # Isolated Margin Mode: each position is allocated a fixed amount of collateral
     ISOLATED = "ISOLATED"
     # Cross Margin Mode: uses all available funds in your account as collateral across all cross margin positions
     CROSS = "CROSS"
+
+
+class SubAccountMode(Enum):
+    # Single asset mode: the subaccount is only allowed to hold one asset as collateral
+    SINGLE_ASSET_MODE = "SINGLE_ASSET_MODE"
 
 
 class TimeInForce(Enum):
@@ -250,7 +286,7 @@ class TimeInForce(Enum):
 
 
 class TransferType(Enum):
-    # Default transfer that has nothing to do with bridging
+    # Deprecated: use `standard` instead. Legacy value for transfers created before transfer types were introduced.
     UNSPECIFIED = "UNSPECIFIED"
     # Standard transfer that has nothing to do with bridging
     STANDARD = "STANDARD"
@@ -268,6 +304,10 @@ class TransferType(Enum):
     REFERRAL_INCENTIVE = "REFERRAL_INCENTIVE"
     # Transfer type for trading deposit yield incentive
     TRADING_DEPOSIT_YIELD_INCENTIVE = "TRADING_DEPOSIT_YIELD_INCENTIVE"
+    # Transfer type for TGE vesting distribution
+    TGE_VESTING = "TGE_VESTING"
+    # Transfer type for TGE airdrop distribution
+    TGE_AIRDROP = "TGE_AIRDROP"
 
 
 class TriggerBy(Enum):
@@ -337,6 +377,15 @@ class Venue(Enum):
     ORDERBOOK = "ORDERBOOK"
     # the trade is cleared on the RFQ venue
     RFQ = "RFQ"
+
+
+class WalletType(Enum):
+    # Funding wallet
+    FUNDING = "FUNDING"
+    # Spot wallet
+    SPOT = "SPOT"
+    # Futures wallet
+    FUTURES = "FUTURES"
 
 
 @dataclass
@@ -435,6 +484,85 @@ class ApiBuilderFillHistoryResponse:
 
 
 @dataclass
+class ApiBulkOrdersRequest:
+    """
+    Bulk create, cancel, or cancel-replace orders for a single subaccount.
+
+    A cancel-replace is a cancel of the old order plus a create of a new one. The new order is assigned a new `order_id`; the cancelled `order_id` is terminated. Clients must track the new `order_id` from the response.
+
+    * Rules
+      - Up to 100 entries in each of `orders`, `order_ids`, and `client_order_ids`
+      - All create orders must target the same instrument
+      - `client_order_id`s within `orders` must be unique
+      - `order_ids` and `client_order_ids` are mutually exclusive; supplying both is rejected
+      - Rate limits: N creates consume N create_order tokens; any cancels consume 1 cancel_order token
+
+    * BulkCreate
+      Populate `orders` only; leave `order_ids` and `client_order_ids` empty. A batch may not mix multiple normal orders with trigger orders.
+
+      To mark an order as TP or SL, populate its `metadata.trigger` field; see `TriggerOrderMetadata` for details.
+
+      A 'parent' order is a normal order whose linked TP/SL trigger orders become active once the parent is fully filled.
+
+      Supported combinations:
+
+      - Normal orders (non-TPSL): one or many orders
+
+      - Standalone TP: 1 TP order
+
+      - Standalone SL: 1 SL order
+
+      - OCO (2 orders: 1 TP + 1 SL): same asset, same size, same side
+
+      - OTO (2 orders: parent + 1 trigger): 1 parent + 1 TP or SL order. Same asset and size. Parent side is opposite of the trigger side.
+
+      - OTOCO (3 orders: parent + TP + SL): 1 parent + 1 TP order + 1 SL order. Same asset and size across all three. Parent side is opposite of TP and SL sides.
+
+    * BulkCancel
+      Leave `orders` empty; populate either `order_ids` or `client_order_ids` (not both). Targets can be normal orders, standalone TP/SL, or members of an OCO/OTO/OTOCO group. Passing any member id of a grouped TPSL order cancels the whole group.
+
+    * BulkCancelReplace
+      Populate `orders` together with `order_ids` or `client_order_ids`. Ids below refer to entries in whichever id list you chose. Per-case:
+
+      - Normal orders (non-TPSL): the batch is processed as all cancels first, then all creates.
+
+      - TPSL: #creates must equal #cancels, and one request may modify only one group. For OTO and OTOCO, only the trigger part is replaceable — the parent order is not included in `orders` or in the cancel id list, and stays on the book unchanged.
+        - Standalone TP or Standalone SL: cancel 1 id (the existing trigger order) + create 1 new trigger order with matching `triggerType`.
+        - OCO: cancel both ids of the existing OCO group (the TP and SL) + create 2 new orders (1 TP + 1 SL); shape conditions same as BulkCreate OCO.
+        - OTO: cancel the id of the existing trigger order in the OTO group + create 1 new trigger order. The new trigger is linked to the same parent.
+        - OTOCO: cancel both ids of the existing OTOCO group (the TP and SL) + create 2 new orders (1 TP + 1 SL); shape conditions same as BulkCreate OCO. The new TP and SL are linked to the same parent.
+    """
+
+    # The subaccount ID of the user creating the request
+    sub_account_id: str
+    # Orders to create or replace, supply up to 100 orders
+    orders: list[Order]
+    # The order IDs of the orders to cancel or replace, supply up to 100 orderIDs (if both orderIDs and clientOrderIDs are provided, we will reject the payload)
+    order_i_ds: list[str]
+    # The client order IDs of the orders to cancel or replace, supply up to 100 clientOrderIDs (if both orderIDs and clientOrderIDs are provided, we will reject the payload)
+    client_order_i_ds: list[str]
+    """
+    Specifies the time-to-live (in milliseconds) for this cancellation.
+    During this period, any order creation with a matching `client_order_id` will be cancelled and not be added to the GRVT matching engine.
+    This mechanism helps mitigate time-of-flight issues where cancellations might arrive before the corresponding orders.
+    Hence, cancellation by `order_id` ignores this field as the exchange can only assign `order_id`s to already-processed order creations.
+    The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `'670'` -> `'600'`, `'30'` -> `'0'`) and capped at 5 seconds (i.e., `'5000'`).
+    Value of `'0'` or omission results in the default time-to-live value being applied.
+    If the caller requests multiple successive cancellations for a given order, such that the time-to-live windows overlap, only the first request will be considered.
+
+    """
+    time_to_live_ms: str | None = None
+
+
+@dataclass
+class ApiBulkOrdersResponse:
+    # The orders in same order as requested
+    orders: list[Order]
+    # A list of acks for the cancelled orders
+    cancel_acks: list[Ack]
+
+
+@dataclass
 class ApiCancelAllOrdersRequest:
     # The subaccount ID cancelling all orders
     sub_account_id: str
@@ -509,7 +637,7 @@ class ApiCandlestickRequest:
     instrument: str
     # The interval of each candlestick
     interval: CandlestickInterval
-    # The type of candlestick data to retrieve
+    # The type of candlestick data to retrieve. Note: For spot instruments, only `trade` and `mid` are available
     type: CandlestickType
     # Start time of kline data in unix nanoseconds
     start_time: str | None = None
@@ -827,6 +955,16 @@ class ApiGetSubAccountsResponse:
 
 
 @dataclass
+class ApiGetSupportedAssetsResponse:
+    # Assets supported in funding wallets
+    funding: list[SupportedAsset]
+    # Assets supported in spot wallets
+    spot: list[SupportedAsset]
+    # Assets supported in futures wallets, grouped by mode
+    futures: list[FuturesWalletAssets]
+
+
+@dataclass
 class ApiMiniTickerRequest:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
@@ -905,6 +1043,108 @@ class ApiOrderbookLevelsResponse:
 
 
 @dataclass
+class ApiPositionHistory:
+    """
+    A position lifecycle record.
+
+    When status is `PARTIALLY_CLOSED`, the position is still open. Fields that describe the close event (`close_time`, `position_close_mark_price`) will be omitted, and `leverage` reflects the current value
+    """
+
+    # Trading account ID which held this position
+    sub_account_id: str
+    # Asset this position was for
+    instrument: str
+    # Timestamp of first trade that opened this lifecycle
+    open_time: str
+    status: PositionCloseStatus
+    # True if the closed position was long
+    is_long: bool
+    margin_type: PositionMarginType
+    # Average entry price at 9 decimals
+    entry_price: str
+    # Average exit price at 9 decimals
+    exit_price: str
+    # Cumulative realized PnL in quote currency
+    realized_pnl: str
+    # Cumulative fees in quote currency
+    cumulative_fee: str
+    # Cumulative realized funding payment in quote currency
+    cumulative_realized_funding_payment: str
+    # Sum of abs(reducingTradeSize) across all reducing trades
+    closed_volume_base: str
+    # Sum of abs(reducingTradeSize) * tradePrice across all reducing trades
+    closed_volume_quote: str
+    # Max absolute position size reached during lifecycle
+    max_open_interest_base: str
+    # Max abs(size) * entryVWAP reached during lifecycle
+    max_open_interest_quote: str
+    # Sum of markPrice * abs(tradeSize) / leverage for position-increasing trades
+    cumulative_initial_margin: str
+    # High-water mark of cumulativeInitialMargin during lifecycle
+    max_initial_margin: str
+    # Leverage at time of close. When status is `PARTIALLY_CLOSED`, this is the current leverage
+    leverage: str
+    # Timestamp when the position lifecycle ended. Omitted when status is `PARTIALLY_CLOSED`
+    close_time: str | None = None
+    # Mark price at close. Omitted when status is `PARTIALLY_CLOSED`
+    position_close_mark_price: str | None = None
+    """
+    The unrealized PnL of the position, expressed in quote asset decimal units
+    `unrealized_pnl = (mark_price - entry_price) * size` where `size` is signed (negative for short positions)
+    Only present when status is `PARTIALLY_CLOSED`
+    """
+    unrealized_pnl: str | None = None
+
+
+@dataclass
+class ApiPositionHistoryRequest:
+    """
+    Query for position lifecycle records for a single sub account.
+
+    Returns both fully closed positions and positions that are still open but have been partially reduced (`PARTIALLY_CLOSED`).
+
+    Results are ordered as follows: partially closed positions (most recently opened first), then fully closed positions (most recently closed first).
+
+    Partially closed positions are included only when all of the following are true:<ul><li>`start_time` is unset (partially closed positions have no close time)</li><li>`end_time` is unset (partially closed positions have no close time)</li><li>`cursor` is unset (they are only returned on the initial page)</li><li>`status` is nil or includes `PARTIALLY_CLOSED`</li></ul>Since these positions have no close time, query-row limits, as well as time-range and cursor-based pagination, do not apply to them.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup by position-close time, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The sub account ID to request for
+    sub_account_id: str
+    # Start of the close-time range in unix nanoseconds. If nil, defaults to no lower bound. Only positions with close_time >= start_time are returned. Does not apply to partially closed positions (they have no close time and will be excluded when this field is set)
+    start_time: str | None = None
+    # End of the close-time range in unix nanoseconds. If nil, defaults to now. Only positions with close_time <= end_time are returned. Does not apply to partially closed positions (they have no close time and will be excluded when this field is set)
+    end_time: str | None = None
+    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only positions matching the filter will be returned
+    kind: list[Kind] | None = None
+    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only positions matching the filter will be returned
+    base: list[str] | None = None
+    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only positions matching the filter will be returned
+    quote: list[str] | None = None
+    # The limit to query for. Defaults to 500; Max 1000. Applies to fully closed positions only; limit excludes any matching partially-closed positions
+    limit: int | None = None
+    # The cursor to indicate when to start the next page query from. Partially closed positions are only returned on the initial page (when cursor is unset)
+    cursor: str | None = None
+    # The status filter to apply. If nil, this defaults to all statuses. Otherwise, only positions matching the filter will be returned
+    status: list[PositionCloseStatus] | None = None
+    # Set to true to filter for long positions. If both is_long and is_short are false (default), positions of both directions are returned
+    is_long: bool | None = None
+    # Set to true to filter for short positions. If both is_long and is_short are false (default), positions of both directions are returned
+    is_short: bool | None = None
+    # The margin type filter to apply. If nil, this defaults to all margin types. Otherwise, only positions matching the filter will be returned
+    margin_type: list[PositionMarginType] | None = None
+
+
+@dataclass
+class ApiPositionHistoryResponse:
+    # Position lifecycle records matching the request filters. Partially closed positions appear first (most recently opened first), followed by fully closed positions (most recently closed first)
+    result: list[ApiPositionHistory]
+    # The cursor to indicate when to start the query from
+    next: str
+
+
+@dataclass
 class ApiPositionsRequest:
     # The sub account ID to request for
     sub_account_id: str
@@ -958,6 +1198,11 @@ class ApiSetDeriskToMaintenanceMarginRatioResponse:
 
 @dataclass
 class ApiSetInitialLeverageRequest:
+    """
+    The request to set the initial leverage of a sub account.
+     DEPRECATED: This API is deprecated, use set_position_config API instead
+    """
+
     # The sub account ID to set the leverage for
     sub_account_id: str
     # The instrument to set the leverage for
@@ -968,6 +1213,11 @@ class ApiSetInitialLeverageRequest:
 
 @dataclass
 class ApiSetInitialLeverageResponse:
+    """
+    The response to set the initial leverage of a sub account.
+     DEPRECATED: This API is deprecated, use set_position_config API instead
+    """
+
     # Whether the leverage was set successfully
     success: bool
 
@@ -997,6 +1247,18 @@ class ApiSetSubAccountPositionMarginConfigRequest:
 class ApiSetSubAccountPositionMarginConfigResponse:
     # Whether the margin type and leverage was acked
     ack: bool
+
+
+@dataclass
+class ApiSpotSubAccountSummaryRequest:
+    # The subaccount ID to filter by
+    sub_account_id: str
+
+
+@dataclass
+class ApiSpotSubAccountSummaryResponse:
+    # The spot sub account summary
+    result: SpotSubAccount
 
 
 @dataclass
@@ -1179,6 +1441,10 @@ class ApiTransferRequest:
     transfer_type: TransferType
     # The metadata of the transfer
     transfer_metadata: str
+    # The wallet type of the from account or subaccount
+    from_wallet_type: WalletType
+    # The wallet type of the to account or subaccount
+    to_wallet_type: WalletType
 
 
 @dataclass
@@ -1481,6 +1747,8 @@ class ClientTier:
     futures_maker_fee: int
     options_taker_fee: int
     options_maker_fee: int
+    spot_taker_fee: int
+    spot_maker_fee: int
 
 
 @dataclass
@@ -1556,14 +1824,10 @@ class Fill:
     size: str
     # The traded price, expressed in `9` decimals
     price: str
-    # The mark price of the instrument at point of trade, expressed in `9` decimals
-    mark_price: str
     # The index price of the instrument at point of trade, expressed in `9` decimals
     index_price: str
     # The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)
     interest_rate: str
-    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
-    forward_price: str
     # The realized PnL of the trade, expressed in quote asset decimal units (0 if increasing position size)
     realized_pnl: str
     # The fees paid on the trade, expressed in quote asset decimal unit (negative if maker rebate applied)
@@ -1604,6 +1868,12 @@ class Fill:
     builder_fee_rate: str
     # The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee
     builder_fee: str
+    # The currency of the fee paid on the trade
+    fee_currency: str
+    # The mark price of the instrument at point of trade, expressed in `9` decimals
+    mark_price: str | None = None
+    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
+    forward_price: str | None = None
     # Specifies the broker who brokered the order
     broker: BrokerTag | None = None
 
@@ -1618,6 +1888,10 @@ class FundingAccountSummary:
     spot_balances: list[SpotBalance]
     # The list of vault investments held by this main account
     vault_investments: list[VaultInvestment]
+    # Total balance of cash (stablecoin) currencies, denominated in USD
+    total_cash_balance: str
+    # Total balance of non-cash spot currencies, denominated in USD
+    total_spot_asset_balance: str
 
 
 @dataclass
@@ -1638,6 +1912,14 @@ class FundingPayment:
     The `tx_id` will match the corresponding `trade_id` or `tx_id`.
     """
     tx_id: str
+
+
+@dataclass
+class FuturesWalletAssets:
+    # The sub account mode
+    mode: SubAccountMode
+    # Assets supported under this futures mode
+    supported_assets: list[SupportedAsset]
 
 
 @dataclass
@@ -1668,8 +1950,6 @@ class InstrumentDisplay:
     kind: Kind
     # Venues that this instrument can be traded at
     venues: list[Venue]
-    # The settlement period of the instrument
-    settlement_period: InstrumentSettlementPeriod
     # The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
     base_decimals: int
     # The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)
@@ -1680,10 +1960,12 @@ class InstrumentDisplay:
     min_size: str
     # Creation time in unix nanoseconds
     create_time: str
-    # The maximum position size, expressed in base asset decimal units
-    max_position_size: str
     # The minimum order notional value, expressed in quote currency decimal units
     min_notional: str
+    # The settlement period of the instrument
+    settlement_period: InstrumentSettlementPeriod | None = None
+    # The maximum position size, expressed in base asset decimal units
+    max_position_size: str | None = None
     # Defines the funding interval to be applied.
     funding_interval_hours: int | None = None
     # Funding rate cap over the defined `intervalHours`.
@@ -1797,7 +2079,7 @@ class Order:
     metadata: OrderMetadata
     # The main account ID of the builder
     builder: str
-    # Builder fee charged for this order
+    # Builder fee charged for this order, expressed as a percentage (e.g., 0.001 means 0.001%).
     builder_fee: str
     # [Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
     order_id: str | None = None
@@ -2040,6 +2322,26 @@ class SpotBalance:
     balance: str
     # The index price of this currency. (reported in `USD`)
     index_price: str
+    # The entry price of this spot currency. (reported in `USD`)
+    entry_price: str
+    # The realized PnL of this spot currency. (reported in `USD`)
+    realized_pnl: str
+    # The unrealized PnL of this spot currency. (reported in `USD`)
+    unrealized_pnl: str
+    # The available to transfer amount of this spot currency.
+    available_to_transfer: str
+
+
+@dataclass
+class SpotSubAccount:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The sub account ID this entry refers to
+    sub_account_id: str
+    # Total equity of the spot sub account, denominated USD
+    total_equity: str
+    # The list of spot assets owned by this spot sub account, and their balances
+    spot_balances: list[SpotBalance]
 
 
 @dataclass
@@ -2105,6 +2407,8 @@ class SubAccount:
     total_cross_equity: str
     # The unrealized PnL of this sub account for cross margin
     cross_unrealized_pnl: str
+    # The mode of the sub account
+    sub_account_mode: SubAccountMode
     # Whether this sub account is a vault
     is_vault: bool | None = None
     # Total amount of IM (reported in `settle_currency`) deducted from the vault due to redemptions nearing the end of their redemption period
@@ -2112,23 +2416,30 @@ class SubAccount:
 
 
 @dataclass
+class SupportedAsset:
+    # The currency ID of the asset
+    asset_id: int
+    # The readable currency code of the asset
+    asset_code: str
+    # The number of decimals used for balance representation
+    balance_decimals: int
+
+
+@dataclass
 class TPSLOrderMetadata:
     """
     Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.
 
-    ### Fields:
-    - **triggerBy**: Defines the price type that activates the order (e.g., index price).
-    - **triggerPrice**: The price at which the order is triggered, expressed in `9` decimal precision.
-
-
     """
 
-    # Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order
+    # Defines the price type (e.g., index price) that activates a Take Profit (TP) or Stop Loss (SL) order
     trigger_by: TriggerBy
     # The Trigger Price of the order, expressed in `9` decimals.
     trigger_price: str
     # If True, the order will close the position when the trigger price is reached
     close_position: bool
+    # If True, the order will be treated as part of a position's split-TP/SL set, subject to aggregate size/count limits.
+    is_split_position: bool
 
 
 @dataclass
@@ -2214,14 +2525,10 @@ class Trade:
     size: str
     # The traded price, expressed in `9` decimals
     price: str
-    # The mark price of the instrument at point of trade, expressed in `9` decimals
-    mark_price: str
     # The index price of the instrument at point of trade, expressed in `9` decimals
     index_price: str
     # The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)
     interest_rate: str
-    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
-    forward_price: str
     """
     A trade identifier, globally unique, and monotonically increasing (not by `1`).
     All trades sharing a single taker execution share the same first component (before `-`), and `event_time`.
@@ -2232,6 +2539,10 @@ class Trade:
     venue: Venue
     # If the trade is a RPI trade
     is_rpi: bool
+    # The mark price of the instrument at point of trade, expressed in `9` decimals
+    mark_price: str | None = None
+    # [Options] The forward price of the option at point of trade, expressed in `9` decimals
+    forward_price: str | None = None
 
 
 @dataclass
@@ -2258,6 +2569,10 @@ class TransferHistory:
     transfer_type: TransferType
     # The metadata of the transfer
     transfer_metadata: str
+    # The wallet type of the from account or subaccount
+    from_wallet_type: WalletType
+    # The wallet type of the to account or subaccount
+    to_wallet_type: WalletType
 
 
 @dataclass

@@ -7,13 +7,13 @@
     |quote<br>`q` |string|True|The quote currency|
     |kind<br>`k` |Kind|True|The kind of instrument|
     |venues<br>`v` |[Venue]|True|Venues that this instrument can be traded at|
-    |settlement_period<br>`sp1` |InstrumentSettlementPeriod|True|The settlement period of the instrument|
+    |settlement_period<br>`sp1` |InstrumentSettlementPeriod|False<br>`None`|The settlement period of the instrument|
     |base_decimals<br>`bd` |integer|True|The smallest denomination of the base asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
     |quote_decimals<br>`qd` |integer|True|The smallest denomination of the quote asset supported by GRVT (+3 represents 0.001, -3 represents 1000, 0 represents 1)|
     |tick_size<br>`ts` |string|True|The size of a single tick, expressed in price decimal units|
     |min_size<br>`ms` |string|True|The minimum contract size, expressed in base asset decimal units|
     |create_time<br>`ct` |string|True|Creation time in unix nanoseconds|
-    |max_position_size<br>`mp` |string|True|The maximum position size, expressed in base asset decimal units|
+    |max_position_size<br>`mp` |string|False<br>`None`|The maximum position size, expressed in base asset decimal units|
     |funding_interval_hours<br>`fi` |integer|False<br>`None`|Defines the funding interval to be applied.|
     |adjusted_funding_rate_cap<br>`af` |string|False<br>`None`|Funding rate cap over the defined `intervalHours`.|
     |adjusted_funding_rate_floor<br>`af1` |string|False<br>`None`|Funding rate floor over the defined `intervalHours`.|
@@ -27,6 +27,7 @@
         |`FUTURE` = 2|the future asset kind|
         |`CALL` = 3|the call option asset kind|
         |`PUT` = 4|the put option asset kind|
+        |`SPOT_SWAP` = 8|the spot swap asset kind|
     ??? info "[Venue](/../../schemas/venue)"
         The list of Trading Venues that are supported on the GRVT exchange<br>
 

@@ -18,7 +18,7 @@
         |metadata<br>`m` |OrderMetadata|True|Order Metadata, ignored by the smart contract, and unsigned by the client|
         |state<br>`s1` |OrderState|False<br>`''`|[Filled by GRVT Backend] The current state of the order, ignored by the smart contract, and unsigned by the client|
         |builder<br>`b` |string|True|The main account ID of the builder|
-        |builder_fee<br>`bf` |string|True|Builder fee charged for this order |
+        |builder_fee<br>`bf` |string|True|Builder fee charged for this order, expressed as a percentage (e.g., 0.001 means 0.001%). |
         ??? info "[TimeInForce](/../../schemas/time_in_force)"
             |                       | Must Fill All | Can Fill Partial |
             | -                     | -             | -                |
@@ -75,13 +75,14 @@
                     |`TAKE_PROFIT` = 1|Take Profit Order - Executes when the price reaches a specified level to secure profits.|
                     |`STOP_LOSS` = 2|Stop Loss Order - Executes when the price reaches a specified level to limit losses.|
                 ??? info "[TPSLOrderMetadata](/../../schemas/tpsl_order_metadata)"
-                    Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.<br><br>### Fields:<br>- **triggerBy**: Defines the price type that activates the order (e.g., index price).<br>- **triggerPrice**: The price at which the order is triggered, expressed in `9` decimal precision.<br><br><br>
+                    Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.<br><br>
 
                     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
                     |-|-|-|-|
-                    |trigger_by<br>`tb` |TriggerBy|True|Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order|
+                    |trigger_by<br>`tb` |TriggerBy|True|Defines the price type (e.g., index price) that activates a Take Profit (TP) or Stop Loss (SL) order|
                     |trigger_price<br>`tp` |string|True|The Trigger Price of the order, expressed in `9` decimals.|
                     |close_position<br>`cp` |boolean|True|If True, the order will close the position when the trigger price is reached|
+                    |is_split_position<br>`is` |boolean|True|If True, the order will be treated as part of a position's split-TP/SL set, subject to aggregate size/count limits.|
                     ??? info "[TriggerBy](/../../schemas/trigger_by)"
                         Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order.<br><br>Trigger orders are executed when the selected price type reaches the specified trigger price.Different price types ensure flexibility in executing strategies based on market conditions.<br><br><br>
 
@@ -164,3 +165,11 @@
                 |`BUILDER_ORDER_FEE_NEGATIVE` = 40|Builder fee is below 0|
                 |`BUILDER_ORDER_BUILDER_NOT_AUTHORIZED` = 41|Builder is not an authorized builder for client|
                 |`BUILDER_ORDER_BUILDER_NOT_EXIST` = 42|Builder does not exist|
+                |`TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE` = 44|the trade price is worse than the bankruptcy price|
+                |`TOO_MANY_MAKER_ORDERS` = 45|the order was cancelled due to matching with too many maker orders|
+                |`REDUCE_ONLY_NOT_SUPPORTED_FOR_SPOT_ORDER` = 46|reduce-only order is not supported for spot order|
+                |`TPSL_NOT_SUPPORTED_FOR_SPOT_ORDER` = 47|tpsl is not supported for spot order|
+                |`SPOT_ORDER_NOT_SUPPORTED` = 48|spot order is not supported|
+                |`INSUFFICIENT_BALANCE` = 49|the subaccount has insufficient balance|
+                |`SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS` = 50|spot trading is blocked during socialized loss (SLOW)|
+                |`BELOW_MARGIN_WITH_PENALTY_DEVIATION` = 51|the order will bring the sub account below initial margin requirement considering wide price deviation|

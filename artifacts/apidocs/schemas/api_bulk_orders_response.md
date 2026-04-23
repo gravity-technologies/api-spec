@@ -1,10 +1,8 @@
-!!! info "[WSOrderFeedDataV1](/../../schemas/ws_order_feed_data_v1)"
+!!! info "[ApiBulkOrdersResponse](/../../schemas/api_bulk_orders_response)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |stream<br>`s` |string|True|Stream name|
-    |selector<br>`s1` |string|True|Primary selector|
-    |sequence_number<br>`sn` |string|True|A sequence number used to determine message order within a stream.<br>- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.<br>- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.<br>  - A single cluster payload can be multiplexed into multiple stream payloads.<br>  - To distinguish each stream payload, a `dedupCounter` is included.<br>  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.|
-    |feed<br>`f` |Order|True|The order object being created or updated|
+    |orders<br>`o` |[Order]|True|The orders in same order as requested|
+    |cancel_acks<br>`ca` |[Ack]|True|A list of acks for the cancelled orders|
     ??? info "[Order](/../../schemas/order)"
         Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
@@ -176,3 +174,7 @@
                 |`INSUFFICIENT_BALANCE` = 49|the subaccount has insufficient balance|
                 |`SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS` = 50|spot trading is blocked during socialized loss (SLOW)|
                 |`BELOW_MARGIN_WITH_PENALTY_DEVIATION` = 51|the order will bring the sub account below initial margin requirement considering wide price deviation|
+    ??? info "[Ack](/../../schemas/ack)"
+        |Name<br>`Lite`|Type|Required<br>`Default`| Description |
+        |-|-|-|-|
+        |ack<br>`a` |boolean|True|Gravity has acknowledged that the request has been successfully received and it will process it in the backend|

@@ -25,6 +25,7 @@
         |derisk_to_maintenance_margin_ratio<br>`dt` |string|True|The derisk margin to maintenance margin ratio of this sub account|
         |total_cross_equity<br>`tc` |string|True|The total equity of this sub account for cross margin|
         |cross_unrealized_pnl<br>`cu` |string|True|The unrealized PnL of this sub account for cross margin|
+        |sub_account_mode<br>`sa1` |SubAccountMode|True|The mode of the sub account|
         ??? info "[MarginType](/../../schemas/margin_type)"
             |Value| Description |
             |-|-|
@@ -36,6 +37,10 @@
             |currency<br>`c` |string|True|The currency you hold a spot balance in|
             |balance<br>`b` |string|True|This currency's balance in this trading account.|
             |index_price<br>`ip` |string|True|The index price of this currency. (reported in `USD`)|
+            |entry_price<br>`ep` |string|True|The entry price of this spot currency. (reported in `USD`)|
+            |realized_pnl<br>`rp` |string|True|The realized PnL of this spot currency. (reported in `USD`)|
+            |unrealized_pnl<br>`up` |string|True|The unrealized PnL of this spot currency. (reported in `USD`)|
+            |available_to_transfer<br>`at` |string|True|The available to transfer amount of this spot currency.|
         ??? info "[Positions](/../../schemas/positions)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
@@ -65,3 +70,7 @@
                 |-|-|
                 |`ISOLATED` = 1|Isolated Margin Mode: each position is allocated a fixed amount of collateral|
                 |`CROSS` = 2|Cross Margin Mode: uses all available funds in your account as collateral across all cross margin positions|
+        ??? info "[SubAccountMode](/../../schemas/sub_account_mode)"
+            |Value| Description |
+            |-|-|
+            |`SINGLE_ASSET_MODE` = 1|Single asset mode: the subaccount is only allowed to hold one asset as collateral|

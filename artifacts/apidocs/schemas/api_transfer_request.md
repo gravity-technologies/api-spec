@@ -12,6 +12,8 @@
     |signature<br>`s` |Signature|True|The signature of the transfer|
     |transfer_type<br>`tt` |TransferType|True|The type of transfer|
     |transfer_metadata<br>`tm` |string|True|The metadata of the transfer|
+    |from_wallet_type<br>`fw` |WalletType|True|The wallet type of the from account or subaccount|
+    |to_wallet_type<br>`tw` |WalletType|True|The wallet type of the to account or subaccount|
     ??? info "[Signature](/../../schemas/signature)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
@@ -25,7 +27,7 @@
     ??? info "[TransferType](/../../schemas/transfer_type)"
         |Value| Description |
         |-|-|
-        |`UNSPECIFIED` = 0|Default transfer that has nothing to do with bridging|
+        |`UNSPECIFIED` = 0|Deprecated: use `standard` instead. Legacy value for transfers created before transfer types were introduced.|
         |`STANDARD` = 1|Standard transfer that has nothing to do with bridging|
         |`FAST_ARB_DEPOSIT` = 2|Fast Arb Deposit Metadata type|
         |`FAST_ARB_WITHDRAWAL` = 3|Fast Arb Withdrawal Metadata type|
@@ -34,3 +36,17 @@
         |`ADHOC_INCENTIVE` = 6|Transfer type for adhoc incentive|
         |`REFERRAL_INCENTIVE` = 7|Transfer type for referral incentive|
         |`TRADING_DEPOSIT_YIELD_INCENTIVE` = 8|Transfer type for trading deposit yield incentive|
+        |`TGE_VESTING` = 9|Transfer type for TGE vesting distribution|
+        |`TGE_AIRDROP` = 10|Transfer type for TGE airdrop distribution|
+    ??? info "[WalletType](/../../schemas/wallet_type)"
+        |Value| Description |
+        |-|-|
+        |`FUNDING` = 1|Funding wallet|
+        |`SPOT` = 2|Spot wallet|
+        |`FUTURES` = 3|Futures wallet|
+    ??? info "[WalletType](/../../schemas/wallet_type)"
+        |Value| Description |
+        |-|-|
+        |`FUNDING` = 1|Funding wallet|
+        |`SPOT` = 2|Spot wallet|
+        |`FUTURES` = 3|Futures wallet|

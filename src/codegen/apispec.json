@@ -137,6 +137,32 @@
         },
         {
           "namespace": "Instrument",
+          "name": "RPCGetSupportedAssetsV1",
+          "version": 1,
+          "route": "/supported_assets",
+          "auth_required": false,
+          "request": "EmptyRequest",
+          "response": "ApiGetSupportedAssetsResponse",
+          "on_request_errors": [
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            }
+          ]
+        },
+        {
+          "namespace": "Instrument",
           "name": "RPCGetMarginRulesV1",
           "version": 1,
           "route": "/margin_rules",
@@ -349,6 +375,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 3042,
+              "message": "Candlestick type is not applicable for spot instruments",
+              "status": 400
             }
           ]
         },
@@ -375,6 +406,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 3007,
+              "message": "API is not applicable for spot instruments",
+              "status": 400
             }
           ]
         }
@@ -742,6 +778,11 @@
               "code": 3041,
               "message": "Candlestick type is invalid",
               "status": 400
+            },
+            {
+              "code": 3042,
+              "message": "Candlestick type is not applicable for spot instruments",
+              "status": 400
             }
           ]
         }
@@ -998,6 +1039,11 @@
               "status": 400
             },
             {
+              "code": 2084,
+              "message": "Post-order check failed",
+              "status": 400
+            },
+            {
               "code": 2083,
               "message": "Order Fill would result in exceeding maximum position size under current configurable leverage tier",
               "status": 400
@@ -1048,6 +1094,11 @@
               "status": 400
             },
             {
+              "code": 2242,
+              "message": "Split TPSL functionality not supported; you may be using a deprecated API, or this functionality is temporarily disabled",
+              "status": 400
+            },
+            {
               "code": 3004,
               "message": "Instrument does not have a valid maintenance margin configuration",
               "status": 500
@@ -1075,6 +1126,31 @@
             {
               "code": 2402,
               "message": "Reduce only order size exceeds maximum allowed value",
+              "status": 400
+            },
+            {
+              "code": 7304,
+              "message": "Only position-reducing orders (`reduce_only` as true) allowed for this asset right now.",
+              "status": 400
+            },
+            {
+              "code": 2450,
+              "message": "Spot order is not supported",
+              "status": 400
+            },
+            {
+              "code": 2451,
+              "message": "Spot order must not be a reduce-only order",
+              "status": 400
+            },
+            {
+              "code": 2452,
+              "message": "Spot order must not be a TPSL order",
+              "status": 400
+            },
+            {
+              "code": 2453,
+              "message": "Spot trading is blocked during socialized loss",
               "status": 400
             }
           ]
@@ -1356,6 +1432,432 @@
           ]
         },
         {
+          "namespace": "Order",
+          "name": "RPCBulkOrdersV2",
+          "version": 2,
+          "route": "/bulk_orders",
+          "auth_required": true,
+          "request": "ApiBulkOrdersRequest",
+          "response": "ApiBulkOrdersResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 1005,
+              "message": "Unknown Error",
+              "status": 500
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1400,
+              "message": "Signer does not have trade permission",
+              "status": 403
+            },
+            {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
+            },
+            {
+              "code": 1012,
+              "message": "Invalid signature chain ID",
+              "status": 400
+            },
+            {
+              "code": 2000,
+              "message": "Signature is from an unauthorized signer",
+              "status": 403
+            },
+            {
+              "code": 2001,
+              "message": "Signature has expired",
+              "status": 403
+            },
+            {
+              "code": 2002,
+              "message": "Signature does not match payload",
+              "status": 403
+            },
+            {
+              "code": 2003,
+              "message": "Order sub account does not match logged in user",
+              "status": 403
+            },
+            {
+              "code": 2004,
+              "message": "Signature is from an expired session key",
+              "status": 403
+            },
+            {
+              "code": 2006,
+              "message": "Signature R/S must have exactly 64 characters long without 0x prefix",
+              "status": 403
+            },
+            {
+              "code": 2005,
+              "message": "Signature V must be 27/28",
+              "status": 403
+            },
+            {
+              "code": 2007,
+              "message": "Signature S must be in the lower half of the curve",
+              "status": 403
+            },
+            {
+              "code": 2010,
+              "message": "Order ID should be empty when creating an order",
+              "status": 400
+            },
+            {
+              "code": 2011,
+              "message": "Client Order ID should be supplied when creating an order",
+              "status": 400
+            },
+            {
+              "code": 2012,
+              "message": "Client Order ID overlaps with existing active order",
+              "status": 400
+            },
+            {
+              "code": 2030,
+              "message": "Orderbook Orders must have a TimeInForce of GTT/IOC/FOK",
+              "status": 400
+            },
+            {
+              "code": 2031,
+              "message": "RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK",
+              "status": 400
+            },
+            {
+              "code": 2032,
+              "message": "Post Only can only be set to true for GTT/AON orders",
+              "status": 400
+            },
+            {
+              "code": 2020,
+              "message": "Market Order must always be supplied without a limit price",
+              "status": 400
+            },
+            {
+              "code": 2021,
+              "message": "Limit Order must always be supplied with a limit price",
+              "status": 400
+            },
+            {
+              "code": 2040,
+              "message": "Order must contain at least one leg",
+              "status": 400
+            },
+            {
+              "code": 2041,
+              "message": "Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice",
+              "status": 400
+            },
+            {
+              "code": 2042,
+              "message": "Orderbook Orders must contain only one leg",
+              "status": 400
+            },
+            {
+              "code": 2050,
+              "message": "Order state must be empty upon creation",
+              "status": 400
+            },
+            {
+              "code": 2051,
+              "message": "Order execution metadata must be empty upon creation",
+              "status": 400
+            },
+            {
+              "code": 2060,
+              "message": "Order Legs contain one or more inactive derivative",
+              "status": 400
+            },
+            {
+              "code": 2061,
+              "message": "Unsupported Instrument Requested",
+              "status": 400
+            },
+            {
+              "code": 2062,
+              "message": "Order size smaller than min size",
+              "status": 400
+            },
+            {
+              "code": 2063,
+              "message": "Order size smaller than min block size in block trade venue",
+              "status": 400
+            },
+            {
+              "code": 2064,
+              "message": "Invalid limit price tick",
+              "status": 400
+            },
+            {
+              "code": 2065,
+              "message": "Order size too granular",
+              "status": 400
+            },
+            {
+              "code": 2066,
+              "message": "Order below minimum notional. Please try again with a higher price or size.",
+              "status": 400
+            },
+            {
+              "code": 2067,
+              "message": "Order below minimum notional. Please try reducing your position again with a higher price or size.",
+              "status": 400
+            },
+            {
+              "code": 2070,
+              "message": "Liquidation Order is not supported",
+              "status": 400
+            },
+            {
+              "code": 2080,
+              "message": "Insufficient margin to create order",
+              "status": 400
+            },
+            {
+              "code": 2081,
+              "message": "Order Fill would result in exceeding maximum position size",
+              "status": 400
+            },
+            {
+              "code": 2082,
+              "message": "Pre-order check failed",
+              "status": 400
+            },
+            {
+              "code": 2084,
+              "message": "Post-order check failed",
+              "status": 400
+            },
+            {
+              "code": 2083,
+              "message": "Order Fill would result in exceeding maximum position size under current configurable leverage tier",
+              "status": 400
+            },
+            {
+              "code": 2090,
+              "message": "Max open orders exceeded",
+              "status": 429
+            },
+            {
+              "code": 2110,
+              "message": "Invalid trigger by",
+              "status": 400
+            },
+            {
+              "code": 2111,
+              "message": "Unsupported trigger by",
+              "status": 400
+            },
+            {
+              "code": 2112,
+              "message": "Invalid trigger order",
+              "status": 400
+            },
+            {
+              "code": 2113,
+              "message": "Trigger price must be non-zero",
+              "status": 400
+            },
+            {
+              "code": 2114,
+              "message": "Invalid position linked TPSL orders, position linked TPSL must be a reduce-only order",
+              "status": 400
+            },
+            {
+              "code": 2115,
+              "message": "Invalid position linked TPSL orders, position linked TPSL must not have smaller size than the position",
+              "status": 400
+            },
+            {
+              "code": 2116,
+              "message": "Position linked TPSL order for this asset already exists",
+              "status": 400
+            },
+            {
+              "code": 2117,
+              "message": "Position linked TPSL orders must be created from web or mobile clients",
+              "status": 400
+            },
+            {
+              "code": 2242,
+              "message": "Split TPSL functionality not supported; you may be using a deprecated API, or this functionality is temporarily disabled",
+              "status": 400
+            },
+            {
+              "code": 3004,
+              "message": "Instrument does not have a valid maintenance margin configuration",
+              "status": 500
+            },
+            {
+              "code": 3005,
+              "message": "Instrument's underlying currency does not have a valid balance decimal configuration",
+              "status": 500
+            },
+            {
+              "code": 3006,
+              "message": "Instrument's quote currency does not have a valid balance decimal configuration",
+              "status": 500
+            },
+            {
+              "code": 2400,
+              "message": "Reduce only order with no position",
+              "status": 400
+            },
+            {
+              "code": 2401,
+              "message": "Reduce only order must not increase position size",
+              "status": 400
+            },
+            {
+              "code": 2402,
+              "message": "Reduce only order size exceeds maximum allowed value",
+              "status": 400
+            },
+            {
+              "code": 7304,
+              "message": "Only position-reducing orders (`reduce_only` as true) allowed for this asset right now.",
+              "status": 400
+            },
+            {
+              "code": 2450,
+              "message": "Spot order is not supported",
+              "status": 400
+            },
+            {
+              "code": 2451,
+              "message": "Spot order must not be a reduce-only order",
+              "status": 400
+            },
+            {
+              "code": 2452,
+              "message": "Spot order must not be a TPSL order",
+              "status": 400
+            },
+            {
+              "code": 2453,
+              "message": "Spot trading is blocked during socialized loss",
+              "status": 400
+            },
+            {
+              "code": 2233,
+              "message": "Both order ID and client order ID cannot be provided",
+              "status": 400
+            },
+            {
+              "code": 2234,
+              "message": "Bulk create orders must have the same instrument",
+              "status": 400
+            },
+            {
+              "code": 2235,
+              "message": "Bulk orders count exceeds the maximum allowed",
+              "status": 400
+            },
+            {
+              "code": 2236,
+              "message": "Bulk orders does not support trigger order",
+              "status": 400
+            },
+            {
+              "code": 2237,
+              "message": "Bulk orders must be from API source",
+              "status": 400
+            },
+            {
+              "code": 2238,
+              "message": "Split TPSL orders must not be position-linked TPSL",
+              "status": 400
+            },
+            {
+              "code": 2239,
+              "message": "Split TPSL orders must be reduce-only",
+              "status": 400
+            },
+            {
+              "code": 2240,
+              "message": "If creating split TPSL orders, can only specify split TPSL orders in the creation array",
+              "status": 400
+            },
+            {
+              "code": 2241,
+              "message": "Split TPSL order count exceeds maximum allowed set size",
+              "status": 400
+            },
+            {
+              "code": 2243,
+              "message": "Split TPSL set already exists for this asset. Please modify the existing set of split TPSL orders.",
+              "status": 400
+            },
+            {
+              "code": 2244,
+              "message": "Split TPSL creation only allowed for instruments with already-existing positions.",
+              "status": 400
+            },
+            {
+              "code": 2245,
+              "message": "Split TPSL creation exceeds position size.",
+              "status": 400
+            },
+            {
+              "code": 2246,
+              "message": "Split TPSL modification requires all existing split TPSL orders to be cancelled",
+              "status": 400
+            },
+            {
+              "code": 2222,
+              "message": "Order is not a TPSL order",
+              "status": 400
+            },
+            {
+              "code": 2232,
+              "message": "Invalid position linked TPSL orders, position linked TPSL must not have order linkage",
+              "status": 400
+            },
+            {
+              "code": 2413,
+              "message": "Replace order failed, number of orders provided does not match the number of orders to replace",
+              "status": 400
+            }
+          ]
+        },
+        {
           "namespace": "Execution",
           "name": "RPCFillHistoryV1",
           "version": 1,
@@ -1434,6 +1936,11 @@
               "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
+            },
+            {
+              "code": 3007,
+              "message": "API is not applicable for spot instruments",
+              "status": 400
             }
           ]
         },
@@ -1475,6 +1982,57 @@
               "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
+            },
+            {
+              "code": 3007,
+              "message": "API is not applicable for spot instruments",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Position",
+          "name": "RPCPositionHistoryV1",
+          "version": 1,
+          "route": "/position_history",
+          "auth_required": true,
+          "request": "ApiPositionHistoryRequest",
+          "response": "ApiPositionHistoryResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 3007,
+              "message": "API is not applicable for spot instruments",
+              "status": 400
             }
           ]
         },
@@ -1556,6 +2114,11 @@
               "code": 2108,
               "message": "Attempted to set leverage above maximum",
               "status": 400
+            },
+            {
+              "code": 3007,
+              "message": "API is not applicable for spot instruments",
+              "status": 400
             }
           ]
         },
@@ -1622,6 +2185,11 @@
               "code": 7454,
               "message": "Max removable amount exceeded",
               "status": 400
+            },
+            {
+              "code": 3007,
+              "message": "API is not applicable for spot instruments",
+              "status": 400
             }
           ]
         },
@@ -1667,6 +2235,11 @@
             {
               "code": 7455,
               "message": "Not isolated margin position",
+              "status": 400
+            },
+            {
+              "code": 3007,
+              "message": "API is not applicable for spot instruments",
               "status": 400
             }
           ]
@@ -1805,6 +2378,41 @@
               "code": 7103,
               "message": "Charged trading fee below the config minimum",
               "status": 500
+            },
+            {
+              "code": 7104,
+              "message": "Transfer sub-account doesn't belong to the transfer main account",
+              "status": 400
+            },
+            {
+              "code": 4004,
+              "message": "Both transfer wallet types must be provided",
+              "status": 400
+            },
+            {
+              "code": 4005,
+              "message": "Invalid wallet type for funding account",
+              "status": 400
+            },
+            {
+              "code": 4006,
+              "message": "Invalid wallet type for sub account",
+              "status": 400
+            },
+            {
+              "code": 4008,
+              "message": "Currency is not allowed in the target wallet type",
+              "status": 400
+            },
+            {
+              "code": 4007,
+              "message": "Transfer failed because signature is an exact duplicate of another recently-observed transfer.",
+              "status": 400
+            },
+            {
+              "code": 4009,
+              "message": "Please specify the transfer type",
+              "status": 400
             }
           ]
         },
@@ -1944,6 +2552,47 @@
           "auth_required": true,
           "request": "ApiSubAccountSummaryRequest",
           "response": "ApiSubAccountSummaryResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "Account",
+          "name": "RPCSpotAccountSummaryV1",
+          "version": 1,
+          "route": "/spot_account_summary",
+          "auth_required": true,
+          "request": "ApiSpotSubAccountSummaryRequest",
+          "response": "ApiSpotSubAccountSummaryResponse",
           "on_request_errors": [
             {
               "code": 1000,
@@ -2250,6 +2899,11 @@
             {
               "code": 2101,
               "message": "Vaults cannot configure leverage",
+              "status": 400
+            },
+            {
+              "code": 3007,
+              "message": "API is not applicable for spot instruments",
               "status": 400
             }
           ]
@@ -3057,6 +3711,11 @@
               "code": 3020,
               "message": "Sub account ID must be an uint64 integer",
               "status": 400
+            },
+            {
+              "code": 3007,
+              "message": "API is not applicable for spot instruments",
+              "status": 400
             }
           ]
         },
@@ -3588,6 +4247,160 @@
       "comment": []
     },
     {
+      "name": "ApiBulkOrdersRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID of the user creating the request"
+          ]
+        },
+        {
+          "name": "orders",
+          "lite_name": "o",
+          "semantic_type": "Order",
+          "json_type": "Order",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Orders to create or replace, supply up to 100 orders"
+          ]
+        },
+        {
+          "name": "order_i_ds",
+          "lite_name": "oi",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The order IDs of the orders to cancel or replace, supply up to 100 orderIDs (if both orderIDs and clientOrderIDs are provided, we will reject the payload)"
+          ]
+        },
+        {
+          "name": "client_order_i_ds",
+          "lite_name": "co",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The client order IDs of the orders to cancel or replace, supply up to 100 clientOrderIDs (if both orderIDs and clientOrderIDs are provided, we will reject the payload)"
+          ]
+        },
+        {
+          "name": "time_to_live_ms",
+          "lite_name": "tt",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "100",
+          "example": "'500'",
+          "comment": [
+            "Specifies the time-to-live (in milliseconds) for this cancellation.",
+            "During this period, any order creation with a matching `client_order_id` will be cancelled and not be added to the GRVT matching engine.",
+            "This mechanism helps mitigate time-of-flight issues where cancellations might arrive before the corresponding orders.",
+            "Hence, cancellation by `order_id` ignores this field as the exchange can only assign `order_id`s to already-processed order creations.",
+            "The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `'670'` -\u003e `'600'`, `'30'` -\u003e `'0'`) and capped at 5 seconds (i.e., `'5000'`).",
+            "Value of `'0'` or omission results in the default time-to-live value being applied.",
+            "If the caller requests multiple successive cancellations for a given order, such that the time-to-live windows overlap, only the first request will be considered.",
+            ""
+          ]
+        }
+      ],
+      "comment": [
+        "Bulk create, cancel, or cancel-replace orders for a single subaccount.",
+        "",
+        "A cancel-replace is a cancel of the old order plus a create of a new one. The new order is assigned a new `order_id`; the cancelled `order_id` is terminated. Clients must track the new `order_id` from the response.",
+        "",
+        "* Rules",
+        "  - Up to 100 entries in each of `orders`, `order_ids`, and `client_order_ids`",
+        "  - All create orders must target the same instrument",
+        "  - `client_order_id`s within `orders` must be unique",
+        "  - `order_ids` and `client_order_ids` are mutually exclusive; supplying both is rejected",
+        "  - Rate limits: N creates consume N create_order tokens; any cancels consume 1 cancel_order token",
+        "",
+        "* BulkCreate",
+        "  Populate `orders` only; leave `order_ids` and `client_order_ids` empty. A batch may not mix multiple normal orders with trigger orders.",
+        "",
+        "  To mark an order as TP or SL, populate its `metadata.trigger` field; see `TriggerOrderMetadata` for details.",
+        "",
+        "  A 'parent' order is a normal order whose linked TP/SL trigger orders become active once the parent is fully filled.",
+        "",
+        "  Supported combinations:",
+        "",
+        "  - Normal orders (non-TPSL): one or many orders",
+        "",
+        "  - Standalone TP: 1 TP order",
+        "",
+        "  - Standalone SL: 1 SL order",
+        "",
+        "  - OCO (2 orders: 1 TP + 1 SL): same asset, same size, same side",
+        "",
+        "  - OTO (2 orders: parent + 1 trigger): 1 parent + 1 TP or SL order. Same asset and size. Parent side is opposite of the trigger side.",
+        "",
+        "  - OTOCO (3 orders: parent + TP + SL): 1 parent + 1 TP order + 1 SL order. Same asset and size across all three. Parent side is opposite of TP and SL sides.",
+        "",
+        "* BulkCancel",
+        "  Leave `orders` empty; populate either `order_ids` or `client_order_ids` (not both). Targets can be normal orders, standalone TP/SL, or members of an OCO/OTO/OTOCO group. Passing any member id of a grouped TPSL order cancels the whole group.",
+        "",
+        "* BulkCancelReplace",
+        "  Populate `orders` together with `order_ids` or `client_order_ids`. Ids below refer to entries in whichever id list you chose. Per-case:",
+        "",
+        "  - Normal orders (non-TPSL): the batch is processed as all cancels first, then all creates.",
+        "",
+        "  - TPSL: #creates must equal #cancels, and one request may modify only one group. For OTO and OTOCO, only the trigger part is replaceable — the parent order is not included in `orders` or in the cancel id list, and stays on the book unchanged.",
+        "    - Standalone TP or Standalone SL: cancel 1 id (the existing trigger order) + create 1 new trigger order with matching `triggerType`.",
+        "    - OCO: cancel both ids of the existing OCO group (the TP and SL) + create 2 new orders (1 TP + 1 SL); shape conditions same as BulkCreate OCO.",
+        "    - OTO: cancel the id of the existing trigger order in the OTO group + create 1 new trigger order. The new trigger is linked to the same parent.",
+        "    - OTOCO: cancel both ids of the existing OTOCO group (the TP and SL) + create 2 new orders (1 TP + 1 SL); shape conditions same as BulkCreate OCO. The new TP and SL are linked to the same parent."
+      ]
+    },
+    {
+      "name": "ApiBulkOrdersResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "orders",
+          "lite_name": "o",
+          "semantic_type": "Order",
+          "json_type": "Order",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The orders in same order as requested"
+          ]
+        },
+        {
+          "name": "cancel_acks",
+          "lite_name": "ca",
+          "semantic_type": "Ack",
+          "json_type": "Ack",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "A list of acks for the cancelled orders"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiCancelAllOrdersRequest",
       "is_root": true,
       "fields": [
@@ -3799,6 +4612,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "example": "'CI_1_M'",
           "comment": [
             "The interval of each candlestick"
           ]
@@ -3811,8 +4625,9 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "example": "'TRADE'",
           "comment": [
-            "The type of candlestick data to retrieve"
+            "The type of candlestick data to retrieve. Note: For spot instruments, only `trade` and `mid` are available"
           ]
         },
         {
@@ -5165,6 +5980,51 @@
       ]
     },
     {
+      "name": "ApiGetSupportedAssetsResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "funding",
+          "lite_name": "f",
+          "semantic_type": "SupportedAsset",
+          "json_type": "SupportedAsset",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Assets supported in funding wallets"
+          ]
+        },
+        {
+          "name": "spot",
+          "lite_name": "s",
+          "semantic_type": "SupportedAsset",
+          "json_type": "SupportedAsset",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Assets supported in spot wallets"
+          ]
+        },
+        {
+          "name": "futures",
+          "lite_name": "f1",
+          "semantic_type": "FuturesWalletAssets",
+          "json_type": "FuturesWalletAssets",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Assets supported in futures wallets, grouped by mode"
+          ]
+        }
+      ],
+      "comment": [
+        "Response for the supported assets endpoint"
+      ]
+    },
+    {
       "name": "ApiMiniTickerRequest",
       "is_root": true,
       "fields": [
@@ -5497,6 +6357,483 @@
       "comment": []
     },
     {
+      "name": "ApiPositionHistory",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Trading account ID which held this position"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Asset this position was for"
+          ]
+        },
+        {
+          "name": "open_time",
+          "lite_name": "ot",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Timestamp of first trade that opened this lifecycle"
+          ]
+        },
+        {
+          "name": "status",
+          "lite_name": "s",
+          "semantic_type": "PositionCloseStatus",
+          "json_type": "PositionCloseStatus",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'CLOSED'",
+          "comment": []
+        },
+        {
+          "name": "is_long",
+          "lite_name": "il",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "True if the closed position was long"
+          ]
+        },
+        {
+          "name": "margin_type",
+          "lite_name": "mt",
+          "semantic_type": "PositionMarginType",
+          "json_type": "PositionMarginType",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'SIMPLE_CROSS_MARGIN'",
+          "comment": []
+        },
+        {
+          "name": "close_time",
+          "lite_name": "ct",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Timestamp when the position lifecycle ended. Omitted when status is `PARTIALLY_CLOSED`"
+          ]
+        },
+        {
+          "name": "entry_price",
+          "lite_name": "ep",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Average entry price at 9 decimals"
+          ]
+        },
+        {
+          "name": "exit_price",
+          "lite_name": "ep1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Average exit price at 9 decimals"
+          ]
+        },
+        {
+          "name": "position_close_mark_price",
+          "lite_name": "pc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Mark price at close. Omitted when status is `PARTIALLY_CLOSED`"
+          ]
+        },
+        {
+          "name": "realized_pnl",
+          "lite_name": "rp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Cumulative realized PnL in quote currency"
+          ]
+        },
+        {
+          "name": "cumulative_fee",
+          "lite_name": "cf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 11,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Cumulative fees in quote currency"
+          ]
+        },
+        {
+          "name": "cumulative_realized_funding_payment",
+          "lite_name": "cr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 12,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Cumulative realized funding payment in quote currency"
+          ]
+        },
+        {
+          "name": "closed_volume_base",
+          "lite_name": "cv",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 13,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Sum of abs(reducingTradeSize) across all reducing trades"
+          ]
+        },
+        {
+          "name": "closed_volume_quote",
+          "lite_name": "cv1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 14,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Sum of abs(reducingTradeSize) * tradePrice across all reducing trades"
+          ]
+        },
+        {
+          "name": "max_open_interest_base",
+          "lite_name": "mo",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 15,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Max absolute position size reached during lifecycle"
+          ]
+        },
+        {
+          "name": "max_open_interest_quote",
+          "lite_name": "mo1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 16,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Max abs(size) * entryVWAP reached during lifecycle"
+          ]
+        },
+        {
+          "name": "cumulative_initial_margin",
+          "lite_name": "ci",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 17,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Sum of markPrice * abs(tradeSize) / leverage for position-increasing trades"
+          ]
+        },
+        {
+          "name": "max_initial_margin",
+          "lite_name": "mi",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 18,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "High-water mark of cumulativeInitialMargin during lifecycle"
+          ]
+        },
+        {
+          "name": "leverage",
+          "lite_name": "l",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 19,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Leverage at time of close. When status is `PARTIALLY_CLOSED`, this is the current leverage"
+          ]
+        },
+        {
+          "name": "unrealized_pnl",
+          "lite_name": "up",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 20,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "The unrealized PnL of the position, expressed in quote asset decimal units",
+            "`unrealized_pnl = (mark_price - entry_price) * size` where `size` is signed (negative for short positions)",
+            "Only present when status is `PARTIALLY_CLOSED`"
+          ]
+        }
+      ],
+      "comment": [
+        "A position lifecycle record.",
+        "",
+        "When status is `PARTIALLY_CLOSED`, the position is still open. Fields that describe the close event (`close_time`, `position_close_mark_price`) will be omitted, and `leverage` reflects the current value"
+      ]
+    },
+    {
+      "name": "ApiPositionHistoryRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to request for"
+          ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Start of the close-time range in unix nanoseconds. If nil, defaults to no lower bound. Only positions with close_time \u003e= start_time are returned. Does not apply to partially closed positions (they have no close time and will be excluded when this field is set)"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "now()",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "End of the close-time range in unix nanoseconds. If nil, defaults to now. Only positions with close_time \u003c= end_time are returned. Does not apply to partially closed positions (they have no close time and will be excluded when this field is set)"
+          ]
+        },
+        {
+          "name": "kind",
+          "lite_name": "k",
+          "semantic_type": "Kind",
+          "json_type": "Kind",
+          "index": 3,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['PERPETUAL']",
+          "comment": [
+            "The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only positions matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "base",
+          "lite_name": "b",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['BTC', 'ETH']",
+          "comment": [
+            "The base filter to apply. If nil, this defaults to all bases. Otherwise, only positions matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "quote",
+          "lite_name": "q",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['USDT', 'USDC']",
+          "comment": [
+            "The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only positions matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "default": "500",
+          "example": "500",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000. Applies to fully closed positions only; limit excludes any matching partially-closed positions"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "''",
+          "comment": [
+            "The cursor to indicate when to start the next page query from. Partially closed positions are only returned on the initial page (when cursor is unset)"
+          ]
+        },
+        {
+          "name": "status",
+          "lite_name": "s",
+          "semantic_type": "PositionCloseStatus",
+          "json_type": "PositionCloseStatus",
+          "index": 8,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['CLOSED', 'LIQUIDATED']",
+          "comment": [
+            "The status filter to apply. If nil, this defaults to all statuses. Otherwise, only positions matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "is_long",
+          "lite_name": "il",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 9,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "comment": [
+            "Set to true to filter for long positions. If both is_long and is_short are false (default), positions of both directions are returned"
+          ]
+        },
+        {
+          "name": "is_short",
+          "lite_name": "is",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 10,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "comment": [
+            "Set to true to filter for short positions. If both is_long and is_short are false (default), positions of both directions are returned"
+          ]
+        },
+        {
+          "name": "margin_type",
+          "lite_name": "mt",
+          "semantic_type": "PositionMarginType",
+          "json_type": "PositionMarginType",
+          "index": 11,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['CROSS', 'ISOLATED']",
+          "comment": [
+            "The margin type filter to apply. If nil, this defaults to all margin types. Otherwise, only positions matching the filter will be returned"
+          ]
+        }
+      ],
+      "comment": [
+        "Query for position lifecycle records for a single sub account.",
+        "",
+        "Returns both fully closed positions and positions that are still open but have been partially reduced (`PARTIALLY_CLOSED`).",
+        "",
+        "Results are ordered as follows: partially closed positions (most recently opened first), then fully closed positions (most recently closed first).",
+        "",
+        "Partially closed positions are included only when all of the following are true:\u003cul\u003e\u003cli\u003e`start_time` is unset (partially closed positions have no close time)\u003c/li\u003e\u003cli\u003e`end_time` is unset (partially closed positions have no close time)\u003c/li\u003e\u003cli\u003e`cursor` is unset (they are only returned on the initial page)\u003c/li\u003e\u003cli\u003e`status` is nil or includes `PARTIALLY_CLOSED`\u003c/li\u003e\u003c/ul\u003eSince these positions have no close time, query-row limits, as well as time-range and cursor-based pagination, do not apply to them.",
+        "",
+        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup by position-close time, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+      ]
+    },
+    {
+      "name": "ApiPositionHistoryResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "ApiPositionHistory",
+          "json_type": "ApiPositionHistory",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Position lifecycle records matching the request filters. Partially closed positions appear first (most recently opened first), followed by fully closed positions (most recently closed first)"
+          ]
+        },
+        {
+          "name": "next",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiPositionsRequest",
       "is_root": true,
       "fields": [
@@ -5777,7 +7114,8 @@
         }
       ],
       "comment": [
-        "The request to set the initial leverage of a sub account"
+        "The request to set the initial leverage of a sub account.",
+        " DEPRECATED: This API is deprecated, use set_position_config API instead"
       ]
     },
     {
@@ -5799,7 +7137,8 @@
         }
       ],
       "comment": [
-        "The response to set the initial leverage of a sub account"
+        "The response to set the initial leverage of a sub account.",
+        " DEPRECATED: This API is deprecated, use set_position_config API instead"
       ]
     },
     {
@@ -5897,6 +7236,47 @@
       ],
       "comment": [
         "The response to set the margin type and leverage for a position"
+      ]
+    },
+    {
+      "name": "ApiSpotSubAccountSummaryRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID to filter by"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiSpotSubAccountSummaryResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "SpotSubAccount",
+          "json_type": "SpotSubAccount",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The spot sub account summary"
+          ]
+        }
+      ],
+      "comment": [
+        "The spot account summary, that reports the total equity and spot balances of a spot sub account"
       ]
     },
     {
@@ -6571,6 +7951,32 @@
           "example": "'{\\\"provider\\\":\\\"XY\\\",\\\"direction\\\":\\\"WITHDRAWAL\\\",\\\"provider_tx_id\\\":\\\"txn123456\\\",\\\"chainid\\\":\\\"42161\\\",\\\"endpoint\\\":\\\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\\\"}'",
           "comment": [
             "The metadata of the transfer"
+          ]
+        },
+        {
+          "name": "from_wallet_type",
+          "lite_name": "fw",
+          "semantic_type": "WalletType",
+          "json_type": "WalletType",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'SPOT'",
+          "comment": [
+            "The wallet type of the from account or subaccount"
+          ]
+        },
+        {
+          "name": "to_wallet_type",
+          "lite_name": "tw",
+          "semantic_type": "WalletType",
+          "json_type": "WalletType",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'FUNDING'",
+          "comment": [
+            "The wallet type of the to account or subaccount"
           ]
         }
       ],
@@ -7737,6 +9143,26 @@
           "array_depth": 0,
           "optional": false,
           "comment": []
+        },
+        {
+          "name": "spot_taker_fee",
+          "lite_name": "st",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
+        },
+        {
+          "name": "spot_maker_fee",
+          "lite_name": "sm",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "comment": []
         }
       ],
       "comment": []
@@ -8115,7 +9541,7 @@
           "json_type": "string",
           "index": 7,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'65038.01'",
           "comment": [
             "The mark price of the instrument at point of trade, expressed in `9` decimals"
@@ -8154,7 +9580,7 @@
           "json_type": "string",
           "index": 10,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'65038.01'",
           "comment": [
             "[Options] The forward price of the option at point of trade, expressed in `9` decimals"
@@ -8351,6 +9777,19 @@
           "comment": [
             "The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee"
           ]
+        },
+        {
+          "name": "fee_currency",
+          "lite_name": "fc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 27,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency of the fee paid on the trade"
+          ]
         }
       ],
       "comment": []
@@ -8407,6 +9846,32 @@
           "optional": false,
           "comment": [
             "The list of vault investments held by this main account"
+          ]
+        },
+        {
+          "name": "total_cash_balance",
+          "lite_name": "tc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000000.00'",
+          "comment": [
+            "Total balance of cash (stablecoin) currencies, denominated in USD"
+          ]
+        },
+        {
+          "name": "total_spot_asset_balance",
+          "lite_name": "ts",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'500000.00'",
+          "comment": [
+            "Total balance of non-cash spot currencies, denominated in USD"
           ]
         }
       ],
@@ -8500,6 +9965,40 @@
         }
       ],
       "comment": []
+    },
+    {
+      "name": "FuturesWalletAssets",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "mode",
+          "lite_name": "m",
+          "semantic_type": "SubAccountMode",
+          "json_type": "SubAccountMode",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'SINGLE_ASSET'",
+          "comment": [
+            "The sub account mode"
+          ]
+        },
+        {
+          "name": "supported_assets",
+          "lite_name": "sa",
+          "semantic_type": "SupportedAsset",
+          "json_type": "SupportedAsset",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Assets supported under this futures mode"
+          ]
+        }
+      ],
+      "comment": [
+        "Supported assets for a futures wallet mode"
+      ]
     },
     {
       "name": "InitialLeverageResult",
@@ -8661,7 +10160,7 @@
           "json_type": "InstrumentSettlementPeriod",
           "index": 8,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'PERPETUAL'",
           "comment": [
             "The settlement period of the instrument"
@@ -8739,7 +10238,7 @@
           "json_type": "string",
           "index": 15,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'100.0'",
           "comment": [
             "The maximum position size, expressed in base asset decimal units"
@@ -8753,6 +10252,7 @@
           "index": 17,
           "array_depth": 0,
           "optional": true,
+          "example": "8",
           "comment": [
             "Defines the funding interval to be applied."
           ]
@@ -9263,9 +10763,9 @@
           "index": 13,
           "array_depth": 0,
           "optional": false,
-          "example": "0.001",
+          "example": "'0.001'",
           "comment": [
-            "Builder fee charged for this order "
+            "Builder fee charged for this order, expressed as a percentage (e.g., 0.001 means 0.001%). "
           ]
         }
       ],
@@ -10209,6 +11709,116 @@
           "comment": [
             "The index price of this currency. (reported in `USD`)"
           ]
+        },
+        {
+          "name": "entry_price",
+          "lite_name": "ep",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1.0'",
+          "comment": [
+            "The entry price of this spot currency. (reported in `USD`)"
+          ]
+        },
+        {
+          "name": "realized_pnl",
+          "lite_name": "rp",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.0'",
+          "comment": [
+            "The realized PnL of this spot currency. (reported in `USD`)"
+          ]
+        },
+        {
+          "name": "unrealized_pnl",
+          "lite_name": "up",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.0'",
+          "comment": [
+            "The unrealized PnL of this spot currency. (reported in `USD`)"
+          ]
+        },
+        {
+          "name": "available_to_transfer",
+          "lite_name": "at",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.0'",
+          "comment": [
+            "The available to transfer amount of this spot currency."
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "SpotSubAccount",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Time at which the event was emitted in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID this entry refers to"
+          ]
+        },
+        {
+          "name": "total_equity",
+          "lite_name": "te",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3945034.23'",
+          "comment": [
+            "Total equity of the spot sub account, denominated USD"
+          ]
+        },
+        {
+          "name": "spot_balances",
+          "lite_name": "sb",
+          "semantic_type": "SpotBalance",
+          "json_type": "SpotBalance",
+          "index": 3,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The list of spot assets owned by this spot sub account, and their balances"
+          ]
         }
       ],
       "comment": []
@@ -10421,6 +12031,7 @@
           "index": 12,
           "array_depth": 0,
           "optional": true,
+          "example": "false",
           "comment": [
             "Whether this sub account is a vault"
           ]
@@ -10489,9 +12100,70 @@
           "comment": [
             "The unrealized PnL of this sub account for cross margin"
           ]
+        },
+        {
+          "name": "sub_account_mode",
+          "lite_name": "sa1",
+          "semantic_type": "SubAccountMode",
+          "json_type": "SubAccountMode",
+          "index": 18,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'SINGLE_ASSET_MODE'",
+          "comment": [
+            "The mode of the sub account"
+          ]
         }
       ],
       "comment": []
+    },
+    {
+      "name": "SupportedAsset",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "asset_id",
+          "lite_name": "ai",
+          "semantic_type": "uint16",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "3",
+          "comment": [
+            "The currency ID of the asset"
+          ]
+        },
+        {
+          "name": "asset_code",
+          "lite_name": "ac",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The readable currency code of the asset"
+          ]
+        },
+        {
+          "name": "balance_decimals",
+          "lite_name": "bd",
+          "semantic_type": "int8",
+          "json_type": "integer",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "6",
+          "comment": [
+            "The number of decimals used for balance representation"
+          ]
+        }
+      ],
+      "comment": [
+        "An asset supported for a given wallet type"
+      ]
     },
     {
       "name": "TPSLOrderMetadata",
@@ -10507,7 +12179,7 @@
           "optional": false,
           "example": "'LAST'",
           "comment": [
-            "Defines the price type that activates a Take Profit (TP) or Stop Loss (SL) order"
+            "Defines the price type (e.g., index price) that activates a Take Profit (TP) or Stop Loss (SL) order"
           ]
         },
         {
@@ -10535,15 +12207,23 @@
           "comment": [
             "If True, the order will close the position when the trigger price is reached"
           ]
+        },
+        {
+          "name": "is_split_position",
+          "lite_name": "is",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "false",
+          "comment": [
+            "If True, the order will be treated as part of a position's split-TP/SL set, subject to aggregate size/count limits."
+          ]
         }
       ],
       "comment": [
         "Contains metadata for Take Profit (TP) and Stop Loss (SL) trigger orders.",
-        "",
-        "### Fields:",
-        "- **triggerBy**: Defines the price type that activates the order (e.g., index price).",
-        "- **triggerPrice**: The price at which the order is triggered, expressed in `9` decimal precision.",
-        "",
         ""
       ]
     },
@@ -10981,7 +12661,7 @@
           "json_type": "string",
           "index": 5,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'65038.01'",
           "comment": [
             "The mark price of the instrument at point of trade, expressed in `9` decimals"
@@ -11020,7 +12700,7 @@
           "json_type": "string",
           "index": 8,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'65038.01'",
           "comment": [
             "[Options] The forward price of the option at point of trade, expressed in `9` decimals"
@@ -11049,6 +12729,7 @@
           "index": 10,
           "array_depth": 0,
           "optional": false,
+          "example": "'ORDERBOOK'",
           "comment": [
             "The venue where the trade occurred"
           ]
@@ -11199,6 +12880,7 @@
           "index": 9,
           "array_depth": 0,
           "optional": false,
+          "example": "'STANDARD'",
           "comment": [
             "The type of transfer"
           ]
@@ -11213,6 +12895,32 @@
           "optional": false,
           "comment": [
             "The metadata of the transfer"
+          ]
+        },
+        {
+          "name": "from_wallet_type",
+          "lite_name": "fw",
+          "semantic_type": "WalletType",
+          "json_type": "WalletType",
+          "index": 11,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'SPOT'",
+          "comment": [
+            "The wallet type of the from account or subaccount"
+          ]
+        },
+        {
+          "name": "to_wallet_type",
+          "lite_name": "tw",
+          "semantic_type": "WalletType",
+          "json_type": "WalletType",
+          "index": 12,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'FUNDING'",
+          "comment": [
+            "The wallet type of the to account or subaccount"
           ]
         }
       ],
@@ -11498,6 +13206,7 @@
           "array_depth": 0,
           "optional": true,
           "default": "true",
+          "example": "false",
           "comment": [
             "Omitted for redemption requests to non-cross exchange vaults. True if cancellation is blocked within the CEV allocation allowance for the user's current tier (e.g. because the user has already transferred out the spot balance underlying the redemption request)."
           ]
@@ -11802,6 +13511,7 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "example": "'CI_1_M'",
           "comment": [
             "The interval of each candlestick"
           ],
@@ -11815,6 +13525,7 @@
           "index": 2,
           "array_depth": 0,
           "optional": false,
+          "example": "'TRADE'",
           "comment": [
             "The type of candlestick data to retrieve"
           ],
@@ -14101,6 +15812,13 @@
           "comment": [
             "the put option asset kind"
           ]
+        },
+        {
+          "name": "SPOT_SWAP",
+          "value": 8,
+          "comment": [
+            "the spot swap asset kind"
+          ]
         }
       ],
       "comment": [
@@ -14430,6 +16148,62 @@
           "comment": [
             "Builder does not exist"
           ]
+        },
+        {
+          "name": "TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE",
+          "value": 44,
+          "comment": [
+            "the trade price is worse than the bankruptcy price"
+          ]
+        },
+        {
+          "name": "TOO_MANY_MAKER_ORDERS",
+          "value": 45,
+          "comment": [
+            "the order was cancelled due to matching with too many maker orders"
+          ]
+        },
+        {
+          "name": "REDUCE_ONLY_NOT_SUPPORTED_FOR_SPOT_ORDER",
+          "value": 46,
+          "comment": [
+            "reduce-only order is not supported for spot order"
+          ]
+        },
+        {
+          "name": "TPSL_NOT_SUPPORTED_FOR_SPOT_ORDER",
+          "value": 47,
+          "comment": [
+            "tpsl is not supported for spot order"
+          ]
+        },
+        {
+          "name": "SPOT_ORDER_NOT_SUPPORTED",
+          "value": 48,
+          "comment": [
+            "spot order is not supported"
+          ]
+        },
+        {
+          "name": "INSUFFICIENT_BALANCE",
+          "value": 49,
+          "comment": [
+            "the subaccount has insufficient balance"
+          ]
+        },
+        {
+          "name": "SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS",
+          "value": 50,
+          "comment": [
+            "spot trading is blocked during socialized loss (SLOW)"
+          ]
+        },
+        {
+          "name": "BELOW_MARGIN_WITH_PENALTY_DEVIATION",
+          "value": 51,
+          "comment": [
+            "the order will bring the sub account below initial margin requirement considering wide price deviation"
+          ]
         }
       ],
       "comment": []
@@ -14476,6 +16250,40 @@
       "comment": []
     },
     {
+      "name": "PositionCloseStatus",
+      "values": [
+        {
+          "name": "CLOSED",
+          "value": 1,
+          "comment": [
+            "Position fully closed via reducing trade or flip"
+          ]
+        },
+        {
+          "name": "LIQUIDATED",
+          "value": 2,
+          "comment": [
+            "Position closed via liquidation"
+          ]
+        },
+        {
+          "name": "SETTLED",
+          "value": 3,
+          "comment": [
+            "Position closed via settlement"
+          ]
+        },
+        {
+          "name": "PARTIALLY_CLOSED",
+          "value": 4,
+          "comment": [
+            "Position partially closed"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "PositionMarginType",
       "values": [
         {
@@ -14490,6 +16298,19 @@
           "value": 2,
           "comment": [
             "Cross Margin Mode: uses all available funds in your account as collateral across all cross margin positions"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "SubAccountMode",
+      "values": [
+        {
+          "name": "SINGLE_ASSET_MODE",
+          "value": 1,
+          "comment": [
+            "Single asset mode: the subaccount is only allowed to hold one asset as collateral"
           ]
         }
       ],
@@ -14549,7 +16370,7 @@
           "name": "UNSPECIFIED",
           "value": 0,
           "comment": [
-            "Default transfer that has nothing to do with bridging"
+            "Deprecated: use `standard` instead. Legacy value for transfers created before transfer types were introduced."
           ]
         },
         {
@@ -14606,6 +16427,20 @@
           "value": 8,
           "comment": [
             "Transfer type for trading deposit yield incentive"
+          ]
+        },
+        {
+          "name": "TGE_VESTING",
+          "value": 9,
+          "comment": [
+            "Transfer type for TGE vesting distribution"
+          ]
+        },
+        {
+          "name": "TGE_AIRDROP",
+          "value": 10,
+          "comment": [
+            "Transfer type for TGE airdrop distribution"
           ]
         }
       ],
@@ -14776,6 +16611,33 @@
       "comment": [
         "The list of Trading Venues that are supported on the GRVT exchange"
       ]
+    },
+    {
+      "name": "WalletType",
+      "values": [
+        {
+          "name": "FUNDING",
+          "value": 1,
+          "comment": [
+            "Funding wallet"
+          ]
+        },
+        {
+          "name": "SPOT",
+          "value": 2,
+          "comment": [
+            "Spot wallet"
+          ]
+        },
+        {
+          "name": "FUTURES",
+          "value": 3,
+          "comment": [
+            "Futures wallet"
+          ]
+        }
+      ],
+      "comment": []
     }
   ]
 }

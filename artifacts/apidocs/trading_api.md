@@ -46,13 +46,14 @@ LITE ENDPOINT: lite/v1/create_order
                         "tpsl": {
                             "trigger_by": "LAST",
                             "trigger_price": "65038.10",
-                            "close_position": false
+                            "close_position": false,
+                            "is_split_position": false
                         }
                     },
                     "broker": "BROKER_CODE"
                 },
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "builder_fee": 0.001
+                "builder_fee": "0.001"
             }
         }
         ```
@@ -88,13 +89,14 @@ LITE ENDPOINT: lite/v1/create_order
                         "t": {
                             "tb": "LAST",
                             "tp": "65038.10",
-                            "cp": false
+                            "cp": false,
+                            "is": false
                         }
                     },
                     "b": "BROKER_CODE"
                 },
                 "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "bf": 0.001
+                "bf": "0.001"
             }
         }
         ```
@@ -138,7 +140,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "tpsl": {
                             "trigger_by": "LAST",
                             "trigger_price": "65038.10",
-                            "close_position": false
+                            "close_position": false,
+                            "is_split_position": false
                         }
                     },
                     "broker": "BROKER_CODE"
@@ -152,7 +155,7 @@ LITE ENDPOINT: lite/v1/create_order
                     "avg_fill_price": ["60000.4"]
                 },
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "builder_fee": 0.001
+                "builder_fee": "0.001"
             }
         }
         ```
@@ -189,7 +192,8 @@ LITE ENDPOINT: lite/v1/create_order
                         "t": {
                             "tb": "LAST",
                             "tp": "65038.10",
-                            "cp": false
+                            "cp": false,
+                            "is": false
                         }
                     },
                     "b": "BROKER_CODE"
@@ -203,7 +207,7 @@ LITE ENDPOINT: lite/v1/create_order
                     "af": ["60000.4"]
                 },
                 "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "bf": 0.001
+                "bf": "0.001"
             }
         }
         ```
@@ -257,6 +261,7 @@ LITE ENDPOINT: lite/v1/create_order
         |2080|400|Insufficient margin to create order|
         |2081|400|Order Fill would result in exceeding maximum position size|
         |2082|400|Pre-order check failed|
+        |2084|400|Post-order check failed|
         |2083|400|Order Fill would result in exceeding maximum position size under current configurable leverage tier|
         |2090|429|Max open orders exceeded|
         |2110|400|Invalid trigger by|
@@ -267,12 +272,18 @@ LITE ENDPOINT: lite/v1/create_order
         |2115|400|Invalid position linked TPSL orders, position linked TPSL must not have smaller size than the position|
         |2116|400|Position linked TPSL order for this asset already exists|
         |2117|400|Position linked TPSL orders must be created from web or mobile clients|
+        |2242|400|Split TPSL functionality not supported; you may be using a deprecated API, or this functionality is temporarily disabled|
         |3004|500|Instrument does not have a valid maintenance margin configuration|
         |3005|500|Instrument's underlying currency does not have a valid balance decimal configuration|
         |3006|500|Instrument's quote currency does not have a valid balance decimal configuration|
         |2400|400|Reduce only order with no position|
         |2401|400|Reduce only order must not increase position size|
         |2402|400|Reduce only order size exceeds maximum allowed value|
+        |7304|400|Only position-reducing orders (`reduce_only` as true) allowed for this asset right now.|
+        |2450|400|Spot order is not supported|
+        |2451|400|Spot order must not be a reduce-only order|
+        |2452|400|Spot order must not be a TPSL order|
+        |2453|400|Spot trading is blocked during socialized loss|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -334,13 +345,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "tpsl": {
                                 "trigger_by": "LAST",
                                 "trigger_price": "65038.10",
-                                "close_position": false
+                                "close_position": false,
+                                "is_split_position": false
                             }
                         },
                         "broker": "BROKER_CODE"
                     },
                     "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                    "builder_fee": 0.001
+                    "builder_fee": "0.001"
                 }
             }
             '
@@ -384,13 +396,14 @@ LITE ENDPOINT: lite/v1/create_order
                                 "tpsl": {
                                     "trigger_by": "LAST",
                                     "trigger_price": "65038.10",
-                                    "close_position": false
+                                    "close_position": false,
+                                    "is_split_position": false
                                 }
                             },
                             "broker": "BROKER_CODE"
                         },
                         "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                        "builder_fee": 0.001
+                        "builder_fee": "0.001"
                     }
                 },
                 "id": 123
@@ -434,13 +447,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "t": {
                                 "tb": "LAST",
                                 "tp": "65038.10",
-                                "cp": false
+                                "cp": false,
+                                "is": false
                             }
                         },
                         "b": "BROKER_CODE"
                     },
                     "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                    "bf": 0.001
+                    "bf": "0.001"
                 }
             }
             '
@@ -484,13 +498,14 @@ LITE ENDPOINT: lite/v1/create_order
                                 "t": {
                                     "tb": "LAST",
                                     "tp": "65038.10",
-                                    "cp": false
+                                    "cp": false,
+                                    "is": false
                                 }
                             },
                             "b": "BROKER_CODE"
                         },
                         "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                        "bf": 0.001
+                        "bf": "0.001"
                     }
                 },
                 "i": 123
@@ -535,13 +550,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "tpsl": {
                                 "trigger_by": "LAST",
                                 "trigger_price": "65038.10",
-                                "close_position": false
+                                "close_position": false,
+                                "is_split_position": false
                             }
                         },
                         "broker": "BROKER_CODE"
                     },
                     "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                    "builder_fee": 0.001
+                    "builder_fee": "0.001"
                 }
             }
             '
@@ -585,13 +601,14 @@ LITE ENDPOINT: lite/v1/create_order
                                 "tpsl": {
                                     "trigger_by": "LAST",
                                     "trigger_price": "65038.10",
-                                    "close_position": false
+                                    "close_position": false,
+                                    "is_split_position": false
                                 }
                             },
                             "broker": "BROKER_CODE"
                         },
                         "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                        "builder_fee": 0.001
+                        "builder_fee": "0.001"
                     }
                 },
                 "id": 123
@@ -635,13 +652,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "t": {
                                 "tb": "LAST",
                                 "tp": "65038.10",
-                                "cp": false
+                                "cp": false,
+                                "is": false
                             }
                         },
                         "b": "BROKER_CODE"
                     },
                     "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                    "bf": 0.001
+                    "bf": "0.001"
                 }
             }
             '
@@ -685,13 +703,14 @@ LITE ENDPOINT: lite/v1/create_order
                                 "t": {
                                     "tb": "LAST",
                                     "tp": "65038.10",
-                                    "cp": false
+                                    "cp": false,
+                                    "is": false
                                 }
                             },
                             "b": "BROKER_CODE"
                         },
                         "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                        "bf": 0.001
+                        "bf": "0.001"
                     }
                 },
                 "i": 123
@@ -736,13 +755,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "tpsl": {
                                 "trigger_by": "LAST",
                                 "trigger_price": "65038.10",
-                                "close_position": false
+                                "close_position": false,
+                                "is_split_position": false
                             }
                         },
                         "broker": "BROKER_CODE"
                     },
                     "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                    "builder_fee": 0.001
+                    "builder_fee": "0.001"
                 }
             }
             '
@@ -786,13 +806,14 @@ LITE ENDPOINT: lite/v1/create_order
                                 "tpsl": {
                                     "trigger_by": "LAST",
                                     "trigger_price": "65038.10",
-                                    "close_position": false
+                                    "close_position": false,
+                                    "is_split_position": false
                                 }
                             },
                             "broker": "BROKER_CODE"
                         },
                         "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                        "builder_fee": 0.001
+                        "builder_fee": "0.001"
                     }
                 },
                 "id": 123
@@ -836,13 +857,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "t": {
                                 "tb": "LAST",
                                 "tp": "65038.10",
-                                "cp": false
+                                "cp": false,
+                                "is": false
                             }
                         },
                         "b": "BROKER_CODE"
                     },
                     "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                    "bf": 0.001
+                    "bf": "0.001"
                 }
             }
             '
@@ -886,13 +908,14 @@ LITE ENDPOINT: lite/v1/create_order
                                 "t": {
                                     "tb": "LAST",
                                     "tp": "65038.10",
-                                    "cp": false
+                                    "cp": false,
+                                    "is": false
                                 }
                             },
                             "b": "BROKER_CODE"
                         },
                         "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                        "bf": 0.001
+                        "bf": "0.001"
                     }
                 },
                 "i": 123
@@ -937,13 +960,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "tpsl": {
                                 "trigger_by": "LAST",
                                 "trigger_price": "65038.10",
-                                "close_position": false
+                                "close_position": false,
+                                "is_split_position": false
                             }
                         },
                         "broker": "BROKER_CODE"
                     },
                     "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                    "builder_fee": 0.001
+                    "builder_fee": "0.001"
                 }
             }
             '
@@ -987,13 +1011,14 @@ LITE ENDPOINT: lite/v1/create_order
                                 "tpsl": {
                                     "trigger_by": "LAST",
                                     "trigger_price": "65038.10",
-                                    "close_position": false
+                                    "close_position": false,
+                                    "is_split_position": false
                                 }
                             },
                             "broker": "BROKER_CODE"
                         },
                         "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                        "builder_fee": 0.001
+                        "builder_fee": "0.001"
                     }
                 },
                 "id": 123
@@ -1037,13 +1062,14 @@ LITE ENDPOINT: lite/v1/create_order
                             "t": {
                                 "tb": "LAST",
                                 "tp": "65038.10",
-                                "cp": false
+                                "cp": false,
+                                "is": false
                             }
                         },
                         "b": "BROKER_CODE"
                     },
                     "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                    "bf": 0.001
+                    "bf": "0.001"
                 }
             }
             '
@@ -1087,13 +1113,14 @@ LITE ENDPOINT: lite/v1/create_order
                                 "t": {
                                     "tb": "LAST",
                                     "tp": "65038.10",
-                                    "cp": false
+                                    "cp": false,
+                                    "is": false
                                 }
                             },
                             "b": "BROKER_CODE"
                         },
                         "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                        "bf": 0.001
+                        "bf": "0.001"
                     }
                 },
                 "i": 123
@@ -1905,7 +1932,8 @@ LITE ENDPOINT: lite/v1/order
                         "tpsl": {
                             "trigger_by": "LAST",
                             "trigger_price": "65038.10",
-                            "close_position": false
+                            "close_position": false,
+                            "is_split_position": false
                         }
                     },
                     "broker": "BROKER_CODE"
@@ -1919,7 +1947,7 @@ LITE ENDPOINT: lite/v1/order
                     "avg_fill_price": ["60000.4"]
                 },
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "builder_fee": 0.001
+                "builder_fee": "0.001"
             }
         }
         ```
@@ -1956,7 +1984,8 @@ LITE ENDPOINT: lite/v1/order
                         "t": {
                             "tb": "LAST",
                             "tp": "65038.10",
-                            "cp": false
+                            "cp": false,
+                            "is": false
                         }
                     },
                     "b": "BROKER_CODE"
@@ -1970,7 +1999,7 @@ LITE ENDPOINT: lite/v1/order
                     "af": ["60000.4"]
                 },
                 "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "bf": 0.001
+                "bf": "0.001"
             }
         }
         ```
@@ -2343,7 +2372,8 @@ LITE ENDPOINT: lite/v1/open_orders
                         "tpsl": {
                             "trigger_by": "LAST",
                             "trigger_price": "65038.10",
-                            "close_position": false
+                            "close_position": false,
+                            "is_split_position": false
                         }
                     },
                     "broker": "BROKER_CODE"
@@ -2357,7 +2387,7 @@ LITE ENDPOINT: lite/v1/open_orders
                     "avg_fill_price": ["60000.4"]
                 },
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "builder_fee": 0.001
+                "builder_fee": "0.001"
             }]
         }
         ```
@@ -2394,7 +2424,8 @@ LITE ENDPOINT: lite/v1/open_orders
                         "t": {
                             "tb": "LAST",
                             "tp": "65038.10",
-                            "cp": false
+                            "cp": false,
+                            "is": false
                         }
                     },
                     "b": "BROKER_CODE"
@@ -2408,7 +2439,7 @@ LITE ENDPOINT: lite/v1/open_orders
                     "af": ["60000.4"]
                 },
                 "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "bf": 0.001
+                "bf": "0.001"
             }]
         }
         ```
@@ -2803,7 +2834,8 @@ LITE ENDPOINT: lite/v1/order_history
                         "tpsl": {
                             "trigger_by": "LAST",
                             "trigger_price": "65038.10",
-                            "close_position": false
+                            "close_position": false,
+                            "is_split_position": false
                         }
                     },
                     "broker": "BROKER_CODE"
@@ -2817,7 +2849,7 @@ LITE ENDPOINT: lite/v1/order_history
                     "avg_fill_price": ["60000.4"]
                 },
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "builder_fee": 0.001
+                "builder_fee": "0.001"
             }],
             "next": "Qw0918="
         }
@@ -2855,7 +2887,8 @@ LITE ENDPOINT: lite/v1/order_history
                         "t": {
                             "tb": "LAST",
                             "tp": "65038.10",
-                            "cp": false
+                            "cp": false,
+                            "is": false
                         }
                     },
                     "b": "BROKER_CODE"
@@ -2869,7 +2902,7 @@ LITE ENDPOINT: lite/v1/order_history
                     "af": ["60000.4"]
                 },
                 "b": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "bf": 0.001
+                "bf": "0.001"
             }],
             "n": "Qw0918="
         }
@@ -3582,6 +3615,1389 @@ LITE ENDPOINT: lite/v1/cancel_on_disconnect
             ```
         </section>
 <hr class="solid">
+### Bulk Orders
+```
+FULL ENDPOINT: full/v2/bulk_orders
+LITE ENDPOINT: lite/v2/bulk_orders
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_bulk_orders_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "orders": [{
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "is_market": false,
+                "time_in_force": "GOOD_TILL_TIME",
+                "post_only": false,
+                "reduce_only": false,
+                "legs": [{
+                    "instrument": "BTC_USDT_Perp",
+                    "size": "10.5",
+                    "limit_price": "65038.01",
+                    "is_buying_asset": true
+                }],
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890,
+                    "chain_id": "325"
+                },
+                "metadata": {
+                    "client_order_id": "23042",
+                    "create_time": "1697788800000000000",
+                    "trigger": {
+                        "trigger_type": "TAKE_PROFIT",
+                        "tpsl": {
+                            "trigger_by": "LAST",
+                            "trigger_price": "65038.10",
+                            "close_position": false,
+                            "is_split_position": false
+                        }
+                    },
+                    "broker": "BROKER_CODE"
+                },
+                "state": {
+                    "status": "PENDING",
+                    "reject_reason": "CLIENT_CANCEL",
+                    "book_size": ["10.5"],
+                    "traded_size": ["1.5"],
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
+                },
+                "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
+                "builder_fee": "0.001"
+            }],
+            "order_i_ds": [null],
+            "client_order_i_ds": [null],
+            "time_to_live_ms": "500"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "o": [{
+                "oi": "0x1234567890abcdef",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "im": false,
+                "ti": "GOOD_TILL_TIME",
+                "po": false,
+                "ro": false,
+                "l": [{
+                    "i": "BTC_USDT_Perp",
+                    "s": "10.5",
+                    "lp": "65038.01",
+                    "ib": true
+                }],
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890,
+                    "ci": "325"
+                },
+                "m": {
+                    "co": "23042",
+                    "ct": "1697788800000000000",
+                    "t": {
+                        "tt": "TAKE_PROFIT",
+                        "t": {
+                            "tb": "LAST",
+                            "tp": "65038.10",
+                            "cp": false,
+                            "is": false
+                        }
+                    },
+                    "b": "BROKER_CODE"
+                },
+                "s1": {
+                    "s": "PENDING",
+                    "rr": "CLIENT_CANCEL",
+                    "bs": ["10.5"],
+                    "ts": ["1.5"],
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
+                },
+                "b": "'$GRVT_MAIN_ACCOUNT_ID'",
+                "bf": "0.001"
+            }],
+            "oi": [null],
+            "co": [null],
+            "tt": "500"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_bulk_orders_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "orders": [{
+                "order_id": "0x1234567890abcdef",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "is_market": false,
+                "time_in_force": "GOOD_TILL_TIME",
+                "post_only": false,
+                "reduce_only": false,
+                "legs": [{
+                    "instrument": "BTC_USDT_Perp",
+                    "size": "10.5",
+                    "limit_price": "65038.01",
+                    "is_buying_asset": true
+                }],
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890,
+                    "chain_id": "325"
+                },
+                "metadata": {
+                    "client_order_id": "23042",
+                    "create_time": "1697788800000000000",
+                    "trigger": {
+                        "trigger_type": "TAKE_PROFIT",
+                        "tpsl": {
+                            "trigger_by": "LAST",
+                            "trigger_price": "65038.10",
+                            "close_position": false,
+                            "is_split_position": false
+                        }
+                    },
+                    "broker": "BROKER_CODE"
+                },
+                "state": {
+                    "status": "PENDING",
+                    "reject_reason": "CLIENT_CANCEL",
+                    "book_size": ["10.5"],
+                    "traded_size": ["1.5"],
+                    "update_time": "1697788800000000000",
+                    "avg_fill_price": ["60000.4"]
+                },
+                "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
+                "builder_fee": "0.001"
+            }],
+            "cancel_acks": [{
+                "ack": "true"
+            }]
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "o": [{
+                "oi": "0x1234567890abcdef",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "im": false,
+                "ti": "GOOD_TILL_TIME",
+                "po": false,
+                "ro": false,
+                "l": [{
+                    "i": "BTC_USDT_Perp",
+                    "s": "10.5",
+                    "lp": "65038.01",
+                    "ib": true
+                }],
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890,
+                    "ci": "325"
+                },
+                "m": {
+                    "co": "23042",
+                    "ct": "1697788800000000000",
+                    "t": {
+                        "tt": "TAKE_PROFIT",
+                        "t": {
+                            "tb": "LAST",
+                            "tp": "65038.10",
+                            "cp": false,
+                            "is": false
+                        }
+                    },
+                    "b": "BROKER_CODE"
+                },
+                "s1": {
+                    "s": "PENDING",
+                    "rr": "CLIENT_CANCEL",
+                    "bs": ["10.5"],
+                    "ts": ["1.5"],
+                    "ut": "1697788800000000000",
+                    "af": ["60000.4"]
+                },
+                "b": "'$GRVT_MAIN_ACCOUNT_ID'",
+                "bf": "0.001"
+            }],
+            "ca": [{
+                "a": "true"
+            }]
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1004|404|Data Not Found|
+        |1005|500|Unknown Error|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |1400|403|Signer does not have trade permission|
+        |1009|503|We are temporarily deactivating this API endpoint, please try again later|
+        |1012|400|Invalid signature chain ID|
+        |2000|403|Signature is from an unauthorized signer|
+        |2001|403|Signature has expired|
+        |2002|403|Signature does not match payload|
+        |2003|403|Order sub account does not match logged in user|
+        |2004|403|Signature is from an expired session key|
+        |2006|403|Signature R/S must have exactly 64 characters long without 0x prefix|
+        |2005|403|Signature V must be 27/28|
+        |2007|403|Signature S must be in the lower half of the curve|
+        |2010|400|Order ID should be empty when creating an order|
+        |2011|400|Client Order ID should be supplied when creating an order|
+        |2012|400|Client Order ID overlaps with existing active order|
+        |2030|400|Orderbook Orders must have a TimeInForce of GTT/IOC/FOK|
+        |2031|400|RFQ Orders must have a TimeInForce of GTT/AON/IOC/FOK|
+        |2032|400|Post Only can only be set to true for GTT/AON orders|
+        |2020|400|Market Order must always be supplied without a limit price|
+        |2021|400|Limit Order must always be supplied with a limit price|
+        |2040|400|Order must contain at least one leg|
+        |2041|400|Order Legs must be sorted by Derivative.Instrument/Underlying/BaseCurrency/Expiration/StrikePrice|
+        |2042|400|Orderbook Orders must contain only one leg|
+        |2050|400|Order state must be empty upon creation|
+        |2051|400|Order execution metadata must be empty upon creation|
+        |2060|400|Order Legs contain one or more inactive derivative|
+        |2061|400|Unsupported Instrument Requested|
+        |2062|400|Order size smaller than min size|
+        |2063|400|Order size smaller than min block size in block trade venue|
+        |2064|400|Invalid limit price tick|
+        |2065|400|Order size too granular|
+        |2066|400|Order below minimum notional. Please try again with a higher price or size.|
+        |2067|400|Order below minimum notional. Please try reducing your position again with a higher price or size.|
+        |2070|400|Liquidation Order is not supported|
+        |2080|400|Insufficient margin to create order|
+        |2081|400|Order Fill would result in exceeding maximum position size|
+        |2082|400|Pre-order check failed|
+        |2084|400|Post-order check failed|
+        |2083|400|Order Fill would result in exceeding maximum position size under current configurable leverage tier|
+        |2090|429|Max open orders exceeded|
+        |2110|400|Invalid trigger by|
+        |2111|400|Unsupported trigger by|
+        |2112|400|Invalid trigger order|
+        |2113|400|Trigger price must be non-zero|
+        |2114|400|Invalid position linked TPSL orders, position linked TPSL must be a reduce-only order|
+        |2115|400|Invalid position linked TPSL orders, position linked TPSL must not have smaller size than the position|
+        |2116|400|Position linked TPSL order for this asset already exists|
+        |2117|400|Position linked TPSL orders must be created from web or mobile clients|
+        |2242|400|Split TPSL functionality not supported; you may be using a deprecated API, or this functionality is temporarily disabled|
+        |3004|500|Instrument does not have a valid maintenance margin configuration|
+        |3005|500|Instrument's underlying currency does not have a valid balance decimal configuration|
+        |3006|500|Instrument's quote currency does not have a valid balance decimal configuration|
+        |2400|400|Reduce only order with no position|
+        |2401|400|Reduce only order must not increase position size|
+        |2402|400|Reduce only order size exceeds maximum allowed value|
+        |7304|400|Only position-reducing orders (`reduce_only` as true) allowed for this asset right now.|
+        |2450|400|Spot order is not supported|
+        |2451|400|Spot order must not be a reduce-only order|
+        |2452|400|Spot order must not be a TPSL order|
+        |2453|400|Spot trading is blocked during socialized loss|
+        |2233|400|Both order ID and client order ID cannot be provided|
+        |2234|400|Bulk create orders must have the same instrument|
+        |2235|400|Bulk orders count exceeds the maximum allowed|
+        |2236|400|Bulk orders does not support trigger order|
+        |2237|400|Bulk orders must be from API source|
+        |2238|400|Split TPSL orders must not be position-linked TPSL|
+        |2239|400|Split TPSL orders must be reduce-only|
+        |2240|400|If creating split TPSL orders, can only specify split TPSL orders in the creation array|
+        |2241|400|Split TPSL order count exceeds maximum allowed set size|
+        |2243|400|Split TPSL set already exists for this asset. Please modify the existing set of split TPSL orders.|
+        |2244|400|Split TPSL creation only allowed for instruments with already-existing positions.|
+        |2245|400|Split TPSL creation exceeds position size.|
+        |2246|400|Split TPSL modification requires all existing split TPSL orders to be cancelled|
+        |2222|400|Order is not a TPSL order|
+        |2232|400|Invalid position linked TPSL orders, position linked TPSL must not have order linkage|
+        |2413|400|Replace order failed, number of orders provided does not match the number of orders to replace|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v2/bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "orders": [{
+                    "order_id": "0x1234567890abcdef",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "is_market": false,
+                    "time_in_force": "GOOD_TILL_TIME",
+                    "post_only": false,
+                    "reduce_only": false,
+                    "legs": [{
+                        "instrument": "BTC_USDT_Perp",
+                        "size": "10.5",
+                        "limit_price": "65038.01",
+                        "is_buying_asset": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890,
+                        "chain_id": "325"
+                    },
+                    "metadata": {
+                        "client_order_id": "23042",
+                        "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "TAKE_PROFIT",
+                            "tpsl": {
+                                "trigger_by": "LAST",
+                                "trigger_price": "65038.10",
+                                "close_position": false,
+                                "is_split_position": false
+                            }
+                        },
+                        "broker": "BROKER_CODE"
+                    },
+                    "state": {
+                        "status": "PENDING",
+                        "reject_reason": "CLIENT_CANCEL",
+                        "book_size": ["10.5"],
+                        "traded_size": ["1.5"],
+                        "update_time": "1697788800000000000",
+                        "avg_fill_price": ["60000.4"]
+                    },
+                    "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
+                    "builder_fee": "0.001"
+                }],
+                "order_i_ds": [null],
+                "client_order_i_ds": [null],
+                "time_to_live_ms": "500"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v2/bulk_orders",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "orders": [{
+                        "order_id": "0x1234567890abcdef",
+                        "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "is_market": false,
+                        "time_in_force": "GOOD_TILL_TIME",
+                        "post_only": false,
+                        "reduce_only": false,
+                        "legs": [{
+                            "instrument": "BTC_USDT_Perp",
+                            "size": "10.5",
+                            "limit_price": "65038.01",
+                            "is_buying_asset": true
+                        }],
+                        "signature": {
+                            "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "expiration": "1697788800000000000",
+                            "nonce": 1234567890,
+                            "chain_id": "325"
+                        },
+                        "metadata": {
+                            "client_order_id": "23042",
+                            "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "TAKE_PROFIT",
+                                "tpsl": {
+                                    "trigger_by": "LAST",
+                                    "trigger_price": "65038.10",
+                                    "close_position": false,
+                                    "is_split_position": false
+                                }
+                            },
+                            "broker": "BROKER_CODE"
+                        },
+                        "state": {
+                            "status": "PENDING",
+                            "reject_reason": "CLIENT_CANCEL",
+                            "book_size": ["10.5"],
+                            "traded_size": ["1.5"],
+                            "update_time": "1697788800000000000",
+                            "avg_fill_price": ["60000.4"]
+                        },
+                        "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
+                        "builder_fee": "0.001"
+                    }],
+                    "order_i_ds": [null],
+                    "client_order_i_ds": [null],
+                    "time_to_live_ms": "500"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v2/bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "o": [{
+                    "oi": "0x1234567890abcdef",
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "im": false,
+                    "ti": "GOOD_TILL_TIME",
+                    "po": false,
+                    "ro": false,
+                    "l": [{
+                        "i": "BTC_USDT_Perp",
+                        "s": "10.5",
+                        "lp": "65038.01",
+                        "ib": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890,
+                        "ci": "325"
+                    },
+                    "m": {
+                        "co": "23042",
+                        "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "TAKE_PROFIT",
+                            "t": {
+                                "tb": "LAST",
+                                "tp": "65038.10",
+                                "cp": false,
+                                "is": false
+                            }
+                        },
+                        "b": "BROKER_CODE"
+                    },
+                    "s1": {
+                        "s": "PENDING",
+                        "rr": "CLIENT_CANCEL",
+                        "bs": ["10.5"],
+                        "ts": ["1.5"],
+                        "ut": "1697788800000000000",
+                        "af": ["60000.4"]
+                    },
+                    "b": "'$GRVT_MAIN_ACCOUNT_ID'",
+                    "bf": "0.001"
+                }],
+                "oi": [null],
+                "co": [null],
+                "tt": "500"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v2/bulk_orders",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "o": [{
+                        "oi": "0x1234567890abcdef",
+                        "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "im": false,
+                        "ti": "GOOD_TILL_TIME",
+                        "po": false,
+                        "ro": false,
+                        "l": [{
+                            "i": "BTC_USDT_Perp",
+                            "s": "10.5",
+                            "lp": "65038.01",
+                            "ib": true
+                        }],
+                        "s": {
+                            "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "e": "1697788800000000000",
+                            "n": 1234567890,
+                            "ci": "325"
+                        },
+                        "m": {
+                            "co": "23042",
+                            "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "TAKE_PROFIT",
+                                "t": {
+                                    "tb": "LAST",
+                                    "tp": "65038.10",
+                                    "cp": false,
+                                    "is": false
+                                }
+                            },
+                            "b": "BROKER_CODE"
+                        },
+                        "s1": {
+                            "s": "PENDING",
+                            "rr": "CLIENT_CANCEL",
+                            "bs": ["10.5"],
+                            "ts": ["1.5"],
+                            "ut": "1697788800000000000",
+                            "af": ["60000.4"]
+                        },
+                        "b": "'$GRVT_MAIN_ACCOUNT_ID'",
+                        "bf": "0.001"
+                    }],
+                    "oi": [null],
+                    "co": [null],
+                    "tt": "500"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v2/bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "orders": [{
+                    "order_id": "0x1234567890abcdef",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "is_market": false,
+                    "time_in_force": "GOOD_TILL_TIME",
+                    "post_only": false,
+                    "reduce_only": false,
+                    "legs": [{
+                        "instrument": "BTC_USDT_Perp",
+                        "size": "10.5",
+                        "limit_price": "65038.01",
+                        "is_buying_asset": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890,
+                        "chain_id": "325"
+                    },
+                    "metadata": {
+                        "client_order_id": "23042",
+                        "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "TAKE_PROFIT",
+                            "tpsl": {
+                                "trigger_by": "LAST",
+                                "trigger_price": "65038.10",
+                                "close_position": false,
+                                "is_split_position": false
+                            }
+                        },
+                        "broker": "BROKER_CODE"
+                    },
+                    "state": {
+                        "status": "PENDING",
+                        "reject_reason": "CLIENT_CANCEL",
+                        "book_size": ["10.5"],
+                        "traded_size": ["1.5"],
+                        "update_time": "1697788800000000000",
+                        "avg_fill_price": ["60000.4"]
+                    },
+                    "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
+                    "builder_fee": "0.001"
+                }],
+                "order_i_ds": [null],
+                "client_order_i_ds": [null],
+                "time_to_live_ms": "500"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v2/bulk_orders",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "orders": [{
+                        "order_id": "0x1234567890abcdef",
+                        "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "is_market": false,
+                        "time_in_force": "GOOD_TILL_TIME",
+                        "post_only": false,
+                        "reduce_only": false,
+                        "legs": [{
+                            "instrument": "BTC_USDT_Perp",
+                            "size": "10.5",
+                            "limit_price": "65038.01",
+                            "is_buying_asset": true
+                        }],
+                        "signature": {
+                            "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "expiration": "1697788800000000000",
+                            "nonce": 1234567890,
+                            "chain_id": "325"
+                        },
+                        "metadata": {
+                            "client_order_id": "23042",
+                            "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "TAKE_PROFIT",
+                                "tpsl": {
+                                    "trigger_by": "LAST",
+                                    "trigger_price": "65038.10",
+                                    "close_position": false,
+                                    "is_split_position": false
+                                }
+                            },
+                            "broker": "BROKER_CODE"
+                        },
+                        "state": {
+                            "status": "PENDING",
+                            "reject_reason": "CLIENT_CANCEL",
+                            "book_size": ["10.5"],
+                            "traded_size": ["1.5"],
+                            "update_time": "1697788800000000000",
+                            "avg_fill_price": ["60000.4"]
+                        },
+                        "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
+                        "builder_fee": "0.001"
+                    }],
+                    "order_i_ds": [null],
+                    "client_order_i_ds": [null],
+                    "time_to_live_ms": "500"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v2/bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "o": [{
+                    "oi": "0x1234567890abcdef",
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "im": false,
+                    "ti": "GOOD_TILL_TIME",
+                    "po": false,
+                    "ro": false,
+                    "l": [{
+                        "i": "BTC_USDT_Perp",
+                        "s": "10.5",
+                        "lp": "65038.01",
+                        "ib": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890,
+                        "ci": "325"
+                    },
+                    "m": {
+                        "co": "23042",
+                        "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "TAKE_PROFIT",
+                            "t": {
+                                "tb": "LAST",
+                                "tp": "65038.10",
+                                "cp": false,
+                                "is": false
+                            }
+                        },
+                        "b": "BROKER_CODE"
+                    },
+                    "s1": {
+                        "s": "PENDING",
+                        "rr": "CLIENT_CANCEL",
+                        "bs": ["10.5"],
+                        "ts": ["1.5"],
+                        "ut": "1697788800000000000",
+                        "af": ["60000.4"]
+                    },
+                    "b": "'$GRVT_MAIN_ACCOUNT_ID'",
+                    "bf": "0.001"
+                }],
+                "oi": [null],
+                "co": [null],
+                "tt": "500"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v2/bulk_orders",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "o": [{
+                        "oi": "0x1234567890abcdef",
+                        "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "im": false,
+                        "ti": "GOOD_TILL_TIME",
+                        "po": false,
+                        "ro": false,
+                        "l": [{
+                            "i": "BTC_USDT_Perp",
+                            "s": "10.5",
+                            "lp": "65038.01",
+                            "ib": true
+                        }],
+                        "s": {
+                            "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "e": "1697788800000000000",
+                            "n": 1234567890,
+                            "ci": "325"
+                        },
+                        "m": {
+                            "co": "23042",
+                            "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "TAKE_PROFIT",
+                                "t": {
+                                    "tb": "LAST",
+                                    "tp": "65038.10",
+                                    "cp": false,
+                                    "is": false
+                                }
+                            },
+                            "b": "BROKER_CODE"
+                        },
+                        "s1": {
+                            "s": "PENDING",
+                            "rr": "CLIENT_CANCEL",
+                            "bs": ["10.5"],
+                            "ts": ["1.5"],
+                            "ut": "1697788800000000000",
+                            "af": ["60000.4"]
+                        },
+                        "b": "'$GRVT_MAIN_ACCOUNT_ID'",
+                        "bf": "0.001"
+                    }],
+                    "oi": [null],
+                    "co": [null],
+                    "tt": "500"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v2/bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "orders": [{
+                    "order_id": "0x1234567890abcdef",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "is_market": false,
+                    "time_in_force": "GOOD_TILL_TIME",
+                    "post_only": false,
+                    "reduce_only": false,
+                    "legs": [{
+                        "instrument": "BTC_USDT_Perp",
+                        "size": "10.5",
+                        "limit_price": "65038.01",
+                        "is_buying_asset": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890,
+                        "chain_id": "325"
+                    },
+                    "metadata": {
+                        "client_order_id": "23042",
+                        "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "TAKE_PROFIT",
+                            "tpsl": {
+                                "trigger_by": "LAST",
+                                "trigger_price": "65038.10",
+                                "close_position": false,
+                                "is_split_position": false
+                            }
+                        },
+                        "broker": "BROKER_CODE"
+                    },
+                    "state": {
+                        "status": "PENDING",
+                        "reject_reason": "CLIENT_CANCEL",
+                        "book_size": ["10.5"],
+                        "traded_size": ["1.5"],
+                        "update_time": "1697788800000000000",
+                        "avg_fill_price": ["60000.4"]
+                    },
+                    "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
+                    "builder_fee": "0.001"
+                }],
+                "order_i_ds": [null],
+                "client_order_i_ds": [null],
+                "time_to_live_ms": "500"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v2/bulk_orders",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "orders": [{
+                        "order_id": "0x1234567890abcdef",
+                        "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "is_market": false,
+                        "time_in_force": "GOOD_TILL_TIME",
+                        "post_only": false,
+                        "reduce_only": false,
+                        "legs": [{
+                            "instrument": "BTC_USDT_Perp",
+                            "size": "10.5",
+                            "limit_price": "65038.01",
+                            "is_buying_asset": true
+                        }],
+                        "signature": {
+                            "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "expiration": "1697788800000000000",
+                            "nonce": 1234567890,
+                            "chain_id": "325"
+                        },
+                        "metadata": {
+                            "client_order_id": "23042",
+                            "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "TAKE_PROFIT",
+                                "tpsl": {
+                                    "trigger_by": "LAST",
+                                    "trigger_price": "65038.10",
+                                    "close_position": false,
+                                    "is_split_position": false
+                                }
+                            },
+                            "broker": "BROKER_CODE"
+                        },
+                        "state": {
+                            "status": "PENDING",
+                            "reject_reason": "CLIENT_CANCEL",
+                            "book_size": ["10.5"],
+                            "traded_size": ["1.5"],
+                            "update_time": "1697788800000000000",
+                            "avg_fill_price": ["60000.4"]
+                        },
+                        "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
+                        "builder_fee": "0.001"
+                    }],
+                    "order_i_ds": [null],
+                    "client_order_i_ds": [null],
+                    "time_to_live_ms": "500"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v2/bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "o": [{
+                    "oi": "0x1234567890abcdef",
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "im": false,
+                    "ti": "GOOD_TILL_TIME",
+                    "po": false,
+                    "ro": false,
+                    "l": [{
+                        "i": "BTC_USDT_Perp",
+                        "s": "10.5",
+                        "lp": "65038.01",
+                        "ib": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890,
+                        "ci": "325"
+                    },
+                    "m": {
+                        "co": "23042",
+                        "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "TAKE_PROFIT",
+                            "t": {
+                                "tb": "LAST",
+                                "tp": "65038.10",
+                                "cp": false,
+                                "is": false
+                            }
+                        },
+                        "b": "BROKER_CODE"
+                    },
+                    "s1": {
+                        "s": "PENDING",
+                        "rr": "CLIENT_CANCEL",
+                        "bs": ["10.5"],
+                        "ts": ["1.5"],
+                        "ut": "1697788800000000000",
+                        "af": ["60000.4"]
+                    },
+                    "b": "'$GRVT_MAIN_ACCOUNT_ID'",
+                    "bf": "0.001"
+                }],
+                "oi": [null],
+                "co": [null],
+                "tt": "500"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v2/bulk_orders",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "o": [{
+                        "oi": "0x1234567890abcdef",
+                        "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "im": false,
+                        "ti": "GOOD_TILL_TIME",
+                        "po": false,
+                        "ro": false,
+                        "l": [{
+                            "i": "BTC_USDT_Perp",
+                            "s": "10.5",
+                            "lp": "65038.01",
+                            "ib": true
+                        }],
+                        "s": {
+                            "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "e": "1697788800000000000",
+                            "n": 1234567890,
+                            "ci": "325"
+                        },
+                        "m": {
+                            "co": "23042",
+                            "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "TAKE_PROFIT",
+                                "t": {
+                                    "tb": "LAST",
+                                    "tp": "65038.10",
+                                    "cp": false,
+                                    "is": false
+                                }
+                            },
+                            "b": "BROKER_CODE"
+                        },
+                        "s1": {
+                            "s": "PENDING",
+                            "rr": "CLIENT_CANCEL",
+                            "bs": ["10.5"],
+                            "ts": ["1.5"],
+                            "ut": "1697788800000000000",
+                            "af": ["60000.4"]
+                        },
+                        "b": "'$GRVT_MAIN_ACCOUNT_ID'",
+                        "bf": "0.001"
+                    }],
+                    "oi": [null],
+                    "co": [null],
+                    "tt": "500"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v2/bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "orders": [{
+                    "order_id": "0x1234567890abcdef",
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "is_market": false,
+                    "time_in_force": "GOOD_TILL_TIME",
+                    "post_only": false,
+                    "reduce_only": false,
+                    "legs": [{
+                        "instrument": "BTC_USDT_Perp",
+                        "size": "10.5",
+                        "limit_price": "65038.01",
+                        "is_buying_asset": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890,
+                        "chain_id": "325"
+                    },
+                    "metadata": {
+                        "client_order_id": "23042",
+                        "create_time": "1697788800000000000",
+                        "trigger": {
+                            "trigger_type": "TAKE_PROFIT",
+                            "tpsl": {
+                                "trigger_by": "LAST",
+                                "trigger_price": "65038.10",
+                                "close_position": false,
+                                "is_split_position": false
+                            }
+                        },
+                        "broker": "BROKER_CODE"
+                    },
+                    "state": {
+                        "status": "PENDING",
+                        "reject_reason": "CLIENT_CANCEL",
+                        "book_size": ["10.5"],
+                        "traded_size": ["1.5"],
+                        "update_time": "1697788800000000000",
+                        "avg_fill_price": ["60000.4"]
+                    },
+                    "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
+                    "builder_fee": "0.001"
+                }],
+                "order_i_ds": [null],
+                "client_order_i_ds": [null],
+                "time_to_live_ms": "500"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v2/bulk_orders",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "orders": [{
+                        "order_id": "0x1234567890abcdef",
+                        "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "is_market": false,
+                        "time_in_force": "GOOD_TILL_TIME",
+                        "post_only": false,
+                        "reduce_only": false,
+                        "legs": [{
+                            "instrument": "BTC_USDT_Perp",
+                            "size": "10.5",
+                            "limit_price": "65038.01",
+                            "is_buying_asset": true
+                        }],
+                        "signature": {
+                            "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "expiration": "1697788800000000000",
+                            "nonce": 1234567890,
+                            "chain_id": "325"
+                        },
+                        "metadata": {
+                            "client_order_id": "23042",
+                            "create_time": "1697788800000000000",
+                            "trigger": {
+                                "trigger_type": "TAKE_PROFIT",
+                                "tpsl": {
+                                    "trigger_by": "LAST",
+                                    "trigger_price": "65038.10",
+                                    "close_position": false,
+                                    "is_split_position": false
+                                }
+                            },
+                            "broker": "BROKER_CODE"
+                        },
+                        "state": {
+                            "status": "PENDING",
+                            "reject_reason": "CLIENT_CANCEL",
+                            "book_size": ["10.5"],
+                            "traded_size": ["1.5"],
+                            "update_time": "1697788800000000000",
+                            "avg_fill_price": ["60000.4"]
+                        },
+                        "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
+                        "builder_fee": "0.001"
+                    }],
+                    "order_i_ds": [null],
+                    "client_order_i_ds": [null],
+                    "time_to_live_ms": "500"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v2/bulk_orders' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "o": [{
+                    "oi": "0x1234567890abcdef",
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "im": false,
+                    "ti": "GOOD_TILL_TIME",
+                    "po": false,
+                    "ro": false,
+                    "l": [{
+                        "i": "BTC_USDT_Perp",
+                        "s": "10.5",
+                        "lp": "65038.01",
+                        "ib": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890,
+                        "ci": "325"
+                    },
+                    "m": {
+                        "co": "23042",
+                        "ct": "1697788800000000000",
+                        "t": {
+                            "tt": "TAKE_PROFIT",
+                            "t": {
+                                "tb": "LAST",
+                                "tp": "65038.10",
+                                "cp": false,
+                                "is": false
+                            }
+                        },
+                        "b": "BROKER_CODE"
+                    },
+                    "s1": {
+                        "s": "PENDING",
+                        "rr": "CLIENT_CANCEL",
+                        "bs": ["10.5"],
+                        "ts": ["1.5"],
+                        "ut": "1697788800000000000",
+                        "af": ["60000.4"]
+                    },
+                    "b": "'$GRVT_MAIN_ACCOUNT_ID'",
+                    "bf": "0.001"
+                }],
+                "oi": [null],
+                "co": [null],
+                "tt": "500"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v2/bulk_orders",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "o": [{
+                        "oi": "0x1234567890abcdef",
+                        "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                        "im": false,
+                        "ti": "GOOD_TILL_TIME",
+                        "po": false,
+                        "ro": false,
+                        "l": [{
+                            "i": "BTC_USDT_Perp",
+                            "s": "10.5",
+                            "lp": "65038.01",
+                            "ib": true
+                        }],
+                        "s": {
+                            "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                            "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                            "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                            "v": 28,
+                            "e": "1697788800000000000",
+                            "n": 1234567890,
+                            "ci": "325"
+                        },
+                        "m": {
+                            "co": "23042",
+                            "ct": "1697788800000000000",
+                            "t": {
+                                "tt": "TAKE_PROFIT",
+                                "t": {
+                                    "tb": "LAST",
+                                    "tp": "65038.10",
+                                    "cp": false,
+                                    "is": false
+                                }
+                            },
+                            "b": "BROKER_CODE"
+                        },
+                        "s1": {
+                            "s": "PENDING",
+                            "rr": "CLIENT_CANCEL",
+                            "bs": ["10.5"],
+                            "ts": ["1.5"],
+                            "ut": "1697788800000000000",
+                            "af": ["60000.4"]
+                        },
+                        "b": "'$GRVT_MAIN_ACCOUNT_ID'",
+                        "bf": "0.001"
+                    }],
+                    "oi": [null],
+                    "co": [null],
+                    "tt": "500"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
 ## Execution
 ### Fill History
 ```
@@ -3656,7 +5072,8 @@ LITE ENDPOINT: lite/v1/fill_history
                 "is_rpi": false,
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                 "builder_fee_rate": 0.001,
-                "builder_fee": "0.2"
+                "builder_fee": "0.2",
+                "fee_currency": "USDT"
             }],
             "next": "Qw0918="
         }
@@ -3689,7 +5106,8 @@ LITE ENDPOINT: lite/v1/fill_history
                 "ir1": false,
                 "b1": "'$GRVT_MAIN_ACCOUNT_ID'",
                 "bf": 0.001,
-                "bf1": "0.2"
+                "bf1": "0.2",
+                "fc": "USDT"
             }],
             "n": "Qw0918="
         }
@@ -4158,6 +5576,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
+        |3007|400|API is not applicable for spot instruments|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -4645,6 +6064,7 @@ LITE ENDPOINT: lite/v1/positions
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
+        |3007|400|API is not applicable for spot instruments|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -4946,6 +6366,559 @@ LITE ENDPOINT: lite/v1/positions
             ```
         </section>
 <hr class="solid">
+### Position History
+```
+FULL ENDPOINT: full/v1/position_history
+LITE ENDPOINT: lite/v1/position_history
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_position_history_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
+            "kind": ["PERPETUAL"],
+            "base": ["BTC", "ETH"],
+            "quote": ["USDT", "USDC"],
+            "limit": 500,
+            "cursor": "",
+            "status": ["CLOSED", "LIQUIDATED"],
+            "is_long": null,
+            "is_short": null,
+            "margin_type": ["CROSS", "ISOLATED"]
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "st": "1697788800000000000",
+            "et": "1697788800000000000",
+            "k": ["PERPETUAL"],
+            "b": ["BTC", "ETH"],
+            "q": ["USDT", "USDC"],
+            "l": 500,
+            "c": "",
+            "s": ["CLOSED", "LIQUIDATED"],
+            "il": null,
+            "is": null,
+            "mt": ["CROSS", "ISOLATED"]
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_position_history_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": [{
+                "sub_account_id": null,
+                "instrument": null,
+                "open_time": null,
+                "status": "CLOSED",
+                "is_long": null,
+                "margin_type": "SIMPLE_CROSS_MARGIN",
+                "close_time": null,
+                "entry_price": null,
+                "exit_price": null,
+                "position_close_mark_price": null,
+                "realized_pnl": null,
+                "cumulative_fee": null,
+                "cumulative_realized_funding_payment": null,
+                "closed_volume_base": null,
+                "closed_volume_quote": null,
+                "max_open_interest_base": null,
+                "max_open_interest_quote": null,
+                "cumulative_initial_margin": null,
+                "max_initial_margin": null,
+                "leverage": null,
+                "unrealized_pnl": null
+            }],
+            "next": "Qw0918="
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "sa": null,
+                "i": null,
+                "ot": null,
+                "s": "CLOSED",
+                "il": null,
+                "mt": "SIMPLE_CROSS_MARGIN",
+                "ct": null,
+                "ep": null,
+                "ep1": null,
+                "pc": null,
+                "rp": null,
+                "cf": null,
+                "cr": null,
+                "cv": null,
+                "cv1": null,
+                "mo": null,
+                "mo1": null,
+                "ci": null,
+                "mi": null,
+                "l": null,
+                "up": null
+            }],
+            "n": "Qw0918="
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+        |3007|400|API is not applicable for spot instruments|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/position_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "kind": ["PERPETUAL"],
+                "base": ["BTC", "ETH"],
+                "quote": ["USDT", "USDC"],
+                "limit": 500,
+                "cursor": "",
+                "status": ["CLOSED", "LIQUIDATED"],
+                "is_long": null,
+                "is_short": null,
+                "margin_type": ["CROSS", "ISOLATED"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/position_history",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "kind": ["PERPETUAL"],
+                    "base": ["BTC", "ETH"],
+                    "quote": ["USDT", "USDC"],
+                    "limit": 500,
+                    "cursor": "",
+                    "status": ["CLOSED", "LIQUIDATED"],
+                    "is_long": null,
+                    "is_short": null,
+                    "margin_type": ["CROSS", "ISOLATED"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/position_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "k": ["PERPETUAL"],
+                "b": ["BTC", "ETH"],
+                "q": ["USDT", "USDC"],
+                "l": 500,
+                "c": "",
+                "s": ["CLOSED", "LIQUIDATED"],
+                "il": null,
+                "is": null,
+                "mt": ["CROSS", "ISOLATED"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/position_history",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "k": ["PERPETUAL"],
+                    "b": ["BTC", "ETH"],
+                    "q": ["USDT", "USDC"],
+                    "l": 500,
+                    "c": "",
+                    "s": ["CLOSED", "LIQUIDATED"],
+                    "il": null,
+                    "is": null,
+                    "mt": ["CROSS", "ISOLATED"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/position_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "kind": ["PERPETUAL"],
+                "base": ["BTC", "ETH"],
+                "quote": ["USDT", "USDC"],
+                "limit": 500,
+                "cursor": "",
+                "status": ["CLOSED", "LIQUIDATED"],
+                "is_long": null,
+                "is_short": null,
+                "margin_type": ["CROSS", "ISOLATED"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/position_history",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "kind": ["PERPETUAL"],
+                    "base": ["BTC", "ETH"],
+                    "quote": ["USDT", "USDC"],
+                    "limit": 500,
+                    "cursor": "",
+                    "status": ["CLOSED", "LIQUIDATED"],
+                    "is_long": null,
+                    "is_short": null,
+                    "margin_type": ["CROSS", "ISOLATED"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/position_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "k": ["PERPETUAL"],
+                "b": ["BTC", "ETH"],
+                "q": ["USDT", "USDC"],
+                "l": 500,
+                "c": "",
+                "s": ["CLOSED", "LIQUIDATED"],
+                "il": null,
+                "is": null,
+                "mt": ["CROSS", "ISOLATED"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/position_history",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "k": ["PERPETUAL"],
+                    "b": ["BTC", "ETH"],
+                    "q": ["USDT", "USDC"],
+                    "l": 500,
+                    "c": "",
+                    "s": ["CLOSED", "LIQUIDATED"],
+                    "il": null,
+                    "is": null,
+                    "mt": ["CROSS", "ISOLATED"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/position_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "kind": ["PERPETUAL"],
+                "base": ["BTC", "ETH"],
+                "quote": ["USDT", "USDC"],
+                "limit": 500,
+                "cursor": "",
+                "status": ["CLOSED", "LIQUIDATED"],
+                "is_long": null,
+                "is_short": null,
+                "margin_type": ["CROSS", "ISOLATED"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/position_history",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "kind": ["PERPETUAL"],
+                    "base": ["BTC", "ETH"],
+                    "quote": ["USDT", "USDC"],
+                    "limit": 500,
+                    "cursor": "",
+                    "status": ["CLOSED", "LIQUIDATED"],
+                    "is_long": null,
+                    "is_short": null,
+                    "margin_type": ["CROSS", "ISOLATED"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/position_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "k": ["PERPETUAL"],
+                "b": ["BTC", "ETH"],
+                "q": ["USDT", "USDC"],
+                "l": 500,
+                "c": "",
+                "s": ["CLOSED", "LIQUIDATED"],
+                "il": null,
+                "is": null,
+                "mt": ["CROSS", "ISOLATED"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/position_history",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "k": ["PERPETUAL"],
+                    "b": ["BTC", "ETH"],
+                    "q": ["USDT", "USDC"],
+                    "l": 500,
+                    "c": "",
+                    "s": ["CLOSED", "LIQUIDATED"],
+                    "il": null,
+                    "is": null,
+                    "mt": ["CROSS", "ISOLATED"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/position_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "kind": ["PERPETUAL"],
+                "base": ["BTC", "ETH"],
+                "quote": ["USDT", "USDC"],
+                "limit": 500,
+                "cursor": "",
+                "status": ["CLOSED", "LIQUIDATED"],
+                "is_long": null,
+                "is_short": null,
+                "margin_type": ["CROSS", "ISOLATED"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/position_history",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "kind": ["PERPETUAL"],
+                    "base": ["BTC", "ETH"],
+                    "quote": ["USDT", "USDC"],
+                    "limit": 500,
+                    "cursor": "",
+                    "status": ["CLOSED", "LIQUIDATED"],
+                    "is_long": null,
+                    "is_short": null,
+                    "margin_type": ["CROSS", "ISOLATED"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/position_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "k": ["PERPETUAL"],
+                "b": ["BTC", "ETH"],
+                "q": ["USDT", "USDC"],
+                "l": 500,
+                "c": "",
+                "s": ["CLOSED", "LIQUIDATED"],
+                "il": null,
+                "is": null,
+                "mt": ["CROSS", "ISOLATED"]
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/position_history",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "k": ["PERPETUAL"],
+                    "b": ["BTC", "ETH"],
+                    "q": ["USDT", "USDC"],
+                    "l": 500,
+                    "c": "",
+                    "s": ["CLOSED", "LIQUIDATED"],
+                    "il": null,
+                    "is": null,
+                    "mt": ["CROSS", "ISOLATED"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
 ### Set Position Config
 ```
 FULL ENDPOINT: full/v1/set_position_config
@@ -5033,6 +7006,7 @@ LITE ENDPOINT: lite/v1/set_position_config
         |2100|400|Invalid initial leverage|
         |2107|400|Attempted to set leverage below minimum|
         |2108|400|Attempted to set leverage above maximum|
+        |3007|400|API is not applicable for spot instruments|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -5560,6 +7534,7 @@ LITE ENDPOINT: lite/v1/add_position_margin
         |7452|400|Add margin to non isolated position|
         |7453|400|Max addable amount exceeded|
         |7454|400|Max removable amount exceeded|
+        |3007|400|API is not applicable for spot instruments|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -6051,6 +8026,7 @@ LITE ENDPOINT: lite/v1/get_position_margin_limits
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1004|404|Data Not Found|
         |7455|400|Not isolated margin position|
+        |3007|400|API is not applicable for spot instruments|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -6770,7 +8746,9 @@ LITE ENDPOINT: lite/v1/transfer
                 "chain_id": "325"
             },
             "transfer_type": "UNSPECIFIED",
-            "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+            "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+            "from_wallet_type": "SPOT",
+            "to_wallet_type": "FUNDING"
         }
         ```
         **Lite Request**
@@ -6792,7 +8770,9 @@ LITE ENDPOINT: lite/v1/transfer
                 "ci": "325"
             },
             "tt": "UNSPECIFIED",
-            "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+            "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+            "fw": "SPOT",
+            "tw": "FUNDING"
         }
         ```
     </section>
@@ -6843,6 +8823,13 @@ LITE ENDPOINT: lite/v1/transfer
         |7101|400|Transfer account not found|
         |7102|400|Transfer sub-account not found|
         |7103|500|Charged trading fee below the config minimum|
+        |7104|400|Transfer sub-account doesn't belong to the transfer main account|
+        |4004|400|Both transfer wallet types must be provided|
+        |4005|400|Invalid wallet type for funding account|
+        |4006|400|Invalid wallet type for sub account|
+        |4008|400|Currency is not allowed in the target wallet type|
+        |4007|400|Transfer failed because signature is an exact duplicate of another recently-observed transfer.|
+        |4009|400|Please specify the transfer type|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -6891,7 +8878,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "chain_id": "325"
                 },
                 "transfer_type": "UNSPECIFIED",
-                "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                "from_wallet_type": "SPOT",
+                "to_wallet_type": "FUNDING"
             }
             '
             ```
@@ -6921,7 +8910,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "chain_id": "325"
                     },
                     "transfer_type": "UNSPECIFIED",
-                    "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                    "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                    "from_wallet_type": "SPOT",
+                    "to_wallet_type": "FUNDING"
                 },
                 "id": 123
             }
@@ -6951,7 +8942,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "ci": "325"
                 },
                 "tt": "UNSPECIFIED",
-                "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                "fw": "SPOT",
+                "tw": "FUNDING"
             }
             '
             ```
@@ -6981,7 +8974,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "ci": "325"
                     },
                     "tt": "UNSPECIFIED",
-                    "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                    "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                    "fw": "SPOT",
+                    "tw": "FUNDING"
                 },
                 "i": 123
             }
@@ -7012,7 +9007,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "chain_id": "325"
                 },
                 "transfer_type": "UNSPECIFIED",
-                "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                "from_wallet_type": "SPOT",
+                "to_wallet_type": "FUNDING"
             }
             '
             ```
@@ -7042,7 +9039,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "chain_id": "325"
                     },
                     "transfer_type": "UNSPECIFIED",
-                    "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                    "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                    "from_wallet_type": "SPOT",
+                    "to_wallet_type": "FUNDING"
                 },
                 "id": 123
             }
@@ -7072,7 +9071,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "ci": "325"
                 },
                 "tt": "UNSPECIFIED",
-                "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                "fw": "SPOT",
+                "tw": "FUNDING"
             }
             '
             ```
@@ -7102,7 +9103,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "ci": "325"
                     },
                     "tt": "UNSPECIFIED",
-                    "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                    "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                    "fw": "SPOT",
+                    "tw": "FUNDING"
                 },
                 "i": 123
             }
@@ -7133,7 +9136,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "chain_id": "325"
                 },
                 "transfer_type": "UNSPECIFIED",
-                "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                "from_wallet_type": "SPOT",
+                "to_wallet_type": "FUNDING"
             }
             '
             ```
@@ -7163,7 +9168,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "chain_id": "325"
                     },
                     "transfer_type": "UNSPECIFIED",
-                    "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                    "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                    "from_wallet_type": "SPOT",
+                    "to_wallet_type": "FUNDING"
                 },
                 "id": 123
             }
@@ -7193,7 +9200,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "ci": "325"
                 },
                 "tt": "UNSPECIFIED",
-                "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                "fw": "SPOT",
+                "tw": "FUNDING"
             }
             '
             ```
@@ -7223,7 +9232,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "ci": "325"
                     },
                     "tt": "UNSPECIFIED",
-                    "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                    "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                    "fw": "SPOT",
+                    "tw": "FUNDING"
                 },
                 "i": 123
             }
@@ -7254,7 +9265,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "chain_id": "325"
                 },
                 "transfer_type": "UNSPECIFIED",
-                "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                "from_wallet_type": "SPOT",
+                "to_wallet_type": "FUNDING"
             }
             '
             ```
@@ -7284,7 +9297,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "chain_id": "325"
                     },
                     "transfer_type": "UNSPECIFIED",
-                    "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                    "transfer_metadata": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                    "from_wallet_type": "SPOT",
+                    "to_wallet_type": "FUNDING"
                 },
                 "id": 123
             }
@@ -7314,7 +9329,9 @@ LITE ENDPOINT: lite/v1/transfer
                     "ci": "325"
                 },
                 "tt": "UNSPECIFIED",
-                "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                "fw": "SPOT",
+                "tw": "FUNDING"
             }
             '
             ```
@@ -7344,7 +9361,9 @@ LITE ENDPOINT: lite/v1/transfer
                         "ci": "325"
                     },
                     "tt": "UNSPECIFIED",
-                    "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}"
+                    "tm": "{\"provider\":\"XY\",\"direction\":\"WITHDRAWAL\",\"provider_tx_id\":\"txn123456\",\"chainid\":\"42161\",\"endpoint\":\"0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0\"}",
+                    "fw": "SPOT",
+                    "tw": "FUNDING"
                 },
                 "i": 123
             }
@@ -7418,8 +9437,10 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "chain_id": "325"
                 },
                 "event_time": "1697788800000000000",
-                "transfer_type": "UNSPECIFIED",
-                "transfer_metadata": null
+                "transfer_type": "STANDARD",
+                "transfer_metadata": null,
+                "from_wallet_type": "SPOT",
+                "to_wallet_type": "FUNDING"
             }],
             "next": "Qw0918="
         }
@@ -7445,8 +9466,10 @@ LITE ENDPOINT: lite/v1/transfer_history
                     "ci": "325"
                 },
                 "et": "1697788800000000000",
-                "tt": "UNSPECIFIED",
-                "tm": null
+                "tt": "STANDARD",
+                "tm": null,
+                "fw": "SPOT",
+                "tw": "FUNDING"
             }],
             "n": "Qw0918="
         }
@@ -8841,7 +10864,11 @@ LITE ENDPOINT: lite/v1/account_summary
                 "spot_balances": [{
                     "currency": "USDT",
                     "balance": "123456.78",
-                    "index_price": "1.0000102"
+                    "index_price": "1.0000102",
+                    "entry_price": "1.0",
+                    "realized_pnl": "0.0",
+                    "unrealized_pnl": "0.0",
+                    "available_to_transfer": "0.0"
                 }],
                 "positions": [{
                     "event_time": "1697788800000000000",
@@ -8867,12 +10894,13 @@ LITE ENDPOINT: lite/v1/account_summary
                     "isolated_mm": "100000.20"
                 }],
                 "settle_index_price": "1.0000102",
-                "is_vault": null,
+                "is_vault": false,
                 "vault_im_additions": "123456.78",
                 "derisk_margin": "185185.77",
                 "derisk_to_maintenance_margin_ratio": "1.5",
                 "total_cross_equity": "123456.78",
-                "cross_unrealized_pnl": "123456.78"
+                "cross_unrealized_pnl": "123456.78",
+                "sub_account_mode": "SINGLE_ASSET_MODE"
             }
         }
         ```
@@ -8892,7 +10920,11 @@ LITE ENDPOINT: lite/v1/account_summary
                 "sb": [{
                     "c": "USDT",
                     "b": "123456.78",
-                    "ip": "1.0000102"
+                    "ip": "1.0000102",
+                    "ep": "1.0",
+                    "rp": "0.0",
+                    "up": "0.0",
+                    "at": "0.0"
                 }],
                 "p": [{
                     "et": "1697788800000000000",
@@ -8918,12 +10950,13 @@ LITE ENDPOINT: lite/v1/account_summary
                     "im": "100000.20"
                 }],
                 "si": "1.0000102",
-                "iv": null,
+                "iv": false,
                 "vi": "123456.78",
                 "dm": "185185.77",
                 "dt": "1.5",
                 "tc": "123456.78",
-                "cu": "123456.78"
+                "cu": "123456.78",
+                "sa1": "SINGLE_ASSET_MODE"
             }
         }
         ```
@@ -9192,6 +11225,340 @@ LITE ENDPOINT: lite/v1/account_summary
             ```
         </section>
 <hr class="solid">
+### Spot Account Summary
+```
+FULL ENDPOINT: full/v1/spot_account_summary
+LITE ENDPOINT: lite/v1/spot_account_summary
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_spot_sub_account_summary_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_spot_sub_account_summary_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": {
+                "event_time": "1697788800000000000",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "total_equity": "3945034.23",
+                "spot_balances": [{
+                    "currency": "USDT",
+                    "balance": "123456.78",
+                    "index_price": "1.0000102",
+                    "entry_price": "1.0",
+                    "realized_pnl": "0.0",
+                    "unrealized_pnl": "0.0",
+                    "available_to_transfer": "0.0"
+                }]
+            }
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "et": "1697788800000000000",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "te": "3945034.23",
+                "sb": [{
+                    "c": "USDT",
+                    "b": "123456.78",
+                    "ip": "1.0000102",
+                    "ep": "1.0",
+                    "rp": "0.0",
+                    "up": "0.0",
+                    "at": "0.0"
+                }]
+            }
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "DEV"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/full/v1/spot_account_summary' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/spot_account_summary",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.dev.gravitymarkets.io/lite/v1/spot_account_summary' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.dev.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/spot_account_summary",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/spot_account_summary' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/spot_account_summary",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/spot_account_summary' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/spot_account_summary",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/spot_account_summary' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/spot_account_summary",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/spot_account_summary' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/spot_account_summary",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/spot_account_summary' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/spot_account_summary",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/spot_account_summary' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/spot_account_summary",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
 ### Sub Account History
 ```
 FULL ENDPOINT: full/v1/account_history
@@ -9247,7 +11614,11 @@ LITE ENDPOINT: lite/v1/account_history
                 "spot_balances": [{
                     "currency": "USDT",
                     "balance": "123456.78",
-                    "index_price": "1.0000102"
+                    "index_price": "1.0000102",
+                    "entry_price": "1.0",
+                    "realized_pnl": "0.0",
+                    "unrealized_pnl": "0.0",
+                    "available_to_transfer": "0.0"
                 }],
                 "positions": [{
                     "event_time": "1697788800000000000",
@@ -9273,12 +11644,13 @@ LITE ENDPOINT: lite/v1/account_history
                     "isolated_mm": "100000.20"
                 }],
                 "settle_index_price": "1.0000102",
-                "is_vault": null,
+                "is_vault": false,
                 "vault_im_additions": "123456.78",
                 "derisk_margin": "185185.77",
                 "derisk_to_maintenance_margin_ratio": "1.5",
                 "total_cross_equity": "123456.78",
-                "cross_unrealized_pnl": "123456.78"
+                "cross_unrealized_pnl": "123456.78",
+                "sub_account_mode": "SINGLE_ASSET_MODE"
             }],
             "next": "Qw0918="
         }
@@ -9299,7 +11671,11 @@ LITE ENDPOINT: lite/v1/account_history
                 "sb": [{
                     "c": "USDT",
                     "b": "123456.78",
-                    "ip": "1.0000102"
+                    "ip": "1.0000102",
+                    "ep": "1.0",
+                    "rp": "0.0",
+                    "up": "0.0",
+                    "at": "0.0"
                 }],
                 "p": [{
                     "et": "1697788800000000000",
@@ -9325,12 +11701,13 @@ LITE ENDPOINT: lite/v1/account_history
                     "im": "100000.20"
                 }],
                 "si": "1.0000102",
-                "iv": null,
+                "iv": false,
                 "vi": "123456.78",
                 "dm": "185185.77",
                 "dt": "1.5",
                 "tc": "123456.78",
-                "cu": "123456.78"
+                "cu": "123456.78",
+                "sa1": "SINGLE_ASSET_MODE"
             }],
             "n": "Qw0918="
         }
@@ -9702,7 +12079,11 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                 "spot_balances": [{
                     "currency": "USDT",
                     "balance": "123456.78",
-                    "index_price": "1.0000102"
+                    "index_price": "1.0000102",
+                    "entry_price": "1.0",
+                    "realized_pnl": "0.0",
+                    "unrealized_pnl": "0.0",
+                    "available_to_transfer": "0.0"
                 }],
                 "vault_investments": [{
                     "vault_id": 123456789,
@@ -9727,7 +12108,11 @@ LITE ENDPOINT: lite/v1/aggregated_account_summary
                 "sb": [{
                     "c": "USDT",
                     "b": "123456.78",
-                    "ip": "1.0000102"
+                    "ip": "1.0000102",
+                    "ep": "1.0",
+                    "rp": "0.0",
+                    "up": "0.0",
+                    "at": "0.0"
                 }],
                 "vi": [{
                     "vi": 123456789,
@@ -10029,21 +12414,29 @@ LITE ENDPOINT: lite/v1/funding_account_summary
                 "spot_balances": [{
                     "currency": "USDT",
                     "balance": "123456.78",
-                    "index_price": "1.0000102"
+                    "index_price": "1.0000102",
+                    "entry_price": "1.0",
+                    "realized_pnl": "0.0",
+                    "unrealized_pnl": "0.0",
+                    "available_to_transfer": "0.0"
                 }],
                 "vault_investments": [{
                     "vault_id": 123456789,
                     "num_lp_tokens": 1000000,
                     "share_price": 1000000,
                     "usd_notional_invested": 1000000
-                }]
+                }],
+                "total_cash_balance": "1000000.00",
+                "total_spot_asset_balance": "500000.00"
             },
             "tier": {
                 "tier": null,
                 "futures_taker_fee": null,
                 "futures_maker_fee": null,
                 "options_taker_fee": null,
-                "options_maker_fee": null
+                "options_maker_fee": null,
+                "spot_taker_fee": null,
+                "spot_maker_fee": null
             }
         }
         ```
@@ -10056,21 +12449,29 @@ LITE ENDPOINT: lite/v1/funding_account_summary
                 "sb": [{
                     "c": "USDT",
                     "b": "123456.78",
-                    "ip": "1.0000102"
+                    "ip": "1.0000102",
+                    "ep": "1.0",
+                    "rp": "0.0",
+                    "up": "0.0",
+                    "at": "0.0"
                 }],
                 "vi": [{
                     "vi": 123456789,
                     "nl": 1000000,
                     "sp": 1000000,
                     "un": 1000000
-                }]
+                }],
+                "tc": "1000000.00",
+                "ts": "500000.00"
             },
             "t": {
                 "t": null,
                 "ft": null,
                 "fm": null,
                 "ot": null,
-                "om": null
+                "om": null,
+                "st": null,
+                "sm": null
             }
         }
         ```
@@ -11482,6 +13883,7 @@ LITE ENDPOINT: lite/v1/set_initial_leverage
         |1004|404|Data Not Found|
         |2100|400|Invalid initial leverage|
         |2101|400|Vaults cannot configure leverage|
+        |3007|400|API is not applicable for spot instruments|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -12859,7 +15261,7 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                     "request_valuation": 1000000,
                     "request_time": "1697788800000000000",
                     "max_redemption_period_timestamp": 1727788800000000000,
-                    "cancel_blocked": null
+                    "cancel_blocked": false
                 },
                 "can_burn": null
             }]
@@ -12880,7 +15282,7 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
                     "rv": 1000000,
                     "rt": "1697788800000000000",
                     "mr": 1727788800000000000,
-                    "cb": null
+                    "cb": false
                 },
                 "cb": null
             }]
