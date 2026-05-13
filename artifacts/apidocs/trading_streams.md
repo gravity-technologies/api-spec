@@ -154,7 +154,8 @@ STREAM: v1.order
                 },
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                 "builder_fee": "0.001"
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -209,7 +210,8 @@ STREAM: v1.order
                 },
                 "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                 "bf": "0.001"
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -797,7 +799,8 @@ STREAM: v1.state
                     "update_time": "1697788800000000000",
                     "avg_fill_price": ["60000.4"]
                 }
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -817,7 +820,8 @@ STREAM: v1.state
                     "ut": "1697788800000000000",
                     "af": ["60000.4"]
                 }
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -1401,7 +1405,8 @@ STREAM: v1.cancel
                 "reason": "UNSPECIFIED",
                 "update_time": "1697788800000000000",
                 "cancel_status": "EXPIRED"
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -1417,7 +1422,8 @@ STREAM: v1.cancel
                 "r": "UNSPECIFIED",
                 "ut": "1697788800000000000",
                 "cs": "EXPIRED"
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -2022,7 +2028,8 @@ STREAM: v1.fill
                 "builder_fee_rate": 0.001,
                 "builder_fee": "0.2",
                 "fee_currency": "USDT"
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -2058,7 +2065,8 @@ STREAM: v1.fill
                 "bf": 0.001,
                 "bf1": "0.2",
                 "fc": "USDT"
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -2657,7 +2665,8 @@ STREAM: v1.position
                 "isolated_balance": "100000.20",
                 "isolated_im": "100000.20",
                 "isolated_mm": "100000.20"
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -2688,7 +2697,8 @@ STREAM: v1.position
                 "ib": "100000.20",
                 "ii": "100000.20",
                 "im": "100000.20"
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -2706,6 +2716,7 @@ STREAM: v1.position
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3020|400|Sub account ID must be an uint64 integer|
+        |3007|400|API is not applicable for spot instruments|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -3271,7 +3282,8 @@ STREAM: v1.deposit
                 "to_account_id": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "currency": "USDT",
                 "num_tokens": "10.50"
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -3285,7 +3297,8 @@ STREAM: v1.deposit
                 "ta": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                 "c": "USDT",
                 "nt": "10.50"
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -3878,7 +3891,8 @@ STREAM: v1.transfer
                 "event_time": "1697788800000000000",
                 "transfer_type": "STANDARD",
                 "transfer_metadata": null
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -3907,7 +3921,8 @@ STREAM: v1.transfer
                 "et": "1697788800000000000",
                 "tt": "STANDARD",
                 "tm": null
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
@@ -4495,7 +4510,8 @@ STREAM: v1.withdrawal
                     "nonce": 1234567890,
                     "chain_id": "325"
                 }
-            }
+            },
+            "prev_sequence_number": "872634875"
         }
         ```
         **Lite Feed Response**
@@ -4518,7 +4534,8 @@ STREAM: v1.withdrawal
                     "n": 1234567890,
                     "ci": "325"
                 }
-            }
+            },
+            "ps": "872634875"
         }
         ```
     </section>
