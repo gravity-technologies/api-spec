@@ -110,6 +110,8 @@ class Kind(Enum):
     CALL = "CALL"
     # the put option asset kind
     PUT = "PUT"
+    # the spot swap asset kind
+    SPOT_SWAP = "SPOT_SWAP"
 
 
 class MarginType(Enum):
@@ -210,8 +212,18 @@ class OrderRejectReason(Enum):
     TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE = "TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE"
     # the order was cancelled due to matching with too many maker orders
     TOO_MANY_MAKER_ORDERS = "TOO_MANY_MAKER_ORDERS"
+    # reduce-only order is not supported for spot order
+    REDUCE_ONLY_NOT_SUPPORTED_FOR_SPOT_ORDER = "REDUCE_ONLY_NOT_SUPPORTED_FOR_SPOT_ORDER"
+    # tpsl is not supported for spot order
+    TPSL_NOT_SUPPORTED_FOR_SPOT_ORDER = "TPSL_NOT_SUPPORTED_FOR_SPOT_ORDER"
+    # spot order is not supported
+    SPOT_ORDER_NOT_SUPPORTED = "SPOT_ORDER_NOT_SUPPORTED"
     # the subaccount has insufficient balance
     INSUFFICIENT_BALANCE = "INSUFFICIENT_BALANCE"
+    # spot trading is blocked during socialized loss (SLOW)
+    SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS = (
+        "SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS"
+    )
     # the order will bring the sub account below initial margin requirement considering wide price deviation
     BELOW_MARGIN_WITH_PENALTY_DEVIATION = "BELOW_MARGIN_WITH_PENALTY_DEVIATION"
 
@@ -247,6 +259,11 @@ class PositionMarginType(Enum):
     CROSS = "CROSS"
 
 
+class SubAccountMode(Enum):
+    # Single asset mode: the subaccount is only allowed to hold one asset as collateral
+    SINGLE_ASSET_MODE = "SINGLE_ASSET_MODE"
+
+
 class TimeInForce(Enum):
     """
     |                       | Must Fill All | Can Fill Partial |
@@ -269,7 +286,7 @@ class TimeInForce(Enum):
 
 
 class TransferType(Enum):
-    # Default transfer that has nothing to do with bridging
+    # Deprecated: use `standard` instead. Legacy value for transfers created before transfer types were introduced.
     UNSPECIFIED = "UNSPECIFIED"
     # Standard transfer that has nothing to do with bridging
     STANDARD = "STANDARD"
@@ -287,6 +304,12 @@ class TransferType(Enum):
     REFERRAL_INCENTIVE = "REFERRAL_INCENTIVE"
     # Transfer type for trading deposit yield incentive
     TRADING_DEPOSIT_YIELD_INCENTIVE = "TRADING_DEPOSIT_YIELD_INCENTIVE"
+    # Transfer type for TGE vesting distribution
+    TGE_VESTING = "TGE_VESTING"
+    # Transfer type for TGE airdrop distribution
+    TGE_AIRDROP = "TGE_AIRDROP"
+    # Transfer type for feedback reward distribution
+    FEEDBACK_REWARD = "FEEDBACK_REWARD"
 
 
 class TriggerBy(Enum):
@@ -356,6 +379,15 @@ class Venue(Enum):
     ORDERBOOK = "ORDERBOOK"
     # the trade is cleared on the RFQ venue
     RFQ = "RFQ"
+
+
+class WalletType(Enum):
+    # Funding wallet
+    FUNDING = "FUNDING"
+    # Spot wallet
+    SPOT = "SPOT"
+    # Futures wallet
+    FUTURES = "FUTURES"
 
 
 @dataclass
@@ -454,6 +486,82 @@ class ApiBuilderFillHistoryResponse:
 
 
 @dataclass
+class ApiBulkOrdersRequest:
+    """
+    Bulk create, cancel, or cancel-replace orders for a single subaccount.
+
+    A cancel-replace is a cancel of the old order plus a create of a new one. The new order is assigned a new `order_id`; the cancelled `order_id` is terminated. Clients must track the new `order_id` from the response.
+
+    **Rules**
+    - Up to 100 entries in each of `orders`, `order_ids`, and `client_order_ids`
+    - All create orders must target the same instrument
+    - `client_order_id`s within `orders` must be unique
+    - `order_ids` and `client_order_ids` are mutually exclusive; supplying both is rejected
+    - Rate limits: N creates consume N create_order tokens; any cancels consume 1 cancel_order token
+
+    **BulkCreate**
+
+    Populate `orders` only; leave `order_ids` and `client_order_ids` empty. A batch may not mix multiple normal orders with trigger orders.
+
+    To mark an order as TP or SL, populate its `metadata.trigger` field; see `TriggerOrderMetadata` for details.
+
+    A 'parent' order is a normal order whose linked TP/SL trigger orders become active once the parent is fully filled.
+
+    Supported combinations:
+    - **Normal orders (non-TPSL)**: one or many orders
+    - **Standalone TP**: 1 TP order
+    - **Standalone SL**: 1 SL order
+    - **OCO** (2 orders: 1 TP + 1 SL): same asset, same size, same side
+    - **OTO** (2 orders: parent + 1 trigger): 1 parent + 1 TP or SL order. Same asset and size. Parent side is opposite of the trigger side.
+    - **OTOCO** (3 orders: parent + TP + SL): 1 parent + 1 TP order + 1 SL order. Same asset and size across all three. Parent side is opposite of TP and SL sides.
+
+    **BulkCancel**
+
+    Leave `orders` empty; populate either `order_ids` or `client_order_ids` (not both). Targets can be normal orders, standalone TP/SL, or members of an OCO/OTO/OTOCO group. Passing any member id of a grouped TPSL order cancels the whole group.
+
+    **BulkCancelReplace**
+
+    Populate `orders` together with `order_ids` or `client_order_ids`. Ids below refer to entries in whichever id list you chose.
+
+    *Normal orders (non-TPSL)*: the batch is processed as all cancels first, then all creates.
+
+    *TPSL*: `#creates` must equal `#cancels`, and one request may modify only one group. For OTO and OTOCO, only the trigger part is replaceable — the parent order is not included in `orders` or in the cancel id list, and stays on the book unchanged.
+    - **Standalone TP / Standalone SL**: cancel 1 id (the existing trigger order) + create 1 new trigger order with matching `triggerType`.
+    - **OCO**: cancel both ids of the existing OCO group (the TP and SL) + create 2 new orders (1 TP + 1 SL); shape conditions same as BulkCreate OCO.
+    - **OTO**: cancel the id of the existing trigger order in the OTO group + create 1 new trigger order. The new trigger is linked to the same parent.
+    - **OTOCO**: cancel both ids of the existing OTOCO group (the TP and SL) + create 2 new orders (1 TP + 1 SL); shape conditions same as BulkCreate OCO. The new TP and SL are linked to the same parent.
+    """
+
+    # The subaccount ID of the user creating the request
+    sub_account_id: str
+    # Orders to create or replace, supply up to 100 orders
+    orders: list[Order]
+    # The order IDs of the orders to cancel or replace, supply up to 100 orderIDs (if both orderIDs and clientOrderIDs are provided, we will reject the payload)
+    order_i_ds: list[str]
+    # The client order IDs of the orders to cancel or replace, supply up to 100 clientOrderIDs (if both orderIDs and clientOrderIDs are provided, we will reject the payload)
+    client_order_i_ds: list[str]
+    """
+    Specifies the time-to-live (in milliseconds) for this cancellation.
+    During this period, any order creation with a matching `client_order_id` will be cancelled and not be added to the GRVT matching engine.
+    This mechanism helps mitigate time-of-flight issues where cancellations might arrive before the corresponding orders.
+    Hence, cancellation by `order_id` ignores this field as the exchange can only assign `order_id`s to already-processed order creations.
+    The duration cannot be negative, is rounded down to the nearest 100ms (e.g., `'670'` -> `'600'`, `'30'` -> `'0'`) and capped at 5 seconds (i.e., `'5000'`).
+    Value of `'0'` or omission results in the default time-to-live value being applied.
+    If the caller requests multiple successive cancellations for a given order, such that the time-to-live windows overlap, only the first request will be considered.
+
+    """
+    time_to_live_ms: str | None = None
+
+
+@dataclass
+class ApiBulkOrdersResponse:
+    # The orders in same order as requested
+    orders: list[Order]
+    # A list of acks for the cancelled orders
+    cancel_acks: list[Ack]
+
+
+@dataclass
 class ApiCancelAllOrdersRequest:
     # The subaccount ID cancelling all orders
     sub_account_id: str
@@ -528,7 +636,7 @@ class ApiCandlestickRequest:
     instrument: str
     # The interval of each candlestick
     interval: CandlestickInterval
-    # The type of candlestick data to retrieve
+    # The type of candlestick data to retrieve. Note: For spot instruments, only `trade` and `mid` are available
     type: CandlestickType
     # Start time of kline data in unix nanoseconds
     start_time: str | None = None
@@ -849,6 +957,10 @@ class ApiGetSubAccountsResponse:
 class ApiGetSupportedAssetsResponse:
     # Assets supported in funding wallets
     funding: list[SupportedAsset]
+    # Assets supported in spot wallets
+    spot: list[SupportedAsset]
+    # Assets supported in futures wallets, grouped by mode
+    futures: list[FuturesWalletAssets]
 
 
 @dataclass
@@ -1110,6 +1222,29 @@ class ApiSetInitialLeverageResponse:
 
 
 @dataclass
+class ApiSetSubAccountModeRequest:
+    """
+    Sets the sub account mode (Single Asset Mode or Multi Asset Mode).
+
+    Switching modes requires passing validation checks to ensure the account remains healthy.
+
+    """
+
+    # The sub account ID to set the mode for
+    sub_account_id: str
+    # The target sub account mode to switch to
+    sub_account_mode: SubAccountMode
+    # The signature of this operation
+    signature: Signature
+
+
+@dataclass
+class ApiSetSubAccountModeResponse:
+    # Whether the mode switch was acked
+    ack: bool
+
+
+@dataclass
 class ApiSetSubAccountPositionMarginConfigRequest:
     """
     Sets the margin type and leverage configuration for a specific position (instrument) within a sub account.
@@ -1134,6 +1269,18 @@ class ApiSetSubAccountPositionMarginConfigRequest:
 class ApiSetSubAccountPositionMarginConfigResponse:
     # Whether the margin type and leverage was acked
     ack: bool
+
+
+@dataclass
+class ApiSpotSubAccountSummaryRequest:
+    # The subaccount ID to filter by
+    sub_account_id: str
+
+
+@dataclass
+class ApiSpotSubAccountSummaryResponse:
+    # The spot sub account summary
+    result: SpotSubAccount
 
 
 @dataclass
@@ -1316,6 +1463,10 @@ class ApiTransferRequest:
     transfer_type: TransferType
     # The metadata of the transfer
     transfer_metadata: str
+    # The wallet type of the from account or subaccount
+    from_wallet_type: WalletType
+    # The wallet type of the to account or subaccount
+    to_wallet_type: WalletType
 
 
 @dataclass
@@ -1618,6 +1769,8 @@ class ClientTier:
     futures_maker_fee: int
     options_taker_fee: int
     options_maker_fee: int
+    spot_taker_fee: int
+    spot_maker_fee: int
 
 
 @dataclass
@@ -1757,6 +1910,10 @@ class FundingAccountSummary:
     spot_balances: list[SpotBalance]
     # The list of vault investments held by this main account
     vault_investments: list[VaultInvestment]
+    # Total balance of cash (stablecoin) currencies, denominated in USD
+    total_cash_balance: str
+    # Total balance of non-cash spot currencies, denominated in USD
+    total_spot_asset_balance: str
 
 
 @dataclass
@@ -1777,6 +1934,14 @@ class FundingPayment:
     The `tx_id` will match the corresponding `trade_id` or `tx_id`.
     """
     tx_id: str
+
+
+@dataclass
+class FuturesWalletAssets:
+    # The sub account mode
+    mode: SubAccountMode
+    # Assets supported under this futures mode
+    supported_assets: list[SupportedAsset]
 
 
 @dataclass
@@ -2179,6 +2344,26 @@ class SpotBalance:
     balance: str
     # The index price of this currency. (reported in `USD`)
     index_price: str
+    # The entry price of this spot currency. (reported in `USD`)
+    entry_price: str
+    # The realized PnL of this spot currency. (reported in `USD`)
+    realized_pnl: str
+    # The unrealized PnL of this spot currency. (reported in `USD`)
+    unrealized_pnl: str
+    # The available to transfer amount of this spot currency.
+    available_to_transfer: str
+
+
+@dataclass
+class SpotSubAccount:
+    # Time at which the event was emitted in unix nanoseconds
+    event_time: str
+    # The sub account ID this entry refers to
+    sub_account_id: str
+    # Total equity of the spot sub account, denominated USD
+    total_equity: str
+    # The list of spot assets owned by this spot sub account, and their balances
+    spot_balances: list[SpotBalance]
 
 
 @dataclass
@@ -2244,6 +2429,10 @@ class SubAccount:
     total_cross_equity: str
     # The unrealized PnL of this sub account for cross margin
     cross_unrealized_pnl: str
+    # The mode of the sub account
+    sub_account_mode: SubAccountMode
+    # The margin balance of this sub account for cross margin
+    margin_balance: str
     # Whether this sub account is a vault
     is_vault: bool | None = None
     # Total amount of IM (reported in `settle_currency`) deducted from the vault due to redemptions nearing the end of their redemption period
@@ -2404,6 +2593,10 @@ class TransferHistory:
     transfer_type: TransferType
     # The metadata of the transfer
     transfer_metadata: str
+    # The wallet type of the from account or subaccount
+    from_wallet_type: WalletType
+    # The wallet type of the to account or subaccount
+    to_wallet_type: WalletType
 
 
 @dataclass

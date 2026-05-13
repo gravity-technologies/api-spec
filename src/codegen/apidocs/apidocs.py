@@ -29,9 +29,12 @@ IGNORE_STRUCTS = [
 
 # skip these fields for all structs, at all levels of nesting
 IGNORE_FIELDS_ANY_PATH = [
-    "prev_sequence_number",
     "latest_sequence_number",
     "use_global_sequence_number",
+    "from_wallet_type",
+    "to_wallet_type",
+    "spot_taker_fee",
+    "spot_maker_fee",
 ]
 
 IGNORE_RPCS: list[str] = [
@@ -39,6 +42,8 @@ IGNORE_RPCS: list[str] = [
     "RPCDropClientWS",
     "RPCGetMarginTiersV1",
     "RPCQueryTradingPerformanceV1",
+    "RPCSpotSubAccountSummary",
+    "RPCGetSupportedAssets",
 ]
 
 IGNORE_ENUM_VALUES: dict[str, list[str]] = {
@@ -58,6 +63,12 @@ IGNORE_ENUM_VALUES: dict[str, list[str]] = {
         "UXLINK",
         "KAITO",
     ],
+    "TransferType": [
+        "TGE_VESTING",
+        "TGE_AIRDROP",
+        "FEEDBACK_REWARD",
+    ],
+    "Kind": ["SPOT_SWAP"],
 }
 
 

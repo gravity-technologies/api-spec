@@ -174,6 +174,14 @@ class GrvtRawSync(GrvtRawSyncBase):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
+    def bulk_orders_v2(
+        self, req: types.ApiBulkOrdersRequest
+    ) -> types.ApiBulkOrdersResponse | GrvtError:
+        resp = self._post(True, self.td_rpc + "/full/v2/bulk_orders", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiBulkOrdersResponse, resp, Config(cast=[Enum]))
+
     def fill_history_v1(
         self, req: types.ApiFillHistoryRequest
     ) -> types.ApiFillHistoryResponse | GrvtError:
@@ -217,6 +225,14 @@ class GrvtRawSync(GrvtRawSyncBase):
         return from_dict(
             types.ApiSetSubAccountPositionMarginConfigResponse, resp, Config(cast=[Enum])
         )
+
+    def set_sub_account_mode_v1(
+        self, req: types.ApiSetSubAccountModeRequest
+    ) -> types.ApiSetSubAccountModeResponse | GrvtError:
+        resp = self._post(True, self.td_rpc + "/full/v1/set_sub_account_mode", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiSetSubAccountModeResponse, resp, Config(cast=[Enum]))
 
     def add_position_margin_v1(
         self, req: types.ApiAddIsolatedPositionMarginRequest
@@ -285,6 +301,16 @@ class GrvtRawSync(GrvtRawSyncBase):
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiSubAccountSummaryResponse, resp, Config(cast=[Enum]))
+
+    def spot_account_summary_v1(
+        self, req: types.ApiSpotSubAccountSummaryRequest
+    ) -> types.ApiSpotSubAccountSummaryResponse | GrvtError:
+        resp = self._post(True, self.td_rpc + "/full/v1/spot_account_summary", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiSpotSubAccountSummaryResponse, resp, Config(cast=[Enum])
+        )
 
     def sub_account_history_v1(
         self, req: types.ApiSubAccountHistoryRequest

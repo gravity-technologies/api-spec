@@ -5,6 +5,7 @@
     |selector<br>`s1` |string|True|Primary selector|
     |sequence_number<br>`sn` |string|True|A sequence number used to determine message order within a stream.<br>- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.<br>- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.<br>  - A single cluster payload can be multiplexed into multiple stream payloads.<br>  - To distinguish each stream payload, a `dedupCounter` is included.<br>  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.|
     |feed<br>`f` |Order|True|The order object being created or updated|
+    |prev_sequence_number<br>`ps` |string|True|The previous sequence number that determines the message order|
     ??? info "[Order](/../../schemas/order)"
         Order is a typed payload used throughout the GRVT platform to express all orderbook, RFQ, and liquidation orders.<br>GRVT orders are capable of expressing both single-legged, and multi-legged orders by default.<br>This increases the learning curve slightly but reduces overall integration load, since the order payload is used across all GRVT trading venues.<br>Given GRVT's trustless settlement model, the Order payload also carries the signature, required to trade the order on our ZKSync Hyperchain.<br><br>All fields in the Order payload (except `id`, `metadata`, and `state`) are trustlessly enforced on our Hyperchain.<br>This minimizes the amount of trust users have to offer to GRVT<br>
 
@@ -170,5 +171,9 @@
                 |`BUILDER_ORDER_BUILDER_NOT_EXIST` = 42|Builder does not exist|
                 |`TRADE_PRICE_WORSE_THAN_BANKRUPTCY_PRICE` = 44|the trade price is worse than the bankruptcy price|
                 |`TOO_MANY_MAKER_ORDERS` = 45|the order was cancelled due to matching with too many maker orders|
+                |`REDUCE_ONLY_NOT_SUPPORTED_FOR_SPOT_ORDER` = 46|reduce-only order is not supported for spot order|
+                |`TPSL_NOT_SUPPORTED_FOR_SPOT_ORDER` = 47|tpsl is not supported for spot order|
+                |`SPOT_ORDER_NOT_SUPPORTED` = 48|spot order is not supported|
                 |`INSUFFICIENT_BALANCE` = 49|the subaccount has insufficient balance|
+                |`SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS` = 50|spot trading is blocked during socialized loss (SLOW)|
                 |`BELOW_MARGIN_WITH_PENALTY_DEVIATION` = 51|the order will bring the sub account below initial margin requirement considering wide price deviation|
