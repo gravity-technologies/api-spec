@@ -657,6 +657,14 @@ class ApiCandlestickResponse:
 
 
 @dataclass
+class ApiCollateralPreferenceItem:
+    # The currency whose collateral preference is being changed
+    currency: str
+    # True to include the currency as collateral, false to exclude it
+    enable: bool
+
+
+@dataclass
 class ApiCreateOrderRequest:
     # The order to create
     order: Order
@@ -1219,6 +1227,29 @@ class ApiSetInitialLeverageResponse:
 
     # Whether the leverage was set successfully
     success: bool
+
+
+@dataclass
+class ApiSetSubAccountCollateralPreferenceRequest:
+    """
+    Enable or disable one or more currencies as collateral for a Multi-Asset Mode sub account.
+
+    USDT (the quote currency) cannot be disabled. Disabling collateral currencies reduces MarginBalance, and the batch is rejected when Initial Margin would no longer be covered.
+
+    """
+
+    # The sub account ID to set collateral preferences for
+    sub_account_id: str
+    # Per-currency preferences applied atomically. Duplicate currencies and empty lists are rejected.
+    preferences: list[ApiCollateralPreferenceItem]
+    # The signature of this operation
+    signature: Signature
+
+
+@dataclass
+class ApiSetSubAccountCollateralPreferenceResponse:
+    # Whether the preference change was acked
+    ack: bool
 
 
 @dataclass

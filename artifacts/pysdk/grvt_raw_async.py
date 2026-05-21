@@ -238,6 +238,18 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiSetSubAccountModeResponse, resp, Config(cast=[Enum]))
 
+    async def set_collateral_preference_v1(
+        self, req: types.ApiSetSubAccountCollateralPreferenceRequest
+    ) -> types.ApiSetSubAccountCollateralPreferenceResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/set_collateral_preference", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiSetSubAccountCollateralPreferenceResponse, resp, Config(cast=[Enum])
+        )
+
     async def add_position_margin_v1(
         self, req: types.ApiAddIsolatedPositionMarginRequest
     ) -> types.ApiAddIsolatedPositionMarginResponse | GrvtError:
