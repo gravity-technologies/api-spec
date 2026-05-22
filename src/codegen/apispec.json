@@ -4,10 +4,6 @@
       "name": "MarketData",
       "endpoints": [
         {
-          "name": "dev",
-          "url": "market-data.dev.gravitymarkets.io"
-        },
-        {
           "name": "staging",
           "url": "market-data.staging.gravitymarkets.io"
         },
@@ -791,10 +787,6 @@
     {
       "name": "Trading",
       "endpoints": [
-        {
-          "name": "dev",
-          "url": "trades.dev.gravitymarkets.io"
-        },
         {
           "name": "staging",
           "url": "trades.staging.gravitymarkets.io"
