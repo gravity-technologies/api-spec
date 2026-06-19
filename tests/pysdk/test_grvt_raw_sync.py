@@ -9,7 +9,7 @@ from artifacts.pysdk.grvt_raw_sync import GrvtRawSync
 
 def get_config() -> GrvtApiConfig:
     conf = GrvtApiConfig(
-        env=GrvtEnv(os.getenv("GRVT_ENV", "dev")),
+        env=GrvtEnv(os.getenv("GRVT_ENV", "staging")),
         trading_account_id=os.getenv("GRVT_SUB_ACCOUNT_ID"),
         private_key=os.getenv("GRVT_PRIVATE_KEY"),
         api_key=os.getenv("GRVT_API_KEY"),
