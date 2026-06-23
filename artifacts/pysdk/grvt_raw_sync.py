@@ -13,417 +13,313 @@ class GrvtRawSync(GrvtRawSyncBase):
         self.md_rpc = self.env.market_data.rpc_endpoint
         self.td_rpc = self.env.trade_data.rpc_endpoint
 
-    def get_instrument_v1(
-        self, req: types.ApiGetInstrumentRequest
-    ) -> types.ApiGetInstrumentResponse | GrvtError:
+    def get_instrument_v1(self, req: types.ApiGetInstrumentRequest) -> types.ApiGetInstrumentResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/instrument", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiGetInstrumentResponse, resp, Config(cast=[Enum]))
 
-    def get_all_instruments_v1(
-        self, req: types.ApiGetAllInstrumentsRequest
-    ) -> types.ApiGetAllInstrumentsResponse | GrvtError:
+    def get_all_instruments_v1(self, req: types.ApiGetAllInstrumentsRequest) -> types.ApiGetAllInstrumentsResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/all_instruments", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiGetAllInstrumentsResponse, resp, Config(cast=[Enum]))
 
-    def get_filtered_instruments_v1(
-        self, req: types.ApiGetFilteredInstrumentsRequest
-    ) -> types.ApiGetFilteredInstrumentsResponse | GrvtError:
+    def get_filtered_instruments_v1(self, req: types.ApiGetFilteredInstrumentsRequest) -> types.ApiGetFilteredInstrumentsResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/instruments", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiGetFilteredInstrumentsResponse, resp, Config(cast=[Enum]))
 
-    def get_currency_v1(
-        self, req: types.ApiGetCurrencyRequest
-    ) -> types.ApiGetCurrencyResponse | GrvtError:
+    def get_currency_v1(self, req: types.ApiGetCurrencyRequest) -> types.ApiGetCurrencyResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/currency", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiGetCurrencyResponse, resp, Config(cast=[Enum]))
 
-    def get_supported_assets_v1(
-        self, req: types.EmptyRequest
-    ) -> types.ApiGetSupportedAssetsResponse | GrvtError:
+    def get_supported_assets_v1(self, req: types.EmptyRequest) -> types.ApiGetSupportedAssetsResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/supported_assets", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiGetSupportedAssetsResponse, resp, Config(cast=[Enum]))
 
-    def get_margin_rules_v1(
-        self, req: types.ApiGetMarginRulesRequest
-    ) -> types.ApiGetMarginRulesResponse | GrvtError:
+    def get_margin_rules_v1(self, req: types.ApiGetMarginRulesRequest) -> types.ApiGetMarginRulesResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/margin_rules", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiGetMarginRulesResponse, resp, Config(cast=[Enum]))
 
-    def mini_ticker_v1(
-        self, req: types.ApiMiniTickerRequest
-    ) -> types.ApiMiniTickerResponse | GrvtError:
+    def mini_ticker_v1(self, req: types.ApiMiniTickerRequest) -> types.ApiMiniTickerResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/mini", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiMiniTickerResponse, resp, Config(cast=[Enum]))
 
-    def ticker_v1(
-        self, req: types.ApiTickerRequest
-    ) -> types.ApiTickerResponse | GrvtError:
+    def ticker_v1(self, req: types.ApiTickerRequest) -> types.ApiTickerResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/ticker", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiTickerResponse, resp, Config(cast=[Enum]))
 
-    def orderbook_levels_v1(
-        self, req: types.ApiOrderbookLevelsRequest
-    ) -> types.ApiOrderbookLevelsResponse | GrvtError:
+    def orderbook_levels_v1(self, req: types.ApiOrderbookLevelsRequest) -> types.ApiOrderbookLevelsResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/book", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiOrderbookLevelsResponse, resp, Config(cast=[Enum]))
 
-    def trade_v1(
-        self, req: types.ApiTradeRequest
-    ) -> types.ApiTradeResponse | GrvtError:
+    def trade_v1(self, req: types.ApiTradeRequest) -> types.ApiTradeResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/trade", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiTradeResponse, resp, Config(cast=[Enum]))
 
-    def trade_history_v1(
-        self, req: types.ApiTradeHistoryRequest
-    ) -> types.ApiTradeHistoryResponse | GrvtError:
+    def trade_history_v1(self, req: types.ApiTradeHistoryRequest) -> types.ApiTradeHistoryResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/trade_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiTradeHistoryResponse, resp, Config(cast=[Enum]))
 
-    def candlestick_v1(
-        self, req: types.ApiCandlestickRequest
-    ) -> types.ApiCandlestickResponse | GrvtError:
+    def candlestick_v1(self, req: types.ApiCandlestickRequest) -> types.ApiCandlestickResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/kline", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiCandlestickResponse, resp, Config(cast=[Enum]))
 
-    def funding_rate_v1(
-        self, req: types.ApiFundingRateRequest
-    ) -> types.ApiFundingRateResponse | GrvtError:
+    def funding_rate_v1(self, req: types.ApiFundingRateRequest) -> types.ApiFundingRateResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/funding", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiFundingRateResponse, resp, Config(cast=[Enum]))
 
-    def create_order_v1(
-        self, req: types.ApiCreateOrderRequest
-    ) -> types.ApiCreateOrderResponse | GrvtError:
+    def create_order_v1(self, req: types.ApiCreateOrderRequest) -> types.ApiCreateOrderResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/create_order", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiCreateOrderResponse, resp, Config(cast=[Enum]))
 
-    def cancel_order_v1(
-        self, req: types.ApiCancelOrderRequest
-    ) -> types.AckResponse | GrvtError:
+    def cancel_order_v1(self, req: types.ApiCancelOrderRequest) -> types.AckResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/cancel_order", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
-    def cancel_all_orders_v1(
-        self, req: types.ApiCancelAllOrdersRequest
-    ) -> types.AckResponse | GrvtError:
+    def cancel_all_orders_v1(self, req: types.ApiCancelAllOrdersRequest) -> types.AckResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/cancel_all_orders", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
-    def get_order_v1(
-        self, req: types.ApiGetOrderRequest
-    ) -> types.ApiGetOrderResponse | GrvtError:
+    def get_order_v1(self, req: types.ApiGetOrderRequest) -> types.ApiGetOrderResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/order", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiGetOrderResponse, resp, Config(cast=[Enum]))
 
-    def open_orders_v1(
-        self, req: types.ApiOpenOrdersRequest
-    ) -> types.ApiOpenOrdersResponse | GrvtError:
+    def open_orders_v1(self, req: types.ApiOpenOrdersRequest) -> types.ApiOpenOrdersResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/open_orders", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiOpenOrdersResponse, resp, Config(cast=[Enum]))
 
-    def order_history_v1(
-        self, req: types.ApiOrderHistoryRequest
-    ) -> types.ApiOrderHistoryResponse | GrvtError:
+    def order_history_v1(self, req: types.ApiOrderHistoryRequest) -> types.ApiOrderHistoryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/order_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiOrderHistoryResponse, resp, Config(cast=[Enum]))
 
-    def cancel_on_disconnect_v1(
-        self, req: types.ApiCancelOnDisconnectRequest
-    ) -> types.AckResponse | GrvtError:
+    def cancel_on_disconnect_v1(self, req: types.ApiCancelOnDisconnectRequest) -> types.AckResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/cancel_on_disconnect", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
-    def bulk_orders_v2(
-        self, req: types.ApiBulkOrdersRequest
-    ) -> types.ApiBulkOrdersResponse | GrvtError:
+    def bulk_orders_v2(self, req: types.ApiBulkOrdersRequest) -> types.ApiBulkOrdersResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v2/bulk_orders", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiBulkOrdersResponse, resp, Config(cast=[Enum]))
 
-    def fill_history_v1(
-        self, req: types.ApiFillHistoryRequest
-    ) -> types.ApiFillHistoryResponse | GrvtError:
+    def fill_history_v1(self, req: types.ApiFillHistoryRequest) -> types.ApiFillHistoryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/fill_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiFillHistoryResponse, resp, Config(cast=[Enum]))
 
-    def funding_payment_history_v1(
-        self, req: types.ApiFundingPaymentHistoryRequest
-    ) -> types.ApiFundingPaymentHistoryResponse | GrvtError:
+    def funding_payment_history_v1(self, req: types.ApiFundingPaymentHistoryRequest) -> types.ApiFundingPaymentHistoryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/funding_payment_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiFundingPaymentHistoryResponse, resp, Config(cast=[Enum]))
 
-    def positions_v1(
-        self, req: types.ApiPositionsRequest
-    ) -> types.ApiPositionsResponse | GrvtError:
+    def positions_v1(self, req: types.ApiPositionsRequest) -> types.ApiPositionsResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/positions", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiPositionsResponse, resp, Config(cast=[Enum]))
 
-    def position_history_v1(
-        self, req: types.ApiPositionHistoryRequest
-    ) -> types.ApiPositionHistoryResponse | GrvtError:
+    def position_history_v1(self, req: types.ApiPositionHistoryRequest) -> types.ApiPositionHistoryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/position_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiPositionHistoryResponse, resp, Config(cast=[Enum]))
 
-    def set_position_config_v1(
-        self, req: types.ApiSetSubAccountPositionMarginConfigRequest
-    ) -> types.ApiSetSubAccountPositionMarginConfigResponse | GrvtError:
+    def set_position_config_v1(self, req: types.ApiSetSubAccountPositionMarginConfigRequest) -> types.ApiSetSubAccountPositionMarginConfigResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/set_position_config", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiSetSubAccountPositionMarginConfigResponse, resp, Config(cast=[Enum]))
 
-    def set_sub_account_mode_v1(
-        self, req: types.ApiSetSubAccountModeRequest
-    ) -> types.ApiSetSubAccountModeResponse | GrvtError:
+    def set_sub_account_mode_v1(self, req: types.ApiSetSubAccountModeRequest) -> types.ApiSetSubAccountModeResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/set_sub_account_mode", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiSetSubAccountModeResponse, resp, Config(cast=[Enum]))
 
-    def add_position_margin_v1(
-        self, req: types.ApiAddIsolatedPositionMarginRequest
-    ) -> types.ApiAddIsolatedPositionMarginResponse | GrvtError:
+    def add_position_margin_v1(self, req: types.ApiAddIsolatedPositionMarginRequest) -> types.ApiAddIsolatedPositionMarginResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/add_position_margin", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiAddIsolatedPositionMarginResponse, resp, Config(cast=[Enum]))
 
-    def get_position_margin_limits_v1(
-        self, req: types.ApiGetIsolatedPositionMarginLimitsRequest
-    ) -> types.ApiGetIsolatedPositionMarginLimitsResponse | GrvtError:
+    def get_position_margin_limits_v1(self, req: types.ApiGetIsolatedPositionMarginLimitsRequest) -> types.ApiGetIsolatedPositionMarginLimitsResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/get_position_margin_limits", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiGetIsolatedPositionMarginLimitsResponse, resp, Config(cast=[Enum]))
 
-    def deposit_history_v1(
-        self, req: types.ApiDepositHistoryRequest
-    ) -> types.ApiDepositHistoryResponse | GrvtError:
+    def deposit_history_v1(self, req: types.ApiDepositHistoryRequest) -> types.ApiDepositHistoryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/deposit_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiDepositHistoryResponse, resp, Config(cast=[Enum]))
 
-    def transfer_v1(
-        self, req: types.ApiTransferRequest
-    ) -> types.ApiTransferResponse | GrvtError:
+    def transfer_v1(self, req: types.ApiTransferRequest) -> types.ApiTransferResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/transfer", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiTransferResponse, resp, Config(cast=[Enum]))
 
-    def transfer_history_v1(
-        self, req: types.ApiTransferHistoryRequest
-    ) -> types.ApiTransferHistoryResponse | GrvtError:
+    def transfer_history_v1(self, req: types.ApiTransferHistoryRequest) -> types.ApiTransferHistoryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/transfer_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiTransferHistoryResponse, resp, Config(cast=[Enum]))
 
-    def withdrawal_v1(
-        self, req: types.ApiWithdrawalRequest
-    ) -> types.AckResponse | GrvtError:
+    def withdrawal_v1(self, req: types.ApiWithdrawalRequest) -> types.AckResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/withdrawal", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
-    def withdrawal_history_v1(
-        self, req: types.ApiWithdrawalHistoryRequest
-    ) -> types.ApiWithdrawalHistoryResponse | GrvtError:
+    def withdrawal_history_v1(self, req: types.ApiWithdrawalHistoryRequest) -> types.ApiWithdrawalHistoryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/withdrawal_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiWithdrawalHistoryResponse, resp, Config(cast=[Enum]))
 
-    def sub_account_summary_v1(
-        self, req: types.ApiSubAccountSummaryRequest
-    ) -> types.ApiSubAccountSummaryResponse | GrvtError:
+    def sub_account_summary_v1(self, req: types.ApiSubAccountSummaryRequest) -> types.ApiSubAccountSummaryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiSubAccountSummaryResponse, resp, Config(cast=[Enum]))
 
-    def spot_account_summary_v1(
-        self, req: types.ApiSpotSubAccountSummaryRequest
-    ) -> types.ApiSpotSubAccountSummaryResponse | GrvtError:
+    def spot_account_summary_v1(self, req: types.ApiSpotSubAccountSummaryRequest) -> types.ApiSpotSubAccountSummaryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/spot_account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiSpotSubAccountSummaryResponse, resp, Config(cast=[Enum]))
 
-    def sub_account_history_v1(
-        self, req: types.ApiSubAccountHistoryRequest
-    ) -> types.ApiSubAccountHistoryResponse | GrvtError:
+    def sub_account_history_v1(self, req: types.ApiSubAccountHistoryRequest) -> types.ApiSubAccountHistoryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/account_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiSubAccountHistoryResponse, resp, Config(cast=[Enum]))
 
-    def aggregated_account_summary_v1(
-        self, req: types.EmptyRequest
-    ) -> types.ApiAggregatedAccountSummaryResponse | GrvtError:
+    def aggregated_account_summary_v1(self, req: types.EmptyRequest) -> types.ApiAggregatedAccountSummaryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/aggregated_account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiAggregatedAccountSummaryResponse, resp, Config(cast=[Enum]))
 
-    def funding_account_summary_v1(
-        self, req: types.EmptyRequest
-    ) -> types.ApiFundingAccountSummaryResponse | GrvtError:
+    def funding_account_summary_v1(self, req: types.EmptyRequest) -> types.ApiFundingAccountSummaryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/funding_account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiFundingAccountSummaryResponse, resp, Config(cast=[Enum]))
 
-    def set_derisk_mm_ratio_v1(
-        self, req: types.ApiSetDeriskToMaintenanceMarginRatioRequest
-    ) -> types.ApiSetDeriskToMaintenanceMarginRatioResponse | GrvtError:
+    def set_derisk_mm_ratio_v1(self, req: types.ApiSetDeriskToMaintenanceMarginRatioRequest) -> types.ApiSetDeriskToMaintenanceMarginRatioResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/set_derisk_mm_ratio", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiSetDeriskToMaintenanceMarginRatioResponse, resp, Config(cast=[Enum]))
 
-    def get_sub_accounts_v1(
-        self, req: types.EmptyRequest
-    ) -> types.ApiGetSubAccountsResponse | GrvtError:
+    def get_sub_accounts_v1(self, req: types.EmptyRequest) -> types.ApiGetSubAccountsResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/get_sub_accounts", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiGetSubAccountsResponse, resp, Config(cast=[Enum]))
 
-    def get_all_initial_leverage_v1(
-        self, req: types.ApiGetAllInitialLeverageRequest
-    ) -> types.ApiGetAllInitialLeverageResponse | GrvtError:
+    def get_all_initial_leverage_v1(self, req: types.ApiGetAllInitialLeverageRequest) -> types.ApiGetAllInitialLeverageResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/get_all_initial_leverage", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiGetAllInitialLeverageResponse, resp, Config(cast=[Enum]))
 
-    def set_initial_leverage_v1(
-        self, req: types.ApiSetInitialLeverageRequest
-    ) -> types.ApiSetInitialLeverageResponse | GrvtError:
+    def set_initial_leverage_v1(self, req: types.ApiSetInitialLeverageRequest) -> types.ApiSetInitialLeverageResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/set_initial_leverage", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiSetInitialLeverageResponse, resp, Config(cast=[Enum]))
 
-    def vault_burn_tokens_v1(
-        self, req: types.ApiVaultBurnTokensRequest
-    ) -> types.AckResponse | GrvtError:
+    def vault_burn_tokens_v1(self, req: types.ApiVaultBurnTokensRequest) -> types.AckResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/vault_burn_tokens", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
-    def vault_invest_v1(
-        self, req: types.ApiVaultInvestRequest
-    ) -> types.AckResponse | GrvtError:
+    def vault_invest_v1(self, req: types.ApiVaultInvestRequest) -> types.AckResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/vault_invest", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
-    def vault_investor_summary_v1(
-        self, req: types.ApiVaultInvestorSummaryRequest
-    ) -> types.ApiVaultInvestorSummaryResponse | GrvtError:
+    def vault_investor_summary_v1(self, req: types.ApiVaultInvestorSummaryRequest) -> types.ApiVaultInvestorSummaryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/vault_investor_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiVaultInvestorSummaryResponse, resp, Config(cast=[Enum]))
 
-    def vault_redeem_v1(
-        self, req: types.ApiVaultRedeemRequest
-    ) -> types.AckResponse | GrvtError:
+    def vault_redeem_v1(self, req: types.ApiVaultRedeemRequest) -> types.AckResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/vault_redeem", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
-    def vault_redeem_cancel_v1(
-        self, req: types.ApiVaultRedeemCancelRequest
-    ) -> types.AckResponse | GrvtError:
+    def vault_redeem_cancel_v1(self, req: types.ApiVaultRedeemCancelRequest) -> types.AckResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/vault_redeem_cancel", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
-    def vault_redemption_queue_v1(
-        self, req: types.ApiVaultViewRedemptionQueueRequest
-    ) -> types.ApiVaultViewRedemptionQueueResponse | GrvtError:
+    def vault_redemption_queue_v1(self, req: types.ApiVaultViewRedemptionQueueRequest) -> types.ApiVaultViewRedemptionQueueResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/vault_view_redemption_queue", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiVaultViewRedemptionQueueResponse, resp, Config(cast=[Enum]))
 
-    def vault_manager_investment_history_v1(
-        self, req: types.ApiQueryVaultManagerInvestorHistoryRequest
-    ) -> types.ApiQueryVaultManagerInvestorHistoryResponse | GrvtError:
+    def vault_manager_investment_history_v1(self, req: types.ApiQueryVaultManagerInvestorHistoryRequest) -> types.ApiQueryVaultManagerInvestorHistoryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/vault_manager_investor_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiQueryVaultManagerInvestorHistoryResponse, resp, Config(cast=[Enum]))
 
-    def get_authorized_builders_v1(
-        self, req: types.EmptyRequest
-    ) -> types.ApiGetAuthorizedBuildersResponse | GrvtError:
+    def get_authorized_builders_v1(self, req: types.EmptyRequest) -> types.ApiGetAuthorizedBuildersResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/get_authorized_builders", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiGetAuthorizedBuildersResponse, resp, Config(cast=[Enum]))
 
-    def builder_fill_history_v1(
-        self, req: types.ApiBuilderFillHistoryRequest
-    ) -> types.ApiBuilderFillHistoryResponse | GrvtError:
+    def builder_fill_history_v1(self, req: types.ApiBuilderFillHistoryRequest) -> types.ApiBuilderFillHistoryResponse | GrvtError:
         resp = self._post(True, self.td_rpc + "/full/v1/builder_fill_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
