@@ -69,3 +69,7 @@
         |`INSUFFICIENT_BALANCE` = 49|the subaccount has insufficient balance|
         |`SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS` = 50|spot trading is blocked during socialized loss (SLOW)|
         |`BELOW_MARGIN_WITH_PENALTY_DEVIATION` = 51|the order will bring the sub account below initial margin requirement considering wide price deviation|
+        |`REPAYMENT_INVALID_SUB_ACCOUNT_MODE` = 52|Repayment requires a sub-account mode that supports it|
+        |`REPAYMENT_NO_USER_DEBT` = 53|sub account doesn't have debt to manual repay|
+        |`REPAYMENT_ORDER_ASSET_NOT_ELIGIBLE` = 54|Repayment leg asset is not eligible|
+        |`REPAYMENT_AUTO_EXCHANGE_PENDING` = 55|Manual repayment not allowed while the sub-account is in an auto-exchange scenario (liquidation, borrow-limit breach, or LTV breach)|

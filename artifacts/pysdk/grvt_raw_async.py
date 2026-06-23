@@ -238,6 +238,18 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiSetSubAccountModeResponse, resp, Config(cast=[Enum]))
 
+    async def set_collateral_preference_v1(
+        self, req: types.ApiSetSubAccountCollateralPreferenceRequest
+    ) -> types.ApiSetSubAccountCollateralPreferenceResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/set_collateral_preference", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiSetSubAccountCollateralPreferenceResponse, resp, Config(cast=[Enum])
+        )
+
     async def add_position_margin_v1(
         self, req: types.ApiAddIsolatedPositionMarginRequest
     ) -> types.ApiAddIsolatedPositionMarginResponse | GrvtError:
@@ -317,14 +329,6 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         return from_dict(
             types.ApiSpotSubAccountSummaryResponse, resp, Config(cast=[Enum])
         )
-
-    async def sub_account_history_v1(
-        self, req: types.ApiSubAccountHistoryRequest
-    ) -> types.ApiSubAccountHistoryResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/account_history", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiSubAccountHistoryResponse, resp, Config(cast=[Enum]))
 
     async def aggregated_account_summary_v1(
         self, req: types.EmptyRequest

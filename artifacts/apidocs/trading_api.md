@@ -1669,6 +1669,7 @@ LITE ENDPOINT: lite/v1/order
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
@@ -2439,6 +2440,7 @@ LITE ENDPOINT: lite/v1/order_history
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
@@ -4241,6 +4243,7 @@ LITE ENDPOINT: lite/v1/fill_history
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
@@ -4608,6 +4611,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
@@ -5363,6 +5367,7 @@ LITE ENDPOINT: lite/v1/position_history
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
@@ -6201,6 +6206,7 @@ LITE ENDPOINT: lite/v1/set_sub_account_mode
         |1004|404|Data Not Found|
         |2500|400|Mode switch failed|
         |2501|400|Close all isolated positions before switching to Multi-Asset mode|
+        |2503|400|Isolated position under-margined — add margin or close before switching mode|
         |2502|400|USDT debt must be zero before switching to Single-Asset mode|
         |2504|400|Insufficient balance to cover initial margin requirements after mode switch|
         |2505|400|Sub account is already in the target mode|
@@ -6505,6 +6511,448 @@ LITE ENDPOINT: lite/v1/set_sub_account_mode
                 "p": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "sa1": "SINGLE_ASSET_MODE",
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890,
+                        "ci": "325"
+                    }
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Set Collateral Preference
+```
+FULL ENDPOINT: full/v1/set_collateral_preference
+LITE ENDPOINT: lite/v1/set_collateral_preference
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_set_sub_account_collateral_preference_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "preferences": [{
+                "currency": "ETH",
+                "enable": true
+            }],
+            "signature": {
+                "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                "v": 28,
+                "expiration": "1697788800000000000",
+                "nonce": 1234567890,
+                "chain_id": "325"
+            }
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "p": [{
+                "c": "ETH",
+                "e": true
+            }],
+            "s": {
+                "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                "v": 28,
+                "e": "1697788800000000000",
+                "n": 1234567890,
+                "ci": "325"
+            }
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_set_sub_account_collateral_preference_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "ack": true
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "a": true
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1004|404|Data Not Found|
+        |2510|400|Setting collateral preference failed|
+        |2511|400|Collateral preference can only be set in Multi-Asset mode|
+        |2512|400|USDT cannot be disabled as collateral|
+        |2513|400|Currency is already enabled as collateral|
+        |2514|400|Currency is already disabled as collateral|
+        |2515|400|Currency is not eligible as collateral (no collateral value ratio configured)|
+        |2516|400|Disabling this collateral would leave initial margin uncovered|
+        |2517|400|Collateral preference batch must contain at least one item|
+        |2518|400|Collateral preference batch contains duplicate currencies|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/set_collateral_preference' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "preferences": [{
+                    "currency": "ETH",
+                    "enable": true
+                }],
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890,
+                    "chain_id": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/set_collateral_preference",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "preferences": [{
+                        "currency": "ETH",
+                        "enable": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890,
+                        "chain_id": "325"
+                    }
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/set_collateral_preference' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "p": [{
+                    "c": "ETH",
+                    "e": true
+                }],
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890,
+                    "ci": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/set_collateral_preference",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "p": [{
+                        "c": "ETH",
+                        "e": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890,
+                        "ci": "325"
+                    }
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/set_collateral_preference' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "preferences": [{
+                    "currency": "ETH",
+                    "enable": true
+                }],
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890,
+                    "chain_id": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/set_collateral_preference",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "preferences": [{
+                        "currency": "ETH",
+                        "enable": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890,
+                        "chain_id": "325"
+                    }
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/set_collateral_preference' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "p": [{
+                    "c": "ETH",
+                    "e": true
+                }],
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890,
+                    "ci": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/set_collateral_preference",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "p": [{
+                        "c": "ETH",
+                        "e": true
+                    }],
+                    "s": {
+                        "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "e": "1697788800000000000",
+                        "n": 1234567890,
+                        "ci": "325"
+                    }
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/set_collateral_preference' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "preferences": [{
+                    "currency": "ETH",
+                    "enable": true
+                }],
+                "signature": {
+                    "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "expiration": "1697788800000000000",
+                    "nonce": 1234567890,
+                    "chain_id": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/set_collateral_preference",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "preferences": [{
+                        "currency": "ETH",
+                        "enable": true
+                    }],
+                    "signature": {
+                        "signer": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                        "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                        "s": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                        "v": 28,
+                        "expiration": "1697788800000000000",
+                        "nonce": 1234567890,
+                        "chain_id": "325"
+                    }
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/set_collateral_preference' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "p": [{
+                    "c": "ETH",
+                    "e": true
+                }],
+                "s": {
+                    "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
+                    "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
+                    "s1": "0x3d786193125f7c29c958647da64d0e2875ece2c3f845a591bdd7dae8c475e26d",
+                    "v": 28,
+                    "e": "1697788800000000000",
+                    "n": 1234567890,
+                    "ci": "325"
+                }
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/set_collateral_preference",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "p": [{
+                        "c": "ETH",
+                        "e": true
+                    }],
                     "s": {
                         "s": "0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0",
                         "r": "0xb788d96fee91c7cdc35918e0441b756d4000ec1d07d900c73347d9abbc20acc8",
@@ -7287,6 +7735,7 @@ LITE ENDPOINT: lite/v1/deposit_history
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
@@ -7636,12 +8085,20 @@ LITE ENDPOINT: lite/v1/transfer
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
+        |4002|400|Transfer failed with an unrefined failure reason, please report to GRVT|
+        |4004|400|Both transfer wallet types must be provided|
+        |4005|400|Invalid wallet type for funding account|
+        |4006|400|Invalid wallet type for sub account|
+        |4007|400|Transfer failed because signature is an exact duplicate of another recently-observed transfer.|
+        |4008|400|Currency is not allowed in the target wallet type|
+        |4009|400|Please specify the transfer type|
+        |4014|400|This currency has been disabled for transfers and withdrawals.|
         |5000|400|Transfer Metadata does not match the expected structure.|
         |5001|400|Transfer Provider does not match the expected provider.|
-        |4002|400|Transfer failed with an unrefined failure reason, please report to GRVT|
         |5002|400|Direction of the transfer does not match the expected direction.|
         |5003|400|Endpoint account ID is invalid.|
         |5004|400|Funding account does not exist in our system.|
@@ -7651,12 +8108,7 @@ LITE ENDPOINT: lite/v1/transfer
         |7102|400|Transfer sub-account not found|
         |7103|500|Charged trading fee below the config minimum|
         |7104|400|Transfer sub-account doesn't belong to the transfer main account|
-        |4004|400|Both transfer wallet types must be provided|
-        |4005|400|Invalid wallet type for funding account|
-        |4006|400|Invalid wallet type for sub account|
-        |4008|400|Currency is not allowed in the target wallet type|
-        |4007|400|Transfer failed because signature is an exact duplicate of another recently-observed transfer.|
-        |4009|400|Please specify the transfer type|
+        |4015|403|Signer does not have transfer permission|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -8153,6 +8605,7 @@ LITE ENDPOINT: lite/v1/transfer_history
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
@@ -8516,10 +8969,12 @@ LITE ENDPOINT: lite/v1/withdrawal
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
         |4010|400|This wallet is not supported. Please try another wallet.|
+        |4014|400|This currency has been disabled for transfers and withdrawals.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -8960,6 +9415,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
@@ -9843,417 +10299,6 @@ LITE ENDPOINT: lite/v1/spot_account_summary
                 "m": "v1/spot_account_summary",
                 "p": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'"
-                },
-                "i": 123
-            }
-            ' -w 360
-            ```
-        </section>
-<hr class="solid">
-### Sub Account History
-```
-FULL ENDPOINT: full/v1/account_history
-LITE ENDPOINT: lite/v1/account_history
-```
-
-=== "Request"
-    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    -8<- "docs/schemas/api_sub_account_history_request.md"
-    </section>
-    <section markdown="1" style="float: right; width: 30%;">
-    !!! question "Query"
-        **Full Request**
-        ``` { .json .copy }
-        {
-            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-            "start_time": "1697788800000000000",
-            "end_time": "1697788800000000000",
-            "limit": 500,
-            "cursor": ""
-        }
-        ```
-        **Lite Request**
-        ``` { .json .copy }
-        {
-            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-            "st": "1697788800000000000",
-            "et": "1697788800000000000",
-            "l": 500,
-            "c": ""
-        }
-        ```
-    </section>
-=== "Response"
-    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    -8<- "docs/schemas/api_sub_account_history_response.md"
-    </section>
-    <section markdown="1" style="float: right; width: 30%;">
-    !!! success
-        **Full Response**
-        ``` { .json .copy }
-        {
-            "result": [{
-                "event_time": "1697788800000000000",
-                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                "margin_type": "SIMPLE_CROSS_MARGIN",
-                "settle_currency": "USDT",
-                "unrealized_pnl": "123456.78",
-                "total_equity": "123456.78",
-                "initial_margin": "123456.78",
-                "maintenance_margin": "123456.78",
-                "available_balance": "123456.78",
-                "spot_balances": [{
-                    "currency": "USDT",
-                    "balance": "123456.78",
-                    "index_price": "1.0000102",
-                    "entry_price": "1.0",
-                    "realized_pnl": "0.0",
-                    "unrealized_pnl": "0.0",
-                    "available_to_transfer": "0.0"
-                }],
-                "positions": [{
-                    "event_time": "1697788800000000000",
-                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "instrument": "BTC_USDT_Perp",
-                    "size": "2635000.50",
-                    "notional": "2635000.50",
-                    "entry_price": "65038.01",
-                    "exit_price": "65038.01",
-                    "mark_price": "65038.01",
-                    "unrealized_pnl": "135000.50",
-                    "realized_pnl": "-35000.30",
-                    "total_pnl": "100000.20",
-                    "roi": "10.20",
-                    "quote_index_price": "1.0000102",
-                    "est_liquidation_price": 60000.25,
-                    "leverage": "10",
-                    "cumulative_fee": "100000.20",
-                    "cumulative_realized_funding_payment": "100000.20",
-                    "margin_type": "cross",
-                    "isolated_balance": "100000.20",
-                    "isolated_im": "100000.20",
-                    "isolated_mm": "100000.20"
-                }],
-                "settle_index_price": "1.0000102",
-                "is_vault": false,
-                "vault_im_additions": "123456.78",
-                "derisk_margin": "185185.77",
-                "derisk_to_maintenance_margin_ratio": "1.5",
-                "total_cross_equity": "123456.78",
-                "cross_unrealized_pnl": "123456.78",
-                "sub_account_mode": "SINGLE_ASSET_MODE",
-                "margin_balance": "123456.78"
-            }],
-            "next": "Qw0918="
-        }
-        ```
-        **Lite Response**
-        ``` { .json .copy }
-        {
-            "r": [{
-                "et": "1697788800000000000",
-                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                "mt": "SIMPLE_CROSS_MARGIN",
-                "sc": "USDT",
-                "up": "123456.78",
-                "te": "123456.78",
-                "im": "123456.78",
-                "mm": "123456.78",
-                "ab": "123456.78",
-                "sb": [{
-                    "c": "USDT",
-                    "b": "123456.78",
-                    "ip": "1.0000102",
-                    "ep": "1.0",
-                    "rp": "0.0",
-                    "up": "0.0",
-                    "at": "0.0"
-                }],
-                "p": [{
-                    "et": "1697788800000000000",
-                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "i": "BTC_USDT_Perp",
-                    "s": "2635000.50",
-                    "n": "2635000.50",
-                    "ep": "65038.01",
-                    "ep1": "65038.01",
-                    "mp": "65038.01",
-                    "up": "135000.50",
-                    "rp": "-35000.30",
-                    "tp": "100000.20",
-                    "r": "10.20",
-                    "qi": "1.0000102",
-                    "el": 60000.25,
-                    "l": "10",
-                    "cf": "100000.20",
-                    "cr": "100000.20",
-                    "mt": "cross",
-                    "ib": "100000.20",
-                    "ii": "100000.20",
-                    "im": "100000.20"
-                }],
-                "si": "1.0000102",
-                "iv": false,
-                "vi": "123456.78",
-                "dm": "185185.77",
-                "dt": "1.5",
-                "tc": "123456.78",
-                "cu": "123456.78",
-                "sa1": "SINGLE_ASSET_MODE",
-                "mb": "123456.78"
-            }],
-            "n": "Qw0918="
-        }
-        ```
-    </section>
-=== "Errors"
-    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
-    !!! info "Error Codes"
-        |Code|HttpStatus| Description |
-        |-|-|-|
-        |1000|401|You need to authenticate prior to using this functionality|
-        |1001|403|You are not authorized to access this functionality|
-        |1002|500|Internal Server Error|
-        |1003|400|Request could not be processed due to malformed syntax|
-        |1006|429|You have surpassed the allocated rate limit for your tier|
-        |1008|401|Your IP has not been whitelisted for access|
-    </section>
-    <section markdown="1" style="float: right; width: 30%;">
-    !!! failure
-        **Full Error Response**
-        ``` { .json .copy }
-        {
-            "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
-        }
-        ```
-        **Lite Error Response**
-        ``` { .json .copy }
-        {
-            "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
-        }
-        ```
-    </section>
-=== "Try it out"
-    -8<- "sections/auth_closed.md"
-    === "STAGING"
-        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-        !!! example "REST Full"
-            ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/account_history' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                "start_time": "1697788800000000000",
-                "end_time": "1697788800000000000",
-                "limit": 500,
-                "cursor": ""
-            }
-            '
-            ```
-        !!! example "JSONRPC Full"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "jsonrpc": "2.0",
-                "method": "v1/account_history",
-                "params": {
-                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "start_time": "1697788800000000000",
-                    "end_time": "1697788800000000000",
-                    "limit": 500,
-                    "cursor": ""
-                },
-                "id": 123
-            }
-            ' -w 360
-            ```
-        </section>
-        <section markdown="1" style="float: right; width: 50%;">
-        !!! example "REST Lite"
-            ``` { .bash .copy }
-            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/account_history' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                "st": "1697788800000000000",
-                "et": "1697788800000000000",
-                "l": 500,
-                "c": ""
-            }
-            '
-            ```
-        !!! example "JSONRPC Lite"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "j": "2.0",
-                "m": "v1/account_history",
-                "p": {
-                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "st": "1697788800000000000",
-                    "et": "1697788800000000000",
-                    "l": 500,
-                    "c": ""
-                },
-                "i": 123
-            }
-            ' -w 360
-            ```
-        </section>
-    === "TESTNET"
-        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-        !!! example "REST Full"
-            ``` { .bash .copy }
-            curl --location 'https://trades.testnet.grvt.io/full/v1/account_history' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                "start_time": "1697788800000000000",
-                "end_time": "1697788800000000000",
-                "limit": 500,
-                "cursor": ""
-            }
-            '
-            ```
-        !!! example "JSONRPC Full"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "jsonrpc": "2.0",
-                "method": "v1/account_history",
-                "params": {
-                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "start_time": "1697788800000000000",
-                    "end_time": "1697788800000000000",
-                    "limit": 500,
-                    "cursor": ""
-                },
-                "id": 123
-            }
-            ' -w 360
-            ```
-        </section>
-        <section markdown="1" style="float: right; width: 50%;">
-        !!! example "REST Lite"
-            ``` { .bash .copy }
-            curl --location 'https://trades.testnet.grvt.io/lite/v1/account_history' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                "st": "1697788800000000000",
-                "et": "1697788800000000000",
-                "l": 500,
-                "c": ""
-            }
-            '
-            ```
-        !!! example "JSONRPC Lite"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "j": "2.0",
-                "m": "v1/account_history",
-                "p": {
-                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "st": "1697788800000000000",
-                    "et": "1697788800000000000",
-                    "l": 500,
-                    "c": ""
-                },
-                "i": 123
-            }
-            ' -w 360
-            ```
-        </section>
-    === "PROD"
-        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
-        !!! example "REST Full"
-            ``` { .bash .copy }
-            curl --location 'https://trades.grvt.io/full/v1/account_history' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                "start_time": "1697788800000000000",
-                "end_time": "1697788800000000000",
-                "limit": 500,
-                "cursor": ""
-            }
-            '
-            ```
-        !!! example "JSONRPC Full"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.grvt.io/ws/full" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "jsonrpc": "2.0",
-                "method": "v1/account_history",
-                "params": {
-                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "start_time": "1697788800000000000",
-                    "end_time": "1697788800000000000",
-                    "limit": 500,
-                    "cursor": ""
-                },
-                "id": 123
-            }
-            ' -w 360
-            ```
-        </section>
-        <section markdown="1" style="float: right; width: 50%;">
-        !!! example "REST Lite"
-            ``` { .bash .copy }
-            curl --location 'https://trades.grvt.io/lite/v1/account_history' \
-            --header "Cookie: $GRVT_COOKIE" \
-            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            --data '{
-                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                "st": "1697788800000000000",
-                "et": "1697788800000000000",
-                "l": 500,
-                "c": ""
-            }
-            '
-            ```
-        !!! example "JSONRPC Lite"
-            ``` { .bash .copy }
-            wscat -c "wss://trades.grvt.io/ws/lite" \
-            -H "Cookie: $GRVT_COOKIE" \
-            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
-            -x '
-            {
-                "j": "2.0",
-                "m": "v1/account_history",
-                "p": {
-                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
-                    "st": "1697788800000000000",
-                    "et": "1697788800000000000",
-                    "l": 500,
-                    "c": ""
                 },
                 "i": 123
             }
@@ -12933,6 +12978,7 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
@@ -13602,6 +13648,7 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
@@ -14174,6 +14221,7 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
@@ -14740,6 +14788,7 @@ LITE ENDPOINT: lite/v1/builder_fill_history
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|

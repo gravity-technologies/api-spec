@@ -44,6 +44,7 @@
             |`ADHOC_INCENTIVE` = 6|Transfer type for adhoc incentive|
             |`REFERRAL_INCENTIVE` = 7|Transfer type for referral incentive|
             |`TRADING_DEPOSIT_YIELD_INCENTIVE` = 8|Transfer type for trading deposit yield incentive|
+            |`STAKING_YIELD` = 12|Transfer type for staking yield payout|
         ??? info "[WalletType](/../../schemas/wallet_type)"
             |Value| Description |
             |-|-|

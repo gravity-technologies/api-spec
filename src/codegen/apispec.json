@@ -342,6 +342,11 @@
               "status": 400
             },
             {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
@@ -366,6 +371,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
             },
             {
               "code": 1006,
@@ -397,6 +407,11 @@
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
             },
             {
               "code": 1006,
@@ -1269,6 +1284,11 @@
               "status": 500
             },
             {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
@@ -1359,6 +1379,11 @@
               "code": 1002,
               "message": "Internal Server Error",
               "status": 500
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
             },
             {
               "code": 1003,
@@ -1874,6 +1899,11 @@
               "status": 500
             },
             {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
@@ -1913,6 +1943,11 @@
               "code": 1002,
               "message": "Internal Server Error",
               "status": 500
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
             },
             {
               "code": 1003,
@@ -2005,6 +2040,11 @@
               "code": 1002,
               "message": "Internal Server Error",
               "status": 500
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
             },
             {
               "code": 1003,
@@ -2164,6 +2204,11 @@
               "status": 400
             },
             {
+              "code": 2503,
+              "message": "Isolated position under-margined — add margin or close before switching mode",
+              "status": 400
+            },
+            {
               "code": 2502,
               "message": "USDT debt must be zero before switching to Single-Asset mode",
               "status": 400
@@ -2181,6 +2226,92 @@
             {
               "code": 2506,
               "message": "Vault accounts cannot switch mode",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "SubAccount",
+          "name": "RPCSetCollateralPreferenceV1",
+          "version": 1,
+          "route": "/set_collateral_preference",
+          "auth_required": true,
+          "request": "ApiSetSubAccountCollateralPreferenceRequest",
+          "response": "ApiSetSubAccountCollateralPreferenceResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 2510,
+              "message": "Setting collateral preference failed",
+              "status": 400
+            },
+            {
+              "code": 2511,
+              "message": "Collateral preference can only be set in Multi-Asset mode",
+              "status": 400
+            },
+            {
+              "code": 2512,
+              "message": "USDT cannot be disabled as collateral",
+              "status": 400
+            },
+            {
+              "code": 2513,
+              "message": "Currency is already enabled as collateral",
+              "status": 400
+            },
+            {
+              "code": 2514,
+              "message": "Currency is already disabled as collateral",
+              "status": 400
+            },
+            {
+              "code": 2515,
+              "message": "Currency is not eligible as collateral (no collateral value ratio configured)",
+              "status": 400
+            },
+            {
+              "code": 2516,
+              "message": "Disabling this collateral would leave initial margin uncovered",
+              "status": 400
+            },
+            {
+              "code": 2517,
+              "message": "Collateral preference batch must contain at least one item",
+              "status": 400
+            },
+            {
+              "code": 2518,
+              "message": "Collateral preference batch contains duplicate currencies",
               "status": 400
             }
           ]
@@ -2332,6 +2463,11 @@
               "status": 500
             },
             {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
@@ -2373,6 +2509,11 @@
               "status": 500
             },
             {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
@@ -2388,6 +2529,46 @@
               "status": 401
             },
             {
+              "code": 4002,
+              "message": "Transfer failed with an unrefined failure reason, please report to GRVT",
+              "status": 400
+            },
+            {
+              "code": 4004,
+              "message": "Both transfer wallet types must be provided",
+              "status": 400
+            },
+            {
+              "code": 4005,
+              "message": "Invalid wallet type for funding account",
+              "status": 400
+            },
+            {
+              "code": 4006,
+              "message": "Invalid wallet type for sub account",
+              "status": 400
+            },
+            {
+              "code": 4007,
+              "message": "Transfer failed because signature is an exact duplicate of another recently-observed transfer.",
+              "status": 400
+            },
+            {
+              "code": 4008,
+              "message": "Currency is not allowed in the target wallet type",
+              "status": 400
+            },
+            {
+              "code": 4009,
+              "message": "Please specify the transfer type",
+              "status": 400
+            },
+            {
+              "code": 4014,
+              "message": "This currency has been disabled for transfers and withdrawals.",
+              "status": 400
+            },
+            {
               "code": 5000,
               "message": "Transfer Metadata does not match the expected structure.",
               "status": 400
@@ -2395,11 +2576,6 @@
             {
               "code": 5001,
               "message": "Transfer Provider does not match the expected provider.",
-              "status": 400
-            },
-            {
-              "code": 4002,
-              "message": "Transfer failed with an unrefined failure reason, please report to GRVT",
               "status": 400
             },
             {
@@ -2448,34 +2624,9 @@
               "status": 400
             },
             {
-              "code": 4004,
-              "message": "Both transfer wallet types must be provided",
-              "status": 400
-            },
-            {
-              "code": 4005,
-              "message": "Invalid wallet type for funding account",
-              "status": 400
-            },
-            {
-              "code": 4006,
-              "message": "Invalid wallet type for sub account",
-              "status": 400
-            },
-            {
-              "code": 4008,
-              "message": "Currency is not allowed in the target wallet type",
-              "status": 400
-            },
-            {
-              "code": 4007,
-              "message": "Transfer failed because signature is an exact duplicate of another recently-observed transfer.",
-              "status": 400
-            },
-            {
-              "code": 4009,
-              "message": "Please specify the transfer type",
-              "status": 400
+              "code": 4015,
+              "message": "Signer does not have transfer permission",
+              "status": 403
             }
           ]
         },
@@ -2502,6 +2653,11 @@
               "code": 1002,
               "message": "Internal Server Error",
               "status": 500
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
             },
             {
               "code": 1003,
@@ -2545,6 +2701,11 @@
               "status": 500
             },
             {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
@@ -2562,6 +2723,11 @@
             {
               "code": 4010,
               "message": "This wallet is not supported. Please try another wallet.",
+              "status": 400
+            },
+            {
+              "code": 4014,
+              "message": "This currency has been disabled for transfers and withdrawals.",
               "status": 400
             }
           ]
@@ -2589,6 +2755,11 @@
               "code": 1002,
               "message": "Internal Server Error",
               "status": 500
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
             },
             {
               "code": 1003,
@@ -2656,47 +2827,6 @@
           "auth_required": true,
           "request": "ApiSpotSubAccountSummaryRequest",
           "response": "ApiSpotSubAccountSummaryResponse",
-          "on_request_errors": [
-            {
-              "code": 1000,
-              "message": "You need to authenticate prior to using this functionality",
-              "status": 401
-            },
-            {
-              "code": 1001,
-              "message": "You are not authorized to access this functionality",
-              "status": 403
-            },
-            {
-              "code": 1002,
-              "message": "Internal Server Error",
-              "status": 500
-            },
-            {
-              "code": 1003,
-              "message": "Request could not be processed due to malformed syntax",
-              "status": 400
-            },
-            {
-              "code": 1006,
-              "message": "You have surpassed the allocated rate limit for your tier",
-              "status": 429
-            },
-            {
-              "code": 1008,
-              "message": "Your IP has not been whitelisted for access",
-              "status": 401
-            }
-          ]
-        },
-        {
-          "namespace": "Account",
-          "name": "RPCSubAccountHistoryV1",
-          "version": 1,
-          "route": "/account_history",
-          "auth_required": true,
-          "request": "ApiSubAccountHistoryRequest",
-          "response": "ApiSubAccountHistoryResponse",
           "on_request_errors": [
             {
               "code": 1000,
@@ -3203,6 +3333,11 @@
               "status": 500
             },
             {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
@@ -3310,6 +3445,11 @@
               "status": 500
             },
             {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
@@ -3402,6 +3542,11 @@
               "status": 500
             },
             {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
               "code": 1003,
               "message": "Request could not be processed due to malformed syntax",
               "status": 400
@@ -3482,6 +3627,11 @@
               "code": 1002,
               "message": "Internal Server Error",
               "status": 500
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
             },
             {
               "code": 1003,
@@ -4787,6 +4937,41 @@
       "comment": []
     },
     {
+      "name": "ApiCollateralPreferenceItem",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ETH'",
+          "comment": [
+            "The currency whose collateral preference is being changed"
+          ]
+        },
+        {
+          "name": "enable",
+          "lite_name": "e",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "True to include the currency as collateral, false to exclude it"
+          ]
+        }
+      ],
+      "comment": [
+        "A single (currency, enable) pair to toggle as collateral."
+      ]
+    },
+    {
       "name": "ApiCreateOrderRequest",
       "is_root": true,
       "fields": [
@@ -5581,6 +5766,20 @@
           "example": "true",
           "comment": [
             "Fetch only active instruments"
+          ]
+        },
+        {
+          "name": "kinds",
+          "lite_name": "k",
+          "semantic_type": "Kind",
+          "json_type": "Kind",
+          "index": 1,
+          "array_depth": 1,
+          "optional": true,
+          "default": "['PERPETUAL']",
+          "example": "['PERPETUAL']",
+          "comment": [
+            "The kind filter to apply. If empty, this defaults to PERPETUAL only. Otherwise, only entries matching the filter will be returned"
           ]
         }
       ],
@@ -7202,6 +7401,77 @@
       ]
     },
     {
+      "name": "ApiSetSubAccountCollateralPreferenceRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to set collateral preferences for"
+          ]
+        },
+        {
+          "name": "preferences",
+          "lite_name": "p",
+          "semantic_type": "ApiCollateralPreferenceItem",
+          "json_type": "ApiCollateralPreferenceItem",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Per-currency preferences applied atomically. Duplicate currencies and empty lists are rejected."
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The signature of this operation"
+          ]
+        }
+      ],
+      "comment": [
+        "Enable or disable one or more currencies as collateral for a Multi-Asset Mode sub account.",
+        "",
+        "USDT (the quote currency) cannot be disabled. Disabling collateral currencies reduces MarginBalance, and the batch is rejected when Initial Margin would no longer be covered.",
+        ""
+      ]
+    },
+    {
+      "name": "ApiSetSubAccountCollateralPreferenceResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "ack",
+          "lite_name": "a",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "Whether the preference change was acked"
+          ]
+        }
+      ],
+      "comment": [
+        "The response to set the sub account collateral preference"
+      ]
+    },
+    {
       "name": "ApiSetSubAccountModeRequest",
       "is_root": true,
       "fields": [
@@ -7409,121 +7679,6 @@
       "comment": [
         "The spot account summary, that reports the total equity and spot balances of a spot sub account"
       ]
-    },
-    {
-      "name": "ApiSubAccountHistoryRequest",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "sub_account_id",
-          "lite_name": "sa",
-          "semantic_type": "uint64",
-          "json_type": "string",
-          "index": 0,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'$GRVT_SUB_ACCOUNT_ID'",
-          "comment": [
-            "The sub account ID to request for"
-          ]
-        },
-        {
-          "name": "start_time",
-          "lite_name": "st",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": true,
-          "default": "0",
-          "example": "'1697788800000000000'",
-          "comment": [
-            "Start time of sub account history in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "end_time",
-          "lite_name": "et",
-          "semantic_type": "timestamp",
-          "json_type": "string",
-          "index": 2,
-          "array_depth": 0,
-          "optional": true,
-          "default": "now()",
-          "example": "'1697788800000000000'",
-          "comment": [
-            "End time of sub account history in unix nanoseconds"
-          ]
-        },
-        {
-          "name": "limit",
-          "lite_name": "l",
-          "semantic_type": "uint32",
-          "json_type": "integer",
-          "index": 3,
-          "array_depth": 0,
-          "optional": true,
-          "default": "500",
-          "example": "500",
-          "comment": [
-            "The limit to query for. Defaults to 500; Max 1000"
-          ]
-        },
-        {
-          "name": "cursor",
-          "lite_name": "c",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 4,
-          "array_depth": 0,
-          "optional": true,
-          "default": "''",
-          "example": "''",
-          "comment": [
-            "The cursor to indicate when to start the next query from"
-          ]
-        }
-      ],
-      "comment": [
-        "The request to get the history of a sub account",
-        "SubAccount Summary values are snapshotted once every hour",
-        "No snapshots are taken if the sub account has no activity in the hourly window",
-        "History is preserved only for the last 30 days",
-        "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
-      ]
-    },
-    {
-      "name": "ApiSubAccountHistoryResponse",
-      "is_root": true,
-      "fields": [
-        {
-          "name": "result",
-          "lite_name": "r",
-          "semantic_type": "SubAccount",
-          "json_type": "SubAccount",
-          "index": 0,
-          "array_depth": 1,
-          "optional": false,
-          "comment": [
-            "The sub account history matching the request sub account"
-          ]
-        },
-        {
-          "name": "next",
-          "lite_name": "n",
-          "semantic_type": "string",
-          "json_type": "string",
-          "index": 1,
-          "array_depth": 0,
-          "optional": false,
-          "example": "'Qw0918='",
-          "comment": [
-            "The cursor to indicate when to start the next query from"
-          ]
-        }
-      ],
-      "comment": []
     },
     {
       "name": "ApiSubAccountSummaryRequest",
@@ -8846,7 +9001,7 @@
         "",
         "If not withdrawing the entirety of your balance, there is a minimum withdrawal amount. Currently that amount is ~25 USDT.",
         "Withdrawal fees also apply to cover the cost of the Ethereum transaction.",
-        "Note that your funds will always remain in self-custory throughout the withdrawal process. At no stage does GRVT gain control over your funds."
+        "Note that your funds will always remain in self-custody throughout the withdrawal process. At no stage does GRVT gain control over your funds."
       ]
     },
     {
@@ -15788,28 +15943,56 @@
           "name": "CI_1_W",
           "value": 15,
           "comment": [
-            "1 week"
+            "1 week from Thursday"
           ]
         },
         {
           "name": "CI_2_W",
           "value": 16,
           "comment": [
-            "2 weeks"
+            "2 weeks from Thursday"
           ]
         },
         {
           "name": "CI_3_W",
           "value": 17,
           "comment": [
-            "3 weeks"
+            "3 weeks from Thursday"
           ]
         },
         {
           "name": "CI_4_W",
           "value": 18,
           "comment": [
-            "4 weeks"
+            "4 weeks from Thursday"
+          ]
+        },
+        {
+          "name": "CI_1_WM",
+          "value": 19,
+          "comment": [
+            "1 week from Monday"
+          ]
+        },
+        {
+          "name": "CI_2_WM",
+          "value": 20,
+          "comment": [
+            "2 weeks from Monday"
+          ]
+        },
+        {
+          "name": "CI_3_WM",
+          "value": 21,
+          "comment": [
+            "3 weeks from Monday"
+          ]
+        },
+        {
+          "name": "CI_4_WM",
+          "value": 22,
+          "comment": [
+            "4 weeks from Monday"
           ]
         }
       ],
@@ -16348,6 +16531,34 @@
           "comment": [
             "the order will bring the sub account below initial margin requirement considering wide price deviation"
           ]
+        },
+        {
+          "name": "REPAYMENT_INVALID_SUB_ACCOUNT_MODE",
+          "value": 52,
+          "comment": [
+            "Repayment requires a sub-account mode that supports it"
+          ]
+        },
+        {
+          "name": "REPAYMENT_NO_USER_DEBT",
+          "value": 53,
+          "comment": [
+            "sub account doesn't have debt to manual repay"
+          ]
+        },
+        {
+          "name": "REPAYMENT_ORDER_ASSET_NOT_ELIGIBLE",
+          "value": 54,
+          "comment": [
+            "Repayment leg asset is not eligible"
+          ]
+        },
+        {
+          "name": "REPAYMENT_AUTO_EXCHANGE_PENDING",
+          "value": 55,
+          "comment": [
+            "Manual repayment not allowed while the sub-account is in an auto-exchange scenario (liquidation, borrow-limit breach, or LTV breach)"
+          ]
         }
       ],
       "comment": []
@@ -16592,6 +16803,13 @@
           "value": 11,
           "comment": [
             "Transfer type for feedback reward distribution"
+          ]
+        },
+        {
+          "name": "STAKING_YIELD",
+          "value": 12,
+          "comment": [
+            "Transfer type for staking yield payout"
           ]
         }
       ],

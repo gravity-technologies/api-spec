@@ -27,10 +27,14 @@
         |`CI_1_D` = 12|1 day|
         |`CI_3_D` = 13|3 days|
         |`CI_5_D` = 14|5 days|
-        |`CI_1_W` = 15|1 week|
-        |`CI_2_W` = 16|2 weeks|
-        |`CI_3_W` = 17|3 weeks|
-        |`CI_4_W` = 18|4 weeks|
+        |`CI_1_W` = 15|1 week from Thursday|
+        |`CI_2_W` = 16|2 weeks from Thursday|
+        |`CI_3_W` = 17|3 weeks from Thursday|
+        |`CI_4_W` = 18|4 weeks from Thursday|
+        |`CI_1_WM` = 19|1 week from Monday|
+        |`CI_2_WM` = 20|2 weeks from Monday|
+        |`CI_3_WM` = 21|3 weeks from Monday|
+        |`CI_4_WM` = 22|4 weeks from Monday|
     ??? info "[CandlestickType](/../../schemas/candlestick_type)"
         |Value| Description |
         |-|-|
