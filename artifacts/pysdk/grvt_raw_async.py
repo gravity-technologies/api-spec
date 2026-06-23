@@ -7,7 +7,6 @@ from .grvt_raw_base import GrvtApiConfig, GrvtError, GrvtRawAsyncBase
 
 # mypy: disable-error-code="no-any-return"
 
-
 class GrvtRawAsync(GrvtRawAsyncBase):
     def __init__(self, config: GrvtApiConfig):
         super().__init__(config)
@@ -36,9 +35,7 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         resp = await self._post(False, self.md_rpc + "/full/v1/instruments", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiGetFilteredInstrumentsResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiGetFilteredInstrumentsResponse, resp, Config(cast=[Enum]))
 
     async def get_currency_v1(
         self, req: types.ApiGetCurrencyRequest
@@ -195,14 +192,10 @@ class GrvtRawAsync(GrvtRawAsyncBase):
     async def funding_payment_history_v1(
         self, req: types.ApiFundingPaymentHistoryRequest
     ) -> types.ApiFundingPaymentHistoryResponse | GrvtError:
-        resp = await self._post(
-            True, self.td_rpc + "/full/v1/funding_payment_history", req
-        )
+        resp = await self._post(True, self.td_rpc + "/full/v1/funding_payment_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiFundingPaymentHistoryResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiFundingPaymentHistoryResponse, resp, Config(cast=[Enum]))
 
     async def positions_v1(
         self, req: types.ApiPositionsRequest
@@ -226,9 +219,7 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         resp = await self._post(True, self.td_rpc + "/full/v1/set_position_config", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiSetSubAccountPositionMarginConfigResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiSetSubAccountPositionMarginConfigResponse, resp, Config(cast=[Enum]))
 
     async def set_sub_account_mode_v1(
         self, req: types.ApiSetSubAccountModeRequest
@@ -244,21 +235,15 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         resp = await self._post(True, self.td_rpc + "/full/v1/add_position_margin", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiAddIsolatedPositionMarginResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiAddIsolatedPositionMarginResponse, resp, Config(cast=[Enum]))
 
     async def get_position_margin_limits_v1(
         self, req: types.ApiGetIsolatedPositionMarginLimitsRequest
     ) -> types.ApiGetIsolatedPositionMarginLimitsResponse | GrvtError:
-        resp = await self._post(
-            True, self.td_rpc + "/full/v1/get_position_margin_limits", req
-        )
+        resp = await self._post(True, self.td_rpc + "/full/v1/get_position_margin_limits", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiGetIsolatedPositionMarginLimitsResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiGetIsolatedPositionMarginLimitsResponse, resp, Config(cast=[Enum]))
 
     async def deposit_history_v1(
         self, req: types.ApiDepositHistoryRequest
@@ -314,9 +299,7 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         resp = await self._post(True, self.td_rpc + "/full/v1/spot_account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiSpotSubAccountSummaryResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiSpotSubAccountSummaryResponse, resp, Config(cast=[Enum]))
 
     async def sub_account_history_v1(
         self, req: types.ApiSubAccountHistoryRequest
@@ -329,26 +312,18 @@ class GrvtRawAsync(GrvtRawAsyncBase):
     async def aggregated_account_summary_v1(
         self, req: types.EmptyRequest
     ) -> types.ApiAggregatedAccountSummaryResponse | GrvtError:
-        resp = await self._post(
-            True, self.td_rpc + "/full/v1/aggregated_account_summary", req
-        )
+        resp = await self._post(True, self.td_rpc + "/full/v1/aggregated_account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiAggregatedAccountSummaryResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiAggregatedAccountSummaryResponse, resp, Config(cast=[Enum]))
 
     async def funding_account_summary_v1(
         self, req: types.EmptyRequest
     ) -> types.ApiFundingAccountSummaryResponse | GrvtError:
-        resp = await self._post(
-            True, self.td_rpc + "/full/v1/funding_account_summary", req
-        )
+        resp = await self._post(True, self.td_rpc + "/full/v1/funding_account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiFundingAccountSummaryResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiFundingAccountSummaryResponse, resp, Config(cast=[Enum]))
 
     async def set_derisk_mm_ratio_v1(
         self, req: types.ApiSetDeriskToMaintenanceMarginRatioRequest
@@ -356,9 +331,7 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         resp = await self._post(True, self.td_rpc + "/full/v1/set_derisk_mm_ratio", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiSetDeriskToMaintenanceMarginRatioResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiSetDeriskToMaintenanceMarginRatioResponse, resp, Config(cast=[Enum]))
 
     async def get_sub_accounts_v1(
         self, req: types.EmptyRequest
@@ -371,14 +344,10 @@ class GrvtRawAsync(GrvtRawAsyncBase):
     async def get_all_initial_leverage_v1(
         self, req: types.ApiGetAllInitialLeverageRequest
     ) -> types.ApiGetAllInitialLeverageResponse | GrvtError:
-        resp = await self._post(
-            True, self.td_rpc + "/full/v1/get_all_initial_leverage", req
-        )
+        resp = await self._post(True, self.td_rpc + "/full/v1/get_all_initial_leverage", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiGetAllInitialLeverageResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiGetAllInitialLeverageResponse, resp, Config(cast=[Enum]))
 
     async def set_initial_leverage_v1(
         self, req: types.ApiSetInitialLeverageRequest
@@ -407,9 +376,7 @@ class GrvtRawAsync(GrvtRawAsyncBase):
     async def vault_investor_summary_v1(
         self, req: types.ApiVaultInvestorSummaryRequest
     ) -> types.ApiVaultInvestorSummaryResponse | GrvtError:
-        resp = await self._post(
-            True, self.td_rpc + "/full/v1/vault_investor_summary", req
-        )
+        resp = await self._post(True, self.td_rpc + "/full/v1/vault_investor_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiVaultInvestorSummaryResponse, resp, Config(cast=[Enum]))
@@ -433,38 +400,26 @@ class GrvtRawAsync(GrvtRawAsyncBase):
     async def vault_redemption_queue_v1(
         self, req: types.ApiVaultViewRedemptionQueueRequest
     ) -> types.ApiVaultViewRedemptionQueueResponse | GrvtError:
-        resp = await self._post(
-            True, self.td_rpc + "/full/v1/vault_view_redemption_queue", req
-        )
+        resp = await self._post(True, self.td_rpc + "/full/v1/vault_view_redemption_queue", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiVaultViewRedemptionQueueResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiVaultViewRedemptionQueueResponse, resp, Config(cast=[Enum]))
 
     async def vault_manager_investment_history_v1(
         self, req: types.ApiQueryVaultManagerInvestorHistoryRequest
     ) -> types.ApiQueryVaultManagerInvestorHistoryResponse | GrvtError:
-        resp = await self._post(
-            True, self.td_rpc + "/full/v1/vault_manager_investor_history", req
-        )
+        resp = await self._post(True, self.td_rpc + "/full/v1/vault_manager_investor_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiQueryVaultManagerInvestorHistoryResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiQueryVaultManagerInvestorHistoryResponse, resp, Config(cast=[Enum]))
 
     async def get_authorized_builders_v1(
         self, req: types.EmptyRequest
     ) -> types.ApiGetAuthorizedBuildersResponse | GrvtError:
-        resp = await self._post(
-            True, self.td_rpc + "/full/v1/get_authorized_builders", req
-        )
+        resp = await self._post(True, self.td_rpc + "/full/v1/get_authorized_builders", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiGetAuthorizedBuildersResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiGetAuthorizedBuildersResponse, resp, Config(cast=[Enum]))
 
     async def builder_fill_history_v1(
         self, req: types.ApiBuilderFillHistoryRequest

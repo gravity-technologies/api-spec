@@ -174,6 +174,7 @@ def generate(spec_root: SpecRoot) -> None:
         f.write("# ruff: noqa: W291\n")
         f.write("# ruff: noqa: D400\n")
         f.write("# ruff: noqa: E501\n")
+        f.write("from __future__ import annotations\n\n")
         f.write("from dataclasses import dataclass\n")
         f.write("from enum import Enum\n")
         f.write("from typing import Any\n\n\n")

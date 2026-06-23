@@ -7,7 +7,6 @@ from .grvt_raw_base import GrvtApiConfig, GrvtError, GrvtRawSyncBase
 
 # mypy: disable-error-code="no-any-return"
 
-
 class GrvtRawSync(GrvtRawSyncBase):
     def __init__(self, config: GrvtApiConfig):
         super().__init__(config)
@@ -36,9 +35,7 @@ class GrvtRawSync(GrvtRawSyncBase):
         resp = self._post(False, self.md_rpc + "/full/v1/instruments", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiGetFilteredInstrumentsResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiGetFilteredInstrumentsResponse, resp, Config(cast=[Enum]))
 
     def get_currency_v1(
         self, req: types.ApiGetCurrencyRequest
@@ -88,7 +85,9 @@ class GrvtRawSync(GrvtRawSyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiOrderbookLevelsResponse, resp, Config(cast=[Enum]))
 
-    def trade_v1(self, req: types.ApiTradeRequest) -> types.ApiTradeResponse | GrvtError:
+    def trade_v1(
+        self, req: types.ApiTradeRequest
+    ) -> types.ApiTradeResponse | GrvtError:
         resp = self._post(False, self.md_rpc + "/full/v1/trade", req)
         if resp.get("code"):
             return GrvtError(**resp)
@@ -196,9 +195,7 @@ class GrvtRawSync(GrvtRawSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/funding_payment_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiFundingPaymentHistoryResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiFundingPaymentHistoryResponse, resp, Config(cast=[Enum]))
 
     def positions_v1(
         self, req: types.ApiPositionsRequest
@@ -222,9 +219,7 @@ class GrvtRawSync(GrvtRawSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/set_position_config", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiSetSubAccountPositionMarginConfigResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiSetSubAccountPositionMarginConfigResponse, resp, Config(cast=[Enum]))
 
     def set_sub_account_mode_v1(
         self, req: types.ApiSetSubAccountModeRequest
@@ -240,9 +235,7 @@ class GrvtRawSync(GrvtRawSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/add_position_margin", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiAddIsolatedPositionMarginResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiAddIsolatedPositionMarginResponse, resp, Config(cast=[Enum]))
 
     def get_position_margin_limits_v1(
         self, req: types.ApiGetIsolatedPositionMarginLimitsRequest
@@ -250,9 +243,7 @@ class GrvtRawSync(GrvtRawSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/get_position_margin_limits", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiGetIsolatedPositionMarginLimitsResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiGetIsolatedPositionMarginLimitsResponse, resp, Config(cast=[Enum]))
 
     def deposit_history_v1(
         self, req: types.ApiDepositHistoryRequest
@@ -308,9 +299,7 @@ class GrvtRawSync(GrvtRawSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/spot_account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiSpotSubAccountSummaryResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiSpotSubAccountSummaryResponse, resp, Config(cast=[Enum]))
 
     def sub_account_history_v1(
         self, req: types.ApiSubAccountHistoryRequest
@@ -326,9 +315,7 @@ class GrvtRawSync(GrvtRawSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/aggregated_account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiAggregatedAccountSummaryResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiAggregatedAccountSummaryResponse, resp, Config(cast=[Enum]))
 
     def funding_account_summary_v1(
         self, req: types.EmptyRequest
@@ -336,9 +323,7 @@ class GrvtRawSync(GrvtRawSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/funding_account_summary", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiFundingAccountSummaryResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiFundingAccountSummaryResponse, resp, Config(cast=[Enum]))
 
     def set_derisk_mm_ratio_v1(
         self, req: types.ApiSetDeriskToMaintenanceMarginRatioRequest
@@ -346,9 +331,7 @@ class GrvtRawSync(GrvtRawSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/set_derisk_mm_ratio", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiSetDeriskToMaintenanceMarginRatioResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiSetDeriskToMaintenanceMarginRatioResponse, resp, Config(cast=[Enum]))
 
     def get_sub_accounts_v1(
         self, req: types.EmptyRequest
@@ -364,9 +347,7 @@ class GrvtRawSync(GrvtRawSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/get_all_initial_leverage", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiGetAllInitialLeverageResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiGetAllInitialLeverageResponse, resp, Config(cast=[Enum]))
 
     def set_initial_leverage_v1(
         self, req: types.ApiSetInitialLeverageRequest
@@ -422,21 +403,15 @@ class GrvtRawSync(GrvtRawSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/vault_view_redemption_queue", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiVaultViewRedemptionQueueResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiVaultViewRedemptionQueueResponse, resp, Config(cast=[Enum]))
 
     def vault_manager_investment_history_v1(
         self, req: types.ApiQueryVaultManagerInvestorHistoryRequest
     ) -> types.ApiQueryVaultManagerInvestorHistoryResponse | GrvtError:
-        resp = self._post(
-            True, self.td_rpc + "/full/v1/vault_manager_investor_history", req
-        )
+        resp = self._post(True, self.td_rpc + "/full/v1/vault_manager_investor_history", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiQueryVaultManagerInvestorHistoryResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiQueryVaultManagerInvestorHistoryResponse, resp, Config(cast=[Enum]))
 
     def get_authorized_builders_v1(
         self, req: types.EmptyRequest
@@ -444,9 +419,7 @@ class GrvtRawSync(GrvtRawSyncBase):
         resp = self._post(True, self.td_rpc + "/full/v1/get_authorized_builders", req)
         if resp.get("code"):
             return GrvtError(**resp)
-        return from_dict(
-            types.ApiGetAuthorizedBuildersResponse, resp, Config(cast=[Enum])
-        )
+        return from_dict(types.ApiGetAuthorizedBuildersResponse, resp, Config(cast=[Enum]))
 
     def builder_fill_history_v1(
         self, req: types.ApiBuilderFillHistoryRequest
