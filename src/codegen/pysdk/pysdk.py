@@ -148,9 +148,9 @@ def write_rpc_api(spec_root: SpecRoot, f: TextIOWrapper, is_async: bool) -> None
             rpc_var = "md" if gateway.name == "MarketData" else "td"
             func_name = inflection.underscore(rpc.name[3:]).lower()
 
-            f.write(f"    {method_prefix}def {func_name}(\n")
-            f.write(f"        self, req: types.{rpc.request}\n")
-            f.write(f"    ) -> types.{rpc.response} | GrvtError:\n")
+            f.write(
+                f"    {method_prefix}def {func_name}(self, req: types.{rpc.request}) -> types.{rpc.response} | GrvtError:\n"
+            )
             f.write(
                 f"        resp = {await_prefix}self._post({rpc.auth_required},"
                 + f' self.{rpc_var}_rpc + "/full/v{rpc.version}{rpc.route}", req)\n'
@@ -174,6 +174,7 @@ def generate(spec_root: SpecRoot) -> None:
         f.write("# ruff: noqa: W291\n")
         f.write("# ruff: noqa: D400\n")
         f.write("# ruff: noqa: E501\n")
+        f.write("from __future__ import annotations\n\n")
         f.write("from dataclasses import dataclass\n")
         f.write("from enum import Enum\n")
         f.write("from typing import Any\n\n\n")

@@ -5,6 +5,8 @@
 # ruff: noqa: W291
 # ruff: noqa: D400
 # ruff: noqa: E501
+from __future__ import annotations
+
 from dataclasses import dataclass
 from enum import Enum
 from typing import Any
@@ -221,9 +223,7 @@ class OrderRejectReason(Enum):
     # the subaccount has insufficient balance
     INSUFFICIENT_BALANCE = "INSUFFICIENT_BALANCE"
     # spot trading is blocked during socialized loss (SLOW)
-    SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS = (
-        "SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS"
-    )
+    SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS = "SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS"
     # the order will bring the sub account below initial margin requirement considering wide price deviation
     BELOW_MARGIN_WITH_PENALTY_DEVIATION = "BELOW_MARGIN_WITH_PENALTY_DEVIATION"
 
@@ -857,7 +857,6 @@ class ApiGetAuthorizedBuildersResponse:
 @dataclass
 class ApiGetCurrencyRequest:
     pass
-
 
 @dataclass
 class ApiGetCurrencyResponse:
@@ -1716,7 +1715,7 @@ class BuilderFillHistory:
     mark_price: str
     # The index price of the instrument at point of trade, expressed in `9` decimals
     index_price: str
-    # Builder fee percentage charged for this order. referred to Order.builder builderFee
+    # Builder fee percentage charged for this order. referred to Order.builder builderFee 
     fee_rate: str
     # The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee
     fee: str
@@ -1821,7 +1820,6 @@ class DepositHistory:
 class EmptyRequest:
     pass
 
-
 @dataclass
 class Error:
     # The error code for the request
@@ -1886,7 +1884,7 @@ class Fill:
     is_rpi: bool
     # The main account ID of the builder. referred to Order.builder
     builder: str
-    # Builder fee percentage charged for this order. referred to Order.builder builderFee
+    # Builder fee percentage charged for this order. referred to Order.builder builderFee 
     builder_fee_rate: str
     # The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee
     builder_fee: str
@@ -2101,7 +2099,7 @@ class Order:
     metadata: OrderMetadata
     # The main account ID of the builder
     builder: str
-    # Builder fee charged for this order, expressed as a percentage (e.g., 0.001 means 0.001%).
+    # Builder fee charged for this order, expressed as a percentage (e.g., 0.001 means 0.001%). 
     builder_fee: str
     # [Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
     order_id: str | None = None
@@ -2836,7 +2834,6 @@ class WSFillFeedSelectorV1:
 class WSListStreamsParams:
     pass
 
-
 @dataclass
 class WSListStreamsResult:
     # The list of stream references  the connection is connected to
@@ -3246,7 +3243,6 @@ class WSTransferFeedSelectorV1:
 class WSUnsubscribeAllParams:
     pass
 
-
 @dataclass
 class WSUnsubscribeAllResult:
     # The list of stream references unsubscribed from
@@ -3337,3 +3333,5 @@ class WithdrawalHistory:
     l_2_hash: str
     # The finalized withdrawal transaction hash on L1, empty if the withdrawal is 'pending'.
     l_1_hash: str | None = None
+
+

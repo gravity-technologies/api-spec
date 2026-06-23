@@ -42,6 +42,7 @@ testpaths = "tests"
 [tool.ruff]
 extend-exclude = [
     "__pycache__",
+    "artifacts",
     "build",
     "dist",
 ]
