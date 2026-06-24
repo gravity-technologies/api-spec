@@ -56,22 +56,14 @@ class CandlestickInterval(Enum):
     CI_3_D = "CI_3_D"
     # 5 days
     CI_5_D = "CI_5_D"
-    # 1 week from Thursday
+    # 1 week
     CI_1_W = "CI_1_W"
-    # 2 weeks from Thursday
+    # 2 weeks
     CI_2_W = "CI_2_W"
-    # 3 weeks from Thursday
+    # 3 weeks
     CI_3_W = "CI_3_W"
-    # 4 weeks from Thursday
+    # 4 weeks
     CI_4_W = "CI_4_W"
-    # 1 week from Monday
-    CI_1_WM = "CI_1_WM"
-    # 2 weeks from Monday
-    CI_2_WM = "CI_2_WM"
-    # 3 weeks from Monday
-    CI_3_WM = "CI_3_WM"
-    # 4 weeks from Monday
-    CI_4_WM = "CI_4_WM"
 
 
 class CandlestickType(Enum):
@@ -234,14 +226,6 @@ class OrderRejectReason(Enum):
     )
     # the order will bring the sub account below initial margin requirement considering wide price deviation
     BELOW_MARGIN_WITH_PENALTY_DEVIATION = "BELOW_MARGIN_WITH_PENALTY_DEVIATION"
-    # Repayment requires a sub-account mode that supports it
-    REPAYMENT_INVALID_SUB_ACCOUNT_MODE = "REPAYMENT_INVALID_SUB_ACCOUNT_MODE"
-    # sub account doesn't have debt to manual repay
-    REPAYMENT_NO_USER_DEBT = "REPAYMENT_NO_USER_DEBT"
-    # Repayment leg asset is not eligible
-    REPAYMENT_ORDER_ASSET_NOT_ELIGIBLE = "REPAYMENT_ORDER_ASSET_NOT_ELIGIBLE"
-    # Manual repayment not allowed while the sub-account is in an auto-exchange scenario (liquidation, borrow-limit breach, or LTV breach)
-    REPAYMENT_AUTO_EXCHANGE_PENDING = "REPAYMENT_AUTO_EXCHANGE_PENDING"
 
 
 class OrderStatus(Enum):
@@ -326,8 +310,6 @@ class TransferType(Enum):
     TGE_AIRDROP = "TGE_AIRDROP"
     # Transfer type for feedback reward distribution
     FEEDBACK_REWARD = "FEEDBACK_REWARD"
-    # Transfer type for staking yield payout
-    STAKING_YIELD = "STAKING_YIELD"
 
 
 class TriggerBy(Enum):
@@ -406,6 +388,45 @@ class WalletType(Enum):
     SPOT = "SPOT"
     # Futures wallet
     FUTURES = "FUTURES"
+
+
+class WsCandlestickInterval(Enum):
+    # 1 minute
+    CI_1_M = "CI_1_M"
+    # 3 minutes
+    CI_3_M = "CI_3_M"
+    # 5 minutes
+    CI_5_M = "CI_5_M"
+    # 15 minutes
+    CI_15_M = "CI_15_M"
+    # 30 minutes
+    CI_30_M = "CI_30_M"
+    # 1 hour
+    CI_1_H = "CI_1_H"
+    # 2 hour
+    CI_2_H = "CI_2_H"
+    # 4 hour
+    CI_4_H = "CI_4_H"
+    # 6 hour
+    CI_6_H = "CI_6_H"
+    # 8 hour
+    CI_8_H = "CI_8_H"
+    # 12 hour
+    CI_12_H = "CI_12_H"
+    # 1 day
+    CI_1_D = "CI_1_D"
+    # 3 days
+    CI_3_D = "CI_3_D"
+    # 5 days
+    CI_5_D = "CI_5_D"
+    # 1 week from Thursday
+    CI_1_W = "CI_1_W"
+    # 2 weeks from Thursday
+    CI_2_W = "CI_2_W"
+    # 3 weeks from Thursday
+    CI_3_W = "CI_3_W"
+    # 4 weeks from Thursday
+    CI_4_W = "CI_4_W"
 
 
 @dataclass
@@ -672,14 +693,6 @@ class ApiCandlestickResponse:
     result: list[Candlestick]
     # The cursor to indicate when to start the next query from
     next: str | None = None
-
-
-@dataclass
-class ApiCollateralPreferenceItem:
-    # The currency whose collateral preference is being changed
-    currency: str
-    # True to include the currency as collateral, false to exclude it
-    enable: bool
 
 
 @dataclass
@@ -1247,52 +1260,6 @@ class ApiSetInitialLeverageResponse:
 
     # Whether the leverage was set successfully
     success: bool
-
-
-@dataclass
-class ApiSetSubAccountCollateralPreferenceRequest:
-    """
-    Enable or disable one or more currencies as collateral for a Multi-Asset Mode sub account.
-
-    USDT (the quote currency) cannot be disabled. Disabling collateral currencies reduces MarginBalance, and the batch is rejected when Initial Margin would no longer be covered.
-
-    """
-
-    # The sub account ID to set collateral preferences for
-    sub_account_id: str
-    # Per-currency preferences applied atomically. Duplicate currencies and empty lists are rejected.
-    preferences: list[ApiCollateralPreferenceItem]
-    # The signature of this operation
-    signature: Signature
-
-
-@dataclass
-class ApiSetSubAccountCollateralPreferenceResponse:
-    # Whether the preference change was acked
-    ack: bool
-
-
-@dataclass
-class ApiSetSubAccountModeRequest:
-    """
-    Sets the sub account mode (Single Asset Mode or Multi Asset Mode).
-
-    Switching modes requires passing validation checks to ensure the account remains healthy.
-
-    """
-
-    # The sub account ID to set the mode for
-    sub_account_id: str
-    # The target sub account mode to switch to
-    sub_account_mode: SubAccountMode
-    # The signature of this operation
-    signature: Signature
-
-
-@dataclass
-class ApiSetSubAccountModeResponse:
-    # Whether the mode switch was acked
-    ack: bool
 
 
 @dataclass
@@ -2780,7 +2747,7 @@ class WSCandlestickFeedSelectorV1:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
     # The interval of each candlestick
-    interval: CandlestickInterval
+    interval: WsCandlestickInterval
     # The type of candlestick data to retrieve
     type: CandlestickType
 

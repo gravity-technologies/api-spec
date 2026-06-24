@@ -4,9 +4,9 @@
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
     |instrument<br>`i` |string|True|The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>|
-    |interval<br>`i1` |CandlestickInterval|True|The interval of each candlestick|
+    |interval<br>`i1` |WsCandlestickInterval|True|The interval of each candlestick|
     |type<br>`t` |CandlestickType|True|The type of candlestick data to retrieve|
-    ??? info "[CandlestickInterval](/../../schemas/candlestick_interval)"
+    ??? info "[WsCandlestickInterval](/../../schemas/ws_candlestick_interval)"
         |Value| Description |
         |-|-|
         |`CI_1_M` = 1|1 minute|
@@ -27,10 +27,6 @@
         |`CI_2_W` = 16|2 weeks from Thursday|
         |`CI_3_W` = 17|3 weeks from Thursday|
         |`CI_4_W` = 18|4 weeks from Thursday|
-        |`CI_1_WM` = 19|1 week from Monday|
-        |`CI_2_WM` = 20|2 weeks from Monday|
-        |`CI_3_WM` = 21|3 weeks from Monday|
-        |`CI_4_WM` = 22|4 weeks from Monday|
     ??? info "[CandlestickType](/../../schemas/candlestick_type)"
         |Value| Description |
         |-|-|
