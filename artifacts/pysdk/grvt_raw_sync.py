@@ -226,14 +226,6 @@ class GrvtRawSync(GrvtRawSyncBase):
             types.ApiSetSubAccountPositionMarginConfigResponse, resp, Config(cast=[Enum])
         )
 
-    def set_sub_account_mode_v1(
-        self, req: types.ApiSetSubAccountModeRequest
-    ) -> types.ApiSetSubAccountModeResponse | GrvtError:
-        resp = self._post(True, self.td_rpc + "/full/v1/set_sub_account_mode", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiSetSubAccountModeResponse, resp, Config(cast=[Enum]))
-
     def add_position_margin_v1(
         self, req: types.ApiAddIsolatedPositionMarginRequest
     ) -> types.ApiAddIsolatedPositionMarginResponse | GrvtError:
@@ -311,14 +303,6 @@ class GrvtRawSync(GrvtRawSyncBase):
         return from_dict(
             types.ApiSpotSubAccountSummaryResponse, resp, Config(cast=[Enum])
         )
-
-    def sub_account_history_v1(
-        self, req: types.ApiSubAccountHistoryRequest
-    ) -> types.ApiSubAccountHistoryResponse | GrvtError:
-        resp = self._post(True, self.td_rpc + "/full/v1/account_history", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiSubAccountHistoryResponse, resp, Config(cast=[Enum]))
 
     def aggregated_account_summary_v1(
         self, req: types.EmptyRequest

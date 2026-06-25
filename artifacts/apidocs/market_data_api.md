@@ -277,13 +277,15 @@ LITE ENDPOINT: lite/v1/all_instruments
         **Full Request**
         ``` { .json .copy }
         {
-            "is_active": true
+            "is_active": true,
+            "kinds": ["PERPETUAL"]
         }
         ```
         **Lite Request**
         ``` { .json .copy }
         {
-            "ia": true
+            "ia": true,
+            "k": ["PERPETUAL"]
         }
         ```
     </section>
@@ -379,7 +381,8 @@ LITE ENDPOINT: lite/v1/all_instruments
             ``` { .bash .copy }
             curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/all_instruments' \
             --data '{
-                "is_active": true
+                "is_active": true,
+                "kinds": ["PERPETUAL"]
             }
             '
             ```
@@ -391,7 +394,8 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "jsonrpc": "2.0",
                 "method": "v1/all_instruments",
                 "params": {
-                    "is_active": true
+                    "is_active": true,
+                    "kinds": ["PERPETUAL"]
                 },
                 "id": 123
             }
@@ -403,7 +407,8 @@ LITE ENDPOINT: lite/v1/all_instruments
             ``` { .bash .copy }
             curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/all_instruments' \
             --data '{
-                "ia": true
+                "ia": true,
+                "k": ["PERPETUAL"]
             }
             '
             ```
@@ -415,7 +420,8 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "j": "2.0",
                 "m": "v1/all_instruments",
                 "p": {
-                    "ia": true
+                    "ia": true,
+                    "k": ["PERPETUAL"]
                 },
                 "i": 123
             }
@@ -428,7 +434,8 @@ LITE ENDPOINT: lite/v1/all_instruments
             ``` { .bash .copy }
             curl --location 'https://market-data.testnet.grvt.io/full/v1/all_instruments' \
             --data '{
-                "is_active": true
+                "is_active": true,
+                "kinds": ["PERPETUAL"]
             }
             '
             ```
@@ -440,7 +447,8 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "jsonrpc": "2.0",
                 "method": "v1/all_instruments",
                 "params": {
-                    "is_active": true
+                    "is_active": true,
+                    "kinds": ["PERPETUAL"]
                 },
                 "id": 123
             }
@@ -452,7 +460,8 @@ LITE ENDPOINT: lite/v1/all_instruments
             ``` { .bash .copy }
             curl --location 'https://market-data.testnet.grvt.io/lite/v1/all_instruments' \
             --data '{
-                "ia": true
+                "ia": true,
+                "k": ["PERPETUAL"]
             }
             '
             ```
@@ -464,7 +473,8 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "j": "2.0",
                 "m": "v1/all_instruments",
                 "p": {
-                    "ia": true
+                    "ia": true,
+                    "k": ["PERPETUAL"]
                 },
                 "i": 123
             }
@@ -477,7 +487,8 @@ LITE ENDPOINT: lite/v1/all_instruments
             ``` { .bash .copy }
             curl --location 'https://market-data.grvt.io/full/v1/all_instruments' \
             --data '{
-                "is_active": true
+                "is_active": true,
+                "kinds": ["PERPETUAL"]
             }
             '
             ```
@@ -489,7 +500,8 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "jsonrpc": "2.0",
                 "method": "v1/all_instruments",
                 "params": {
-                    "is_active": true
+                    "is_active": true,
+                    "kinds": ["PERPETUAL"]
                 },
                 "id": 123
             }
@@ -501,7 +513,8 @@ LITE ENDPOINT: lite/v1/all_instruments
             ``` { .bash .copy }
             curl --location 'https://market-data.grvt.io/lite/v1/all_instruments' \
             --data '{
-                "ia": true
+                "ia": true,
+                "k": ["PERPETUAL"]
             }
             '
             ```
@@ -513,7 +526,8 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "j": "2.0",
                 "m": "v1/all_instruments",
                 "p": {
-                    "ia": true
+                    "ia": true,
+                    "k": ["PERPETUAL"]
                 },
                 "i": 123
             }
@@ -2689,6 +2703,7 @@ LITE ENDPOINT: lite/v1/trade_history
         |-|-|-|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1014|504|Upstream data service timed out, please try again|
         |1006|429|You have surpassed the allocated rate limit for your tier|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -2997,6 +3012,7 @@ LITE ENDPOINT: lite/v1/kline
         |-|-|-|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1014|504|Upstream data service timed out, please try again|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |3042|400|Candlestick type is not applicable for spot instruments|
     </section>
@@ -3320,6 +3336,7 @@ LITE ENDPOINT: lite/v1/funding
         |-|-|-|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
+        |1014|504|Upstream data service timed out, please try again|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |3007|400|API is not applicable for spot instruments|
     </section>

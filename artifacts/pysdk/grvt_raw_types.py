@@ -390,6 +390,45 @@ class WalletType(Enum):
     FUTURES = "FUTURES"
 
 
+class WsCandlestickInterval(Enum):
+    # 1 minute
+    CI_1_M = "CI_1_M"
+    # 3 minutes
+    CI_3_M = "CI_3_M"
+    # 5 minutes
+    CI_5_M = "CI_5_M"
+    # 15 minutes
+    CI_15_M = "CI_15_M"
+    # 30 minutes
+    CI_30_M = "CI_30_M"
+    # 1 hour
+    CI_1_H = "CI_1_H"
+    # 2 hour
+    CI_2_H = "CI_2_H"
+    # 4 hour
+    CI_4_H = "CI_4_H"
+    # 6 hour
+    CI_6_H = "CI_6_H"
+    # 8 hour
+    CI_8_H = "CI_8_H"
+    # 12 hour
+    CI_12_H = "CI_12_H"
+    # 1 day
+    CI_1_D = "CI_1_D"
+    # 3 days
+    CI_3_D = "CI_3_D"
+    # 5 days
+    CI_5_D = "CI_5_D"
+    # 1 week from Thursday
+    CI_1_W = "CI_1_W"
+    # 2 weeks from Thursday
+    CI_2_W = "CI_2_W"
+    # 3 weeks from Thursday
+    CI_3_W = "CI_3_W"
+    # 4 weeks from Thursday
+    CI_4_W = "CI_4_W"
+
+
 @dataclass
 class Ack:
     # Gravity has acknowledged that the request has been successfully received and it will process it in the backend
@@ -840,6 +879,8 @@ class ApiGetAllInitialLeverageResponse:
 class ApiGetAllInstrumentsRequest:
     # Fetch only active instruments
     is_active: bool | None = None
+    # The kind filter to apply. If empty, this defaults to PERPETUAL only. Otherwise, only entries matching the filter will be returned
+    kinds: list[Kind] | None = None
 
 
 @dataclass
@@ -1222,29 +1263,6 @@ class ApiSetInitialLeverageResponse:
 
 
 @dataclass
-class ApiSetSubAccountModeRequest:
-    """
-    Sets the sub account mode (Single Asset Mode or Multi Asset Mode).
-
-    Switching modes requires passing validation checks to ensure the account remains healthy.
-
-    """
-
-    # The sub account ID to set the mode for
-    sub_account_id: str
-    # The target sub account mode to switch to
-    sub_account_mode: SubAccountMode
-    # The signature of this operation
-    signature: Signature
-
-
-@dataclass
-class ApiSetSubAccountModeResponse:
-    # Whether the mode switch was acked
-    ack: bool
-
-
-@dataclass
 class ApiSetSubAccountPositionMarginConfigRequest:
     """
     Sets the margin type and leverage configuration for a specific position (instrument) within a sub account.
@@ -1281,37 +1299,6 @@ class ApiSpotSubAccountSummaryRequest:
 class ApiSpotSubAccountSummaryResponse:
     # The spot sub account summary
     result: SpotSubAccount
-
-
-@dataclass
-class ApiSubAccountHistoryRequest:
-    """
-    The request to get the history of a sub account
-    SubAccount Summary values are snapshotted once every hour
-    No snapshots are taken if the sub account has no activity in the hourly window
-    History is preserved only for the last 30 days
-
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
-    """
-
-    # The sub account ID to request for
-    sub_account_id: str
-    # Start time of sub account history in unix nanoseconds
-    start_time: str | None = None
-    # End time of sub account history in unix nanoseconds
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the next query from
-    cursor: str | None = None
-
-
-@dataclass
-class ApiSubAccountHistoryResponse:
-    # The sub account history matching the request sub account
-    result: list[SubAccount]
-    # The cursor to indicate when to start the next query from
-    next: str
 
 
 @dataclass
@@ -1681,7 +1668,7 @@ class ApiWithdrawalRequest:
 
     If not withdrawing the entirety of your balance, there is a minimum withdrawal amount. Currently that amount is ~25 USDT.
     Withdrawal fees also apply to cover the cost of the Ethereum transaction.
-    Note that your funds will always remain in self-custory throughout the withdrawal process. At no stage does GRVT gain control over your funds.
+    Note that your funds will always remain in self-custody throughout the withdrawal process. At no stage does GRVT gain control over your funds.
     """
 
     # The main account to withdraw from
@@ -2760,7 +2747,7 @@ class WSCandlestickFeedSelectorV1:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
     # The interval of each candlestick
-    interval: CandlestickInterval
+    interval: WsCandlestickInterval
     # The type of candlestick data to retrieve
     type: CandlestickType
 
