@@ -5,3 +5,4 @@
     |`LIQUIDATED` = 2|Position closed via liquidation|
     |`SETTLED` = 3|Position closed via settlement|
     |`PARTIALLY_CLOSED` = 4|Position partially closed|
+    |`SPLIT_CLOSED` = 5|Lifecycle ended by a stock split; reopened re-denominated|

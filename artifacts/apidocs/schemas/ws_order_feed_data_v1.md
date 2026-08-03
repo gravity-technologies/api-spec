@@ -13,8 +13,8 @@
         |-|-|-|-|
         |order_id<br>`oi` |string|False<br>`0`|[Filled by GRVT Backend] A unique 128-bit identifier for the order, deterministically generated within the GRVT backend|
         |sub_account_id<br>`sa` |string|True|The subaccount initiating the order|
-        |is_market<br>`im` |boolean|False<br>`false`|If the order is a market order<br>Market Orders do not have a limit price, and are always executed according to the maker order price.<br>Market Orders must always be taker orders|
-        |time_in_force<br>`ti` |TimeInForce|True|Four supported types of orders: GTT, IOC, AON, FOK:<ul><br><li>PARTIAL EXECUTION = GTT / IOC - allows partial size execution on each leg</li><br><li>FULL EXECUTION = AON / FOK - only allows full size execution on all legs</li><br><li>TAKER ONLY = IOC / FOK - only allows taker orders</li><br><li>MAKER OR TAKER = GTT / AON - allows maker or taker orders</li><br></ul>Exchange only supports (GTT, IOC, FOK)<br>RFQ Maker only supports (GTT, AON), RFQ Taker only supports (FOK)|
+        |is_market<br>`im` |boolean|False<br>`false`|If the order is a market order<br>Market Orders do not have a limit price, and are always executed according to the maker order price.<br>Market Orders must always be taker orders<br>On STABLE_PERP a slippage bound is mandatory: `limit_price` must carry the signed bound (reference price ± the chosen slippage), otherwise the order is rejected with stablePerpRequiresPriceBound. is_market = false with a limit price behaves identically on STABLE_PERP; the flag is intent metadata only.|
+        |time_in_force<br>`ti` |TimeInForce|True|Four supported types of orders: GTT, IOC, AON, FOK:<ul><br><li>PARTIAL EXECUTION = GTT / IOC - allows partial size execution on each leg</li><br><li>FULL EXECUTION = AON / FOK - only allows full size execution on all legs</li><br><li>TAKER ONLY = IOC / FOK - only allows taker orders</li><br><li>MAKER OR TAKER = GTT / AON - allows maker or taker orders</li><br></ul>Exchange only supports (GTT, IOC, FOK)<br>RFQ Maker only supports (GTT, AON), RFQ Taker only supports (IOC, FOK)|
         |post_only<br>`po` |boolean|False<br>`false`|If True, Order must be a maker order. It has to fill the orderbook instead of match it.<br>If False, Order can be either a maker or taker order. <b>In this case, order creation is currently subject to a speedbump of 25ms to ensure orders are matched against updated orderbook quotes.</b><br><br>|               | Must Fill All | Can Fill Partial |<br>| -             | -             | -                |<br>| Must Be Taker | FOK + False   | IOC + False      |<br>| Can Be Either | AON + False   | GTC + False      |<br>| Must Be Maker | AON + True    | GTC + True       |<br>|
         |reduce_only<br>`ro` |boolean|False<br>`false`|If True, Order must reduce the position size, or be cancelled|
         |legs<br>`l` |[OrderLeg]|True|The legs present in this order<br>The legs must be sorted by Asset.Instrument/Underlying/Quote/Expiration/StrikePrice|
@@ -42,7 +42,7 @@
             |-|-|-|-|
             |instrument<br>`i` |string|True|The instrument to trade in this leg|
             |size<br>`s` |string|True|The total number of assets to trade in this leg, expressed in base asset decimal units.|
-            |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order|
+            |limit_price<br>`lp` |string|False<br>`0`|The limit price of the order leg, expressed in `9` decimals.<br>This is the number of quote currency units to pay/receive for this leg.<br>This should be `null/0` if the order is a market order<br>Exception: on STABLE_PERP market orders this carries the mandatory signed slippage bound (reference price ± the chosen slippage) rather than being left empty.|
             |is_buying_asset<br>`ib` |boolean|True|Specifies if the order leg is a buy or sell|
         ??? info "[Signature](/../../schemas/signature)"
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
@@ -63,6 +63,10 @@
             |create_time<br>`ct` |string|False<br>`0`|[Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds|
             |trigger<br>`t` |TriggerOrderMetadata|False<br>``|Trigger fields are used to support any type of trigger order such as TP/SL|
             |broker<br>`b` |BrokerTag|False<br>``|Specifies the broker who brokered the order|
+            |is_ecn<br>`ie` |boolean|False<br>`false`|Specifies this order is an ECN order eligible for Market Maker Last Look. Only applicable to STABLE_PERP (SFP) instruments with qualified market makers.|
+            |slippage_bps<br>`sb` |integer|False<br>`0`|Maximum allowed slippage from mark price for an IOC limit order, expressed in basis points (800 = 8%).<br>Only valid on IOC limit orders. 0 means no slippage protection (regular limit IOC order).<br>|
+            |rfq_id<br>`ri` |string|False<br>`None`|Binds this order to an RFQ (see ApiCreateRfqRequest and the `v1.rfq` / `v1.quote` streams). Optional.<br><br>As a taker acceptance: unlocks that RFQ's private quote pool, so the order matches across the private pool merged with the public book (firm resting liquidity + public quotes). The acceptance must be a single-leg order with time_in_force = IOC or FOK. Setting `rfq_id` on a non-ECN GTT order is rejected. If the referenced RFQ has expired, been cancelled, or is unknown, the order is rejected.<br><br>As a maker quote (is_ecn = true): identifies which RFQ the quote is responding to.<br><br>Omit `rfq_id` to match the public book only — private RFQ liquidity requires an RFQ.|
+            |is_private<br>`ip1` |boolean|False<br>`false`|Maker quotes only. true = a private quote delivered to a single RFQ's taker (appears only on that taker's `v1.quote` book); false = a public quote resting on the order book, visible to all. When true, `rfq_id` is required.|
             ??? info "[TriggerOrderMetadata](/../../schemas/trigger_order_metadata)"
                 Contains metadata related to trigger orders, such as Take Profit (TP) or Stop Loss (SL).<br><br>Trigger orders are used to automatically execute an order when a predefined price condition is met, allowing traders to implement risk management strategies.<br><br><br>
 
@@ -177,3 +181,11 @@
                 |`INSUFFICIENT_BALANCE` = 49|the subaccount has insufficient balance|
                 |`SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS` = 50|spot trading is blocked during socialized loss (SLOW)|
                 |`BELOW_MARGIN_WITH_PENALTY_DEVIATION` = 51|the order will bring the sub account below initial margin requirement considering wide price deviation|
+                |`CORPORATE_ACTION` = 56|Cancelled by the system due to Corporate Action|
+                |`NOT_QUALIFIED_MAKER` = 57|the order was rejected because the sub account is not a qualified maker|
+                |`PRIVATE_QUOTE_REQUIRES_RFQ` = 58|rfq_id is required when is_private = true|
+                |`STABLE_PERP_REQUIRES_PRICE_BOUND` = 59|a signed slippage bound filled in limit_price is required|
+                |`UNSUPPORTED_TRIGGER_BY` = 60|SFP order only supports trigger_by = index|
+                |`RFQ_NOT_FOUND` = 61|the order was rejected because the referenced RFQ could not be found|
+                |`RESTING_ORDER_WOULD_CROSS` = 62|post-only resting placement crosses opposite best resting or index mid|
+                |`SESSION_CLOSED` = 63|the order was submitted when the trading session was either closed or under maintenance|

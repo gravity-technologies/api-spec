@@ -9,7 +9,7 @@
     |total_equity<br>`te` |string|True|The notional value of your account if all positions are closed, excluding trading fees (reported in `settle_currency`).<br>`total_equity = sum(spot_balance.balance * spot_balance.index_price) / settle_index_price + unrealized_pnl`|
     |initial_margin<br>`im` |string|True|The `total_equity` required to open positions in the account (reported in `settle_currency`).<br>Computation is different depending on account's `margin_type`|
     |maintenance_margin<br>`mm` |string|True|The `total_equity` required to avoid liquidation of positions in the account (reported in `settle_currency`).<br>Computation is different depending on account's `margin_type`|
-    |available_balance<br>`ab` |string|True|The notional value available to transfer out of the trading account into the funding account (reported in `settle_currency`).<br>`available_balance = total_equity - initial_margin - min(unrealized_pnl, 0)`|
+    |available_balance<br>`ab` |string|True|DEPRECATED: use the per-currency `availableToTransfer` of the quote-currency entry in `spotBalances` instead.<br>The notional value available to transfer out of the trading account into the funding account (reported in `settle_currency`).<br>`available_balance = total_equity - initial_margin - min(unrealized_pnl, 0)`|
     |spot_balances<br>`sb` |[SpotBalance]|True|The list of spot assets owned by this sub account, and their balances|
     |positions<br>`p` |[Positions]|True|The list of positions owned by this sub account|
     |settle_index_price<br>`si` |string|True|The index price of the settle currency. (reported in `USD`)|

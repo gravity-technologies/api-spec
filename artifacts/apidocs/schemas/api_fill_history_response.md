@@ -32,6 +32,9 @@
         |builder_fee_rate<br>`bf` |string|True|Builder fee percentage charged for this order. referred to Order.builder builderFee |
         |builder_fee<br>`bf1` |string|True|The builder fee paid on the trade, expressed in quote asset decimal unit. referred to Trade.builderFee|
         |fee_currency<br>`fc` |string|True|The currency of the fee paid on the trade|
+        |repayment_scenario<br>`rs` |RepaymentScenario|True|If this fill was a MAM repayment/exchange, the scenario (manual / auto / liquidation); unspecified for normal trades.|
+        |rfq_id<br>`ri` |string|False<br>`None`|The RFQ this fill was cleared against. Only set for RFQ venue fills; unset otherwise|
+        |counterparty_type<br>`ct` |RfqCounterpartyType|False<br>`None`|The type of counterparty this fill was matched against (maker quote / resting order / forced-exit netting). Only set for RFQ venue fills; unset otherwise|
         ??? info "[Venue](/../../schemas/venue)"
             The list of Trading Venues that are supported on the GRVT exchange<br>
 
@@ -48,3 +51,19 @@
             |`COIN_ROUTES` = 1|CoinRoutes|
             |`ALERTATRON` = 2|Alertatron|
             |`ORIGAMI` = 3|Origami|
+        ??? info "[RepaymentScenario](/../../schemas/repayment_scenario)"
+            Server-only fee scenario tag for spot orders that repay MAM USDT debt against the insurance fund.<br>The default value 'unspecified' means the order is NOT a repayment (regular spot fees apply).<br>Risk rejects any user-submitted order with a non-unspecified value.<br>
+
+            |Value| Description |
+            |-|-|
+            |`MANUAL_REPAYMENT` = 1|User-initiated MAM repay via TDG; uses MRR (/8) divisor for fee.|
+            |`AUTO_REPAYMENT` = 2|DEPRECATED — replaced by autoRepayBorrowLimit / autoRepayLTV. Kept for capnp ordinal compatibility; no producer emits this value.|
+            |`LIQUIDATION_REPAYMENT` = 3|Liquidator MMR>=100% step 2 repayment; uses LRR (/2) divisor for fee.|
+            |`AUTO_REPAY_BORROW_LIMIT` = 4|Liquidator borrow-limit auto-repay; uses ARR (/4) divisor for fee. Validator checks BL trigger is still active.|
+            |`AUTO_REPAY_LTV` = 5|Liquidator undeployed-loan / LTV auto-repay; uses ARR (/4) divisor for fee. Validator checks LTV trigger is still active.|
+        ??? info "[RfqCounterpartyType](/../../schemas/rfq_counterparty_type)"
+            |Value| Description |
+            |-|-|
+            |`MAKER_QUOTE` = 1|the counterparty is a maker quote submitted to the RFQ|
+            |`RESTING_ORDER` = 2|the counterparty is a resting order on the orderbook|
+            |`FORCED_EXIT_NETTING` = 3|the counterparty is a forced-exit netting fill|

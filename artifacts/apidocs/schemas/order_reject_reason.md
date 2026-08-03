@@ -52,3 +52,11 @@
     |`INSUFFICIENT_BALANCE` = 49|the subaccount has insufficient balance|
     |`SPOT_TRADING_BLOCKED_DURING_SOCIALIZED_LOSS` = 50|spot trading is blocked during socialized loss (SLOW)|
     |`BELOW_MARGIN_WITH_PENALTY_DEVIATION` = 51|the order will bring the sub account below initial margin requirement considering wide price deviation|
+    |`CORPORATE_ACTION` = 56|Cancelled by the system due to Corporate Action|
+    |`NOT_QUALIFIED_MAKER` = 57|the order was rejected because the sub account is not a qualified maker|
+    |`PRIVATE_QUOTE_REQUIRES_RFQ` = 58|rfq_id is required when is_private = true|
+    |`STABLE_PERP_REQUIRES_PRICE_BOUND` = 59|a signed slippage bound filled in limit_price is required|
+    |`UNSUPPORTED_TRIGGER_BY` = 60|SFP order only supports trigger_by = index|
+    |`RFQ_NOT_FOUND` = 61|the order was rejected because the referenced RFQ could not be found|
+    |`RESTING_ORDER_WOULD_CROSS` = 62|post-only resting placement crosses opposite best resting or index mid|
+    |`SESSION_CLOSED` = 63|the order was submitted when the trading session was either closed or under maintenance|

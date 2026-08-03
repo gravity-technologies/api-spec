@@ -64,6 +64,18 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiGetMarginRulesResponse, resp, Config(cast=[Enum]))
 
+    async def get_all_collateral_asset_info_v1(
+        self, req: types.EmptyRequest
+    ) -> types.ApiGetAllCollateralAssetInfoResponse | GrvtError:
+        resp = await self._post(
+            False, self.md_rpc + "/full/v1/get_all_collateral_asset_info", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiGetAllCollateralAssetInfoResponse, resp, Config(cast=[Enum])
+        )
+
     async def mini_ticker_v1(
         self, req: types.ApiMiniTickerRequest
     ) -> types.ApiMiniTickerResponse | GrvtError:
@@ -204,6 +216,18 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             types.ApiFundingPaymentHistoryResponse, resp, Config(cast=[Enum])
         )
 
+    async def interest_payment_history_v1(
+        self, req: types.ApiInterestPaymentHistoryRequest
+    ) -> types.ApiInterestPaymentHistoryResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/interest_payment_history", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiInterestPaymentHistoryResponse, resp, Config(cast=[Enum])
+        )
+
     async def positions_v1(
         self, req: types.ApiPositionsRequest
     ) -> types.ApiPositionsResponse | GrvtError:
@@ -228,6 +252,18 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(
             types.ApiSetSubAccountPositionMarginConfigResponse, resp, Config(cast=[Enum])
+        )
+
+    async def get_collateral_preference_v1(
+        self, req: types.ApiGetSubAccountCollateralPreferenceRequest
+    ) -> types.ApiGetSubAccountCollateralPreferenceResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/get_collateral_preference", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiGetSubAccountCollateralPreferenceResponse, resp, Config(cast=[Enum])
         )
 
     async def add_position_margin_v1(
@@ -291,6 +327,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiWithdrawalHistoryResponse, resp, Config(cast=[Enum]))
+
+    async def get_withdrawal_fee_v1(
+        self, req: types.ApiWithdrawalFeeRequest
+    ) -> types.ApiWithdrawalFeeResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/withdrawal_fee", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiWithdrawalFeeResponse, resp, Config(cast=[Enum]))
 
     async def sub_account_summary_v1(
         self, req: types.ApiSubAccountSummaryRequest
@@ -438,6 +482,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             types.ApiQueryVaultManagerInvestorHistoryResponse, resp, Config(cast=[Enum])
         )
 
+    async def ecn_from_broker_v1(
+        self, req: types.ApiECNFromBrokerRequest
+    ) -> types.ApiECNFromBrokerResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/ecn_from_broker", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiECNFromBrokerResponse, resp, Config(cast=[Enum]))
+
     async def get_authorized_builders_v1(
         self, req: types.EmptyRequest
     ) -> types.ApiGetAuthorizedBuildersResponse | GrvtError:
@@ -457,3 +509,11 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiBuilderFillHistoryResponse, resp, Config(cast=[Enum]))
+
+    async def set_indicative_prices_v1(
+        self, req: types.ApiSetIndicativePricesRequest
+    ) -> types.AckResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/set_indicative_prices", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
