@@ -24,6 +24,9 @@
     |max_initial_margin<br>`mi` |string|True|High-water mark of cumulativeInitialMargin during lifecycle|
     |leverage<br>`l` |string|True|Leverage at time of close. When status is `PARTIALLY_CLOSED`, this is the current leverage|
     |unrealized_pnl<br>`up` |string|False<br>`None`|The unrealized PnL of the position, expressed in quote asset decimal units<br>`unrealized_pnl = (mark_price - entry_price) * size` where `size` is signed (negative for short positions)<br>Only present when status is `PARTIALLY_CLOSED`|
+    |split_ratio_from<br>`sr` |integer|False<br>`None`|Stock split 'from' ratio (pre-split units); the position size scaled by to/from<br>Only present when status is `SPLIT_CLOSED`. Example: `1` for a 1:4 split|
+    |split_ratio_to<br>`sr1` |integer|False<br>`None`|Stock split 'to' ratio (post-split units)<br>Only present when status is `SPLIT_CLOSED`. Example: `4` for a 1:4 split|
+    |split_remaining_size<br>`sr2` |string|False<br>`None`|Signed position size in base asset decimal units immediately before the split<br>Only present when status is `SPLIT_CLOSED`|
     ??? info "[PositionCloseStatus](/../../schemas/position_close_status)"
         |Value| Description |
         |-|-|
@@ -31,6 +34,7 @@
         |`LIQUIDATED` = 2|Position closed via liquidation|
         |`SETTLED` = 3|Position closed via settlement|
         |`PARTIALLY_CLOSED` = 4|Position partially closed|
+        |`SPLIT_CLOSED` = 5|Lifecycle ended by a stock split; reopened re-denominated|
     ??? info "[PositionMarginType](/../../schemas/position_margin_type)"
         |Value| Description |
         |-|-|

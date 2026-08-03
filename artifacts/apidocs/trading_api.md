@@ -50,7 +50,11 @@ LITE ENDPOINT: lite/v1/create_order
                             "is_split_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "is_ecn": null,
+                    "slippage_bps": 800,
+                    "rfq_id": null,
+                    "is_private": null
                 },
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                 "builder_fee": "0.001"
@@ -93,7 +97,11 @@ LITE ENDPOINT: lite/v1/create_order
                             "is": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ie": null,
+                    "sb": 800,
+                    "ri": null,
+                    "ip1": null
                 },
                 "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                 "bf": "0.001"
@@ -144,7 +152,11 @@ LITE ENDPOINT: lite/v1/create_order
                             "is_split_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "is_ecn": null,
+                    "slippage_bps": 800,
+                    "rfq_id": null,
+                    "is_private": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -196,7 +208,11 @@ LITE ENDPOINT: lite/v1/create_order
                             "is": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ie": null,
+                    "sb": 800,
+                    "ri": null,
+                    "ip1": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -279,11 +295,16 @@ LITE ENDPOINT: lite/v1/create_order
         |2400|400|Reduce only order with no position|
         |2401|400|Reduce only order must not increase position size|
         |2402|400|Reduce only order size exceeds maximum allowed value|
+        |2091|403|As a precaution, only position-reducing (`reduce_only` as true) orders are currently allowed on your account. Please contact support so we can help complete the necessary checks.|
         |7304|400|Only position-reducing orders (`reduce_only` as true) allowed for this asset right now.|
         |2450|400|Spot order is not supported|
         |2451|400|Spot order must not be a reduce-only order|
         |2452|400|Spot order must not be a TPSL order|
         |2453|400|Spot trading is blocked during socialized loss|
+        |7600|400|Order slippage protection is not enabled.|
+        |7601|400|Slippage protection is only supported on IOC limit orders.|
+        |7602|400|Slippage is below the minimum allowed value.|
+        |7603|400|Slippage exceeds the asset's price protection band.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -349,7 +370,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 "is_split_position": false
                             }
                         },
-                        "broker": "BROKER_CODE"
+                        "broker": "BROKER_CODE",
+                        "is_ecn": null,
+                        "slippage_bps": 800,
+                        "rfq_id": null,
+                        "is_private": null
                     },
                     "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                     "builder_fee": "0.001"
@@ -400,7 +425,11 @@ LITE ENDPOINT: lite/v1/create_order
                                     "is_split_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE"
+                            "broker": "BROKER_CODE",
+                            "is_ecn": null,
+                            "slippage_bps": 800,
+                            "rfq_id": null,
+                            "is_private": null
                         },
                         "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                         "builder_fee": "0.001"
@@ -451,7 +480,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 "is": false
                             }
                         },
-                        "b": "BROKER_CODE"
+                        "b": "BROKER_CODE",
+                        "ie": null,
+                        "sb": 800,
+                        "ri": null,
+                        "ip1": null
                     },
                     "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                     "bf": "0.001"
@@ -502,7 +535,11 @@ LITE ENDPOINT: lite/v1/create_order
                                     "is": false
                                 }
                             },
-                            "b": "BROKER_CODE"
+                            "b": "BROKER_CODE",
+                            "ie": null,
+                            "sb": 800,
+                            "ri": null,
+                            "ip1": null
                         },
                         "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                         "bf": "0.001"
@@ -554,7 +591,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 "is_split_position": false
                             }
                         },
-                        "broker": "BROKER_CODE"
+                        "broker": "BROKER_CODE",
+                        "is_ecn": null,
+                        "slippage_bps": 800,
+                        "rfq_id": null,
+                        "is_private": null
                     },
                     "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                     "builder_fee": "0.001"
@@ -605,7 +646,11 @@ LITE ENDPOINT: lite/v1/create_order
                                     "is_split_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE"
+                            "broker": "BROKER_CODE",
+                            "is_ecn": null,
+                            "slippage_bps": 800,
+                            "rfq_id": null,
+                            "is_private": null
                         },
                         "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                         "builder_fee": "0.001"
@@ -656,7 +701,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 "is": false
                             }
                         },
-                        "b": "BROKER_CODE"
+                        "b": "BROKER_CODE",
+                        "ie": null,
+                        "sb": 800,
+                        "ri": null,
+                        "ip1": null
                     },
                     "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                     "bf": "0.001"
@@ -707,7 +756,11 @@ LITE ENDPOINT: lite/v1/create_order
                                     "is": false
                                 }
                             },
-                            "b": "BROKER_CODE"
+                            "b": "BROKER_CODE",
+                            "ie": null,
+                            "sb": 800,
+                            "ri": null,
+                            "ip1": null
                         },
                         "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                         "bf": "0.001"
@@ -759,7 +812,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 "is_split_position": false
                             }
                         },
-                        "broker": "BROKER_CODE"
+                        "broker": "BROKER_CODE",
+                        "is_ecn": null,
+                        "slippage_bps": 800,
+                        "rfq_id": null,
+                        "is_private": null
                     },
                     "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                     "builder_fee": "0.001"
@@ -810,7 +867,11 @@ LITE ENDPOINT: lite/v1/create_order
                                     "is_split_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE"
+                            "broker": "BROKER_CODE",
+                            "is_ecn": null,
+                            "slippage_bps": 800,
+                            "rfq_id": null,
+                            "is_private": null
                         },
                         "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                         "builder_fee": "0.001"
@@ -861,7 +922,11 @@ LITE ENDPOINT: lite/v1/create_order
                                 "is": false
                             }
                         },
-                        "b": "BROKER_CODE"
+                        "b": "BROKER_CODE",
+                        "ie": null,
+                        "sb": 800,
+                        "ri": null,
+                        "ip1": null
                     },
                     "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                     "bf": "0.001"
@@ -912,7 +977,11 @@ LITE ENDPOINT: lite/v1/create_order
                                     "is": false
                                 }
                             },
-                            "b": "BROKER_CODE"
+                            "b": "BROKER_CODE",
+                            "ie": null,
+                            "sb": 800,
+                            "ri": null,
+                            "ip1": null
                         },
                         "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                         "bf": "0.001"
@@ -1593,7 +1662,11 @@ LITE ENDPOINT: lite/v1/order
                             "is_split_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "is_ecn": null,
+                    "slippage_bps": 800,
+                    "rfq_id": null,
+                    "is_private": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -1645,7 +1718,11 @@ LITE ENDPOINT: lite/v1/order
                             "is": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ie": null,
+                    "sb": 800,
+                    "ri": null,
+                    "ip1": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -1666,6 +1743,7 @@ LITE ENDPOINT: lite/v1/order
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -1682,18 +1760,18 @@ LITE ENDPOINT: lite/v1/order
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -1969,7 +2047,11 @@ LITE ENDPOINT: lite/v1/open_orders
                             "is_split_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "is_ecn": null,
+                    "slippage_bps": 800,
+                    "rfq_id": null,
+                    "is_private": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -2021,7 +2103,11 @@ LITE ENDPOINT: lite/v1/open_orders
                             "is": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ie": null,
+                    "sb": 800,
+                    "ri": null,
+                    "ip1": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2362,7 +2448,11 @@ LITE ENDPOINT: lite/v1/order_history
                             "is_split_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "is_ecn": null,
+                    "slippage_bps": 800,
+                    "rfq_id": null,
+                    "is_private": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -2415,7 +2505,11 @@ LITE ENDPOINT: lite/v1/order_history
                             "is": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ie": null,
+                    "sb": 800,
+                    "ri": null,
+                    "ip1": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2437,6 +2531,7 @@ LITE ENDPOINT: lite/v1/order_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -2451,18 +2546,18 @@ LITE ENDPOINT: lite/v1/order_history
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -3044,7 +3139,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                             "is_split_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "is_ecn": null,
+                    "slippage_bps": 800,
+                    "rfq_id": null,
+                    "is_private": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -3100,7 +3199,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                             "is": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ie": null,
+                    "sb": 800,
+                    "ri": null,
+                    "ip1": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3162,7 +3265,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                             "is_split_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "is_ecn": null,
+                    "slippage_bps": 800,
+                    "rfq_id": null,
+                    "is_private": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -3217,7 +3324,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                             "is": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ie": null,
+                    "sb": 800,
+                    "ri": null,
+                    "ip1": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3303,11 +3414,16 @@ LITE ENDPOINT: lite/v2/bulk_orders
         |2400|400|Reduce only order with no position|
         |2401|400|Reduce only order must not increase position size|
         |2402|400|Reduce only order size exceeds maximum allowed value|
+        |2091|403|As a precaution, only position-reducing (`reduce_only` as true) orders are currently allowed on your account. Please contact support so we can help complete the necessary checks.|
         |7304|400|Only position-reducing orders (`reduce_only` as true) allowed for this asset right now.|
         |2450|400|Spot order is not supported|
         |2451|400|Spot order must not be a reduce-only order|
         |2452|400|Spot order must not be a TPSL order|
         |2453|400|Spot trading is blocked during socialized loss|
+        |7600|400|Order slippage protection is not enabled.|
+        |7601|400|Slippage protection is only supported on IOC limit orders.|
+        |7602|400|Slippage is below the minimum allowed value.|
+        |7603|400|Slippage exceeds the asset's price protection band.|
         |2233|400|Both order ID and client order ID cannot be provided|
         |2234|400|Bulk create orders must have the same instrument|
         |2235|400|Bulk orders count exceeds the maximum allowed|
@@ -3391,7 +3507,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                 "is_split_position": false
                             }
                         },
-                        "broker": "BROKER_CODE"
+                        "broker": "BROKER_CODE",
+                        "is_ecn": null,
+                        "slippage_bps": 800,
+                        "rfq_id": null,
+                        "is_private": null
                     },
                     "state": {
                         "status": "PENDING",
@@ -3455,7 +3575,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                     "is_split_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE"
+                            "broker": "BROKER_CODE",
+                            "is_ecn": null,
+                            "slippage_bps": 800,
+                            "rfq_id": null,
+                            "is_private": null
                         },
                         "state": {
                             "status": "PENDING",
@@ -3519,7 +3643,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                 "is": false
                             }
                         },
-                        "b": "BROKER_CODE"
+                        "b": "BROKER_CODE",
+                        "ie": null,
+                        "sb": 800,
+                        "ri": null,
+                        "ip1": null
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3583,7 +3711,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                     "is": false
                                 }
                             },
-                            "b": "BROKER_CODE"
+                            "b": "BROKER_CODE",
+                            "ie": null,
+                            "sb": 800,
+                            "ri": null,
+                            "ip1": null
                         },
                         "s1": {
                             "s": "PENDING",
@@ -3648,7 +3780,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                 "is_split_position": false
                             }
                         },
-                        "broker": "BROKER_CODE"
+                        "broker": "BROKER_CODE",
+                        "is_ecn": null,
+                        "slippage_bps": 800,
+                        "rfq_id": null,
+                        "is_private": null
                     },
                     "state": {
                         "status": "PENDING",
@@ -3712,7 +3848,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                     "is_split_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE"
+                            "broker": "BROKER_CODE",
+                            "is_ecn": null,
+                            "slippage_bps": 800,
+                            "rfq_id": null,
+                            "is_private": null
                         },
                         "state": {
                             "status": "PENDING",
@@ -3776,7 +3916,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                 "is": false
                             }
                         },
-                        "b": "BROKER_CODE"
+                        "b": "BROKER_CODE",
+                        "ie": null,
+                        "sb": 800,
+                        "ri": null,
+                        "ip1": null
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3840,7 +3984,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                     "is": false
                                 }
                             },
-                            "b": "BROKER_CODE"
+                            "b": "BROKER_CODE",
+                            "ie": null,
+                            "sb": 800,
+                            "ri": null,
+                            "ip1": null
                         },
                         "s1": {
                             "s": "PENDING",
@@ -3905,7 +4053,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                 "is_split_position": false
                             }
                         },
-                        "broker": "BROKER_CODE"
+                        "broker": "BROKER_CODE",
+                        "is_ecn": null,
+                        "slippage_bps": 800,
+                        "rfq_id": null,
+                        "is_private": null
                     },
                     "state": {
                         "status": "PENDING",
@@ -3969,7 +4121,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                     "is_split_position": false
                                 }
                             },
-                            "broker": "BROKER_CODE"
+                            "broker": "BROKER_CODE",
+                            "is_ecn": null,
+                            "slippage_bps": 800,
+                            "rfq_id": null,
+                            "is_private": null
                         },
                         "state": {
                             "status": "PENDING",
@@ -4033,7 +4189,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                 "is": false
                             }
                         },
-                        "b": "BROKER_CODE"
+                        "b": "BROKER_CODE",
+                        "ie": null,
+                        "sb": 800,
+                        "ri": null,
+                        "ip1": null
                     },
                     "s1": {
                         "s": "PENDING",
@@ -4097,7 +4257,11 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                     "is": false
                                 }
                             },
-                            "b": "BROKER_CODE"
+                            "b": "BROKER_CODE",
+                            "ie": null,
+                            "sb": 800,
+                            "ri": null,
+                            "ip1": null
                         },
                         "s1": {
                             "s": "PENDING",
@@ -4179,11 +4343,11 @@ LITE ENDPOINT: lite/v1/fill_history
                 "price": "65038.01",
                 "mark_price": "65038.01",
                 "index_price": "65038.01",
-                "interest_rate": 0.0003,
+                "interest_rate": "0.0003",
                 "forward_price": "65038.01",
                 "realized_pnl": "2400.50",
                 "fee": "9.75",
-                "fee_rate": 0.0003,
+                "fee_rate": "0.0003",
                 "trade_id": "209358-2",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
@@ -4193,9 +4357,12 @@ LITE ENDPOINT: lite/v1/fill_history
                 "broker": "UNSPECIFIED",
                 "is_rpi": false,
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "builder_fee_rate": 0.001,
+                "builder_fee_rate": "0.001",
                 "builder_fee": "0.2",
-                "fee_currency": "USDT"
+                "fee_currency": "USDT",
+                "repayment_scenario": "MANUAL_REPAYMENT",
+                "rfq_id": null,
+                "counterparty_type": "MAKER_QUOTE"
             }],
             "next": "Qw0918="
         }
@@ -4213,11 +4380,11 @@ LITE ENDPOINT: lite/v1/fill_history
                 "p": "65038.01",
                 "mp": "65038.01",
                 "ip": "65038.01",
-                "ir": 0.0003,
+                "ir": "0.0003",
                 "fp": "65038.01",
                 "rp": "2400.50",
                 "f": "9.75",
-                "fr": 0.0003,
+                "fr": "0.0003",
                 "ti": "209358-2",
                 "oi": "0x10000101000203040506",
                 "v": "ORDERBOOK",
@@ -4227,9 +4394,12 @@ LITE ENDPOINT: lite/v1/fill_history
                 "b": "UNSPECIFIED",
                 "ir1": false,
                 "b1": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "bf": 0.001,
+                "bf": "0.001",
                 "bf1": "0.2",
-                "fc": "USDT"
+                "fc": "USDT",
+                "rs": "MANUAL_REPAYMENT",
+                "ri": null,
+                "ct": "MAKER_QUOTE"
             }],
             "n": "Qw0918="
         }
@@ -4240,6 +4410,7 @@ LITE ENDPOINT: lite/v1/fill_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -4254,18 +4425,18 @@ LITE ENDPOINT: lite/v1/fill_history
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -4608,6 +4779,7 @@ LITE ENDPOINT: lite/v1/funding_payment_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -4623,18 +4795,18 @@ LITE ENDPOINT: lite/v1/funding_payment_history
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -4901,6 +5073,345 @@ LITE ENDPOINT: lite/v1/funding_payment_history
                     "k": ["PERPETUAL"],
                     "b": ["BTC", "ETH"],
                     "q": ["USDT", "USDC"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Interest Payment History
+```
+FULL ENDPOINT: full/v1/interest_payment_history
+LITE ENDPOINT: lite/v1/interest_payment_history
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_interest_payment_history_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "currency": ["USDT"],
+            "start_time": "1697788800000000000",
+            "end_time": "1697788800000000000",
+            "limit": 500,
+            "cursor": ""
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "c": ["USDT"],
+            "st": "1697788800000000000",
+            "et": "1697788800000000000",
+            "l": 500,
+            "c1": ""
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_interest_payment_history_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": [{
+                "event_time": "1697788800000000000",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "currency": "USDT",
+                "amount": "1.50",
+                "charge_time": "1697788800000000000",
+                "borrowed_amount": "50000.00"
+            }],
+            "next": "Qw0918="
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": [{
+                "et": "1697788800000000000",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "c": "USDT",
+                "a": "1.50",
+                "ct": "1697788800000000000",
+                "ba": "50000.00"
+            }],
+            "n": "Qw0918="
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1014|504|Upstream data service timed out, please try again|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/interest_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "currency": ["USDT"],
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/interest_payment_history",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "currency": ["USDT"],
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/interest_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "c": ["USDT"],
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c1": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/interest_payment_history",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "c": ["USDT"],
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c1": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/interest_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "currency": ["USDT"],
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/interest_payment_history",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "currency": ["USDT"],
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/interest_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "c": ["USDT"],
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c1": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/interest_payment_history",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "c": ["USDT"],
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c1": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/interest_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "currency": ["USDT"],
+                "start_time": "1697788800000000000",
+                "end_time": "1697788800000000000",
+                "limit": 500,
+                "cursor": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/interest_payment_history",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "currency": ["USDT"],
+                    "start_time": "1697788800000000000",
+                    "end_time": "1697788800000000000",
+                    "limit": 500,
+                    "cursor": ""
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/interest_payment_history' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "c": ["USDT"],
+                "st": "1697788800000000000",
+                "et": "1697788800000000000",
+                "l": 500,
+                "c1": ""
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/interest_payment_history",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "c": ["USDT"],
+                    "st": "1697788800000000000",
+                    "et": "1697788800000000000",
+                    "l": 500,
+                    "c1": ""
                 },
                 "i": 123
             }
@@ -5324,7 +5835,10 @@ LITE ENDPOINT: lite/v1/position_history
                 "cumulative_initial_margin": null,
                 "max_initial_margin": null,
                 "leverage": null,
-                "unrealized_pnl": null
+                "unrealized_pnl": null,
+                "split_ratio_from": null,
+                "split_ratio_to": null,
+                "split_remaining_size": null
             }],
             "next": "Qw0918="
         }
@@ -5353,7 +5867,10 @@ LITE ENDPOINT: lite/v1/position_history
                 "ci": null,
                 "mi": null,
                 "l": null,
-                "up": null
+                "up": null,
+                "sr": null,
+                "sr1": null,
+                "sr2": null
             }],
             "n": "Qw0918="
         }
@@ -5364,6 +5881,7 @@ LITE ENDPOINT: lite/v1/position_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -5379,18 +5897,18 @@ LITE ENDPOINT: lite/v1/position_history
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -6128,6 +6646,267 @@ LITE ENDPOINT: lite/v1/set_position_config
             ```
         </section>
 <hr class="solid">
+## SubAccount
+### Get Collateral Preference
+```
+FULL ENDPOINT: full/v1/get_collateral_preference
+LITE ENDPOINT: lite/v1/get_collateral_preference
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_get_sub_account_collateral_preference_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_get_sub_account_collateral_preference_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "preferences": [{
+                "currency": "ETH",
+                "enabled": true
+            }]
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "p": [{
+                "c": "ETH",
+                "e": true
+            }]
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1004|404|Data Not Found|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/get_collateral_preference' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/get_collateral_preference",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/get_collateral_preference' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/get_collateral_preference",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/get_collateral_preference' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/get_collateral_preference",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/get_collateral_preference' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/get_collateral_preference",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/get_collateral_preference' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/get_collateral_preference",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/get_collateral_preference' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/get_collateral_preference",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+## Position
 ### Add Position Margin
 ```
 FULL ENDPOINT: full/v1/add_position_margin
@@ -6890,6 +7669,7 @@ LITE ENDPOINT: lite/v1/deposit_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -6904,18 +7684,18 @@ LITE ENDPOINT: lite/v1/deposit_history
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -7240,6 +8020,7 @@ LITE ENDPOINT: lite/v1/transfer
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -7267,6 +8048,10 @@ LITE ENDPOINT: lite/v1/transfer
         |7103|500|Charged trading fee below the config minimum|
         |7104|400|Transfer sub-account doesn't belong to the transfer main account|
         |4015|403|Signer does not have transfer permission|
+        |4016|403|As a precaution, funds movements on your account are temporarily unavailable. Please contact support so we can help complete the necessary checks.|
+        |4018|400|$GRVT is disabled for external transfer|
+        |4010|400|This wallet is not supported. Please try another wallet.|
+        |4019|400|Your wallet has been put under review. Please reach out to kyc@grvt.io for any questions.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -7274,18 +8059,18 @@ LITE ENDPOINT: lite/v1/transfer
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -7760,6 +8545,7 @@ LITE ENDPOINT: lite/v1/transfer_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -7774,18 +8560,18 @@ LITE ENDPOINT: lite/v1/transfer_history
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -8124,6 +8910,7 @@ LITE ENDPOINT: lite/v1/withdrawal
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -8132,7 +8919,9 @@ LITE ENDPOINT: lite/v1/withdrawal
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |1008|401|Your IP has not been whitelisted for access|
         |4010|400|This wallet is not supported. Please try another wallet.|
+        |4019|400|Your wallet has been put under review. Please reach out to kyc@grvt.io for any questions.|
         |4014|400|This currency has been disabled for transfers and withdrawals.|
+        |4016|403|As a precaution, funds movements on your account are temporarily unavailable. Please contact support so we can help complete the necessary checks.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -8140,18 +8929,18 @@ LITE ENDPOINT: lite/v1/withdrawal
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -8570,6 +9359,7 @@ LITE ENDPOINT: lite/v1/withdrawal_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -8584,18 +9374,18 @@ LITE ENDPOINT: lite/v1/withdrawal_history
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -8826,6 +9616,257 @@ LITE ENDPOINT: lite/v1/withdrawal_history
                     "l": 500,
                     "c1": "",
                     "ma": null
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Get Withdrawal Fee
+```
+FULL ENDPOINT: full/v1/withdrawal_fee
+LITE ENDPOINT: lite/v1/withdrawal_fee
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_withdrawal_fee_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "token_currency": 3
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "tc": 3
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_withdrawal_fee_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "withdrawal_fee": "25.0",
+            "token_currency": "USDT"
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "wf": "25.0",
+            "tc": "USDT"
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1002,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/withdrawal_fee' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "token_currency": 3
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/withdrawal_fee",
+                "params": {
+                    "token_currency": 3
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/withdrawal_fee' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "tc": 3
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/withdrawal_fee",
+                "p": {
+                    "tc": 3
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/withdrawal_fee' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "token_currency": 3
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/withdrawal_fee",
+                "params": {
+                    "token_currency": 3
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/withdrawal_fee' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "tc": 3
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/withdrawal_fee",
+                "p": {
+                    "tc": 3
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/withdrawal_fee' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "token_currency": 3
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/withdrawal_fee",
+                "params": {
+                    "token_currency": 3
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/withdrawal_fee' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "tc": 3
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/withdrawal_fee",
+                "p": {
+                    "tc": 3
                 },
                 "i": 123
             }
@@ -9804,7 +10845,13 @@ LITE ENDPOINT: lite/v1/funding_account_summary
                 "futures_taker_fee": null,
                 "futures_maker_fee": null,
                 "options_taker_fee": null,
-                "options_maker_fee": null
+                "options_maker_fee": null,
+                "spot_borrow_configs": [{
+                    "currency": "ETH",
+                    "borrow_limit": null,
+                    "borrow_rate": null,
+                    "collateral_limit": null
+                }]
             }
         }
         ```
@@ -9837,7 +10884,13 @@ LITE ENDPOINT: lite/v1/funding_account_summary
                 "ft": null,
                 "fm": null,
                 "ot": null,
-                "om": null
+                "om": null,
+                "sb": [{
+                    "c": "ETH",
+                    "bl": null,
+                    "br": null,
+                    "cl": null
+                }]
             }
         }
         ```
@@ -12133,6 +13186,7 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -12149,18 +13203,18 @@ LITE ENDPOINT: lite/v1/vault_investor_summary
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -12803,6 +13857,7 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -12818,18 +13873,18 @@ LITE ENDPOINT: lite/v1/vault_redeem_cancel
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -13376,6 +14431,7 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -13390,18 +14446,18 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -13608,6 +14664,328 @@ LITE ENDPOINT: lite/v1/vault_manager_investor_history
                     "oo": true,
                     "st": "1697788800000000000",
                     "et": "1697788800000000000"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+## RFQ
+### E C N From Broker
+```
+FULL ENDPOINT: full/v1/ecn_from_broker
+LITE ENDPOINT: lite/v1/ecn_from_broker
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_ecn_from_broker_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "10000101000203040506",
+            "order_id": "10000101000203040506",
+            "client_order_id": "1234567890",
+            "asset": "BTC_USDT_Perp",
+            "seq_no": "872634876",
+            "cumulative_confirmed_size": "10"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "10000101000203040506",
+            "oi": "10000101000203040506",
+            "co": "1234567890",
+            "a": "BTC_USDT_Perp",
+            "sn": "872634876",
+            "cc": "10"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_ecn_from_broker_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": null
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": null
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |1008|401|Your IP has not been whitelisted for access|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1000,
+            "m":"You need to authenticate prior to using this functionality",
+            "s":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/ecn_from_broker' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "10000101000203040506",
+                "order_id": "10000101000203040506",
+                "client_order_id": "1234567890",
+                "asset": "BTC_USDT_Perp",
+                "seq_no": "872634876",
+                "cumulative_confirmed_size": "10"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/ecn_from_broker",
+                "params": {
+                    "sub_account_id": "10000101000203040506",
+                    "order_id": "10000101000203040506",
+                    "client_order_id": "1234567890",
+                    "asset": "BTC_USDT_Perp",
+                    "seq_no": "872634876",
+                    "cumulative_confirmed_size": "10"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/ecn_from_broker' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "10000101000203040506",
+                "oi": "10000101000203040506",
+                "co": "1234567890",
+                "a": "BTC_USDT_Perp",
+                "sn": "872634876",
+                "cc": "10"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/ecn_from_broker",
+                "p": {
+                    "sa": "10000101000203040506",
+                    "oi": "10000101000203040506",
+                    "co": "1234567890",
+                    "a": "BTC_USDT_Perp",
+                    "sn": "872634876",
+                    "cc": "10"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/ecn_from_broker' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "10000101000203040506",
+                "order_id": "10000101000203040506",
+                "client_order_id": "1234567890",
+                "asset": "BTC_USDT_Perp",
+                "seq_no": "872634876",
+                "cumulative_confirmed_size": "10"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/ecn_from_broker",
+                "params": {
+                    "sub_account_id": "10000101000203040506",
+                    "order_id": "10000101000203040506",
+                    "client_order_id": "1234567890",
+                    "asset": "BTC_USDT_Perp",
+                    "seq_no": "872634876",
+                    "cumulative_confirmed_size": "10"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/ecn_from_broker' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "10000101000203040506",
+                "oi": "10000101000203040506",
+                "co": "1234567890",
+                "a": "BTC_USDT_Perp",
+                "sn": "872634876",
+                "cc": "10"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/ecn_from_broker",
+                "p": {
+                    "sa": "10000101000203040506",
+                    "oi": "10000101000203040506",
+                    "co": "1234567890",
+                    "a": "BTC_USDT_Perp",
+                    "sn": "872634876",
+                    "cc": "10"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/ecn_from_broker' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "10000101000203040506",
+                "order_id": "10000101000203040506",
+                "client_order_id": "1234567890",
+                "asset": "BTC_USDT_Perp",
+                "seq_no": "872634876",
+                "cumulative_confirmed_size": "10"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/ecn_from_broker",
+                "params": {
+                    "sub_account_id": "10000101000203040506",
+                    "order_id": "10000101000203040506",
+                    "client_order_id": "1234567890",
+                    "asset": "BTC_USDT_Perp",
+                    "seq_no": "872634876",
+                    "cumulative_confirmed_size": "10"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/ecn_from_broker' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "10000101000203040506",
+                "oi": "10000101000203040506",
+                "co": "1234567890",
+                "a": "BTC_USDT_Perp",
+                "sn": "872634876",
+                "cc": "10"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/ecn_from_broker",
+                "p": {
+                    "sa": "10000101000203040506",
+                    "oi": "10000101000203040506",
+                    "co": "1234567890",
+                    "a": "BTC_USDT_Perp",
+                    "sn": "872634876",
+                    "cc": "10"
                 },
                 "i": 123
             }
@@ -13943,6 +15321,7 @@ LITE ENDPOINT: lite/v1/builder_fill_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1000|401|You need to authenticate prior to using this functionality|
         |1001|403|You are not authorized to access this functionality|
         |1002|500|Internal Server Error|
@@ -13957,18 +15336,18 @@ LITE ENDPOINT: lite/v1/builder_fill_history
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1000,
-            "message":"You need to authenticate prior to using this functionality",
-            "status":401
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1000,
-            "m":"You need to authenticate prior to using this functionality",
-            "s":401
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -14175,6 +15554,304 @@ LITE ENDPOINT: lite/v1/builder_fill_history
                     "et": "1697788800000000000",
                     "l": 500,
                     "c": ""
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+### Set Indicative Prices
+```
+FULL ENDPOINT: full/v1/set_indicative_prices
+LITE ENDPOINT: lite/v1/set_indicative_prices
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_set_indicative_prices_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+            "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+            "instrument": "BTC_USDT_Perp",
+            "bid": "65000.0",
+            "ask": "65010.0"
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+            "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+            "i": "BTC_USDT_Perp",
+            "b": "65000.0",
+            "a": "65010.0"
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/ack_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "result": {
+                "ack": "true"
+            }
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "r": {
+                "a": "true"
+            }
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1002|500|Internal Server Error|
+        |1001|403|You are not authorized to access this functionality|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+        |7700|400|Indicative prices are only supported for Stable Funding Perpetuals.|
+        |7701|403|You are not a qualified market maker or designated market maker for this instrument.|
+        |7702|400|Both a bid price and an ask price must be specified.|
+        |7703|400|The bid price must be strictly below the ask price.|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1002,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/full/v1/set_indicative_prices' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "instrument": "BTC_USDT_Perp",
+                "bid": "65000.0",
+                "ask": "65010.0"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/set_indicative_prices",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "instrument": "BTC_USDT_Perp",
+                    "bid": "65000.0",
+                    "ask": "65010.0"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.staging.gravitymarkets.io/lite/v1/set_indicative_prices' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "i": "BTC_USDT_Perp",
+                "b": "65000.0",
+                "a": "65010.0"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/set_indicative_prices",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "i": "BTC_USDT_Perp",
+                    "b": "65000.0",
+                    "a": "65010.0"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/full/v1/set_indicative_prices' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "instrument": "BTC_USDT_Perp",
+                "bid": "65000.0",
+                "ask": "65010.0"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/set_indicative_prices",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "instrument": "BTC_USDT_Perp",
+                    "bid": "65000.0",
+                    "ask": "65010.0"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.testnet.grvt.io/lite/v1/set_indicative_prices' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "i": "BTC_USDT_Perp",
+                "b": "65000.0",
+                "a": "65010.0"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/set_indicative_prices",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "i": "BTC_USDT_Perp",
+                    "b": "65000.0",
+                    "a": "65010.0"
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/full/v1/set_indicative_prices' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "instrument": "BTC_USDT_Perp",
+                "bid": "65000.0",
+                "ask": "65010.0"
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/set_indicative_prices",
+                "params": {
+                    "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "instrument": "BTC_USDT_Perp",
+                    "bid": "65000.0",
+                    "ask": "65010.0"
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://trades.grvt.io/lite/v1/set_indicative_prices' \
+            --header "Cookie: $GRVT_COOKIE" \
+            --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            --data '{
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "i": "BTC_USDT_Perp",
+                "b": "65000.0",
+                "a": "65010.0"
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/set_indicative_prices",
+                "p": {
+                    "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                    "i": "BTC_USDT_Perp",
+                    "b": "65000.0",
+                    "a": "65010.0"
                 },
                 "i": 123
             }

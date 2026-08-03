@@ -142,7 +142,11 @@ STREAM: v1.order
                             "is_split_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "is_ecn": null,
+                    "slippage_bps": 800,
+                    "rfq_id": null,
+                    "is_private": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -198,7 +202,11 @@ STREAM: v1.order
                             "is": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ie": null,
+                    "sb": 800,
+                    "ri": null,
+                    "ip1": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -1702,11 +1710,11 @@ STREAM: v1.fill
                 "price": "65038.01",
                 "mark_price": "65038.01",
                 "index_price": "65038.01",
-                "interest_rate": 0.0003,
+                "interest_rate": "0.0003",
                 "forward_price": "65038.01",
                 "realized_pnl": "2400.50",
                 "fee": "9.75",
-                "fee_rate": 0.0003,
+                "fee_rate": "0.0003",
                 "trade_id": "209358-2",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
@@ -1716,9 +1724,12 @@ STREAM: v1.fill
                 "broker": "UNSPECIFIED",
                 "is_rpi": false,
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "builder_fee_rate": 0.001,
+                "builder_fee_rate": "0.001",
                 "builder_fee": "0.2",
-                "fee_currency": "USDT"
+                "fee_currency": "USDT",
+                "repayment_scenario": "MANUAL_REPAYMENT",
+                "rfq_id": null,
+                "counterparty_type": "MAKER_QUOTE"
             },
             "prev_sequence_number": "872634875"
         }
@@ -1739,11 +1750,11 @@ STREAM: v1.fill
                 "p": "65038.01",
                 "mp": "65038.01",
                 "ip": "65038.01",
-                "ir": 0.0003,
+                "ir": "0.0003",
                 "fp": "65038.01",
                 "rp": "2400.50",
                 "f": "9.75",
-                "fr": 0.0003,
+                "fr": "0.0003",
                 "ti": "209358-2",
                 "oi": "0x10000101000203040506",
                 "v": "ORDERBOOK",
@@ -1753,9 +1764,12 @@ STREAM: v1.fill
                 "b": "UNSPECIFIED",
                 "ir1": false,
                 "b1": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "bf": 0.001,
+                "bf": "0.001",
                 "bf1": "0.2",
-                "fc": "USDT"
+                "fc": "USDT",
+                "rs": "MANUAL_REPAYMENT",
+                "ri": null,
+                "ct": "MAKER_QUOTE"
             },
             "ps": "872634875"
         }
@@ -4170,6 +4184,517 @@ STREAM: v1.withdrawal
                 "request_id":1,
                 "stream":"v1.withdrawal",
                 "feed":["'$GRVT_MAIN_ACCOUNT_ID'"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+## RFQ
+### E C N To Broker
+```
+STREAM: v1.ecn_to_broker
+```
+
+=== "Feed Selector"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/wsecn_to_broker_feed_selector_v1.md"
+    ??? info "JSONRPC Wrappers"
+        -8<- "docs/schemas/jsonrpc_request.md"
+        -8<- "docs/schemas/jsonrpc_response.md"
+        -8<- "docs/schemas/ws_subscribe_params.md"
+        -8<- "docs/schemas/ws_subscribe_result.md"
+        -8<- "docs/schemas/ws_unsubscribe_params.md"
+        -8<- "docs/schemas/ws_unsubscribe_result.md"
+        -8<- "docs/schemas/ws_subscribe_request_v1_legacy.md"
+        -8<- "docs/schemas/ws_subscribe_response_v1_legacy.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    ???+ question "Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "subscribe",
+            "params": {
+                "stream": "v1.ecn_to_broker",
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.ecn_to_broker",
+                "subs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "unsubs": [],
+                "num_snapshots": [10],
+                "first_sequence_number": [872634876]
+            },
+            "id": 123,
+            "method": "subscribe"
+        }
+        ```
+    ??? question "Unsubscribe"
+        **Full Unsubscribe Request**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "method": "unsubscribe",
+            "params": {
+                "stream": "v1.ecn_to_broker",
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+            },
+            "id": 123
+        }
+        ```
+        **Full Unsubscribe Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "result": {
+                "stream": "v1.ecn_to_broker",
+                "unsubs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+            },
+            "id": 123,
+            "method": "subscribe"
+        }
+        ```
+    ??? question "Legacy Subscribe"
+        **Full Subscribe Request**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "stream":"v1.ecn_to_broker",
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "method":"subscribe",
+            "is_full":true
+        }
+        ```
+        **Full Subscribe Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "stream":"v1.ecn_to_broker",
+            "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "unsubs":[],
+            "num_snapshots":[1],
+            "first_sequence_number":[2813]
+        }
+        ```
+    </section>
+=== "Feed Data"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/wsecn_to_broker_feed_data_v1.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Feed Response**
+        ``` { .json .copy }
+        {
+            "stream": "v1.ecn_to_broker",
+            "selector": "'$GRVT_SUB_ACCOUNT_ID'",
+            "sequence_number": "872634876",
+            "feed": {
+                "order_id": "10000101000203040506",
+                "client_order_id": "23042",
+                "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
+                "asset": "BTC_USDT_Perp",
+                "seq_no": "872634876",
+                "cumulative_request_size": "10",
+                "cumulative_filled_size": "8",
+                "cumulative_shortfall": "2",
+                "status": "PENDING",
+                "reject_reason": "UNSPECIFIED",
+                "expiry_time": "1697788800000000000"
+            },
+            "prev_sequence_number": "872634875"
+        }
+        ```
+        **Lite Feed Response**
+        ``` { .json .copy }
+        {
+            "s": "v1.ecn_to_broker",
+            "s1": "'$GRVT_SUB_ACCOUNT_ID'",
+            "sn": "872634876",
+            "f": {
+                "oi": "10000101000203040506",
+                "co": "23042",
+                "sa": "'$GRVT_SUB_ACCOUNT_ID'",
+                "a": "BTC_USDT_Perp",
+                "sn": "872634876",
+                "cr": "10",
+                "cf": "8",
+                "cs": "2",
+                "s": "PENDING",
+                "rr": "UNSPECIFIED",
+                "et": "1697788800000000000"
+            },
+            "ps": "872634875"
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1000|401|You need to authenticate prior to using this functionality|
+        |1001|403|You are not authorized to access this functionality|
+        |1002|500|Internal Server Error|
+        |1008|401|Your IP has not been whitelisted for access|
+        |1101|400|Feed Format must be in the format of <primary>@<secondary>|
+        |1102|400|Wrong number of primary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |1103|400|Wrong number of secondary selectors|
+        |3000|400|Instrument is invalid|
+        |3020|400|Sub account ID must be an uint64 integer|
+    -8<- "docs/schemas/jsonrpc_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure "Error"
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "jsonrpc": "2.0",
+            "error": {
+                "code": 1000,
+                "message": "You need to authenticate prior to using this functionality"
+            },
+            "id": 123,
+            "method": "subscribe"
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "j": "2.0",
+            "e": {
+                "c": 1000,
+                "m": "You need to authenticate prior to using this functionality"
+            },
+            "i": 123,
+            "m": "subscribe"
+        }
+        ```
+        **Legacy Error Response**
+        ``` { .json .copy }
+        {
+            "code":1000,
+            "message":"You need to authenticate prior to using this functionality",
+            "status":401
+        }
+        ```
+    </section>
+=== "Try it out"
+    -8<- "sections/auth_closed.md"
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.ecn_to_broker",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.ecn_to_broker",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ecn_to_broker",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.ecn_to_broker",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.ecn_to_broker",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.staging.gravitymarkets.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ecn_to_broker",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.ecn_to_broker",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.ecn_to_broker",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ecn_to_broker",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.ecn_to_broker",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.ecn_to_broker",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.testnet.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ecn_to_broker",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":false
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "subscribe",
+                "params": {
+                    "stream": "v1.ecn_to_broker",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/full" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "unsubscribe",
+                "params": {
+                    "stream": "v1.ecn_to_broker",
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Full"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ecn_to_broker",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "method":"subscribe",
+                "is_full":true
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "subscribe",
+                "p": {
+                    "s": "v1.ecn_to_broker",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Unsubscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws/lite" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "unsubscribe",
+                "p": {
+                    "s": "v1.ecn_to_broker",
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        !!! example "Legacy Subscribe Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://trades.grvt.io/ws" \
+            -H "Cookie: $GRVT_COOKIE" \
+            -H "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
+            -x '
+            {
+                "request_id":1,
+                "stream":"v1.ecn_to_broker",
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
                 "method":"subscribe",
                 "is_full":false
             }

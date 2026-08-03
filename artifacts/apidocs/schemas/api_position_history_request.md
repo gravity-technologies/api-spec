@@ -24,6 +24,7 @@
         |`FUTURE` = 2|the future asset kind|
         |`CALL` = 3|the call option asset kind|
         |`PUT` = 4|the put option asset kind|
+        |`STABLE_PERP` = 9|Stable Funding Perp on an RWA underlying, USDC-settled|
     ??? info "[PositionCloseStatus](/../../schemas/position_close_status)"
         |Value| Description |
         |-|-|
@@ -31,6 +32,7 @@
         |`LIQUIDATED` = 2|Position closed via liquidation|
         |`SETTLED` = 3|Position closed via settlement|
         |`PARTIALLY_CLOSED` = 4|Position partially closed|
+        |`SPLIT_CLOSED` = 5|Lifecycle ended by a stock split; reopened re-denominated|
     ??? info "[PositionMarginType](/../../schemas/position_margin_type)"
         |Value| Description |
         |-|-|

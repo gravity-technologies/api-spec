@@ -20,6 +20,15 @@ class BrokerTag(Enum):
     ORIGAMI = "ORIGAMI"
 
 
+class CDCStatus(Enum):
+    # CDC utilization below the reduce-only threshold.
+    NORMAL = "NORMAL"
+    # CDC utilization at or above the reduce-only threshold but below 100% — new collateral deposits are restricted.
+    REDUCE_ONLY = "REDUCE_ONLY"
+    # CDC utilization at or above 100% — subject to auto-exchange.
+    AUTO_EXCHANGE = "AUTO_EXCHANGE"
+
+
 class CancelStatus(Enum):
     # Cancellation has expired because corresponding order had not arrived within the defined time-to-live window.
     EXPIRED = "EXPIRED"
@@ -112,6 +121,8 @@ class Kind(Enum):
     PUT = "PUT"
     # the spot swap asset kind
     SPOT_SWAP = "SPOT_SWAP"
+    # Stable Funding Perp on an RWA underlying, USDC-settled
+    STABLE_PERP = "STABLE_PERP"
 
 
 class MarginType(Enum):
@@ -226,6 +237,22 @@ class OrderRejectReason(Enum):
     )
     # the order will bring the sub account below initial margin requirement considering wide price deviation
     BELOW_MARGIN_WITH_PENALTY_DEVIATION = "BELOW_MARGIN_WITH_PENALTY_DEVIATION"
+    # Cancelled by the system due to Corporate Action
+    CORPORATE_ACTION = "CORPORATE_ACTION"
+    # the order was rejected because the sub account is not a qualified maker
+    NOT_QUALIFIED_MAKER = "NOT_QUALIFIED_MAKER"
+    # rfq_id is required when is_private = true
+    PRIVATE_QUOTE_REQUIRES_RFQ = "PRIVATE_QUOTE_REQUIRES_RFQ"
+    # a signed slippage bound filled in limit_price is required
+    STABLE_PERP_REQUIRES_PRICE_BOUND = "STABLE_PERP_REQUIRES_PRICE_BOUND"
+    # SFP order only supports trigger_by = index
+    UNSUPPORTED_TRIGGER_BY = "UNSUPPORTED_TRIGGER_BY"
+    # the order was rejected because the referenced RFQ could not be found
+    RFQ_NOT_FOUND = "RFQ_NOT_FOUND"
+    # post-only resting placement crosses opposite best resting or index mid
+    RESTING_ORDER_WOULD_CROSS = "RESTING_ORDER_WOULD_CROSS"
+    # the order was submitted when the trading session was either closed or under maintenance
+    SESSION_CLOSED = "SESSION_CLOSED"
 
 
 class OrderStatus(Enum):
@@ -250,6 +277,8 @@ class PositionCloseStatus(Enum):
     SETTLED = "SETTLED"
     # Position partially closed
     PARTIALLY_CLOSED = "PARTIALLY_CLOSED"
+    # Lifecycle ended by a stock split; reopened re-denominated
+    SPLIT_CLOSED = "SPLIT_CLOSED"
 
 
 class PositionMarginType(Enum):
@@ -257,6 +286,34 @@ class PositionMarginType(Enum):
     ISOLATED = "ISOLATED"
     # Cross Margin Mode: uses all available funds in your account as collateral across all cross margin positions
     CROSS = "CROSS"
+
+
+class RepaymentScenario(Enum):
+    """
+    Server-only fee scenario tag for spot orders that repay MAM USDT debt against the insurance fund.
+    The default value 'unspecified' means the order is NOT a repayment (regular spot fees apply).
+    Risk rejects any user-submitted order with a non-unspecified value.
+    """
+
+    # User-initiated MAM repay via TDG; uses MRR (/8) divisor for fee.
+    MANUAL_REPAYMENT = "MANUAL_REPAYMENT"
+    # DEPRECATED — replaced by autoRepayBorrowLimit / autoRepayLTV. Kept for capnp ordinal compatibility; no producer emits this value.
+    AUTO_REPAYMENT = "AUTO_REPAYMENT"
+    # Liquidator MMR>=100% step 2 repayment; uses LRR (/2) divisor for fee.
+    LIQUIDATION_REPAYMENT = "LIQUIDATION_REPAYMENT"
+    # Liquidator borrow-limit auto-repay; uses ARR (/4) divisor for fee. Validator checks BL trigger is still active.
+    AUTO_REPAY_BORROW_LIMIT = "AUTO_REPAY_BORROW_LIMIT"
+    # Liquidator undeployed-loan / LTV auto-repay; uses ARR (/4) divisor for fee. Validator checks LTV trigger is still active.
+    AUTO_REPAY_LTV = "AUTO_REPAY_LTV"
+
+
+class RfqCounterpartyType(Enum):
+    # the counterparty is a maker quote submitted to the RFQ
+    MAKER_QUOTE = "MAKER_QUOTE"
+    # the counterparty is a resting order on the orderbook
+    RESTING_ORDER = "RESTING_ORDER"
+    # the counterparty is a forced-exit netting fill
+    FORCED_EXIT_NETTING = "FORCED_EXIT_NETTING"
 
 
 class SubAccountMode(Enum):
@@ -696,6 +753,30 @@ class ApiCandlestickResponse:
 
 
 @dataclass
+class ApiCollateralAssetInfo:
+    # The asset
+    currency: str
+    # CVR, expressed in percentage points. 0 = not usable as collateral.
+    collateral_value_ratio: str
+    # CDC limit, native units. 0 = untracked / unlimited.
+    collateral_deposit_cap: str
+    # MBR - per-asset ceiling on the annual borrow rate, expressed in percentage points; the tier borrow rate never exceeds this.
+    max_borrow_rate: str
+    # Effective manual-repay/convert fee = max((1-CVR)/MRR, RFR), expressed in percentage points.
+    manual_repayment_fee_rate: str
+    # Collateral-deposit-cap utilization status: normal / reduceOnly / autoExchange.
+    cdc_status: CDCStatus
+
+
+@dataclass
+class ApiCollateralPreferenceStatus:
+    # The currency whose collateral state is being reported
+    currency: str
+    # Whether this currency currently counts as collateral for the sub account
+    enabled: bool
+
+
+@dataclass
 class ApiCreateOrderRequest:
     # The order to create
     order: Order
@@ -714,7 +795,7 @@ class ApiDepositHistoryRequest:
     The history is returned in reverse chronological order
     Both finalized and pending deposits are returned, and pending deposits are indicated by an empty `confirmedTime` field.
 
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records (default 500, max 1000). If more data matches, the response returns a non-empty `next` cursor. To read the full result set you MUST re-issue the request with `cursor` set to that value and keep looping until `next` is empty.</li><li><b>A single call silently truncates at `limit` and returns no error.</b> Callers that read only the first page (or omit `limit`, which just applies the 500 default) will undercount whenever the account has more than `limit` matching records — e.g. summing deposits/transfers for a balance or PnL calculation must drain the cursor, not read one page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
     """
 
     # The token currency to query for, if nil or empty, return all deposits. Otherwise, only entries matching the filter will be returned
@@ -723,7 +804,7 @@ class ApiDepositHistoryRequest:
     start_time: str | None = None
     # The end time to query for in unix nanoseconds
     end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
+    # The page size for a single response. Defaults to 500; Max 1000. This caps one page only — omitting it does NOT return everything, it applies the 500 default. To get the full result set, follow the `next` cursor until it is empty.
     limit: int | None = None
     # The cursor to indicate when to start the next query from
     cursor: str | None = None
@@ -737,6 +818,27 @@ class ApiDepositHistoryResponse:
     result: list[DepositHistory]
     # The cursor to indicate when to start the next query from
     next: str | None = None
+
+
+@dataclass
+class ApiECNFromBrokerRequest:
+    # The sub account ID of the ECN order
+    sub_account_id: str
+    # A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
+    order_id: str
+    # A unique client order ID for the ECN order
+    client_order_id: str
+    # The asset of the ECN order
+    asset: str
+    # A sequence number used to determine message order for this ECN orders
+    seq_no: str
+    # The cumulative confirmed size for this ECN order
+    cumulative_confirmed_size: str
+
+
+@dataclass
+class ApiECNFromBrokerResponse:
+    result: bool
 
 
 @dataclass
@@ -861,6 +963,12 @@ class ApiFundingRateResponse:
     result: list[ApiFundingRate]
     # The cursor to indicate when to start the next query from
     next: str | None = None
+
+
+@dataclass
+class ApiGetAllCollateralAssetInfoResponse:
+    # Collateral configuration for every collateral-eligible asset (CVR > 0)
+    assets: list[ApiCollateralAssetInfo]
 
 
 @dataclass
@@ -989,6 +1097,26 @@ class ApiGetOrderResponse:
 
 
 @dataclass
+class ApiGetSubAccountCollateralPreferenceRequest:
+    """
+    Fetch the per-currency collateral enable/disable state for a Multi-Asset Mode sub account.
+
+    Returns one entry per collateral-eligible currency (CVR > 0), including USDT, which is always enabled and cannot be toggled off.
+    """
+
+    # The sub account ID to fetch collateral preferences for
+    sub_account_id: str
+
+
+@dataclass
+class ApiGetSubAccountCollateralPreferenceResponse:
+    # The sub account ID the preferences apply to
+    sub_account_id: str
+    # One entry per collateral-eligible currency (CVR configured), with its current effective state.
+    preferences: list[ApiCollateralPreferenceStatus]
+
+
+@dataclass
 class ApiGetSubAccountsResponse:
     # List of sub-account IDs accessible to the session
     sub_account_ids: list[str]
@@ -1002,6 +1130,36 @@ class ApiGetSupportedAssetsResponse:
     spot: list[SupportedAsset]
     # Assets supported in futures wallets, grouped by mode
     futures: list[FuturesWalletAssets]
+
+
+@dataclass
+class ApiInterestPaymentHistoryRequest:
+    """
+    Query for all historical MAM hourly interest payments charged to a single sub account.
+
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    """
+
+    # The sub account ID to request for
+    sub_account_id: str
+    # The currency filter to apply. If nil, this defaults to all currencies. Otherwise, only entries matching the filter will be returned
+    currency: list[str] | None = None
+    # The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
+    start_time: str | None = None
+    # The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+
+
+@dataclass
+class ApiInterestPaymentHistoryResponse:
+    # The interest payments matching the request
+    result: list[InterestPayment]
+    # The cursor to indicate when to start the query from
+    next: str
 
 
 @dataclass
@@ -1134,6 +1292,21 @@ class ApiPositionHistory:
     Only present when status is `PARTIALLY_CLOSED`
     """
     unrealized_pnl: str | None = None
+    """
+    Stock split 'from' ratio (pre-split units); the position size scaled by to/from
+    Only present when status is `SPLIT_CLOSED`. Example: `1` for a 1:4 split
+    """
+    split_ratio_from: int | None = None
+    """
+    Stock split 'to' ratio (post-split units)
+    Only present when status is `SPLIT_CLOSED`. Example: `4` for a 1:4 split
+    """
+    split_ratio_to: int | None = None
+    """
+    Signed position size in base asset decimal units immediately before the split
+    Only present when status is `SPLIT_CLOSED`
+    """
+    split_remaining_size: str | None = None
 
 
 @dataclass
@@ -1237,6 +1410,18 @@ class ApiSetDeriskToMaintenanceMarginRatioResponse:
 
 
 @dataclass
+class ApiSetIndicativePricesRequest:
+    # The sub account submitting the indicative price. Must belong to the authenticated session.
+    sub_account_id: str
+    # The instrument the indicative price is for
+    instrument: str
+    # Indicative bid price, expressed in 9 decimals. Must be > 0 and strictly below ask
+    bid: str
+    # Indicative ask price, expressed in 9 decimals. Must be strictly above bid
+    ask: str
+
+
+@dataclass
 class ApiSetInitialLeverageRequest:
     """
     The request to set the initial leverage of a sub account.
@@ -1287,6 +1472,17 @@ class ApiSetSubAccountPositionMarginConfigRequest:
 class ApiSetSubAccountPositionMarginConfigResponse:
     # Whether the margin type and leverage was acked
     ack: bool
+
+
+@dataclass
+class ApiSpotBorrowConfig:
+    currency: str
+    # BL — max borrowable amount, native units. 0 = not borrowable.
+    borrow_limit: str
+    # BR — annual borrow interest rate at this tier. Never exceeds the asset's maxBorrowRate.
+    borrow_rate: str
+    # CL — max amount counted as collateral, native units. 0 = unlimited.
+    collateral_limit: str
 
 
 @dataclass
@@ -1388,7 +1584,7 @@ class ApiTransferHistoryRequest:
     The request to get the historical transfers of an account
     The history is returned in reverse chronological order
 
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records (default 500, max 1000). If more data matches, the response returns a non-empty `next` cursor. To read the full result set you MUST re-issue the request with `cursor` set to that value and keep looping until `next` is empty.</li><li><b>A single call silently truncates at `limit` and returns no error.</b> Callers that read only the first page (or omit `limit`, which just applies the 500 default) will undercount whenever the account has more than `limit` matching records — e.g. summing deposits/transfers for a balance or PnL calculation must drain the cursor, not read one page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
     """
 
     # The token currency to query for, if nil or empty, return all transfers. Otherwise, only entries matching the filter will be returned
@@ -1397,7 +1593,7 @@ class ApiTransferHistoryRequest:
     start_time: str | None = None
     # The end time to query for in unix nanoseconds
     end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
+    # The page size for a single response. Defaults to 500; Max 1000. This caps one page only — omitting it does NOT return everything, it applies the 500 default. To get the full result set, follow the `next` cursor until it is empty.
     limit: int | None = None
     # The cursor to indicate when to start the next query from
     cursor: str | None = None
@@ -1629,13 +1825,27 @@ class ApiVaultViewRedemptionQueueResponse:
 
 
 @dataclass
+class ApiWithdrawalFeeRequest:
+    # Currency ID to express the withdrawal fee in (e.g. USDT id 3).
+    token_currency: int
+
+
+@dataclass
+class ApiWithdrawalFeeResponse:
+    # The withdrawal fee, quoted in tokenCurrency decimal units.
+    withdrawal_fee: str
+    # The currency the withdrawal fee is expressed in.
+    token_currency: str
+
+
+@dataclass
 class ApiWithdrawalHistoryRequest:
     """
     The request to get the historical withdrawals of an account
     The history is returned in reverse chronological order
     Both finalized and pending withdrawals are returned, and pending withdrawals are indicated by an empty `l1Hash` field.
 
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
+    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records (default 500, max 1000). If more data matches, the response returns a non-empty `next` cursor. To read the full result set you MUST re-issue the request with `cursor` set to that value and keep looping until `next` is empty.</li><li><b>A single call silently truncates at `limit` and returns no error.</b> Callers that read only the first page (or omit `limit`, which just applies the 500 default) will undercount whenever the account has more than `limit` matching records — e.g. summing deposits/transfers for a balance or PnL calculation must drain the cursor, not read one page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
     """
 
     # The token currency to query for, if nil or empty, return all withdrawals. Otherwise, only entries matching the filter will be returned
@@ -1644,7 +1854,7 @@ class ApiWithdrawalHistoryRequest:
     start_time: str | None = None
     # The end time to query for in unix nanoseconds
     end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
+    # The page size for a single response. Defaults to 500; Max 1000. This caps one page only — omitting it does NOT return everything, it applies the 500 default. To get the full result set, follow the `next` cursor until it is empty.
     limit: int | None = None
     # The cursor to indicate when to start the next query from
     cursor: str | None = None
@@ -1758,6 +1968,8 @@ class ClientTier:
     options_maker_fee: int
     spot_taker_fee: int
     spot_maker_fee: int
+    # Per-currency borrow & collateral limits for this tier. Populated only in the funding_account_summary response; empty in raw config contexts.
+    spot_borrow_configs: list[ApiSpotBorrowConfig]
 
 
 @dataclass
@@ -1802,6 +2014,32 @@ class DepositHistory:
     confirmed_time: str
     # The address of the sender
     from_address: str
+
+
+@dataclass
+class ECNToBrokerFeed:
+    # A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
+    order_id: str
+    # A unique identifier for the active order within a subaccount, specified by the client
+    client_order_id: str
+    # The subaccount initiating the order
+    sub_account_id: str
+    # The asset of the ECN order
+    asset: str
+    # A sequence number used to determine message order for this ECN orders
+    seq_no: str
+    # The cumulative request size for this ECN order
+    cumulative_request_size: str
+    # The cumulative filled size for this ECN order
+    cumulative_filled_size: str
+    # The cumulative shortfall for this ECN order
+    cumulative_shortfall: str
+    # The status of the ECN order
+    status: OrderStatus
+    # The reason for rejection or cancellation
+    reject_reason: OrderRejectReason
+    # [Filled by GRVT Backend] Time at which the ECN order will expire in unix nanoseconds
+    expiry_time: str
 
 
 @dataclass
@@ -1879,12 +2117,18 @@ class Fill:
     builder_fee: str
     # The currency of the fee paid on the trade
     fee_currency: str
+    # If this fill was a MAM repayment/exchange, the scenario (manual / auto / liquidation); unspecified for normal trades.
+    repayment_scenario: RepaymentScenario
     # The mark price of the instrument at point of trade, expressed in `9` decimals
     mark_price: str | None = None
     # [Options] The forward price of the option at point of trade, expressed in `9` decimals
     forward_price: str | None = None
     # Specifies the broker who brokered the order
     broker: BrokerTag | None = None
+    # The RFQ this fill was cleared against. Only set for RFQ venue fills; unset otherwise
+    rfq_id: str | None = None
+    # The type of counterparty this fill was matched against (maker quote / resting order / forced-exit netting). Only set for RFQ venue fills; unset otherwise
+    counterparty_type: RfqCounterpartyType | None = None
 
 
 @dataclass
@@ -1984,6 +2228,22 @@ class InstrumentDisplay:
 
 
 @dataclass
+class InterestPayment:
+    # Time at which the interest charge was computed in unix nanoseconds
+    event_time: str
+    # The sub-account being charged interest
+    sub_account_id: str
+    # The currency the interest is charged in
+    currency: str
+    # The interest charged for this hour.
+    amount: str
+    # The last interest charge time accumulated to this amount (HH:05 tick).
+    charge_time: str
+    # The borrowed principal in this currency that the hourly interest was computed on.
+    borrowed_amount: str
+
+
+@dataclass
 class JSONRPCRequest:
     """
     All Websocket JSON RPC Requests are housed in this wrapper. You may specify a stream, and a list of feeds to subscribe to.
@@ -2074,7 +2334,7 @@ class Order:
     <li>TAKER ONLY = IOC / FOK - only allows taker orders</li>
     <li>MAKER OR TAKER = GTT / AON - allows maker or taker orders</li>
     </ul>Exchange only supports (GTT, IOC, FOK)
-    RFQ Maker only supports (GTT, AON), RFQ Taker only supports (FOK)
+    RFQ Maker only supports (GTT, AON), RFQ Taker only supports (IOC, FOK)
     """
     time_in_force: TimeInForce
     """
@@ -2096,6 +2356,7 @@ class Order:
     If the order is a market order
     Market Orders do not have a limit price, and are always executed according to the maker order price.
     Market Orders must always be taker orders
+    On STABLE_PERP a slippage bound is mandatory: `limit_price` must carry the signed bound (reference price ± the chosen slippage), otherwise the order is rejected with stablePerpRequiresPriceBound. is_market = false with a limit price behaves identically on STABLE_PERP; the flag is intent metadata only.
     """
     is_market: bool | None = None
     """
@@ -2128,6 +2389,7 @@ class OrderLeg:
     The limit price of the order leg, expressed in `9` decimals.
     This is the number of quote currency units to pay/receive for this leg.
     This should be `null/0` if the order is a market order
+    Exception: on STABLE_PERP market orders this carries the mandatory signed slippage bound (reference price ± the chosen slippage) rather than being left empty.
     """
     limit_price: str | None = None
 
@@ -2157,6 +2419,26 @@ class OrderMetadata:
     trigger: TriggerOrderMetadata | None = None
     # Specifies the broker who brokered the order
     broker: BrokerTag | None = None
+    # Specifies if the order is an ECN order. Only applicable to STABLE_PERP (SFP) instruments.
+    is_ecn: bool | None = None
+    """
+    Maximum allowed slippage from mark price for an IOC limit order, expressed in basis points (800 = 8%).
+    Only valid on IOC limit orders. 0 means no slippage protection (regular limit IOC order).
+
+    """
+    slippage_bps: int | None = None
+    """
+    Binds this order to an RFQ (see ApiCreateRfqRequest and the `v1.rfq` / `v1.quote` streams). Optional.
+
+    As a taker acceptance: unlocks that RFQ's private quote pool, so the order matches across the private pool merged with the public book (firm resting liquidity + public quotes). The acceptance must be a single-leg order with time_in_force = IOC or FOK. Setting `rfq_id` on a non-ECN GTT order is rejected. If the referenced RFQ has expired, been cancelled, or is unknown, the order is rejected.
+
+    As a maker quote (is_ecn = true): identifies which RFQ the quote is responding to.
+
+    Omit `rfq_id` to match the public book only — private RFQ liquidity requires an RFQ.
+    """
+    rfq_id: str | None = None
+    # Maker quotes only. true = a private quote delivered to a single RFQ's taker (appears only on that taker's `v1.quote` book); false = a public quote resting on the order book, visible to all. When true, `rfq_id` is required.
+    is_private: bool | None = None
 
 
 @dataclass
@@ -2398,6 +2680,7 @@ class SubAccount:
     """
     maintenance_margin: str
     """
+    DEPRECATED: use the per-currency `availableToTransfer` of the quote-currency entry in `spotBalances` instead.
     The notional value available to transfer out of the trading account into the funding account (reported in `settle_currency`).
     `available_balance = total_equity - initial_margin - min(unrealized_pnl, 0)`
     """
@@ -2782,6 +3065,42 @@ class WSDepositFeedSelectorV1:
 
     # The main account ID to request for
     main_account_id: str
+
+
+@dataclass
+class WSECNToBrokerFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # ECN to broker message
+    feed: ECNToBrokerFeed
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSECNToBrokerFeedSelectorV1:
+    """
+    Subscribes to a feed of order updates pertaining to orders made by your account.
+    Each Order can be uniquely identified by its `order_id` or `client_order_id`.
+    To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).
+    Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`).
+    """
+
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The instrument filter to apply.
+    instrument: str | None = None
 
 
 @dataclass
