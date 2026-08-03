@@ -482,14 +482,6 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             types.ApiQueryVaultManagerInvestorHistoryResponse, resp, Config(cast=[Enum])
         )
 
-    async def ecn_from_broker_v1(
-        self, req: types.ApiECNFromBrokerRequest
-    ) -> types.ApiECNFromBrokerResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/ecn_from_broker", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiECNFromBrokerResponse, resp, Config(cast=[Enum]))
-
     async def get_authorized_builders_v1(
         self, req: types.EmptyRequest
     ) -> types.ApiGetAuthorizedBuildersResponse | GrvtError:
@@ -517,6 +509,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
+
+    async def ecn_from_broker_v1(
+        self, req: types.ApiECNFromBrokerRequest
+    ) -> types.ApiECNFromBrokerResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/ecn_from_broker", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiECNFromBrokerResponse, resp, Config(cast=[Enum]))
 
     async def create_rfq_v1(
         self, req: types.ApiCreateRfqRequest

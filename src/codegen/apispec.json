@@ -3711,47 +3711,6 @@
           ]
         },
         {
-          "namespace": "RFQ",
-          "name": "RPCECNFromBrokerV1",
-          "version": 1,
-          "route": "/ecn_from_broker",
-          "auth_required": true,
-          "request": "ApiECNFromBrokerRequest",
-          "response": "ApiECNFromBrokerResponse",
-          "on_request_errors": [
-            {
-              "code": 1000,
-              "message": "You need to authenticate prior to using this functionality",
-              "status": 401
-            },
-            {
-              "code": 1001,
-              "message": "You are not authorized to access this functionality",
-              "status": 403
-            },
-            {
-              "code": 1002,
-              "message": "Internal Server Error",
-              "status": 500
-            },
-            {
-              "code": 1003,
-              "message": "Request could not be processed due to malformed syntax",
-              "status": 400
-            },
-            {
-              "code": 1006,
-              "message": "You have surpassed the allocated rate limit for your tier",
-              "status": 429
-            },
-            {
-              "code": 1008,
-              "message": "Your IP has not been whitelisted for access",
-              "status": 401
-            }
-          ]
-        },
-        {
           "namespace": "Builder",
           "name": "RPCGetAuthorizedBuildersV1",
           "version": 1,
@@ -3886,6 +3845,47 @@
               "code": 7703,
               "message": "The bid price must be strictly below the ask price.",
               "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "RFQ",
+          "name": "RPCECNFromBrokerV1",
+          "version": 1,
+          "route": "/ecn_from_broker",
+          "auth_required": true,
+          "request": "ApiECNFromBrokerRequest",
+          "response": "ApiECNFromBrokerResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
