@@ -2419,7 +2419,7 @@ class OrderMetadata:
     trigger: TriggerOrderMetadata | None = None
     # Specifies the broker who brokered the order
     broker: BrokerTag | None = None
-    # Specifies if the order is an ECN order. Only applicable to STABLE_PERP (SFP) instruments.
+    # Specifies this order is an ECN order eligible for Market Maker Last Look. Only applicable to STABLE_PERP (SFP) instruments with qualified market makers.
     is_ecn: bool | None = None
     """
     Maximum allowed slippage from mark price for an IOC limit order, expressed in basis points (800 = 8%).

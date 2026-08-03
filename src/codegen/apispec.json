@@ -12249,7 +12249,7 @@
           "optional": true,
           "default": "false",
           "comment": [
-            "Specifies if the order is an ECN order. Only applicable to STABLE_PERP (SFP) instruments."
+            "Specifies this order is an ECN order eligible for Market Maker Last Look. Only applicable to STABLE_PERP (SFP) instruments with qualified market makers."
           ]
         },
         {
