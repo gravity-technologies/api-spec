@@ -495,3 +495,19 @@ class GrvtRawSync(GrvtRawSyncBase):
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
+
+    def create_rfq_v1(
+        self, req: types.ApiCreateRfqRequest
+    ) -> types.ApiCreateRfqResponse | GrvtError:
+        resp = self._post(True, self.td_rpc + "/full/v1/create_rfq", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiCreateRfqResponse, resp, Config(cast=[Enum]))
+
+    def cancel_rfq_v1(
+        self, req: types.ApiCancelRfqRequest
+    ) -> types.AckResponse | GrvtError:
+        resp = self._post(True, self.td_rpc + "/full/v1/cancel_rfq", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))

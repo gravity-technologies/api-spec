@@ -316,6 +316,24 @@ class RfqCounterpartyType(Enum):
     FORCED_EXIT_NETTING = "FORCED_EXIT_NETTING"
 
 
+class RfqEvent(Enum):
+    # a new maker channel was created
+    NEW = "NEW"
+    # both channels were expired
+    EXPIRED = "EXPIRED"
+    # both channels were cancelled
+    CANCELLED = "CANCELLED"
+
+
+class RfqSide(Enum):
+    # omitted = two-way request
+    UNSPECIFIED = "UNSPECIFIED"
+    # the RFQ side is a buy
+    BUY = "BUY"
+    # the RFQ side is a sell
+    SELL = "SELL"
+
+
 class SubAccountMode(Enum):
     # Single asset mode: the subaccount is only allowed to hold one asset as collateral
     SINGLE_ASSET_MODE = "SINGLE_ASSET_MODE"
@@ -721,6 +739,19 @@ class ApiCancelOrderRequest:
 
 
 @dataclass
+class ApiCancelRfqRequest:
+    """
+    Cancels an open RFQ identified by its `rfq_id` before it is accepted or expires.
+    On cancellation the platform auto-cancels any maker private quotes bound to the RFQ, and emits a CANCELLED event on the `v1.rfq` stream. (An RFQ left untouched also auto-cancels its bound quotes when it reaches `rfq.expiry`.)
+    """
+
+    # The subaccount ID cancelling the RFQ
+    sub_account_id: str
+    # Cancel the RFQ with this `rfq_id`
+    rfq_id: str
+
+
+@dataclass
 class ApiCandlestickRequest:
     """
     Kline/Candlestick bars for an instrument. Klines are uniquely identified by their instrument, type, interval, and open time.
@@ -786,6 +817,30 @@ class ApiCreateOrderRequest:
 class ApiCreateOrderResponse:
     # The created order
     result: Order
+
+
+@dataclass
+class ApiCreateRfqRequest:
+    """
+    Creates a new RFQ (Request For Quote): a taker solicits private quotes for a single STABLE_PERP instrument by specifying a size, and optionally a direction (`rfq.side`; omit for a two-way request). This request is unsigned — creating an RFQ commits the taker to nothing.
+
+    End-to-end flow:
+    1. The taker submits an RFQ here. (In the GRVT UI, entering a size on the trade page is the RFQ.)
+    2. GRVT broadcasts the RFQ to makers on the `v1.rfq` stream; makers respond with private quotes.
+    3. Those private quotes stream back to the taker on the `v1.quote` stream, alongside the public order book (firm resting liquidity + public quotes) which is already visible.
+    4. The taker accepts by signing an order via create_order with `metadata.rfq_id` set (single leg; IOC or FOK), which executes across the private pool merged with the public book — or walks away and lets the RFQ expire.
+
+    The created RFQ is returned in the response. A sub-account may hold at most one open RFQ per instrument. The RFQ lives until `rfq.expiry`, after which GRVT expires it and auto-cancels the makers' private quotes bound to it.
+    """
+
+    # The RFQ to create
+    rfq: Rfq
+
+
+@dataclass
+class ApiCreateRfqResponse:
+    # The created RFQ
+    rfq: Rfq
 
 
 @dataclass
@@ -2564,6 +2619,68 @@ class PreMinRedemptions:
 
 
 @dataclass
+class Rfq:
+    """
+    A Request for Quote (RFQ) lets a taker solicit private quotes on a single instrument from makers.
+
+    <ul><li>Single instrument</li><ul><li>Each RFQ targets one instrument (kind = STABLE_PERP) for a single requested size.</li><li>The taker may disclose a direction via `rfq.side`, or omit it to request a two-way (buy and sell) quote.</li></ul><li>Maker solicitation</li><ul><li>On submission, GRVT broadcasts the RFQ to makers over the `v1.rfq` feed (see RfqFeed).</li><li>Makers respond with private quotes, which the taker receives as a private quote book over the `v1.quote` feed (see RfqQuoteFeed).</li></ul><li>Anonymity</li><ul><li>Anonymity is automatic and always enforced — the taker and makers only ever see each other's derived anonymous account ids.</li><li>Real taker and maker identities are never exposed to the counterparty.</li></ul><li>Expiry</li><ul><li>The RFQ lives until `rfq.expiry`, after which GRVT expires it and auto-cancels the makers' private quotes bound to it.</li></ul></ul>
+    """
+
+    # [Filled by GRVT Backend] A unique 128-bit identifier for the RFQ, deterministically generated within the GRVT backend
+    rfq_id: str
+    # The subaccount initiating the RFQ
+    sub_account_id: str
+    # RFQ TTL. The timestamp after which Gravity expires the RFQ, expressed in unix nanoseconds. Default 60s, cap 300s (per-instrument config)
+    expiry: str
+    # The instrument to trade. Must be kind = STABLE_PERP
+    instrument: str
+    # Requested size (positive), expressed in base asset decimal units
+    size: str
+    # Optional — omitted = two-way request. The GRVT UI always fills it; API takers may withhold direction and accept two-way quotes
+    side: RfqSide | None = None
+
+
+@dataclass
+class RfqFeed:
+    # The RFQ lifecycle event: NEW, EXPIRED, or CANCELLED. On EXPIRED/CANCELLED only rfqID is populated; the platform then auto-cancels the maker's private quotes bound to this RFQ
+    event: RfqEvent
+    # The RFQ this event refers to
+    rfq_id: str
+    # The RFQ instrument. Must be kind = STABLE_PERP
+    instrument: str | None = None
+    # Requested size, expressed in base asset decimal units. Zero-size = platform solicitation for missing public presence
+    size: str | None = None
+    # Present only if the taker disclosed direction; omitted = two-way request
+    side: RfqSide | None = None
+    # RFQ TTL. The timestamp after which Gravity expires the RFQ, expressed in unix nanoseconds
+    expiry: str | None = None
+
+
+@dataclass
+class RfqQuoteFeed:
+    # The RFQ this private quote book belongs to
+    rfq_id: str
+    # Private quote bid levels, sorted best (highest) price first
+    bid_levels: list[RfqQuoteLevel]
+    # Private quote ask levels, sorted best (lowest) price first
+    ask_levels: list[RfqQuoteLevel]
+    # Best (highest) bid price across the book, expressed in the instrument's quote-asset decimals.
+    best_bid: str | None = None
+    # Best (lowest) ask price across the book, expressed in the instrument's quote-asset decimals.
+    best_ask: str | None = None
+
+
+@dataclass
+class RfqQuoteLevel:
+    # Price of the level, expressed in `9` decimals
+    price: str
+    # Size at this level, expressed in base asset decimal units
+    size: str
+    # Distinguishes an AON level (liftable only in full — POST-MVP) from a GTT level
+    time_in_force: TimeInForce
+
+
+@dataclass
 class RiskBracket:
     # 1-indexed tier number
     tier: int
@@ -3342,6 +3459,81 @@ class WSPositionsFeedSelectorV1:
     Updates get published when a trade is executed, and when leverage configurations are changed for instruments with ongoing positions.
     To subscribe to all positions, specify an empty `instrument` (eg. `2345123`).
     Otherwise, specify the `instrument` to only receive positions for that instrument (eg. `2345123-BTC_USDT_Perp`).
+    """
+
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The instrument filter to apply.
+    instrument: str | None = None
+
+
+@dataclass
+class WSRfqFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # The RFQ lifecycle event (NEW / EXPIRED / CANCELLED)
+    feed: RfqFeed
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSRfqFeedSelectorV1:
+    """
+    Maker feed. Subscribe with selector `(sub_account_id, instrument)` to receive the RFQs you can quote on, delivered as lifecycle events (NEW, EXPIRED, CANCELLED). Respond to an RFQ by posting quotes via create_order (is_ecn = true, with `metadata.rfq_id` / `metadata.is_private`).
+
+    The subscription is stateful: from the moment you subscribe you are 'on' for that instrument — RFQs are delivered, your response ratios are tracked, and you are expected to keep a live public quote resting on the book (the platform nudges you with a zero-size RFQ if none is resting).
+
+    Each RFQ is uniquely identified by its `rfq_id`. A sub-account may hold at most one open RFQ per instrument, which is what lets this selector be keyed by `(sub_account_id, instrument)` alone, with no `rfq_id` required.
+
+    """
+
+    # The subaccount ID to filter by
+    sub_account_id: str
+    # The instrument filter to apply.
+    instrument: str | None = None
+
+
+@dataclass
+class WSRfqQuoteFeedDataV1:
+    # Stream name
+    stream: str
+    # Primary selector
+    selector: str
+    """
+    A sequence number used to determine message order within a stream.
+    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
+    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
+      - A single cluster payload can be multiplexed into multiple stream payloads.
+      - To distinguish each stream payload, a `dedupCounter` is included.
+      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
+    """
+    sequence_number: str
+    # The taker's private quote book for their open RFQ on this instrument
+    feed: RfqQuoteFeed
+    # The previous sequence number that determines the message order
+    prev_sequence_number: str
+
+
+@dataclass
+class WSRfqQuoteFeedSelectorV1:
+    """
+    Taker feed. Subscribe with selector `(sub_account_id, instrument)` to receive your private RFQ quote book — best bid/ask and all private quote levels — for your open RFQ on that instrument.
+
+    These private quotes are the makers' responses to your RFQ (created via ApiCreateRfqRequest). View them alongside the public order book (firm resting liquidity + public quotes) to decide, then accept by signing an order via create_order with `metadata.rfq_id` set.
+
+    Each update pertains to a single RFQ, uniquely identified by its `rfq_id`. A sub-account may hold at most one open RFQ per instrument, which is what lets this selector be keyed by `(sub_account_id, instrument)` alone, with no `rfq_id` required.
     """
 
     # The subaccount ID to filter by

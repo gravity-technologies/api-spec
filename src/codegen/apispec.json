@@ -3888,6 +3888,123 @@
               "status": 400
             }
           ]
+        },
+        {
+          "namespace": "RFQ",
+          "name": "RPCCreateRfqV1",
+          "version": 1,
+          "route": "/create_rfq",
+          "auth_required": true,
+          "request": "ApiCreateRfqRequest",
+          "response": "ApiCreateRfqResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 2061,
+              "message": "Unsupported Instrument Requested",
+              "status": 400
+            },
+            {
+              "code": 2065,
+              "message": "Order size too granular",
+              "status": 400
+            },
+            {
+              "code": 2141,
+              "message": "RFQ sub account does not match logged in user",
+              "status": 403
+            },
+            {
+              "code": 2142,
+              "message": "RFQ instrument must be a stable perpetual",
+              "status": 400
+            },
+            {
+              "code": 2143,
+              "message": "RFQ size is below the instrument minimum size",
+              "status": 400
+            },
+            {
+              "code": 2144,
+              "message": "RFQ size exceeds the instrument maximum position size",
+              "status": 400
+            },
+            {
+              "code": 2145,
+              "message": "RFQ expiry is invalid",
+              "status": 400
+            },
+            {
+              "code": 2146,
+              "message": "An open RFQ already exists for this sub account and instrument",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "RFQ",
+          "name": "RPCCancelRfqV1",
+          "version": 1,
+          "route": "/cancel_rfq",
+          "auth_required": true,
+          "request": "ApiCancelRfqRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            }
+          ]
         }
       ],
       "streams": [
@@ -4322,6 +4439,106 @@
             {
               "code": 1103,
               "message": "Wrong number of secondary selectors",
+              "status": 400
+            },
+            {
+              "code": 1103,
+              "message": "Wrong number of secondary selectors",
+              "status": 400
+            },
+            {
+              "code": 3000,
+              "message": "Instrument is invalid",
+              "status": 400
+            },
+            {
+              "code": 3020,
+              "message": "Sub account ID must be an uint64 integer",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "RFQ",
+          "name": "StreamRfqV1",
+          "channel": "v1.rfq",
+          "auth_required": true,
+          "feed_selector": "WSRfqFeedSelectorV1",
+          "feed": "WSRfqFeedDataV1",
+          "on_subscribe_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1101,
+              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "status": 400
+            },
+            {
+              "code": 1102,
+              "message": "Wrong number of primary selectors",
+              "status": 400
+            },
+            {
+              "code": 1103,
+              "message": "Wrong number of secondary selectors",
+              "status": 400
+            },
+            {
+              "code": 3000,
+              "message": "Instrument is invalid",
+              "status": 400
+            },
+            {
+              "code": 3020,
+              "message": "Sub account ID must be an uint64 integer",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "RFQ",
+          "name": "StreamRfqQuoteV1",
+          "channel": "v1.quote",
+          "auth_required": true,
+          "feed_selector": "WSRfqQuoteFeedSelectorV1",
+          "feed": "WSRfqQuoteFeedDataV1",
+          "on_subscribe_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1101,
+              "message": "Feed Format must be in the format of \u003cprimary\u003e@\u003csecondary\u003e",
+              "status": 400
+            },
+            {
+              "code": 1102,
+              "message": "Wrong number of primary selectors",
               "status": 400
             },
             {
@@ -5097,6 +5314,41 @@
       ]
     },
     {
+      "name": "ApiCancelRfqRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID cancelling the RFQ"
+          ]
+        },
+        {
+          "name": "rfq_id",
+          "lite_name": "ri",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Cancel the RFQ with this `rfq_id`"
+          ]
+        }
+      ],
+      "comment": [
+        "Cancels an open RFQ identified by its `rfq_id` before it is accepted or expires.",
+        "On cancellation the platform auto-cancels any maker private quotes bound to the RFQ, and emits a CANCELLED event on the `v1.rfq` stream. (An RFQ left untouched also auto-cancels its bound quotes when it reaches `rfq.expiry`.)"
+      ]
+    },
+    {
       "name": "ApiCandlestickRequest",
       "is_root": true,
       "fields": [
@@ -5391,6 +5643,54 @@
           "optional": false,
           "comment": [
             "The created order"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiCreateRfqRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "rfq",
+          "lite_name": "r",
+          "semantic_type": "Rfq",
+          "json_type": "Rfq",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The RFQ to create"
+          ]
+        }
+      ],
+      "comment": [
+        "Creates a new RFQ (Request For Quote): a taker solicits private quotes for a single STABLE_PERP instrument by specifying a size, and optionally a direction (`rfq.side`; omit for a two-way request). This request is unsigned — creating an RFQ commits the taker to nothing.",
+        "",
+        "End-to-end flow:",
+        "1. The taker submits an RFQ here. (In the GRVT UI, entering a size on the trade page is the RFQ.)",
+        "2. GRVT broadcasts the RFQ to makers on the `v1.rfq` stream; makers respond with private quotes.",
+        "3. Those private quotes stream back to the taker on the `v1.quote` stream, alongside the public order book (firm resting liquidity + public quotes) which is already visible.",
+        "4. The taker accepts by signing an order via create_order with `metadata.rfq_id` set (single leg; IOC or FOK), which executes across the private pool merged with the public book — or walks away and lets the RFQ expire.",
+        "",
+        "The created RFQ is returned in the response. A sub-account may hold at most one open RFQ per instrument. The RFQ lives until `rfq.expiry`, after which GRVT expires it and auto-cancels the makers' private quotes bound to it."
+      ]
+    },
+    {
+      "name": "ApiCreateRfqResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "rfq",
+          "lite_name": "r",
+          "semantic_type": "Rfq",
+          "json_type": "Rfq",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The created RFQ"
           ]
         }
       ],
@@ -12860,6 +13160,289 @@
       ]
     },
     {
+      "name": "Rfq",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "rfq_id",
+          "lite_name": "ri",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "[Filled by GRVT Backend] A unique 128-bit identifier for the RFQ, deterministically generated within the GRVT backend"
+          ]
+        },
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount initiating the RFQ"
+          ]
+        },
+        {
+          "name": "expiry",
+          "lite_name": "e",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "RFQ TTL. The timestamp after which Gravity expires the RFQ, expressed in unix nanoseconds. Default 60s, cap 300s (per-instrument config)"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument to trade. Must be kind = STABLE_PERP"
+          ]
+        },
+        {
+          "name": "size",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'10.5'",
+          "comment": [
+            "Requested size (positive), expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "side",
+          "lite_name": "s1",
+          "semantic_type": "RfqSide",
+          "json_type": "RfqSide",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Optional — omitted = two-way request. The GRVT UI always fills it; API takers may withhold direction and accept two-way quotes"
+          ]
+        }
+      ],
+      "comment": [
+        "A Request for Quote (RFQ) lets a taker solicit private quotes on a single instrument from makers.",
+        "",
+        "\u003cul\u003e\u003cli\u003eSingle instrument\u003c/li\u003e\u003cul\u003e\u003cli\u003eEach RFQ targets one instrument (kind = STABLE_PERP) for a single requested size.\u003c/li\u003e\u003cli\u003eThe taker may disclose a direction via `rfq.side`, or omit it to request a two-way (buy and sell) quote.\u003c/li\u003e\u003c/ul\u003e\u003cli\u003eMaker solicitation\u003c/li\u003e\u003cul\u003e\u003cli\u003eOn submission, GRVT broadcasts the RFQ to makers over the `v1.rfq` feed (see RfqFeed).\u003c/li\u003e\u003cli\u003eMakers respond with private quotes, which the taker receives as a private quote book over the `v1.quote` feed (see RfqQuoteFeed).\u003c/li\u003e\u003c/ul\u003e\u003cli\u003eAnonymity\u003c/li\u003e\u003cul\u003e\u003cli\u003eAnonymity is automatic and always enforced — the taker and makers only ever see each other's derived anonymous account ids.\u003c/li\u003e\u003cli\u003eReal taker and maker identities are never exposed to the counterparty.\u003c/li\u003e\u003c/ul\u003e\u003cli\u003eExpiry\u003c/li\u003e\u003cul\u003e\u003cli\u003eThe RFQ lives until `rfq.expiry`, after which GRVT expires it and auto-cancels the makers' private quotes bound to it.\u003c/li\u003e\u003c/ul\u003e\u003c/ul\u003e"
+      ]
+    },
+    {
+      "name": "RfqFeed",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "event",
+          "lite_name": "e",
+          "semantic_type": "RfqEvent",
+          "json_type": "RfqEvent",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The RFQ lifecycle event: NEW, EXPIRED, or CANCELLED. On EXPIRED/CANCELLED only rfqID is populated; the platform then auto-cancels the maker's private quotes bound to this RFQ"
+          ]
+        },
+        {
+          "name": "rfq_id",
+          "lite_name": "ri",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The RFQ this event refers to"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The RFQ instrument. Must be kind = STABLE_PERP"
+          ]
+        },
+        {
+          "name": "size",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'10.5'",
+          "comment": [
+            "Requested size, expressed in base asset decimal units. Zero-size = platform solicitation for missing public presence"
+          ]
+        },
+        {
+          "name": "side",
+          "lite_name": "s1",
+          "semantic_type": "RfqSide",
+          "json_type": "RfqSide",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Present only if the taker disclosed direction; omitted = two-way request"
+          ]
+        },
+        {
+          "name": "expiry",
+          "lite_name": "e1",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "RFQ TTL. The timestamp after which Gravity expires the RFQ, expressed in unix nanoseconds"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "RfqQuoteFeed",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "rfq_id",
+          "lite_name": "ri",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The RFQ this private quote book belongs to"
+          ]
+        },
+        {
+          "name": "best_bid",
+          "lite_name": "bb",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65038.01'",
+          "comment": [
+            "Best (highest) bid price across the book, expressed in the instrument's quote-asset decimals."
+          ]
+        },
+        {
+          "name": "best_ask",
+          "lite_name": "ba",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'65040.02'",
+          "comment": [
+            "Best (lowest) ask price across the book, expressed in the instrument's quote-asset decimals."
+          ]
+        },
+        {
+          "name": "bid_levels",
+          "lite_name": "bl",
+          "semantic_type": "RfqQuoteLevel",
+          "json_type": "RfqQuoteLevel",
+          "index": 3,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Private quote bid levels, sorted best (highest) price first"
+          ]
+        },
+        {
+          "name": "ask_levels",
+          "lite_name": "al",
+          "semantic_type": "RfqQuoteLevel",
+          "json_type": "RfqQuoteLevel",
+          "index": 4,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Private quote ask levels, sorted best (lowest) price first"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "RfqQuoteLevel",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "price",
+          "lite_name": "p",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65038.01'",
+          "comment": [
+            "Price of the level, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "size",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3456.78'",
+          "comment": [
+            "Size at this level, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "time_in_force",
+          "lite_name": "ti",
+          "semantic_type": "TimeInForce",
+          "json_type": "TimeInForce",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Distinguishes an AON level (liftable only in full — POST-MVP) from a GTT level"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "RiskBracket",
       "is_root": false,
       "fields": [
@@ -15919,6 +16502,243 @@
       ]
     },
     {
+      "name": "WSRfqFeedDataV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.rfq'",
+          "comment": [
+            "Stream name"
+          ]
+        },
+        {
+          "name": "selector",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "Primary selector"
+          ]
+        },
+        {
+          "name": "sequence_number",
+          "lite_name": "sn",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634876'",
+          "comment": [
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
+          ]
+        },
+        {
+          "name": "feed",
+          "lite_name": "f",
+          "semantic_type": "RfqFeed",
+          "json_type": "RfqFeed",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The RFQ lifecycle event (NEW / EXPIRED / CANCELLED)"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines the message order"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "WSRfqFeedSelectorV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID to filter by"
+          ],
+          "selector": "primary"
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'all'",
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument filter to apply."
+          ],
+          "selector": "primary"
+        }
+      ],
+      "comment": [
+        "Maker feed. Subscribe with selector `(sub_account_id, instrument)` to receive the RFQs you can quote on, delivered as lifecycle events (NEW, EXPIRED, CANCELLED). Respond to an RFQ by posting quotes via create_order (is_ecn = true, with `metadata.rfq_id` / `metadata.is_private`).",
+        "",
+        "The subscription is stateful: from the moment you subscribe you are 'on' for that instrument — RFQs are delivered, your response ratios are tracked, and you are expected to keep a live public quote resting on the book (the platform nudges you with a zero-size RFQ if none is resting).",
+        "",
+        "Each RFQ is uniquely identified by its `rfq_id`. A sub-account may hold at most one open RFQ per instrument, which is what lets this selector be keyed by `(sub_account_id, instrument)` alone, with no `rfq_id` required.",
+        ""
+      ]
+    },
+    {
+      "name": "WSRfqQuoteFeedDataV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "stream",
+          "lite_name": "s",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'v1.quote'",
+          "comment": [
+            "Stream name"
+          ]
+        },
+        {
+          "name": "selector",
+          "lite_name": "s1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "Primary selector"
+          ]
+        },
+        {
+          "name": "sequence_number",
+          "lite_name": "sn",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634876'",
+          "comment": [
+            "A sequence number used to determine message order within a stream.",
+            "- If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.",
+            "- If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.",
+            "  - A single cluster payload can be multiplexed into multiple stream payloads.",
+            "  - To distinguish each stream payload, a `dedupCounter` is included.",
+            "  - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`."
+          ]
+        },
+        {
+          "name": "feed",
+          "lite_name": "f",
+          "semantic_type": "RfqQuoteFeed",
+          "json_type": "RfqQuoteFeed",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The taker's private quote book for their open RFQ on this instrument"
+          ]
+        },
+        {
+          "name": "prev_sequence_number",
+          "lite_name": "ps",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'872634875'",
+          "comment": [
+            "The previous sequence number that determines the message order"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "WSRfqQuoteFeedSelectorV1",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The subaccount ID to filter by"
+          ],
+          "selector": "primary"
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "'all'",
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument filter to apply."
+          ],
+          "selector": "primary"
+        }
+      ],
+      "comment": [
+        "Taker feed. Subscribe with selector `(sub_account_id, instrument)` to receive your private RFQ quote book — best bid/ask and all private quote levels — for your open RFQ on that instrument.",
+        "",
+        "These private quotes are the makers' responses to your RFQ (created via ApiCreateRfqRequest). View them alongside the public order book (firm resting liquidity + public quotes) to decide, then accept by signing an order via create_order with `metadata.rfq_id` set.",
+        "",
+        "Each update pertains to a single RFQ, uniquely identified by its `rfq_id`. A sub-account may hold at most one open RFQ per instrument, which is what lets this selector be keyed by `(sub_account_id, instrument)` alone, with no `rfq_id` required."
+      ]
+    },
+    {
       "name": "WSSubscribeParams",
       "is_root": true,
       "fields": [
@@ -17992,6 +18812,60 @@
           "value": 3,
           "comment": [
             "the counterparty is a forced-exit netting fill"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "RfqEvent",
+      "values": [
+        {
+          "name": "NEW",
+          "value": 1,
+          "comment": [
+            "a new maker channel was created"
+          ]
+        },
+        {
+          "name": "EXPIRED",
+          "value": 2,
+          "comment": [
+            "both channels were expired"
+          ]
+        },
+        {
+          "name": "CANCELLED",
+          "value": 3,
+          "comment": [
+            "both channels were cancelled"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "RfqSide",
+      "values": [
+        {
+          "name": "UNSPECIFIED",
+          "value": 0,
+          "comment": [
+            "omitted = two-way request"
+          ]
+        },
+        {
+          "name": "BUY",
+          "value": 1,
+          "comment": [
+            "the RFQ side is a buy"
+          ]
+        },
+        {
+          "name": "SELL",
+          "value": 2,
+          "comment": [
+            "the RFQ side is a sell"
           ]
         }
       ],
