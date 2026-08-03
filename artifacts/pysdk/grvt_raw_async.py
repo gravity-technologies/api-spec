@@ -482,14 +482,6 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             types.ApiQueryVaultManagerInvestorHistoryResponse, resp, Config(cast=[Enum])
         )
 
-    async def ecn_from_broker_v1(
-        self, req: types.ApiECNFromBrokerRequest
-    ) -> types.ApiECNFromBrokerResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/ecn_from_broker", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiECNFromBrokerResponse, resp, Config(cast=[Enum]))
-
     async def get_authorized_builders_v1(
         self, req: types.EmptyRequest
     ) -> types.ApiGetAuthorizedBuildersResponse | GrvtError:
@@ -514,6 +506,30 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         self, req: types.ApiSetIndicativePricesRequest
     ) -> types.AckResponse | GrvtError:
         resp = await self._post(True, self.td_rpc + "/full/v1/set_indicative_prices", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
+
+    async def ecn_from_broker_v1(
+        self, req: types.ApiECNFromBrokerRequest
+    ) -> types.ApiECNFromBrokerResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/ecn_from_broker", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiECNFromBrokerResponse, resp, Config(cast=[Enum]))
+
+    async def create_rfq_v1(
+        self, req: types.ApiCreateRfqRequest
+    ) -> types.ApiCreateRfqResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/create_rfq", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiCreateRfqResponse, resp, Config(cast=[Enum]))
+
+    async def cancel_rfq_v1(
+        self, req: types.ApiCancelRfqRequest
+    ) -> types.AckResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/cancel_rfq", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
