@@ -1558,6 +1558,229 @@ LITE ENDPOINT: lite/v1/margin_rules
             ```
         </section>
 <hr class="solid">
+### Get All Collateral Asset Info
+```
+FULL ENDPOINT: full/v1/get_all_collateral_asset_info
+LITE ENDPOINT: lite/v1/get_all_collateral_asset_info
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/empty_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_get_all_collateral_asset_info_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "assets": [{
+                "currency": "ETH",
+                "collateral_value_ratio": 95.0,
+                "collateral_deposit_cap": "1000.0",
+                "max_borrow_rate": 10.0,
+                "manual_repayment_fee_rate": 0.625,
+                "cdc_status": "NORMAL"
+            }]
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "a": [{
+                "c": "ETH",
+                "cv": 95.0,
+                "cd": "1000.0",
+                "mb": 10.0,
+                "mr": 0.625,
+                "cs": "NORMAL"
+            }]
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1002,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
+        }
+        ```
+    </section>
+=== "Try it out"
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/get_all_collateral_asset_info' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/get_all_collateral_asset_info",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/get_all_collateral_asset_info' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/get_all_collateral_asset_info",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/get_all_collateral_asset_info' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/get_all_collateral_asset_info",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/get_all_collateral_asset_info' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/get_all_collateral_asset_info",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/get_all_collateral_asset_info' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/get_all_collateral_asset_info",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/get_all_collateral_asset_info' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/get_all_collateral_asset_info",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
 ## Ticker
 ### Mini Ticker
 ```
@@ -2701,6 +2924,7 @@ LITE ENDPOINT: lite/v1/trade_history
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1014|504|Upstream data service timed out, please try again|
@@ -2712,18 +2936,18 @@ LITE ENDPOINT: lite/v1/trade_history
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1002,
-            "message":"Internal Server Error",
-            "status":500
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1002,
-            "m":"Internal Server Error",
-            "s":500
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -3010,6 +3234,7 @@ LITE ENDPOINT: lite/v1/kline
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1014|504|Upstream data service timed out, please try again|
@@ -3022,18 +3247,18 @@ LITE ENDPOINT: lite/v1/kline
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1002,
-            "message":"Internal Server Error",
-            "status":500
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1002,
-            "m":"Internal Server Error",
-            "s":500
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>
@@ -3334,6 +3559,7 @@ LITE ENDPOINT: lite/v1/funding
     !!! info "Error Codes"
         |Code|HttpStatus| Description |
         |-|-|-|
+        |1015|503|Upstream data service is temporarily unavailable, please try again|
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1014|504|Upstream data service timed out, please try again|
@@ -3346,18 +3572,18 @@ LITE ENDPOINT: lite/v1/funding
         ``` { .json .copy }
         {
             "request_id":1,
-            "code":1002,
-            "message":"Internal Server Error",
-            "status":500
+            "code":1015,
+            "message":"Upstream data service is temporarily unavailable, please try again",
+            "status":503
         }
         ```
         **Lite Error Response**
         ``` { .json .copy }
         {
             "ri":1,
-            "c":1002,
-            "m":"Internal Server Error",
-            "s":500
+            "c":1015,
+            "m":"Upstream data service is temporarily unavailable, please try again",
+            "s":503
         }
         ```
     </section>

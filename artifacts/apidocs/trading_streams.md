@@ -142,7 +142,11 @@ STREAM: v1.order
                             "is_split_position": false
                         }
                     },
-                    "broker": "BROKER_CODE"
+                    "broker": "BROKER_CODE",
+                    "is_ecn": null,
+                    "slippage_bps": 800,
+                    "rfq_id": null,
+                    "is_private": null
                 },
                 "state": {
                     "status": "PENDING",
@@ -198,7 +202,11 @@ STREAM: v1.order
                             "is": false
                         }
                     },
-                    "b": "BROKER_CODE"
+                    "b": "BROKER_CODE",
+                    "ie": null,
+                    "sb": 800,
+                    "ri": null,
+                    "ip1": null
                 },
                 "s1": {
                     "s": "PENDING",
@@ -1702,11 +1710,11 @@ STREAM: v1.fill
                 "price": "65038.01",
                 "mark_price": "65038.01",
                 "index_price": "65038.01",
-                "interest_rate": 0.0003,
+                "interest_rate": "0.0003",
                 "forward_price": "65038.01",
                 "realized_pnl": "2400.50",
                 "fee": "9.75",
-                "fee_rate": 0.0003,
+                "fee_rate": "0.0003",
                 "trade_id": "209358-2",
                 "order_id": "0x10000101000203040506",
                 "venue": "ORDERBOOK",
@@ -1716,9 +1724,12 @@ STREAM: v1.fill
                 "broker": "UNSPECIFIED",
                 "is_rpi": false,
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "builder_fee_rate": 0.001,
+                "builder_fee_rate": "0.001",
                 "builder_fee": "0.2",
-                "fee_currency": "USDT"
+                "fee_currency": "USDT",
+                "repayment_scenario": "MANUAL_REPAYMENT",
+                "rfq_id": null,
+                "counterparty_type": "MAKER_QUOTE"
             },
             "prev_sequence_number": "872634875"
         }
@@ -1739,11 +1750,11 @@ STREAM: v1.fill
                 "p": "65038.01",
                 "mp": "65038.01",
                 "ip": "65038.01",
-                "ir": 0.0003,
+                "ir": "0.0003",
                 "fp": "65038.01",
                 "rp": "2400.50",
                 "f": "9.75",
-                "fr": 0.0003,
+                "fr": "0.0003",
                 "ti": "209358-2",
                 "oi": "0x10000101000203040506",
                 "v": "ORDERBOOK",
@@ -1753,9 +1764,12 @@ STREAM: v1.fill
                 "b": "UNSPECIFIED",
                 "ir1": false,
                 "b1": "'$GRVT_MAIN_ACCOUNT_ID'",
-                "bf": 0.001,
+                "bf": "0.001",
                 "bf1": "0.2",
-                "fc": "USDT"
+                "fc": "USDT",
+                "rs": "MANUAL_REPAYMENT",
+                "ri": null,
+                "ct": "MAKER_QUOTE"
             },
             "ps": "872634875"
         }

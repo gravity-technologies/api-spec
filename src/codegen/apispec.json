@@ -194,6 +194,32 @@
           ]
         },
         {
+          "namespace": "Instrument",
+          "name": "RPCGetAllCollateralAssetInfoV1",
+          "version": 1,
+          "route": "/get_all_collateral_asset_info",
+          "auth_required": false,
+          "request": "EmptyRequest",
+          "response": "ApiGetAllCollateralAssetInfoResponse",
+          "on_request_errors": [
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            }
+          ]
+        },
+        {
           "namespace": "Ticker",
           "name": "RPCMiniTickerV1",
           "version": 1,
@@ -332,6 +358,11 @@
           "response": "ApiTradeHistoryResponse",
           "on_request_errors": [
             {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
+            {
               "code": 1002,
               "message": "Internal Server Error",
               "status": 500
@@ -362,6 +393,11 @@
           "request": "ApiCandlestickRequest",
           "response": "ApiCandlestickResponse",
           "on_request_errors": [
+            {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
             {
               "code": 1002,
               "message": "Internal Server Error",
@@ -398,6 +434,11 @@
           "request": "ApiFundingRateRequest",
           "response": "ApiFundingRateResponse",
           "on_request_errors": [
+            {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
             {
               "code": 1002,
               "message": "Internal Server Error",
@@ -1136,6 +1177,11 @@
               "status": 400
             },
             {
+              "code": 2091,
+              "message": "As a precaution, only position-reducing (`reduce_only` as true) orders are currently allowed on your account. Please contact support so we can help complete the necessary checks.",
+              "status": 403
+            },
+            {
               "code": 7304,
               "message": "Only position-reducing orders (`reduce_only` as true) allowed for this asset right now.",
               "status": 400
@@ -1158,6 +1204,26 @@
             {
               "code": 2453,
               "message": "Spot trading is blocked during socialized loss",
+              "status": 400
+            },
+            {
+              "code": 7600,
+              "message": "Order slippage protection is not enabled.",
+              "status": 400
+            },
+            {
+              "code": 7601,
+              "message": "Slippage protection is only supported on IOC limit orders.",
+              "status": 400
+            },
+            {
+              "code": 7602,
+              "message": "Slippage is below the minimum allowed value.",
+              "status": 400
+            },
+            {
+              "code": 7603,
+              "message": "Slippage exceeds the asset's price protection band.",
               "status": 400
             }
           ]
@@ -1269,6 +1335,11 @@
           "response": "ApiGetOrderResponse",
           "on_request_errors": [
             {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
+            {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
               "status": 401
@@ -1365,6 +1436,11 @@
           "request": "ApiOrderHistoryRequest",
           "response": "ApiOrderHistoryResponse",
           "on_request_errors": [
+            {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
             {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
@@ -1768,6 +1844,11 @@
               "status": 400
             },
             {
+              "code": 2091,
+              "message": "As a precaution, only position-reducing (`reduce_only` as true) orders are currently allowed on your account. Please contact support so we can help complete the necessary checks.",
+              "status": 403
+            },
+            {
               "code": 7304,
               "message": "Only position-reducing orders (`reduce_only` as true) allowed for this asset right now.",
               "status": 400
@@ -1790,6 +1871,26 @@
             {
               "code": 2453,
               "message": "Spot trading is blocked during socialized loss",
+              "status": 400
+            },
+            {
+              "code": 7600,
+              "message": "Order slippage protection is not enabled.",
+              "status": 400
+            },
+            {
+              "code": 7601,
+              "message": "Slippage protection is only supported on IOC limit orders.",
+              "status": 400
+            },
+            {
+              "code": 7602,
+              "message": "Slippage is below the minimum allowed value.",
+              "status": 400
+            },
+            {
+              "code": 7603,
+              "message": "Slippage exceeds the asset's price protection band.",
               "status": 400
             },
             {
@@ -1884,6 +1985,11 @@
           "response": "ApiFillHistoryResponse",
           "on_request_errors": [
             {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
+            {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
               "status": 401
@@ -1930,6 +2036,11 @@
           "response": "ApiFundingPaymentHistoryResponse",
           "on_request_errors": [
             {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
+            {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
               "status": 401
@@ -1968,6 +2079,57 @@
               "code": 3007,
               "message": "API is not applicable for spot instruments",
               "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Execution",
+          "name": "RPCInterestPaymentHistoryV1",
+          "version": 1,
+          "route": "/interest_payment_history",
+          "auth_required": true,
+          "request": "ApiInterestPaymentHistoryRequest",
+          "response": "ApiInterestPaymentHistoryResponse",
+          "on_request_errors": [
+            {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
             }
           ]
         },
@@ -2026,6 +2188,11 @@
           "request": "ApiPositionHistoryRequest",
           "response": "ApiPositionHistoryResponse",
           "on_request_errors": [
+            {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
             {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
@@ -2151,6 +2318,47 @@
               "code": 3007,
               "message": "API is not applicable for spot instruments",
               "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "SubAccount",
+          "name": "RPCGetCollateralPreferenceV1",
+          "version": 1,
+          "route": "/get_collateral_preference",
+          "auth_required": true,
+          "request": "ApiGetSubAccountCollateralPreferenceRequest",
+          "response": "ApiGetSubAccountCollateralPreferenceResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
             }
           ]
         },
@@ -2286,6 +2494,11 @@
           "response": "ApiDepositHistoryResponse",
           "on_request_errors": [
             {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
+            {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
               "status": 401
@@ -2331,6 +2544,11 @@
           "request": "ApiTransferRequest",
           "response": "ApiTransferResponse",
           "on_request_errors": [
+            {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
             {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
@@ -2465,6 +2683,26 @@
               "code": 4015,
               "message": "Signer does not have transfer permission",
               "status": 403
+            },
+            {
+              "code": 4016,
+              "message": "As a precaution, funds movements on your account are temporarily unavailable. Please contact support so we can help complete the necessary checks.",
+              "status": 403
+            },
+            {
+              "code": 4018,
+              "message": "$GRVT is disabled for external transfer",
+              "status": 400
+            },
+            {
+              "code": 4010,
+              "message": "This wallet is not supported. Please try another wallet.",
+              "status": 400
+            },
+            {
+              "code": 4019,
+              "message": "Your wallet has been put under review. Please reach out to kyc@grvt.io for any questions.",
+              "status": 400
             }
           ]
         },
@@ -2477,6 +2715,11 @@
           "request": "ApiTransferHistoryRequest",
           "response": "ApiTransferHistoryResponse",
           "on_request_errors": [
+            {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
             {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
@@ -2524,6 +2767,11 @@
           "response": "AckResponse",
           "on_request_errors": [
             {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
+            {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
               "status": 401
@@ -2564,9 +2812,19 @@
               "status": 400
             },
             {
+              "code": 4019,
+              "message": "Your wallet has been put under review. Please reach out to kyc@grvt.io for any questions.",
+              "status": 400
+            },
+            {
               "code": 4014,
               "message": "This currency has been disabled for transfers and withdrawals.",
               "status": 400
+            },
+            {
+              "code": 4016,
+              "message": "As a precaution, funds movements on your account are temporarily unavailable. Please contact support so we can help complete the necessary checks.",
+              "status": 403
             }
           ]
         },
@@ -2579,6 +2837,11 @@
           "request": "ApiWithdrawalHistoryRequest",
           "response": "ApiWithdrawalHistoryResponse",
           "on_request_errors": [
+            {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
             {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
@@ -2598,6 +2861,37 @@
               "code": 1014,
               "message": "Upstream data service timed out, please try again",
               "status": 504
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "Transfer",
+          "name": "RPCGetWithdrawalFeeV1",
+          "version": 1,
+          "route": "/withdrawal_fee",
+          "auth_required": true,
+          "request": "ApiWithdrawalFeeRequest",
+          "response": "ApiWithdrawalFeeResponse",
+          "on_request_errors": [
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
             },
             {
               "code": 1003,
@@ -3156,6 +3450,11 @@
           "response": "ApiVaultInvestorSummaryResponse",
           "on_request_errors": [
             {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
+            {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
               "status": 401
@@ -3268,6 +3567,11 @@
           "response": "AckResponse",
           "on_request_errors": [
             {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
+            {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
               "status": 401
@@ -3365,6 +3669,11 @@
           "response": "ApiQueryVaultManagerInvestorHistoryResponse",
           "on_request_errors": [
             {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
+            {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
               "status": 401
@@ -3452,6 +3761,11 @@
           "response": "ApiBuilderFillHistoryResponse",
           "on_request_errors": [
             {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            },
+            {
               "code": 1000,
               "message": "You need to authenticate prior to using this functionality",
               "status": 401
@@ -3485,6 +3799,52 @@
               "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "Execution",
+          "name": "RPCSetIndicativePricesV1",
+          "version": 1,
+          "route": "/set_indicative_prices",
+          "auth_required": true,
+          "request": "ApiSetIndicativePricesRequest",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 7700,
+              "message": "Indicative prices are only supported for Stable Funding Perpetuals.",
+              "status": 400
+            },
+            {
+              "code": 7701,
+              "message": "You are not a qualified market maker or designated market maker for this instrument.",
+              "status": 403
+            },
+            {
+              "code": 7702,
+              "message": "Both a bid price and an ask price must be specified.",
+              "status": 400
+            },
+            {
+              "code": 7703,
+              "message": "The bid price must be strictly below the ask price.",
+              "status": 400
             }
           ]
         }
@@ -4775,6 +5135,127 @@
       "comment": []
     },
     {
+      "name": "ApiCollateralAssetInfo",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ETH'",
+          "comment": [
+            "The asset"
+          ]
+        },
+        {
+          "name": "collateral_value_ratio",
+          "lite_name": "cv",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "95.0",
+          "comment": [
+            "CVR, expressed in percentage points. 0 = not usable as collateral."
+          ]
+        },
+        {
+          "name": "collateral_deposit_cap",
+          "lite_name": "cd",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000.0'",
+          "comment": [
+            "CDC limit, native units. 0 = untracked / unlimited."
+          ]
+        },
+        {
+          "name": "max_borrow_rate",
+          "lite_name": "mb",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "10.0",
+          "comment": [
+            "MBR - per-asset ceiling on the annual borrow rate, expressed in percentage points; the tier borrow rate never exceeds this."
+          ]
+        },
+        {
+          "name": "manual_repayment_fee_rate",
+          "lite_name": "mr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "0.625",
+          "comment": [
+            "Effective manual-repay/convert fee = max((1-CVR)/MRR, RFR), expressed in percentage points."
+          ]
+        },
+        {
+          "name": "cdc_status",
+          "lite_name": "cs",
+          "semantic_type": "CDCStatus",
+          "json_type": "CDCStatus",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "Collateral-deposit-cap utilization status: normal / reduceOnly / autoExchange."
+          ]
+        }
+      ],
+      "comment": [
+        "Platform-wide collateral configuration and usage for a single asset"
+      ]
+    },
+    {
+      "name": "ApiCollateralPreferenceStatus",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ETH'",
+          "comment": [
+            "The currency whose collateral state is being reported"
+          ]
+        },
+        {
+          "name": "enabled",
+          "lite_name": "e",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "true",
+          "comment": [
+            "Whether this currency currently counts as collateral for the sub account"
+          ]
+        }
+      ],
+      "comment": [
+        "The current effective collateral state of a single currency."
+      ]
+    },
+    {
       "name": "ApiCreateOrderRequest",
       "is_root": true,
       "fields": [
@@ -4870,7 +5351,7 @@
           "default": "500",
           "example": "500",
           "comment": [
-            "The limit to query for. Defaults to 500; Max 1000"
+            "The page size for a single response. Defaults to 500; Max 1000. This caps one page only — omitting it does NOT return everything, it applies the 500 default. To get the full result set, follow the `next` cursor until it is empty."
           ]
         },
         {
@@ -4907,7 +5388,7 @@
         "The history is returned in reverse chronological order",
         "Both finalized and pending deposits are returned, and pending deposits are indicated by an empty `confirmedTime` field.",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records (default 500, max 1000). If more data matches, the response returns a non-empty `next` cursor. To read the full result set you MUST re-issue the request with `cursor` set to that value and keep looping until `next` is empty.\u003c/li\u003e\u003cli\u003e\u003cb\u003eA single call silently truncates at `limit` and returns no error.\u003c/b\u003e Callers that read only the first page (or omit `limit`, which just applies the 500 default) will undercount whenever the account has more than `limit` matching records — e.g. summing deposits/transfers for a balance or PnL calculation must drain the cursor, not read one page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
       ]
     },
     {
@@ -5511,6 +5992,27 @@
       "comment": []
     },
     {
+      "name": "ApiGetAllCollateralAssetInfoResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "assets",
+          "lite_name": "a",
+          "semantic_type": "ApiCollateralAssetInfo",
+          "json_type": "ApiCollateralAssetInfo",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Collateral configuration for every collateral-eligible asset (CVR \u003e 0)"
+          ]
+        }
+      ],
+      "comment": [
+        "Response for the collateral asset info endpoint"
+      ]
+    },
+    {
       "name": "ApiGetAllInitialLeverageRequest",
       "is_root": true,
       "fields": [
@@ -6020,6 +6522,64 @@
       "comment": []
     },
     {
+      "name": "ApiGetSubAccountCollateralPreferenceRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to fetch collateral preferences for"
+          ]
+        }
+      ],
+      "comment": [
+        "Fetch the per-currency collateral enable/disable state for a Multi-Asset Mode sub account.",
+        "",
+        "Returns one entry per collateral-eligible currency (CVR \u003e 0), including USDT, which is always enabled and cannot be toggled off."
+      ]
+    },
+    {
+      "name": "ApiGetSubAccountCollateralPreferenceResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID the preferences apply to"
+          ]
+        },
+        {
+          "name": "preferences",
+          "lite_name": "p",
+          "semantic_type": "ApiCollateralPreferenceStatus",
+          "json_type": "ApiCollateralPreferenceStatus",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "One entry per collateral-eligible currency (CVR configured), with its current effective state."
+          ]
+        }
+      ],
+      "comment": [
+        "The response to get the sub account collateral preference"
+      ]
+    },
+    {
       "name": "ApiGetSubAccountsResponse",
       "is_root": true,
       "fields": [
@@ -6085,6 +6645,132 @@
       "comment": [
         "Response for the supported assets endpoint"
       ]
+    },
+    {
+      "name": "ApiInterestPaymentHistoryRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account ID to request for"
+          ]
+        },
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 1,
+          "optional": true,
+          "default": "all",
+          "example": "['USDT']",
+          "comment": [
+            "The currency filter to apply. If nil, this defaults to all currencies. Otherwise, only entries matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The start time to apply in unix nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "now()",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The end time to apply in unix nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "500",
+          "example": "500",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "''",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": [
+        "Query for all historical MAM hourly interest payments charged to a single sub account.",
+        "",
+        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+      ]
+    },
+    {
+      "name": "ApiInterestPaymentHistoryResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "InterestPayment",
+          "json_type": "InterestPayment",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The interest payments matching the request"
+          ]
+        },
+        {
+          "name": "next",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": []
     },
     {
       "name": "ApiMiniTickerRequest",
@@ -6673,6 +7359,45 @@
             "`unrealized_pnl = (mark_price - entry_price) * size` where `size` is signed (negative for short positions)",
             "Only present when status is `PARTIALLY_CLOSED`"
           ]
+        },
+        {
+          "name": "split_ratio_from",
+          "lite_name": "sr",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 21,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Stock split 'from' ratio (pre-split units); the position size scaled by to/from",
+            "Only present when status is `SPLIT_CLOSED`. Example: `1` for a 1:4 split"
+          ]
+        },
+        {
+          "name": "split_ratio_to",
+          "lite_name": "sr1",
+          "semantic_type": "int32",
+          "json_type": "integer",
+          "index": 22,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Stock split 'to' ratio (post-split units)",
+            "Only present when status is `SPLIT_CLOSED`. Example: `4` for a 1:4 split"
+          ]
+        },
+        {
+          "name": "split_remaining_size",
+          "lite_name": "sr2",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 23,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Signed position size in base asset decimal units immediately before the split",
+            "Only present when status is `SPLIT_CLOSED`"
+          ]
         }
       ],
       "comment": [
@@ -7132,6 +7857,67 @@
       ]
     },
     {
+      "name": "ApiSetIndicativePricesRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub account submitting the indicative price. Must belong to the authenticated session."
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'BTC_USDT_Perp'",
+          "comment": [
+            "The instrument the indicative price is for"
+          ]
+        },
+        {
+          "name": "bid",
+          "lite_name": "b",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65000.0'",
+          "comment": [
+            "Indicative bid price, expressed in 9 decimals. Must be \u003e 0 and strictly below ask"
+          ]
+        },
+        {
+          "name": "ask",
+          "lite_name": "a",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'65010.0'",
+          "comment": [
+            "Indicative ask price, expressed in 9 decimals. Must be strictly above bid"
+          ]
+        }
+      ],
+      "comment": [
+        "Submit a two-sided indicative price for an instrument. Only sub accounts whose main account is an approved qualified maker or designated market maker for the instrument may submit; others are rejected. Both sides are mandatory and bid must be strictly below ask. The quote carries a fixed 60-second TTL and replaces this sub account's previous quote for the instrument."
+      ]
+    },
+    {
       "name": "ApiSetInitialLeverageRequest",
       "is_root": true,
       "fields": [
@@ -7298,6 +8084,62 @@
       ],
       "comment": [
         "The response to set the margin type and leverage for a position"
+      ]
+    },
+    {
+      "name": "ApiSpotBorrowConfig",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ETH'",
+          "comment": []
+        },
+        {
+          "name": "borrow_limit",
+          "lite_name": "bl",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "BL — max borrowable amount, native units. 0 = not borrowable."
+          ]
+        },
+        {
+          "name": "borrow_rate",
+          "lite_name": "br",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "BR — annual borrow interest rate at this tier. Never exceeds the asset's maxBorrowRate."
+          ]
+        },
+        {
+          "name": "collateral_limit",
+          "lite_name": "cl",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "CL — max amount counted as collateral, native units. 0 = unlimited."
+          ]
+        }
+      ],
+      "comment": [
+        "Per-currency borrow \u0026 collateral limits resolved at this account's tier (incl. per-account overrides)."
       ]
     },
     {
@@ -7682,7 +8524,7 @@
           "default": "500",
           "example": "500",
           "comment": [
-            "The limit to query for. Defaults to 500; Max 1000"
+            "The page size for a single response. Defaults to 500; Max 1000. This caps one page only — omitting it does NOT return everything, it applies the 500 default. To get the full result set, follow the `next` cursor until it is empty."
           ]
         },
         {
@@ -7745,7 +8587,7 @@
         "The request to get the historical transfers of an account",
         "The history is returned in reverse chronological order",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records (default 500, max 1000). If more data matches, the response returns a non-empty `next` cursor. To read the full result set you MUST re-issue the request with `cursor` set to that value and keep looping until `next` is empty.\u003c/li\u003e\u003cli\u003e\u003cb\u003eA single call silently truncates at `limit` and returns no error.\u003c/b\u003e Callers that read only the first page (or omit `limit`, which just applies the 500 default) will undercount whenever the account has more than `limit` matching records — e.g. summing deposits/transfers for a balance or PnL calculation must drain the cursor, not read one page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
       ]
     },
     {
@@ -8459,6 +9301,63 @@
       ]
     },
     {
+      "name": "ApiWithdrawalFeeRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "token_currency",
+          "lite_name": "tc",
+          "semantic_type": "uint16",
+          "json_type": "integer",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "3",
+          "comment": [
+            "Currency ID to express the withdrawal fee in (e.g. USDT id 3)."
+          ]
+        }
+      ],
+      "comment": [
+        "Query the flat withdrawal fee for a native (L2 -\u003e L1) bridge withdrawal, expressed in the requested currency"
+      ]
+    },
+    {
+      "name": "ApiWithdrawalFeeResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "withdrawal_fee",
+          "lite_name": "wf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'25.0'",
+          "comment": [
+            "The withdrawal fee, quoted in tokenCurrency decimal units."
+          ]
+        },
+        {
+          "name": "token_currency",
+          "lite_name": "tc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency the withdrawal fee is expressed in."
+          ]
+        }
+      ],
+      "comment": [
+        "The native bridge withdrawal fee, in the requested currency"
+      ]
+    },
+    {
       "name": "ApiWithdrawalHistoryRequest",
       "is_root": true,
       "fields": [
@@ -8514,7 +9413,7 @@
           "default": "500",
           "example": "500",
           "comment": [
-            "The limit to query for. Defaults to 500; Max 1000"
+            "The page size for a single response. Defaults to 500; Max 1000. This caps one page only — omitting it does NOT return everything, it applies the 500 default. To get the full result set, follow the `next` cursor until it is empty."
           ]
         },
         {
@@ -8551,7 +9450,7 @@
         "The history is returned in reverse chronological order",
         "Both finalized and pending withdrawals are returned, and pending withdrawals are indicated by an empty `l1Hash` field.",
         "",
-        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
+        "Pagination works as follows:\u003cul\u003e\u003cli\u003eWe perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.\u003c/li\u003e\u003cli\u003eThe lookup is limited to `limit` records (default 500, max 1000). If more data matches, the response returns a non-empty `next` cursor. To read the full result set you MUST re-issue the request with `cursor` set to that value and keep looping until `next` is empty.\u003c/li\u003e\u003cli\u003e\u003cb\u003eA single call silently truncates at `limit` and returns no error.\u003c/b\u003e Callers that read only the first page (or omit `limit`, which just applies the 500 default) will undercount whenever the account has more than `limit` matching records — e.g. summing deposits/transfers for a balance or PnL calculation must drain the cursor, not read one page.\u003c/li\u003e\u003cli\u003eIf a `cursor` is provided, it will be used to fetch results from that point onwards.\u003c/li\u003e\u003cli\u003ePagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.\u003c/li\u003e\u003c/ul\u003e"
       ]
     },
     {
@@ -9110,6 +10009,18 @@
           "array_depth": 0,
           "optional": false,
           "comment": []
+        },
+        {
+          "name": "spot_borrow_configs",
+          "lite_name": "sb",
+          "semantic_type": "ApiSpotBorrowConfig",
+          "json_type": "ApiSpotBorrowConfig",
+          "index": 7,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Per-currency borrow \u0026 collateral limits for this tier. Populated only in the funding_account_summary response; empty in raw config contexts."
+          ]
         }
       ],
       "comment": []
@@ -9515,7 +10426,7 @@
           "index": 9,
           "array_depth": 0,
           "optional": false,
-          "example": "0.0003",
+          "example": "'0.0003'",
           "comment": [
             "The interest rate of the underlying at point of trade, expressed in centibeeps (1/100th of a basis point)"
           ]
@@ -9567,7 +10478,7 @@
           "index": 13,
           "array_depth": 0,
           "optional": false,
-          "example": "0.0003",
+          "example": "'0.0003'",
           "comment": [
             "The fee rate paid on the trade"
           ]
@@ -9707,7 +10618,7 @@
           "index": 25,
           "array_depth": 0,
           "optional": false,
-          "example": "0.001",
+          "example": "'0.001'",
           "comment": [
             "Builder fee percentage charged for this order. referred to Order.builder builderFee "
           ]
@@ -9736,6 +10647,42 @@
           "example": "'USDT'",
           "comment": [
             "The currency of the fee paid on the trade"
+          ]
+        },
+        {
+          "name": "repayment_scenario",
+          "lite_name": "rs",
+          "semantic_type": "RepaymentScenario",
+          "json_type": "RepaymentScenario",
+          "index": 28,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "If this fill was a MAM repayment/exchange, the scenario (manual / auto / liquidation); unspecified for normal trades."
+          ]
+        },
+        {
+          "name": "rfq_id",
+          "lite_name": "ri",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 29,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "The RFQ this fill was cleared against. Only set for RFQ venue fills; unset otherwise"
+          ]
+        },
+        {
+          "name": "counterparty_type",
+          "lite_name": "ct",
+          "semantic_type": "RfqCounterpartyType",
+          "json_type": "RfqCounterpartyType",
+          "index": 30,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "The type of counterparty this fill was matched against (maker quote / resting order / forced-exit netting). Only set for RFQ venue fills; unset otherwise"
           ]
         }
       ],
@@ -10247,6 +11194,91 @@
       "comment": []
     },
     {
+      "name": "InterestPayment",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Time at which the interest charge was computed in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "sub_account_id",
+          "lite_name": "sa",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub-account being charged interest"
+          ]
+        },
+        {
+          "name": "currency",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency the interest is charged in"
+          ]
+        },
+        {
+          "name": "amount",
+          "lite_name": "a",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1.50'",
+          "comment": [
+            "The interest charged for this hour."
+          ]
+        },
+        {
+          "name": "charge_time",
+          "lite_name": "ct",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The last interest charge time accumulated to this amount (HH:05 tick)."
+          ]
+        },
+        {
+          "name": "borrowed_amount",
+          "lite_name": "ba",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'50000.00'",
+          "comment": [
+            "The borrowed principal in this currency that the hourly interest was computed on."
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "JSONRPCRequest",
       "is_root": true,
       "fields": [
@@ -10582,7 +11614,8 @@
           "comment": [
             "If the order is a market order",
             "Market Orders do not have a limit price, and are always executed according to the maker order price.",
-            "Market Orders must always be taker orders"
+            "Market Orders must always be taker orders",
+            "On STABLE_PERP a slippage bound is mandatory: `limit_price` must carry the signed bound (reference price ± the chosen slippage), otherwise the order is rejected with stablePerpRequiresPriceBound. is_market = false with a limit price behaves identically on STABLE_PERP; the flag is intent metadata only."
           ]
         },
         {
@@ -10600,7 +11633,7 @@
             "\u003cli\u003eTAKER ONLY = IOC / FOK - only allows taker orders\u003c/li\u003e",
             "\u003cli\u003eMAKER OR TAKER = GTT / AON - allows maker or taker orders\u003c/li\u003e",
             "\u003c/ul\u003eExchange only supports (GTT, IOC, FOK)",
-            "RFQ Maker only supports (GTT, AON), RFQ Taker only supports (FOK)"
+            "RFQ Maker only supports (GTT, AON), RFQ Taker only supports (IOC, FOK)"
           ]
         },
         {
@@ -10769,7 +11802,8 @@
           "comment": [
             "The limit price of the order leg, expressed in `9` decimals.",
             "This is the number of quote currency units to pay/receive for this leg.",
-            "This should be `null/0` if the order is a market order"
+            "This should be `null/0` if the order is a market order",
+            "Exception: on STABLE_PERP market orders this carries the mandatory signed slippage bound (reference price ± the chosen slippage) rather than being left empty."
           ]
         },
         {
@@ -10852,6 +11886,66 @@
           "example": "'BROKER_CODE'",
           "comment": [
             "Specifies the broker who brokered the order"
+          ]
+        },
+        {
+          "name": "is_ecn",
+          "lite_name": "ie",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "comment": [
+            "Specifies if the order is an ECN order. Only applicable to STABLE_PERP (SFP) instruments."
+          ]
+        },
+        {
+          "name": "slippage_bps",
+          "lite_name": "sb",
+          "semantic_type": "uint16",
+          "json_type": "integer",
+          "index": 8,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'800'",
+          "comment": [
+            "Maximum allowed slippage from mark price for an IOC limit order, expressed in basis points (800 = 8%).",
+            "Only valid on IOC limit orders. 0 means no slippage protection (regular limit IOC order).",
+            ""
+          ]
+        },
+        {
+          "name": "rfq_id",
+          "lite_name": "ri",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Binds this order to an RFQ (see ApiCreateRfqRequest and the `v1.rfq` / `v1.quote` streams). Optional.",
+            "",
+            "As a taker acceptance: unlocks that RFQ's private quote pool, so the order matches across the private pool merged with the public book (firm resting liquidity + public quotes). The acceptance must be a single-leg order with time_in_force = IOC or FOK. Setting `rfq_id` on a non-ECN GTT order is rejected. If the referenced RFQ has expired, been cancelled, or is unknown, the order is rejected.",
+            "",
+            "As a maker quote (is_ecn = true): identifies which RFQ the quote is responding to.",
+            "",
+            "Omit `rfq_id` to match the public book only — private RFQ liquidity requires an RFQ."
+          ]
+        },
+        {
+          "name": "is_private",
+          "lite_name": "ip1",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 10,
+          "array_depth": 0,
+          "optional": true,
+          "default": "false",
+          "comment": [
+            "Maker quotes only. true = a private quote delivered to a single RFQ's taker (appears only on that taker's `v1.quote` book); false = a public quote resting on the order book, visible to all. When true, `rfq_id` is required."
           ]
         }
       ],
@@ -11929,6 +13023,7 @@
           "optional": false,
           "example": "'123456.78'",
           "comment": [
+            "DEPRECATED: use the per-currency `availableToTransfer` of the quote-currency entry in `spotBalances` instead.",
             "The notional value available to transfer out of the trading account into the funding account (reported in `settle_currency`).",
             "`available_balance = total_equity - initial_margin - min(unrealized_pnl, 0)`"
           ]
@@ -15480,6 +16575,35 @@
       ]
     },
     {
+      "name": "CDCStatus",
+      "values": [
+        {
+          "name": "NORMAL",
+          "value": 1,
+          "comment": [
+            "CDC utilization below the reduce-only threshold."
+          ]
+        },
+        {
+          "name": "REDUCE_ONLY",
+          "value": 2,
+          "comment": [
+            "CDC utilization at or above the reduce-only threshold but below 100% — new collateral deposits are restricted."
+          ]
+        },
+        {
+          "name": "AUTO_EXCHANGE",
+          "value": 3,
+          "comment": [
+            "CDC utilization at or above 100% — subject to auto-exchange."
+          ]
+        }
+      ],
+      "comment": [
+        "Per-asset collateral-deposit-cap (CDC) utilization status."
+      ]
+    },
+    {
       "name": "CancelStatus",
       "values": [
         {
@@ -15778,6 +16902,13 @@
           "value": 8,
           "comment": [
             "the spot swap asset kind"
+          ]
+        },
+        {
+          "name": "STABLE_PERP",
+          "value": 9,
+          "comment": [
+            "Stable Funding Perp on an RWA underlying, USDC-settled"
           ]
         }
       ],
@@ -16164,6 +17295,62 @@
           "comment": [
             "the order will bring the sub account below initial margin requirement considering wide price deviation"
           ]
+        },
+        {
+          "name": "CORPORATE_ACTION",
+          "value": 56,
+          "comment": [
+            "Cancelled by the system due to Corporate Action"
+          ]
+        },
+        {
+          "name": "NOT_QUALIFIED_MAKER",
+          "value": 57,
+          "comment": [
+            "the order was rejected because the sub account is not a qualified maker"
+          ]
+        },
+        {
+          "name": "PRIVATE_QUOTE_REQUIRES_RFQ",
+          "value": 58,
+          "comment": [
+            "rfq_id is required when is_private = true"
+          ]
+        },
+        {
+          "name": "STABLE_PERP_REQUIRES_PRICE_BOUND",
+          "value": 59,
+          "comment": [
+            "a signed slippage bound filled in limit_price is required"
+          ]
+        },
+        {
+          "name": "UNSUPPORTED_TRIGGER_BY",
+          "value": 60,
+          "comment": [
+            "SFP order only supports trigger_by = index"
+          ]
+        },
+        {
+          "name": "RFQ_NOT_FOUND",
+          "value": 61,
+          "comment": [
+            "the order was rejected because the referenced RFQ could not be found"
+          ]
+        },
+        {
+          "name": "RESTING_ORDER_WOULD_CROSS",
+          "value": 62,
+          "comment": [
+            "post-only resting placement crosses opposite best resting or index mid"
+          ]
+        },
+        {
+          "name": "SESSION_CLOSED",
+          "value": 63,
+          "comment": [
+            "the order was submitted when the trading session was either closed or under maintenance"
+          ]
         }
       ],
       "comment": []
@@ -16239,6 +17426,13 @@
           "comment": [
             "Position partially closed"
           ]
+        },
+        {
+          "name": "SPLIT_CLOSED",
+          "value": 5,
+          "comment": [
+            "Lifecycle ended by a stock split; reopened re-denominated"
+          ]
         }
       ],
       "comment": []
@@ -16258,6 +17452,78 @@
           "value": 2,
           "comment": [
             "Cross Margin Mode: uses all available funds in your account as collateral across all cross margin positions"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "RepaymentScenario",
+      "values": [
+        {
+          "name": "MANUAL_REPAYMENT",
+          "value": 1,
+          "comment": [
+            "User-initiated MAM repay via TDG; uses MRR (/8) divisor for fee."
+          ]
+        },
+        {
+          "name": "AUTO_REPAYMENT",
+          "value": 2,
+          "comment": [
+            "DEPRECATED — replaced by autoRepayBorrowLimit / autoRepayLTV. Kept for capnp ordinal compatibility; no producer emits this value."
+          ]
+        },
+        {
+          "name": "LIQUIDATION_REPAYMENT",
+          "value": 3,
+          "comment": [
+            "Liquidator MMR\u003e=100% step 2 repayment; uses LRR (/2) divisor for fee."
+          ]
+        },
+        {
+          "name": "AUTO_REPAY_BORROW_LIMIT",
+          "value": 4,
+          "comment": [
+            "Liquidator borrow-limit auto-repay; uses ARR (/4) divisor for fee. Validator checks BL trigger is still active."
+          ]
+        },
+        {
+          "name": "AUTO_REPAY_LTV",
+          "value": 5,
+          "comment": [
+            "Liquidator undeployed-loan / LTV auto-repay; uses ARR (/4) divisor for fee. Validator checks LTV trigger is still active."
+          ]
+        }
+      ],
+      "comment": [
+        "Server-only fee scenario tag for spot orders that repay MAM USDT debt against the insurance fund.",
+        "The default value 'unspecified' means the order is NOT a repayment (regular spot fees apply).",
+        "Risk rejects any user-submitted order with a non-unspecified value."
+      ]
+    },
+    {
+      "name": "RfqCounterpartyType",
+      "values": [
+        {
+          "name": "MAKER_QUOTE",
+          "value": 1,
+          "comment": [
+            "the counterparty is a maker quote submitted to the RFQ"
+          ]
+        },
+        {
+          "name": "RESTING_ORDER",
+          "value": 2,
+          "comment": [
+            "the counterparty is a resting order on the orderbook"
+          ]
+        },
+        {
+          "name": "FORCED_EXIT_NETTING",
+          "value": 3,
+          "comment": [
+            "the counterparty is a forced-exit netting fill"
           ]
         }
       ],
