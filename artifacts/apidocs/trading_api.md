@@ -15239,6 +15239,7 @@ LITE ENDPOINT: lite/v1/builder_fill_history
             ```
         </section>
 <hr class="solid">
+## RFQ
 ### Set Indicative Prices
 ```
 FULL ENDPOINT: full/v1/set_indicative_prices
@@ -15537,7 +15538,6 @@ LITE ENDPOINT: lite/v1/set_indicative_prices
             ```
         </section>
 <hr class="solid">
-## RFQ
 ### E C N From Broker
 ```
 FULL ENDPOINT: full/v1/ecn_from_broker
