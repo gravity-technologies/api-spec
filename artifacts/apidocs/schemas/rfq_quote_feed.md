@@ -11,6 +11,7 @@
         |-|-|-|-|
         |price<br>`p` |string|True|Price of the level, expressed in `9` decimals|
         |size<br>`s` |string|True|Size at this level, expressed in base asset decimal units|
+        |maker_anon_account_id<br>`ma` |string|True|The maker's derived anonymous account id shown to the taker. Real maker identity is never exposed|
         |time_in_force<br>`ti` |TimeInForce|True|Distinguishes an AON level (liftable only in full — POST-MVP) from a GTT level|
         ??? info "[TimeInForce](/../../schemas/time_in_force)"
             |                       | Must Fill All | Can Fill Partial |
@@ -31,6 +32,7 @@
         |-|-|-|-|
         |price<br>`p` |string|True|Price of the level, expressed in `9` decimals|
         |size<br>`s` |string|True|Size at this level, expressed in base asset decimal units|
+        |maker_anon_account_id<br>`ma` |string|True|The maker's derived anonymous account id shown to the taker. Real maker identity is never exposed|
         |time_in_force<br>`ti` |TimeInForce|True|Distinguishes an AON level (liftable only in full — POST-MVP) from a GTT level|
         ??? info "[TimeInForce](/../../schemas/time_in_force)"
             |                       | Must Fill All | Can Fill Partial |

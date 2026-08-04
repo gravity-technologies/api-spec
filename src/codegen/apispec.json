@@ -13288,6 +13288,19 @@
           ]
         },
         {
+          "name": "taker_anon_account_id",
+          "lite_name": "ta",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'0x8b3c1d9e4f5a6b7c0d1e2f3a4b5c6d7e'",
+          "comment": [
+            "The taker's derived anonymous account id shown to makers. Real taker identity is never exposed"
+          ]
+        },
+        {
           "name": "size",
           "lite_name": "s",
           "semantic_type": "string",
@@ -13425,6 +13438,19 @@
           "example": "'3456.78'",
           "comment": [
             "Size at this level, expressed in base asset decimal units"
+          ]
+        },
+        {
+          "name": "maker_anon_account_id",
+          "lite_name": "ma",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0x2f7a5c8e1b4d6039a2c5e8f1b4d70369'",
+          "comment": [
+            "The maker's derived anonymous account id shown to the taker. Real maker identity is never exposed"
           ]
         },
         {

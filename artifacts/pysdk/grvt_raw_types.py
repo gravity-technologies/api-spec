@@ -2648,6 +2648,8 @@ class RfqFeed:
     rfq_id: str
     # The RFQ instrument. Must be kind = STABLE_PERP
     instrument: str | None = None
+    # The taker's derived anonymous account id shown to makers. Real taker identity is never exposed
+    taker_anon_account_id: str | None = None
     # Requested size, expressed in base asset decimal units. Zero-size = platform solicitation for missing public presence
     size: str | None = None
     # Present only if the taker disclosed direction; omitted = two-way request
@@ -2676,6 +2678,8 @@ class RfqQuoteLevel:
     price: str
     # Size at this level, expressed in base asset decimal units
     size: str
+    # The maker's derived anonymous account id shown to the taker. Real maker identity is never exposed
+    maker_anon_account_id: str
     # Distinguishes an AON level (liftable only in full — POST-MVP) from a GTT level
     time_in_force: TimeInForce
 
