@@ -894,7 +894,9 @@ class ApiECNFromBrokerRequest:
 
     `seq_no` echoes the `v1.ecn_to_broker` request being answered:
     - A response at the latest `seq_no` covers all earlier outstanding requests.
-    - A response to an already-superseded `seq_no` is ignored, so duplicate sends are safe.
+    - Retrying an already-processed `seq_no` is ignored, so duplicate sends of the same response are safe.
+      This does not extend to lowering the total: a smaller `cumulative_confirmed_size` against the
+      still-outstanding `seq_no` is rejected as an underflow, not treated as a retry.
     - A value ahead of the latest published sequence number is rejected.
 
     Respond before the request's `expiry_time` (1 second) — an unanswered request cancels the whole order (`ecnOrderExpired`).
