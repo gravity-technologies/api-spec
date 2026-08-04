@@ -4729,7 +4729,7 @@ STREAM: v1.rfq
             "method": "subscribe",
             "params": {
                 "stream": "v1.rfq",
-                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
             },
             "id": 123
         }
@@ -4740,7 +4740,7 @@ STREAM: v1.rfq
             "jsonrpc": "2.0",
             "result": {
                 "stream": "v1.rfq",
-                "subs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "subs": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
@@ -4757,7 +4757,7 @@ STREAM: v1.rfq
             "method": "unsubscribe",
             "params": {
                 "stream": "v1.rfq",
-                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
             },
             "id": 123
         }
@@ -4768,7 +4768,7 @@ STREAM: v1.rfq
             "jsonrpc": "2.0",
             "result": {
                 "stream": "v1.rfq",
-                "unsubs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "unsubs": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
             },
             "id": 123,
             "method": "subscribe"
@@ -4780,7 +4780,7 @@ STREAM: v1.rfq
         {
             "request_id":1,
             "stream":"v1.rfq",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
             "method":"subscribe",
             "is_full":true
         }
@@ -4790,7 +4790,7 @@ STREAM: v1.rfq
         {
             "request_id":1,
             "stream":"v1.rfq",
-            "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "subs":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
             "unsubs":[],
             "num_snapshots":[1],
             "first_sequence_number":[2813]
@@ -4807,12 +4807,12 @@ STREAM: v1.rfq
         ``` { .json .copy }
         {
             "stream": "v1.rfq",
-            "selector": "BTC_USDT_Perp",
+            "selector": "AAPL_USDC_SFP",
             "sequence_number": "872634876",
             "feed": {
                 "event": "NEW",
                 "rfq_id": null,
-                "instrument": "BTC_USDT_Perp",
+                "instrument": "AAPL_USDC_SFP",
                 "size": "10.5",
                 "side": "UNSPECIFIED",
                 "expiry": "1697788800000000000"
@@ -4824,12 +4824,12 @@ STREAM: v1.rfq
         ``` { .json .copy }
         {
             "s": "v1.rfq",
-            "s1": "BTC_USDT_Perp",
+            "s1": "AAPL_USDC_SFP",
             "sn": "872634876",
             "f": {
                 "e": "NEW",
                 "ri": null,
-                "i": "BTC_USDT_Perp",
+                "i": "AAPL_USDC_SFP",
                 "s": "10.5",
                 "s1": "UNSPECIFIED",
                 "e1": "1697788800000000000"
@@ -4903,7 +4903,7 @@ STREAM: v1.rfq
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.rfq",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "id": 123
             }
@@ -4920,7 +4920,7 @@ STREAM: v1.rfq
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.rfq",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "id": 123
             }
@@ -4935,7 +4935,7 @@ STREAM: v1.rfq
             {
                 "request_id":1,
                 "stream":"v1.rfq",
-                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "method":"subscribe",
                 "is_full":true
             }
@@ -4954,7 +4954,7 @@ STREAM: v1.rfq
                 "m": "subscribe",
                 "p": {
                     "s": "v1.rfq",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "i": 123
             }
@@ -4971,7 +4971,7 @@ STREAM: v1.rfq
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.rfq",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "i": 123
             }
@@ -4986,7 +4986,7 @@ STREAM: v1.rfq
             {
                 "request_id":1,
                 "stream":"v1.rfq",
-                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "method":"subscribe",
                 "is_full":false
             }
@@ -5006,7 +5006,7 @@ STREAM: v1.rfq
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.rfq",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "id": 123
             }
@@ -5023,7 +5023,7 @@ STREAM: v1.rfq
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.rfq",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "id": 123
             }
@@ -5038,7 +5038,7 @@ STREAM: v1.rfq
             {
                 "request_id":1,
                 "stream":"v1.rfq",
-                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "method":"subscribe",
                 "is_full":true
             }
@@ -5057,7 +5057,7 @@ STREAM: v1.rfq
                 "m": "subscribe",
                 "p": {
                     "s": "v1.rfq",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "i": 123
             }
@@ -5074,7 +5074,7 @@ STREAM: v1.rfq
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.rfq",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "i": 123
             }
@@ -5089,7 +5089,7 @@ STREAM: v1.rfq
             {
                 "request_id":1,
                 "stream":"v1.rfq",
-                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "method":"subscribe",
                 "is_full":false
             }
@@ -5109,7 +5109,7 @@ STREAM: v1.rfq
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.rfq",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "id": 123
             }
@@ -5126,7 +5126,7 @@ STREAM: v1.rfq
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.rfq",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "id": 123
             }
@@ -5141,7 +5141,7 @@ STREAM: v1.rfq
             {
                 "request_id":1,
                 "stream":"v1.rfq",
-                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "method":"subscribe",
                 "is_full":true
             }
@@ -5160,7 +5160,7 @@ STREAM: v1.rfq
                 "m": "subscribe",
                 "p": {
                     "s": "v1.rfq",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "i": 123
             }
@@ -5177,7 +5177,7 @@ STREAM: v1.rfq
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.rfq",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "i": 123
             }
@@ -5192,7 +5192,7 @@ STREAM: v1.rfq
             {
                 "request_id":1,
                 "stream":"v1.rfq",
-                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "method":"subscribe",
                 "is_full":false
             }
@@ -5227,7 +5227,7 @@ STREAM: v1.quote
             "method": "subscribe",
             "params": {
                 "stream": "v1.quote",
-                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
             },
             "id": 123
         }
@@ -5238,7 +5238,7 @@ STREAM: v1.quote
             "jsonrpc": "2.0",
             "result": {
                 "stream": "v1.quote",
-                "subs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "subs": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "unsubs": [],
                 "num_snapshots": [10],
                 "first_sequence_number": [872634876]
@@ -5255,7 +5255,7 @@ STREAM: v1.quote
             "method": "unsubscribe",
             "params": {
                 "stream": "v1.quote",
-                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
             },
             "id": 123
         }
@@ -5266,7 +5266,7 @@ STREAM: v1.quote
             "jsonrpc": "2.0",
             "result": {
                 "stream": "v1.quote",
-                "unsubs": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                "unsubs": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
             },
             "id": 123,
             "method": "subscribe"
@@ -5278,7 +5278,7 @@ STREAM: v1.quote
         {
             "request_id":1,
             "stream":"v1.quote",
-            "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
             "method":"subscribe",
             "is_full":true
         }
@@ -5288,7 +5288,7 @@ STREAM: v1.quote
         {
             "request_id":1,
             "stream":"v1.quote",
-            "subs":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+            "subs":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
             "unsubs":[],
             "num_snapshots":[1],
             "first_sequence_number":[2813]
@@ -5305,7 +5305,7 @@ STREAM: v1.quote
         ``` { .json .copy }
         {
             "stream": "v1.quote",
-            "selector": "BTC_USDT_Perp",
+            "selector": "AAPL_USDC_SFP",
             "sequence_number": "872634876",
             "feed": {
                 "rfq_id": "0x1234567890abcdef",
@@ -5329,7 +5329,7 @@ STREAM: v1.quote
         ``` { .json .copy }
         {
             "s": "v1.quote",
-            "s1": "BTC_USDT_Perp",
+            "s1": "AAPL_USDC_SFP",
             "sn": "872634876",
             "f": {
                 "ri": "0x1234567890abcdef",
@@ -5415,7 +5415,7 @@ STREAM: v1.quote
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.quote",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "id": 123
             }
@@ -5432,7 +5432,7 @@ STREAM: v1.quote
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.quote",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "id": 123
             }
@@ -5447,7 +5447,7 @@ STREAM: v1.quote
             {
                 "request_id":1,
                 "stream":"v1.quote",
-                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "method":"subscribe",
                 "is_full":true
             }
@@ -5466,7 +5466,7 @@ STREAM: v1.quote
                 "m": "subscribe",
                 "p": {
                     "s": "v1.quote",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "i": 123
             }
@@ -5483,7 +5483,7 @@ STREAM: v1.quote
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.quote",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "i": 123
             }
@@ -5498,7 +5498,7 @@ STREAM: v1.quote
             {
                 "request_id":1,
                 "stream":"v1.quote",
-                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "method":"subscribe",
                 "is_full":false
             }
@@ -5518,7 +5518,7 @@ STREAM: v1.quote
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.quote",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "id": 123
             }
@@ -5535,7 +5535,7 @@ STREAM: v1.quote
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.quote",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "id": 123
             }
@@ -5550,7 +5550,7 @@ STREAM: v1.quote
             {
                 "request_id":1,
                 "stream":"v1.quote",
-                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "method":"subscribe",
                 "is_full":true
             }
@@ -5569,7 +5569,7 @@ STREAM: v1.quote
                 "m": "subscribe",
                 "p": {
                     "s": "v1.quote",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "i": 123
             }
@@ -5586,7 +5586,7 @@ STREAM: v1.quote
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.quote",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "i": 123
             }
@@ -5601,7 +5601,7 @@ STREAM: v1.quote
             {
                 "request_id":1,
                 "stream":"v1.quote",
-                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "method":"subscribe",
                 "is_full":false
             }
@@ -5621,7 +5621,7 @@ STREAM: v1.quote
                 "method": "subscribe",
                 "params": {
                     "stream": "v1.quote",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "id": 123
             }
@@ -5638,7 +5638,7 @@ STREAM: v1.quote
                 "method": "unsubscribe",
                 "params": {
                     "stream": "v1.quote",
-                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "selectors": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "id": 123
             }
@@ -5653,7 +5653,7 @@ STREAM: v1.quote
             {
                 "request_id":1,
                 "stream":"v1.quote",
-                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "method":"subscribe",
                 "is_full":true
             }
@@ -5672,7 +5672,7 @@ STREAM: v1.quote
                 "m": "subscribe",
                 "p": {
                     "s": "v1.quote",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "i": 123
             }
@@ -5689,7 +5689,7 @@ STREAM: v1.quote
                 "m": "unsubscribe",
                 "p": {
                     "s": "v1.quote",
-                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"]
+                    "s1": ["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"]
                 },
                 "i": 123
             }
@@ -5704,7 +5704,7 @@ STREAM: v1.quote
             {
                 "request_id":1,
                 "stream":"v1.quote",
-                "feed":["'$GRVT_SUB_ACCOUNT_ID'-BTC_USDT_Perp"],
+                "feed":["'$GRVT_SUB_ACCOUNT_ID'-AAPL_USDC_SFP"],
                 "method":"subscribe",
                 "is_full":false
             }

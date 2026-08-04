@@ -15582,13 +15582,13 @@ LITE ENDPOINT: lite/v1/ecn_from_broker
         **Full Response**
         ``` { .json .copy }
         {
-            "result": null
+            "result": true
         }
         ```
         **Lite Response**
         ``` { .json .copy }
         {
-            "r": null
+            "r": true
         }
         ```
     </section>
@@ -15877,7 +15877,7 @@ LITE ENDPOINT: lite/v1/create_rfq
             "rfq": {
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "expiry": "1697788800000000000",
-                "instrument": "BTC_USDT_Perp",
+                "instrument": "AAPL_USDC_SFP",
                 "size": "10.5",
                 "side": "UNSPECIFIED"
             }
@@ -15889,7 +15889,7 @@ LITE ENDPOINT: lite/v1/create_rfq
             "r": {
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "e": "1697788800000000000",
-                "i": "BTC_USDT_Perp",
+                "i": "AAPL_USDC_SFP",
                 "s": "10.5",
                 "s1": "UNSPECIFIED"
             }
@@ -15909,7 +15909,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "rfq_id": "0x1234567890abcdef",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "expiry": "1697788800000000000",
-                "instrument": "BTC_USDT_Perp",
+                "instrument": "AAPL_USDC_SFP",
                 "size": "10.5",
                 "side": "UNSPECIFIED"
             }
@@ -15922,7 +15922,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "ri": "0x1234567890abcdef",
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "e": "1697788800000000000",
-                "i": "BTC_USDT_Perp",
+                "i": "AAPL_USDC_SFP",
                 "s": "10.5",
                 "s1": "UNSPECIFIED"
             }
@@ -15982,7 +15982,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "rfq": {
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "expiry": "1697788800000000000",
-                    "instrument": "BTC_USDT_Perp",
+                    "instrument": "AAPL_USDC_SFP",
                     "size": "10.5",
                     "side": "UNSPECIFIED"
                 }
@@ -16002,7 +16002,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                     "rfq": {
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "expiry": "1697788800000000000",
-                        "instrument": "BTC_USDT_Perp",
+                        "instrument": "AAPL_USDC_SFP",
                         "size": "10.5",
                         "side": "UNSPECIFIED"
                     }
@@ -16022,7 +16022,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "r": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "e": "1697788800000000000",
-                    "i": "BTC_USDT_Perp",
+                    "i": "AAPL_USDC_SFP",
                     "s": "10.5",
                     "s1": "UNSPECIFIED"
                 }
@@ -16042,7 +16042,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                     "r": {
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "e": "1697788800000000000",
-                        "i": "BTC_USDT_Perp",
+                        "i": "AAPL_USDC_SFP",
                         "s": "10.5",
                         "s1": "UNSPECIFIED"
                     }
@@ -16063,7 +16063,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "rfq": {
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "expiry": "1697788800000000000",
-                    "instrument": "BTC_USDT_Perp",
+                    "instrument": "AAPL_USDC_SFP",
                     "size": "10.5",
                     "side": "UNSPECIFIED"
                 }
@@ -16083,7 +16083,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                     "rfq": {
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "expiry": "1697788800000000000",
-                        "instrument": "BTC_USDT_Perp",
+                        "instrument": "AAPL_USDC_SFP",
                         "size": "10.5",
                         "side": "UNSPECIFIED"
                     }
@@ -16103,7 +16103,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "r": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "e": "1697788800000000000",
-                    "i": "BTC_USDT_Perp",
+                    "i": "AAPL_USDC_SFP",
                     "s": "10.5",
                     "s1": "UNSPECIFIED"
                 }
@@ -16123,7 +16123,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                     "r": {
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "e": "1697788800000000000",
-                        "i": "BTC_USDT_Perp",
+                        "i": "AAPL_USDC_SFP",
                         "s": "10.5",
                         "s1": "UNSPECIFIED"
                     }
@@ -16144,7 +16144,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "rfq": {
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "expiry": "1697788800000000000",
-                    "instrument": "BTC_USDT_Perp",
+                    "instrument": "AAPL_USDC_SFP",
                     "size": "10.5",
                     "side": "UNSPECIFIED"
                 }
@@ -16164,7 +16164,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                     "rfq": {
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "expiry": "1697788800000000000",
-                        "instrument": "BTC_USDT_Perp",
+                        "instrument": "AAPL_USDC_SFP",
                         "size": "10.5",
                         "side": "UNSPECIFIED"
                     }
@@ -16184,7 +16184,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "r": {
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "e": "1697788800000000000",
-                    "i": "BTC_USDT_Perp",
+                    "i": "AAPL_USDC_SFP",
                     "s": "10.5",
                     "s1": "UNSPECIFIED"
                 }
@@ -16204,7 +16204,7 @@ LITE ENDPOINT: lite/v1/create_rfq
                     "r": {
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "e": "1697788800000000000",
-                        "i": "BTC_USDT_Perp",
+                        "i": "AAPL_USDC_SFP",
                         "s": "10.5",
                         "s1": "UNSPECIFIED"
                     }

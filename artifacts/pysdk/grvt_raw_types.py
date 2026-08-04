@@ -877,22 +877,41 @@ class ApiDepositHistoryResponse:
 
 @dataclass
 class ApiECNFromBrokerRequest:
-    # The sub account ID of the ECN order
+    """
+    Reports the size a broker has confirmed for an ECN order, in response to the size requested
+    on the `v1.ecn_to_broker` stream.
+    - The target order is identified by `order_id` or `client_order_id`. At least one must be provided;
+      if both are provided, they must refer to the same order, and `instrument` must match that order.
+    - `cumulative_confirmed_size` is an absolute running total for the order. Resending a
+      smaller or equal value has no effect, so the request is safe to retry.
+    - `seq_no` echoes the `v1.ecn_to_broker` message being confirmed and must not be ahead of the latest
+      sequence number GRVT published for this order.
+    """
+
+    # The sub account ID that owns the ECN order being confirmed. Must match the sub account of the referenced order
     sub_account_id: str
-    # A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
+    # A unique identifier for the order, generated within the GRVT backend. Required unless `client_order_id` is provided
     order_id: str
-    # A unique client order ID for the ECN order
+    # The client-specified identifier of the ECN order within the sub account. Required unless `order_id` is provided
     client_order_id: str
-    # The asset of the ECN order
+    # The instrument of the ECN order. Must match the instrument of the referenced order
     asset: str
-    # A sequence number used to determine message order for this ECN orders
+    # The `seq_no` of the `v1.ecn_to_broker` message this confirmation responds to. A value ahead of the latest sequence number published for this order is rejected
     seq_no: str
-    # The cumulative confirmed size for this ECN order
+    # The total size the broker has confirmed for this ECN order since inception. Must be a multiple of the instrument's minimum size increment and should not exceed the cumulative requested size
     cumulative_confirmed_size: str
 
 
 @dataclass
 class ApiECNFromBrokerResponse:
+    """
+    Acknowledges that the broker confirmation passed validation and was accepted for processing.
+    Acceptance does not mean the confirmed size has been matched — the resulting order updates are
+    published on the `v1.ecn_to_broker` and order streams. Any failure is returned as an error response
+    instead of this payload.
+    """
+
+    # `true` when the confirmation was accepted for processing
     result: bool
 
 
