@@ -143,10 +143,10 @@ STREAM: v1.order
                         }
                     },
                     "broker": "BROKER_CODE",
-                    "is_ecn": null,
+                    "is_ecn": "false",
                     "slippage_bps": 800,
-                    "rfq_id": null,
-                    "is_private": null
+                    "rfq_id": "0x1234567890abcdef",
+                    "is_private": "false"
                 },
                 "state": {
                     "status": "PENDING",
@@ -203,10 +203,10 @@ STREAM: v1.order
                         }
                     },
                     "b": "BROKER_CODE",
-                    "ie": null,
+                    "ie": "false",
                     "sb": 800,
-                    "ri": null,
-                    "ip1": null
+                    "ri": "0x1234567890abcdef",
+                    "ip1": "false"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -5308,7 +5308,7 @@ STREAM: v1.quote
             "selector": "BTC_USDT_Perp",
             "sequence_number": "872634876",
             "feed": {
-                "rfq_id": null,
+                "rfq_id": "0x1234567890abcdef",
                 "best_bid": "65038.01",
                 "best_ask": "65040.02",
                 "bid_levels": [{
@@ -5332,7 +5332,7 @@ STREAM: v1.quote
             "s1": "BTC_USDT_Perp",
             "sn": "872634876",
             "f": {
-                "ri": null,
+                "ri": "0x1234567890abcdef",
                 "bb": "65038.01",
                 "ba": "65040.02",
                 "bl": [{

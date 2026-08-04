@@ -51,10 +51,10 @@ LITE ENDPOINT: lite/v1/create_order
                         }
                     },
                     "broker": "BROKER_CODE",
-                    "is_ecn": null,
+                    "is_ecn": "false",
                     "slippage_bps": 800,
-                    "rfq_id": null,
-                    "is_private": null
+                    "rfq_id": "0x1234567890abcdef",
+                    "is_private": "false"
                 },
                 "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                 "builder_fee": "0.001"
@@ -98,10 +98,10 @@ LITE ENDPOINT: lite/v1/create_order
                         }
                     },
                     "b": "BROKER_CODE",
-                    "ie": null,
+                    "ie": "false",
                     "sb": 800,
-                    "ri": null,
-                    "ip1": null
+                    "ri": "0x1234567890abcdef",
+                    "ip1": "false"
                 },
                 "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                 "bf": "0.001"
@@ -153,10 +153,10 @@ LITE ENDPOINT: lite/v1/create_order
                         }
                     },
                     "broker": "BROKER_CODE",
-                    "is_ecn": null,
+                    "is_ecn": "false",
                     "slippage_bps": 800,
-                    "rfq_id": null,
-                    "is_private": null
+                    "rfq_id": "0x1234567890abcdef",
+                    "is_private": "false"
                 },
                 "state": {
                     "status": "PENDING",
@@ -209,10 +209,10 @@ LITE ENDPOINT: lite/v1/create_order
                         }
                     },
                     "b": "BROKER_CODE",
-                    "ie": null,
+                    "ie": "false",
                     "sb": 800,
-                    "ri": null,
-                    "ip1": null
+                    "ri": "0x1234567890abcdef",
+                    "ip1": "false"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -371,10 +371,10 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "broker": "BROKER_CODE",
-                        "is_ecn": null,
+                        "is_ecn": "false",
                         "slippage_bps": 800,
-                        "rfq_id": null,
-                        "is_private": null
+                        "rfq_id": "0x1234567890abcdef",
+                        "is_private": "false"
                     },
                     "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                     "builder_fee": "0.001"
@@ -426,10 +426,10 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "broker": "BROKER_CODE",
-                            "is_ecn": null,
+                            "is_ecn": "false",
                             "slippage_bps": 800,
-                            "rfq_id": null,
-                            "is_private": null
+                            "rfq_id": "0x1234567890abcdef",
+                            "is_private": "false"
                         },
                         "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                         "builder_fee": "0.001"
@@ -481,10 +481,10 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "b": "BROKER_CODE",
-                        "ie": null,
+                        "ie": "false",
                         "sb": 800,
-                        "ri": null,
-                        "ip1": null
+                        "ri": "0x1234567890abcdef",
+                        "ip1": "false"
                     },
                     "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                     "bf": "0.001"
@@ -536,10 +536,10 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "b": "BROKER_CODE",
-                            "ie": null,
+                            "ie": "false",
                             "sb": 800,
-                            "ri": null,
-                            "ip1": null
+                            "ri": "0x1234567890abcdef",
+                            "ip1": "false"
                         },
                         "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                         "bf": "0.001"
@@ -592,10 +592,10 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "broker": "BROKER_CODE",
-                        "is_ecn": null,
+                        "is_ecn": "false",
                         "slippage_bps": 800,
-                        "rfq_id": null,
-                        "is_private": null
+                        "rfq_id": "0x1234567890abcdef",
+                        "is_private": "false"
                     },
                     "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                     "builder_fee": "0.001"
@@ -647,10 +647,10 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "broker": "BROKER_CODE",
-                            "is_ecn": null,
+                            "is_ecn": "false",
                             "slippage_bps": 800,
-                            "rfq_id": null,
-                            "is_private": null
+                            "rfq_id": "0x1234567890abcdef",
+                            "is_private": "false"
                         },
                         "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                         "builder_fee": "0.001"
@@ -702,10 +702,10 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "b": "BROKER_CODE",
-                        "ie": null,
+                        "ie": "false",
                         "sb": 800,
-                        "ri": null,
-                        "ip1": null
+                        "ri": "0x1234567890abcdef",
+                        "ip1": "false"
                     },
                     "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                     "bf": "0.001"
@@ -757,10 +757,10 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "b": "BROKER_CODE",
-                            "ie": null,
+                            "ie": "false",
                             "sb": 800,
-                            "ri": null,
-                            "ip1": null
+                            "ri": "0x1234567890abcdef",
+                            "ip1": "false"
                         },
                         "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                         "bf": "0.001"
@@ -813,10 +813,10 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "broker": "BROKER_CODE",
-                        "is_ecn": null,
+                        "is_ecn": "false",
                         "slippage_bps": 800,
-                        "rfq_id": null,
-                        "is_private": null
+                        "rfq_id": "0x1234567890abcdef",
+                        "is_private": "false"
                     },
                     "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                     "builder_fee": "0.001"
@@ -868,10 +868,10 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "broker": "BROKER_CODE",
-                            "is_ecn": null,
+                            "is_ecn": "false",
                             "slippage_bps": 800,
-                            "rfq_id": null,
-                            "is_private": null
+                            "rfq_id": "0x1234567890abcdef",
+                            "is_private": "false"
                         },
                         "builder": "'$GRVT_MAIN_ACCOUNT_ID'",
                         "builder_fee": "0.001"
@@ -923,10 +923,10 @@ LITE ENDPOINT: lite/v1/create_order
                             }
                         },
                         "b": "BROKER_CODE",
-                        "ie": null,
+                        "ie": "false",
                         "sb": 800,
-                        "ri": null,
-                        "ip1": null
+                        "ri": "0x1234567890abcdef",
+                        "ip1": "false"
                     },
                     "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                     "bf": "0.001"
@@ -978,10 +978,10 @@ LITE ENDPOINT: lite/v1/create_order
                                 }
                             },
                             "b": "BROKER_CODE",
-                            "ie": null,
+                            "ie": "false",
                             "sb": 800,
-                            "ri": null,
-                            "ip1": null
+                            "ri": "0x1234567890abcdef",
+                            "ip1": "false"
                         },
                         "b": "'$GRVT_MAIN_ACCOUNT_ID'",
                         "bf": "0.001"
@@ -1663,10 +1663,10 @@ LITE ENDPOINT: lite/v1/order
                         }
                     },
                     "broker": "BROKER_CODE",
-                    "is_ecn": null,
+                    "is_ecn": "false",
                     "slippage_bps": 800,
-                    "rfq_id": null,
-                    "is_private": null
+                    "rfq_id": "0x1234567890abcdef",
+                    "is_private": "false"
                 },
                 "state": {
                     "status": "PENDING",
@@ -1719,10 +1719,10 @@ LITE ENDPOINT: lite/v1/order
                         }
                     },
                     "b": "BROKER_CODE",
-                    "ie": null,
+                    "ie": "false",
                     "sb": 800,
-                    "ri": null,
-                    "ip1": null
+                    "ri": "0x1234567890abcdef",
+                    "ip1": "false"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2048,10 +2048,10 @@ LITE ENDPOINT: lite/v1/open_orders
                         }
                     },
                     "broker": "BROKER_CODE",
-                    "is_ecn": null,
+                    "is_ecn": "false",
                     "slippage_bps": 800,
-                    "rfq_id": null,
-                    "is_private": null
+                    "rfq_id": "0x1234567890abcdef",
+                    "is_private": "false"
                 },
                 "state": {
                     "status": "PENDING",
@@ -2104,10 +2104,10 @@ LITE ENDPOINT: lite/v1/open_orders
                         }
                     },
                     "b": "BROKER_CODE",
-                    "ie": null,
+                    "ie": "false",
                     "sb": 800,
-                    "ri": null,
-                    "ip1": null
+                    "ri": "0x1234567890abcdef",
+                    "ip1": "false"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -2449,10 +2449,10 @@ LITE ENDPOINT: lite/v1/order_history
                         }
                     },
                     "broker": "BROKER_CODE",
-                    "is_ecn": null,
+                    "is_ecn": "false",
                     "slippage_bps": 800,
-                    "rfq_id": null,
-                    "is_private": null
+                    "rfq_id": "0x1234567890abcdef",
+                    "is_private": "false"
                 },
                 "state": {
                     "status": "PENDING",
@@ -2506,10 +2506,10 @@ LITE ENDPOINT: lite/v1/order_history
                         }
                     },
                     "b": "BROKER_CODE",
-                    "ie": null,
+                    "ie": "false",
                     "sb": 800,
-                    "ri": null,
-                    "ip1": null
+                    "ri": "0x1234567890abcdef",
+                    "ip1": "false"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3140,10 +3140,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                         }
                     },
                     "broker": "BROKER_CODE",
-                    "is_ecn": null,
+                    "is_ecn": "false",
                     "slippage_bps": 800,
-                    "rfq_id": null,
-                    "is_private": null
+                    "rfq_id": "0x1234567890abcdef",
+                    "is_private": "false"
                 },
                 "state": {
                     "status": "PENDING",
@@ -3200,10 +3200,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                         }
                     },
                     "b": "BROKER_CODE",
-                    "ie": null,
+                    "ie": "false",
                     "sb": 800,
-                    "ri": null,
-                    "ip1": null
+                    "ri": "0x1234567890abcdef",
+                    "ip1": "false"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3266,10 +3266,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                         }
                     },
                     "broker": "BROKER_CODE",
-                    "is_ecn": null,
+                    "is_ecn": "false",
                     "slippage_bps": 800,
-                    "rfq_id": null,
-                    "is_private": null
+                    "rfq_id": "0x1234567890abcdef",
+                    "is_private": "false"
                 },
                 "state": {
                     "status": "PENDING",
@@ -3325,10 +3325,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                         }
                     },
                     "b": "BROKER_CODE",
-                    "ie": null,
+                    "ie": "false",
                     "sb": 800,
-                    "ri": null,
-                    "ip1": null
+                    "ri": "0x1234567890abcdef",
+                    "ip1": "false"
                 },
                 "s1": {
                     "s": "PENDING",
@@ -3508,10 +3508,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                             }
                         },
                         "broker": "BROKER_CODE",
-                        "is_ecn": null,
+                        "is_ecn": "false",
                         "slippage_bps": 800,
-                        "rfq_id": null,
-                        "is_private": null
+                        "rfq_id": "0x1234567890abcdef",
+                        "is_private": "false"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3576,10 +3576,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                 }
                             },
                             "broker": "BROKER_CODE",
-                            "is_ecn": null,
+                            "is_ecn": "false",
                             "slippage_bps": 800,
-                            "rfq_id": null,
-                            "is_private": null
+                            "rfq_id": "0x1234567890abcdef",
+                            "is_private": "false"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3644,10 +3644,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                             }
                         },
                         "b": "BROKER_CODE",
-                        "ie": null,
+                        "ie": "false",
                         "sb": 800,
-                        "ri": null,
-                        "ip1": null
+                        "ri": "0x1234567890abcdef",
+                        "ip1": "false"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3712,10 +3712,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                 }
                             },
                             "b": "BROKER_CODE",
-                            "ie": null,
+                            "ie": "false",
                             "sb": 800,
-                            "ri": null,
-                            "ip1": null
+                            "ri": "0x1234567890abcdef",
+                            "ip1": "false"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -3781,10 +3781,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                             }
                         },
                         "broker": "BROKER_CODE",
-                        "is_ecn": null,
+                        "is_ecn": "false",
                         "slippage_bps": 800,
-                        "rfq_id": null,
-                        "is_private": null
+                        "rfq_id": "0x1234567890abcdef",
+                        "is_private": "false"
                     },
                     "state": {
                         "status": "PENDING",
@@ -3849,10 +3849,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                 }
                             },
                             "broker": "BROKER_CODE",
-                            "is_ecn": null,
+                            "is_ecn": "false",
                             "slippage_bps": 800,
-                            "rfq_id": null,
-                            "is_private": null
+                            "rfq_id": "0x1234567890abcdef",
+                            "is_private": "false"
                         },
                         "state": {
                             "status": "PENDING",
@@ -3917,10 +3917,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                             }
                         },
                         "b": "BROKER_CODE",
-                        "ie": null,
+                        "ie": "false",
                         "sb": 800,
-                        "ri": null,
-                        "ip1": null
+                        "ri": "0x1234567890abcdef",
+                        "ip1": "false"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -3985,10 +3985,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                 }
                             },
                             "b": "BROKER_CODE",
-                            "ie": null,
+                            "ie": "false",
                             "sb": 800,
-                            "ri": null,
-                            "ip1": null
+                            "ri": "0x1234567890abcdef",
+                            "ip1": "false"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -4054,10 +4054,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                             }
                         },
                         "broker": "BROKER_CODE",
-                        "is_ecn": null,
+                        "is_ecn": "false",
                         "slippage_bps": 800,
-                        "rfq_id": null,
-                        "is_private": null
+                        "rfq_id": "0x1234567890abcdef",
+                        "is_private": "false"
                     },
                     "state": {
                         "status": "PENDING",
@@ -4122,10 +4122,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                 }
                             },
                             "broker": "BROKER_CODE",
-                            "is_ecn": null,
+                            "is_ecn": "false",
                             "slippage_bps": 800,
-                            "rfq_id": null,
-                            "is_private": null
+                            "rfq_id": "0x1234567890abcdef",
+                            "is_private": "false"
                         },
                         "state": {
                             "status": "PENDING",
@@ -4190,10 +4190,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                             }
                         },
                         "b": "BROKER_CODE",
-                        "ie": null,
+                        "ie": "false",
                         "sb": 800,
-                        "ri": null,
-                        "ip1": null
+                        "ri": "0x1234567890abcdef",
+                        "ip1": "false"
                     },
                     "s1": {
                         "s": "PENDING",
@@ -4258,10 +4258,10 @@ LITE ENDPOINT: lite/v2/bulk_orders
                                 }
                             },
                             "b": "BROKER_CODE",
-                            "ie": null,
+                            "ie": "false",
                             "sb": 800,
-                            "ri": null,
-                            "ip1": null
+                            "ri": "0x1234567890abcdef",
+                            "ip1": "false"
                         },
                         "s1": {
                             "s": "PENDING",
@@ -15906,7 +15906,7 @@ LITE ENDPOINT: lite/v1/create_rfq
         ``` { .json .copy }
         {
             "rfq": {
-                "rfq_id": null,
+                "rfq_id": "0x1234567890abcdef",
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "expiry": "1697788800000000000",
                 "instrument": "BTC_USDT_Perp",
@@ -15919,7 +15919,7 @@ LITE ENDPOINT: lite/v1/create_rfq
         ``` { .json .copy }
         {
             "r": {
-                "ri": null,
+                "ri": "0x1234567890abcdef",
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "e": "1697788800000000000",
                 "i": "BTC_USDT_Perp",
