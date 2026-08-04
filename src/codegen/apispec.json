@@ -12548,7 +12548,7 @@
           "array_depth": 0,
           "optional": true,
           "default": "false",
-          "example": "'false'",
+          "example": "false",
           "comment": [
             "Specifies this order is an ECN order eligible for Market Maker Last Look. Only applicable to STABLE_PERP (SFP) instruments with qualified market makers."
           ]
@@ -12597,7 +12597,7 @@
           "array_depth": 0,
           "optional": true,
           "default": "false",
-          "example": "'false'",
+          "example": "false",
           "comment": [
             "Maker quotes only. true = a private quote delivered to a single RFQ's taker (appears only on that taker's `v1.quote` book); false = a public quote resting on the order book, visible to all. When true, `rfq_id` is required."
           ]
