@@ -15875,7 +15875,6 @@ LITE ENDPOINT: lite/v1/create_rfq
         ``` { .json .copy }
         {
             "rfq": {
-                "rfq_id": null,
                 "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                 "expiry": "1697788800000000000",
                 "instrument": "BTC_USDT_Perp",
@@ -15888,7 +15887,6 @@ LITE ENDPOINT: lite/v1/create_rfq
         ``` { .json .copy }
         {
             "r": {
-                "ri": null,
                 "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                 "e": "1697788800000000000",
                 "i": "BTC_USDT_Perp",
@@ -15982,7 +15980,6 @@ LITE ENDPOINT: lite/v1/create_rfq
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "rfq": {
-                    "rfq_id": null,
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "expiry": "1697788800000000000",
                     "instrument": "BTC_USDT_Perp",
@@ -16003,7 +16000,6 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "method": "v1/create_rfq",
                 "params": {
                     "rfq": {
-                        "rfq_id": null,
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "expiry": "1697788800000000000",
                         "instrument": "BTC_USDT_Perp",
@@ -16024,7 +16020,6 @@ LITE ENDPOINT: lite/v1/create_rfq
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "r": {
-                    "ri": null,
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "e": "1697788800000000000",
                     "i": "BTC_USDT_Perp",
@@ -16045,7 +16040,6 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "m": "v1/create_rfq",
                 "p": {
                     "r": {
-                        "ri": null,
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "e": "1697788800000000000",
                         "i": "BTC_USDT_Perp",
@@ -16067,7 +16061,6 @@ LITE ENDPOINT: lite/v1/create_rfq
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "rfq": {
-                    "rfq_id": null,
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "expiry": "1697788800000000000",
                     "instrument": "BTC_USDT_Perp",
@@ -16088,7 +16081,6 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "method": "v1/create_rfq",
                 "params": {
                     "rfq": {
-                        "rfq_id": null,
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "expiry": "1697788800000000000",
                         "instrument": "BTC_USDT_Perp",
@@ -16109,7 +16101,6 @@ LITE ENDPOINT: lite/v1/create_rfq
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "r": {
-                    "ri": null,
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "e": "1697788800000000000",
                     "i": "BTC_USDT_Perp",
@@ -16130,7 +16121,6 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "m": "v1/create_rfq",
                 "p": {
                     "r": {
-                        "ri": null,
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "e": "1697788800000000000",
                         "i": "BTC_USDT_Perp",
@@ -16152,7 +16142,6 @@ LITE ENDPOINT: lite/v1/create_rfq
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "rfq": {
-                    "rfq_id": null,
                     "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                     "expiry": "1697788800000000000",
                     "instrument": "BTC_USDT_Perp",
@@ -16173,7 +16162,6 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "method": "v1/create_rfq",
                 "params": {
                     "rfq": {
-                        "rfq_id": null,
                         "sub_account_id": "'$GRVT_SUB_ACCOUNT_ID'",
                         "expiry": "1697788800000000000",
                         "instrument": "BTC_USDT_Perp",
@@ -16194,7 +16182,6 @@ LITE ENDPOINT: lite/v1/create_rfq
             --header "X-Grvt-Account-Id: $GRVT_ACCOUNT_ID" \
             --data '{
                 "r": {
-                    "ri": null,
                     "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                     "e": "1697788800000000000",
                     "i": "BTC_USDT_Perp",
@@ -16215,7 +16202,6 @@ LITE ENDPOINT: lite/v1/create_rfq
                 "m": "v1/create_rfq",
                 "p": {
                     "r": {
-                        "ri": null,
                         "sa": "'$GRVT_SUB_ACCOUNT_ID'",
                         "e": "1697788800000000000",
                         "i": "BTC_USDT_Perp",

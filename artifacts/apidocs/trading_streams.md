@@ -4813,7 +4813,6 @@ STREAM: v1.rfq
                 "event": "NEW",
                 "rfq_id": null,
                 "instrument": "BTC_USDT_Perp",
-                "taker_anon_account_id": "0x8b3c1d9e4f5a6b7c0d1e2f3a4b5c6d7e",
                 "size": "10.5",
                 "side": "UNSPECIFIED",
                 "expiry": "1697788800000000000"
@@ -4831,7 +4830,6 @@ STREAM: v1.rfq
                 "e": "NEW",
                 "ri": null,
                 "i": "BTC_USDT_Perp",
-                "ta": "0x8b3c1d9e4f5a6b7c0d1e2f3a4b5c6d7e",
                 "s": "10.5",
                 "s1": "UNSPECIFIED",
                 "e1": "1697788800000000000"
@@ -5316,13 +5314,11 @@ STREAM: v1.quote
                 "bid_levels": [{
                     "price": "65038.01",
                     "size": "3456.78",
-                    "maker_anon_account_id": "0x2f7a5c8e1b4d6039a2c5e8f1b4d70369",
                     "time_in_force": "GOOD_TILL_TIME"
                 }],
                 "ask_levels": [{
                     "price": "65038.01",
                     "size": "3456.78",
-                    "maker_anon_account_id": "0x2f7a5c8e1b4d6039a2c5e8f1b4d70369",
                     "time_in_force": "GOOD_TILL_TIME"
                 }]
             },
@@ -5342,13 +5338,11 @@ STREAM: v1.quote
                 "bl": [{
                     "p": "65038.01",
                     "s": "3456.78",
-                    "ma": "0x2f7a5c8e1b4d6039a2c5e8f1b4d70369",
                     "ti": "GOOD_TILL_TIME"
                 }],
                 "al": [{
                     "p": "65038.01",
                     "s": "3456.78",
-                    "ma": "0x2f7a5c8e1b4d6039a2c5e8f1b4d70369",
                     "ti": "GOOD_TILL_TIME"
                 }]
             },
