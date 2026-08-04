@@ -877,22 +877,53 @@ class ApiDepositHistoryResponse:
 
 @dataclass
 class ApiECNFromBrokerRequest:
-    # The sub account ID of the ECN order
+    """
+    Confirms size for an ECN order, in response to a last-look request on the `v1.ecn_to_broker` stream.
+    Only applicable to SFP (`kind = STABLE_PERP`) instruments; only qualified market makers can hold ECN orders.
+
+    The target order is identified by `order_id` or `client_order_id`. At least one must be provided;
+    if both are provided they must refer to the same order, and `instrument` must match that order.
+
+    `cumulative_confirmed_size` is an absolute running total for the order and must be a multiple of the
+    instrument's minimum size. Its value relative to the request's `cumulative_request_size` decides the outcome:
+    - **Full confirm** — equal to the requested size: the held matches are executed, and the order's remaining size stays live on the book.
+    - **Partial confirm** — between the previous confirmed value and the requested size: matches are executed up to the confirmed size, and the order's unconfirmed remainder is cancelled (terminal).
+    - **Decline** — re-send the previous confirmed value, or `0` if nothing was confirmed yet: no new size executes.
+    - **Underflow** — below the previous confirmed value: the order is cancelled (`ecnOrderSizeUnderflow`).
+    - **Overflow** — above the requested size: the order is cancelled (`ecnOrderSizeOverflow`).
+
+    `seq_no` echoes the `v1.ecn_to_broker` request being answered:
+    - A response at the latest `seq_no` covers all earlier outstanding requests.
+    - A response to an already-superseded `seq_no` is ignored, so duplicate sends are safe.
+    - A value ahead of the latest published sequence number is rejected.
+
+    Respond before the request's `expiry_time` (1 second) — an unanswered request cancels the whole order (`ecnOrderExpired`).
+    """
+
+    # The sub account ID that owns the ECN order being confirmed. Must match the sub account of the referenced order
     sub_account_id: str
-    # A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
+    # A unique identifier for the order, generated within the GRVT backend. Required unless `client_order_id` is provided
     order_id: str
-    # A unique client order ID for the ECN order
+    # The client-specified identifier of the ECN order within the sub account. Required unless `order_id` is provided
     client_order_id: str
-    # The asset of the ECN order
+    # The instrument of the ECN order. Must match the instrument of the referenced order
     asset: str
-    # A sequence number used to determine message order for this ECN orders
+    # The `seq_no` of the `v1.ecn_to_broker` message this confirmation responds to. A value ahead of the latest sequence number published for this order is rejected
     seq_no: str
-    # The cumulative confirmed size for this ECN order
+    # The total size the broker has confirmed for this ECN order since inception. Must be a multiple of the instrument's minimum size increment and should not exceed the cumulative requested size
     cumulative_confirmed_size: str
 
 
 @dataclass
 class ApiECNFromBrokerResponse:
+    """
+    Acknowledges that the broker confirmation passed validation and was accepted for processing.
+    Acceptance does not mean the confirmed size has been matched — the resulting order updates are
+    published on the `v1.ecn_to_broker` and order streams. Any failure is returned as an error response
+    instead of this payload.
+    """
+
+    # `true` when the confirmation was accepted for processing
     result: bool
 
 
@@ -2648,6 +2679,8 @@ class RfqFeed:
     rfq_id: str
     # The RFQ instrument. Must be kind = STABLE_PERP
     instrument: str | None = None
+    # The taker's derived anonymous account id shown to makers. Real taker identity is never exposed
+    taker_anon_account_id: str | None = None
     # Requested size, expressed in base asset decimal units. Zero-size = platform solicitation for missing public presence
     size: str | None = None
     # Present only if the taker disclosed direction; omitted = two-way request
@@ -2676,6 +2709,8 @@ class RfqQuoteLevel:
     price: str
     # Size at this level, expressed in base asset decimal units
     size: str
+    # The maker's derived anonymous account id shown to the taker. Real maker identity is never exposed
+    maker_anon_account_id: str
     # Distinguishes an AON level (liftable only in full — POST-MVP) from a GTT level
     time_in_force: TimeInForce
 
@@ -3186,6 +3221,21 @@ class WSDepositFeedSelectorV1:
 
 @dataclass
 class WSECNToBrokerFeedDataV1:
+    """
+    The last-look request stream. Available only on SFP (`kind = STABLE_PERP`) instruments, and only relevant to
+    qualified market makers with ECN orders (`metadata.is_ecn = true`) — other accounts receive no traffic here.
+
+    When a taker's order matches one of your ECN orders, the matched size is held off-book and a confirmation
+    request is published on this stream. Each request identifies the ECN order by `order_id` / `client_order_id`
+    and carries a per-order monotonic `seq_no`; all sizes are cumulative over the life of the order. Respond via
+    `/ecn_from_broker` before the request's `expiry_time` (1 second): confirming the full `cumulative_request_size`
+    executes the held matches and leaves the order's remaining size live on the book; confirming less is terminal —
+    matches execute up to the confirmed size and the order's unconfirmed remainder is cancelled; silence cancels the
+    entire order (`ecnOrderExpired`). One response at the latest `seq_no` covers all earlier outstanding requests.
+    Frames that carry no new requested size (fill or shortfall updates) are informational and require no response.
+    On subscribe, the stream snapshots the most recent request per open ECN order.
+    """
+
     # Stream name
     stream: str
     # Primary selector
@@ -3212,6 +3262,7 @@ class WSECNToBrokerFeedSelectorV1:
     Each Order can be uniquely identified by its `order_id` or `client_order_id`.
     To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).
     Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`).
+    This stream is only applicable to STABLE_PERP (SFP) instruments with qualified market makers.
     """
 
     # The subaccount ID to filter by
