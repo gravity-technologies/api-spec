@@ -20,8 +20,6 @@ IGNORE_FIELD_PATHS = [
     ["ApiCreateOrderRequest", "Order", "order_id"],
     ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "state"],
     ["JSONRPCRequest", "ApiCreateOrderRequest", "Order", "order_id"],
-    ["WSRfqFeedDataV1", "RfqFeed", "taker_anon_account_id"],
-    ["WSRfqQuoteFeedDataV1", "RfqQuoteFeed", "RfqQuoteLevel", "maker_anon_account_id"],
     ["ApiCreateRfqRequest", "Rfq", "rfq_id"],
     ["JSONRPCRequest", "ApiCreateRfqRequest", "Rfq", "rfq_id"],
 ]
@@ -39,6 +37,8 @@ IGNORE_FIELDS_ANY_PATH = [
     "to_wallet_type",
     "spot_taker_fee",
     "spot_maker_fee",
+    "taker_anon_account_id",
+    "maker_anon_account_id",
 ]
 
 IGNORE_RPCS: list[str] = [
