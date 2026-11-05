@@ -15,6 +15,7 @@
         |max_borrow_rate<br>`mb` |string|True|MBR - per-asset ceiling on the annual borrow rate, expressed in percentage points; the tier borrow rate never exceeds this.|
         |manual_repayment_fee_rate<br>`mr` |string|True|Effective manual-repay/convert fee = max((1-CVR)/MRR, RFR), expressed in percentage points.|
         |cdc_status<br>`cs` |CDCStatus|True|Collateral-deposit-cap utilization status: normal / reduceOnly / autoExchange.|
+        |show_only_when_held<br>`so` |boolean|True|Show this currency only when the sub account holds a balance of it|
         ??? info "[CDCStatus](/../../schemas/cdc_status)"
             Per-asset collateral-deposit-cap (CDC) utilization status.<br>
 

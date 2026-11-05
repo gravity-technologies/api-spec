@@ -5,3 +5,4 @@
     |-|-|-|-|
     |currency<br>`c` |string|True|The currency whose collateral state is being reported|
     |enabled<br>`e` |boolean|True|Whether this currency currently counts as collateral for the sub account|
+    |locked<br>`l` |boolean|True|The sub account cannot turn this currency off as collateral|

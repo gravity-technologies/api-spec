@@ -21,6 +21,7 @@
     |cross_unrealized_pnl<br>`cu` |string|True|The unrealized PnL of this sub account for cross margin|
     |sub_account_mode<br>`sa1` |SubAccountMode|True|The mode of the sub account|
     |margin_balance<br>`mb` |string|True|The margin balance of this sub account for cross margin|
+    |algo_trading_enabled<br>`at` |boolean|True|Whether algo trading is enabled for this sub account|
     ??? info "[MarginType](/../../schemas/margin_type)"
         |Value| Description |
         |-|-|
@@ -36,6 +37,7 @@
         |realized_pnl<br>`rp` |string|True|The realized PnL of this spot currency. (reported in `USD`)|
         |unrealized_pnl<br>`up` |string|True|The unrealized PnL of this spot currency. (reported in `USD`)|
         |available_to_transfer<br>`at` |string|True|The available to transfer amount of this spot currency.|
+        |borrowed_amount<br>`ba` |string|False<br>`None`|The amount borrowed in this currency, inclusive of accrued interest.<br>Only reported by `account_summary`, and only for multi-asset-mode sub accounts|
     ??? info "[Positions](/../../schemas/positions)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
