@@ -51,9 +51,16 @@ LITE ENDPOINT: lite/v1/instrument
                 "create_time": "1697788800000000000",
                 "max_position_size": "100.0",
                 "funding_interval_hours": 8,
-                "adjusted_funding_rate_cap": 2.5,
-                "adjusted_funding_rate_floor": -2.5,
-                "min_notional": "20.0"
+                "adjusted_funding_rate_cap": "2.5",
+                "adjusted_funding_rate_floor": "-2.5",
+                "min_notional": "20.0",
+                "asset_class": "EQUITY",
+                "status": "ACTIVE",
+                "guaranteed_exit_band": "0.5",
+                "spread_penalty_tolerance": "0.1",
+                "funding_cap_adjustment_time": "1697788800000000000",
+                "funding_cap_adjustment_value": "0.0003",
+                "triple_swap_day": "FRIDAY"
             }
         }
         ```
@@ -75,9 +82,16 @@ LITE ENDPOINT: lite/v1/instrument
                 "ct": "1697788800000000000",
                 "mp": "100.0",
                 "fi": 8,
-                "af": 2.5,
-                "af1": -2.5,
-                "mn": "20.0"
+                "af": "2.5",
+                "af1": "-2.5",
+                "mn": "20.0",
+                "ac": "EQUITY",
+                "s": "ACTIVE",
+                "ge": "0.5",
+                "sp2": "0.1",
+                "fc": "1697788800000000000",
+                "fc1": "0.0003",
+                "ts2": "FRIDAY"
             }
         }
         ```
@@ -313,9 +327,16 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "create_time": "1697788800000000000",
                 "max_position_size": "100.0",
                 "funding_interval_hours": 8,
-                "adjusted_funding_rate_cap": 2.5,
-                "adjusted_funding_rate_floor": -2.5,
-                "min_notional": "20.0"
+                "adjusted_funding_rate_cap": "2.5",
+                "adjusted_funding_rate_floor": "-2.5",
+                "min_notional": "20.0",
+                "asset_class": "EQUITY",
+                "status": "ACTIVE",
+                "guaranteed_exit_band": "0.5",
+                "spread_penalty_tolerance": "0.1",
+                "funding_cap_adjustment_time": "1697788800000000000",
+                "funding_cap_adjustment_value": "0.0003",
+                "triple_swap_day": "FRIDAY"
             }]
         }
         ```
@@ -337,9 +358,16 @@ LITE ENDPOINT: lite/v1/all_instruments
                 "ct": "1697788800000000000",
                 "mp": "100.0",
                 "fi": 8,
-                "af": 2.5,
-                "af1": -2.5,
-                "mn": "20.0"
+                "af": "2.5",
+                "af1": "-2.5",
+                "mn": "20.0",
+                "ac": "EQUITY",
+                "s": "ACTIVE",
+                "ge": "0.5",
+                "sp2": "0.1",
+                "fc": "1697788800000000000",
+                "fc1": "0.0003",
+                "ts2": "FRIDAY"
             }]
         }
         ```
@@ -592,9 +620,16 @@ LITE ENDPOINT: lite/v1/instruments
                 "create_time": "1697788800000000000",
                 "max_position_size": "100.0",
                 "funding_interval_hours": 8,
-                "adjusted_funding_rate_cap": 2.5,
-                "adjusted_funding_rate_floor": -2.5,
-                "min_notional": "20.0"
+                "adjusted_funding_rate_cap": "2.5",
+                "adjusted_funding_rate_floor": "-2.5",
+                "min_notional": "20.0",
+                "asset_class": "EQUITY",
+                "status": "ACTIVE",
+                "guaranteed_exit_band": "0.5",
+                "spread_penalty_tolerance": "0.1",
+                "funding_cap_adjustment_time": "1697788800000000000",
+                "funding_cap_adjustment_value": "0.0003",
+                "triple_swap_day": "FRIDAY"
             }]
         }
         ```
@@ -616,9 +651,16 @@ LITE ENDPOINT: lite/v1/instruments
                 "ct": "1697788800000000000",
                 "mp": "100.0",
                 "fi": 8,
-                "af": 2.5,
-                "af1": -2.5,
-                "mn": "20.0"
+                "af": "2.5",
+                "af1": "-2.5",
+                "mn": "20.0",
+                "ac": "EQUITY",
+                "s": "ACTIVE",
+                "ge": "0.5",
+                "sp2": "0.1",
+                "fc": "1697788800000000000",
+                "fc1": "0.0003",
+                "ts2": "FRIDAY"
             }]
         }
         ```
@@ -1070,6 +1112,379 @@ LITE ENDPOINT: lite/v1/currency
             ```
         </section>
 <hr class="solid">
+## SfpTradingSchedule
+### Get Sfp Trading Schedu
+```
+FULL ENDPOINT: full/v1/sfp_trading_schedule
+LITE ENDPOINT: lite/v1/sfp_trading_schedule
+```
+
+=== "Request"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/empty_request.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! question "Query"
+        **Full Request**
+        ``` { .json .copy }
+        {
+        }
+        ```
+        **Lite Request**
+        ``` { .json .copy }
+        {
+        }
+        ```
+    </section>
+=== "Response"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    -8<- "docs/schemas/api_sfp_trading_schedule_response.md"
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! success
+        **Full Response**
+        ``` { .json .copy }
+        {
+            "update_time": "1697788800000",
+            "equity": {
+                "sessions": [{
+                    "start_time": "1697788800000",
+                    "end_time": "1697812200000",
+                    "type": "REGULAR"
+                }],
+                "holidays": [{
+                    "name": "Independence Day",
+                    "close_type": "FULL_DAY",
+                    "start_time": "1783137600000",
+                    "end_time": "1783224000000"
+                }]
+            },
+            "equity_nyse": {
+                "sessions": [{
+                    "start_time": "1697788800000",
+                    "end_time": "1697812200000",
+                    "type": "REGULAR"
+                }],
+                "holidays": [{
+                    "name": "Independence Day",
+                    "close_type": "FULL_DAY",
+                    "start_time": "1783137600000",
+                    "end_time": "1783224000000"
+                }]
+            },
+            "equity_nasdaq": {
+                "sessions": [{
+                    "start_time": "1697788800000",
+                    "end_time": "1697812200000",
+                    "type": "REGULAR"
+                }],
+                "holidays": [{
+                    "name": "Independence Day",
+                    "close_type": "FULL_DAY",
+                    "start_time": "1783137600000",
+                    "end_time": "1783224000000"
+                }]
+            },
+            "commodity": {
+                "sessions": [{
+                    "start_time": "1697788800000",
+                    "end_time": "1697812200000",
+                    "type": "REGULAR"
+                }],
+                "holidays": [{
+                    "name": "Independence Day",
+                    "close_type": "FULL_DAY",
+                    "start_time": "1783137600000",
+                    "end_time": "1783224000000"
+                }]
+            },
+            "commodity_cme": {
+                "sessions": [{
+                    "start_time": "1697788800000",
+                    "end_time": "1697812200000",
+                    "type": "REGULAR"
+                }],
+                "holidays": [{
+                    "name": "Independence Day",
+                    "close_type": "FULL_DAY",
+                    "start_time": "1783137600000",
+                    "end_time": "1783224000000"
+                }]
+            },
+            "schedules": [{
+                "name": "CME copper",
+                "asset_class": "COMMODITY_CME",
+                "instruments": ["XAU_USDT_SFP"],
+                "sessions": [{
+                    "start_time": "1697788800000",
+                    "end_time": "1697812200000",
+                    "type": "REGULAR"
+                }],
+                "holidays": [{
+                    "name": "Independence Day",
+                    "close_type": "FULL_DAY",
+                    "start_time": "1783137600000",
+                    "end_time": "1783224000000"
+                }]
+            }]
+        }
+        ```
+        **Lite Response**
+        ``` { .json .copy }
+        {
+            "ut": "1697788800000",
+            "e": {
+                "s": [{
+                    "st": "1697788800000",
+                    "et": "1697812200000",
+                    "t": "REGULAR"
+                }],
+                "h": [{
+                    "n": "Independence Day",
+                    "ct": "FULL_DAY",
+                    "st": "1783137600000",
+                    "et": "1783224000000"
+                }]
+            },
+            "en": {
+                "s": [{
+                    "st": "1697788800000",
+                    "et": "1697812200000",
+                    "t": "REGULAR"
+                }],
+                "h": [{
+                    "n": "Independence Day",
+                    "ct": "FULL_DAY",
+                    "st": "1783137600000",
+                    "et": "1783224000000"
+                }]
+            },
+            "en1": {
+                "s": [{
+                    "st": "1697788800000",
+                    "et": "1697812200000",
+                    "t": "REGULAR"
+                }],
+                "h": [{
+                    "n": "Independence Day",
+                    "ct": "FULL_DAY",
+                    "st": "1783137600000",
+                    "et": "1783224000000"
+                }]
+            },
+            "c": {
+                "s": [{
+                    "st": "1697788800000",
+                    "et": "1697812200000",
+                    "t": "REGULAR"
+                }],
+                "h": [{
+                    "n": "Independence Day",
+                    "ct": "FULL_DAY",
+                    "st": "1783137600000",
+                    "et": "1783224000000"
+                }]
+            },
+            "cc": {
+                "s": [{
+                    "st": "1697788800000",
+                    "et": "1697812200000",
+                    "t": "REGULAR"
+                }],
+                "h": [{
+                    "n": "Independence Day",
+                    "ct": "FULL_DAY",
+                    "st": "1783137600000",
+                    "et": "1783224000000"
+                }]
+            },
+            "s": [{
+                "n": "CME copper",
+                "ac": "COMMODITY_CME",
+                "i": ["XAU_USDT_SFP"],
+                "s": [{
+                    "st": "1697788800000",
+                    "et": "1697812200000",
+                    "t": "REGULAR"
+                }],
+                "h": [{
+                    "n": "Independence Day",
+                    "ct": "FULL_DAY",
+                    "st": "1783137600000",
+                    "et": "1783224000000"
+                }]
+            }]
+        }
+        ```
+    </section>
+=== "Errors"
+    <section markdown="1" style="float: left; width: 70%; padding-right: 10px;">
+    !!! info "Error Codes"
+        |Code|HttpStatus| Description |
+        |-|-|-|
+        |1002|500|Internal Server Error|
+        |1003|400|Request could not be processed due to malformed syntax|
+        |1006|429|You have surpassed the allocated rate limit for your tier|
+    </section>
+    <section markdown="1" style="float: right; width: 30%;">
+    !!! failure
+        **Full Error Response**
+        ``` { .json .copy }
+        {
+            "request_id":1,
+            "code":1002,
+            "message":"Internal Server Error",
+            "status":500
+        }
+        ```
+        **Lite Error Response**
+        ``` { .json .copy }
+        {
+            "ri":1,
+            "c":1002,
+            "m":"Internal Server Error",
+            "s":500
+        }
+        ```
+    </section>
+=== "Try it out"
+    === "STAGING"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.staging.gravitymarkets.io/full/v1/sfp_trading_schedule' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/sfp_trading_schedule",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.staging.gravitymarkets.io/lite/v1/sfp_trading_schedule' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.staging.gravitymarkets.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/sfp_trading_schedule",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "TESTNET"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/full/v1/sfp_trading_schedule' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/sfp_trading_schedule",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.testnet.grvt.io/lite/v1/sfp_trading_schedule' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.testnet.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/sfp_trading_schedule",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+    === "PROD"
+        <section markdown="1" style="float: left; width: 50%; padding-right: 10px;">
+        !!! example "REST Full"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/full/v1/sfp_trading_schedule' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Full"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/full" \
+            -x '
+            {
+                "jsonrpc": "2.0",
+                "method": "v1/sfp_trading_schedule",
+                "params": {
+                },
+                "id": 123
+            }
+            ' -w 360
+            ```
+        </section>
+        <section markdown="1" style="float: right; width: 50%;">
+        !!! example "REST Lite"
+            ``` { .bash .copy }
+            curl --location 'https://market-data.grvt.io/lite/v1/sfp_trading_schedule' \
+            --data '{
+            }
+            '
+            ```
+        !!! example "JSONRPC Lite"
+            ``` { .bash .copy }
+            wscat -c "wss://market-data.grvt.io/ws/lite" \
+            -x '
+            {
+                "j": "2.0",
+                "m": "v1/sfp_trading_schedule",
+                "p": {
+                },
+                "i": 123
+            }
+            ' -w 360
+            ```
+        </section>
+<hr class="solid">
+## Instrument
 ### Get Supported Assets
 ```
 FULL ENDPOINT: full/v1/supported_assets
@@ -1105,19 +1520,22 @@ LITE ENDPOINT: lite/v1/supported_assets
             "funding": [{
                 "asset_id": 3,
                 "asset_code": "USDT",
-                "balance_decimals": 6
+                "balance_decimals": 6,
+                "transfer_disabled": false
             }],
             "spot": [{
                 "asset_id": 3,
                 "asset_code": "USDT",
-                "balance_decimals": 6
+                "balance_decimals": 6,
+                "transfer_disabled": false
             }],
             "futures": [{
                 "mode": "SINGLE_ASSET",
                 "supported_assets": [{
                     "asset_id": 3,
                     "asset_code": "USDT",
-                    "balance_decimals": 6
+                    "balance_decimals": 6,
+                    "transfer_disabled": false
                 }]
             }]
         }
@@ -1128,19 +1546,22 @@ LITE ENDPOINT: lite/v1/supported_assets
             "f": [{
                 "ai": 3,
                 "ac": "USDT",
-                "bd": 6
+                "bd": 6,
+                "td": false
             }],
             "s": [{
                 "ai": 3,
                 "ac": "USDT",
-                "bd": 6
+                "bd": 6,
+                "td": false
             }],
             "f1": [{
                 "m": "SINGLE_ASSET",
                 "sa": [{
                     "ai": 3,
                     "ac": "USDT",
-                    "bd": 6
+                    "bd": 6,
+                    "td": false
                 }]
             }]
         }
@@ -1596,7 +2017,8 @@ LITE ENDPOINT: lite/v1/get_all_collateral_asset_info
                 "collateral_deposit_cap": "1000.0",
                 "max_borrow_rate": 10.0,
                 "manual_repayment_fee_rate": 0.625,
-                "cdc_status": "NORMAL"
+                "cdc_status": "NORMAL",
+                "show_only_when_held": false
             }]
         }
         ```
@@ -1609,7 +2031,8 @@ LITE ENDPOINT: lite/v1/get_all_collateral_asset_info
                 "cd": "1000.0",
                 "mb": 10.0,
                 "mr": 0.625,
-                "cs": "NORMAL"
+                "cs": "NORMAL",
+                "so": false
             }]
         }
         ```
@@ -1859,6 +2282,7 @@ LITE ENDPOINT: lite/v1/mini
         |1003|400|Request could not be processed due to malformed syntax|
         |1004|404|Data Not Found|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |7725|403|This endpoint is not supported for stable funding.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2090,7 +2514,13 @@ LITE ENDPOINT: lite/v1/ticker
                 "open_interest": "123456.78",
                 "long_short_ratio": "0.5",
                 "funding_rate": 0.0003,
-                "next_funding_time": "1697788800000000000"
+                "next_funding_time": "1697788800000000000",
+                "status": "ACTIVE",
+                "session": "REGULAR",
+                "long_open_interest": "123456.78",
+                "short_open_interest": "123456.78",
+                "funding_rate_long_apr_pct": "-5.5",
+                "funding_rate_short_apr_pct": "-5"
             }
         }
         ```
@@ -2123,7 +2553,13 @@ LITE ENDPOINT: lite/v1/ticker
                 "oi": "123456.78",
                 "ls1": "0.5",
                 "fr2": 0.0003,
-                "nf": "1697788800000000000"
+                "nf": "1697788800000000000",
+                "s": "ACTIVE",
+                "s1": "REGULAR",
+                "lo": "123456.78",
+                "so": "123456.78",
+                "fr3": "-5.5",
+                "fr4": "-5"
             }
         }
         ```
@@ -2392,6 +2828,7 @@ LITE ENDPOINT: lite/v1/book
         |3000|400|Instrument is invalid|
         |3031|400|Depth is invalid|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |7725|403|This endpoint is not supported for stable funding.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2656,6 +3093,7 @@ LITE ENDPOINT: lite/v1/trade
         |1002|500|Internal Server Error|
         |1003|400|Request could not be processed due to malformed syntax|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |7725|403|This endpoint is not supported for stable funding.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -2929,6 +3367,7 @@ LITE ENDPOINT: lite/v1/trade_history
         |1003|400|Request could not be processed due to malformed syntax|
         |1014|504|Upstream data service timed out, please try again|
         |1006|429|You have surpassed the allocated rate limit for your tier|
+        |7725|403|This endpoint is not supported for stable funding.|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -3240,6 +3679,7 @@ LITE ENDPOINT: lite/v1/kline
         |1014|504|Upstream data service timed out, please try again|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |3042|400|Candlestick type is not applicable for spot instruments|
+        |3043|400|Candlestick type not supported for this instrument|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure
@@ -3534,7 +3974,10 @@ LITE ENDPOINT: lite/v1/funding
                 "funding_time": "1697788800000000000",
                 "mark_price": "65038.01",
                 "funding_rate_8_h_avg": 0.0003,
-                "funding_interval_hours": 8
+                "funding_interval_hours": 8,
+                "funding_rate_long_apr_pct": "-5.5",
+                "funding_rate_short_apr_pct": "-5",
+                "funding_multiplier": 1
             }],
             "next": "Qw0918="
         }
@@ -3548,7 +3991,10 @@ LITE ENDPOINT: lite/v1/funding
                 "ft": "1697788800000000000",
                 "mp": "65038.01",
                 "fr1": 0.0003,
-                "fi": 8
+                "fi": 8,
+                "fr2": "-5.5",
+                "fr3": "-5",
+                "fm": 1
             }],
             "n": "Qw0918="
         }
@@ -3565,6 +4011,8 @@ LITE ENDPOINT: lite/v1/funding
         |1014|504|Upstream data service timed out, please try again|
         |1006|429|You have surpassed the allocated rate limit for your tier|
         |3007|400|API is not applicable for spot instruments|
+        |3008|400|Funding rate aggregation type is not applicable for stable perp instruments|
+        |3012|400|Cursor is invalid|
     </section>
     <section markdown="1" style="float: right; width: 30%;">
     !!! failure

@@ -64,6 +64,7 @@
             |`LIQUIDATION_REPAYMENT` = 3|Liquidator MMR>=100% step 2 repayment; uses LRR (/2) divisor for fee.|
             |`AUTO_REPAY_BORROW_LIMIT` = 4|Liquidator borrow-limit auto-repay; uses ARR (/4) divisor for fee. Validator checks BL trigger is still active.|
             |`AUTO_REPAY_LTV` = 5|Liquidator undeployed-loan / LTV auto-repay; uses ARR (/4) divisor for fee. Validator checks LTV trigger is still active.|
+            |`LIQUIDATION_REBALANCING` = 6|Collateral conversion inside a liquidation bundle. Fee-free.|
         ??? info "[RfqCounterpartyType](/../../schemas/rfq_counterparty_type)"
             |Value| Description |
             |-|-|

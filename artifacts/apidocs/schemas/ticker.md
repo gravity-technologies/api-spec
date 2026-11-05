@@ -27,5 +27,33 @@
     |open_price<br>`op` |string|False<br>`None`|The 24 hour first traded price of the instrument, expressed in `9` decimals|
     |open_interest<br>`oi` |string|False<br>`None`|The open interest in the instrument, expressed in base asset decimal units|
     |long_short_ratio<br>`ls1` |string|False<br>`None`|The ratio of accounts that are net long vs net short on this instrument|
-    |funding_rate<br>`fr2` |string|False<br>`None`|The current indicative funding rate for the active interval, expressed in centibeeps|
+    |funding_rate<br>`fr2` |string|False<br>`None`|The current indicative funding rate for the active interval, expressed in centibeeps. Absent for stable perps, which have `funding_rate_long_apr_pct` and `funding_rate_short_apr_pct` instead.|
     |next_funding_time<br>`nf` |string|False<br>`None`|Timestamp in nanoseconds when the current funding interval ends|
+    |status<br>`s` |InstrumentStatus|False<br>`None`|The current status of the instrument|
+    |session<br>`s1` |TradingSessionType|False<br>`None`|The current trading session of the instrument's underlying market|
+    |long_open_interest<br>`lo` |string|False<br>`None`|The long open interest in the instrument, expressed in base asset decimal units. Excludes qualified-maker and DMM open interest.|
+    |short_open_interest<br>`so` |string|False<br>`None`|The short open interest in the instrument, expressed in base asset decimal units. Excludes qualified-maker and DMM open interest.|
+    |funding_rate_long_apr_pct<br>`fr3` |string|False<br>`None`|Stable perps only: the indicative annual rate for retail longs at the next charge, in percent a year (`'-5.5'` = retail longs pay 5.5%; positive = retail receives, negative = retail pays). Updated when the rates change. Absent for other kinds.|
+    |funding_rate_short_apr_pct<br>`fr4` |string|False<br>`None`|Stable perps only: the indicative annual rate for retail shorts at the next charge, in percent a year (`'-5'` = retail shorts pay 5%; positive = retail receives, negative = retail pays). Updated when the rates change. Absent for other kinds.|
+    ??? info "[InstrumentStatus](/../../schemas/instrument_status)"
+        The lifecycle/trading status of an instrument on the GRVT exchange<br>
+
+        |Value| Description |
+        |-|-|
+        |`ACTIVE` = 1|Instrument is fully tradable|
+        |`REDUCE_ONLY` = 2|Only position-reducing orders are accepted (e.g. pre-delist wind-down)|
+        |`MAINTENANCE` = 3|Trading is temporarily paused for scheduled maintenance; cancel-only|
+        |`HALTED` = 4|Underlying halted at its primary market (LULD, news pending); index and mark frozen|
+        |`CLOSED` = 5|Outside trading window: daily maintenance break, weekend, holiday; cancel-only|
+        |`PENDING` = 6|Instrument is created but not yet open for trading (pre-listing)|
+        |`DELISTED` = 7|Instrument has been permanently removed|
+    ??? info "[TradingSessionType](/../../schemas/trading_session_type)"
+        Specifies different types of trading sessions<br>
+
+        |Value| Description |
+        |-|-|
+        |`REGULAR` = 1|Core market hours. Full liquidity.|
+        |`PRE_MARKET` = 2|Extended hours before open. Lower liquidity.|
+        |`AFTER_MARKET` = 3|Extended hours after close. Lower liquidity.|
+        |`OVERNIGHT` = 4|For 24/5 or specific overnight TradFi perps. Minimal liquidity.|
+        |`CLOSE` = 5|Weekends, holidays, or daily maintenance windows.|

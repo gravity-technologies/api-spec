@@ -8,3 +8,4 @@
     |realized_pnl<br>`rp` |string|True|The realized PnL of this spot currency. (reported in `USD`)|
     |unrealized_pnl<br>`up` |string|True|The unrealized PnL of this spot currency. (reported in `USD`)|
     |available_to_transfer<br>`at` |string|True|The available to transfer amount of this spot currency.|
+    |borrowed_amount<br>`ba` |string|False<br>`None`|The amount borrowed in this currency, inclusive of accrued interest.<br>Only reported by `account_summary`, and only for multi-asset-mode sub accounts|

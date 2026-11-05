@@ -1,16 +1,16 @@
 !!! info "[RfqQuoteFeed](/../../schemas/rfq_quote_feed)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |rfq_id<br>`ri` |string|True|The RFQ this private quote book belongs to|
-    |best_bid<br>`bb` |string|False<br>`None`|Best (highest) bid price across the book, expressed in the instrument's quote-asset decimals.|
-    |best_ask<br>`ba` |string|False<br>`None`|Best (lowest) ask price across the book, expressed in the instrument's quote-asset decimals.|
-    |bid_levels<br>`bl` |[RfqQuoteLevel]|True|Private quote bid levels, sorted best (highest) price first|
-    |ask_levels<br>`al` |[RfqQuoteLevel]|True|Private quote ask levels, sorted best (lowest) price first|
+    |rfq_id<br>`ri` |string|True|The RFQ this estimate belongs to. A feed with no levels means the RFQ ended|
+    |best_bid<br>`bb` |string|False<br>`None`|Average fill price to sell the RFQ size, expressed in `9` decimals. Omitted when the bid side is empty|
+    |best_ask<br>`ba` |string|False<br>`None`|Average fill price to buy the RFQ size, expressed in `9` decimals. Omitted when the ask side is empty|
+    |bid_levels<br>`bl` |[RfqQuoteLevel]|True|The sell-side estimate (at most one level), from the bids|
+    |ask_levels<br>`al` |[RfqQuoteLevel]|True|The buy-side estimate (at most one level), from the asks|
     ??? info "[RfqQuoteLevel](/../../schemas/rfq_quote_level)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |price<br>`p` |string|True|Price of the level, expressed in `9` decimals|
-        |size<br>`s` |string|True|Size at this level, expressed in base asset decimal units|
+        |price<br>`p` |string|True|Average fill price for the size, expressed in `9` decimals. Rounded against the taker: up for asks, down for bids|
+        |size<br>`s` |string|True|Fillable size, up to the RFQ size, expressed in base asset decimal units|
         |time_in_force<br>`ti` |TimeInForce|True|Distinguishes an AON level (liftable only in full — POST-MVP) from a GTT level|
         ??? info "[TimeInForce](/../../schemas/time_in_force)"
             |                       | Must Fill All | Can Fill Partial |
@@ -29,8 +29,8 @@
     ??? info "[RfqQuoteLevel](/../../schemas/rfq_quote_level)"
         |Name<br>`Lite`|Type|Required<br>`Default`| Description |
         |-|-|-|-|
-        |price<br>`p` |string|True|Price of the level, expressed in `9` decimals|
-        |size<br>`s` |string|True|Size at this level, expressed in base asset decimal units|
+        |price<br>`p` |string|True|Average fill price for the size, expressed in `9` decimals. Rounded against the taker: up for asks, down for bids|
+        |size<br>`s` |string|True|Fillable size, up to the RFQ size, expressed in base asset decimal units|
         |time_in_force<br>`ti` |TimeInForce|True|Distinguishes an AON level (liftable only in full — POST-MVP) from a GTT level|
         ??? info "[TimeInForce](/../../schemas/time_in_force)"
             |                       | Must Fill All | Can Fill Partial |
