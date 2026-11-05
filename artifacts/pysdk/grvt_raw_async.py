@@ -180,56 +180,6 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiOpenOrdersResponse, resp, Config(cast=[Enum]))
 
-    async def create_algo_order_v1(
-        self, req: types.ApiCreateAlgoOrderRequest
-    ) -> types.ApiCreateAlgoOrderResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/create_algo_order", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiCreateAlgoOrderResponse, resp, Config(cast=[Enum]))
-
-    async def cancel_algo_order_v1(
-        self, req: types.ApiCancelAlgoOrderRequest
-    ) -> types.AckResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/cancel_algo_order", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
-
-    async def get_algo_order_v1(
-        self, req: types.ApiGetAlgoOrderRequest
-    ) -> types.ApiGetAlgoOrderResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/get_algo_order", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiGetAlgoOrderResponse, resp, Config(cast=[Enum]))
-
-    async def open_algo_orders_v1(
-        self, req: types.ApiOpenAlgoOrdersRequest
-    ) -> types.ApiOpenAlgoOrdersResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/open_algo_orders", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiOpenAlgoOrdersResponse, resp, Config(cast=[Enum]))
-
-    async def algo_order_history_v1(
-        self, req: types.ApiAlgoOrderHistoryRequest
-    ) -> types.ApiAlgoOrderHistoryResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/algo_order_history", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiAlgoOrderHistoryResponse, resp, Config(cast=[Enum]))
-
-    async def algo_sub_order_history_v1(
-        self, req: types.ApiAlgoSubOrderHistoryRequest
-    ) -> types.ApiAlgoSubOrderHistoryResponse | GrvtError:
-        resp = await self._post(
-            True, self.td_rpc + "/full/v1/algo_sub_order_history", req
-        )
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiAlgoSubOrderHistoryResponse, resp, Config(cast=[Enum]))
-
     async def order_history_v1(
         self, req: types.ApiOrderHistoryRequest
     ) -> types.ApiOrderHistoryResponse | GrvtError:

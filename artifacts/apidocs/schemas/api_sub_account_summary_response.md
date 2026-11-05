@@ -27,7 +27,6 @@
         |cross_unrealized_pnl<br>`cu` |string|True|The unrealized PnL of this sub account for cross margin|
         |sub_account_mode<br>`sa1` |SubAccountMode|True|The mode of the sub account|
         |margin_balance<br>`mb` |string|True|The margin balance of this sub account for cross margin|
-        |algo_trading_enabled<br>`at` |boolean|True|Whether algo trading is enabled for this sub account|
         ??? info "[MarginType](/../../schemas/margin_type)"
             |Value| Description |
             |-|-|

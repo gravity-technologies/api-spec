@@ -10,18 +10,6 @@ from enum import Enum
 from typing import Any
 
 
-class AlgoOrderType(Enum):
-    # CHASE - A post-only limit order that re-prices toward the best bid/ask until filled or cancelled
-    CHASE = "CHASE"
-
-
-class AlgoTriggerFilter(Enum):
-    # WITH_TRIGGER - Only algo orders that carry a trigger and wait for it to cross before becoming active
-    WITH_TRIGGER = "WITH_TRIGGER"
-    # WITHOUT_TRIGGER - Only algo orders that have no trigger and become active on creation
-    WITHOUT_TRIGGER = "WITHOUT_TRIGGER"
-
-
 class AssetClass(Enum):
     # Digital assets (e.g. BTC, ETH)
     CRYPTO = "CRYPTO"
@@ -119,11 +107,6 @@ class CandlestickType(Enum):
     INDEX = "INDEX"
     # Tracks book mid prices
     MID = "MID"
-
-
-class ChasePriceMode(Enum):
-    # BEST_BID_ASK - The chase price equals the best bid (buy) or best ask (sell)
-    BEST_BID_ASK = "BEST_BID_ASK"
 
 
 class DayOfWeek(Enum):
@@ -679,96 +662,6 @@ class AggregatedAccountSummary:
 
 
 @dataclass
-class AlgoOrder:
-    """
-    An algo order is the parent order of an algorithmic execution strategy. Instead of resting on the orderbook itself, it is a set of instructions that GRVT Backend executes on your behalf by placing and managing sub-orders, until the algo order is filled, cancelled or expired.
-
-    Algo trading must be enabled (opted in) for the sub account before an algo order can be created.
-
-    The algo order is not signed by you. Sub-orders are placed by GRVT Backend and never appear on the `v1.order` and `v1.state` streams; follow the algo order itself through the `v1.algo.order` stream.
-
-    The `type` field selects the strategy. Currently only `CHASE` is supported.
-
-    **CHASE**: a post-only limit order that automatically follows the market. The order is placed at the best bid (buy) or best ask (sell), and periodically re-priced to keep up with the market, until it is filled, cancelled or expired. Because it is always post-only, it only ever adds liquidity and is never executed as a taker. The chase parameters are in `metadata.chase`.<ul><li>An optional `trigger` keeps the algo order pending until the trigger condition crosses; a chase order without a trigger starts chasing immediately.</li><li>A partial fill does not stop the chase: the unfilled remainder keeps being re-priced.</li></ul>An algo order is `PENDING` while it waits for its trigger, `OPEN` while it is actively chasing (including while held at the maximum distance), and `FILLED`, `CANCELLED` or `REJECTED` once terminated.
-    """
-
-    # The subaccount initiating the algo order
-    sub_account_id: str
-    # The type of the algo order
-    type: AlgoOrderType
-    # The single leg traded by this algo order
-    leg: AlgoOrderLeg
-    # Algo order metadata, including the type-specific parameters
-    metadata: AlgoOrderMetadata
-    # The main account ID of the builder
-    builder: str
-    # Builder fee charged for every sub-order, expressed as a percentage (e.g., 0.001 means 0.001%).
-    builder_fee: str
-    # [Filled by GRVT Backend] A unique 128-bit identifier for the algo order, assigned by Trade Data
-    algo_order_id: str | None = None
-    # If True, every sub-order must be a maker order. Chase orders are always post-only
-    post_only: bool | None = None
-    # If True, every sub-order must reduce the position size, or be cancelled
-    reduce_only: bool | None = None
-    # [Filled by GRVT Backend] The current state of the algo order
-    state: AlgoOrderState | None = None
-
-
-@dataclass
-class AlgoOrderLeg:
-    # The instrument to trade
-    instrument: str
-    # The total number of assets to trade across all sub-orders, expressed in base asset decimal units.
-    size: str
-    # Specifies if the algo order is a buy or sell
-    is_buying_asset: bool
-
-
-@dataclass
-class AlgoOrderMetadata:
-    """
-    Metadata fields are used to support Backend only operations.
-    Type-specific parameters live in the nested struct matching the algo order type.
-    """
-
-    """
-    A unique identifier for the active algo order within a subaccount, specified by the client
-    This field can be used for algo order cancellation
-    """
-    client_order_id: str
-    # [Filled by GRVT Backend] Time at which the algo order was received by GRVT in unix nanoseconds
-    create_time: str | None = None
-    # Trigger fields. If set, the algo order stays pending until the trigger price is crossed
-    trigger: TriggerOrderMetadata | None = None
-    # Specifies the broker who brokered the algo order
-    broker: BrokerTag | None = None
-    # Time at which the algo order expires, expressed in unix nanoseconds. Defaults to and must be capped at 90 days
-    expiry: str | None = None
-    # Chase order parameters. Set only when the algo order type is CHASE
-    chase: ChaseAlgoOrderMetadata | None = None
-
-
-@dataclass
-class AlgoOrderState:
-    # The status of the algo order
-    status: OrderStatus
-    # The reason for rejection or cancellation
-    reject_reason: OrderRejectReason
-    # The total number of assets traded across all sub-orders
-    traded_size: str
-    # The average fill price across all sub-orders
-    avg_fill_price: str
-    # Time at which the algo order was updated by GRVT in unix nanoseconds
-    update_time: str
-    # The latest sub-order placed for this algo order, 0 until the first sub-order is placed
-    last_sub_order_id: str
-    # Time at which the algo order was triggered in unix nanoseconds, 0 if not triggered yet
-    trigger_time: str | None = None
-    # Chase order state. Set only when the algo order type is CHASE
-    chase: ChaseOrderState | None = None
-
-
-@dataclass
 class ApiAddIsolatedPositionMarginRequest:
     # The sub account ID to add isolated margin in or remove margin from
     sub_account_id: str
@@ -790,50 +683,6 @@ class ApiAddIsolatedPositionMarginResponse:
 class ApiAggregatedAccountSummaryResponse:
     # The aggregated account summary
     result: AggregatedAccountSummary
-
-
-@dataclass
-class ApiAlgoOrderHistoryRequest:
-    """
-    Retrieves the algo order history for the account. Returns one row per terminated or filled parent algo order, not per sub-order.
-
-    Pagination works as follows:<ul><li>We perform a reverse chronological lookup, starting from `end_time`. If `end_time` is not set, we start from the most recent data.</li><li>The lookup is limited to `limit` records. If more data is requested, the response will contain a `next` cursor for you to query the next page.</li><li>If a `cursor` is provided, it will be used to fetch results from that point onwards.</li><li>Pagination will continue until the `start_time` is reached. If `start_time` is not set, pagination will continue as far back as our data retention policy allows.</li></ul>
-    """
-
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # The algo order type filter to apply. If nil, this defaults to all types. Otherwise, only entries matching the filter will be returned
-    type: list[AlgoOrderType] | None = None
-    # The start time to apply in nanoseconds. If nil, this defaults to all start times. Otherwise, only entries matching the filter will be returned
-    start_time: str | None = None
-    # The end time to apply in nanoseconds. If nil, this defaults to all end times. Otherwise, only entries matching the filter will be returned
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the query from
-    cursor: str | None = None
-
-
-@dataclass
-class ApiAlgoOrderHistoryResponse:
-    # The algo orders matching the request filter
-    result: list[AlgoOrder]
-    # The cursor to indicate when to start the query from
-    next: str
-
-
-@dataclass
-class ApiAlgoSubOrderHistoryRequest:
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # The `algo_order_id` whose sub-orders are retrieved
-    algo_order_id: str
-
-
-@dataclass
-class ApiAlgoSubOrderHistoryResponse:
-    # The sub-orders of the requested algo order
-    result: list[Order]
 
 
 @dataclass
@@ -947,16 +796,6 @@ class ApiBulkOrdersResponse:
     orders: list[Order]
     # A list of acks for the cancelled orders
     cancel_acks: list[Ack]
-
-
-@dataclass
-class ApiCancelAlgoOrderRequest:
-    # The subaccount ID cancelling the algo order
-    sub_account_id: str
-    # Cancel the algo order with this `algo_order_id`
-    algo_order_id: str | None = None
-    # Cancel the algo order with this `client_order_id`
-    client_order_id: str | None = None
 
 
 @dataclass
@@ -1093,18 +932,6 @@ class ApiCollateralPreferenceStatus:
     enabled: bool
     # The sub account cannot turn this currency off as collateral
     locked: bool
-
-
-@dataclass
-class ApiCreateAlgoOrderRequest:
-    # The algo order to create
-    order: AlgoOrder
-
-
-@dataclass
-class ApiCreateAlgoOrderResponse:
-    # The created algo order
-    result: AlgoOrder
 
 
 @dataclass
@@ -1359,22 +1186,6 @@ class ApiFundingRateResponse:
 
 
 @dataclass
-class ApiGetAlgoOrderRequest:
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # Filter for `algo_order_id`
-    algo_order_id: str | None = None
-    # Filter for `client_order_id`
-    client_order_id: str | None = None
-
-
-@dataclass
-class ApiGetAlgoOrderResponse:
-    # The algo order for the requested filter
-    result: AlgoOrder
-
-
-@dataclass
 class ApiGetAllCollateralAssetInfoResponse:
     # Collateral configuration for every collateral-eligible asset (CVR > 0)
     assets: list[ApiCollateralAssetInfo]
@@ -1581,28 +1392,6 @@ class ApiMiniTickerRequest:
 class ApiMiniTickerResponse:
     # The mini ticker matching the request asset
     result: MiniTicker
-
-
-@dataclass
-class ApiOpenAlgoOrdersRequest:
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # The kind filter to apply. If nil, this defaults to all kinds. Otherwise, only entries matching the filter will be returned
-    kind: list[Kind] | None = None
-    # The base filter to apply. If nil, this defaults to all bases. Otherwise, only entries matching the filter will be returned
-    base: list[str] | None = None
-    # The quote filter to apply. If nil, this defaults to all quotes. Otherwise, only entries matching the filter will be returned
-    quote: list[str] | None = None
-    # The algo order type filter to apply. If nil, this defaults to all types. Otherwise, only entries matching the filter will be returned
-    type: list[AlgoOrderType] | None = None
-    # The trigger filter to apply. If nil, this defaults to all algo orders. Otherwise, `WITH_TRIGGER` returns only algo orders that carry a trigger, and `WITHOUT_TRIGGER` returns only those that do not
-    trigger_filter: AlgoTriggerFilter | None = None
-
-
-@dataclass
-class ApiOpenAlgoOrdersResponse:
-    # The open algo orders matching the request filter
-    result: list[AlgoOrder]
 
 
 @dataclass
@@ -2595,28 +2384,6 @@ class Candlestick:
 
 
 @dataclass
-class ChaseAlgoOrderMetadata:
-    # How the chase price is determined at each re-price tick
-    chase_price_mode: ChasePriceMode
-    """
-    The maximum distance the chase price can move away from the reference price, as an absolute price distance in quote currency units, expressed in `9` decimals.
-    Always absolute: when the user picks a percentage, the client converts it and sends the result here.
-    """
-    max_distance: str
-    """
-    The max distance as a percentage in basis points (1 bp = 0.01%, 100% = 10000), as the user entered it. `0` if the user entered an absolute distance.
-    Informational only, for display and history. `maxDistance` is what is enforced.
-    """
-    max_distance_bps: int | None = None
-
-
-@dataclass
-class ChaseOrderState:
-    # The number of successful re-prices of this algo order's sub-orders
-    reprice_count: int
-
-
-@dataclass
 class ClientTier:
     tier: int
     futures_taker_fee: int
@@ -3086,11 +2853,6 @@ class OrderMetadata:
     When GRVT Backend receives an order with an overlapping clientOrderID, we will reject the order with rejectReason set to overlappingClientOrderId
     """
     client_order_id: str
-    """
-    The algo order that created this order as a sub-order.
-    Zero if the order is not a sub-order of an algo order.
-    """
-    algo_order_id: str
     # [Filled by GRVT Backend] Time at which the order was received by GRVT in unix nanoseconds
     create_time: str | None = None
     # Trigger fields are used to support any type of trigger order such as TP/SL
@@ -3528,8 +3290,6 @@ class SubAccount:
     sub_account_mode: SubAccountMode
     # The margin balance of this sub account for cross margin
     margin_balance: str
-    # Whether algo trading is enabled for this sub account
-    algo_trading_enabled: bool
     # Whether this sub account is a vault
     is_vault: bool | None = None
     # Total amount of IM (reported in `settle_currency`) deducted from the vault due to redemptions nearing the end of their redemption period
@@ -3848,42 +3608,6 @@ class VaultRedemptionRequest:
     exchange_rate: str
     # `true` if this request belongs to the vault manager, omitted otherwise.
     is_manager: bool | None = None
-
-
-@dataclass
-class WSAlgoOrderFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # The algo order object being created or updated
-    feed: AlgoOrder
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSAlgoOrderFeedSelectorV1:
-    """
-    Subscribes to a feed of algo order updates pertaining to algo orders made by your account.
-    Each algo order can be uniquely identified by its `algo_order_id` or `client_order_id`, and carries its `type` so that clients can filter by algo order type.
-    To subscribe to all algo orders, specify an empty `instrument` (eg. `2345123`).
-    Otherwise, specify the `instrument` to only receive algo orders for that instrument (eg. `2345123-BTC_USDT_Perp`).
-    """
-
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # The instrument filter to apply.
-    instrument: str | None = None
 
 
 @dataclass
