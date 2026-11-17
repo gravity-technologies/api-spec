@@ -10,6 +10,29 @@ from enum import Enum
 from typing import Any
 
 
+class AssetClass(Enum):
+    # Digital assets (e.g. BTC, ETH)
+    CRYPTO = "CRYPTO"
+    # Equities and equity-linked underlyings (e.g. stocks)
+    EQUITY = "EQUITY"
+    # Physical commodities (e.g. gold, oil)
+    COMMODITY = "COMMODITY"
+    # Foreign-exchange currency pairs
+    FX = "FX"
+    # Composite indices tracking a basket of underlyings
+    INDEX = "INDEX"
+    # NASDAQ-listed equities — maps to a TradingSchedule entry
+    EQUITY_NASDAQ = "EQUITY_NASDAQ"
+    # NYSE/NYSE Arca-listed equities and ETFs — maps to a TradingSchedule entry
+    EQUITY_NYSE = "EQUITY_NYSE"
+    # Korea Exchange (KRX)-listed equities — maps to a TradingSchedule entry
+    EQUITY_KRX = "EQUITY_KRX"
+    # CME-traded commodities — maps to a TradingSchedule entry
+    COMMODITY_CME = "COMMODITY_CME"
+    # Pre-IPO instruments — maps to a TradingSchedule entry
+    PRE_IPO = "PRE_IPO"
+
+
 class BrokerTag(Enum):
     UNSPECIFIED = "UNSPECIFIED"
     # CoinRoutes
@@ -86,6 +109,23 @@ class CandlestickType(Enum):
     MID = "MID"
 
 
+class DayOfWeek(Enum):
+    # Monday
+    MONDAY = "MONDAY"
+    # Tuesday
+    TUESDAY = "TUESDAY"
+    # Wednesday
+    WEDNESDAY = "WEDNESDAY"
+    # Thursday
+    THURSDAY = "THURSDAY"
+    # Friday
+    FRIDAY = "FRIDAY"
+    # Saturday
+    SATURDAY = "SATURDAY"
+    # Sunday
+    SUNDAY = "SUNDAY"
+
+
 class FundingRateAggregationType(Enum):
     # Default value -- one record returned per funding interval. Query instruments endpoint to learn funding interval of each instrument.
     FUNDING_INTERVAL = "FUNDING_INTERVAL"
@@ -108,6 +148,23 @@ class InstrumentSettlementPeriod(Enum):
     MONTHLY = "MONTHLY"
     # Instrument settles at an expiry date, marked as a quarterly instrument
     QUARTERLY = "QUARTERLY"
+
+
+class InstrumentStatus(Enum):
+    # Instrument is fully tradable
+    ACTIVE = "ACTIVE"
+    # Only position-reducing orders are accepted (e.g. pre-delist wind-down)
+    REDUCE_ONLY = "REDUCE_ONLY"
+    # Trading is temporarily paused for scheduled maintenance; cancel-only
+    MAINTENANCE = "MAINTENANCE"
+    # Underlying halted at its primary market (LULD, news pending); index and mark frozen
+    HALTED = "HALTED"
+    # Outside trading window: daily maintenance break, weekend, holiday; cancel-only
+    CLOSED = "CLOSED"
+    # Instrument is created but not yet open for trading (pre-listing)
+    PENDING = "PENDING"
+    # Instrument has been permanently removed
+    DELISTED = "DELISTED"
 
 
 class Kind(Enum):
@@ -245,7 +302,7 @@ class OrderRejectReason(Enum):
     PRIVATE_QUOTE_REQUIRES_RFQ = "PRIVATE_QUOTE_REQUIRES_RFQ"
     # a signed slippage bound filled in limit_price is required
     STABLE_PERP_REQUIRES_PRICE_BOUND = "STABLE_PERP_REQUIRES_PRICE_BOUND"
-    # SFP order only supports trigger_by = index
+    # SFP order only supports trigger_by = index or mid
     UNSUPPORTED_TRIGGER_BY = "UNSUPPORTED_TRIGGER_BY"
     # the order was rejected because the referenced RFQ could not be found
     RFQ_NOT_FOUND = "RFQ_NOT_FOUND"
@@ -253,6 +310,40 @@ class OrderRejectReason(Enum):
     RESTING_ORDER_WOULD_CROSS = "RESTING_ORDER_WOULD_CROSS"
     # the order was submitted when the trading session was either closed or under maintenance
     SESSION_CLOSED = "SESSION_CLOSED"
+    # the quote was cancelled because the RFQ it was bound to reached a terminal state — expired, cancelled by the taker, or closed once its taker order filled
+    RFQ_TERMINATED = "RFQ_TERMINATED"
+    # stable perp orders require a multi-asset-mode sub-account
+    STABLE_PERP_REQUIRES_MULTI_ASSET_MODE = "STABLE_PERP_REQUIRES_MULTI_ASSET_MODE"
+    # the trade would have left the sub account borrowing more than its tier borrow limit in the traded quote currency
+    BORROW_LIMIT_EXCEEDED_AFTER_TRADE = "BORROW_LIMIT_EXCEEDED_AFTER_TRADE"
+    # an undeployed-loan (LTV) auto-exchange executed on the sub account, and all open orders are cancelled by Gravity
+    UNDEPLOYED_LOAN_AUTO_EXCHANGE = "UNDEPLOYED_LOAN_AUTO_EXCHANGE"
+    # a liquidation auto-exchange executed on the sub account, and all open orders are cancelled by Gravity
+    LIQUIDATION_AUTO_EXCHANGE = "LIQUIDATION_AUTO_EXCHANGE"
+    # USDC is not enabled as collateral on the sub account, so USDC-quoted instruments cannot be traded; enable USDC as collateral first
+    USDC_COLLATERAL_DISABLED = "USDC_COLLATERAL_DISABLED"
+    # post-only orders are not supported on STABLE_PERP for accounts that are not qualified market makers; their orders only take liquidity
+    SFP_POST_ONLY_NOT_ALLOWED = "SFP_POST_ONLY_NOT_ALLOWED"
+    # the order was rejected because its sub account is a vault in single-asset margin mode whose investment currency is not its quote currency, and such a vault cannot trade
+    VAULT_NON_QUOTE_INVESTMENT_CURRENCY = "VAULT_NON_QUOTE_INVESTMENT_CURRENCY"
+    # rfq_id was set on an order whose instrument is not a STABLE_PERP; RFQ is a STABLE_PERP-only product
+    RFQ_ID_REQUIRES_STABLE_PERP = "RFQ_ID_REQUIRES_STABLE_PERP"
+    # is_private = true is not supported yet; private per-RFQ quote pools are post-MVP
+    RFQ_PRIVATE_POOL_NOT_SUPPORTED = "RFQ_PRIVATE_POOL_NOT_SUPPORTED"
+    # the taker order accepting an RFQ must be a bounded IOC order — IOC, carrying a limit price; an acceptance takes liquidity immediately and must not be able to rest on the book
+    RFQ_REQUIRES_IOC = "RFQ_REQUIRES_IOC"
+    # the order does not match the RFQ it references — wrong instrument, or a side the RFQ did not request
+    RFQ_MISMATCH = "RFQ_MISMATCH"
+    # the RFQ already has a taker order bound to it; an RFQ accepts only one
+    RFQ_ALREADY_BOUND = "RFQ_ALREADY_BOUND"
+    # a resting order carrying rfq_id must be an ECN quote (is_ecn = true)
+    RFQ_MAKER_MUST_BE_ECN = "RFQ_MAKER_MUST_BE_ECN"
+    # fill-or-kill is not supported on STABLE_PERP yet
+    FOK_NOT_SUPPORTED = "FOK_NOT_SUPPORTED"
+    # market orders are not supported on STABLE_PERP; a taker order must be a bounded IOC order, carrying a limit price
+    MARKET_ORDER_NOT_SUPPORTED = "MARKET_ORDER_NOT_SUPPORTED"
+    # STABLE_PERP orders are disabled on this cluster
+    STABLE_PERP_ORDER_NOT_SUPPORTED = "STABLE_PERP_ORDER_NOT_SUPPORTED"
 
 
 class OrderStatus(Enum):
@@ -305,6 +396,8 @@ class RepaymentScenario(Enum):
     AUTO_REPAY_BORROW_LIMIT = "AUTO_REPAY_BORROW_LIMIT"
     # Liquidator undeployed-loan / LTV auto-repay; uses ARR (/4) divisor for fee. Validator checks LTV trigger is still active.
     AUTO_REPAY_LTV = "AUTO_REPAY_LTV"
+    # Collateral conversion inside a liquidation bundle. Fee-free.
+    LIQUIDATION_REBALANCING = "LIQUIDATION_REBALANCING"
 
 
 class RfqCounterpartyType(Enum):
@@ -323,6 +416,8 @@ class RfqEvent(Enum):
     EXPIRED = "EXPIRED"
     # both channels were cancelled
     CANCELLED = "CANCELLED"
+    # the RFQ's taker order left the matcher — filled, unfilled or cancelled
+    CLOSED = "CLOSED"
 
 
 class RfqSide(Enum):
@@ -332,6 +427,14 @@ class RfqSide(Enum):
     BUY = "BUY"
     # the RFQ side is a sell
     SELL = "SELL"
+
+
+class SfpFundingMode(Enum):
+    UNSPECIFIED = "UNSPECIFIED"
+    # Rate is an annual percentage of notional, as a fraction with 9 decimals: 4.5% = 45000000
+    ANNUAL_PCT_OF_CURRENT_PRICE = "ANNUAL_PCT_OF_CURRENT_PRICE"
+    # Rate is quote currency per unit per day, with 9 decimals: 0.25 USDC = 250000000
+    DAILY_CASH_PER_UNIT = "DAILY_CASH_PER_UNIT"
 
 
 class SubAccountMode(Enum):
@@ -358,6 +461,26 @@ class TimeInForce(Enum):
     FILL_OR_KILL = "FILL_OR_KILL"
     # RPI - A GTT + PostOnly maker order, that can only be taken by non-algorithmic UI users.
     RETAIL_PRICE_IMPROVEMENT = "RETAIL_PRICE_IMPROVEMENT"
+
+
+class TradingScheduleCloseType(Enum):
+    # Market is fully closed for the entire day
+    FULL_DAY = "FULL_DAY"
+    # Market closes early; see the earlyClose time
+    EARLY_CLOSE = "EARLY_CLOSE"
+
+
+class TradingSessionType(Enum):
+    # Core market hours. Full liquidity.
+    REGULAR = "REGULAR"
+    # Extended hours before open. Lower liquidity.
+    PRE_MARKET = "PRE_MARKET"
+    # Extended hours after close. Lower liquidity.
+    AFTER_MARKET = "AFTER_MARKET"
+    # For 24/5 or specific overnight TradFi perps. Minimal liquidity.
+    OVERNIGHT = "OVERNIGHT"
+    # Weekends, holidays, or daily maintenance windows.
+    CLOSE = "CLOSE"
 
 
 class TransferType(Enum):
@@ -797,6 +920,8 @@ class ApiCollateralAssetInfo:
     manual_repayment_fee_rate: str
     # Collateral-deposit-cap utilization status: normal / reduceOnly / autoExchange.
     cdc_status: CDCStatus
+    # Show this currency only when the sub account holds a balance of it
+    show_only_when_held: bool
 
 
 @dataclass
@@ -805,6 +930,8 @@ class ApiCollateralPreferenceStatus:
     currency: str
     # Whether this currency currently counts as collateral for the sub account
     enabled: bool
+    # The sub account cannot turn this currency off as collateral
+    locked: bool
 
 
 @dataclass
@@ -831,6 +958,7 @@ class ApiCreateRfqRequest:
     4. The taker accepts by signing an order via create_order with `metadata.rfq_id` set (single leg; IOC or FOK), which executes across the private pool merged with the public book — or walks away and lets the RFQ expire.
 
     The created RFQ is returned in the response. A sub-account may hold at most one open RFQ per instrument. The RFQ lives until `rfq.expiry`, after which GRVT expires it and auto-cancels the makers' private quotes bound to it.
+    The sub-account must be in multi-asset mode.
     """
 
     # The RFQ to create
@@ -1009,16 +1137,22 @@ class ApiFundingPaymentHistoryResponse:
 class ApiFundingRate:
     # The readable instrument name:<ul><li>Perpetual: `ETH_USDT_Perp`</li><li>Future: `BTC_USDT_Fut_20Oct23`</li><li>Call: `ETH_USDT_Call_20Oct23_2800`</li><li>Put: `ETH_USDT_Put_20Oct23_2800`</li></ul>
     instrument: str
-    # The funding rate of the instrument, expressed in percentage points
-    funding_rate: str
     # The funding timestamp of the funding rate, expressed in unix nanoseconds
     funding_time: str
-    # The mark price of the instrument at funding timestamp, expressed in `9` decimals
+    # The mark price of the instrument at funding timestamp, expressed in `9` decimals. For stable perps, the index price the charge used.
     mark_price: str
-    # Deprecated: Refer to `funding_rate` instead. Will be removed in a future release.
-    funding_rate_8_h_avg: str
     # Funding interval in hours (e.g. 1/4/8/etc).
     funding_interval_hours: int
+    # The funding rate of the instrument, expressed in percentage points. Absent for stable perps, which have `funding_rate_long_apr_pct` and `funding_rate_short_apr_pct` instead.
+    funding_rate: str | None = None
+    # Deprecated: Refer to `funding_rate` instead. Will be removed in a future release. Absent for stable perps.
+    funding_rate_8_h_avg: str | None = None
+    # Stable perps only: the annual rate for retail longs at this charge, in percent a year (`'-5.5'` = retail longs paid 5.5%; positive = retail receives, negative = retail pays). Absent for other kinds.
+    funding_rate_long_apr_pct: str | None = None
+    # Stable perps only: the annual rate for retail shorts at this charge, in percent a year (`'-5'` = retail shorts paid 5%; positive = retail receives, negative = retail pays). Absent for other kinds.
+    funding_rate_short_apr_pct: str | None = None
+    # Stable perps only: days of funding the charge covered, 3 on the triple day, else 1. Absent for other kinds.
+    funding_multiplier: int | None = None
 
 
 @dataclass
@@ -1462,6 +1596,58 @@ class ApiPositionsResponse:
 
 
 @dataclass
+class ApiQualifiedMakerEffectiveRateHistoryRequest:
+    # The instrument to filter for
+    instrument: str | None = None
+    # The start time in unix nanoseconds
+    start_time: str | None = None
+    # The end time in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+
+
+@dataclass
+class ApiQualifiedMakerEffectiveRateHistoryResponse:
+    # The effective rates matching the request
+    result: list[QualifiedMakerEffectiveRate]
+    # The cursor to indicate when to start the query from
+    next: str
+
+
+@dataclass
+class ApiQualifiedMakerFundingRateSubmission:
+    # The upload ID: the accepted transaction's ID
+    upload_id: str
+    # When the upload was accepted, unix nanoseconds
+    uploaded_at: str
+    # The rates uploaded
+    rates: list[QualifiedMakerFundingRateEntry]
+
+
+@dataclass
+class ApiQualifiedMakerFundingRateSubmissionHistoryRequest:
+    # The start time in unix nanoseconds
+    start_time: str | None = None
+    # The end time in unix nanoseconds
+    end_time: str | None = None
+    # The limit to query for. Defaults to 500; Max 1000
+    limit: int | None = None
+    # The cursor to indicate when to start the query from
+    cursor: str | None = None
+
+
+@dataclass
+class ApiQualifiedMakerFundingRateSubmissionHistoryResponse:
+    # The accepted submissions matching the request
+    result: list[ApiQualifiedMakerFundingRateSubmission]
+    # The cursor to indicate when to start the query from
+    next: str
+
+
+@dataclass
 class ApiQueryVaultManagerInvestorHistoryRequest:
     # The unique identifier of the vault to filter by
     vault_id: str
@@ -1561,13 +1747,31 @@ class ApiSetSubAccountPositionMarginConfigResponse:
 
 
 @dataclass
+class ApiSfpTradingScheduleResponse:
+    # Session data update timestamp in milliseconds
+    update_time: str
+    # Trading hours as groups of stable perps sharing them: one per asset class, named after it, then one per instrument schedule, named in cluster config. Each stable perp with a schedule is in exactly one group
+    schedules: list[SfpTradingScheduleGroup]
+    # Legacy: use `schedules` instead. Schedule for the `EQUITY` asset class
+    equity: SfpMarketSchedule | None = None
+    # Legacy: use `schedules` instead. Schedule for the `EQUITY_NYSE` asset class
+    equity_nyse: SfpMarketSchedule | None = None
+    # Legacy: use `schedules` instead. Schedule for the `EQUITY_NASDAQ` asset class
+    equity_nasdaq: SfpMarketSchedule | None = None
+    # Legacy: use `schedules` instead. Schedule for the `COMMODITY` asset class
+    commodity: SfpMarketSchedule | None = None
+    # Legacy: use `schedules` instead. Schedule for the `COMMODITY_CME` asset class
+    commodity_cme: SfpMarketSchedule | None = None
+
+
+@dataclass
 class ApiSpotBorrowConfig:
     currency: str
-    # BL — max borrowable amount, native units. 0 = not borrowable.
+    # BL — max borrowable amount, denominated in the asset. 0 = not borrowable.
     borrow_limit: str
     # BR — annual borrow interest rate at this tier. Never exceeds the asset's maxBorrowRate.
     borrow_rate: str
-    # CL — max amount counted as collateral, native units. 0 = unlimited.
+    # CL — max amount counted as collateral, denominated in the asset. 0 = unlimited.
     collateral_limit: str
 
 
@@ -1593,6 +1797,22 @@ class ApiSubAccountSummaryRequest:
 class ApiSubAccountSummaryResponse:
     # The sub account matching the request sub account
     result: SubAccount
+
+
+@dataclass
+class ApiSubmitQualifiedMakerFundingRatesRequest:
+    # One entry per instrument; the request is accepted or rejected as a whole
+    rates: list[QualifiedMakerFundingRateEntry]
+    # The EIP-712 signature over rates
+    signature: Signature
+
+
+@dataclass
+class ApiSubmitQualifiedMakerFundingRatesResponse:
+    # The upload id: the transaction ID of the accepted rates
+    upload_id: str
+    # The accepted rates, as submitted
+    rates: list[QualifiedMakerFundingRateEntry]
 
 
 @dataclass
@@ -1767,6 +1987,40 @@ class ApiVaultBurnTokensRequest:
 
 
 @dataclass
+class ApiVaultConversionRateRequest:
+    # The currency converted from.
+    from_currency: str
+    # The currency converted into.
+    to_currency: str
+    # Optional amount of `fromCurrency`. When set, the response estimates what it converts into.
+    from_num_tokens: str | None = None
+
+
+@dataclass
+class ApiVaultConversionRateResponse:
+    # The currency converted from.
+    from_currency: str
+    # The currency converted into.
+    to_currency: str
+    # The highest rate accepted now, `toCurrency` per unit of `fromCurrency`, floored to 9 decimal places. It is 1 when both currencies are the same.
+    exchange_rate: str
+    # The current spot rate from the latest oracle prices, 9 decimal places.
+    spot_rate: str
+    # The conversion fee configured for the pair, in centibeeps (1 = 0.0001%).
+    fee_rate_centi_beeps: int
+    # The length of the window the rate is the highest of, in seconds.
+    window_seconds: int
+    # When the price sample the rate comes from leaves the window, in unix nanoseconds. Show a validity no longer than this.
+    valid_until: str
+    # The time of the newest oracle price the rate uses, in unix nanoseconds.
+    event_time: str
+    # The amount of `fromCurrency` the request named, if any.
+    from_num_tokens: str | None = None
+    # What `fromNumTokens` converts into at `exchangeRate`, floored to `toCurrency` decimals. Omitted without `fromNumTokens`.
+    to_num_tokens: str | None = None
+
+
+@dataclass
 class ApiVaultInvestRequest:
     """
     Request payload for investing in a vault.
@@ -1776,7 +2030,7 @@ class ApiVaultInvestRequest:
 
     # The unique identifier of the vault to invest in.
     vault_id: str
-    # The currency used for the investment. This should be the vault's quote currency.
+    # The currency used for the investment. This should be the vault's investment currency.
     currency: str
     # The investment sum, in terms of the token currency specified (i.e., `numTokens` of '1000' with `tokenCurrency` of 'USDT' denotes investment of 1,000 USDT).
     num_tokens: str
@@ -1786,6 +2040,45 @@ class ApiVaultInvestRequest:
     The signature must comply with AccountPermExternalTransfer permission.
     """
     signature: Signature
+
+
+@dataclass
+class ApiVaultInvestV2Request:
+    """
+    Request payload for investing in a vault from the funding account or from a trading account, converting the source currency into the vault's investment currency when they differ.
+
+    The investor signs `VaultInvestV3` over both currencies, the amount and the exchange rate. Without conversion the rate is exactly 1. With conversion it must be at most the rate `/vault_conversion_rate` returns.
+    """
+
+    # The unique identifier of the vault to invest in.
+    vault_id: str
+    # The trading account to invest from. 0 means the funding account.
+    from_sub_account_id: str
+    # FUNDING when `fromSubAccountID` is 0, otherwise SPOT or FUTURES.
+    from_wallet_type: WalletType
+    # The currency debited from the source wallet.
+    from_currency: str
+    # The amount debited from the source wallet, in `fromCurrency`.
+    from_num_tokens: str
+    # The currency the vault receives. This must be the vault's investment currency.
+    to_currency: str
+    # The signed rate, `toCurrency` per unit of `fromCurrency`, up to 9 decimal places. Exactly 1 when both currencies are the same.
+    exchange_rate: str
+    """
+    The `VaultInvestV3` signature of the investing account.
+    The signer needs the vault investor permission on the main account and, for a trading account source, the transfer permission on that trading account.
+    """
+    signature: Signature
+
+
+@dataclass
+class ApiVaultInvestV2Response:
+    # Whether the investment was accepted.
+    ack: bool
+    # The transaction ID of the investment once risk confirmed it. 0 when the investment was queued.
+    tx_id: str
+    # Cross-exchange vaults only: true when the vault was locked and the investment was queued.
+    enqueued: bool | None = None
 
 
 @dataclass
@@ -1806,6 +2099,26 @@ class ApiVaultInvestorHistory:
     realized_pnl: str
     # The performance fee of the vault.
     performance_fee: str
+    # The vault leg's currency: the vault's investment currency, which the vault received or paid. Empty on a burn, which moves no tokens.
+    token_currency: str
+    # The vault leg: the tokens of tokenCurrency the vault received on an invest or paid on a redemption. 0 on a burn, and on a vaultRedeem recorded before its results carried the amount.
+    num_tokens: str
+    # The currency that left its owner: on an invest the investor's source currency (the user leg), on a redemption tokenCurrency. A row without conversion has the vault leg's currency. Empty on a burn.
+    from_currency: str
+    # The tokens of fromCurrency that left their owner: on an invest what the investor paid (the user leg), on a redemption numTokens. 0 on a burn, and on a vaultRedeem recorded before its results carried the amount.
+    from_num_tokens: str
+    # The currency that reached its owner: on a redemption the investor's payout currency (the user leg), on an invest tokenCurrency. A row without conversion has the vault leg's currency. Empty on a burn.
+    to_currency: str
+    # The tokens of toCurrency that reached their owner: on a redemption what the investor received (the user leg), on an invest numTokens. 0 on a burn, and on a vaultRedeem recorded before its results carried the amount.
+    to_num_tokens: str
+    # The conversion fee in toCurrency: the difference between the two legs of a converting invest or redemption. 0 without conversion.
+    conversion_fee_num_tokens: str
+    # The trading sub-account an invest was paid from. 0 for the funding account and on other rows.
+    from_sub_account_id: str
+    # The wallet an invest was paid from: FUNDING for the funding account, otherwise SPOT or FUTURES. Unspecified on redemptions and burns.
+    from_wallet_type: WalletType
+    # On a redemption, when its redemption request was made, in unix nanoseconds. 0 when unknown and on other rows.
+    request_time: str
 
 
 @dataclass
@@ -1854,7 +2167,7 @@ class ApiVaultRedeemRequest:
 
     # The unique identifier of the vault to redeem from.
     vault_id: str
-    # The currency used for the redemption. This should be the vault's quote currency.
+    # The currency used for the redemption. This should be the vault's investment currency.
     currency: str
     # The number of shares to redeem.
     num_tokens: str
@@ -1862,6 +2175,31 @@ class ApiVaultRedeemRequest:
     The digital signature from the investing account.
     This signature must be generated by the main account ID and is used to verify the authenticity of the request.
     The signature must comply with AccountPermExternalTransfer permission.
+    """
+    signature: Signature
+
+
+@dataclass
+class ApiVaultRedeemV2Request:
+    """
+    Request payload for redeeming from a vault, paid in the vault's investment currency or converted into another currency.
+
+    The investor signs `VaultRedeemV3` over both currencies, the number of shares and the exchange rate. The request keeps the signed rate and is paid at it, at the share price of the payout.
+    """
+
+    # The unique identifier of the vault to redeem from.
+    vault_id: str
+    # The currency the vault pays. This must be the vault's investment currency.
+    from_currency: str
+    # The currency paid into the funding account: the investment currency, or another currency converted at `exchangeRate`.
+    to_currency: str
+    # The number of shares to redeem.
+    num_tokens: str
+    # The signed rate, `toCurrency` per unit of `fromCurrency`, up to 9 decimal places. Exactly 1 when both currencies are the same.
+    exchange_rate: str
+    """
+    The `VaultRedeemV3` signature of the redeeming account.
+    The signer needs the vault investor permission on the main account.
     """
     signature: Signature
 
@@ -2125,7 +2463,9 @@ class ECNToBrokerFeed:
     # The reason for rejection or cancellation
     reject_reason: OrderRejectReason
     # [Filled by GRVT Backend] Time at which the ECN order will expire in unix nanoseconds
-    expiry_time: str
+    expiry_time: str | None = None
+    # The taker's derived anonymous account id shown to makers, omitted when no taker has matched yet. Real taker identity is never exposed
+    taker_anon_account_id: str | None = None
 
 
 @dataclass
@@ -2239,7 +2579,7 @@ class FundingPayment:
     event_time: str
     # The sub account ID that made the funding payment
     sub_account_id: str
-    # The perpetual instrument being funded
+    # The instrument being funded (perpetual or stable perp)
     instrument: str
     # The currency of the funding payment
     currency: str
@@ -2311,6 +2651,20 @@ class InstrumentDisplay:
     adjusted_funding_rate_cap: str | None = None
     # Funding rate floor over the defined `intervalHours`.
     adjusted_funding_rate_floor: str | None = None
+    # The asset class of the underlying the instrument tracks
+    asset_class: AssetClass | None = None
+    # The current lifecycle/trading status of the instrument
+    status: InstrumentStatus | None = None
+    # The guaranteed exit band, expressed in percentage points
+    guaranteed_exit_band: str | None = None
+    # The spread penalty tolerance, expressed in percentage points
+    spread_penalty_tolerance: str | None = None
+    # Timestamp in unix nanoseconds at which the funding cap adjustment applies
+    funding_cap_adjustment_time: str | None = None
+    # The funding cap adjustment value, expressed as a decimal daily rate
+    funding_cap_adjustment_value: str | None = None
+    # Stable perps only: the weekday whose daily funding charge covers 3 days (the weekend)
+    triple_swap_day: DayOfWeek | None = None
 
 
 @dataclass
@@ -2650,11 +3004,65 @@ class PreMinRedemptions:
 
 
 @dataclass
+class QualifiedMakerEffectiveRate:
+    # The charge (funding) time in unix nanoseconds
+    event_time: str
+    # The qualified maker main account
+    main_account_id: str
+    # The stable perp
+    instrument: str
+    # The mode the qualified maker uploaded in; the record carries only that mode's pair of rate fields
+    mode: SfpFundingMode
+    # The upload this rate comes from
+    upload_id: str
+    # When that upload was accepted, unix nanoseconds
+    uploaded_at: str
+    # True if the qualified maker did not upload since the previous charge and its last rate was reused
+    carried_forward: bool
+    # The funding tick transaction ID
+    tx_id: str
+    # The sub-account the netted payment was booked on: the sfpFundingSubAccount config, else the main account's non-vault sub-account with the largest total equity. 0 when the charge paid nothing
+    funding_sub_account_id: str
+    # The qualified maker's position netted across all sub-accounts of its main account, in base units (negative = short). Net short is settled at its long rate, net long at its short rate
+    net_position: str
+    # The index price the charge used, expressed in `9` decimals
+    index_price: str
+    # Days of funding the charge covered: 3 on the triple swap day, else 1
+    multiplier: int
+    # The netted funding payment in the quote currency, as on the funding sub-account's funding payment: negative = the qualified maker received it, positive = it paid. 0 when the charge paid nothing
+    amount: str
+    # ANNUAL_PCT_OF_CURRENT_PRICE only: the qualified maker's long rate used, in percent a year ("-4.5" = retail longs pay 4.5%); positive = retail receives, negative = retail pays
+    long_rate_apr_pct: str | None = None
+    # ANNUAL_PCT_OF_CURRENT_PRICE only: the qualified maker's short rate used, in percent a year; positive = retail receives, negative = retail pays
+    short_rate_apr_pct: str | None = None
+    # DAILY_CASH_PER_UNIT only: the qualified maker's long rate used, in quote currency per unit per day; positive = retail receives, negative = retail pays
+    long_rate_cash_per_unit: str | None = None
+    # DAILY_CASH_PER_UNIT only: the qualified maker's short rate used, in quote currency per unit per day; positive = retail receives, negative = retail pays
+    short_rate_cash_per_unit: str | None = None
+
+
+@dataclass
+class QualifiedMakerFundingRateEntry:
+    # A listed stable perp
+    instrument: str
+    # Either funding mode; the entry carries only that mode's pair of rate fields
+    mode: SfpFundingMode
+    # ANNUAL_PCT_OF_CURRENT_PRICE only: the long rate in percent a year, up to 6 decimals ("-4.5" = retail longs pay 4.5%); positive = retail receives, negative = retail pays
+    long_rate_apr_pct: str | None = None
+    # ANNUAL_PCT_OF_CURRENT_PRICE only: the short rate in percent a year, up to 6 decimals; positive = retail receives, negative = retail pays
+    short_rate_apr_pct: str | None = None
+    # DAILY_CASH_PER_UNIT only: the long rate in quote currency per unit per day, up to 6 decimals; positive = retail receives, negative = retail pays
+    long_rate_cash_per_unit: str | None = None
+    # DAILY_CASH_PER_UNIT only: the short rate in quote currency per unit per day, up to 6 decimals; positive = retail receives, negative = retail pays
+    short_rate_cash_per_unit: str | None = None
+
+
+@dataclass
 class Rfq:
     """
     A Request for Quote (RFQ) lets a taker solicit private quotes on a single instrument from makers.
 
-    <ul><li>Single instrument</li><ul><li>Each RFQ targets one instrument (kind = STABLE_PERP) for a single requested size.</li><li>The taker may disclose a direction via `rfq.side`, or omit it to request a two-way (buy and sell) quote.</li></ul><li>Maker solicitation</li><ul><li>On submission, GRVT broadcasts the RFQ to makers over the `v1.rfq` feed (see RfqFeed).</li><li>Makers respond with private quotes, which the taker receives as a private quote book over the `v1.quote` feed (see RfqQuoteFeed).</li></ul><li>Anonymity</li><ul><li>Anonymity is automatic and always enforced — the taker and makers only ever see each other's derived anonymous account ids.</li><li>Real taker and maker identities are never exposed to the counterparty.</li></ul><li>Expiry</li><ul><li>The RFQ lives until `rfq.expiry`, after which GRVT expires it and auto-cancels the makers' private quotes bound to it.</li></ul></ul>
+    <ul><li>Single instrument</li><ul><li>Each RFQ targets one instrument (kind = STABLE_PERP) for a single requested size.</li><li>The taker may disclose a direction via `rfq.side`, or omit it to request a two-way (buy and sell) quote.</li></ul><li>Maker solicitation</li><ul><li>On submission, GRVT broadcasts the RFQ to makers over the `v1.rfq` feed (see RfqFeed).</li><li>While the RFQ is open, the taker receives on the `v1.quote` feed an estimate of the average fill price for the RFQ size against the public book (see RfqQuoteFeed).</li></ul><li>Anonymity</li><ul><li>Anonymity is automatic and always enforced — the taker and makers only ever see each other's derived anonymous account ids.</li><li>Real taker and maker identities are never exposed to the counterparty.</li></ul><li>Expiry</li><ul><li>The RFQ lives until `rfq.expiry`, after which GRVT expires it and auto-cancels the makers' private quotes bound to it.</li></ul></ul>
     """
 
     # [Filled by GRVT Backend] A unique 128-bit identifier for the RFQ, deterministically generated within the GRVT backend
@@ -2691,23 +3099,23 @@ class RfqFeed:
 
 @dataclass
 class RfqQuoteFeed:
-    # The RFQ this private quote book belongs to
+    # The RFQ this estimate belongs to. A feed with no levels means the RFQ ended
     rfq_id: str
-    # Private quote bid levels, sorted best (highest) price first
+    # The sell-side estimate (at most one level), from the bids
     bid_levels: list[RfqQuoteLevel]
-    # Private quote ask levels, sorted best (lowest) price first
+    # The buy-side estimate (at most one level), from the asks
     ask_levels: list[RfqQuoteLevel]
-    # Best (highest) bid price across the book, expressed in the instrument's quote-asset decimals.
+    # Average fill price to sell the RFQ size, expressed in `9` decimals. Omitted when the bid side is empty
     best_bid: str | None = None
-    # Best (lowest) ask price across the book, expressed in the instrument's quote-asset decimals.
+    # Average fill price to buy the RFQ size, expressed in `9` decimals. Omitted when the ask side is empty
     best_ask: str | None = None
 
 
 @dataclass
 class RfqQuoteLevel:
-    # Price of the level, expressed in `9` decimals
+    # Average fill price for the size, expressed in `9` decimals. Rounded against the taker: up for asks, down for bids
     price: str
-    # Size at this level, expressed in base asset decimal units
+    # Fillable size, up to the RFQ size, expressed in base asset decimal units
     size: str
     # The maker's derived anonymous account id shown to the taker. Real maker identity is never exposed
     maker_anon_account_id: str
@@ -2731,6 +3139,28 @@ class RiskBracket:
     cumulative_maintenance_amount: str
     # Upper bound of notional value (exclusive) in quote currency, omitted for last tier
     notional_cap: str | None = None
+
+
+@dataclass
+class SfpMarketSchedule:
+    # Trading sessions for the current calendar week (Sunday to Saturday in the exchange's local time). The sessions are contiguous with no gaps, and any period when the market is not open, including holidays falling in this week, is returned as a `CLOSE` session
+    sessions: list[TradingSession]
+    # Market holidays and early closes, past and upcoming, sorted by start time. The market is closed from the start time to the end time of each entry. Empty when there are none
+    holidays: list[TradingHolidaySchedule]
+
+
+@dataclass
+class SfpTradingScheduleGroup:
+    # The group name. For stable perps on their asset class hours, the asset class (for example `COMMODITY_CME`)
+    name: str
+    # The instruments' asset class. Its holiday calendar sets the group's holidays
+    asset_class: AssetClass
+    # The stable perps trading these hours, sorted. Each stable perp with a schedule is in exactly one group
+    instruments: list[str]
+    # Trading sessions for the current calendar week (Sunday to Saturday in the exchange's local time). The sessions are contiguous with no gaps, and any period when the market is not open, including holidays falling in this week, is returned as a `CLOSE` session
+    sessions: list[TradingSession]
+    # Market holidays and early closes, past and upcoming, sorted by start time. The market is closed from the start time to the end time of each entry. Empty when there are none
+    holidays: list[TradingHolidaySchedule]
 
 
 @dataclass
@@ -2773,6 +3203,11 @@ class SpotBalance:
     unrealized_pnl: str
     # The available to transfer amount of this spot currency.
     available_to_transfer: str
+    """
+    The amount borrowed in this currency, inclusive of accrued interest.
+    Only reported by `account_summary`, and only for multi-asset-mode sub accounts
+    """
+    borrowed_amount: str | None = None
 
 
 @dataclass
@@ -2869,6 +3304,8 @@ class SupportedAsset:
     asset_code: str
     # The number of decimals used for balance representation
     balance_decimals: int
+    # The asset cannot be transferred between wallets
+    transfer_disabled: bool
 
 
 @dataclass
@@ -2953,10 +3390,22 @@ class Ticker:
     open_interest: str | None = None
     # The ratio of accounts that are net long vs net short on this instrument
     long_short_ratio: str | None = None
-    # The current indicative funding rate for the active interval, expressed in centibeeps
+    # The current indicative funding rate for the active interval, expressed in centibeeps. Absent for stable perps, which have `funding_rate_long_apr_pct` and `funding_rate_short_apr_pct` instead.
     funding_rate: str | None = None
     # Timestamp in nanoseconds when the current funding interval ends
     next_funding_time: str | None = None
+    # The current status of the instrument
+    status: InstrumentStatus | None = None
+    # The current trading session of the instrument's underlying market
+    session: TradingSessionType | None = None
+    # The long open interest in the instrument, expressed in base asset decimal units. Excludes qualified-maker and DMM open interest.
+    long_open_interest: str | None = None
+    # The short open interest in the instrument, expressed in base asset decimal units. Excludes qualified-maker and DMM open interest.
+    short_open_interest: str | None = None
+    # Stable perps only: the indicative annual rate for retail longs at the next charge, in percent a year (`'-5.5'` = retail longs pay 5.5%; positive = retail receives, negative = retail pays). Updated when the rates change. Absent for other kinds.
+    funding_rate_long_apr_pct: str | None = None
+    # Stable perps only: the indicative annual rate for retail shorts at the next charge, in percent a year (`'-5'` = retail shorts pay 5%; positive = retail receives, negative = retail pays). Updated when the rates change. Absent for other kinds.
+    funding_rate_short_apr_pct: str | None = None
 
 
 @dataclass
@@ -2989,6 +3438,28 @@ class Trade:
     mark_price: str | None = None
     # [Options] The forward price of the option at point of trade, expressed in `9` decimals
     forward_price: str | None = None
+
+
+@dataclass
+class TradingHolidaySchedule:
+    # Holiday name
+    name: str
+    # `FULL_DAY`: the market is closed for the whole day. `EARLY_CLOSE`: the market trades as normal until the start time, then is closed until the end time
+    close_type: TradingScheduleCloseType
+    # When the closure begins, as a Unix timestamp in milliseconds. For `FULL_DAY` this is when the closed trading day's session would have opened (the evening before for a session that opens before midnight); for `EARLY_CLOSE` it is the moment the market closes early
+    start_time: str
+    # When the closed or shortened trading day's session would have closed, as a Unix timestamp in milliseconds. The closure covers the start time up to, but not including, the end time
+    end_time: str
+
+
+@dataclass
+class TradingSession:
+    # Trading session start time timestamp in milliseconds
+    start_time: str
+    # Trading session end time timestamp in milliseconds
+    end_time: str
+    # Trading session type
+    type: TradingSessionType
 
 
 @dataclass
@@ -3073,10 +3544,24 @@ class VaultInvestorSummary:
     total_equity: str
     # The all-time realized PnL (in USD) that the investor has received from the vault.
     all_time_realized_pnl: str
+    # The number of the investor's vault LP tokens still within the vault's minimum investment period.
+    num_lp_tokens_locked: str
+    # The number of vault LP tokens the investor can request to redeem now: those past the minimum investment period, less any pending redemption.
+    num_lp_tokens_redeemable: str
+    # The investor's vault LP tokens within the minimum investment period, by the time they unlock (earliest first).
+    locked_lots: list[VaultLpLotView]
     # The singleton pending redemption (omitted if none).
     pending_redemption: VaultRedemption | None = None
     # True if the requesting account is authorized to burn tokens on this vault, omitted otherwise.
     can_burn: bool | None = None
+
+
+@dataclass
+class VaultLpLotView:
+    # Time in unix nanoseconds from which these LP tokens can be redeemed.
+    unlock_time: str
+    # The number of LP tokens in the lot.
+    num_lp_tokens: str
 
 
 @dataclass
@@ -3095,6 +3580,10 @@ class VaultRedemption:
     request_time: str
     # [Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed.
     max_redemption_period_timestamp: str
+    # The currency the request pays into the investor's funding account: the vault's investment currency, unless the request converts.
+    to_currency: str
+    # The signed rate the request is paid at, `to_currency` per unit of the vault's investment currency. 1 when the request does not convert.
+    exchange_rate: str
     # Omitted for redemption requests to non-cross exchange vaults. True if cancellation is blocked within the CEV allocation allowance for the user's current tier (e.g. because the user has already transferred out the spot balance underlying the redemption request).
     cancel_blocked: bool | None = None
 
@@ -3111,6 +3600,12 @@ class VaultRedemptionRequest:
     age_category: VaultRedemptionReqAgeCategory
     # [Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be eligible for automated redemption.
     eligible_for_auto_redemption_timestamp: str
+    # The currency the vault pays: the vault's investment currency.
+    from_currency: str
+    # The currency paid into the investor's funding account. Equal to `from_currency` when the request does not convert.
+    to_currency: str
+    # The signed rate the request is paid at, `to_currency` per unit of `from_currency`. 1 when the request does not convert.
+    exchange_rate: str
     # `true` if this request belongs to the vault manager, omitted otherwise.
     is_manager: bool | None = None
 
@@ -3542,7 +4037,7 @@ class WSRfqFeedDataV1:
 @dataclass
 class WSRfqFeedSelectorV1:
     """
-    Maker feed. Subscribe with selector `(sub_account_id, instrument)` to receive the RFQs you can quote on, delivered as lifecycle events (NEW, EXPIRED, CANCELLED). Respond to an RFQ by posting quotes via create_order (is_ecn = true, with `metadata.rfq_id` / `metadata.is_private`).
+    Maker feed. Subscribe with selector `(sub_account_id, instrument)` to receive the RFQs you can quote on, delivered as lifecycle events. Respond to an RFQ by posting quotes via create_order (is_ecn = true, with `metadata.rfq_id` / `metadata.is_private`).
 
     The subscription is stateful: from the moment you subscribe you are 'on' for that instrument — RFQs are delivered, your response ratios are tracked, and you are expected to keep a live public quote resting on the book (the platform nudges you with a zero-size RFQ if none is resting).
 

@@ -146,7 +146,7 @@ STREAM: v1.order
                     "is_ecn": false,
                     "slippage_bps": 800,
                     "rfq_id": "0x1234567890abcdef",
-                    "is_private": false
+                    "is_private": false,
                 },
                 "state": {
                     "status": "PENDING",
@@ -206,7 +206,8 @@ STREAM: v1.order
                     "ie": false,
                     "sb": 800,
                     "ri": "0x1234567890abcdef",
-                    "ip1": false
+                    "ip1": false,
+                    "ao": null
                 },
                 "s1": {
                     "s": "PENDING",

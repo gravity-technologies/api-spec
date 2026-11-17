@@ -6,3 +6,4 @@
     |asset_id<br>`ai` |integer|True|The currency ID of the asset|
     |asset_code<br>`ac` |string|True|The readable currency code of the asset|
     |balance_decimals<br>`bd` |integer|True|The number of decimals used for balance representation|
+    |transfer_disabled<br>`td` |boolean|True|The asset cannot be transferred between wallets|

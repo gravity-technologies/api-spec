@@ -20,6 +20,9 @@
         |age_category<br>`ac` |VaultRedemptionReqAgeCategory|True|Age category of this redemption request.|
         |is_manager<br>`im` |boolean|False<br>`None`|`true` if this request belongs to the vault manager, omitted otherwise.|
         |eligible_for_auto_redemption_timestamp<br>`ef` |string|True|[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be eligible for automated redemption.|
+        |from_currency<br>`fc` |string|True|The currency the vault pays: the vault's investment currency.|
+        |to_currency<br>`tc` |string|True|The currency paid into the investor's funding account. Equal to `from_currency` when the request does not convert.|
+        |exchange_rate<br>`er` |string|True|The signed rate the request is paid at, `to_currency` per unit of `from_currency`. 1 when the request does not convert.|
         ??? info "[VaultRedemptionReqAgeCategory](/../../schemas/vault_redemption_req_age_category)"
             Denotes the age category of a given redemption request.<br><br><br>
 
@@ -47,6 +50,9 @@
             |age_category<br>`ac` |VaultRedemptionReqAgeCategory|True|Age category of this redemption request.|
             |is_manager<br>`im` |boolean|False<br>`None`|`true` if this request belongs to the vault manager, omitted otherwise.|
             |eligible_for_auto_redemption_timestamp<br>`ef` |string|True|[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be eligible for automated redemption.|
+            |from_currency<br>`fc` |string|True|The currency the vault pays: the vault's investment currency.|
+            |to_currency<br>`tc` |string|True|The currency paid into the investor's funding account. Equal to `from_currency` when the request does not convert.|
+            |exchange_rate<br>`er` |string|True|The signed rate the request is paid at, `to_currency` per unit of `from_currency`. 1 when the request does not convert.|
             ??? info "[VaultRedemptionReqAgeCategory](/../../schemas/vault_redemption_req_age_category)"
                 Denotes the age category of a given redemption request.<br><br><br>
 

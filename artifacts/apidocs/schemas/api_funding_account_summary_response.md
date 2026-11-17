@@ -26,6 +26,7 @@
             |realized_pnl<br>`rp` |string|True|The realized PnL of this spot currency. (reported in `USD`)|
             |unrealized_pnl<br>`up` |string|True|The unrealized PnL of this spot currency. (reported in `USD`)|
             |available_to_transfer<br>`at` |string|True|The available to transfer amount of this spot currency.|
+            |borrowed_amount<br>`ba` |string|False<br>`None`|The amount borrowed in this currency, inclusive of accrued interest.<br>Only reported by `account_summary`, and only for multi-asset-mode sub accounts|
         ??? info "[VaultInvestment](/../../schemas/vault_investment)"
             Summarizes a vault investment held by a funding account<br>
 
@@ -50,6 +51,6 @@
             |Name<br>`Lite`|Type|Required<br>`Default`| Description |
             |-|-|-|-|
             |currency<br>`c` |string|True||
-            |borrow_limit<br>`bl` |string|True|BL — max borrowable amount, native units. 0 = not borrowable.|
+            |borrow_limit<br>`bl` |string|True|BL — max borrowable amount, denominated in the asset. 0 = not borrowable.|
             |borrow_rate<br>`br` |string|True|BR — annual borrow interest rate at this tier. Never exceeds the asset's maxBorrowRate.|
-            |collateral_limit<br>`cl` |string|True|CL — max amount counted as collateral, native units. 0 = unlimited.|
+            |collateral_limit<br>`cl` |string|True|CL — max amount counted as collateral, denominated in the asset. 0 = unlimited.|

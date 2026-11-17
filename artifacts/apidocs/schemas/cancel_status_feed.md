@@ -65,10 +65,27 @@
         |`NOT_QUALIFIED_MAKER` = 57|the order was rejected because the sub account is not a qualified maker|
         |`PRIVATE_QUOTE_REQUIRES_RFQ` = 58|rfq_id is required when is_private = true|
         |`STABLE_PERP_REQUIRES_PRICE_BOUND` = 59|a signed slippage bound filled in limit_price is required|
-        |`UNSUPPORTED_TRIGGER_BY` = 60|SFP order only supports trigger_by = index|
+        |`UNSUPPORTED_TRIGGER_BY` = 60|SFP order only supports trigger_by = index or mid|
         |`RFQ_NOT_FOUND` = 61|the order was rejected because the referenced RFQ could not be found|
         |`RESTING_ORDER_WOULD_CROSS` = 62|post-only resting placement crosses opposite best resting or index mid|
         |`SESSION_CLOSED` = 63|the order was submitted when the trading session was either closed or under maintenance|
+        |`RFQ_TERMINATED` = 65|the quote was cancelled because the RFQ it was bound to reached a terminal state — expired, cancelled by the taker, or closed once its taker order filled|
+        |`STABLE_PERP_REQUIRES_MULTI_ASSET_MODE` = 66|stable perp orders require a multi-asset-mode sub-account|
+        |`BORROW_LIMIT_EXCEEDED_AFTER_TRADE` = 67|the trade would have left the sub account borrowing more than its tier borrow limit in the traded quote currency|
+        |`UNDEPLOYED_LOAN_AUTO_EXCHANGE` = 68|an undeployed-loan (LTV) auto-exchange executed on the sub account, and all open orders are cancelled by Gravity|
+        |`LIQUIDATION_AUTO_EXCHANGE` = 69|a liquidation auto-exchange executed on the sub account, and all open orders are cancelled by Gravity|
+        |`USDC_COLLATERAL_DISABLED` = 70|USDC is not enabled as collateral on the sub account, so USDC-quoted instruments cannot be traded; enable USDC as collateral first|
+        |`SFP_POST_ONLY_NOT_ALLOWED` = 71|post-only orders are not supported on STABLE_PERP for accounts that are not qualified market makers; their orders only take liquidity|
+        |`VAULT_NON_QUOTE_INVESTMENT_CURRENCY` = 72|the order was rejected because its sub account is a vault in single-asset margin mode whose investment currency is not its quote currency, and such a vault cannot trade|
+        |`RFQ_ID_REQUIRES_STABLE_PERP` = 161|rfq_id was set on an order whose instrument is not a STABLE_PERP; RFQ is a STABLE_PERP-only product|
+        |`RFQ_PRIVATE_POOL_NOT_SUPPORTED` = 162|is_private = true is not supported yet; private per-RFQ quote pools are post-MVP|
+        |`RFQ_REQUIRES_IOC` = 163|the taker order accepting an RFQ must be a bounded IOC order — IOC, carrying a limit price; an acceptance takes liquidity immediately and must not be able to rest on the book|
+        |`RFQ_MISMATCH` = 164|the order does not match the RFQ it references — wrong instrument, or a side the RFQ did not request|
+        |`RFQ_ALREADY_BOUND` = 165|the RFQ already has a taker order bound to it; an RFQ accepts only one|
+        |`RFQ_MAKER_MUST_BE_ECN` = 166|a resting order carrying rfq_id must be an ECN quote (is_ecn = true)|
+        |`FOK_NOT_SUPPORTED` = 167|fill-or-kill is not supported on STABLE_PERP yet|
+        |`MARKET_ORDER_NOT_SUPPORTED` = 168|market orders are not supported on STABLE_PERP; a taker order must be a bounded IOC order, carrying a limit price|
+        |`STABLE_PERP_ORDER_NOT_SUPPORTED` = 169|STABLE_PERP orders are disabled on this cluster|
     ??? info "[CancelStatus](/../../schemas/cancel_status)"
         |Value| Description |
         |-|-|

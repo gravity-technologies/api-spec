@@ -18,6 +18,13 @@
     |adjusted_funding_rate_cap<br>`af` |string|False<br>`None`|Funding rate cap over the defined `intervalHours`.|
     |adjusted_funding_rate_floor<br>`af1` |string|False<br>`None`|Funding rate floor over the defined `intervalHours`.|
     |min_notional<br>`mn` |string|True|The minimum order notional value, expressed in quote currency decimal units|
+    |asset_class<br>`ac` |AssetClass|False<br>`None`|The asset class of the underlying the instrument tracks|
+    |status<br>`s` |InstrumentStatus|False<br>`None`|The current lifecycle/trading status of the instrument|
+    |guaranteed_exit_band<br>`ge` |string|False<br>`None`|The guaranteed exit band, expressed in percentage points|
+    |spread_penalty_tolerance<br>`sp2` |string|False<br>`None`|The spread penalty tolerance, expressed in percentage points|
+    |funding_cap_adjustment_time<br>`fc` |string|False<br>`None`|Timestamp in unix nanoseconds at which the funding cap adjustment applies|
+    |funding_cap_adjustment_value<br>`fc1` |string|False<br>`None`|The funding cap adjustment value, expressed as a decimal daily rate|
+    |triple_swap_day<br>`ts2` |DayOfWeek|False<br>`None`|Stable perps only: the weekday whose daily funding charge covers 3 days (the weekend)|
     ??? info "[Kind](/../../schemas/kind)"
         The list of asset kinds that are supported on the GRVT exchange<br>
 
@@ -43,3 +50,42 @@
         |`WEEKLY` = 3|Instrument settles at an expiry date, marked as a weekly instrument|
         |`MONTHLY` = 4|Instrument settles at an expiry date, marked as a monthly instrument|
         |`QUARTERLY` = 5|Instrument settles at an expiry date, marked as a quarterly instrument|
+    ??? info "[AssetClass](/../../schemas/asset_class)"
+        Asset class of an instrument's underlying. The first five values (crypto through index) are general classifications used by Perpetuals for display. The remaining values (equityNasdaq, equityNyse, etc.) are schedule-specific and used by SFPs to route to a trading schedule<br>
+
+        |Value| Description |
+        |-|-|
+        |`CRYPTO` = 1|Digital assets (e.g. BTC, ETH)|
+        |`EQUITY` = 2|Equities and equity-linked underlyings (e.g. stocks)|
+        |`COMMODITY` = 3|Physical commodities (e.g. gold, oil)|
+        |`FX` = 4|Foreign-exchange currency pairs|
+        |`INDEX` = 5|Composite indices tracking a basket of underlyings|
+        |`EQUITY_NASDAQ` = 6|NASDAQ-listed equities — maps to a TradingSchedule entry|
+        |`EQUITY_NYSE` = 7|NYSE/NYSE Arca-listed equities and ETFs — maps to a TradingSchedule entry|
+        |`EQUITY_KRX` = 8|Korea Exchange (KRX)-listed equities — maps to a TradingSchedule entry|
+        |`COMMODITY_CME` = 9|CME-traded commodities — maps to a TradingSchedule entry|
+        |`PRE_IPO` = 10|Pre-IPO instruments — maps to a TradingSchedule entry|
+    ??? info "[InstrumentStatus](/../../schemas/instrument_status)"
+        The lifecycle/trading status of an instrument on the GRVT exchange<br>
+
+        |Value| Description |
+        |-|-|
+        |`ACTIVE` = 1|Instrument is fully tradable|
+        |`REDUCE_ONLY` = 2|Only position-reducing orders are accepted (e.g. pre-delist wind-down)|
+        |`MAINTENANCE` = 3|Trading is temporarily paused for scheduled maintenance; cancel-only|
+        |`HALTED` = 4|Underlying halted at its primary market (LULD, news pending); index and mark frozen|
+        |`CLOSED` = 5|Outside trading window: daily maintenance break, weekend, holiday; cancel-only|
+        |`PENDING` = 6|Instrument is created but not yet open for trading (pre-listing)|
+        |`DELISTED` = 7|Instrument has been permanently removed|
+    ??? info "[DayOfWeek](/../../schemas/day_of_week)"
+        Day of the week, used by recurring trading schedule sessions<br>
+
+        |Value| Description |
+        |-|-|
+        |`MONDAY` = 1|Monday|
+        |`TUESDAY` = 2|Tuesday|
+        |`WEDNESDAY` = 3|Wednesday|
+        |`THURSDAY` = 4|Thursday|
+        |`FRIDAY` = 5|Friday|
+        |`SATURDAY` = 6|Saturday|
+        |`SUNDAY` = 7|Sunday|

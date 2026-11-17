@@ -159,6 +159,7 @@ STREAM: v1.mini.s
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
+        |7725|403|This endpoint is not supported for stable funding.|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -629,6 +630,7 @@ STREAM: v1.mini.d
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
+        |7725|403|This endpoint is not supported for stable funding.|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -1074,7 +1076,13 @@ STREAM: v1.ticker.s
                 "open_interest": "123456.78",
                 "long_short_ratio": "0.5",
                 "funding_rate": 0.0003,
-                "next_funding_time": "1697788800000000000"
+                "next_funding_time": "1697788800000000000",
+                "status": "ACTIVE",
+                "session": "REGULAR",
+                "long_open_interest": "123456.78",
+                "short_open_interest": "123456.78",
+                "funding_rate_long_apr_pct": "-5.5",
+                "funding_rate_short_apr_pct": "-5"
             },
             "prev_sequence_number": "872634875"
         }
@@ -1111,7 +1119,13 @@ STREAM: v1.ticker.s
                 "oi": "123456.78",
                 "ls1": "0.5",
                 "fr2": 0.0003,
-                "nf": "1697788800000000000"
+                "nf": "1697788800000000000",
+                "s": "ACTIVE",
+                "s1": "REGULAR",
+                "lo": "123456.78",
+                "so": "123456.78",
+                "fr3": "-5.5",
+                "fr4": "-5"
             },
             "ps": "872634875"
         }
@@ -1574,7 +1588,13 @@ STREAM: v1.ticker.d
                 "open_interest": "123456.78",
                 "long_short_ratio": "0.5",
                 "funding_rate": 0.0003,
-                "next_funding_time": "1697788800000000000"
+                "next_funding_time": "1697788800000000000",
+                "status": "ACTIVE",
+                "session": "REGULAR",
+                "long_open_interest": "123456.78",
+                "short_open_interest": "123456.78",
+                "funding_rate_long_apr_pct": "-5.5",
+                "funding_rate_short_apr_pct": "-5"
             },
             "prev_sequence_number": "872634875"
         }
@@ -1611,7 +1631,13 @@ STREAM: v1.ticker.d
                 "oi": "123456.78",
                 "ls1": "0.5",
                 "fr2": 0.0003,
-                "nf": "1697788800000000000"
+                "nf": "1697788800000000000",
+                "s": "ACTIVE",
+                "s1": "REGULAR",
+                "lo": "123456.78",
+                "so": "123456.78",
+                "fr3": "-5.5",
+                "fr4": "-5"
             },
             "ps": "872634875"
         }
@@ -2103,6 +2129,7 @@ STREAM: v1.book.s
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
         |3031|400|Depth is invalid|
+        |7725|403|This endpoint is not supported for stable funding.|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -2575,6 +2602,7 @@ STREAM: v1.book.d
         |1103|400|Wrong number of secondary selectors|
         |3000|400|Instrument is invalid|
         |3030|400|Feed rate is invalid|
+        |7725|403|This endpoint is not supported for stable funding.|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -3048,6 +3076,7 @@ STREAM: v1.trade
         |3000|400|Instrument is invalid|
         |3011|400|Limit exceeds min or max value|
         |3013|400|Exact limit value is not supported|
+        |7725|403|This endpoint is not supported for stable funding.|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">
@@ -3518,6 +3547,7 @@ STREAM: v1.candle
         |3040|400|Candlestick interval is invalid|
         |3041|400|Candlestick type is invalid|
         |3042|400|Candlestick type is not applicable for spot instruments|
+        |3043|400|Candlestick type not supported for this instrument|
     -8<- "docs/schemas/jsonrpc_response.md"
     </section>
     <section markdown="1" style="float: right; width: 30%;">

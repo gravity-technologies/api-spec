@@ -48,6 +48,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(types.ApiGetCurrencyResponse, resp, Config(cast=[Enum]))
 
+    async def get_sfp_trading_schedule(
+        self, req: types.EmptyRequest
+    ) -> types.ApiSfpTradingScheduleResponse | GrvtError:
+        resp = await self._post(False, self.md_rpc + "/full/v1/sfp_trading_schedule", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiSfpTradingScheduleResponse, resp, Config(cast=[Enum]))
+
     async def get_supported_assets_v1(
         self, req: types.EmptyRequest
     ) -> types.ApiGetSupportedAssetsResponse | GrvtError:
@@ -228,6 +236,32 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             types.ApiInterestPaymentHistoryResponse, resp, Config(cast=[Enum])
         )
 
+    async def qualified_maker_effective_rate_history_v1(
+        self, req: types.ApiQualifiedMakerEffectiveRateHistoryRequest
+    ) -> types.ApiQualifiedMakerEffectiveRateHistoryResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/effective_rate_history", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiQualifiedMakerEffectiveRateHistoryResponse, resp, Config(cast=[Enum])
+        )
+
+    async def qualified_maker_funding_rate_submission_history_v1(
+        self, req: types.ApiQualifiedMakerFundingRateSubmissionHistoryRequest
+    ) -> types.ApiQualifiedMakerFundingRateSubmissionHistoryResponse | GrvtError:
+        resp = await self._post(
+            True, self.td_rpc + "/full/v1/funding_rate_submission_history", req
+        )
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiQualifiedMakerFundingRateSubmissionHistoryResponse,
+            resp,
+            Config(cast=[Enum]),
+        )
+
     async def positions_v1(
         self, req: types.ApiPositionsRequest
     ) -> types.ApiPositionsResponse | GrvtError:
@@ -354,6 +388,16 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             types.ApiSpotSubAccountSummaryResponse, resp, Config(cast=[Enum])
         )
 
+    async def submit_qualified_maker_funding_rates_v1(
+        self, req: types.ApiSubmitQualifiedMakerFundingRatesRequest
+    ) -> types.ApiSubmitQualifiedMakerFundingRatesResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/submit_funding_rates", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(
+            types.ApiSubmitQualifiedMakerFundingRatesResponse, resp, Config(cast=[Enum])
+        )
+
     async def aggregated_account_summary_v1(
         self, req: types.EmptyRequest
     ) -> types.ApiAggregatedAccountSummaryResponse | GrvtError:
@@ -432,6 +476,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
 
+    async def vault_invest_v2(
+        self, req: types.ApiVaultInvestV2Request
+    ) -> types.ApiVaultInvestV2Response | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v2/vault_invest", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiVaultInvestV2Response, resp, Config(cast=[Enum]))
+
     async def vault_investor_summary_v1(
         self, req: types.ApiVaultInvestorSummaryRequest
     ) -> types.ApiVaultInvestorSummaryResponse | GrvtError:
@@ -446,6 +498,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         self, req: types.ApiVaultRedeemRequest
     ) -> types.AckResponse | GrvtError:
         resp = await self._post(True, self.td_rpc + "/full/v1/vault_redeem", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
+
+    async def vault_redeem_v2(
+        self, req: types.ApiVaultRedeemV2Request
+    ) -> types.AckResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v2/vault_redeem", req)
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
@@ -469,6 +529,14 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         return from_dict(
             types.ApiVaultViewRedemptionQueueResponse, resp, Config(cast=[Enum])
         )
+
+    async def vault_conversion_rate_v1(
+        self, req: types.ApiVaultConversionRateRequest
+    ) -> types.ApiVaultConversionRateResponse | GrvtError:
+        resp = await self._post(True, self.td_rpc + "/full/v1/vault_conversion_rate", req)
+        if resp.get("code"):
+            return GrvtError(**resp)
+        return from_dict(types.ApiVaultConversionRateResponse, resp, Config(cast=[Enum]))
 
     async def vault_manager_investment_history_v1(
         self, req: types.ApiQueryVaultManagerInvestorHistoryRequest

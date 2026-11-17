@@ -132,6 +132,32 @@
           ]
         },
         {
+          "namespace": "SfpTradingSchedule",
+          "name": "RPCGetSfpTradingSchedule",
+          "version": 1,
+          "route": "/sfp_trading_schedule",
+          "auth_required": false,
+          "request": "EmptyRequest",
+          "response": "ApiSfpTradingScheduleResponse",
+          "on_request_errors": [
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            }
+          ]
+        },
+        {
           "namespace": "Instrument",
           "name": "RPCGetSupportedAssetsV1",
           "version": 1,
@@ -247,6 +273,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 7725,
+              "message": "This endpoint is not supported for stable funding.",
+              "status": 403
             }
           ]
         },
@@ -319,6 +350,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 7725,
+              "message": "This endpoint is not supported for stable funding.",
+              "status": 403
             }
           ]
         },
@@ -345,6 +381,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 7725,
+              "message": "This endpoint is not supported for stable funding.",
+              "status": 403
             }
           ]
         },
@@ -381,6 +422,11 @@
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
+            },
+            {
+              "code": 7725,
+              "message": "This endpoint is not supported for stable funding.",
+              "status": 403
             }
           ]
         },
@@ -422,6 +468,11 @@
               "code": 3042,
               "message": "Candlestick type is not applicable for spot instruments",
               "status": 400
+            },
+            {
+              "code": 3043,
+              "message": "Candlestick type not supported for this instrument",
+              "status": 400
             }
           ]
         },
@@ -462,6 +513,16 @@
             {
               "code": 3007,
               "message": "API is not applicable for spot instruments",
+              "status": 400
+            },
+            {
+              "code": 3008,
+              "message": "Funding rate aggregation type is not applicable for stable perp instruments",
+              "status": 400
+            },
+            {
+              "code": 3012,
+              "message": "Cursor is invalid",
               "status": 400
             }
           ]
@@ -510,6 +571,11 @@
               "code": 3030,
               "message": "Feed rate is invalid",
               "status": 400
+            },
+            {
+              "code": 7725,
+              "message": "This endpoint is not supported for stable funding.",
+              "status": 403
             }
           ]
         },
@@ -555,6 +621,11 @@
               "code": 3030,
               "message": "Feed rate is invalid",
               "status": 400
+            },
+            {
+              "code": 7725,
+              "message": "This endpoint is not supported for stable funding.",
+              "status": 403
             }
           ]
         },
@@ -695,6 +766,11 @@
               "code": 3031,
               "message": "Depth is invalid",
               "status": 400
+            },
+            {
+              "code": 7725,
+              "message": "This endpoint is not supported for stable funding.",
+              "status": 403
             }
           ]
         },
@@ -740,6 +816,11 @@
               "code": 3030,
               "message": "Feed rate is invalid",
               "status": 400
+            },
+            {
+              "code": 7725,
+              "message": "This endpoint is not supported for stable funding.",
+              "status": 403
             }
           ]
         },
@@ -785,6 +866,11 @@
               "code": 3013,
               "message": "Exact limit value is not supported",
               "status": 400
+            },
+            {
+              "code": 7725,
+              "message": "This endpoint is not supported for stable funding.",
+              "status": 403
             }
           ]
         },
@@ -834,6 +920,11 @@
             {
               "code": 3042,
               "message": "Candlestick type is not applicable for spot instruments",
+              "status": 400
+            },
+            {
+              "code": 3043,
+              "message": "Candlestick type not supported for this instrument",
               "status": 400
             }
           ]
@@ -1142,6 +1233,11 @@
               "status": 400
             },
             {
+              "code": 2118,
+              "message": "Invalid trigger price tick",
+              "status": 400
+            },
+            {
               "code": 2242,
               "message": "Split TPSL functionality not supported; you may be using a deprecated API, or this functionality is temporarily disabled",
               "status": 400
@@ -1180,6 +1276,11 @@
               "code": 2091,
               "message": "As a precaution, only position-reducing (`reduce_only` as true) orders are currently allowed on your account. Please contact support so we can help complete the necessary checks.",
               "status": 403
+            },
+            {
+              "code": 7303,
+              "message": "Order creations have been blocked for this delisted asset.",
+              "status": 400
             },
             {
               "code": 7304,
@@ -1224,6 +1325,76 @@
             {
               "code": 7603,
               "message": "Slippage exceeds the asset's price protection band.",
+              "status": 400
+            },
+            {
+              "code": 7701,
+              "message": "You are not a qualified market maker or designated market maker for this instrument.",
+              "status": 403
+            },
+            {
+              "code": 7704,
+              "message": "Stable Funding Perpetual orders are not yet supported.",
+              "status": 400
+            },
+            {
+              "code": 7705,
+              "message": "The order's instrument does not match the referenced RFQ's instrument.",
+              "status": 400
+            },
+            {
+              "code": 7706,
+              "message": "Private maker quotes are not yet supported.",
+              "status": 400
+            },
+            {
+              "code": 7707,
+              "message": "The referenced RFQ is not open.",
+              "status": 400
+            },
+            {
+              "code": 7708,
+              "message": "The referenced RFQ already has a taker order.",
+              "status": 400
+            },
+            {
+              "code": 7709,
+              "message": "Invalid time in force for a Stable Funding Perpetual taker order.",
+              "status": 400
+            },
+            {
+              "code": 7711,
+              "message": "Market orders are not allowed for Stable Funding Perpetual taker orders; a market-order slippage bound must be set.",
+              "status": 400
+            },
+            {
+              "code": 7712,
+              "message": "Non-Stable-Funding-Perpetual orders must always be supplied without rfq_id.",
+              "status": 400
+            },
+            {
+              "code": 7723,
+              "message": "USDC must be enabled as collateral on this sub account to trade USDC-quoted instruments.",
+              "status": 400
+            },
+            {
+              "code": 2147,
+              "message": "stable perp orders require a multi-asset-mode sub-account",
+              "status": 400
+            },
+            {
+              "code": 7724,
+              "message": "Post-only orders are not allowed on Stable Funding Perpetuals.",
+              "status": 400
+            },
+            {
+              "code": 7726,
+              "message": "The Stable Funding Perpetual market is closed.",
+              "status": 400
+            },
+            {
+              "code": 2148,
+              "message": "a vault whose investment currency is not its quote currency cannot trade",
               "status": 400
             }
           ]
@@ -1809,6 +1980,11 @@
               "status": 400
             },
             {
+              "code": 2118,
+              "message": "Invalid trigger price tick",
+              "status": 400
+            },
+            {
               "code": 2242,
               "message": "Split TPSL functionality not supported; you may be using a deprecated API, or this functionality is temporarily disabled",
               "status": 400
@@ -1847,6 +2023,11 @@
               "code": 2091,
               "message": "As a precaution, only position-reducing (`reduce_only` as true) orders are currently allowed on your account. Please contact support so we can help complete the necessary checks.",
               "status": 403
+            },
+            {
+              "code": 7303,
+              "message": "Order creations have been blocked for this delisted asset.",
+              "status": 400
             },
             {
               "code": 7304,
@@ -1891,6 +2072,76 @@
             {
               "code": 7603,
               "message": "Slippage exceeds the asset's price protection band.",
+              "status": 400
+            },
+            {
+              "code": 7701,
+              "message": "You are not a qualified market maker or designated market maker for this instrument.",
+              "status": 403
+            },
+            {
+              "code": 7704,
+              "message": "Stable Funding Perpetual orders are not yet supported.",
+              "status": 400
+            },
+            {
+              "code": 7705,
+              "message": "The order's instrument does not match the referenced RFQ's instrument.",
+              "status": 400
+            },
+            {
+              "code": 7706,
+              "message": "Private maker quotes are not yet supported.",
+              "status": 400
+            },
+            {
+              "code": 7707,
+              "message": "The referenced RFQ is not open.",
+              "status": 400
+            },
+            {
+              "code": 7708,
+              "message": "The referenced RFQ already has a taker order.",
+              "status": 400
+            },
+            {
+              "code": 7709,
+              "message": "Invalid time in force for a Stable Funding Perpetual taker order.",
+              "status": 400
+            },
+            {
+              "code": 7711,
+              "message": "Market orders are not allowed for Stable Funding Perpetual taker orders; a market-order slippage bound must be set.",
+              "status": 400
+            },
+            {
+              "code": 7712,
+              "message": "Non-Stable-Funding-Perpetual orders must always be supplied without rfq_id.",
+              "status": 400
+            },
+            {
+              "code": 7723,
+              "message": "USDC must be enabled as collateral on this sub account to trade USDC-quoted instruments.",
+              "status": 400
+            },
+            {
+              "code": 2147,
+              "message": "stable perp orders require a multi-asset-mode sub-account",
+              "status": 400
+            },
+            {
+              "code": 7724,
+              "message": "Post-only orders are not allowed on Stable Funding Perpetuals.",
+              "status": 400
+            },
+            {
+              "code": 7726,
+              "message": "The Stable Funding Perpetual market is closed.",
+              "status": 400
+            },
+            {
+              "code": 2148,
+              "message": "a vault whose investment currency is not its quote currency cannot trade",
               "status": 400
             },
             {
@@ -2130,6 +2381,98 @@
               "code": 1008,
               "message": "Your IP has not been whitelisted for access",
               "status": 401
+            }
+          ]
+        },
+        {
+          "namespace": "QualifiedMaker",
+          "name": "RPCQualifiedMakerEffectiveRateHistoryV1",
+          "version": 1,
+          "route": "/effective_rate_history",
+          "auth_required": true,
+          "request": "ApiQualifiedMakerEffectiveRateHistoryRequest",
+          "response": "ApiQualifiedMakerEffectiveRateHistoryResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
+            }
+          ]
+        },
+        {
+          "namespace": "QualifiedMaker",
+          "name": "RPCQualifiedMakerFundingRateSubmissionHistoryV1",
+          "version": 1,
+          "route": "/funding_rate_submission_history",
+          "auth_required": true,
+          "request": "ApiQualifiedMakerFundingRateSubmissionHistoryRequest",
+          "response": "ApiQualifiedMakerFundingRateSubmissionHistoryResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
+              "code": 1015,
+              "message": "Upstream data service is temporarily unavailable, please try again",
+              "status": 503
             }
           ]
         },
@@ -2993,6 +3336,107 @@
           ]
         },
         {
+          "namespace": "QualifiedMaker",
+          "name": "RPCSubmitQualifiedMakerFundingRatesV1",
+          "version": 1,
+          "route": "/submit_funding_rates",
+          "auth_required": true,
+          "request": "ApiSubmitQualifiedMakerFundingRatesRequest",
+          "response": "ApiSubmitQualifiedMakerFundingRatesResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1012,
+              "message": "Invalid signature chain ID",
+              "status": 400
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
+              "code": 2000,
+              "message": "Signature is from an unauthorized signer",
+              "status": 403
+            },
+            {
+              "code": 2001,
+              "message": "Signature has expired",
+              "status": 403
+            },
+            {
+              "code": 2008,
+              "message": "Signature exceeds maximum allowed duration.",
+              "status": 403
+            },
+            {
+              "code": 7817,
+              "message": "Qualified maker funding rate upload is not enabled.",
+              "status": 403
+            },
+            {
+              "code": 7818,
+              "message": "The account is not a qualified maker for every instrument in the request.",
+              "status": 403
+            },
+            {
+              "code": 7819,
+              "message": "The request must hold between 1 and 256 rates, at most one per instrument.",
+              "status": 400
+            },
+            {
+              "code": 7820,
+              "message": "Every instrument must be a listed stable perp.",
+              "status": 400
+            },
+            {
+              "code": 7821,
+              "message": "Rate fields do not match the instrument's funding mode.",
+              "status": 400
+            },
+            {
+              "code": 7822,
+              "message": "The upload window for an instrument in the request is closed.",
+              "status": 400
+            },
+            {
+              "code": 7823,
+              "message": "These rates have already been submitted. Please sign a new request.",
+              "status": 400
+            },
+            {
+              "code": 7824,
+              "message": "A cash rate in the request is too large to convert at the instrument's index price.",
+              "status": 400
+            }
+          ]
+        },
+        {
           "namespace": "Account",
           "name": "RPCAggregatedAccountSummaryV1",
           "version": 1,
@@ -3442,6 +3886,217 @@
         },
         {
           "namespace": "Vault",
+          "name": "RPCVaultInvestV2",
+          "version": 2,
+          "route": "/vault_invest",
+          "auth_required": true,
+          "request": "ApiVaultInvestV2Request",
+          "response": "ApiVaultInvestV2Response",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1014,
+              "message": "Upstream data service timed out, please try again",
+              "status": 504
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
+            },
+            {
+              "code": 2000,
+              "message": "Signature is from an unauthorized signer",
+              "status": 403
+            },
+            {
+              "code": 2001,
+              "message": "Signature has expired",
+              "status": 403
+            },
+            {
+              "code": 2002,
+              "message": "Signature does not match payload",
+              "status": 403
+            },
+            {
+              "code": 2004,
+              "message": "Signature is from an expired session key",
+              "status": 403
+            },
+            {
+              "code": 2006,
+              "message": "Signature R/S must have exactly 64 characters long without 0x prefix",
+              "status": 403
+            },
+            {
+              "code": 2005,
+              "message": "Signature V must be 27/28",
+              "status": 403
+            },
+            {
+              "code": 2007,
+              "message": "Signature S must be in the lower half of the curve",
+              "status": 403
+            },
+            {
+              "code": 2008,
+              "message": "Signature exceeds maximum allowed duration.",
+              "status": 403
+            },
+            {
+              "code": 1012,
+              "message": "Invalid signature chain ID",
+              "status": 400
+            },
+            {
+              "code": 4000,
+              "message": "Insufficient balance to complete transfer",
+              "status": 400
+            },
+            {
+              "code": 7811,
+              "message": "This conversion would leave a negative balance.",
+              "status": 400
+            },
+            {
+              "code": 7000,
+              "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            },
+            {
+              "code": 7012,
+              "message": "Vault investor ID provided is invalid.",
+              "status": 400
+            },
+            {
+              "code": 7003,
+              "message": "This vault has been delisted/closed.",
+              "status": 400
+            },
+            {
+              "code": 7004,
+              "message": "This investment would cause the vault to exceed its valuation cap.",
+              "status": 400
+            },
+            {
+              "code": 7014,
+              "message": "Only allowed to invest in vault's investment currency",
+              "status": 400
+            },
+            {
+              "code": 7018,
+              "message": "Invalid invest source: use the funding account with the funding wallet, or a spot or futures wallet of one of your own trading accounts that is not a vault.",
+              "status": 400
+            },
+            {
+              "code": 7035,
+              "message": "Spot transfers are not enabled, so only the funding account or the futures wallet of a trading account, in USDT, can pay this investment.",
+              "status": 400
+            },
+            {
+              "code": 7017,
+              "message": "The exchange rate is not allowed: it must be exactly 1 when both currencies are the same, and at most the current conversion rate otherwise.",
+              "status": 400
+            },
+            {
+              "code": 7027,
+              "message": "The conversion would pay out nothing: the exchange rate or the amount is too small.",
+              "status": 400
+            },
+            {
+              "code": 7019,
+              "message": "A price this conversion needs is stale or not available yet. Please try again later.",
+              "status": 400
+            },
+            {
+              "code": 7028,
+              "message": "This signed vault investment has already been executed. Sign a new one to invest again.",
+              "status": 400
+            },
+            {
+              "code": 7801,
+              "message": "This currency is not enabled for stable coin convert.",
+              "status": 400
+            },
+            {
+              "code": 7802,
+              "message": "The index price of one of the currencies is outside the permitted convert band. Please try again later.",
+              "status": 400
+            },
+            {
+              "code": 7803,
+              "message": "An index price required for this conversion is unavailable. Please try again later.",
+              "status": 400
+            },
+            {
+              "code": 1007,
+              "message": "The currency you are requesting for is  not currently supported",
+              "status": 404
+            },
+            {
+              "code": 7812,
+              "message": "The convert amount is too large to be represented. Please use a smaller amount.",
+              "status": 400
+            },
+            {
+              "code": 7805,
+              "message": "This amount cannot be converted exactly between the two currencies’ decimals. Please adjust the amount.",
+              "status": 400
+            },
+            {
+              "code": 4008,
+              "message": "Currency is not allowed in the target wallet type",
+              "status": 400
+            },
+            {
+              "code": 7101,
+              "message": "Transfer account not found",
+              "status": 400
+            },
+            {
+              "code": 7102,
+              "message": "Transfer sub-account not found",
+              "status": 400
+            },
+            {
+              "code": 7013,
+              "message": "Cross-exchange vaults not supported",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Vault",
           "name": "RPCVaultInvestorSummaryV1",
           "version": 1,
           "route": "/vault_investor_summary",
@@ -3554,6 +4209,177 @@
               "code": 7002,
               "message": "User has an ongoing redemption",
               "status": 400
+            },
+            {
+              "code": 7015,
+              "message": "Some of these vault shares are still within the vault's minimum investment period and cannot be redeemed yet.",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Vault",
+          "name": "RPCVaultRedeemV2",
+          "version": 2,
+          "route": "/vault_redeem",
+          "auth_required": true,
+          "request": "ApiVaultRedeemV2Request",
+          "response": "AckResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
+            },
+            {
+              "code": 2000,
+              "message": "Signature is from an unauthorized signer",
+              "status": 403
+            },
+            {
+              "code": 2001,
+              "message": "Signature has expired",
+              "status": 403
+            },
+            {
+              "code": 2002,
+              "message": "Signature does not match payload",
+              "status": 403
+            },
+            {
+              "code": 2004,
+              "message": "Signature is from an expired session key",
+              "status": 403
+            },
+            {
+              "code": 2006,
+              "message": "Signature R/S must have exactly 64 characters long without 0x prefix",
+              "status": 403
+            },
+            {
+              "code": 2005,
+              "message": "Signature V must be 27/28",
+              "status": 403
+            },
+            {
+              "code": 2007,
+              "message": "Signature S must be in the lower half of the curve",
+              "status": 403
+            },
+            {
+              "code": 2008,
+              "message": "Signature exceeds maximum allowed duration.",
+              "status": 403
+            },
+            {
+              "code": 1012,
+              "message": "Invalid signature chain ID",
+              "status": 400
+            },
+            {
+              "code": 7000,
+              "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            },
+            {
+              "code": 7001,
+              "message": "Vault does not have sufficient LP token balance",
+              "status": 400
+            },
+            {
+              "code": 7007,
+              "message": "The investor is not an LP for this vault.",
+              "status": 400
+            },
+            {
+              "code": 7009,
+              "message": "Vault Investor does not have enough LP tokens to redeem.",
+              "status": 400
+            },
+            {
+              "code": 7008,
+              "message": "Vault redemption requests may only be submitted in the vault's investment currency.",
+              "status": 400
+            },
+            {
+              "code": 7002,
+              "message": "User has an ongoing redemption",
+              "status": 400
+            },
+            {
+              "code": 7015,
+              "message": "Some of these vault shares are still within the vault's minimum investment period and cannot be redeemed yet.",
+              "status": 400
+            },
+            {
+              "code": 7017,
+              "message": "The exchange rate is not allowed: it must be exactly 1 when both currencies are the same, and at most the current conversion rate otherwise.",
+              "status": 400
+            },
+            {
+              "code": 7027,
+              "message": "The conversion would pay out nothing: the exchange rate or the amount is too small.",
+              "status": 400
+            },
+            {
+              "code": 7019,
+              "message": "A price this conversion needs is stale or not available yet. Please try again later.",
+              "status": 400
+            },
+            {
+              "code": 7801,
+              "message": "This currency is not enabled for stable coin convert.",
+              "status": 400
+            },
+            {
+              "code": 7802,
+              "message": "The index price of one of the currencies is outside the permitted convert band. Please try again later.",
+              "status": 400
+            },
+            {
+              "code": 7803,
+              "message": "An index price required for this conversion is unavailable. Please try again later.",
+              "status": 400
+            },
+            {
+              "code": 7812,
+              "message": "The convert amount is too large to be represented. Please use a smaller amount.",
+              "status": 400
+            },
+            {
+              "code": 7805,
+              "message": "This amount cannot be converted exactly between the two currencies’ decimals. Please adjust the amount.",
+              "status": 400
             }
           ]
         },
@@ -3655,6 +4481,77 @@
             {
               "code": 7000,
               "message": "Vault ID provided is invalid and does not belong to any vault",
+              "status": 400
+            }
+          ]
+        },
+        {
+          "namespace": "Vault",
+          "name": "RPCVaultConversionRateV1",
+          "version": 1,
+          "route": "/vault_conversion_rate",
+          "auth_required": true,
+          "request": "ApiVaultConversionRateRequest",
+          "response": "ApiVaultConversionRateResponse",
+          "on_request_errors": [
+            {
+              "code": 1000,
+              "message": "You need to authenticate prior to using this functionality",
+              "status": 401
+            },
+            {
+              "code": 1001,
+              "message": "You are not authorized to access this functionality",
+              "status": 403
+            },
+            {
+              "code": 1002,
+              "message": "Internal Server Error",
+              "status": 500
+            },
+            {
+              "code": 1003,
+              "message": "Request could not be processed due to malformed syntax",
+              "status": 400
+            },
+            {
+              "code": 1006,
+              "message": "You have surpassed the allocated rate limit for your tier",
+              "status": 429
+            },
+            {
+              "code": 1008,
+              "message": "Your IP has not been whitelisted for access",
+              "status": 401
+            },
+            {
+              "code": 1009,
+              "message": "We are temporarily deactivating this API endpoint, please try again later",
+              "status": 503
+            },
+            {
+              "code": 1007,
+              "message": "The currency you are requesting for is  not currently supported",
+              "status": 404
+            },
+            {
+              "code": 7801,
+              "message": "This currency is not enabled for stable coin convert.",
+              "status": 400
+            },
+            {
+              "code": 7802,
+              "message": "The index price of one of the currencies is outside the permitted convert band. Please try again later.",
+              "status": 400
+            },
+            {
+              "code": 7019,
+              "message": "A price this conversion needs is stale or not available yet. Please try again later.",
+              "status": 400
+            },
+            {
+              "code": 7805,
+              "message": "This amount cannot be converted exactly between the two currencies’ decimals. Please adjust the amount.",
               "status": 400
             }
           ]
@@ -3919,6 +4816,11 @@
               "status": 400
             },
             {
+              "code": 1004,
+              "message": "Data Not Found",
+              "status": 404
+            },
+            {
               "code": 1006,
               "message": "You have surpassed the allocated rate limit for your tier",
               "status": 429
@@ -3961,6 +4863,11 @@
             {
               "code": 2146,
               "message": "An open RFQ already exists for this sub account and instrument",
+              "status": 400
+            },
+            {
+              "code": 2147,
+              "message": "stable perp orders require a multi-asset-mode sub-account",
               "status": 400
             }
           ]
@@ -5567,6 +6474,19 @@
           "comment": [
             "Collateral-deposit-cap utilization status: normal / reduceOnly / autoExchange."
           ]
+        },
+        {
+          "name": "show_only_when_held",
+          "lite_name": "so",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "false",
+          "comment": [
+            "Show this currency only when the sub account holds a balance of it"
+          ]
         }
       ],
       "comment": [
@@ -5602,6 +6522,19 @@
           "comment": [
             "Whether this currency currently counts as collateral for the sub account"
           ]
+        },
+        {
+          "name": "locked",
+          "lite_name": "l",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "false",
+          "comment": [
+            "The sub account cannot turn this currency off as collateral"
+          ]
         }
       ],
       "comment": [
@@ -5626,7 +6559,7 @@
         }
       ],
       "comment": [
-        "Create an order on the orderbook for this trading account."
+        "Create an order on the orderbook for this trading account. STABLE_PERP orders require the sub-account to be in multi-asset mode."
       ]
     },
     {
@@ -5674,7 +6607,8 @@
         "3. Those private quotes stream back to the taker on the `v1.quote` stream, alongside the public order book (firm resting liquidity + public quotes) which is already visible.",
         "4. The taker accepts by signing an order via create_order with `metadata.rfq_id` set (single leg; IOC or FOK), which executes across the private pool merged with the public book — or walks away and lets the RFQ expire.",
         "",
-        "The created RFQ is returned in the response. A sub-account may hold at most one open RFQ per instrument. The RFQ lives until `rfq.expiry`, after which GRVT expires it and auto-cancels the makers' private quotes bound to it."
+        "The created RFQ is returned in the response. A sub-account may hold at most one open RFQ per instrument. The RFQ lives until `rfq.expiry`, after which GRVT expires it and auto-cancels the makers' private quotes bound to it.",
+        "The sub-account must be in multi-asset mode."
       ]
     },
     {
@@ -6335,10 +7269,10 @@
           "json_type": "string",
           "index": 1,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "0.0003",
           "comment": [
-            "The funding rate of the instrument, expressed in percentage points"
+            "The funding rate of the instrument, expressed in percentage points. Absent for stable perps, which have `funding_rate_long_apr_pct` and `funding_rate_short_apr_pct` instead."
           ]
         },
         {
@@ -6364,7 +7298,7 @@
           "optional": false,
           "example": "'65038.01'",
           "comment": [
-            "The mark price of the instrument at funding timestamp, expressed in `9` decimals"
+            "The mark price of the instrument at funding timestamp, expressed in `9` decimals. For stable perps, the index price the charge used."
           ]
         },
         {
@@ -6374,10 +7308,10 @@
           "json_type": "string",
           "index": 4,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "0.0003",
           "comment": [
-            "Deprecated: Refer to `funding_rate` instead. Will be removed in a future release."
+            "Deprecated: Refer to `funding_rate` instead. Will be removed in a future release. Absent for stable perps."
           ]
         },
         {
@@ -6391,6 +7325,45 @@
           "example": "8",
           "comment": [
             "Funding interval in hours (e.g. 1/4/8/etc)."
+          ]
+        },
+        {
+          "name": "funding_rate_long_apr_pct",
+          "lite_name": "fr2",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'-5.5'",
+          "comment": [
+            "Stable perps only: the annual rate for retail longs at this charge, in percent a year (`'-5.5'` = retail longs paid 5.5%; positive = retail receives, negative = retail pays). Absent for other kinds."
+          ]
+        },
+        {
+          "name": "funding_rate_short_apr_pct",
+          "lite_name": "fr3",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'-5'",
+          "comment": [
+            "Stable perps only: the annual rate for retail shorts at this charge, in percent a year (`'-5'` = retail shorts paid 5%; positive = retail receives, negative = retail pays). Absent for other kinds."
+          ]
+        },
+        {
+          "name": "funding_multiplier",
+          "lite_name": "fm",
+          "semantic_type": "uint8",
+          "json_type": "integer",
+          "index": 8,
+          "array_depth": 0,
+          "optional": true,
+          "example": "1",
+          "comment": [
+            "Stable perps only: days of funding the charge covered, 3 on the triple day, else 1. Absent for other kinds."
           ]
         }
       ],
@@ -8236,6 +9209,259 @@
       "comment": []
     },
     {
+      "name": "ApiQualifiedMakerEffectiveRateHistoryRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "default": "all",
+          "example": "'AAPL_USDC_SFP'",
+          "comment": [
+            "The instrument to filter for"
+          ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The start time in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "now()",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The end time in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "500",
+          "example": "500",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "''",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": [
+        "Query the rates the caller's qualified maker main account was settled at, one row per (charge, instrument). Paginated like funding_payment_history: reverse chronological from `end_time`, `limit` rows per page, `next` cursor."
+      ]
+    },
+    {
+      "name": "ApiQualifiedMakerEffectiveRateHistoryResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "QualifiedMakerEffectiveRate",
+          "json_type": "QualifiedMakerEffectiveRate",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The effective rates matching the request"
+          ]
+        },
+        {
+          "name": "next",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiQualifiedMakerFundingRateSubmission",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "upload_id",
+          "lite_name": "ui",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1028403",
+          "comment": [
+            "The upload ID: the accepted transaction's ID"
+          ]
+        },
+        {
+          "name": "uploaded_at",
+          "lite_name": "ua",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "When the upload was accepted, unix nanoseconds"
+          ]
+        },
+        {
+          "name": "rates",
+          "lite_name": "r",
+          "semantic_type": "QualifiedMakerFundingRateEntry",
+          "json_type": "QualifiedMakerFundingRateEntry",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The rates uploaded"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "ApiQualifiedMakerFundingRateSubmissionHistoryRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The start time in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "default": "now()",
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The end time in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "limit",
+          "lite_name": "l",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "500",
+          "example": "500",
+          "comment": [
+            "The limit to query for. Defaults to 500; Max 1000"
+          ]
+        },
+        {
+          "name": "cursor",
+          "lite_name": "c",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "''",
+          "example": "''",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": [
+        "Query the caller's accepted qualified maker funding rate submissions, newest first. Rejected submissions are not stored; their reason is in the submit response."
+      ]
+    },
+    {
+      "name": "ApiQualifiedMakerFundingRateSubmissionHistoryResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "result",
+          "lite_name": "r",
+          "semantic_type": "ApiQualifiedMakerFundingRateSubmission",
+          "json_type": "ApiQualifiedMakerFundingRateSubmission",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The accepted submissions matching the request"
+          ]
+        },
+        {
+          "name": "next",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'Qw0918='",
+          "comment": [
+            "The cursor to indicate when to start the query from"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiQueryVaultManagerInvestorHistoryRequest",
       "is_root": true,
       "fields": [
@@ -8619,6 +9845,98 @@
       ]
     },
     {
+      "name": "ApiSfpTradingScheduleResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "update_time",
+          "lite_name": "ut",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000'",
+          "comment": [
+            "Session data update timestamp in milliseconds"
+          ]
+        },
+        {
+          "name": "equity",
+          "lite_name": "e",
+          "semantic_type": "SfpMarketSchedule",
+          "json_type": "SfpMarketSchedule",
+          "index": 1,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Legacy: use `schedules` instead. Schedule for the `EQUITY` asset class"
+          ]
+        },
+        {
+          "name": "equity_nyse",
+          "lite_name": "en",
+          "semantic_type": "SfpMarketSchedule",
+          "json_type": "SfpMarketSchedule",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Legacy: use `schedules` instead. Schedule for the `EQUITY_NYSE` asset class"
+          ]
+        },
+        {
+          "name": "equity_nasdaq",
+          "lite_name": "en1",
+          "semantic_type": "SfpMarketSchedule",
+          "json_type": "SfpMarketSchedule",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Legacy: use `schedules` instead. Schedule for the `EQUITY_NASDAQ` asset class"
+          ]
+        },
+        {
+          "name": "commodity",
+          "lite_name": "c",
+          "semantic_type": "SfpMarketSchedule",
+          "json_type": "SfpMarketSchedule",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Legacy: use `schedules` instead. Schedule for the `COMMODITY` asset class"
+          ]
+        },
+        {
+          "name": "commodity_cme",
+          "lite_name": "cc",
+          "semantic_type": "SfpMarketSchedule",
+          "json_type": "SfpMarketSchedule",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "comment": [
+            "Legacy: use `schedules` instead. Schedule for the `COMMODITY_CME` asset class"
+          ]
+        },
+        {
+          "name": "schedules",
+          "lite_name": "s",
+          "semantic_type": "SfpTradingScheduleGroup",
+          "json_type": "SfpTradingScheduleGroup",
+          "index": 6,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Trading hours as groups of stable perps sharing them: one per asset class, named after it, then one per instrument schedule, named in cluster config. Each stable perp with a schedule is in exactly one group"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "ApiSpotBorrowConfig",
       "is_root": false,
       "fields": [
@@ -8641,8 +9959,9 @@
           "index": 1,
           "array_depth": 0,
           "optional": false,
+          "example": "'1500000.0'",
           "comment": [
-            "BL — max borrowable amount, native units. 0 = not borrowable."
+            "BL — max borrowable amount, denominated in the asset. 0 = not borrowable."
           ]
         },
         {
@@ -8665,8 +9984,9 @@
           "index": 3,
           "array_depth": 0,
           "optional": false,
+          "example": "'2000000.0'",
           "comment": [
-            "CL — max amount counted as collateral, native units. 0 = unlimited."
+            "CL — max amount counted as collateral, denominated in the asset. 0 = unlimited."
           ]
         }
       ],
@@ -8757,6 +10077,73 @@
       ]
     },
     {
+      "name": "ApiSubmitQualifiedMakerFundingRatesRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "rates",
+          "lite_name": "r",
+          "semantic_type": "QualifiedMakerFundingRateEntry",
+          "json_type": "QualifiedMakerFundingRateEntry",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "One entry per instrument; the request is accepted or rejected as a whole"
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The EIP-712 signature over rates"
+          ]
+        }
+      ],
+      "comment": [
+        "Submits a qualified maker's long and short funding rates for stable perps. Each entry applies from the instrument's next charge. Only qualified makers can submit."
+      ]
+    },
+    {
+      "name": "ApiSubmitQualifiedMakerFundingRatesResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "upload_id",
+          "lite_name": "ui",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1028403",
+          "comment": [
+            "The upload id: the transaction ID of the accepted rates"
+          ]
+        },
+        {
+          "name": "rates",
+          "lite_name": "r",
+          "semantic_type": "QualifiedMakerFundingRateEntry",
+          "json_type": "QualifiedMakerFundingRateEntry",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The accepted rates, as submitted"
+          ]
+        }
+      ],
+      "comment": [
+        "Acknowledges accepted qualified maker funding rates"
+      ]
+    },
+    {
       "name": "ApiTickerRequest",
       "is_root": true,
       "fields": [
@@ -8775,7 +10162,7 @@
         }
       ],
       "comment": [
-        "Retrieves a single ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful."
+        "Retrieves a single ticker value for a single instrument. Please do not use this to repeatedly poll for data -- a websocket subscription is much more performant, and useful.\u003cbr\u003e\u003cbr\u003eRate limit:\u003cul\u003e\u003cli\u003ePerpetual, future, option and spot instruments: the standard rate limit for this endpoint, per IP address.\u003c/li\u003e\u003cli\u003eStable perps (`_SFP` instruments): a separate per-IP-address limit, shared across all stable perp instruments (one budget for all of them, not one per instrument). IP addresses on the gateway whitelist are exempt.\u003c/li\u003e\u003c/ul\u003eA request over the limit is rejected with error `1006` (HTTP `429`). The `X-RateLimit-Limit` and `X-RateLimit-Remaining` response headers show the limit that applied to the request."
       ]
     },
     {
@@ -9400,6 +10787,194 @@
       ]
     },
     {
+      "name": "ApiVaultConversionRateRequest",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "from_currency",
+          "lite_name": "fc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency converted from."
+          ]
+        },
+        {
+          "name": "to_currency",
+          "lite_name": "tc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDC'",
+          "comment": [
+            "The currency converted into."
+          ]
+        },
+        {
+          "name": "from_num_tokens",
+          "lite_name": "fn",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'1000'",
+          "comment": [
+            "Optional amount of `fromCurrency`. When set, the response estimates what it converts into."
+          ]
+        }
+      ],
+      "comment": [
+        "Request payload for the highest exchange rate the gateway currently accepts for a vault investment or redemption that converts `fromCurrency` into `toCurrency`."
+      ]
+    },
+    {
+      "name": "ApiVaultConversionRateResponse",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "from_currency",
+          "lite_name": "fc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency converted from."
+          ]
+        },
+        {
+          "name": "to_currency",
+          "lite_name": "tc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDC'",
+          "comment": [
+            "The currency converted into."
+          ]
+        },
+        {
+          "name": "exchange_rate",
+          "lite_name": "er",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.98901'",
+          "comment": [
+            "The highest rate accepted now, `toCurrency` per unit of `fromCurrency`, floored to 9 decimal places. It is 1 when both currencies are the same."
+          ]
+        },
+        {
+          "name": "spot_rate",
+          "lite_name": "sr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.99'",
+          "comment": [
+            "The current spot rate from the latest oracle prices, 9 decimal places."
+          ]
+        },
+        {
+          "name": "fee_rate_centi_beeps",
+          "lite_name": "fr",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000'",
+          "comment": [
+            "The conversion fee configured for the pair, in centibeeps (1 = 0.0001%)."
+          ]
+        },
+        {
+          "name": "window_seconds",
+          "lite_name": "ws",
+          "semantic_type": "uint32",
+          "json_type": "integer",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'30'",
+          "comment": [
+            "The length of the window the rate is the highest of, in seconds."
+          ]
+        },
+        {
+          "name": "valid_until",
+          "lite_name": "vu",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788830000000000'",
+          "comment": [
+            "When the price sample the rate comes from leaves the window, in unix nanoseconds. Show a validity no longer than this."
+          ]
+        },
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The time of the newest oracle price the rate uses, in unix nanoseconds."
+          ]
+        },
+        {
+          "name": "from_num_tokens",
+          "lite_name": "fn",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'1000'",
+          "comment": [
+            "The amount of `fromCurrency` the request named, if any."
+          ]
+        },
+        {
+          "name": "to_num_tokens",
+          "lite_name": "tn",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'989.01'",
+          "comment": [
+            "What `fromNumTokens` converts into at `exchangeRate`, floored to `toCurrency` decimals. Omitted without `fromNumTokens`."
+          ]
+        }
+      ],
+      "comment": [
+        "Response payload with the highest exchange rate the gateway currently accepts for the currency pair. Sign it as `exchangeRate`: any rate at or below it passes while the quote is valid."
+      ]
+    },
+    {
       "name": "ApiVaultInvestRequest",
       "is_root": true,
       "fields": [
@@ -9426,7 +11001,7 @@
           "optional": false,
           "example": "'USDT'",
           "comment": [
-            "The currency used for the investment. This should be the vault's quote currency."
+            "The currency used for the investment. This should be the vault's investment currency."
           ]
         },
         {
@@ -9461,6 +11036,169 @@
         "Request payload for investing in a vault.",
         "",
         "This API allows a client to invest a specified amount of tokens in a particular vault."
+      ]
+    },
+    {
+      "name": "ApiVaultInvestV2Request",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3477045127917224'",
+          "comment": [
+            "The unique identifier of the vault to invest in."
+          ]
+        },
+        {
+          "name": "from_sub_account_id",
+          "lite_name": "fs",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0'",
+          "comment": [
+            "The trading account to invest from. 0 means the funding account."
+          ]
+        },
+        {
+          "name": "from_wallet_type",
+          "lite_name": "fw",
+          "semantic_type": "WalletType",
+          "json_type": "WalletType",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'FUNDING'",
+          "comment": [
+            "FUNDING when `fromSubAccountID` is 0, otherwise SPOT or FUTURES."
+          ]
+        },
+        {
+          "name": "from_currency",
+          "lite_name": "fc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency debited from the source wallet."
+          ]
+        },
+        {
+          "name": "from_num_tokens",
+          "lite_name": "fn",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000'",
+          "comment": [
+            "The amount debited from the source wallet, in `fromCurrency`."
+          ]
+        },
+        {
+          "name": "to_currency",
+          "lite_name": "tc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDC'",
+          "comment": [
+            "The currency the vault receives. This must be the vault's investment currency."
+          ]
+        },
+        {
+          "name": "exchange_rate",
+          "lite_name": "er",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.999'",
+          "comment": [
+            "The signed rate, `toCurrency` per unit of `fromCurrency`, up to 9 decimal places. Exactly 1 when both currencies are the same."
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The `VaultInvestV3` signature of the investing account.",
+            "The signer needs the vault investor permission on the main account and, for a trading account source, the transfer permission on that trading account."
+          ]
+        }
+      ],
+      "comment": [
+        "Request payload for investing in a vault from the funding account or from a trading account, converting the source currency into the vault's investment currency when they differ.",
+        "",
+        "The investor signs `VaultInvestV3` over both currencies, the amount and the exchange rate. Without conversion the rate is exactly 1. With conversion it must be at most the rate `/vault_conversion_rate` returns."
+      ]
+    },
+    {
+      "name": "ApiVaultInvestV2Response",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "ack",
+          "lite_name": "a",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'true'",
+          "comment": [
+            "Whether the investment was accepted."
+          ]
+        },
+        {
+          "name": "tx_id",
+          "lite_name": "ti",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1028403'",
+          "comment": [
+            "The transaction ID of the investment once risk confirmed it. 0 when the investment was queued."
+          ]
+        },
+        {
+          "name": "enqueued",
+          "lite_name": "e",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'false'",
+          "comment": [
+            "Cross-exchange vaults only: true when the vault was locked and the investment was queued."
+          ]
+        }
+      ],
+      "comment": [
+        "Response payload for a vault investment."
       ]
     },
     {
@@ -9570,6 +11308,136 @@
           "comment": [
             "The performance fee of the vault."
           ]
+        },
+        {
+          "name": "token_currency",
+          "lite_name": "tc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDC'",
+          "comment": [
+            "The vault leg's currency: the vault's investment currency, which the vault received or paid. Empty on a burn, which moves no tokens."
+          ]
+        },
+        {
+          "name": "num_tokens",
+          "lite_name": "nt",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000.0'",
+          "comment": [
+            "The vault leg: the tokens of tokenCurrency the vault received on an invest or paid on a redemption. 0 on a burn, and on a vaultRedeem recorded before its results carried the amount."
+          ]
+        },
+        {
+          "name": "from_currency",
+          "lite_name": "fc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency that left its owner: on an invest the investor's source currency (the user leg), on a redemption tokenCurrency. A row without conversion has the vault leg's currency. Empty on a burn."
+          ]
+        },
+        {
+          "name": "from_num_tokens",
+          "lite_name": "fn",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 11,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1001.0'",
+          "comment": [
+            "The tokens of fromCurrency that left their owner: on an invest what the investor paid (the user leg), on a redemption numTokens. 0 on a burn, and on a vaultRedeem recorded before its results carried the amount."
+          ]
+        },
+        {
+          "name": "to_currency",
+          "lite_name": "tc1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 12,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency that reached its owner: on a redemption the investor's payout currency (the user leg), on an invest tokenCurrency. A row without conversion has the vault leg's currency. Empty on a burn."
+          ]
+        },
+        {
+          "name": "to_num_tokens",
+          "lite_name": "tn",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 13,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'999.0'",
+          "comment": [
+            "The tokens of toCurrency that reached their owner: on a redemption what the investor received (the user leg), on an invest numTokens. 0 on a burn, and on a vaultRedeem recorded before its results carried the amount."
+          ]
+        },
+        {
+          "name": "conversion_fee_num_tokens",
+          "lite_name": "cf",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 14,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1.0'",
+          "comment": [
+            "The conversion fee in toCurrency: the difference between the two legs of a converting invest or redemption. 0 without conversion."
+          ]
+        },
+        {
+          "name": "from_sub_account_id",
+          "lite_name": "fs",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 15,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The trading sub-account an invest was paid from. 0 for the funding account and on other rows."
+          ]
+        },
+        {
+          "name": "from_wallet_type",
+          "lite_name": "fw",
+          "semantic_type": "WalletType",
+          "json_type": "WalletType",
+          "index": 16,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'FUNDING'",
+          "comment": [
+            "The wallet an invest was paid from: FUNDING for the funding account, otherwise SPOT or FUTURES. Unspecified on redemptions and burns."
+          ]
+        },
+        {
+          "name": "request_time",
+          "lite_name": "rt",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 17,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "On a redemption, when its redemption request was made, in unix nanoseconds. 0 when unknown and on other rows."
+          ]
         }
       ],
       "comment": [
@@ -9674,7 +11542,7 @@
           "optional": false,
           "example": "'USDT'",
           "comment": [
-            "The currency used for the redemption. This should be the vault's quote currency."
+            "The currency used for the redemption. This should be the vault's investment currency."
           ]
         },
         {
@@ -9709,6 +11577,95 @@
         "Request payload for redeeming from a vault.",
         "",
         "This API allows a client to redeem a specified amount of tokens from a particular vault."
+      ]
+    },
+    {
+      "name": "ApiVaultRedeemV2Request",
+      "is_root": true,
+      "fields": [
+        {
+          "name": "vault_id",
+          "lite_name": "vi",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'3477045127917224'",
+          "comment": [
+            "The unique identifier of the vault to redeem from."
+          ]
+        },
+        {
+          "name": "from_currency",
+          "lite_name": "fc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDC'",
+          "comment": [
+            "The currency the vault pays. This must be the vault's investment currency."
+          ]
+        },
+        {
+          "name": "to_currency",
+          "lite_name": "tc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency paid into the funding account: the investment currency, or another currency converted at `exchangeRate`."
+          ]
+        },
+        {
+          "name": "num_tokens",
+          "lite_name": "nt",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1000'",
+          "comment": [
+            "The number of shares to redeem."
+          ]
+        },
+        {
+          "name": "exchange_rate",
+          "lite_name": "er",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.999'",
+          "comment": [
+            "The signed rate, `toCurrency` per unit of `fromCurrency`, up to 9 decimal places. Exactly 1 when both currencies are the same."
+          ]
+        },
+        {
+          "name": "signature",
+          "lite_name": "s",
+          "semantic_type": "Signature",
+          "json_type": "Signature",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "comment": [
+            "The `VaultRedeemV3` signature of the redeeming account.",
+            "The signer needs the vault investor permission on the main account."
+          ]
+        }
+      ],
+      "comment": [
+        "Request payload for redeeming from a vault, paid in the vault's investment currency or converted into another currency.",
+        "",
+        "The investor signs `VaultRedeemV3` over both currencies, the number of shares and the exchange rate. The request keeps the signed rate and is paid at it, at the share price of the payout."
       ]
     },
     {
@@ -10925,10 +12882,23 @@
           "json_type": "string",
           "index": 10,
           "array_depth": 0,
-          "optional": false,
+          "optional": true,
           "example": "'1697788800000000000'",
           "comment": [
             "[Filled by GRVT Backend] Time at which the ECN order will expire in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "taker_anon_account_id",
+          "lite_name": "ta",
+          "semantic_type": "uint128",
+          "json_type": "string",
+          "index": 11,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'0x8b3c1d9e4f5a6b7c0d1e2f3a4b5c6d7e'",
+          "comment": [
+            "The taker's derived anonymous account id shown to makers, omitted when no taker has matched yet. Real taker identity is never exposed"
           ]
         }
       ],
@@ -11493,7 +13463,7 @@
           "optional": false,
           "example": "'BTC_USDT_Perp'",
           "comment": [
-            "The perpetual instrument being funded"
+            "The instrument being funded (perpetual or stable perp)"
           ]
         },
         {
@@ -11839,7 +13809,7 @@
           "index": 18,
           "array_depth": 0,
           "optional": true,
-          "example": "2.5",
+          "example": "'2.5'",
           "comment": [
             "Funding rate cap over the defined `intervalHours`."
           ]
@@ -11852,7 +13822,7 @@
           "index": 19,
           "array_depth": 0,
           "optional": true,
-          "example": "-2.5",
+          "example": "'-2.5'",
           "comment": [
             "Funding rate floor over the defined `intervalHours`."
           ]
@@ -11868,6 +13838,97 @@
           "example": "'20.0'",
           "comment": [
             "The minimum order notional value, expressed in quote currency decimal units"
+          ]
+        },
+        {
+          "name": "asset_class",
+          "lite_name": "ac",
+          "semantic_type": "AssetClass",
+          "json_type": "AssetClass",
+          "index": 21,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'EQUITY'",
+          "comment": [
+            "The asset class of the underlying the instrument tracks"
+          ]
+        },
+        {
+          "name": "status",
+          "lite_name": "s",
+          "semantic_type": "InstrumentStatus",
+          "json_type": "InstrumentStatus",
+          "index": 22,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'ACTIVE'",
+          "comment": [
+            "The current lifecycle/trading status of the instrument"
+          ]
+        },
+        {
+          "name": "guaranteed_exit_band",
+          "lite_name": "ge",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 24,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'0.5'",
+          "comment": [
+            "The guaranteed exit band, expressed in percentage points"
+          ]
+        },
+        {
+          "name": "spread_penalty_tolerance",
+          "lite_name": "sp2",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 25,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'0.1'",
+          "comment": [
+            "The spread penalty tolerance, expressed in percentage points"
+          ]
+        },
+        {
+          "name": "funding_cap_adjustment_time",
+          "lite_name": "fc",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 26,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Timestamp in unix nanoseconds at which the funding cap adjustment applies"
+          ]
+        },
+        {
+          "name": "funding_cap_adjustment_value",
+          "lite_name": "fc1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 27,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'0.0003'",
+          "comment": [
+            "The funding cap adjustment value, expressed as a decimal daily rate"
+          ]
+        },
+        {
+          "name": "triple_swap_day",
+          "lite_name": "ts2",
+          "semantic_type": "DayOfWeek",
+          "json_type": "DayOfWeek",
+          "index": 28,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'FRIDAY'",
+          "comment": [
+            "Stable perps only: the weekday whose daily funding charge covers 3 days (the weekend)"
           ]
         }
       ],
@@ -13192,6 +15253,327 @@
       ]
     },
     {
+      "name": "QualifiedMakerEffectiveRate",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "event_time",
+          "lite_name": "et",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "The charge (funding) time in unix nanoseconds"
+          ]
+        },
+        {
+          "name": "main_account_id",
+          "lite_name": "ma",
+          "semantic_type": "address",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0xc73c0c2538fd9b833d20933ccc88fdaa74fcb0d0'",
+          "comment": [
+            "The qualified maker main account"
+          ]
+        },
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'AAPL_USDC_SFP'",
+          "comment": [
+            "The stable perp"
+          ]
+        },
+        {
+          "name": "mode",
+          "lite_name": "m",
+          "semantic_type": "SfpFundingMode",
+          "json_type": "SfpFundingMode",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ANNUAL_PCT_OF_CURRENT_PRICE'",
+          "comment": [
+            "The mode the qualified maker uploaded in; the record carries only that mode's pair of rate fields"
+          ]
+        },
+        {
+          "name": "long_rate_apr_pct",
+          "lite_name": "lr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'-4.5'",
+          "comment": [
+            "ANNUAL_PCT_OF_CURRENT_PRICE only: the qualified maker's long rate used, in percent a year (\"-4.5\" = retail longs pay 4.5%); positive = retail receives, negative = retail pays"
+          ]
+        },
+        {
+          "name": "short_rate_apr_pct",
+          "lite_name": "sr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'-5.2'",
+          "comment": [
+            "ANNUAL_PCT_OF_CURRENT_PRICE only: the qualified maker's short rate used, in percent a year; positive = retail receives, negative = retail pays"
+          ]
+        },
+        {
+          "name": "long_rate_cash_per_unit",
+          "lite_name": "lr1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'-0.25'",
+          "comment": [
+            "DAILY_CASH_PER_UNIT only: the qualified maker's long rate used, in quote currency per unit per day; positive = retail receives, negative = retail pays"
+          ]
+        },
+        {
+          "name": "short_rate_cash_per_unit",
+          "lite_name": "sr1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'-0.1'",
+          "comment": [
+            "DAILY_CASH_PER_UNIT only: the qualified maker's short rate used, in quote currency per unit per day; positive = retail receives, negative = retail pays"
+          ]
+        },
+        {
+          "name": "upload_id",
+          "lite_name": "ui",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1028403",
+          "comment": [
+            "The upload this rate comes from"
+          ]
+        },
+        {
+          "name": "uploaded_at",
+          "lite_name": "ua",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "When that upload was accepted, unix nanoseconds"
+          ]
+        },
+        {
+          "name": "carried_forward",
+          "lite_name": "cf",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "example": "false",
+          "comment": [
+            "True if the qualified maker did not upload since the previous charge and its last rate was reused"
+          ]
+        },
+        {
+          "name": "tx_id",
+          "lite_name": "ti",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 11,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1028404'",
+          "comment": [
+            "The funding tick transaction ID"
+          ]
+        },
+        {
+          "name": "funding_sub_account_id",
+          "lite_name": "fs",
+          "semantic_type": "uint64",
+          "json_type": "string",
+          "index": 12,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'$GRVT_SUB_ACCOUNT_ID'",
+          "comment": [
+            "The sub-account the netted payment was booked on: the sfpFundingSubAccount config, else the main account's non-vault sub-account with the largest total equity. 0 when the charge paid nothing"
+          ]
+        },
+        {
+          "name": "net_position",
+          "lite_name": "np",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 13,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'-3'",
+          "comment": [
+            "The qualified maker's position netted across all sub-accounts of its main account, in base units (negative = short). Net short is settled at its long rate, net long at its short rate"
+          ]
+        },
+        {
+          "name": "index_price",
+          "lite_name": "ip",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 14,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'200.5'",
+          "comment": [
+            "The index price the charge used, expressed in `9` decimals"
+          ]
+        },
+        {
+          "name": "multiplier",
+          "lite_name": "m1",
+          "semantic_type": "uint8",
+          "json_type": "integer",
+          "index": 15,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1",
+          "comment": [
+            "Days of funding the charge covered: 3 on the triple swap day, else 1"
+          ]
+        },
+        {
+          "name": "amount",
+          "lite_name": "a",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 16,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'-0.073972'",
+          "comment": [
+            "The netted funding payment in the quote currency, as on the funding sub-account's funding payment: negative = the qualified maker received it, positive = it paid. 0 when the charge paid nothing"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "QualifiedMakerFundingRateEntry",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "instrument",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'AAPL_USDC_SFP'",
+          "comment": [
+            "A listed stable perp"
+          ]
+        },
+        {
+          "name": "mode",
+          "lite_name": "m",
+          "semantic_type": "SfpFundingMode",
+          "json_type": "SfpFundingMode",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'ANNUAL_PCT_OF_CURRENT_PRICE'",
+          "comment": [
+            "Either funding mode; the entry carries only that mode's pair of rate fields"
+          ]
+        },
+        {
+          "name": "long_rate_apr_pct",
+          "lite_name": "lr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'-4.5'",
+          "comment": [
+            "ANNUAL_PCT_OF_CURRENT_PRICE only: the long rate in percent a year, up to 6 decimals (\"-4.5\" = retail longs pay 4.5%); positive = retail receives, negative = retail pays"
+          ]
+        },
+        {
+          "name": "short_rate_apr_pct",
+          "lite_name": "sr",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'-5.2'",
+          "comment": [
+            "ANNUAL_PCT_OF_CURRENT_PRICE only: the short rate in percent a year, up to 6 decimals; positive = retail receives, negative = retail pays"
+          ]
+        },
+        {
+          "name": "long_rate_cash_per_unit",
+          "lite_name": "lr1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 4,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'-0.25'",
+          "comment": [
+            "DAILY_CASH_PER_UNIT only: the long rate in quote currency per unit per day, up to 6 decimals; positive = retail receives, negative = retail pays"
+          ]
+        },
+        {
+          "name": "short_rate_cash_per_unit",
+          "lite_name": "sr1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": true,
+          "default": "0",
+          "example": "'-0.1'",
+          "comment": [
+            "DAILY_CASH_PER_UNIT only: the short rate in quote currency per unit per day, up to 6 decimals; positive = retail receives, negative = retail pays"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
       "name": "Rfq",
       "is_root": false,
       "fields": [
@@ -13276,7 +15658,7 @@
       "comment": [
         "A Request for Quote (RFQ) lets a taker solicit private quotes on a single instrument from makers.",
         "",
-        "\u003cul\u003e\u003cli\u003eSingle instrument\u003c/li\u003e\u003cul\u003e\u003cli\u003eEach RFQ targets one instrument (kind = STABLE_PERP) for a single requested size.\u003c/li\u003e\u003cli\u003eThe taker may disclose a direction via `rfq.side`, or omit it to request a two-way (buy and sell) quote.\u003c/li\u003e\u003c/ul\u003e\u003cli\u003eMaker solicitation\u003c/li\u003e\u003cul\u003e\u003cli\u003eOn submission, GRVT broadcasts the RFQ to makers over the `v1.rfq` feed (see RfqFeed).\u003c/li\u003e\u003cli\u003eMakers respond with private quotes, which the taker receives as a private quote book over the `v1.quote` feed (see RfqQuoteFeed).\u003c/li\u003e\u003c/ul\u003e\u003cli\u003eAnonymity\u003c/li\u003e\u003cul\u003e\u003cli\u003eAnonymity is automatic and always enforced — the taker and makers only ever see each other's derived anonymous account ids.\u003c/li\u003e\u003cli\u003eReal taker and maker identities are never exposed to the counterparty.\u003c/li\u003e\u003c/ul\u003e\u003cli\u003eExpiry\u003c/li\u003e\u003cul\u003e\u003cli\u003eThe RFQ lives until `rfq.expiry`, after which GRVT expires it and auto-cancels the makers' private quotes bound to it.\u003c/li\u003e\u003c/ul\u003e\u003c/ul\u003e"
+        "\u003cul\u003e\u003cli\u003eSingle instrument\u003c/li\u003e\u003cul\u003e\u003cli\u003eEach RFQ targets one instrument (kind = STABLE_PERP) for a single requested size.\u003c/li\u003e\u003cli\u003eThe taker may disclose a direction via `rfq.side`, or omit it to request a two-way (buy and sell) quote.\u003c/li\u003e\u003c/ul\u003e\u003cli\u003eMaker solicitation\u003c/li\u003e\u003cul\u003e\u003cli\u003eOn submission, GRVT broadcasts the RFQ to makers over the `v1.rfq` feed (see RfqFeed).\u003c/li\u003e\u003cli\u003eWhile the RFQ is open, the taker receives on the `v1.quote` feed an estimate of the average fill price for the RFQ size against the public book (see RfqQuoteFeed).\u003c/li\u003e\u003c/ul\u003e\u003cli\u003eAnonymity\u003c/li\u003e\u003cul\u003e\u003cli\u003eAnonymity is automatic and always enforced — the taker and makers only ever see each other's derived anonymous account ids.\u003c/li\u003e\u003cli\u003eReal taker and maker identities are never exposed to the counterparty.\u003c/li\u003e\u003c/ul\u003e\u003cli\u003eExpiry\u003c/li\u003e\u003cul\u003e\u003cli\u003eThe RFQ lives until `rfq.expiry`, after which GRVT expires it and auto-cancels the makers' private quotes bound to it.\u003c/li\u003e\u003c/ul\u003e\u003c/ul\u003e"
       ]
     },
     {
@@ -13388,7 +15770,7 @@
           "optional": false,
           "example": "'0x1234567890abcdef'",
           "comment": [
-            "The RFQ this private quote book belongs to"
+            "The RFQ this estimate belongs to. A feed with no levels means the RFQ ended"
           ]
         },
         {
@@ -13401,7 +15783,7 @@
           "optional": true,
           "example": "'65038.01'",
           "comment": [
-            "Best (highest) bid price across the book, expressed in the instrument's quote-asset decimals."
+            "Average fill price to sell the RFQ size, expressed in `9` decimals. Omitted when the bid side is empty"
           ]
         },
         {
@@ -13414,7 +15796,7 @@
           "optional": true,
           "example": "'65040.02'",
           "comment": [
-            "Best (lowest) ask price across the book, expressed in the instrument's quote-asset decimals."
+            "Average fill price to buy the RFQ size, expressed in `9` decimals. Omitted when the ask side is empty"
           ]
         },
         {
@@ -13426,7 +15808,7 @@
           "array_depth": 1,
           "optional": false,
           "comment": [
-            "Private quote bid levels, sorted best (highest) price first"
+            "The sell-side estimate (at most one level), from the bids"
           ]
         },
         {
@@ -13438,7 +15820,7 @@
           "array_depth": 1,
           "optional": false,
           "comment": [
-            "Private quote ask levels, sorted best (lowest) price first"
+            "The buy-side estimate (at most one level), from the asks"
           ]
         }
       ],
@@ -13458,7 +15840,7 @@
           "optional": false,
           "example": "'65038.01'",
           "comment": [
-            "Price of the level, expressed in `9` decimals"
+            "Average fill price for the size, expressed in `9` decimals. Rounded against the taker: up for asks, down for bids"
           ]
         },
         {
@@ -13471,7 +15853,7 @@
           "optional": false,
           "example": "'3456.78'",
           "comment": [
-            "Size at this level, expressed in base asset decimal units"
+            "Fillable size, up to the RFQ size, expressed in base asset decimal units"
           ]
         },
         {
@@ -13595,6 +15977,107 @@
           "example": "'0'",
           "comment": [
             "Cumulative maintenance margin amount in quote currency"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "SfpMarketSchedule",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "sessions",
+          "lite_name": "s",
+          "semantic_type": "TradingSession",
+          "json_type": "TradingSession",
+          "index": 0,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Trading sessions for the current calendar week (Sunday to Saturday in the exchange's local time). The sessions are contiguous with no gaps, and any period when the market is not open, including holidays falling in this week, is returned as a `CLOSE` session"
+          ]
+        },
+        {
+          "name": "holidays",
+          "lite_name": "h",
+          "semantic_type": "TradingHolidaySchedule",
+          "json_type": "TradingHolidaySchedule",
+          "index": 1,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Market holidays and early closes, past and upcoming, sorted by start time. The market is closed from the start time to the end time of each entry. Empty when there are none"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "SfpTradingScheduleGroup",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "name",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'CME copper'",
+          "comment": [
+            "The group name. For stable perps on their asset class hours, the asset class (for example `COMMODITY_CME`)"
+          ]
+        },
+        {
+          "name": "asset_class",
+          "lite_name": "ac",
+          "semantic_type": "AssetClass",
+          "json_type": "AssetClass",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'COMMODITY_CME'",
+          "comment": [
+            "The instruments' asset class. Its holiday calendar sets the group's holidays"
+          ]
+        },
+        {
+          "name": "instruments",
+          "lite_name": "i",
+          "semantic_type": "asset",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 1,
+          "optional": false,
+          "example": "['XAU_USDT_SFP']",
+          "comment": [
+            "The stable perps trading these hours, sorted. Each stable perp with a schedule is in exactly one group"
+          ]
+        },
+        {
+          "name": "sessions",
+          "lite_name": "s",
+          "semantic_type": "TradingSession",
+          "json_type": "TradingSession",
+          "index": 3,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Trading sessions for the current calendar week (Sunday to Saturday in the exchange's local time). The sessions are contiguous with no gaps, and any period when the market is not open, including holidays falling in this week, is returned as a `CLOSE` session"
+          ]
+        },
+        {
+          "name": "holidays",
+          "lite_name": "h",
+          "semantic_type": "TradingHolidaySchedule",
+          "json_type": "TradingHolidaySchedule",
+          "index": 4,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "Market holidays and early closes, past and upcoming, sorted by start time. The market is closed from the start time to the end time of each entry. Empty when there are none"
           ]
         }
       ],
@@ -13795,6 +16278,20 @@
           "example": "'0.0'",
           "comment": [
             "The available to transfer amount of this spot currency."
+          ]
+        },
+        {
+          "name": "borrowed_amount",
+          "lite_name": "ba",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'0.0'",
+          "comment": [
+            "The amount borrowed in this currency, inclusive of accrued interest.",
+            "Only reported by `account_summary`, and only for multi-asset-mode sub accounts"
           ]
         }
       ],
@@ -14208,6 +16705,19 @@
           "comment": [
             "The number of decimals used for balance representation"
           ]
+        },
+        {
+          "name": "transfer_disabled",
+          "lite_name": "td",
+          "semantic_type": "bool",
+          "json_type": "boolean",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "false",
+          "comment": [
+            "The asset cannot be transferred between wallets"
+          ]
         }
       ],
       "comment": [
@@ -14602,7 +17112,7 @@
           "optional": true,
           "example": "0.0003",
           "comment": [
-            "The current indicative funding rate for the active interval, expressed in centibeeps"
+            "The current indicative funding rate for the active interval, expressed in centibeeps. Absent for stable perps, which have `funding_rate_long_apr_pct` and `funding_rate_short_apr_pct` instead."
           ]
         },
         {
@@ -14616,6 +17126,84 @@
           "example": "'1697788800000000000'",
           "comment": [
             "Timestamp in nanoseconds when the current funding interval ends"
+          ]
+        },
+        {
+          "name": "status",
+          "lite_name": "s",
+          "semantic_type": "InstrumentStatus",
+          "json_type": "InstrumentStatus",
+          "index": 27,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'ACTIVE'",
+          "comment": [
+            "The current status of the instrument"
+          ]
+        },
+        {
+          "name": "session",
+          "lite_name": "s1",
+          "semantic_type": "TradingSessionType",
+          "json_type": "TradingSessionType",
+          "index": 28,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'REGULAR'",
+          "comment": [
+            "The current trading session of the instrument's underlying market"
+          ]
+        },
+        {
+          "name": "long_open_interest",
+          "lite_name": "lo",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 29,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The long open interest in the instrument, expressed in base asset decimal units. Excludes qualified-maker and DMM open interest."
+          ]
+        },
+        {
+          "name": "short_open_interest",
+          "lite_name": "so",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 30,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'123456.78'",
+          "comment": [
+            "The short open interest in the instrument, expressed in base asset decimal units. Excludes qualified-maker and DMM open interest."
+          ]
+        },
+        {
+          "name": "funding_rate_long_apr_pct",
+          "lite_name": "fr3",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 31,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'-5.5'",
+          "comment": [
+            "Stable perps only: the indicative annual rate for retail longs at the next charge, in percent a year (`'-5.5'` = retail longs pay 5.5%; positive = retail receives, negative = retail pays). Updated when the rates change. Absent for other kinds."
+          ]
+        },
+        {
+          "name": "funding_rate_short_apr_pct",
+          "lite_name": "fr4",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 32,
+          "array_depth": 0,
+          "optional": true,
+          "example": "'-5'",
+          "comment": [
+            "Stable perps only: the indicative annual rate for retail shorts at the next charge, in percent a year (`'-5'` = retail shorts pay 5%; positive = retail receives, negative = retail pays). Updated when the rates change. Absent for other kinds."
           ]
         }
       ],
@@ -14800,6 +17388,111 @@
       "comment": [
         "All private RFQs and Private AXEs will be filtered out from the responses"
       ]
+    },
+    {
+      "name": "TradingHolidaySchedule",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "name",
+          "lite_name": "n",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'Independence Day'",
+          "comment": [
+            "Holiday name"
+          ]
+        },
+        {
+          "name": "close_type",
+          "lite_name": "ct",
+          "semantic_type": "TradingScheduleCloseType",
+          "json_type": "TradingScheduleCloseType",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'FULL_DAY'",
+          "comment": [
+            "`FULL_DAY`: the market is closed for the whole day. `EARLY_CLOSE`: the market trades as normal until the start time, then is closed until the end time"
+          ]
+        },
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1783137600000'",
+          "comment": [
+            "When the closure begins, as a Unix timestamp in milliseconds. For `FULL_DAY` this is when the closed trading day's session would have opened (the evening before for a session that opens before midnight); for `EARLY_CLOSE` it is the moment the market closes early"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 3,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1783224000000'",
+          "comment": [
+            "When the closed or shortened trading day's session would have closed, as a Unix timestamp in milliseconds. The closure covers the start time up to, but not including, the end time"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "TradingSession",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "start_time",
+          "lite_name": "st",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000'",
+          "comment": [
+            "Trading session start time timestamp in milliseconds"
+          ]
+        },
+        {
+          "name": "end_time",
+          "lite_name": "et",
+          "semantic_type": "int64",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697812200000'",
+          "comment": [
+            "Trading session end time timestamp in milliseconds"
+          ]
+        },
+        {
+          "name": "type",
+          "lite_name": "t",
+          "semantic_type": "TradingSessionType",
+          "json_type": "TradingSessionType",
+          "index": 2,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'REGULAR'",
+          "comment": [
+            "Trading session type"
+          ]
+        }
+      ],
+      "comment": []
     },
     {
       "name": "TransferHistory",
@@ -15182,12 +17875,85 @@
           "comment": [
             "True if the requesting account is authorized to burn tokens on this vault, omitted otherwise."
           ]
+        },
+        {
+          "name": "num_lp_tokens_locked",
+          "lite_name": "nl1",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 9,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The number of the investor's vault LP tokens still within the vault's minimum investment period."
+          ]
+        },
+        {
+          "name": "num_lp_tokens_redeemable",
+          "lite_name": "nl2",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 10,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The number of vault LP tokens the investor can request to redeem now: those past the minimum investment period, less any pending redemption."
+          ]
+        },
+        {
+          "name": "locked_lots",
+          "lite_name": "ll",
+          "semantic_type": "VaultLpLotView",
+          "json_type": "VaultLpLotView",
+          "index": 11,
+          "array_depth": 1,
+          "optional": false,
+          "comment": [
+            "The investor's vault LP tokens within the minimum investment period, by the time they unlock (earliest first)."
+          ]
         }
       ],
       "comment": [
         "Vault investor summary information.",
         "",
         "This struct contains the summary of investments in a vault."
+      ]
+    },
+    {
+      "name": "VaultLpLotView",
+      "is_root": false,
+      "fields": [
+        {
+          "name": "unlock_time",
+          "lite_name": "ut",
+          "semantic_type": "timestamp",
+          "json_type": "string",
+          "index": 0,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'1697788800000000000'",
+          "comment": [
+            "Time in unix nanoseconds from which these LP tokens can be redeemed."
+          ]
+        },
+        {
+          "name": "num_lp_tokens",
+          "lite_name": "nl",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 1,
+          "array_depth": 0,
+          "optional": false,
+          "example": "1000000",
+          "comment": [
+            "The number of LP tokens in the lot."
+          ]
+        }
+      ],
+      "comment": [
+        "Vault LP tokens minted together that unlock at the same time."
       ]
     },
     {
@@ -15258,6 +18024,32 @@
           "example": "false",
           "comment": [
             "Omitted for redemption requests to non-cross exchange vaults. True if cancellation is blocked within the CEV allocation allowance for the user's current tier (e.g. because the user has already transferred out the spot balance underlying the redemption request)."
+          ]
+        },
+        {
+          "name": "to_currency",
+          "lite_name": "tc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 5,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency the request pays into the investor's funding account: the vault's investment currency, unless the request converts."
+          ]
+        },
+        {
+          "name": "exchange_rate",
+          "lite_name": "er",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.999'",
+          "comment": [
+            "The signed rate the request is paid at, `to_currency` per unit of the vault's investment currency. 1 when the request does not convert."
           ]
         }
       ],
@@ -15347,6 +18139,45 @@
           "example": "'1727788800000000000'",
           "comment": [
             "[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be eligible for automated redemption."
+          ]
+        },
+        {
+          "name": "from_currency",
+          "lite_name": "fc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 6,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDC'",
+          "comment": [
+            "The currency the vault pays: the vault's investment currency."
+          ]
+        },
+        {
+          "name": "to_currency",
+          "lite_name": "tc",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 7,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'USDT'",
+          "comment": [
+            "The currency paid into the investor's funding account. Equal to `from_currency` when the request does not convert."
+          ]
+        },
+        {
+          "name": "exchange_rate",
+          "lite_name": "er",
+          "semantic_type": "string",
+          "json_type": "string",
+          "index": 8,
+          "array_depth": 0,
+          "optional": false,
+          "example": "'0.999'",
+          "comment": [
+            "The signed rate the request is paid at, `to_currency` per unit of `from_currency`. 1 when the request does not convert."
           ]
         }
       ],
@@ -16686,7 +19517,7 @@
         }
       ],
       "comment": [
-        "Maker feed. Subscribe with selector `(sub_account_id, instrument)` to receive the RFQs you can quote on, delivered as lifecycle events (NEW, EXPIRED, CANCELLED). Respond to an RFQ by posting quotes via create_order (is_ecn = true, with `metadata.rfq_id` / `metadata.is_private`).",
+        "Maker feed. Subscribe with selector `(sub_account_id, instrument)` to receive the RFQs you can quote on, delivered as lifecycle events. Respond to an RFQ by posting quotes via create_order (is_ecn = true, with `metadata.rfq_id` / `metadata.is_private`).",
         "",
         "The subscription is stateful: from the moment you subscribe you are 'on' for that instrument — RFQs are delivered, your response ratios are tracked, and you are expected to keep a live public quote resting on the book (the platform nudges you with a zero-size RFQ if none is resting).",
         "",
@@ -17903,6 +20734,84 @@
   ],
   "enums": [
     {
+      "name": "AssetClass",
+      "values": [
+        {
+          "name": "CRYPTO",
+          "value": 1,
+          "comment": [
+            "Digital assets (e.g. BTC, ETH)"
+          ]
+        },
+        {
+          "name": "EQUITY",
+          "value": 2,
+          "comment": [
+            "Equities and equity-linked underlyings (e.g. stocks)"
+          ]
+        },
+        {
+          "name": "COMMODITY",
+          "value": 3,
+          "comment": [
+            "Physical commodities (e.g. gold, oil)"
+          ]
+        },
+        {
+          "name": "FX",
+          "value": 4,
+          "comment": [
+            "Foreign-exchange currency pairs"
+          ]
+        },
+        {
+          "name": "INDEX",
+          "value": 5,
+          "comment": [
+            "Composite indices tracking a basket of underlyings"
+          ]
+        },
+        {
+          "name": "EQUITY_NASDAQ",
+          "value": 6,
+          "comment": [
+            "NASDAQ-listed equities — maps to a TradingSchedule entry"
+          ]
+        },
+        {
+          "name": "EQUITY_NYSE",
+          "value": 7,
+          "comment": [
+            "NYSE/NYSE Arca-listed equities and ETFs — maps to a TradingSchedule entry"
+          ]
+        },
+        {
+          "name": "EQUITY_KRX",
+          "value": 8,
+          "comment": [
+            "Korea Exchange (KRX)-listed equities — maps to a TradingSchedule entry"
+          ]
+        },
+        {
+          "name": "COMMODITY_CME",
+          "value": 9,
+          "comment": [
+            "CME-traded commodities — maps to a TradingSchedule entry"
+          ]
+        },
+        {
+          "name": "PRE_IPO",
+          "value": 10,
+          "comment": [
+            "Pre-IPO instruments — maps to a TradingSchedule entry"
+          ]
+        }
+      ],
+      "comment": [
+        "Asset class of an instrument's underlying. The first five values (crypto through index) are general classifications used by Perpetuals for display. The remaining values (equityNasdaq, equityNyse, etc.) are schedule-specific and used by SFPs to route to a trading schedule"
+      ]
+    },
+    {
       "name": "BrokerTag",
       "values": [
         {
@@ -18152,6 +21061,63 @@
       "comment": []
     },
     {
+      "name": "DayOfWeek",
+      "values": [
+        {
+          "name": "MONDAY",
+          "value": 1,
+          "comment": [
+            "Monday"
+          ]
+        },
+        {
+          "name": "TUESDAY",
+          "value": 2,
+          "comment": [
+            "Tuesday"
+          ]
+        },
+        {
+          "name": "WEDNESDAY",
+          "value": 3,
+          "comment": [
+            "Wednesday"
+          ]
+        },
+        {
+          "name": "THURSDAY",
+          "value": 4,
+          "comment": [
+            "Thursday"
+          ]
+        },
+        {
+          "name": "FRIDAY",
+          "value": 5,
+          "comment": [
+            "Friday"
+          ]
+        },
+        {
+          "name": "SATURDAY",
+          "value": 6,
+          "comment": [
+            "Saturday"
+          ]
+        },
+        {
+          "name": "SUNDAY",
+          "value": 7,
+          "comment": [
+            "Sunday"
+          ]
+        }
+      ],
+      "comment": [
+        "Day of the week, used by recurring trading schedule sessions"
+      ]
+    },
+    {
       "name": "FundingRateAggregationType",
       "values": [
         {
@@ -18227,6 +21193,63 @@
         }
       ],
       "comment": []
+    },
+    {
+      "name": "InstrumentStatus",
+      "values": [
+        {
+          "name": "ACTIVE",
+          "value": 1,
+          "comment": [
+            "Instrument is fully tradable"
+          ]
+        },
+        {
+          "name": "REDUCE_ONLY",
+          "value": 2,
+          "comment": [
+            "Only position-reducing orders are accepted (e.g. pre-delist wind-down)"
+          ]
+        },
+        {
+          "name": "MAINTENANCE",
+          "value": 3,
+          "comment": [
+            "Trading is temporarily paused for scheduled maintenance; cancel-only"
+          ]
+        },
+        {
+          "name": "HALTED",
+          "value": 4,
+          "comment": [
+            "Underlying halted at its primary market (LULD, news pending); index and mark frozen"
+          ]
+        },
+        {
+          "name": "CLOSED",
+          "value": 5,
+          "comment": [
+            "Outside trading window: daily maintenance break, weekend, holiday; cancel-only"
+          ]
+        },
+        {
+          "name": "PENDING",
+          "value": 6,
+          "comment": [
+            "Instrument is created but not yet open for trading (pre-listing)"
+          ]
+        },
+        {
+          "name": "DELISTED",
+          "value": 7,
+          "comment": [
+            "Instrument has been permanently removed"
+          ]
+        }
+      ],
+      "comment": [
+        "The lifecycle/trading status of an instrument on the GRVT exchange"
+      ]
     },
     {
       "name": "Kind",
@@ -18690,7 +21713,7 @@
           "name": "UNSUPPORTED_TRIGGER_BY",
           "value": 60,
           "comment": [
-            "SFP order only supports trigger_by = index"
+            "SFP order only supports trigger_by = index or mid"
           ]
         },
         {
@@ -18712,6 +21735,125 @@
           "value": 63,
           "comment": [
             "the order was submitted when the trading session was either closed or under maintenance"
+          ]
+        },
+        {
+          "name": "RFQ_TERMINATED",
+          "value": 65,
+          "comment": [
+            "the quote was cancelled because the RFQ it was bound to reached a terminal state — expired, cancelled by the taker, or closed once its taker order filled"
+          ]
+        },
+        {
+          "name": "STABLE_PERP_REQUIRES_MULTI_ASSET_MODE",
+          "value": 66,
+          "comment": [
+            "stable perp orders require a multi-asset-mode sub-account"
+          ]
+        },
+        {
+          "name": "BORROW_LIMIT_EXCEEDED_AFTER_TRADE",
+          "value": 67,
+          "comment": [
+            "the trade would have left the sub account borrowing more than its tier borrow limit in the traded quote currency"
+          ]
+        },
+        {
+          "name": "UNDEPLOYED_LOAN_AUTO_EXCHANGE",
+          "value": 68,
+          "comment": [
+            "an undeployed-loan (LTV) auto-exchange executed on the sub account, and all open orders are cancelled by Gravity"
+          ]
+        },
+        {
+          "name": "LIQUIDATION_AUTO_EXCHANGE",
+          "value": 69,
+          "comment": [
+            "a liquidation auto-exchange executed on the sub account, and all open orders are cancelled by Gravity"
+          ]
+        },
+        {
+          "name": "USDC_COLLATERAL_DISABLED",
+          "value": 70,
+          "comment": [
+            "USDC is not enabled as collateral on the sub account, so USDC-quoted instruments cannot be traded; enable USDC as collateral first"
+          ]
+        },
+        {
+          "name": "SFP_POST_ONLY_NOT_ALLOWED",
+          "value": 71,
+          "comment": [
+            "post-only orders are not supported on STABLE_PERP for accounts that are not qualified market makers; their orders only take liquidity"
+          ]
+        },
+        {
+          "name": "VAULT_NON_QUOTE_INVESTMENT_CURRENCY",
+          "value": 72,
+          "comment": [
+            "the order was rejected because its sub account is a vault in single-asset margin mode whose investment currency is not its quote currency, and such a vault cannot trade"
+          ]
+        },
+        {
+          "name": "RFQ_ID_REQUIRES_STABLE_PERP",
+          "value": 161,
+          "comment": [
+            "rfq_id was set on an order whose instrument is not a STABLE_PERP; RFQ is a STABLE_PERP-only product"
+          ]
+        },
+        {
+          "name": "RFQ_PRIVATE_POOL_NOT_SUPPORTED",
+          "value": 162,
+          "comment": [
+            "is_private = true is not supported yet; private per-RFQ quote pools are post-MVP"
+          ]
+        },
+        {
+          "name": "RFQ_REQUIRES_IOC",
+          "value": 163,
+          "comment": [
+            "the taker order accepting an RFQ must be a bounded IOC order — IOC, carrying a limit price; an acceptance takes liquidity immediately and must not be able to rest on the book"
+          ]
+        },
+        {
+          "name": "RFQ_MISMATCH",
+          "value": 164,
+          "comment": [
+            "the order does not match the RFQ it references — wrong instrument, or a side the RFQ did not request"
+          ]
+        },
+        {
+          "name": "RFQ_ALREADY_BOUND",
+          "value": 165,
+          "comment": [
+            "the RFQ already has a taker order bound to it; an RFQ accepts only one"
+          ]
+        },
+        {
+          "name": "RFQ_MAKER_MUST_BE_ECN",
+          "value": 166,
+          "comment": [
+            "a resting order carrying rfq_id must be an ECN quote (is_ecn = true)"
+          ]
+        },
+        {
+          "name": "FOK_NOT_SUPPORTED",
+          "value": 167,
+          "comment": [
+            "fill-or-kill is not supported on STABLE_PERP yet"
+          ]
+        },
+        {
+          "name": "MARKET_ORDER_NOT_SUPPORTED",
+          "value": 168,
+          "comment": [
+            "market orders are not supported on STABLE_PERP; a taker order must be a bounded IOC order, carrying a limit price"
+          ]
+        },
+        {
+          "name": "STABLE_PERP_ORDER_NOT_SUPPORTED",
+          "value": 169,
+          "comment": [
+            "STABLE_PERP orders are disabled on this cluster"
           ]
         }
       ],
@@ -18856,6 +21998,13 @@
           "comment": [
             "Liquidator undeployed-loan / LTV auto-repay; uses ARR (/4) divisor for fee. Validator checks LTV trigger is still active."
           ]
+        },
+        {
+          "name": "LIQUIDATION_REBALANCING",
+          "value": 6,
+          "comment": [
+            "Collateral conversion inside a liquidation bundle. Fee-free."
+          ]
         }
       ],
       "comment": [
@@ -18914,6 +22063,13 @@
           "comment": [
             "both channels were cancelled"
           ]
+        },
+        {
+          "name": "CLOSED",
+          "value": 4,
+          "comment": [
+            "the RFQ's taker order left the matcher — filled, unfilled or cancelled"
+          ]
         }
       ],
       "comment": []
@@ -18940,6 +22096,31 @@
           "value": 2,
           "comment": [
             "the RFQ side is a sell"
+          ]
+        }
+      ],
+      "comment": []
+    },
+    {
+      "name": "SfpFundingMode",
+      "values": [
+        {
+          "name": "UNSPECIFIED",
+          "value": 0,
+          "comment": []
+        },
+        {
+          "name": "ANNUAL_PCT_OF_CURRENT_PRICE",
+          "value": 1,
+          "comment": [
+            "Rate is an annual percentage of notional, as a fraction with 9 decimals: 4.5% = 45000000"
+          ]
+        },
+        {
+          "name": "DAILY_CASH_PER_UNIT",
+          "value": 2,
+          "comment": [
+            "Rate is quote currency per unit per day, with 9 decimals: 0.25 USDC = 250000000"
           ]
         }
       ],
@@ -19003,6 +22184,71 @@
         "| Must Fill Immediately | FOK           | IOC              |",
         "| Can Fill Till Time    | AON           | GTC              |",
         ""
+      ]
+    },
+    {
+      "name": "TradingScheduleCloseType",
+      "values": [
+        {
+          "name": "FULL_DAY",
+          "value": 1,
+          "comment": [
+            "Market is fully closed for the entire day"
+          ]
+        },
+        {
+          "name": "EARLY_CLOSE",
+          "value": 2,
+          "comment": [
+            "Market closes early; see the earlyClose time"
+          ]
+        }
+      ],
+      "comment": [
+        "How the market behaves on a holiday date"
+      ]
+    },
+    {
+      "name": "TradingSessionType",
+      "values": [
+        {
+          "name": "REGULAR",
+          "value": 1,
+          "comment": [
+            "Core market hours. Full liquidity."
+          ]
+        },
+        {
+          "name": "PRE_MARKET",
+          "value": 2,
+          "comment": [
+            "Extended hours before open. Lower liquidity."
+          ]
+        },
+        {
+          "name": "AFTER_MARKET",
+          "value": 3,
+          "comment": [
+            "Extended hours after close. Lower liquidity."
+          ]
+        },
+        {
+          "name": "OVERNIGHT",
+          "value": 4,
+          "comment": [
+            "For 24/5 or specific overnight TradFi perps. Minimal liquidity."
+          ]
+        },
+        {
+          "name": "CLOSE",
+          "value": 5,
+          "comment": [
+            "Weekends, holidays, or daily maintenance windows."
+          ]
+        }
+      ],
+      "comment": [
+        "Specifies different types of trading sessions"
       ]
     },
     {

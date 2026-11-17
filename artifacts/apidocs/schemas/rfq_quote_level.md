@@ -1,8 +1,8 @@
 !!! info "[RfqQuoteLevel](/../../schemas/rfq_quote_level)"
     |Name<br>`Lite`|Type|Required<br>`Default`| Description |
     |-|-|-|-|
-    |price<br>`p` |string|True|Price of the level, expressed in `9` decimals|
-    |size<br>`s` |string|True|Size at this level, expressed in base asset decimal units|
+    |price<br>`p` |string|True|Average fill price for the size, expressed in `9` decimals. Rounded against the taker: up for asks, down for bids|
+    |size<br>`s` |string|True|Fillable size, up to the RFQ size, expressed in base asset decimal units|
     |time_in_force<br>`ti` |TimeInForce|True|Distinguishes an AON level (liftable only in full — POST-MVP) from a GTT level|
     ??? info "[TimeInForce](/../../schemas/time_in_force)"
         |                       | Must Fill All | Can Fill Partial |

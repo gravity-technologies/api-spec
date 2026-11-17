@@ -8,3 +8,5 @@
     |request_time<br>`rt` |string|True|[Filled by GRVT Backend] Time at which the redemption request was received by GRVT in unix nanoseconds|
     |max_redemption_period_timestamp<br>`mr` |string|True|[Filled by GRVT Backend] Time in unix nanoseconds, beyond which the request will be force-redeemed.|
     |cancel_blocked<br>`cb` |boolean|False<br>`true`|Omitted for redemption requests to non-cross exchange vaults. True if cancellation is blocked within the CEV allocation allowance for the user's current tier (e.g. because the user has already transferred out the spot balance underlying the redemption request).|
+    |to_currency<br>`tc` |string|True|The currency the request pays into the investor's funding account: the vault's investment currency, unless the request converts.|
+    |exchange_rate<br>`er` |string|True|The signed rate the request is paid at, `to_currency` per unit of the vault's investment currency. 1 when the request does not convert.|
