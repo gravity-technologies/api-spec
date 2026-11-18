@@ -409,17 +409,6 @@ class RfqCounterpartyType(Enum):
     FORCED_EXIT_NETTING = "FORCED_EXIT_NETTING"
 
 
-class RfqEvent(Enum):
-    # a new maker channel was created
-    NEW = "NEW"
-    # both channels were expired
-    EXPIRED = "EXPIRED"
-    # both channels were cancelled
-    CANCELLED = "CANCELLED"
-    # the RFQ's taker order left the matcher — filled, unfilled or cancelled
-    CLOSED = "CLOSED"
-
-
 class RfqSide(Enum):
     # omitted = two-way request
     UNSPECIFIED = "UNSPECIFIED"
@@ -427,14 +416,6 @@ class RfqSide(Enum):
     BUY = "BUY"
     # the RFQ side is a sell
     SELL = "SELL"
-
-
-class SfpFundingMode(Enum):
-    UNSPECIFIED = "UNSPECIFIED"
-    # Rate is an annual percentage of notional, as a fraction with 9 decimals: 4.5% = 45000000
-    ANNUAL_PCT_OF_CURRENT_PRICE = "ANNUAL_PCT_OF_CURRENT_PRICE"
-    # Rate is quote currency per unit per day, with 9 decimals: 0.25 USDC = 250000000
-    DAILY_CASH_PER_UNIT = "DAILY_CASH_PER_UNIT"
 
 
 class SubAccountMode(Enum):
@@ -1004,58 +985,6 @@ class ApiDepositHistoryResponse:
 
 
 @dataclass
-class ApiECNFromBrokerRequest:
-    """
-    Confirms size for an ECN order, in response to a last-look request on the `v1.ecn_to_broker` stream.
-    Only applicable to SFP (`kind = STABLE_PERP`) instruments; only qualified market makers can hold ECN orders.
-
-    The target order is identified by `order_id` or `client_order_id`. At least one must be provided;
-    if both are provided they must refer to the same order, and `instrument` must match that order.
-
-    `cumulative_confirmed_size` is an absolute running total for the order and must be a multiple of the
-    instrument's minimum size. Its value relative to the request's `cumulative_request_size` decides the outcome:
-    - **Full confirm** — equal to the requested size: the held matches are executed, and the order's remaining size stays live on the book.
-    - **Partial confirm** — between the previous confirmed value and the requested size: matches are executed up to the confirmed size, and the order's unconfirmed remainder is cancelled (terminal).
-    - **Decline** — re-send the previous confirmed value, or `0` if nothing was confirmed yet: no new size executes.
-    - **Underflow** — below the previous confirmed value: the order is cancelled (`ecnOrderSizeUnderflow`).
-    - **Overflow** — above the requested size: the order is cancelled (`ecnOrderSizeOverflow`).
-
-    `seq_no` echoes the `v1.ecn_to_broker` request being answered:
-    - A response at the latest `seq_no` covers all earlier outstanding requests.
-    - A response to an already-superseded `seq_no` is ignored, so duplicate sends are safe.
-    - A value ahead of the latest published sequence number is rejected.
-
-    Respond before the request's `expiry_time` (1 second) — an unanswered request cancels the whole order (`ecnOrderExpired`).
-    """
-
-    # The sub account ID that owns the ECN order being confirmed. Must match the sub account of the referenced order
-    sub_account_id: str
-    # A unique identifier for the order, generated within the GRVT backend. Required unless `client_order_id` is provided
-    order_id: str
-    # The client-specified identifier of the ECN order within the sub account. Required unless `order_id` is provided
-    client_order_id: str
-    # The instrument of the ECN order. Must match the instrument of the referenced order
-    asset: str
-    # The `seq_no` of the `v1.ecn_to_broker` message this confirmation responds to. A value ahead of the latest sequence number published for this order is rejected
-    seq_no: str
-    # The total size the broker has confirmed for this ECN order since inception. Must be a multiple of the instrument's minimum size increment and should not exceed the cumulative requested size
-    cumulative_confirmed_size: str
-
-
-@dataclass
-class ApiECNFromBrokerResponse:
-    """
-    Acknowledges that the broker confirmation passed validation and was accepted for processing.
-    Acceptance does not mean the confirmed size has been matched — the resulting order updates are
-    published on the `v1.ecn_to_broker` and order streams. Any failure is returned as an error response
-    instead of this payload.
-    """
-
-    # `true` when the confirmation was accepted for processing
-    result: bool
-
-
-@dataclass
 class ApiFillHistoryRequest:
     """
     Query for all historical fills made by a single account. A single order can be matched multiple times, hence there is no real way to uniquely identify a trade.
@@ -1596,58 +1525,6 @@ class ApiPositionsResponse:
 
 
 @dataclass
-class ApiQualifiedMakerEffectiveRateHistoryRequest:
-    # The instrument to filter for
-    instrument: str | None = None
-    # The start time in unix nanoseconds
-    start_time: str | None = None
-    # The end time in unix nanoseconds
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the query from
-    cursor: str | None = None
-
-
-@dataclass
-class ApiQualifiedMakerEffectiveRateHistoryResponse:
-    # The effective rates matching the request
-    result: list[QualifiedMakerEffectiveRate]
-    # The cursor to indicate when to start the query from
-    next: str
-
-
-@dataclass
-class ApiQualifiedMakerFundingRateSubmission:
-    # The upload ID: the accepted transaction's ID
-    upload_id: str
-    # When the upload was accepted, unix nanoseconds
-    uploaded_at: str
-    # The rates uploaded
-    rates: list[QualifiedMakerFundingRateEntry]
-
-
-@dataclass
-class ApiQualifiedMakerFundingRateSubmissionHistoryRequest:
-    # The start time in unix nanoseconds
-    start_time: str | None = None
-    # The end time in unix nanoseconds
-    end_time: str | None = None
-    # The limit to query for. Defaults to 500; Max 1000
-    limit: int | None = None
-    # The cursor to indicate when to start the query from
-    cursor: str | None = None
-
-
-@dataclass
-class ApiQualifiedMakerFundingRateSubmissionHistoryResponse:
-    # The accepted submissions matching the request
-    result: list[ApiQualifiedMakerFundingRateSubmission]
-    # The cursor to indicate when to start the query from
-    next: str
-
-
-@dataclass
 class ApiQueryVaultManagerInvestorHistoryRequest:
     # The unique identifier of the vault to filter by
     vault_id: str
@@ -1679,18 +1556,6 @@ class ApiSetDeriskToMaintenanceMarginRatioRequest:
 class ApiSetDeriskToMaintenanceMarginRatioResponse:
     # Whether the derisk margin to maintenance margin ratio was set successfully
     success: bool
-
-
-@dataclass
-class ApiSetIndicativePricesRequest:
-    # The sub account submitting the indicative price. Must belong to the authenticated session.
-    sub_account_id: str
-    # The instrument the indicative price is for
-    instrument: str
-    # Indicative bid price, expressed in 9 decimals. Must be > 0 and strictly below ask
-    bid: str
-    # Indicative ask price, expressed in 9 decimals. Must be strictly above bid
-    ask: str
 
 
 @dataclass
@@ -1797,22 +1662,6 @@ class ApiSubAccountSummaryRequest:
 class ApiSubAccountSummaryResponse:
     # The sub account matching the request sub account
     result: SubAccount
-
-
-@dataclass
-class ApiSubmitQualifiedMakerFundingRatesRequest:
-    # One entry per instrument; the request is accepted or rejected as a whole
-    rates: list[QualifiedMakerFundingRateEntry]
-    # The EIP-712 signature over rates
-    signature: Signature
-
-
-@dataclass
-class ApiSubmitQualifiedMakerFundingRatesResponse:
-    # The upload id: the transaction ID of the accepted rates
-    upload_id: str
-    # The accepted rates, as submitted
-    rates: list[QualifiedMakerFundingRateEntry]
 
 
 @dataclass
@@ -2441,34 +2290,6 @@ class DepositHistory:
 
 
 @dataclass
-class ECNToBrokerFeed:
-    # A unique 128-bit identifier for the order, deterministically generated within the GRVT backend
-    order_id: str
-    # A unique identifier for the active order within a subaccount, specified by the client
-    client_order_id: str
-    # The subaccount initiating the order
-    sub_account_id: str
-    # The asset of the ECN order
-    asset: str
-    # A sequence number used to determine message order for this ECN orders
-    seq_no: str
-    # The cumulative request size for this ECN order
-    cumulative_request_size: str
-    # The cumulative filled size for this ECN order
-    cumulative_filled_size: str
-    # The cumulative shortfall for this ECN order
-    cumulative_shortfall: str
-    # The status of the ECN order
-    status: OrderStatus
-    # The reason for rejection or cancellation
-    reject_reason: OrderRejectReason
-    # [Filled by GRVT Backend] Time at which the ECN order will expire in unix nanoseconds
-    expiry_time: str | None = None
-    # The taker's derived anonymous account id shown to makers, omitted when no taker has matched yet. Real taker identity is never exposed
-    taker_anon_account_id: str | None = None
-
-
-@dataclass
 class EmptyRequest:
     pass
 
@@ -3004,60 +2825,6 @@ class PreMinRedemptions:
 
 
 @dataclass
-class QualifiedMakerEffectiveRate:
-    # The charge (funding) time in unix nanoseconds
-    event_time: str
-    # The qualified maker main account
-    main_account_id: str
-    # The stable perp
-    instrument: str
-    # The mode the qualified maker uploaded in; the record carries only that mode's pair of rate fields
-    mode: SfpFundingMode
-    # The upload this rate comes from
-    upload_id: str
-    # When that upload was accepted, unix nanoseconds
-    uploaded_at: str
-    # True if the qualified maker did not upload since the previous charge and its last rate was reused
-    carried_forward: bool
-    # The funding tick transaction ID
-    tx_id: str
-    # The sub-account the netted payment was booked on: the sfpFundingSubAccount config, else the main account's non-vault sub-account with the largest total equity. 0 when the charge paid nothing
-    funding_sub_account_id: str
-    # The qualified maker's position netted across all sub-accounts of its main account, in base units (negative = short). Net short is settled at its long rate, net long at its short rate
-    net_position: str
-    # The index price the charge used, expressed in `9` decimals
-    index_price: str
-    # Days of funding the charge covered: 3 on the triple swap day, else 1
-    multiplier: int
-    # The netted funding payment in the quote currency, as on the funding sub-account's funding payment: negative = the qualified maker received it, positive = it paid. 0 when the charge paid nothing
-    amount: str
-    # ANNUAL_PCT_OF_CURRENT_PRICE only: the qualified maker's long rate used, in percent a year ("-4.5" = retail longs pay 4.5%); positive = retail receives, negative = retail pays
-    long_rate_apr_pct: str | None = None
-    # ANNUAL_PCT_OF_CURRENT_PRICE only: the qualified maker's short rate used, in percent a year; positive = retail receives, negative = retail pays
-    short_rate_apr_pct: str | None = None
-    # DAILY_CASH_PER_UNIT only: the qualified maker's long rate used, in quote currency per unit per day; positive = retail receives, negative = retail pays
-    long_rate_cash_per_unit: str | None = None
-    # DAILY_CASH_PER_UNIT only: the qualified maker's short rate used, in quote currency per unit per day; positive = retail receives, negative = retail pays
-    short_rate_cash_per_unit: str | None = None
-
-
-@dataclass
-class QualifiedMakerFundingRateEntry:
-    # A listed stable perp
-    instrument: str
-    # Either funding mode; the entry carries only that mode's pair of rate fields
-    mode: SfpFundingMode
-    # ANNUAL_PCT_OF_CURRENT_PRICE only: the long rate in percent a year, up to 6 decimals ("-4.5" = retail longs pay 4.5%); positive = retail receives, negative = retail pays
-    long_rate_apr_pct: str | None = None
-    # ANNUAL_PCT_OF_CURRENT_PRICE only: the short rate in percent a year, up to 6 decimals; positive = retail receives, negative = retail pays
-    short_rate_apr_pct: str | None = None
-    # DAILY_CASH_PER_UNIT only: the long rate in quote currency per unit per day, up to 6 decimals; positive = retail receives, negative = retail pays
-    long_rate_cash_per_unit: str | None = None
-    # DAILY_CASH_PER_UNIT only: the short rate in quote currency per unit per day, up to 6 decimals; positive = retail receives, negative = retail pays
-    short_rate_cash_per_unit: str | None = None
-
-
-@dataclass
 class Rfq:
     """
     A Request for Quote (RFQ) lets a taker solicit private quotes on a single instrument from makers.
@@ -3077,24 +2844,6 @@ class Rfq:
     size: str
     # Optional — omitted = two-way request. The GRVT UI always fills it; API takers may withhold direction and accept two-way quotes
     side: RfqSide | None = None
-
-
-@dataclass
-class RfqFeed:
-    # The RFQ lifecycle event: NEW, EXPIRED, or CANCELLED. On EXPIRED/CANCELLED only rfqID is populated; the platform then auto-cancels the maker's private quotes bound to this RFQ
-    event: RfqEvent
-    # The RFQ this event refers to
-    rfq_id: str
-    # The RFQ instrument. Must be kind = STABLE_PERP
-    instrument: str | None = None
-    # The taker's derived anonymous account id shown to makers. Real taker identity is never exposed
-    taker_anon_account_id: str | None = None
-    # Requested size, expressed in base asset decimal units. Zero-size = platform solicitation for missing public presence
-    size: str | None = None
-    # Present only if the taker disclosed direction; omitted = two-way request
-    side: RfqSide | None = None
-    # RFQ TTL. The timestamp after which Gravity expires the RFQ, expressed in unix nanoseconds
-    expiry: str | None = None
 
 
 @dataclass
@@ -3715,58 +3464,6 @@ class WSDepositFeedSelectorV1:
 
 
 @dataclass
-class WSECNToBrokerFeedDataV1:
-    """
-    The last-look request stream. Available only on SFP (`kind = STABLE_PERP`) instruments, and only relevant to
-    qualified market makers with ECN orders (`metadata.is_ecn = true`) — other accounts receive no traffic here.
-
-    When a taker's order matches one of your ECN orders, the matched size is held off-book and a confirmation
-    request is published on this stream. Each request identifies the ECN order by `order_id` / `client_order_id`
-    and carries a per-order monotonic `seq_no`; all sizes are cumulative over the life of the order. Respond via
-    `/ecn_from_broker` before the request's `expiry_time` (1 second): confirming the full `cumulative_request_size`
-    executes the held matches and leaves the order's remaining size live on the book; confirming less is terminal —
-    matches execute up to the confirmed size and the order's unconfirmed remainder is cancelled; silence cancels the
-    entire order (`ecnOrderExpired`). One response at the latest `seq_no` covers all earlier outstanding requests.
-    Frames that carry no new requested size (fill or shortfall updates) are informational and require no response.
-    On subscribe, the stream snapshots the most recent request per open ECN order.
-    """
-
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # ECN to broker message
-    feed: ECNToBrokerFeed
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSECNToBrokerFeedSelectorV1:
-    """
-    Subscribes to a feed of order updates pertaining to orders made by your account.
-    Each Order can be uniquely identified by its `order_id` or `client_order_id`.
-    To subscribe to all orders, specify an empty `instrument` (eg. `2345123`).
-    Otherwise, specify the `instrument` to only receive orders for that instrument (eg. `2345123-BTC_USDT_Perp`).
-    This stream is only applicable to STABLE_PERP (SFP) instruments with qualified market makers.
-    """
-
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # The instrument filter to apply.
-    instrument: str | None = None
-
-
-@dataclass
 class WSFillFeedDataV1:
     # The websocket channel to which the response is sent
     stream: str
@@ -4005,44 +3702,6 @@ class WSPositionsFeedSelectorV1:
     Updates get published when a trade is executed, and when leverage configurations are changed for instruments with ongoing positions.
     To subscribe to all positions, specify an empty `instrument` (eg. `2345123`).
     Otherwise, specify the `instrument` to only receive positions for that instrument (eg. `2345123-BTC_USDT_Perp`).
-    """
-
-    # The subaccount ID to filter by
-    sub_account_id: str
-    # The instrument filter to apply.
-    instrument: str | None = None
-
-
-@dataclass
-class WSRfqFeedDataV1:
-    # Stream name
-    stream: str
-    # Primary selector
-    selector: str
-    """
-    A sequence number used to determine message order within a stream.
-    - If `useGlobalSequenceNumber` is **false**, this returns the gateway sequence number, which increments by one locally within each stream and resets on gateway restarts.
-    - If `useGlobalSequenceNumber` is **true**, this returns the global sequence number, which uniquely identifies messages across the cluster.
-      - A single cluster payload can be multiplexed into multiple stream payloads.
-      - To distinguish each stream payload, a `dedupCounter` is included.
-      - The returned sequence number is computed as: `cluster_sequence_number * 10^5 + dedupCounter`.
-    """
-    sequence_number: str
-    # The RFQ lifecycle event (NEW / EXPIRED / CANCELLED)
-    feed: RfqFeed
-    # The previous sequence number that determines the message order
-    prev_sequence_number: str
-
-
-@dataclass
-class WSRfqFeedSelectorV1:
-    """
-    Maker feed. Subscribe with selector `(sub_account_id, instrument)` to receive the RFQs you can quote on, delivered as lifecycle events. Respond to an RFQ by posting quotes via create_order (is_ecn = true, with `metadata.rfq_id` / `metadata.is_private`).
-
-    The subscription is stateful: from the moment you subscribe you are 'on' for that instrument — RFQs are delivered, your response ratios are tracked, and you are expected to keep a live public quote resting on the book (the platform nudges you with a zero-size RFQ if none is resting).
-
-    Each RFQ is uniquely identified by its `rfq_id`. A sub-account may hold at most one open RFQ per instrument, which is what lets this selector be keyed by `(sub_account_id, instrument)` alone, with no `rfq_id` required.
-
     """
 
     # The subaccount ID to filter by

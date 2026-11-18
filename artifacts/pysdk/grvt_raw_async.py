@@ -236,32 +236,6 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             types.ApiInterestPaymentHistoryResponse, resp, Config(cast=[Enum])
         )
 
-    async def qualified_maker_effective_rate_history_v1(
-        self, req: types.ApiQualifiedMakerEffectiveRateHistoryRequest
-    ) -> types.ApiQualifiedMakerEffectiveRateHistoryResponse | GrvtError:
-        resp = await self._post(
-            True, self.td_rpc + "/full/v1/effective_rate_history", req
-        )
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(
-            types.ApiQualifiedMakerEffectiveRateHistoryResponse, resp, Config(cast=[Enum])
-        )
-
-    async def qualified_maker_funding_rate_submission_history_v1(
-        self, req: types.ApiQualifiedMakerFundingRateSubmissionHistoryRequest
-    ) -> types.ApiQualifiedMakerFundingRateSubmissionHistoryResponse | GrvtError:
-        resp = await self._post(
-            True, self.td_rpc + "/full/v1/funding_rate_submission_history", req
-        )
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(
-            types.ApiQualifiedMakerFundingRateSubmissionHistoryResponse,
-            resp,
-            Config(cast=[Enum]),
-        )
-
     async def positions_v1(
         self, req: types.ApiPositionsRequest
     ) -> types.ApiPositionsResponse | GrvtError:
@@ -386,16 +360,6 @@ class GrvtRawAsync(GrvtRawAsyncBase):
             return GrvtError(**resp)
         return from_dict(
             types.ApiSpotSubAccountSummaryResponse, resp, Config(cast=[Enum])
-        )
-
-    async def submit_qualified_maker_funding_rates_v1(
-        self, req: types.ApiSubmitQualifiedMakerFundingRatesRequest
-    ) -> types.ApiSubmitQualifiedMakerFundingRatesResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/submit_funding_rates", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(
-            types.ApiSubmitQualifiedMakerFundingRatesResponse, resp, Config(cast=[Enum])
         )
 
     async def aggregated_account_summary_v1(
@@ -569,22 +533,6 @@ class GrvtRawAsync(GrvtRawAsyncBase):
         if resp.get("code"):
             return GrvtError(**resp)
         return from_dict(types.ApiBuilderFillHistoryResponse, resp, Config(cast=[Enum]))
-
-    async def set_indicative_prices_v1(
-        self, req: types.ApiSetIndicativePricesRequest
-    ) -> types.AckResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/set_indicative_prices", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.AckResponse, resp, Config(cast=[Enum]))
-
-    async def ecn_from_broker_v1(
-        self, req: types.ApiECNFromBrokerRequest
-    ) -> types.ApiECNFromBrokerResponse | GrvtError:
-        resp = await self._post(True, self.td_rpc + "/full/v1/ecn_from_broker", req)
-        if resp.get("code"):
-            return GrvtError(**resp)
-        return from_dict(types.ApiECNFromBrokerResponse, resp, Config(cast=[Enum]))
 
     async def create_rfq_v1(
         self, req: types.ApiCreateRfqRequest
